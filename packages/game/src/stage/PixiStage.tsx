@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Application, Graphics } from 'pixi.js'
 import { Esqueleto } from '@lifesim/core'
-import { desenharEsqueleto } from './RigDebug'
+import { desenharSilhueta } from './SilhouetteRenderer'
 
 export function PixiStage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -33,7 +33,7 @@ export function PixiStage() {
       const offsetX = app.screen.width / 2
       const offsetY = app.screen.height / 2
 
-      desenharEsqueleto(gfx, esqueleto, offsetX, offsetY)
+      desenharSilhueta(gfx, esqueleto, offsetX, offsetY)
     })
 
     return () => {
