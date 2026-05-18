@@ -19,5 +19,12 @@ export type {
 } from './silhouette/BezierSegment';
 
 export const VERSAO_CORE = '0.0.1';
+
 // Schemas
 export * from './schemas';
+
+// Motor RPG
+export * from './rpg';
+
+// Motor de eventos
+export * from './events';
