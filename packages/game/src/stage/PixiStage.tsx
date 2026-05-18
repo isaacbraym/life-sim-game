@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Application, Graphics } from 'pixi.js'
+import { Esqueleto } from '@lifesim/core'
+import { desenharEsqueleto } from './RigDebug'
 
 export function PixiStage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -24,12 +26,14 @@ export function PixiStage() {
       appRef.current = app
       container.appendChild(app.canvas)
 
-      const circulo = new Graphics()
-      circulo.circle(0, 0, 50)
-      circulo.fill({ color: 0xe94560 })
-      circulo.x = app.screen.width / 2
-      circulo.y = app.screen.height / 2
-      app.stage.addChild(circulo)
+      const esqueleto = new Esqueleto()
+      const gfx = new Graphics()
+      app.stage.addChild(gfx)
+
+      const offsetX = app.screen.width / 2
+      const offsetY = app.screen.height / 2
+
+      desenharEsqueleto(gfx, esqueleto, offsetX, offsetY)
     })
 
     return () => {
