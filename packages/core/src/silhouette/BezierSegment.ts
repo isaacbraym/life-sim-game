@@ -24,18 +24,18 @@ export type PerfilTronco = {
 };
 
 export const PERFIL_BRACO_PADRAO: PerfilBraco = {
-  espessuraOmbro: 22,
-  espessuraBiceps: 20,
-  espessuraCotovelo: 14,
+  espessuraOmbro: 14,
+  espessuraBiceps: 18,
+  espessuraCotovelo: 13,
   espessuraAntebraco: 16,
-  espessuraPulso: 9,
+  espessuraPulso: 7,
 };
 
 export const PERFIL_PERNA_PADRAO: PerfilPerna = {
-  espessuraQuadril: 22,
+  espessuraQuadril: 26,
   espessuraCoxa: 28,
-  espessuraJoelho: 18,
-  espessuraPanturrilha: 22,
+  espessuraJoelho: 16,
+  espessuraPanturrilha: 20,
   espessuraTornozelo: 10,
 };
 
@@ -80,14 +80,20 @@ function pontoPerpendicular(
   };
 }
 
+const calcularCPCubicoAlongado = (pInicio: Ponto, pFim: Ponto, pMeio: Ponto, dirNorm: Ponto, stretch: number) => {
+  const cX = (4 / 3) * pMeio.x - (1 / 6) * pInicio.x - (1 / 6) * pFim.x;
+  const cY = (4 / 3) * pMeio.y - (1 / 6) * pInicio.y - (1 / 6) * pFim.y;
+  return {
+    cp1: { x: cX - dirNorm.x * stretch, y: cY - dirNorm.y * stretch },
+    cp2: { x: cX + dirNorm.x * stretch, y: cY + dirNorm.y * stretch },
+  };
+};
+
 // ─── BRACO ───────────────────────────────────────────────────────────────────
 
 export type PathBraco = {
-  // lado esquerdo (indo da raiz ao terminal)
   esq: { p0: Ponto; cp1: Ponto; cp2: Ponto; p1: Ponto; cp3: Ponto; cp4: Ponto; p2: Ponto };
-  // lado direito (voltando do terminal à raiz)
   dir: { p0: Ponto; cp1: Ponto; cp2: Ponto; p1: Ponto; cp3: Ponto; cp4: Ponto; p2: Ponto };
-  // caps de ponta
   capOmbro: Ponto;
   capPulso: Ponto;
 };
@@ -104,38 +110,41 @@ export function gerarPathBraco(
   const dirBraco = subtrair(cotovelo, ombro);
   const dirAntebraco = subtrair(pulso, cotovelo);
 
-  // Pontos perpendiculares nos 3 joints
-  const pOmbro    = pontoPerpendicular(ombro,    dirBraco,       perfil.espessuraOmbro    / 2 * sinal);
-  const pBiceps   = pontoPerpendicular(cotovelo,  dirBraco,       perfil.espessuraBiceps   / 2 * sinal);
-  const pCotovelo = pontoPerpendicular(cotovelo,  dirAntebraco,   perfil.espessuraCotovelo / 2 * sinal);
-  const pAntebraco= pontoPerpendicular(cotovelo,  dirAntebraco,   perfil.espessuraAntebraco/ 2 * sinal);
-  const pPulso    = pontoPerpendicular(pulso,     dirAntebraco,   perfil.espessuraPulso    / 2 * sinal);
+  const meioBraco = { x: lerp(ombro.x, cotovelo.x, 0.45), y: lerp(ombro.y, cotovelo.y, 0.45) };
+  const meioAntebraco = { x: lerp(cotovelo.x, pulso.x, 0.35), y: lerp(cotovelo.y, pulso.y, 0.35) };
 
-  // Handles de controle para suavidade
-  const t = 0.35;
-  const midBracoX = lerp(ombro.x, cotovelo.x, t);
-  const midBracoY = lerp(ombro.y, cotovelo.y, t);
-  const midAntX   = lerp(cotovelo.x, pulso.x, t);
-  const midAntY   = lerp(cotovelo.y, pulso.y, t);
+  const pOmbro = pontoPerpendicular(ombro, dirBraco, perfil.espessuraOmbro / 2 * sinal);
+  const pBiceps = pontoPerpendicular(meioBraco, dirBraco, perfil.espessuraBiceps / 2 * sinal);
+  
+  const dirCotovelo = normalizar({ x: dirBraco.x + dirAntebraco.x, y: dirBraco.y + dirAntebraco.y });
+  const pCotovelo = pontoPerpendicular(cotovelo, dirCotovelo, perfil.espessuraCotovelo / 2 * sinal);
+  
+  const pAntebraco = pontoPerpendicular(meioAntebraco, dirAntebraco, perfil.espessuraAntebraco / 2 * sinal);
+  const pPulso = pontoPerpendicular(pulso, dirAntebraco, perfil.espessuraPulso / 2 * sinal);
 
-  const cp_bE: Ponto = { x: midBracoX + (pBiceps.esq.x - cotovelo.x) * 0.5, y: midBracoY + (pBiceps.esq.y - cotovelo.y) * 0.5 };
-  const cp_bD: Ponto = { x: midBracoX + (pBiceps.dir.x - cotovelo.x) * 0.5, y: midBracoY + (pBiceps.dir.y - cotovelo.y) * 0.5 };
-  const cp_aE: Ponto = { x: midAntX + (pAntebraco.esq.x - cotovelo.x) * 0.5, y: midAntY + (pAntebraco.esq.y - cotovelo.y) * 0.5 };
-  const cp_aD: Ponto = { x: midAntX + (pAntebraco.dir.x - cotovelo.x) * 0.5, y: midAntY + (pAntebraco.dir.y - cotovelo.y) * 0.5 };
+  const dirBNorm = normalizar(dirBraco);
+  const dirANorm = normalizar(dirAntebraco);
+  const stretchB = comprimentoVetor(dirBraco) * 0.2;
+  const stretchA = comprimentoVetor(dirAntebraco) * 0.2;
+
+  const cps_bE = calcularCPCubicoAlongado(pOmbro.esq, pCotovelo.esq, pBiceps.esq, dirBNorm, stretchB);
+  const cps_bD = calcularCPCubicoAlongado(pOmbro.dir, pCotovelo.dir, pBiceps.dir, dirBNorm, stretchB);
+  const cps_aE = calcularCPCubicoAlongado(pCotovelo.esq, pPulso.esq, pAntebraco.esq, dirANorm, stretchA);
+  const cps_aD = calcularCPCubicoAlongado(pCotovelo.dir, pPulso.dir, pAntebraco.dir, dirANorm, stretchA);
 
   return {
     esq: {
       p0: pOmbro.esq,
-      cp1: cp_bE, cp2: pBiceps.esq,
+      cp1: cps_bE.cp1, cp2: cps_bE.cp2,
       p1: pCotovelo.esq,
-      cp3: cp_aE, cp4: pAntebraco.esq,
+      cp3: cps_aE.cp1, cp4: cps_aE.cp2,
       p2: pPulso.esq,
     },
     dir: {
       p0: pPulso.dir,
-      cp1: cp_aD, cp2: pAntebraco.dir,
+      cp1: cps_aD.cp2, cp2: cps_aD.cp1,
       p1: pCotovelo.dir,
-      cp3: cp_bD, cp4: pBiceps.dir,
+      cp3: cps_bD.cp2, cp4: cps_bD.cp1,
       p2: pOmbro.dir,
     },
     capOmbro: ombro,
@@ -154,39 +163,44 @@ export function gerarPathPerna(
 ): PathBraco {
   const sinal = espelhar ? -1 : 1;
 
-  const dirCoxa     = subtrair(joelho,    quadril);
+  const dirCoxa = subtrair(joelho, quadril);
   const dirPanturrilha = subtrair(tornozelo, joelho);
 
-  const pQuadril    = pontoPerpendicular(quadril,   dirCoxa,          perfil.espessuraQuadril    / 2 * sinal);
-  const pCoxa       = pontoPerpendicular(joelho,    dirCoxa,          perfil.espessuraCoxa       / 2 * sinal);
-  const pJoelho     = pontoPerpendicular(joelho,    dirPanturrilha,   perfil.espessuraJoelho     / 2 * sinal);
-  const pPanturrilha= pontoPerpendicular(joelho,    dirPanturrilha,   perfil.espessuraPanturrilha/ 2 * sinal);
-  const pTornozelo  = pontoPerpendicular(tornozelo, dirPanturrilha,   perfil.espessuraTornozelo  / 2 * sinal);
+  const meioCoxa = { x: lerp(quadril.x, joelho.x, 0.45), y: lerp(quadril.y, joelho.y, 0.45) };
+  const meioPant = { x: lerp(joelho.x, tornozelo.x, 0.25), y: lerp(joelho.y, tornozelo.y, 0.25) };
 
-  const t = 0.4;
-  const midCoxaX  = lerp(quadril.x, joelho.x, t);
-  const midCoxaY  = lerp(quadril.y, joelho.y, t);
-  const midPantX  = lerp(joelho.x, tornozelo.x, t);
-  const midPantY  = lerp(joelho.y, tornozelo.y, t);
+  const pQuadril = pontoPerpendicular(quadril, dirCoxa, perfil.espessuraQuadril / 2 * sinal);
+  const pCoxa = pontoPerpendicular(meioCoxa, dirCoxa, perfil.espessuraCoxa / 2 * sinal);
+  
+  const dirJoelho = normalizar({ x: dirCoxa.x + dirPanturrilha.x, y: dirCoxa.y + dirPanturrilha.y });
+  const pJoelho = pontoPerpendicular(joelho, dirJoelho, perfil.espessuraJoelho / 2 * sinal);
+  
+  const pPanturrilha = pontoPerpendicular(meioPant, dirPanturrilha, perfil.espessuraPanturrilha / 2 * sinal);
+  const pTornozelo = pontoPerpendicular(tornozelo, dirPanturrilha, perfil.espessuraTornozelo / 2 * sinal);
 
-  const cp_cE: Ponto = { x: midCoxaX + (pCoxa.esq.x - joelho.x) * 0.5, y: midCoxaY + (pCoxa.esq.y - joelho.y) * 0.5 };
-  const cp_cD: Ponto = { x: midCoxaX + (pCoxa.dir.x - joelho.x) * 0.5, y: midCoxaY + (pCoxa.dir.y - joelho.y) * 0.5 };
-  const cp_pE: Ponto = { x: midPantX + (pPanturrilha.esq.x - joelho.x) * 0.5, y: midPantY + (pPanturrilha.esq.y - joelho.y) * 0.5 };
-  const cp_pD: Ponto = { x: midPantX + (pPanturrilha.dir.x - joelho.x) * 0.5, y: midPantY + (pPanturrilha.dir.y - joelho.y) * 0.5 };
+  const dirCNorm = normalizar(dirCoxa);
+  const dirPNorm = normalizar(dirPanturrilha);
+  const stretchC = comprimentoVetor(dirCoxa) * 0.2;
+  const stretchP = comprimentoVetor(dirPanturrilha) * 0.2;
+
+  const cps_cE = calcularCPCubicoAlongado(pQuadril.esq, pJoelho.esq, pCoxa.esq, dirCNorm, stretchC);
+  const cps_cD = calcularCPCubicoAlongado(pQuadril.dir, pJoelho.dir, pCoxa.dir, dirCNorm, stretchC);
+  const cps_pE = calcularCPCubicoAlongado(pJoelho.esq, pTornozelo.esq, pPanturrilha.esq, dirPNorm, stretchP);
+  const cps_pD = calcularCPCubicoAlongado(pJoelho.dir, pTornozelo.dir, pPanturrilha.dir, dirPNorm, stretchP);
 
   return {
     esq: {
       p0: pQuadril.esq,
-      cp1: cp_cE, cp2: pCoxa.esq,
+      cp1: cps_cE.cp1, cp2: cps_cE.cp2,
       p1: pJoelho.esq,
-      cp3: cp_pE, cp4: pPanturrilha.esq,
+      cp3: cps_pE.cp1, cp4: cps_pE.cp2,
       p2: pTornozelo.esq,
     },
     dir: {
       p0: pTornozelo.dir,
-      cp1: cp_pD, cp2: pPanturrilha.dir,
+      cp1: cps_pD.cp2, cp2: cps_pD.cp1,
       p1: pJoelho.dir,
-      cp3: cp_cD, cp4: pCoxa.dir,
+      cp3: cps_cD.cp2, cp4: cps_cD.cp1,
       p2: pQuadril.dir,
     },
     capOmbro: quadril,

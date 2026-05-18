@@ -14,9 +14,10 @@ export function PixiStage() {
     let montado = true
     const app = new Application()
 
-    app.init({
-      background: '#1a1a2e',
-      resizeTo: container,
+  app.init({
+    background: '#1a1a2e',
+    resizeTo: container,
+    antialias: true,
     }).then(() => {
       if (!montado) {
         app.destroy()

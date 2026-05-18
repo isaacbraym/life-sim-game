@@ -13,6 +13,21 @@ const COR_SOMBRA     = 0xe8a882;
 const COR_CONTORNO   = 0x2a1a0e;
 const ESPESSURA_CONTORNO = 1.2;
 
+function desenharElipseInclinada(gfx: Graphics, cx: number, cy: number, rx: number, ry: number, angle: number) {
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const m = 0.552284749831;
+  const tx = (px: number, py: number) => cx + px * cos - py * sin;
+  const ty = (px: number, py: number) => cy + px * sin + py * cos;
+
+  gfx.moveTo(tx(rx, 0), ty(rx, 0));
+  gfx.bezierCurveTo(tx(rx, ry * m), ty(rx, ry * m), tx(rx * m, ry), ty(rx * m, ry), tx(0, ry), ty(0, ry));
+  gfx.bezierCurveTo(tx(-rx * m, ry), ty(-rx * m, ry), tx(-rx, ry * m), ty(-rx, ry * m), tx(-rx, 0), ty(-rx, 0));
+  gfx.bezierCurveTo(tx(-rx, -ry * m), ty(-rx, -ry * m), tx(-rx * m, -ry), ty(-rx * m, -ry), tx(0, -ry), ty(0, -ry));
+  gfx.bezierCurveTo(tx(rx * m, -ry), ty(rx * m, -ry), tx(rx, -ry * m), ty(rx, -ry * m), tx(rx, 0), ty(rx, 0));
+  gfx.closePath();
+}
+
 function desenharPathBezier(gfx: Graphics, path: PathBraco, ox: number, oy: number): void {
   const e = path.esq;
   const d = path.dir;
@@ -66,22 +81,67 @@ export function desenharSilhueta(
   const sR      = p('shoulder_R');
   const hipL    = p('hip_L');
   const hipR    = p('hip_R');
-  const ombrosY = sL.y;
+  const neck    = p('neck');
+  const head    = p('head');
 
-  gfx.moveTo(offsetX+hipL.x-20, offsetY+pelvis.y+5);
-  gfx.bezierCurveTo(offsetX+hipL.x-24, offsetY+ombrosY+30, offsetX+sL.x-8, offsetY+ombrosY+5, offsetX+sL.x, offsetY+ombrosY);
-  gfx.bezierCurveTo(offsetX+sL.x+6, offsetY+ombrosY-4, offsetX+sL.x+12, offsetY+ombrosY-4, offsetX+sR.x-12, offsetY+ombrosY-4);
-  gfx.bezierCurveTo(offsetX+sR.x-6, offsetY+ombrosY-4, offsetX+sR.x, offsetY+ombrosY, offsetX+sR.x+8, offsetY+ombrosY+5);
-  gfx.bezierCurveTo(offsetX+hipR.x+24, offsetY+ombrosY+30, offsetX+hipR.x+20, offsetY+pelvis.y+5, offsetX+hipR.x+18, offsetY+pelvis.y+18);
-  gfx.bezierCurveTo(offsetX+hipR.x+10, offsetY+pelvis.y+24, offsetX+pelvis.x+8, offsetY+pelvis.y+26, offsetX+pelvis.x, offsetY+pelvis.y+26);
-  gfx.bezierCurveTo(offsetX+pelvis.x-8, offsetY+pelvis.y+26, offsetX+hipL.x-10, offsetY+pelvis.y+24, offsetX+hipL.x-18, offsetY+pelvis.y+18);
-  gfx.bezierCurveTo(offsetX+hipL.x-20, offsetY+pelvis.y+10, offsetX+hipL.x-20, offsetY+pelvis.y+5, offsetX+hipL.x-20, offsetY+pelvis.y+5);
+  const rootX = offsetX + pelvis.x;
+  
+  const ombroEsqX = offsetX + sL.x - 14;
+  const ombroDirX = offsetX + sR.x + 14;
+  const quadrilEsqX = offsetX + hipL.x - 14;
+  const quadrilDirX = offsetX + hipR.x + 14;
+  const cinturaEsqX = rootX - 15;
+  const cinturaDirX = rootX + 15;
+  const cinturaY = (sL.y + pelvis.y) / 2 + 10;
+
+  gfx.moveTo(rootX - 10, offsetY + neck.y + 10);
+  
+  // Top left: Pescoço para ombro (curva arredondada)
+  gfx.bezierCurveTo(
+    rootX - 25, offsetY + neck.y + 10,
+    ombroEsqX, offsetY + sL.y - 10,
+    ombroEsqX, offsetY + sL.y + 5
+  );
+  
+  // Lado esquerdo: Ombro para quadril
+  gfx.bezierCurveTo(
+    ombroEsqX, offsetY + cinturaY - 10,
+    cinturaEsqX, offsetY + cinturaY,
+    quadrilEsqX, offsetY + pelvis.y
+  );
+  
+  // Fundo (virilha)
+  gfx.bezierCurveTo(
+    quadrilEsqX + 5, offsetY + pelvis.y + 16,
+    quadrilDirX - 5, offsetY + pelvis.y + 16,
+    quadrilDirX, offsetY + pelvis.y
+  );
+  
+  // Lado direito: Quadril para ombro
+  gfx.bezierCurveTo(
+    cinturaDirX, offsetY + cinturaY,
+    ombroDirX, offsetY + cinturaY - 10,
+    ombroDirX, offsetY + sR.y + 5
+  );
+  
+  // Top right: Ombro para pescoço
+  gfx.bezierCurveTo(
+    ombroDirX, offsetY + sR.y - 10,
+    rootX + 25, offsetY + neck.y + 10,
+    rootX + 10, offsetY + neck.y + 10
+  );
+  
+  // Conexão base do pescoço
+  gfx.bezierCurveTo(
+    rootX + 5, offsetY + neck.y + 12,
+    rootX - 5, offsetY + neck.y + 12,
+    rootX - 10, offsetY + neck.y + 10
+  );
+  
   gfx.closePath();
   gfx.fill({ color: COR_PELE });
   gfx.stroke();
 
-  const neck = p('neck');
-  const head = p('head');
   gfx.moveTo(offsetX+neck.x-7, offsetY+neck.y+2);
   gfx.bezierCurveTo(offsetX+neck.x-6, offsetY+head.y+4, offsetX+neck.x+6, offsetY+head.y+4, offsetX+neck.x+7, offsetY+neck.y+2);
   gfx.closePath();
@@ -96,4 +156,23 @@ export function desenharSilhueta(
   gfx.fill({ color: COR_SOMBRA });
   gfx.ellipse(offsetX+head.x+6, offsetY+head.y-20, 3, 2);
   gfx.fill({ color: COR_SOMBRA });
+
+  // Mãos simples (16x9 -> radius 8x4.5) inclinadas
+  const wristL = p('wrist_L');
+  const wristR = p('wrist_R');
+  desenharElipseInclinada(gfx, offsetX + wristL.x, offsetY + wristL.y, 8, 4.5, 0.4);
+  gfx.fill({ color: COR_PELE });
+  gfx.stroke();
+  desenharElipseInclinada(gfx, offsetX + wristR.x, offsetY + wristR.y, 8, 4.5, -0.4);
+  gfx.fill({ color: COR_PELE });
+  gfx.stroke();
+
+  // Pés simples (18x8 -> radius 9x4) horizontais
+  const ankleL = p('ankle_L');
+  gfx.ellipse(offsetX + ankleL.x, offsetY + ankleL.y + 3, 9, 4);
+  gfx.fill({ color: COR_PELE });
+  gfx.stroke();
+  gfx.ellipse(offsetX + ankleR.x, offsetY + ankleR.y + 3, 9, 4);
+  gfx.fill({ color: COR_PELE });
+  gfx.stroke();
 }
