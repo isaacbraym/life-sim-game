@@ -8,20 +8,15 @@ import {
   PathBraco,
 } from '@lifesim/core';
 
-const COR_PELE     = 0xf5c5a3;
-const COR_CONTORNO = 0x2a1a0e;
-const ESPESSURA_CONTORNO = 1.5;
+const COR_PELE       = 0xf5c5a3;
+const COR_SOMBRA     = 0xe8a882;
+const COR_CONTORNO   = 0x2a1a0e;
+const ESPESSURA_CONTORNO = 1.2;
 
-function desenharPathBezier(
-  gfx: Graphics,
-  path: PathBraco,
-  ox: number,
-  oy: number,
-): void {
+function desenharPathBezier(gfx: Graphics, path: PathBraco, ox: number, oy: number): void {
   const e = path.esq;
   const d = path.dir;
-
-  gfx.moveTo(ox + e.p0.x, oy + e.p0.y);
+  gfx.moveTo(ox+e.p0.x, oy+e.p0.y);
   gfx.bezierCurveTo(ox+e.cp1.x, oy+e.cp1.y, ox+e.cp2.x, oy+e.cp2.y, ox+e.p1.x, oy+e.p1.y);
   gfx.bezierCurveTo(ox+e.cp3.x, oy+e.cp3.y, ox+e.cp4.x, oy+e.cp4.y, ox+e.p2.x, oy+e.p2.y);
   gfx.bezierCurveTo(
@@ -73,28 +68,32 @@ export function desenharSilhueta(
   const hipR    = p('hip_R');
   const ombrosY = sL.y;
 
-  gfx.moveTo(offsetX + hipL.x - 23, offsetY + pelvis.y);
-  gfx.bezierCurveTo(offsetX+hipL.x-16, offsetY+ombrosY+10, offsetX+sL.x-2, offsetY+ombrosY, offsetX+sL.x+4, offsetY+ombrosY);
-  gfx.lineTo(offsetX + sR.x - 4, offsetY + ombrosY);
-  gfx.bezierCurveTo(offsetX+sR.x+2, offsetY+ombrosY, offsetX+hipR.x+16, offsetY+ombrosY+10, offsetX+hipR.x+23, offsetY+pelvis.y);
-  gfx.bezierCurveTo(offsetX+hipR.x+18, offsetY+pelvis.y+15, offsetX+hipR.x+8, offsetY+pelvis.y+20, offsetX+pelvis.x+10, offsetY+pelvis.y+18);
-  gfx.bezierCurveTo(offsetX+pelvis.x+4, offsetY+pelvis.y+22, offsetX+pelvis.x-4, offsetY+pelvis.y+22, offsetX+pelvis.x-10, offsetY+pelvis.y+18);
-  gfx.bezierCurveTo(offsetX+hipL.x-8, offsetY+pelvis.y+20, offsetX+hipL.x-18, offsetY+pelvis.y+15, offsetX+hipL.x-23, offsetY+pelvis.y);
+  gfx.moveTo(offsetX+hipL.x-20, offsetY+pelvis.y+5);
+  gfx.bezierCurveTo(offsetX+hipL.x-24, offsetY+ombrosY+30, offsetX+sL.x-8, offsetY+ombrosY+5, offsetX+sL.x, offsetY+ombrosY);
+  gfx.bezierCurveTo(offsetX+sL.x+6, offsetY+ombrosY-4, offsetX+sL.x+12, offsetY+ombrosY-4, offsetX+sR.x-12, offsetY+ombrosY-4);
+  gfx.bezierCurveTo(offsetX+sR.x-6, offsetY+ombrosY-4, offsetX+sR.x, offsetY+ombrosY, offsetX+sR.x+8, offsetY+ombrosY+5);
+  gfx.bezierCurveTo(offsetX+hipR.x+24, offsetY+ombrosY+30, offsetX+hipR.x+20, offsetY+pelvis.y+5, offsetX+hipR.x+18, offsetY+pelvis.y+18);
+  gfx.bezierCurveTo(offsetX+hipR.x+10, offsetY+pelvis.y+24, offsetX+pelvis.x+8, offsetY+pelvis.y+26, offsetX+pelvis.x, offsetY+pelvis.y+26);
+  gfx.bezierCurveTo(offsetX+pelvis.x-8, offsetY+pelvis.y+26, offsetX+hipL.x-10, offsetY+pelvis.y+24, offsetX+hipL.x-18, offsetY+pelvis.y+18);
+  gfx.bezierCurveTo(offsetX+hipL.x-20, offsetY+pelvis.y+10, offsetX+hipL.x-20, offsetY+pelvis.y+5, offsetX+hipL.x-20, offsetY+pelvis.y+5);
   gfx.closePath();
   gfx.fill({ color: COR_PELE });
   gfx.stroke();
 
   const neck = p('neck');
   const head = p('head');
-  gfx.moveTo(offsetX+neck.x-8, offsetY+neck.y);
-  gfx.lineTo(offsetX+neck.x+8, offsetY+neck.y);
-  gfx.lineTo(offsetX+head.x+7, offsetY+head.y);
-  gfx.lineTo(offsetX+head.x-7, offsetY+head.y);
+  gfx.moveTo(offsetX+neck.x-7, offsetY+neck.y+2);
+  gfx.bezierCurveTo(offsetX+neck.x-6, offsetY+head.y+4, offsetX+neck.x+6, offsetY+head.y+4, offsetX+neck.x+7, offsetY+neck.y+2);
   gfx.closePath();
   gfx.fill({ color: COR_PELE });
   gfx.stroke();
 
-  gfx.ellipse(offsetX+head.x, offsetY+head.y-18, 20, 24);
+  gfx.ellipse(offsetX+head.x, offsetY+head.y-16, 22, 26);
   gfx.fill({ color: COR_PELE });
   gfx.stroke();
+
+  gfx.ellipse(offsetX+head.x-6, offsetY+head.y-20, 3, 2);
+  gfx.fill({ color: COR_SOMBRA });
+  gfx.ellipse(offsetX+head.x+6, offsetY+head.y-20, 3, 2);
+  gfx.fill({ color: COR_SOMBRA });
 }

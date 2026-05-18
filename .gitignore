@@ -10,3 +10,8 @@ Thumbs.db
 *.log
 coverage/
 .vite/
+# Docs locais (nao versionados)
+docs/locais/
+
+# Pasta de captura do projeto
+vida25d_captura_*/

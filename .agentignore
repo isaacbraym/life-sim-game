@@ -1,0 +1,23 @@
+# Pastas pesadas — IGNORAR ao mapear o projeto
+node_modules/
+dist/
+.git/
+.vite/
+coverage/
+vida25d_captura_*/
+packages/game/dist/
+packages/core/dist/
+packages/dev-tools/dist/
+
+# Arquivos gerados automaticamente
+pnpm-lock.yaml
+*.tsbuildinfo
+*.map
+
+# Binarios e assets
+*.png
+*.jpg
+*.svg
+*.ico
+*.woff
+*.woff2

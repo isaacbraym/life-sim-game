@@ -24,19 +24,19 @@ export type PerfilTronco = {
 };
 
 export const PERFIL_BRACO_PADRAO: PerfilBraco = {
-  espessuraOmbro: 18,
-  espessuraBiceps: 24,
-  espessuraCotovelo: 15,
-  espessuraAntebraco: 21,
-  espessuraPulso: 10,
+  espessuraOmbro: 22,
+  espessuraBiceps: 20,
+  espessuraCotovelo: 14,
+  espessuraAntebraco: 16,
+  espessuraPulso: 9,
 };
 
 export const PERFIL_PERNA_PADRAO: PerfilPerna = {
-  espessuraQuadril: 26,
-  espessuraCoxa: 31,
-  espessuraJoelho: 20,
-  espessuraPanturrilha: 26,
-  espessuraTornozelo: 12,
+  espessuraQuadril: 22,
+  espessuraCoxa: 28,
+  espessuraJoelho: 18,
+  espessuraPanturrilha: 22,
+  espessuraTornozelo: 10,
 };
 
 export const PERFIL_TRONCO_PADRAO: PerfilTronco = {
