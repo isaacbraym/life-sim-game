@@ -2,32 +2,11 @@
   "name": "life-sim-game",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    cat > package.json << 'EOF'
-{
-  "name": "life-sim-game",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "packageManager": "pnpm@11.1.2"
-}
-EOF
-      "onFail": "download"
-    }
-  },
   "type": "module"
 }
