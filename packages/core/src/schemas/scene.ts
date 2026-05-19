@@ -71,7 +71,7 @@ export const BeatDiretiva = z.object({
     'mudar_pose', 'mover_ator', 'mudar_expressao',
     'mudar_camera', 'tocar_som', 'pausar',
   ]),
-  parametros: z.record(z.unknown()),  // validados por handler específico
+  parametros: z.record(z.string(), z.unknown()),  // validados por handler específico
 }).strict();
 
 export const OpcaoEscolha = z.object({
@@ -84,6 +84,8 @@ export const OpcaoEscolha = z.object({
   efeitos: z.array(z.unknown()),  // Effect[], definido abaixo
   proximoEventoId: z.string().optional(),
 }).strict();
+
+export type OpcaoEscolha = z.infer<typeof OpcaoEscolha>;
 
 export const BeatEscolha = z.object({
   tipo: z.literal('escolha'),

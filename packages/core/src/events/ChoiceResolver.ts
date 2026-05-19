@@ -34,8 +34,8 @@ export function resolverEscolha(params: ResolverEscolhaParams): ResultadoEscolha
   }
 
   return {
-    efeitosAplicados: (opcao.efeitos || []) as Effect[],
-    proximoEventoId: opcao.proximoEventoId,
-    tierResultado
+    efeitosAplicados: (opcao.efeitos ?? []) as Effect[],
+    ...(opcao.proximoEventoId !== undefined ? { proximoEventoId: opcao.proximoEventoId } : {}),
+    ...(tierResultado !== undefined ? { tierResultado } : {}),
   };
 }

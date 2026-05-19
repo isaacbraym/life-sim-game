@@ -1,4 +1,5 @@
 {
+  "files": [],
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
@@ -14,11 +15,11 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-    "@core/*": ["packages/core/src/*"],
-    "@lifesim/core": ["packages/core/src/index.ts"],
-    "@game/*": ["packages/game/src/*"],
-    "@dev/*": ["packages/dev-tools/apps/*"],
-    "@content/*": ["content/*"]
-}
+      "@core/*": ["packages/core/src/*"],
+      "@lifesim/core": ["packages/core/src/index.ts"],
+      "@game/*": ["packages/game/src/*"],
+      "@dev/*": ["packages/dev-tools/apps/*"],
+      "@content/*": ["content/*"]
+    }
   }
 }

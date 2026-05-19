@@ -28,3 +28,11 @@ export * from './rpg';
 
 // Motor de eventos
 export * from './events';
+
+// NPC
+export * from './npc';
+
+// Persistencia
+export { VidaGameDB, db } from './persistence/GameDB';
+export type { EntradaLogEvento } from './persistence/GameDB';
+export type { Relacionamento as RelacionamentoDB } from './persistence/GameDB';

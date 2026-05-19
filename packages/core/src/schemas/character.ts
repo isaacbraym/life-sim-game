@@ -52,6 +52,7 @@ export const Character = z.object({
   atributos: Atributos,
   atributosGeneticos: Atributos,  // base ao nascer, imutável
 
+
   dinheiro: z.number().default(0),
   humorAtual: z.number().int().min(0).max(100).default(70),
   saudeAtual: z.number().int().min(0).max(100).default(100),
@@ -63,4 +64,5 @@ export const Character = z.object({
   eventosVividos: z.array(z.string()).default([]),  // eventIds
 }).strict();
 
+export type Atributos = z.infer<typeof Atributos>;
 export type Character = z.infer<typeof Character>;
