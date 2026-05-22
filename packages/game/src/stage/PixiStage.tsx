@@ -1,55 +1,43 @@
-import { useEffect, useRef } from 'react'
-import { Application, Graphics } from 'pixi.js'
-import { Esqueleto } from '@lifesim/core'
-import { desenharSilhueta } from './SilhouetteRenderer'
+import React, { useEffect, useRef } from 'react';
+import * as PIXI from 'pixi.js';
 
-export function PixiStage() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const appRef = useRef<Application | null>(null)
+export function PixiStage(): React.JSX.Element {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const appRef = useRef<PIXI.Application | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return
+    const container = containerRef.current;
+    if (!container || appRef.current) return;
 
-    const container = containerRef.current
-    let montado = true
-    const app = new Application()
+    const app = new PIXI.Application();
 
-  app.init({
-    background: '#1a1a2e',
-    resizeTo: container,
-    antialias: true,
+    void app.init({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      backgroundColor: 0x1a1a2e,
+      antialias: true,
     }).then(() => {
-      if (!montado) {
-        app.destroy()
-        return
-      }
+      appRef.current = app;
+      container.appendChild(app.canvas);
 
-      appRef.current = app
-      container.appendChild(app.canvas)
-
-      const esqueleto = new Esqueleto()
-      const gfx = new Graphics()
-      app.stage.addChild(gfx)
-
-      const offsetX = app.screen.width / 2
-      const offsetY = app.screen.height / 2
-
-      desenharSilhueta(gfx, esqueleto, offsetX, offsetY)
-    })
+      const quadradoTeste = new PIXI.Graphics();
+      quadradoTeste.rect(
+        window.innerWidth / 2 - 50,
+        window.innerHeight / 2 - 50,
+        100,
+        100,
+      );
+      quadradoTeste.fill({ color: 0xe74c3c });
+      app.stage.addChild(quadradoTeste);
+    });
 
     return () => {
-      montado = false
       if (appRef.current) {
-        appRef.current.destroy()
-        appRef.current = null
+        appRef.current.destroy();
+        appRef.current = null;
       }
-    }
-  }, [])
+    };
+  }, []);
 
-  return (
-    <div
-      ref={containerRef}
-      style={{ width: '100%', height: '100%' }}
-    />
-  )
+  return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 }
