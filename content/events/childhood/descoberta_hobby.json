@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "descoberta_hobby",
+  "categoria": "childhood",
+  "titulo": "Isso aqui é meu",
+  "descricaoCurta": "Você tentou por acidente. Ou alguém empurrou. O fato é que você descobriu algo que faz sentido nas suas mãos: um instrumento, um esporte, um desenho, uma câmera.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [6, 12],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_hobby",
+      "presente": false
+    },
+    "peso": 22,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "descoberta_hobby_cena",
+    "descricaoCurta": "Quarto ou sala. Criança completamente absorta em alguma atividade, horas passaram sem perceber.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "intimo",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "absorto_atividade",
+          "categoria": "action",
+          "descricao": "Criança concentrada, levemente inclinada para frente",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 40,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você não percebeu que eram três horas de tarde e agora é seis da noite.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "O tempo passou diferente. Como se estivesse dentro de algo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Música. Pedir pra aprender de verdade.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
+              { "tipo": "adicionar_flag", "flag": "hobby_musica" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Desenho. Comprar mais cadernos.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
+              { "tipo": "adicionar_flag", "flag": "hobby_desenho" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Esporte. Treinar todo dia.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
+              { "tipo": "adicionar_flag", "flag": "hobby_esporte" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Leitura. Já tem uma pilha esperando.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
+              { "tipo": "adicionar_flag", "flag": "hobby_leitura" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

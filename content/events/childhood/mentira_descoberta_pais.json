@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "mentira_descoberta_pais",
+  "categoria": "childhood",
+  "titulo": "A mentira foi longe demais",
+  "descricaoCurta": "Você mentiu. Parecia simples no começo. Aí a mentira precisou de outra mentira pra se sustentar. Agora desabou.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [7, 12],
+    "peso": 18,
+    "cooldownMeses": 20,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "pai_ou_mae_brabo",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": { "idadeMin": 25, "idadeMax": 55 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "mentira_descoberta_cena",
+    "descricaoCurta": "Sala. Adulto com o objeto da prova na mão — bilhete, mensagem, nota, o que for. Você sem saída.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "flagrado_sem_saida",
+          "categoria": "emotional",
+          "descricao": "Cabeça levemente baixa, olhar desviado, postura encolhida",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adulto_decepcionado",
+          "categoria": "emotional",
+          "descricao": "Adulto com a prova na mão, olhar mais decepcionado do que bravo",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Não estou com raiva. Estou decepcionado. E isso é pior.",
+        "mudancaExpressao": "triste"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "É pior mesmo. A raiva passa. A decepção fica olhando pra você por semanas.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Assumir tudo. Sem desculpa, sem enrolação.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "assumiu_mentira" }
+            ]
+          },
+          {
+            "texto": "Tentar explicar o contexto. Reduzir o dano.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -8 },
+              { "tipo": "adicionar_flag", "flag": "tentou_explicar_mentira" }
+            ]
+          },
+          {
+            "texto": "Mentir mais um pouco. Ver até onde vai.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
+              { "tipo": "adicionar_flag", "flag": "mentiu_de_novo" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

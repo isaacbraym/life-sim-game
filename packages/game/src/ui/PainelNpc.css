@@ -1,0 +1,572 @@
+/* ==========================================================================
+   PainelNpc.css — Painel de detalhes de NPC (Sugestão A)
+   Todas as variáveis são scoped em .painel-npc-overlay para evitar conflito.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+/* --------------------------------------------------------------------------
+   Variáveis de tema
+   -------------------------------------------------------------------------- */
+.painel-npc-overlay {
+  --pnpc-bg:           #0f1117;
+  --pnpc-surface:      #181c25;
+  --pnpc-surface2:     #1e2332;
+  --pnpc-border:       #2a3045;
+  --pnpc-text:         #e8eaf0;
+  --pnpc-muted:        #6b7594;
+  --pnpc-dim:          #3d4560;
+  --pnpc-accent:       #5b8dee;
+  --pnpc-accent-soft:  rgba(91, 141, 238, 0.12);
+  --pnpc-green:        #4caf7d;
+  --pnpc-red:          #e05c5c;
+  --pnpc-yellow:       #e8b84b;
+  --pnpc-purple:       #b48cf7;
+  --pnpc-radius:       12px;
+  --pnpc-radius-sm:    8px;
+
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Overlay (backdrop)
+   -------------------------------------------------------------------------- */
+.painel-npc-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* --------------------------------------------------------------------------
+   Painel (modal)
+   -------------------------------------------------------------------------- */
+.painel-npc {
+  background: var(--pnpc-surface);
+  border: 1px solid var(--pnpc-border);
+  border-radius: 18px;
+  width: 420px;
+  max-height: 88vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  color: var(--pnpc-text);
+  animation: pnpc-slide-up 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pnpc-slide-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.painel-npc__header {
+  padding: 20px 20px 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.painel-npc__btn-fechar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--pnpc-surface2);
+  border: 1px solid var(--pnpc-border);
+  color: var(--pnpc-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.painel-npc__btn-fechar:hover {
+  color: var(--pnpc-text);
+  border-color: var(--pnpc-accent);
+}
+
+.painel-npc__identidade {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+}
+
+/* Avatar */
+.painel-npc__avatar-wrap { position: relative; flex-shrink: 0; }
+
+.painel-npc__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2a3a5c, #1e2880);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border: 2px solid var(--pnpc-border);
+}
+
+.painel-npc__badge-persistencia {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 20px;
+  font-family: 'DM Mono', monospace;
+  border: 2px solid var(--pnpc-surface);
+  white-space: nowrap;
+}
+.painel-npc__badge-persistencia--permanente { background: var(--pnpc-green); }
+.painel-npc__badge-persistencia--recorrente { background: var(--pnpc-accent); }
+.painel-npc__badge-persistencia--descartavel { background: var(--pnpc-dim); }
+
+/* Info do NPC */
+.painel-npc__nome-bloco h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--pnpc-text);
+}
+
+.painel-npc__papel {
+  font-size: 12px;
+  color: var(--pnpc-muted);
+  margin-top: 3px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.painel-npc__dados-rapidos {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--pnpc-muted);
+  flex-wrap: wrap;
+}
+.painel-npc__dado { display: flex; align-items: center; gap: 3px; }
+
+/* --------------------------------------------------------------------------
+   Abas
+   -------------------------------------------------------------------------- */
+.painel-npc__abas {
+  display: flex;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--pnpc-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+.painel-npc__abas::-webkit-scrollbar { display: none; }
+
+.painel-npc__aba {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pnpc-muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  letter-spacing: 0.3px;
+  font-family: 'DM Sans', sans-serif;
+}
+.painel-npc__aba:hover { color: var(--pnpc-text); }
+.painel-npc__aba--ativa {
+  color: var(--pnpc-accent);
+  border-bottom-color: var(--pnpc-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Área de conteúdo scrollável
+   -------------------------------------------------------------------------- */
+.painel-npc__conteudo {
+  overflow-y: auto;
+  flex: 1;
+  padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pnpc-border) transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Seções e cartões
+   -------------------------------------------------------------------------- */
+.painel-npc__secao { margin-bottom: 20px; }
+.painel-npc__secao:last-child { margin-bottom: 0; }
+
+.painel-npc__secao-titulo {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--pnpc-dim);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-family: 'DM Mono', monospace;
+}
+
+.painel-npc__cartao {
+  background: var(--pnpc-surface2);
+  border: 1px solid var(--pnpc-border);
+  border-radius: var(--pnpc-radius-sm);
+  padding: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   Aba Aparência — Preview do rig (placeholder SVG)
+   -------------------------------------------------------------------------- */
+.painel-npc__rig-preview {
+  background: linear-gradient(180deg, #1a2035 0%, #111520 100%);
+  border: 1px solid var(--pnpc-border);
+  border-radius: var(--pnpc-radius-sm);
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.painel-npc__rig-preview-label {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.15);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 1px;
+}
+
+/* Atributo físico (linha label + valor) */
+.painel-npc__atributo-fisico {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--pnpc-border);
+  font-size: 13px;
+}
+.painel-npc__atributo-fisico:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.painel-npc__af-label {
+  color: var(--pnpc-muted);
+  width: 130px;
+  flex-shrink: 0;
+}
+.painel-npc__af-valor {
+  color: var(--pnpc-text);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.painel-npc__cor-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Aba Bio — grade de fichas
+   -------------------------------------------------------------------------- */
+.painel-npc__grid-bio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.painel-npc__bio-item {
+  background: var(--pnpc-surface2);
+  border: 1px solid var(--pnpc-border);
+  border-radius: var(--pnpc-radius-sm);
+  padding: 10px 12px;
+}
+.painel-npc__bio-item--full { grid-column: 1 / -1; }
+
+.painel-npc__bi-label {
+  font-size: 10px;
+  color: var(--pnpc-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 4px;
+}
+.painel-npc__bi-valor {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pnpc-text);
+}
+
+/* --------------------------------------------------------------------------
+   Aba Relacionamento
+   -------------------------------------------------------------------------- */
+.painel-npc__rel-tipo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pnpc-surface2);
+  border: 1px solid var(--pnpc-border);
+  border-radius: var(--pnpc-radius-sm);
+  padding: 12px;
+  margin-bottom: 14px;
+}
+.painel-npc__rel-icone { font-size: 24px; }
+.painel-npc__rel-info h4 { font-size: 14px; font-weight: 600; }
+.painel-npc__rel-info p  { font-size: 12px; color: var(--pnpc-muted); margin-top: 2px; }
+
+/* Barra de afeto */
+.painel-npc__afeto-bloco { margin-bottom: 14px; }
+
+.painel-npc__afeto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.painel-npc__afeto-label { font-size: 12px; color: var(--pnpc-muted); }
+.painel-npc__afeto-valor { font-size: 13px; font-weight: 600; }
+
+.painel-npc__afeto-barra-bg {
+  height: 6px;
+  background: var(--pnpc-surface2);
+  border: 1px solid var(--pnpc-border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.painel-npc__afeto-barra-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--pnpc-red), var(--pnpc-yellow), var(--pnpc-green));
+  transition: width 0.4s ease;
+}
+
+/* Histórico de interações no relacionamento */
+.painel-npc__historico-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pnpc-border);
+  font-size: 12px;
+}
+.painel-npc__historico-item:last-child { border-bottom: none; }
+
+.painel-npc__rel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pnpc-accent);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.painel-npc__rel-text {
+  color: var(--pnpc-muted);
+  line-height: 1.5;
+}
+.painel-npc__rel-text strong { color: var(--pnpc-text); }
+
+/* --------------------------------------------------------------------------
+   Aba Atributos
+   -------------------------------------------------------------------------- */
+.painel-npc__status-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.painel-npc__status-pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.painel-npc__status-pill--vivo     { background: rgba(76, 175, 125, 0.15); color: var(--pnpc-green);  border: 1px solid rgba(76, 175, 125, 0.3); }
+.painel-npc__status-pill--emprego  { background: rgba(91, 141, 238, 0.12); color: var(--pnpc-accent); border: 1px solid rgba(91, 141, 238, 0.25); }
+.painel-npc__status-pill--financ   { background: rgba(232, 184, 75, 0.12); color: var(--pnpc-yellow); border: 1px solid rgba(232, 184, 75, 0.3); }
+
+.painel-npc__attr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.painel-npc__attr-card {
+  background: var(--pnpc-surface2);
+  border: 1px solid var(--pnpc-border);
+  border-radius: var(--pnpc-radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+.painel-npc__attr-card--full { grid-column: 1 / -1; }
+
+.painel-npc__a-nome {
+  font-size: 10px;
+  color: var(--pnpc-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 6px;
+}
+.painel-npc__a-val {
+  font-size: 26px;
+  font-weight: 600;
+  font-family: 'DM Mono', monospace;
+  line-height: 1;
+}
+.painel-npc__a-mod {
+  font-size: 11px;
+  color: var(--pnpc-muted);
+  margin-top: 4px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* Cores por atributo */
+.painel-npc__attr-card--forca .painel-npc__a-val  { color: var(--pnpc-red); }
+.painel-npc__attr-card--int   .painel-npc__a-val  { color: var(--pnpc-accent); }
+.painel-npc__attr-card--car   .painel-npc__a-val  { color: var(--pnpc-yellow); }
+.painel-npc__attr-card--con   .painel-npc__a-val  { color: var(--pnpc-green); }
+.painel-npc__attr-card--sor   .painel-npc__a-val  { color: var(--pnpc-purple); }
+
+/* --------------------------------------------------------------------------
+   Aba Linha do tempo
+   -------------------------------------------------------------------------- */
+.painel-npc__timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+.painel-npc__timeline-item:last-child { padding-bottom: 0; }
+
+.painel-npc__tl-esquerda {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 36px;
+}
+.painel-npc__tl-ano {
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  color: var(--pnpc-dim);
+  white-space: nowrap;
+  margin-bottom: 6px;
+}
+.painel-npc__tl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pnpc-surface2);
+  border: 2px solid var(--pnpc-accent);
+  flex-shrink: 0;
+}
+.painel-npc__tl-linha {
+  width: 2px;
+  flex: 1;
+  background: var(--pnpc-border);
+  margin-top: 4px;
+  min-height: 20px;
+}
+
+.painel-npc__tl-conteudo {
+  background: var(--pnpc-surface2);
+  border: 1px solid var(--pnpc-border);
+  border-radius: var(--pnpc-radius-sm);
+  padding: 10px 12px;
+  flex: 1;
+  font-size: 12px;
+}
+.painel-npc__tl-titulo {
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: var(--pnpc-text);
+}
+.painel-npc__tl-desc {
+  color: var(--pnpc-muted);
+  line-height: 1.5;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+}
+.painel-npc__tl-tag {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  background: var(--pnpc-accent-soft);
+  color: var(--pnpc-accent);
+  font-family: 'DM Mono', monospace;
+}
+
+/* Aviso sem atributos */
+.painel-npc__sem-atributos {
+  font-size: 13px;
+  color: var(--pnpc-muted);
+  text-align: center;
+  padding: 20px 0;
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Footer com ações
+   -------------------------------------------------------------------------- */
+.painel-npc__footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--pnpc-border);
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.painel-npc__btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: var(--pnpc-radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  border: 1px solid var(--pnpc-border);
+}
+.painel-npc__btn--primario {
+  background: var(--pnpc-accent);
+  color: #fff;
+  border-color: var(--pnpc-accent);
+}
+.painel-npc__btn--primario:hover { background: #4a7de0; }
+.painel-npc__btn--sec {
+  background: transparent;
+  color: var(--pnpc-muted);
+}
+.painel-npc__btn--sec:hover {
+  color: var(--pnpc-text);
+  background: var(--pnpc-surface2);
+}

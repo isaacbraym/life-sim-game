@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "dor_dente_canal",
+  "categoria": "health",
+  "titulo": "O Motorzinho da Agonia",
+  "descricaoCurta": "Um de seus molares começa a pulsar com uma dor aguda e insuportável no meio de um feriadão prolongado. Você vai precisar encarar o famigerado tratamento de canal.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 65],
+    "peso": 20,
+    "cooldownMeses": 18,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "dentista",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "dor_dente_canal_cena",
+    "descricaoCurta": "No consultório odontológico, o protagonista segura a bochecha com medo do dentista segurando a broca.",
+    "background": "hospital_quarto",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_dor_dente",
+          "categoria": "emotional",
+          "descricao": "Mão na bochecha, olhar trêmulo de pânico",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "dentista_broca",
+          "categoria": "interactions",
+          "descricao": "Segurando instrumento odontológico com seriedade profissional",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A dor é tão forte que você sente seu molar pulsar no ritmo do Olodum. O barulhinho da broca de alta rotação ecoa na sala como uma serra elétrica de filme de terror.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Então, o canal está inflamado. Se eu não abrir agora para drenar, você não vai dormir o resto da semana. Vamos começar?"
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Doutor, capricha na anestesia porque eu sou cardíaco na hora de sentir dor física!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Encarar a broca, pagar a franquia do plano e fazer o canal de vez.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 25 },
+              { "tipo": "alterar_dinheiro", "delta": -350.0 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Tentar apelar para o carisma e conseguir um parcelamento amigável em 10 vezes.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 25 },
+              { "tipo": "alterar_dinheiro", "delta": -320.0 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Adiar a consulta e continuar tomando analgésicos fortes com água de torneira.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -25 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

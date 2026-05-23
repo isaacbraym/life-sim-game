@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "falsificacao_carteirinha_estudante",
+  "categoria": "crime",
+  "titulo": "A Carteirinha de Estudante Falsa",
+  "descricaoCurta": "Querendo pagar meia-entrada nos shows e cinemas, você se depara com a oportunidade de comprar uma carteirinha falsificada.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [15, 30],
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "estudante_negociante",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 16,
+        "idadeMax": 30
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "falsificacao_carteirinha_estudante_cena",
+    "descricaoCurta": "Pátio escolar com sol, protagonista conversando baixinho com outro estudante que mostra um cartão.",
+    "background": "escola_patio",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_interessado",
+          "categoria": "interactions",
+          "descricao": "Olhando de soslaio para o objeto na mão do outro",
+          "rotacoes": [],
+          "expressaoFacial": "flertando",
+          "intensidadeExpressao": 40,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "negociante_mostra_cartao",
+          "categoria": "interactions",
+          "descricao": "Segurando um cartão pequeno com as pontas dos dedos discretamente",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O ingresso para o festival de música do ano custa um rim inteiro. No pátio da escola, um conhecido que manja de design gráfico oferece uma solução clandestina mas eficiente.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Parça, cinquenta reais e eu faço uma carteirinha estudantil oficial, com selo holográfico e tudo. Passa em qualquer leitor. Recupera o investimento no primeiro cinema!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pagar os cinquenta reais e encomendar a carteirinha fria.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -50.0 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "estudante_falso" }
+            ]
+          },
+          {
+            "texto": "Bolar seu próprio design no computador e imprimir em casa para economizar.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -10.0 },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "falsificador_autodidata" }
+            ]
+          },
+          {
+            "texto": "Recusar a proposta e pagar o valor integral oficial parcelado no cartão.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -250.0 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

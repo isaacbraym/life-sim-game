@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "roubo_carga_sedex_atraso",
+  "categoria": "crime",
+  "titulo": "O Resgate do Sedex Atrasado",
+  "descricaoCurta": "Sua encomenda dos Correios está atrasada há meses. Você vê a van de entrega parada na calçada com a porta aberta e sem o motorista.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 60],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "carteiro_distraido",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 22,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "roubo_carga_sedex_atraso_cena",
+    "descricaoCurta": "Rua residencial, protagonista perto de caixas de papelão, carteiro distraído ao fundo falando ao celular.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_segura_caixa",
+          "categoria": "action",
+          "descricao": "Segurando uma caixa média de papelão nos braços com ar de segredo",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "carteiro_fala_longe",
+          "categoria": "interactions",
+          "descricao": "Celular no ouvido, gesticulando alegremente de costas",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "aberta",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Sua encomenda internacional está em 'Curitiba' há três meses. Caminhando pela rua, você vê a van amarela do Sedex com o baú escancarado. O carteiro está a 15 metros dali, fofocando no WhatsApp de costas. Suas caixas estão ao alcance da mão.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Pois é, dona Maria! O trânsito tá horrível... Vou demorar um pouco para entregar a encomenda aí."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pegar silenciosamente seu pacote (e mais um de brinde) e dar no pé sem olhar para trás.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 400.0 },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "resgate_sedex_sucesso" }
+            ]
+          },
+          {
+            "texto": "Arrancar a caixa e sair em disparada chamando atenção total da rua.",
+            "atributoCheck": { "atributo": "forca", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 400.0 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "resgate_sedex_sucesso" }
+            ]
+          },
+          {
+            "texto": "Avisar o carteiro que a van está aberta para evitar que roubem as coisas dele.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "carteiro_distraido", "delta": 25 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

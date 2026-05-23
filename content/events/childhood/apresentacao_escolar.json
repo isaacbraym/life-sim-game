@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "apresentacao_escolar",
+  "categoria": "childhood",
+  "titulo": "O dia da apresentação",
+  "descricaoCurta": "Você vai subir no palco. Pode ser dança junina, peça de teatro, trabalho de ciências ou recitação de poema. O auditório vai estar cheio de pais com câmera.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [6, 12],
+    "peso": 16,
+    "cooldownMeses": 18,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "apresentacao_escolar_cena",
+    "descricaoCurta": "Nos bastidores, segundos antes de entrar. Você olha para a cortina que separa você da plateia.",
+    "background": "escola_corredor",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "pre_apresentacao_nervoso",
+          "categoria": "emotional",
+          "descricao": "De pé, respirando fundo, mãos fechadas, olhando para frente",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Do outro lado da cortina: duzentos pais, irmãos, avós e câmeras de celular.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você decorou. Você treinou. Seu cérebro resolveu esquecer tudo agora.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Respirar fundo e entrar. O que vier, veio.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Dar o mínimo pra sobreviver e sair do palco logo.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Dar tudo de si. Que venha o constrangimento ou a glória.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 30 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 2 },
+              { "tipo": "adicionar_flag", "flag": "gosto_por_palco" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

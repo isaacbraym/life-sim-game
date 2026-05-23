@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "pedido_demissao_voluntario",
+  "categoria": "career",
+  "titulo": "Você pediu pra sair",
+  "descricaoCurta": "Você chegou no limite. Outra proposta chegou, ou o ambiente ficou tóxico, ou você simplesmente não aguenta mais olhar pra aquela planilha. Hora de ir embora.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [21, 45],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "chefe_recebendo_demissao",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 28, "idadeMax": 60 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "pedido_demissao_voluntario_cena",
+    "descricaoCurta": "Sala fechada. Você com a carta de demissão ou a conversa que ensaiou no espelho.",
+    "background": "escritorio_sala_reuniao",
+    "framing": "medium",
+    "humor": "intimo",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "decidido_mas_desconfortavel",
+          "categoria": "emotional",
+          "descricao": "Firme na decisão mas claramente desconfortável com a conversa",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 55,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "chefe_surpreso_processando",
+          "categoria": "emotional",
+          "descricao": "Surpreso, sem ter previsto isso, pensando na resposta",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 65,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você falou as palavras. Elas saíram e não têm como voltar.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Você tem certeza? Podemos conversar sobre o que está acontecendo.",
+        "mudancaExpressao": "surpresa"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Manter a decisão. Já foi pensada.",
+            "efeitos": [
+              { "tipo": "remover_flag", "flag": "tem_emprego" },
+              { "tipo": "adicionar_flag", "flag": "pediu_demissao" },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Abrir pra contra-proposta. Ouvir o que oferecem.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 500 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

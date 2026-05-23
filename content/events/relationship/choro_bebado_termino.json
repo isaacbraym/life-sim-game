@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "choro_bebado_termino",
+  "categoria": "relationship",
+  "titulo": "O Pagode da Depressão",
+  "descricaoCurta": "Após uma briga feia com seu amor, você bebe um pouco além da conta em um bar copo-sujo e começa a chorar alto ao som de pagode dos anos 90.",
+  "contentTags": ["substance"],
+  "triggers": {
+    "idadeRange": [18, 35],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "choro_bebado_termino_cena",
+    "descricaoCurta": "Bar mal iluminado, mesa cheia de copos vazios de cerveja e protagonista chorando com o celular na mão.",
+    "background": "bar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_choro_bebado",
+          "categoria": "emotional",
+          "descricao": "Sentado na cadeira, cabeça baixa apoiada na mesa com um copo na mão",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "garcom_olhar_julgador",
+          "categoria": "interactions",
+          "descricao": "Segurando bandeja com pano no ombro e expressão entediada",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A mesa está cheia de tulipas vazias. O cantor de voz e violão do bar começa a tocar 'Evidências'. A letra bate direto na sua alma ferida. Você saca o celular e resolve mandar um áudio de 4 minutos soluçando e cantando o refrão.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Chefe, a casa tá fechando. A saideira já foi e seu Uber tá esperando lá fora."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Apagar o áudio antes de enviar e pedir desculpas ao garçom de forma educada.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Tentar cantar ainda mais alto para provar que a sua dor é legítima.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "vergonha_no_bar" }
+            ]
+          },
+          {
+            "texto": "Pagar a conta chorando, entrar no Uber silenciosamente e dormir.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -80.0 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_estagio",
+  "categoria": "education",
+  "titulo": "Estagiário",
+  "descricaoCurta": "Você conseguiu um estágio. Vai para o mercado de trabalho pela primeira vez de verdade — com carteirinha, com horário, com aquela sensação de que todo mundo sabe mais que você.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 22],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
+    "peso": 22,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "supervisor_estagio",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 28, "idadeMax": 50 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_estagio_cena",
+    "descricaoCurta": "Escritório. Primeiro dia. Você olhando para a mesa que é sua agora.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "estagiario_primeiro_dia",
+          "categoria": "basic",
+          "descricao": "Postura rígida, tentando parecer competente, claramente novato",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 55,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "supervisor_apresentando",
+          "categoria": "basic",
+          "descricao": "Mostrando o espaço, gesticulando para o escritório",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 30,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "aberta",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Qualquer dúvida pode perguntar. Ninguém nasce sabendo. Bem-vindo à equipe.",
+        "mudancaExpressao": "neutra"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você olha para a tela do computador. Tem acesso a documentos reais de uma empresa real.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Perguntar tudo que não entender desde o primeiro dia.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_estagio" },
+              { "tipo": "alterar_dinheiro", "delta": 800 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Observar, copiar o que os outros fazem, perguntar só quando necessário.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_estagio" },
+              { "tipo": "alterar_dinheiro", "delta": 800 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Tentar impressionar logo de cara com iniciativa própria.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_estagio" },
+              { "tipo": "alterar_dinheiro", "delta": 800 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

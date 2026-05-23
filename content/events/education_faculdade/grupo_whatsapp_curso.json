@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "grupo_whatsapp_curso",
+  "categoria": "education_faculdade",
+  "titulo": "A Caverna do Dragão Acadêmica",
+  "descricaoCurta": "O grupo que era para resumos vira um antro de figurinhas políticas e fofocas.",
+  "contentTags": ["comedia"],
+  "triggers": {
+    "idadeRange": [18, 24],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "grupo_whatsapp_curso_cena",
+    "descricaoCurta": "Estudante olhando o celular com expressão de descrença.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "olhando_celular_descrente",
+          "categoria": "emotional",
+          "descricao": "Celular na mão, franzindo a testa para a tela",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "150 mensagens não lidas. Duas são sobre a matéria que cai na prova. O resto é treta entre o DA e o centro acadêmico.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Silenciar por 1 ano. Nunca mais abrir.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Mandar um figurinha debochada pra colocar lenha na fogueira.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

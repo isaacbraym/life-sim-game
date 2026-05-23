@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "reprovacao_vestibular",
+  "categoria": "education",
+  "titulo": "Não passou",
+  "descricaoCurta": "Você buscou o resultado. O seu nome não estava na lista. Simples assim. Meses de estudo, cursinhos, privações — e não estava na lista.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [17, 18],
+    "requisitos": {
+      "tipo": "nao",
+      "predicado": { "tipo": "flag", "flag": "passou_vestibular", "presente": true }
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "reprovacao_vestibular_cena",
+    "descricaoCurta": "Você com o celular na mão. A tela aberta no site. O nome não está lá.",
+    "background": "quarto",
+    "framing": "closeup",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "olhando_celular_resultado_ruim",
+          "categoria": "emotional",
+          "descricao": "Segurando o celular, expressão vazia, processando",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você rola a página mais uma vez. Como se o nome fosse aparecer na segunda rolagem.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Não aparece.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Já começar a planejar a próxima tentativa.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "estudando_para_vestibular" }
+            ]
+          },
+          {
+            "texto": "Considerar outras opções. Talvez faculdade particular, EAD, técnico.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "considerando_alternativas_ensino" }
+            ]
+          },
+          {
+            "texto": "Precisar de um dia pra processar sem falar com ninguém.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

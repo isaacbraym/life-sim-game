@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "reencontro_ex_supermercado",
+  "categoria": "relationship",
+  "titulo": "Flagrante no Corredor 4",
+  "descricaoCurta": "Você reencontra seu ex-parceiro no supermercado no pior dia possível: você está com roupas desleixadas e segurando papel higiênico barato.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [20, 40],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "ex_parceiro",
+      "tipoVinculo": "romance"
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "ex_parceiro",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "reencontro_ex_supermercado_cena",
+    "descricaoCurta": "Corredor de supermercado com prateleiras cheias de produtos e promoções.",
+    "background": "centro_comercial",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_segura_compras",
+          "categoria": "emotional",
+          "descricao": "Parado com expressão de vergonha segurando um rolo de papel higiênico",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "ex_com_carrinho",
+          "categoria": "emotional",
+          "descricao": "Em pé com sorriso amigável e surpreso",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Domingo à noite. Você correu ao supermercado de camiseta furada para comprar papel higiênico folha simples. Ao virar no corredor de limpeza, dá de cara com seu ex-parceiro. Ele está impecável, cheiroso e com um carrinho cheio de queijos importados e vinhos caros.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Nossa, quanto tempo! Tudo bem com você? Nem te reconheci de longe."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Puxar assunto com simpatia e fingir que está tudo ótimo.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Dar um aceno rápido e sair fingindo pressa.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Fazer uma piada sobre seu estado lamentável.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 20 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

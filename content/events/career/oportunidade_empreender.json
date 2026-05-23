@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "oportunidade_empreender",
+  "categoria": "career",
+  "titulo": "O Golpe do CNPJ",
+  "descricaoCurta": "A ilusão de 'ser seu próprio chefe', que na verdade significa trabalhar 16 horas por dia pra pagar o Simples Nacional.",
+  "contentTags": ["trabalho", "tenso"],
+  "triggers": {
+    "idadeRange": [23, 40],
+    "requisitos": {
+      "tipo": "todos",
+      "predicados": [
+        { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+        { "tipo": "algum", "predicados": [
+          { "tipo": "var", "caminho": "personagem.atributos.inteligencia", "operador": ">=", "valor": 13 },
+          { "tipo": "var", "caminho": "personagem.atributos.carisma", "operador": ">=", "valor": 13 }
+        ]}
+      ]
+    },
+    "peso": 12,
+    "cooldownMeses": 48,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "socio_potencial",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 22, "idadeMax": 45 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "oportunidade_empreender_cena",
+    "descricaoCurta": "Cafeteria cara. Um 'empreendedor de palco' tentando te convencer.",
+    "background": "restaurante",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "avaliando_golpe",
+          "categoria": "emotional",
+          "descricao": "Desconfiado, braços cruzados, achando que é pirâmide",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.25, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "vendedor_curso_milionario",
+          "categoria": "emotional",
+          "descricao": "Paletó ajustado, relógio gigante, gesticulando muito",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "aberta",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "O mindset é tudo! Você larga a CLT, a gente abre essa agência e em 6 meses tamo faturando 7 dígitos!",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Ele usou a palavra 'mindset'. O alarme de picareta soou no seu cérebro.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Cair no papo. Abrir mão dos direitos trabalhistas pela 'liberdade'.",
+            "efeitos": [
+              { "tipo": "remover_flag", "flag": "tem_emprego" },
+              { "tipo": "adicionar_flag", "flag": "empreendendo" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_saude", "delta": -15 }
+            ]
+          },
+          {
+            "texto": "Recusar a proposta. A CLT é ruim, mas pirâmide é pior.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "pichacao_muro_escola",
+  "categoria": "crime",
+  "titulo": "Pixação no Muro da Escola",
+  "descricaoCurta": "Armado com uma lata de spray no bolso, você e um parceiro cogitam deixar uma marca rebelde no muro da escola à noite.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [12, 22],
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "parceiro_spray",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 12,
+        "idadeMax": 22
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "pichacao_muro_escola_cena",
+    "descricaoCurta": "Pátio escolar mal iluminado à noite, protagonista agachado agitando lata de spray.",
+    "background": "escola_patio",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_spray",
+          "categoria": "action",
+          "descricao": "Agachado, sacudindo uma lata de tinta spray com expressão focada",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "parceiro_olhando",
+          "categoria": "interactions",
+          "descricao": "Olhando ansiosamente ao redor com os braços erguidos de leve",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "aberta",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O muro recém-pintado da escola parece uma tela em branco pedindo rebeldia. Seu amigo agita uma lata de spray Colorgin preta e te passa a bola. Se o vigia ver, é suspensão e serviço comunitário na certa.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Picha aquela zoeira que a gente combinou da diretora, vai! Desenha rápido que eu fico vigiando o portão da frente!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Caprichar num protesto artístico detalhado contra a carga horária de aulas.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "pichador_artistico" }
+            ]
+          },
+          {
+            "texto": "Escrever apenas a sigla da turma com pressa e sair correndo logo em seguida.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "tagger_rapido" }
+            ]
+          },
+          {
+            "texto": "Desistir do vandalismo, guardar o spray e ir embora comer um dogão.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

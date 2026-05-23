@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "zoom_ajuste_intimo",
+  "categoria": "career",
+  "titulo": "Câmera Indiscreta",
+  "descricaoCurta": "Um ajuste íntimo transmitido por engano para toda a diretoria na chamada de vídeo.",
+  "contentTags": ["trabalho", "sexual", "humilhacao"],
+  "triggers": {
+    "idadeRange": [22, 35],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 10,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "gerente_rh",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 25, "idadeMax": 60 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "zoom_ajuste_intimo_cena",
+    "descricaoCurta": "Câmera de videoconferência. Um enquadramento infeliz.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "ajeitando_calca_live",
+          "categoria": "action",
+          "descricao": "De pé em frente ao notebook de short, ajeitando as roupas íntimas",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "na_calca",
+          "maoDireita": "na_calca",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Reunião mensal com toda a diretoria e equipe pelo Zoom. O diretor de operações apresenta gráficos. Achando que sua câmera estava fechada, você levanta da cadeira, enfia a mão no short para dar aquela ajeitada de respeito e volta a sentar. Seu celular vibra desesperadamente.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fingir travamento e fechar a tampa do notebook.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Mandar mensagem privada fingindo que nada aconteceu.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          },
+          {
+            "texto": "Assumir a vergonha e pedir desculpas formais ao RH.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "gerente_rh", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "ajeitada_publica" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+}

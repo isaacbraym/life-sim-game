@@ -1,4 +1,4 @@
-import { Ponto } from '../rig/Skeleton';
+import type { Ponto } from '../rig/Joint';
 
 export type PerfilBraco = {
   espessuraOmbro: number;

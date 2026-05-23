@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "dor_costas_colchao_velho",
+  "categoria": "health",
+  "titulo": "A Ergonometria do Calvário",
+  "descricaoCurta": "Você acorda com as costas travadas após uma noite inteira dormindo na cratera formada pelo seu colchão de solteiro de dez anos atrás.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [25, 70],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "dor_costas_colchao_velho_cena",
+    "descricaoCurta": "No quarto, o protagonista segura a lombar com expressão de cansaço extremo.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_lombar",
+          "categoria": "basic",
+          "descricao": "Mão apoiada na lombar e corpo curvado de dor",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "fechada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O colchão antigo tem uma 'anatomia' própria: uma cratera gigante no meio que abraça suas costas como um buraco negro. Você tenta levantar, mas sua lombar faz o barulho de um galho seco quebrando.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Creck... ai! Minha coluna parece que foi montada com peças sobressalentes de uma betoneira."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fazer um alongamento leve no chão firme e passar um spray analgésico de cânfora.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Apelar para o cartão de crédito e comprar um colchão ortopédico de espuma densa.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 25 },
+              { "tipo": "alterar_dinheiro", "delta": -850.0 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          },
+          {
+            "texto": "Ignorar a dor e passar o dia jogado no sofá maroto para 'compensar'.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

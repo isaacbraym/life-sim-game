@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "falso_sequestro_telefone",
+  "categoria": "crime",
+  "titulo": "O Falso Sequestro por Telefone",
+  "descricaoCurta": "Você recebe uma ligação desesperada no meio da noite de alguém fingindo ser seu parente sequestrado.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 80],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "troteiro_presidiario",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "falso_sequestro_telefone_cena",
+    "descricaoCurta": "Quarto escuro, protagonista com celular no ouvido em pânico extremo.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_panico_telefone",
+          "categoria": "emotional",
+          "descricao": "Segurando o celular com força, olhos arregalados de pânico",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "golpista_fala_celular",
+          "categoria": "action",
+          "descricao": "Celular na orelha falando de forma agressiva",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "fechada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O celular vibra na cabeceira às 3h15 da manhã. Ao atender, você ouve um choro estridente: 'Socorro, me pegaram! Eles vão me matar!'. Logo em seguida, uma voz masculina rouca assume a ligação exigindo dinheiro rápido via PIX.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Presta atenção, chefe! Estou com sua filha na mala do carro. Se desligar ou chamar a polícia, eu apago ela. Passa dez mil reais no PIX agora!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Entrar em desespero e transferir R$ 2.000 (o limite noturno do PIX).",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -2000.0 },
+              { "tipo": "alterar_humor", "delta": -45 },
+              { "tipo": "adicionar_flag", "flag": "caiu_no_falso_sequestro" }
+            ]
+          },
+          {
+            "texto": "Manter o sangue frio, enrolar o cara e tentar ligar para o parente de outro telefone.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Zombar do sequestrador dizendo que você não tem parentes vivos e desligar.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "trollou_o_sequestrador" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

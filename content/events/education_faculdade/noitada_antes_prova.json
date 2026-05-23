@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "noitada_antes_prova",
+  "categoria": "education",
+  "titulo": "Prova amanhã, sai hoje",
+  "descricaoCurta": "Alguém no grupo mandou mensagem: saída hoje? Você tem prova amanhã de manhã. Lógica diz que não. O grupo diz que sim.",
+  "contentTags": ["substance"],
+  "triggers": {
+    "idadeRange": [18, 22],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 16,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "noitada_antes_prova_cena",
+    "descricaoCurta": "Bar perto da faculdade. Você chegou pra 'só um'. São meia noite.",
+    "background": "bar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "arrependimento_preventivo_feliz",
+          "categoria": "emotional",
+          "descricao": "Rindo mas com um olhar que sabe que vai se arrepender amanhã",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A prova é às oito da manhã. São onze da noite. Você está no bar. A matemática não fecha, mas a sensação é boa.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ficar até tarde e enfrentar as consequências.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "fez_noitada_antes_de_prova" }
+            ]
+          },
+          {
+            "texto": "Ir embora às meia-noite. Ainda dá pra dormir cinco horas.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Ficar mas não beber. Só a companhia.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

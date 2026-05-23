@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "grupo_familia_whatsapp",
+  "categoria": "relationship",
+  "titulo": "Bom Dia Grupo!",
+  "descricaoCurta": "Seu tio envia um vídeo conspiracionista absurdo no grupo da família no WhatsApp de manhã cedo de domingo, iniciando uma discussão caótica entre os parentes.",
+  "contentTags": ["political"],
+  "triggers": {
+    "idadeRange": [15, 60],
+    "peso": 25,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "tio_conspiracionista",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 40,
+        "idadeMax": 75
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "grupo_familia_whatsapp_cena",
+    "descricaoCurta": "Sala de estar iluminada pela luz da manhã, protagonista encarando o celular com expressão incrédula.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_chocado_celular",
+          "categoria": "interactions",
+          "descricao": "Segurando celular com as duas mãos, boca aberta de surpresa",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "tio_brabo",
+          "categoria": "emotional",
+          "descricao": "Apontando o dedo indicador em sinal de sermão",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O vídeo diz que a lua é oca e que antenas 5G vão controlar a mente das pessoas. Sua tia-avó já mandou três emojis de oração e seu primo começou a ironizar nos comentários.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Só não vê quem é cego! O governo esconde a verdade do povo. Eu recebi de um grupo de coronéis aposentados no Telegram!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Mandar um link de agência de checagem desmentindo o vídeo com dados.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "tio_conspiracionista", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Enviar uma imagem fofa de bom dia com um versículo bíblico para desviar o foco.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "tio_conspiracionista", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Silenciar o grupo, arquivar a conversa e fingir que nada aconteceu.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "grupo_silenciado" },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

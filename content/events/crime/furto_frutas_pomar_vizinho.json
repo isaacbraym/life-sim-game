@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "furto_frutas_pomar_vizinho",
+  "categoria": "crime",
+  "titulo": "As Mangas do Vizinho",
+  "descricaoCurta": "Uma mangueira carregada no quintal do vizinho rabugento está implorando para ser colhida por cima do muro.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [8, 20],
+    "peso": 30,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "vizinho_rabugento",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 40,
+        "idadeMax": 80
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "furto_frutas_pomar_vizinho_cena",
+    "descricaoCurta": "Muro alto de tijolos com folhas de mangueira saindo por cima, vizinho rabugento gritando da janela.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_na_espreita",
+          "categoria": "basic",
+          "descricao": "Agachado com sorriso sapeca, segurando uma manga na mão",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "vizinho_bravo_gesticulando",
+          "categoria": "emotional",
+          "descricao": "Punho erguido com expressão de extrema raiva",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Um pé de manga rosa gigantesco e carregado no quintal do Seu Adir avança por cima da calçada. Os frutos estão amarelinhos e suculentos. Pular o muro ou usar uma vara de bambu é a questão de honra da tarde.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Moleque safado! Desce já desse muro senão eu solto o pitbull e chamo sua mãe! Não quero ninguém roubando minhas frutas!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Subir no muro e pular rápido no quintal para pegar as mangas caídas no chão.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "pulador_de_muro" }
+            ]
+          },
+          {
+            "texto": "Derrubar as mangas usando uma vara de bambu sem pisar no quintal dele.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "pescador_de_manga" }
+            ]
+          },
+          {
+            "texto": "Pedir desculpas e pedir uma manga educadamente para acalmar os ânimos.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "vizinho_rabugento", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

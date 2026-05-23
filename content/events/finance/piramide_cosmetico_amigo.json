@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "piramide_cosmetico_amigo",
+  "categoria": "finance",
+  "titulo": "O Empreendedor de Elite",
+  "descricaoCurta": "Um antigo colega de escola te convida para um café e tenta te recrutar para um negócio de marketing multinível de perfumes e cosméticos.",
+  "contentTags": ["political"],
+  "triggers": {
+    "idadeRange": [20, 50],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "amigo_vendedor",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "piramide_cosmetico_amigo_cena",
+    "descricaoCurta": "Mesa de cafeteria, amigo vendedor entusiasmado mostrando folheto e protagonista desconfiado.",
+    "background": "restaurante",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_recusando",
+          "categoria": "interactions",
+          "descricao": "Braço estendido com a palma aberta recusando folheto",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "vendedor_entusiasmado",
+          "categoria": "interactions",
+          "descricao": "Segurando panfleto com as duas mãos e sorrindo",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Ele chega vestindo terno barato de microfibra e coloca dois catálogos perfumados sobre a mesa de fórmica da cafeteria, falando sobre 'independência financeira' e 'ser seu próprio chefe'.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Você só precisa investir trezentos reais no kit inicial de perfumes e recrutar mais cinco amigos. Em três meses você compra uma Ferrari, confia!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Desmascarar a farsa mostrando que a conta matemática de recrutamento é insustentável.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "amigo_vendedor", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Ouvir tudo, comer os salgados por conta dele e ir embora sem comprar nada.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 20.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Inventar uma desculpa de que seu gato está doente e fugir da cafeteria.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "amigo_vendedor", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

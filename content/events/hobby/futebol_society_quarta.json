@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "futebol_society_quarta",
+  "categoria": "hobby",
+  "titulo": "O Futebol de Quarta",
+  "descricaoCurta": "O futebol society com os amigos é sagrado, mas uma entrada forte do zagueiro adversário quase quebra seu tornozelo e inflama os ânimos.",
+  "contentTags": ["violence"],
+  "triggers": {
+    "idadeRange": [16, 50],
+    "peso": 30,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "rival_campo",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 18,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "futebol_society_quarta_cena",
+    "descricaoCurta": "Quadra de futebol de grama sintética, protagonista e rival encarando-se.",
+    "background": "parque",
+    "framing": "wide",
+    "humor": "agressivo",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_bravo_futebol",
+          "categoria": "action",
+          "descricao": "Braços abertos cobrando falta com raiva",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "rival_debochado",
+          "categoria": "emotional",
+          "descricao": "Mão na cintura com sorriso sarcástico",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O clássico 'só bola' clássico brasileiro. A chuteira dele bateu direto na sua canela, deixando uma marca vermelha instantânea sobre a meia.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Levanta aí, rapaz! Nem encostei, foi só na bola. Futebol é esporte de contato, se quer carinho vai jogar tênis!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Revidar na mesma moeda no próximo lance da partida.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "vinganca_campo" }
+            ]
+          },
+          {
+            "texto": "Tentar acalmar o jogo e conversar racionalmente com ele.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "rival_campo", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Pedir substituição e ir para o banco comer churrasco logo.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

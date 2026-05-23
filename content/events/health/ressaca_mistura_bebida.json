@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "ressaca_mistura_bebida",
+  "categoria": "health",
+  "titulo": "O Juramento do Nunca Mais",
+  "descricaoCurta": "Você misturou cerveja, cachaça de quina e drinks duvidosos no churrasco de ontem. Agora, acorda com a boca seca como o Saara e uma britadeira na mente.",
+  "contentTags": ["substance"],
+  "triggers": {
+    "idadeRange": [18, 70],
+    "peso": 20,
+    "cooldownMeses": 3,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "ressaca_mistura_bebida_cena",
+    "descricaoCurta": "No quarto escuro, o protagonista de ressaca segura a cabeça com cara de arrependimento.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_ressaca",
+          "categoria": "emotional",
+          "descricao": "Sentado com as mãos na cabeça demonstrando enxaqueca severa",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A mistura proibida de destilados no churrasco de ontem à noite cobrou a conta. Sua língua está parecendo uma lixa de pé e a luz do sol que entra pela fresta da cortina parece um laser de ficção científica perfurando seu cérebro.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Nunca mais eu bebo... Eu juro, por tudo que é mais sagrado, se essa dor passar eu viro monge..."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tomar um comprimido efervescente contra ressaca e beber bastante água de coco gelada.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": -18.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Apelar para a cura tradicional brasileira: comer um prato de mocotó fumegante e engordurado.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          },
+          {
+            "texto": "Passar o dia inteiro deitado no escuro reclamando do barulho de respiração dos outros.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "termino_primeiro_namoro",
+  "categoria": "education",
+  "titulo": "Fim do namoro",
+  "descricaoCurta": "Acabou. Pode ter sido você, pode ter sido ele/ela, pode ter sido os dois. O resultado é o mesmo: aquela sensação de buraco no peito que você nunca tinha sentido antes.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [13, 18],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_namorado",
+      "presente": true
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "ex_namorado",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 12, "idadeMax": 19 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "termino_namoro_cena",
+    "descricaoCurta": "Praça ou corredor. A conversa que ninguém quer ter, acontecendo.",
+    "background": "praca",
+    "framing": "close",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.25, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "magoado_contendo",
+          "categoria": "emotional",
+          "descricao": "Postura fechada, olho molhado, tentando parecer ok",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "culpado_desconfortavel",
+          "categoria": "emotional",
+          "descricao": "Olhando para baixo, claramente desconfortável",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 65,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Acho que a gente precisa conversar. Tô sentindo que as coisas mudaram entre a gente.",
+        "mudancaExpressao": "triste"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você já sabia. A gente sempre sabe antes. Só estava esperando confirmar.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Terminar com dignidade. Sem drama.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "remover_flag", "flag": "tem_namorado" },
+              { "tipo": "adicionar_flag", "flag": "terminou_bem" },
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Chorar. Não tem dignidade que aguente isso.",
+            "efeitos": [
+              { "tipo": "remover_flag", "flag": "tem_namorado" },
+              { "tipo": "alterar_humor", "delta": -30 }
+            ]
+          },
+          {
+            "texto": "Tentar convencer a não terminar.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 16 },
+            "efeitos": [
+              { "tipo": "remover_flag", "flag": "tem_namorado" },
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

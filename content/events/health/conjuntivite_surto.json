@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "conjuntivite_surto",
+  "categoria": "health",
+  "titulo": "O Olhar do Exterminador",
+  "descricaoCurta": "Há um surto de conjuntivite na cidade e você pegou. Seus olhos estão vermelhos, inchados e colados por uma secreção suspeita.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [10, 75],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "farmaceutico",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 22,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "conjuntivite_surto_cena",
+    "descricaoCurta": "Na farmácia do centro comercial, o protagonista de óculos escuros tenta comprar remédio.",
+    "background": "centro_comercial",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_oculos_escuros",
+          "categoria": "emotional",
+          "descricao": "Braços cruzados, cabeça levemente baixa e óculos de sol",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "farmaceutico_recuando",
+          "categoria": "interactions",
+          "descricao": "Dando um passo para trás com as mãos levantadas",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você acordou parecendo que levou um soco de cada lado do rosto. Seus cílios colaram como se tivessem passado supercola. Com óculos de sol dentro da farmácia, você tenta manter a dignidade.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Amigo, por favor, não tire esses óculos aqui dentro. E passe álcool em gel na mão antes de tocar em qualquer produto!"
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Relaxa, chefe, só vim pegar meu atestado de 5 dias... digo, meu colírio!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Comprar o colírio indicado e seguir as regras de higiene à risca.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 20 },
+              { "tipo": "alterar_dinheiro", "delta": -45.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Fazer compressa de chá de camomila morno sugerido por sua tia.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Ir trabalhar de óculos escuros e espalhar o vírus para toda a firma.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

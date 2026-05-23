@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "furto_pote_coletivo",
+  "categoria": "crime",
+  "titulo": "O Mistério da Copa",
+  "descricaoCurta": "Seu pote de vidro importado sumiu da geladeira comum da firma. No dia seguinte, você vê um idêntico cheio de salada alheia na prateleira superior.",
+  "contentTags": ["language"],
+  "triggers": {
+    "idadeRange": [18, 60],
+    "peso": 30,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "colega",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "furto_pote_coletivo_cena",
+    "descricaoCurta": "Cozinha da empresa, protagonista segurando uma tampa de pote encarando o colega.",
+    "background": "cozinha",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_exigindo_pote",
+          "categoria": "interactions",
+          "descricao": "Segurando tampa de plástico azul com olhar inquisidor",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "colega_comendo_salada",
+          "categoria": "interactions",
+          "descricao": "Comendo salada de um pote de vidro com garfo na mão",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A tampa azul que sobrou na sua mão encaixa perfeitamente no pote que seu colega de equipe está lavando na pia. O ar condicionado gela enquanto a tensão sobe.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Ah, esse pote de vidro azul? Minha esposa comprou no supermercado mês passado... ou será que foi no centro? Não lembro muito bem."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Esperar o final do expediente e furtar o pote de volta da pia.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "pote_recuperado" },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Explicar firmemente que aquele pote é seu e mostrar sua marcação no fundo.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "colega", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Engolir o sapo e comprar um pote de plástico barato de R$ 5.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -5.0 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

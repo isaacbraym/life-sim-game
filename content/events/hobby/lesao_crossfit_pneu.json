@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "lesao_crossfit_pneu",
+  "categoria": "hobby",
+  "titulo": "O Monstro do Crossfit",
+  "descricaoCurta": "Você aceita fazer uma aula experimental de crossfit para sair do sedentarismo. No final do treino, o coach exige que você tombe um pneu de trator gigante.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 45],
+    "peso": 25,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "coach",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 22,
+        "idadeMax": 45
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "lesao_crossfit_pneu_cena",
+    "descricaoCurta": "Área externa de treino com o pneu no chão, protagonista exausto e coach gritando.",
+    "background": "parque",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_exaurido",
+          "categoria": "action",
+          "descricao": "Mãos nos joelhos, cabeça baixa de cansaço extremo",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "coach_gritando",
+          "categoria": "action",
+          "descricao": "Gesticulando e gritando de forma agressiva com cronômetro na mão",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Seus braços parecem gelatina e o suor arde nos olhos. O pneu de trator à sua frente parece uma parede de borracha intransponível.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Força no core, guerreiro! Sem choro! Só faltam três repetições para terminar o circuito do dia, bora!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dar o último suspiro de energia e erguer o pneu com toda força.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "sobreviveu_crossfit" },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_saude", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Pedir ajuda e focar na mecânica correta para não se machucar.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "coach", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Fingir uma cãibra violenta na panturrilha e sentar para tomar água.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "desistiu_treino" },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

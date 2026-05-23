@@ -1,25 +1,19 @@
 {
-  "files": [],
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
     "noImplicitAny": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true,
+    "exactOptionalPropertyTypes": false,
     "skipLibCheck": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@core/*": ["packages/core/src/*"],
-      "@lifesim/core": ["packages/core/src/index.ts"],
-      "@game/*": ["packages/game/src/*"],
-      "@dev/*": ["packages/dev-tools/apps/*"],
-      "@content/*": ["content/*"]
-    }
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
   }
 }

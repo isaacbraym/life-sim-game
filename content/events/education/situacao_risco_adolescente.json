@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "situacao_risco_adolescente",
+  "categoria": "education",
+  "titulo": "Isso quase deu muito errado",
+  "descricaoCurta": "Velocidade alta num carro que não era seu. Pulo de ponte em rio que você não conhecia. Racha na rua de madrugada. A adrenalina era real. A estupidez também.",
+  "contentTags": ["violence"],
+  "triggers": {
+    "idadeRange": [14, 17],
+    "peso": 12,
+    "cooldownMeses": 30,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "amigo_instigador",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 13, "idadeMax": 19 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "situacao_risco_adolescente_cena",
+    "descricaoCurta": "Rua ou local externo. Madrugada. Você e um amigo. Algo está prestes a acontecer.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adrenalina_incerteza",
+          "categoria": "emotional",
+          "descricao": "Postura tensa mas excitada, avaliando a situação",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "amigo_desafiando",
+          "categoria": "emotional",
+          "descricao": "Postura confiante, já decidido, esperando você",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 65,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Para de pensar tanto. Acontece nada. Vem.",
+        "mudancaExpressao": "arrogante"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "A parte racional do seu cérebro está avisando. A parte idiota está vencendo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ir. Às vezes os idiotas sobrevivem.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "passou_por_risco_adolescente" }
+            ]
+          },
+          {
+            "texto": "Recusar. Não precisa disso pra se sentir vivo.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "recusou_risco_adolescente" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

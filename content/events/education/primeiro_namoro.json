@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_namoro",
+  "categoria": "education",
+  "titulo": "Contrato de Exclusividade (Pré-Término)",
+  "descricaoCurta": "A incrível experiência de ter alguém para cobrar satisfação do que você está fazendo no fim de semana. O amor é lindo (e exaustivo).",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [13, 17],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_namorado",
+      "presente": false
+    },
+    "peso": 25,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "primeiro_namorado",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 12, "idadeMax": 18 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_namoro_cena",
+    "descricaoCurta": "Praça ou corredor de escola. Dois adolescentes, um declarando, o outro processando.",
+    "background": "praca",
+    "framing": "medium",
+    "humor": "intimo",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adolescente_nervoso_feliz",
+          "categoria": "emotional",
+          "descricao": "Levemente corado, sorriso contido, olhando para o lado",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.25, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "declarando_timido",
+          "categoria": "emotional",
+          "descricao": "Mão na nuca, olhando de lado, tentando parecer casual",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Então... a gente fica trocando saliva faz um tempo. Quer oficializar o erro de juventude e namorar comigo?",
+        "mudancaExpressao": "medo"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você sente as borboletas no estômago, mas pode ser só a gastrite nervosa começando cedo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dizer Sim. (O primeiro de muitos relacionamentos que vão te custar muita terapia no futuro).",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_namorado" },
+              { "tipo": "adicionar_flag", "flag": "primeiro_namoro_aceito" },
+              { "tipo": "alterar_humor", "delta": 30 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Pedir um tempo pra pensar. (Fazer cu doce clássico, só pra valorizar o passe).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Recusar com gentileza. (E fugir correndo porque compromisso nessa idade é pura loucura).",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "recusou_primeiro_namoro" },
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

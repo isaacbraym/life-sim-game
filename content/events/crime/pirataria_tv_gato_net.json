@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "pirataria_tv_gato_net",
+  "categoria": "crime",
+  "titulo": "A Instalação do Gatonet",
+  "descricaoCurta": "Cansado de pagar assinaturas absurdas de TV a cabo, você recebe uma oferta de instalação de um aparelho IPTV pirata.",
+  "contentTags": ["political"],
+  "triggers": {
+    "idadeRange": [18, 65],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "tecnico_gato",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 22,
+        "idadeMax": 55
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "pirataria_tv_gato_net_cena",
+    "descricaoCurta": "Sala de estar, técnico segurando uma pequena caixinha preta apontando para a televisão.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_aponta_tv",
+          "categoria": "interactions",
+          "descricao": "Sentado no sofá, apontando animadamente para a TV",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "tecnico_mostra_receptor",
+          "categoria": "interactions",
+          "descricao": "Segurando um pequeno controle e um aparelho preto, explicando o funcionamento",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Mensalidade de streaming subindo de novo. Canais de futebol custam uma fortuna. Um rapaz que faz bico no condomínio oferece a clássica caixinha IPTV pirata que libera 'tudo de graça para sempre'.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Aqui é o seguinte, patrão: trezentos reais da caixinha instalada e nunca mais você paga nada. Tem Premiere, canais de filmes e até pay-per-view. Roda liso no cabo de rede."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pagar os trezentos reais e mandar o técnico instalar o 'gatonet' na hora.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -300.0 },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "gato_net_ativo" }
+            ]
+          },
+          {
+            "texto": "Chorar um desconto e fechar a instalação por duzentos e cinquenta.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -250.0 },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "gato_net_ativo" }
+            ]
+          },
+          {
+            "texto": "Recusar a pirataria e continuar pagando a TV oficial com dor no bolso.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -120.0 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

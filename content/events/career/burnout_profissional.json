@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "burnout_profissional",
+  "categoria": "career",
+  "titulo": "O tanque está vazio",
+  "descricaoCurta": "Você acordou e não conseguiu sair da cama. Não é preguiça. É que você deu tudo por meses e não sobrou nada. O trabalho foi secando devagar até não restar mais nada para dar.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [22, 45],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 12,
+    "cooldownMeses": 36,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "burnout_profissional_cena",
+    "descricaoCurta": "Quarto. Você sentado na beira da cama. O celular com notificações do trabalho. Você olhando para o nada.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "esgotamento_total",
+          "categoria": "emotional",
+          "descricao": "Sentado, curvado, ombros pesados, olhar vazio",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "São oito da manhã. A reunião começa às nove. Você não consegue imaginar entrar naquela sala.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Não é falta de vontade. É que a vontade foi embora e não avisou.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tirar uma licença médica. O corpo está pedindo pausa.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "teve_burnout" },
+              { "tipo": "alterar_saude", "delta": -20 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Ir trabalhar de qualquer jeito. Vai passar.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "teve_burnout" },
+              { "tipo": "alterar_saude", "delta": -30 },
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": -2 }
+            ]
+          },
+          {
+            "texto": "Conversar com alguém — médico, psicólogo, amigo próximo.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "teve_burnout" },
+              { "tipo": "adicionar_flag", "flag": "pediu_ajuda_saude_mental" },
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "suspeita_adocao",
+  "categoria": "education",
+  "titulo": "Você não se parece com ninguém",
+  "descricaoCurta": "Alguém comentou, ou você percebeu sozinho. As fotos antigas não fecham a conta. Você começou a fazer perguntas que os pais ficam desconfortáveis de responder.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [13, 17],
+    "peso": 8,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "mae_respondendo",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": { "genero": "F", "idadeMin": 30, "idadeMax": 60 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "suspeita_adocao_cena",
+    "descricaoCurta": "Cozinha ou sala. Você com uma pergunta que ficou grande demais pra continuar dentro.",
+    "background": "cozinha",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "perguntando_serio",
+          "categoria": "emotional",
+          "descricao": "Postura firme, olhando direto, esperando a verdade",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "mae_desconfortavel_pausa",
+          "categoria": "emotional",
+          "descricao": "Pausa longa, expressão de peso, ainda decidindo o que dizer",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 65,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você fez a pergunta. Ela demorou muito tempo pra responder. Tempo demais.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Tem uma conversa que a gente precisava ter há algum tempo.",
+        "mudancaExpressao": "triste"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ouvir tudo. Precisa saber.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "descobriu_sobre_adocao" },
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Parar ela. Ainda não está pronto.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "adiou_conversa_adocao" },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "promocao_trabalho",
+  "categoria": "career",
+  "titulo": "O Dobro de Trabalho, 50 Reais de Aumento",
+  "descricaoCurta": "Ser promovido a 'Analista Sênior' para acumular a função de três pessoas demitidas. A expectativa de vida acabou de cair.",
+  "contentTags": ["trabalho", "ansiedade"],
+  "triggers": {
+    "idadeRange": [21, 40],
+    "requisitos": {
+      "tipo": "todos",
+      "predicados": [
+        { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+        { "tipo": "algum", "predicados": [
+          { "tipo": "var", "caminho": "personagem.atributos.inteligencia", "operador": ">=", "valor": 12 },
+          { "tipo": "var", "caminho": "personagem.atributos.carisma", "operador": ">=", "valor": 12 }
+        ]}
+      ]
+    },
+    "peso": 20,
+    "cooldownMeses": 30,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "chefe_anunciando",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 30, "idadeMax": 60 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "promocao_trabalho_cena",
+    "descricaoCurta": "Você olhando a proposta salarial com cara de trouxa.",
+    "background": "escritorio_sala_reuniao",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "lendo_contrato_puto",
+          "categoria": "emotional",
+          "descricao": "Olhando um papel, testa franzida, tentando achar o aumento",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "chefe_falsiane",
+          "categoria": "basic",
+          "descricao": "Chefe sorrindo falso, oferecendo o documento",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Parabéns pela promoção! O aumento não foi bem o que você pediu, mas o título no e-mail vai ficar chique demais, né?",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aceitar. É melhor que nada e ajuda a pagar a Netflix.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "foi_promovido" },
+              { "tipo": "alterar_dinheiro", "delta": 50 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_saude", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Recusar a promoção por desaforo. (O chefe fica puto).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+}

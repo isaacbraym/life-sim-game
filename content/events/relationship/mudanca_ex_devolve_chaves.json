@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "mudanca_ex_devolve_chaves",
+  "categoria": "relationship",
+  "titulo": "O Último Saco de Lixo",
+  "descricaoCurta": "O ato final da separação: seu ex-parceiro volta ao apartamento para buscar as últimas roupas em sacos de lixo e devolver as chaves.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [20, 40],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "ex_parceiro",
+      "tipoVinculo": "romance"
+    },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "ex_parceiro",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "mudanca_ex_devolve_chaves_cena",
+    "descricaoCurta": "Entrada de um apartamento com porta aberta, revelando corredor externo.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_devolve_chaves",
+          "categoria": "interactions",
+          "descricao": "Parado com o braço estendido segurando um molho de chaves",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "ex_com_saco_lixo",
+          "categoria": "interactions",
+          "descricao": "Parado segurando um saco plástico preto pesado e olhar cansado",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "É o ato final da separação. O ex-parceiro volta ao apartamento apenas para recolher as últimas blusas esquecidas nas gavetas, que ele enfia em um saco de lixo preto. Ele estende a mão para colocar o chaveiro do prédio sobre o aparador da sala.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Pronto, acho que não ficou mais nada meu aqui. É estranho ver isso assim. Desejo o melhor para você."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Desejar o melhor de volta de cabeça erguida e fechar a porta.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 10 },
+              { "tipo": "aplicar_status", "status": "separado" },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Dar um último abraço apertado e chorar.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 15 },
+              { "tipo": "aplicar_status", "status": "separado" },
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "adicionar_flag", "flag": "abraco_final" }
+            ]
+          },
+          {
+            "texto": "Tentar propor passar a noite juntos para se despedir.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "recaida_termino" },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

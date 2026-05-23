@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeira_republica",
+  "categoria": "education",
+  "titulo": "Morar junto com estranhos",
+  "descricaoCurta": "Você vai morar em república. Dividir banheiro, cozinha e silêncio com pessoas que você não escolheu. Vai formar laços ou vai odiar metade deles. Às vezes as duas coisas.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [17, 21],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
+    "peso": 25,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "colega_republica",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 17, "idadeMax": 25 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeira_republica_cena",
+    "descricaoCurta": "Apartamento pequeno. Você desempacotando. Um colega de república aparece.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.35, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "desempacotando_exausto",
+          "categoria": "basic",
+          "descricao": "Com caixa ou mochila, olhando o espaço pequeno com resignação",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "colega_descontraido",
+          "categoria": "basic",
+          "descricao": "Encostado na porta, descontraído, já em casa",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 55,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Bem-vindo. Regra número um: quem usar a última do papel, repõe. Aprendi do jeito difícil.",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você olha para o quarto. Quatro metros quadrados. Sua nova vida cabe aqui por enquanto.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Propor uma reunião de regras. Organizar desde o início.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "mora_em_republica" },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Ir com a maré. As regras aparecem quando precisam.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "mora_em_republica" },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          },
+          {
+            "texto": "Estabelecer o quarto como território pessoal e minimizar contato.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "mora_em_republica" },
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "adicionar_flag", "flag": "perfil_introvertido" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

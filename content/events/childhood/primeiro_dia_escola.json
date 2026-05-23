@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_dia_escola",
+  "categoria": "childhood",
+  "titulo": "Primeiro dia de escola",
+  "descricaoCurta": "Você está na porta da escola pela primeira vez. A mochila pesa mais do que parece e o coração pesa mais ainda.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [6, 7],
+    "peso": 80,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "mae",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": {
+        "genero": "F",
+        "idadeMin": 24,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_dia_escola_cena",
+    "descricaoCurta": "Criança na porta da escola com a mãe. Outras crianças entram ao fundo.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "idle_neutro",
+          "categoria": "basic",
+          "descricao": "Pose neutra em pé, expressão apreensiva",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "idle_mae_acenando",
+          "categoria": "basic",
+          "descricao": "Mãe abaixada no nível da criança, mão no ombro",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A escola cheira a tinta nova e merendas esquecidas. Você aperta a alça da mochila com as duas mãos.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Vai ser ótimo, você vai ver. Faz amigos fácil.",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você olha para a porta. Do outro lado, crianças que você nunca viu na vida.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Entrar de cabeça erguida.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 8 },
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "primeiro_dia_escola_bem" },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Ficar parado esperando a mãe ir embora primeiro.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "primeiro_dia_escola_timido" },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Chorar e pedir para não ficar.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "primeiro_dia_escola_choro" },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
+}

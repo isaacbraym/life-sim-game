@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "peido_elevador_sogros",
+  "categoria": "relationship",
+  "titulo": "O Elevador do Silêncio",
+  "descricaoCurta": "Você está descendo no elevador silencioso do prédio junto com os pais do seu parceiro quando um barulho embaraçoso escapa.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 40],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "peido_elevador_sogros_cena",
+    "descricaoCurta": "Interior de elevador metálico claustrofóbico. Protagonista vermelho de vergonha e parceiro olhando para o teto com nojo.",
+    "background": "fundo_vazio",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_envergonhado_elevador",
+          "categoria": "emotional",
+          "descricao": "Braços caídos rente ao corpo, encolhido, olhando fixamente para o chão",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 99,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "parceiro_tentando_respirar",
+          "categoria": "interactions",
+          "descricao": "Mão esquerda cobrindo o nariz e olhar de reprovação",
+          "rotacoes": [],
+          "expressaoFacial": "nojo",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "salto_alto",
+          "peDireito": "salto_alto",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Após um almoço de domingo pesado com feijoada e couve, você entra no elevador com seu amor e os sogros. No silêncio sepulcral da descida do 14º andar, um espirro mal calculado faz vazar um ruído alto e inconfundível. O som reverbera nas paredes de aço escovado.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Meu Deus... A gente ainda tá no nono andar. Que cheiro de pneu queimado é esse?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar culpar os cabos do elevador pelo atrito sonoro estranho.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Assumir a culpa rindo de nervoso para quebrar a tensão extrema.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Ficar em silêncio absoluto fingindo estar surdo até a porta abrir.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "trauma_elevador" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_emprego_clt",
+  "categoria": "career",
+  "titulo": "Bem-vindo à Máquina de Moer Carne",
+  "descricaoCurta": "Sua carteira foi assinada! Agora você tem direito a 30 dias de férias que não consegue tirar e um burnout gratuito.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [20, 27],
+    "requisitos": {
+      "tipo": "todos",
+      "predicados": [
+        { "tipo": "flag", "flag": "tem_emprego", "presente": false },
+        { "tipo": "algum", "predicados": [
+          { "tipo": "flag", "flag": "formado", "presente": true },
+          { "tipo": "flag", "flag": "tem_estagio", "presente": true }
+        ]}
+      ]
+    },
+    "peso": 40,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "novo_chefe",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 30, "idadeMax": 55 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_emprego_clt_cena",
+    "descricaoCurta": "Escritório. Primeiro dia. Seu chefe apresentando você para a equipe.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "primeiro_dia_emprego_real",
+          "categoria": "basic",
+          "descricao": "Roupa arrumada, postura de quem está tentando parecer que já fez isso antes",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 40,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "chefe_apresentando_equipe",
+          "categoria": "basic",
+          "descricao": "Postura de quem fez isso umas vinte vezes, mostrando o espaço com gesto largo",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 45,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "aberta",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Gente, mais um pra família! Ele tá cheio de energia que a gente vai drenar em questão de três semanas. Podem cumprimentar.",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "A equipe te olha com a mesma compaixão de quem vê um bezerro indo pro abate. Você vai odiar trabalhar aqui, mas precisa pagar os boletos.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dar um sorriso corporativo motivado. (Fingir que não percebeu que é uma vaga arrombada).",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_emprego" },
+              { "tipo": "adicionar_flag", "flag": "primeiro_emprego_clt" },
+              { "tipo": "alterar_dinheiro", "delta": 2200 },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Acenar e já perguntar mentalmente que horas acaba o expediente.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_emprego" },
+              { "tipo": "adicionar_flag", "flag": "primeiro_emprego_clt" },
+              { "tipo": "alterar_dinheiro", "delta": 2200 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

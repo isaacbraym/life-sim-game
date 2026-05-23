@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "pego_no_flagra_pais",
+  "categoria": "relationship",
+  "titulo": "Porta Destrancada",
+  "descricaoCurta": "Você e seu parceiro esquecem de trancar a porta do quarto e um de seus pais entra sem bater para trazer toalhas limpas.",
+  "contentTags": ["sexual"],
+  "triggers": {
+    "idadeRange": [18, 30],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "pego_no_flagra_pais_cena",
+    "descricaoCurta": "Quarto bagunçado, casal se cobrindo às pressas com um lençol e mãe/pai na porta segurando toalhas paralisado.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_flagrado_quarto",
+          "categoria": "emotional",
+          "descricao": "Segurando lençol até o pescoço com expressão de pânico e surpresa",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 99,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "parceiro_escondido",
+          "categoria": "emotional",
+          "descricao": "Encolhido atrás do protagonista com as mãos no rosto",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "No calor do momento, a tranca da porta foi ignorada. A maçaneta gira rápido e a porta se abre. Sua mãe entra alegremente segurando toalhas limpas. Ao processar a cena, ela congela com os olhos arregalados. O silêncio é constrangedoramente eterno.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Ah... eu só vim... deixar a toalha... Já estou saindo. Juízo, por favor!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Falar alto fingindo que estavam apenas jogando videogame ou fazendo alongamento.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Tentar puxar o lençol e fingir que nada aconteceu, deitando de lado em silêncio.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          },
+          {
+            "texto": "Enfiar a cabeça embaixo do travesseiro e rezar para a terra te engolir.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "adicionar_flag", "flag": "trauma_flagra" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

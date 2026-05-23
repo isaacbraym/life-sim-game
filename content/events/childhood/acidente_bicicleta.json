@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "acidente_bicicleta",
+  "categoria": "childhood",
+  "titulo": "Gravidade 1 x 0 Você",
+  "descricaoCurta": "A física não perdoa quem acha que é o Ayrton Senna de Monark sem freio. A bicicleta decidiu te ejetar.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [6, 12],
+    "peso": 15,
+    "cooldownMeses": 30,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "acidente_bicicleta_cena",
+    "descricaoCurta": "Rua residencial. Criança no chão com a bicicleta tombada ao lado, joelho sangrando.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "no_chao_levantando",
+          "categoria": "action",
+          "descricao": "Tentando se levantar do chão, olhando para o joelho",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Tem aquela fração de segundo no ar em que você percebe que a evolução falhou com você. O asfalto, por outro lado, fez um ótimo trabalho.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Joelho esfolado, gosto de sangue com terra na boca, e a certeza absoluta de que sua mãe vai te dar uma surra por ter rasgado a calça.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Engolir o choro e voltar pra casa manquitola. (Dignidade destruída, mas o chassi segue vivo).",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -8 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Ficar no chão fingindo desmaio. (Vai que você ganha um Band-Aid e um picolé por pena).",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -8 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Chorar feito um bezerro desmamado. (Até algum vizinho ameaçar chamar o Conselho Tutelar para os seus pais).",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "choro_publico_vergonhoso" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
+}

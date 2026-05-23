@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "enviar_print_propria_conversa",
+  "categoria": "relationship",
+  "titulo": "O Print do Erro",
+  "descricaoCurta": "Você tira um print da conversa do seu parceiro para mandar para seu melhor amigo fofocar, mas acaba enviando o print na própria conversa do casal.",
+  "contentTags": ["language"],
+  "triggers": {
+    "idadeRange": [16, 50],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "enviar_print_propria_conversa_cena",
+    "descricaoCurta": "Sofá da sala de estar com o protagonista olhando o celular desesperado e o parceiro digitando furiosamente no próprio celular.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_desespero_celular",
+          "categoria": "interactions",
+          "descricao": "Encarando o celular com as duas mãos, testa franzida e expressão de pânico",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "parceiro_com_celular_bravo",
+          "categoria": "interactions",
+          "descricao": "Segurando o celular com postura rígida e sobrancelhas franzidas em desconfiança",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Seu parceiro mandou um textão exigindo atenção. Você printou com a intenção de mandar para seu melhor amigo com a legenda 'Olha isso kkk'. Mas na pressa, você selecionou o chat errado e enviou a imagem com a legenda irônica de volta para o parceiro. O 'entregue' vira 'lido' imediatamente.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Ué... Você acabou de mandar um print de mim para mim mesmo? E o que significa esse 'Olha isso kkk'?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar apagar correndo para todos e torcer para o parceiro fingir que não viu.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Fazer graça e inventar que estava testando se a resolução da sua tela estava boa.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Pedir desculpas sinceramente pela fofoca e admitir a vergonha.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "fofoqueiro_revelado" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

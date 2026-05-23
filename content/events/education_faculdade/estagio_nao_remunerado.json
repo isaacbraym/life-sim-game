@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "estagio_nao_remunerado",
+  "categoria": "education_faculdade",
+  "titulo": "Escravidão Gourmet",
+  "descricaoCurta": "Trabalhar 6 horas por dia organizando planilha em troca de 'networking' e um vale-transporte atrasado.",
+  "contentTags": ["trabalho", "pobreza"],
+  "triggers": {
+    "idadeRange": [19, 24],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 30,
+    "cooldownMeses": 12,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "estagio_nao_remunerado_cena",
+    "descricaoCurta": "Estudante no computador do escritório, com cara de quem desistiu da vida.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "digitando_sem_alma",
+          "categoria": "action",
+          "descricao": "Olhar vazio para a tela, digitando mecanicamente",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "na_mesa",
+          "maoDireita": "na_mesa",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Eles disseram que você ganharia experiência. Você só ganhou uma tendinite precoce e raiva de planilhas.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Abaixar a cabeça e continuar, acreditando na efetivação fantasma.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "tem_estagio" }
+            ]
+          },
+          {
+            "texto": "Furtar café e papel higiênico da firma para compensar o salário zero.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_dinheiro", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "tem_estagio" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

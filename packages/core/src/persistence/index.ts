@@ -1,2 +1,2 @@
-export { VidaGameDB, db } from './GameDB';
-export type { EntradaLogEvento, Relacionamento as RelacionamentoDB } from './GameDB';
+export * from './GameDB';
+export * from './exporters';

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "conflito_pais_liberdade",
+  "categoria": "education",
+  "titulo": "Minha vida, minhas regras",
+  "descricaoCurta": "Você quer sair até a hora que quiser. Eles têm outra opinião. A negociação virou discussão, a discussão virou porta batida.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [14, 17],
+    "peso": 22,
+    "cooldownMeses": 18,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "pai_ou_mae_limite",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": { "idadeMin": 30, "idadeMax": 60 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "conflito_pais_liberdade_cena",
+    "descricaoCurta": "Corredor ou sala. Você e o responsável, em impasse.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adolescente_rebelde_firme",
+          "categoria": "emotional",
+          "descricao": "Braços cruzados, queixo levantado, olhar desafiador",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adulto_cansado_firme",
+          "categoria": "emotional",
+          "descricao": "Cansado mas inabalável, postura de não vai ceder",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Enquanto morar aqui, as regras são as minhas. Quando pagar suas contas, muda.",
+        "mudancaExpressao": "raiva"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você já ouviu isso umas sete vezes. Nunca fica mais fácil de ouvir.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Negociar com calma. Propor um meio-termo.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Bater a porta e seguir em frente. Por hoje.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "conflito_serio_com_pais" }
+            ]
+          },
+          {
+            "texto": "Aceitar. Por enquanto. Guardar o rancor pro futuro.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

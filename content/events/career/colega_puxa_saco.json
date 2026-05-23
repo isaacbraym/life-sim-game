@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "colega_puxa_saco",
+  "categoria": "career",
+  "titulo": "O CEO de CNPJ Alheio",
+  "descricaoCurta": "Ter que lidar com o colega que ganha o mesmo que você, mas veste a camisa como se fosse o dono.",
+  "contentTags": ["trabalho", "raiva"],
+  "triggers": {
+    "idadeRange": [20, 60],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 35,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "colega_insuportavel",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": { "idadeMin": 22, "idadeMax": 50 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "colega_puxa_saco_cena",
+    "descricaoCurta": "Escritório. O colega bajulando o chefe enquanto você tenta não vomitar.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "raiva",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "revirando_olhos",
+          "categoria": "emotional",
+          "descricao": "Revirando os olhos tão forte que consegue ver o próprio cérebro",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "pose_de_vencedor_corporativo",
+          "categoria": "interactions",
+          "descricao": "Mão na cintura, sorrisão de quem vai herdar a empresa",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "na_cintura",
+          "maoDireita": "na_cintura",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 1
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Eu não me importo de ficar até as 20h hoje, chefe! O foco é entregar valor, né?",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "A vontade de jogar o grampeador na nuca dele é imensa, mas o medo de ser demitido é maior.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ignorar e focar em ir embora às 18h em ponto.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Dar uma alfinetada passivo-agressiva sobre o banco de horas dele.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

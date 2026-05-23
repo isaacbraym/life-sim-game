@@ -1,5 +1,12 @@
 import { Graphics } from 'pixi.js';
-import { Esqueleto, gerarPathBraco, gerarPathPerna, PERFIL_BRACO_PADRAO, PERFIL_PERNA_PADRAO, PathBraco } from '@lifesim/core';
+import { Esqueleto } from '@lifesim/core';
+import {
+  gerarPathBraco,
+  gerarPathPerna,
+  PERFIL_BRACO_PADRAO,
+  PERFIL_PERNA_PADRAO,
+} from '@core/silhouette';
+import type { PathBraco } from '@core/silhouette';
 
 const COR_PELE    = 0xf5c5a3;
 const COR_CONTORNO = 0x2a1a0e;

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "golpe_pix_whatsapp",
+  "categoria": "finance",
+  "titulo": "O Golpe do Pix",
+  "descricaoCurta": "Você recebe uma mensagem de um amigo próximo no WhatsApp pedindo um Pix emergencial de R$ 400. O tom da conversa está estranho e o destinatário é um desconhecido.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [16, 70],
+    "peso": 30,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "amigo_virtual",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 18,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "golpe_pix_whatsapp_cena",
+    "descricaoCurta": "Quarto iluminado apenas pela tela do celular, protagonista analisando a mensagem.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_olhando_celular",
+          "categoria": "interactions",
+          "descricao": "Segurando o celular perto do rosto com expressão de dúvida",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "golpista_invisivel",
+          "categoria": "basic",
+          "descricao": "Parado com braço estendido",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A mensagem diz: 'Oi amigo, consegue me transferir R$ 400 pelo Pix hoje? Meu aplicativo do banco travou e eu preciso pagar o mecânico agora. Amanhã cedo te devolvo.'",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Por favor, faz a transferência para essa chave aqui, é o Pix do ajudante dele. Me quebra esse galho!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fazer uma pergunta secreta para testar a identidade do amigo.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Fazer o Pix correndo para ajudar o amigo sem verificar.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -400.0 },
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "adicionar_flag", "flag": "caiu_no_golpe" }
+            ]
+          },
+          {
+            "texto": "Ligar imediatamente por chamada normal para o telefone dele.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

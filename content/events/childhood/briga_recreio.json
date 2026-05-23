@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "briga_recreio",
+  "categoria": "childhood",
+  "titulo": "Briga no recreio",
+  "descricaoCurta": "Um colega empurrou você ou tirou sua merenda. O círculo de crianças ao redor já começou a se formar.",
+  "contentTags": ["violence"],
+  "triggers": {
+    "idadeRange": [7, 12],
+    "peso": 25,
+    "cooldownMeses": 18,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "valentao",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "genero": "M",
+        "idadeMin": 7,
+        "idadeMax": 13,
+        "estiloCorporal": "atletico"
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "briga_recreio_cena",
+    "descricaoCurta": "Pátio da escola, duas crianças se encarando com círculo ao redor.",
+    "background": "escola_patio",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.25, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "postura_defesa",
+          "categoria": "emotional",
+          "descricao": "Postura defensiva, punhos levemente fechados",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 65,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "postura_agressiva",
+          "categoria": "emotional",
+          "descricao": "Postura agressiva, peito estufado",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "fechada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Ele tomou sua merenda e ainda ficou rindo na sua cara. O círculo de crianças ao redor vibra com o cheiro de sangue.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "O que você vai fazer? Vai chorar?",
+        "mudancaExpressao": "arrogante"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Partir para cima. Que venha.",
+            "atributoCheck": { "atributo": "forca", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "brigou_na_escola" },
+              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 },
+              { "tipo": "alterar_saude", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Tentar resolver no papo.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Dar meia-volta e ir chamar um professor.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "dedurou_colega" },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
+}

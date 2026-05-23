@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "reuniao_que_poderia_ser_email",
+  "categoria": "career",
+  "titulo": "A Tortura em Slides",
+  "descricaoCurta": "Fingir prestar atenção por 2 horas enquanto o chefe literalmente lê em voz alta o que já está escrito no telão.",
+  "contentTags": ["trabalho", "tedio"],
+  "triggers": {
+    "idadeRange": [20, 60],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 40,
+    "cooldownMeses": 3,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "chefe_chato",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 35, "idadeMax": 65 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "reuniao_que_poderia_ser_email_cena",
+    "descricaoCurta": "Sala de reunião cinza. Telão aceso. Almas abandonando os corpos.",
+    "background": "escritorio_sala_reuniao",
+    "framing": "wide",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "tedio_mortal",
+          "categoria": "emotional",
+          "descricao": "Apoiando o rosto na mão, tentando piscar para não morrer",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "no_rosto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.4, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "apontando_slide",
+          "categoria": "interactions",
+          "descricao": "Apontando para a tela, cheio de energia corporativa inútil",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Ele acabou de ler o slide 12 de 45. Seu cérebro já começou a derreter e escorrer pelo ouvido.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Rabiscar no caderno e fingir que está fazendo anotações cruciais.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Dormir de olho aberto mantendo o maxilar rígido.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_saude", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

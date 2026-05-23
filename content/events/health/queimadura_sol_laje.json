@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "queimadura_sol_laje",
+  "categoria": "health",
+  "titulo": "O Bronzeado de Lagosta",
+  "descricaoCurta": "Você subiu na laje para pegar aquele bronzeado carioca usando uma mistura caseira suspeita. Agora, sua pele está vermelha fluorescente e você não consegue nem vestir uma camiseta.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [14, 60],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "queimadura_sol_laje_cena",
+    "descricaoCurta": "No quarto, o protagonista mantém os braços abastados do corpo com expressão de extrema dor na pele.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_ardendo_sol",
+          "categoria": "action",
+          "descricao": "Mãos bem abertas longe do corpo, expressão facial de dor e ardência",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A ideia de usar Coca-Cola com óleo de cozinha para acelerar a cor do verão parecia genial na laje de casa. O resultado: você virou uma lagosta cozida ambulante que chora a cada brisa de ventilador.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Ai de mim... Minha pele tá esticada parecendo plástico filme sob o sol. Não consigo nem abraçar alguém sem gemer de dor."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Comprar uma loção pós-sol de calamina e dormir imóvel de costas para o colchão.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_dinheiro", "delta": -25.0 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Ir ao pronto-socorro buscar um creme de queimadura e receita de anti-inflamatório.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 20 },
+              { "tipo": "alterar_dinheiro", "delta": -45.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Passar margarina gelada no corpo por indicação de um fórum obscuro da internet.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -25 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

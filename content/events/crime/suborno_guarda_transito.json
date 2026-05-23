@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "suborno_guarda_transito",
+  "categoria": "crime",
+  "titulo": "O Cafezinho do Guarda",
+  "descricaoCurta": "Você é parado em uma blitz com o IPVA atrasado. O guarda de trânsito começa a enrolar e solta aquela velha indireta.",
+  "contentTags": ["political"],
+  "triggers": {
+    "idadeRange": [18, 70],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "policial_rodoviario",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "suborno_guarda_transito_cena",
+    "descricaoCurta": "Margem de rua movimentada à noite, guarda com talão na mão falando com motorista na janela.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_apreensivo",
+          "categoria": "interactions",
+          "descricao": "Sentado no banco do motorista, segurando a carteira de habilitação com as duas mãos",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "guarda_analisando",
+          "categoria": "interactions",
+          "descricao": "Caneta batendo no talão, inclinando o corpo de leve com expressão desconfiada",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "apontando",
+          "peEsquerdo": "bota",
+          "peDireito": "bota",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Parado na blitz. Habilitação vencida e licenciamento do carro atrasado desde o ano passado. O guincho já está encostando na traseira do veículo. O guarda olha os papéis, suspira longo e limpa a garganta.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Olha, cidadão... Pátio, taxa de reboque, diárias... Isso aí vai te custar uns dois mil reais e sete pontos na carteira. Não tem uma forma mais fácil e rápida de a gente acertar isso?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Sugerir pagar uma 'cerveja' ou um 'cafezinho' de R$ 150 para ele liberar o carro.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -150.0 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "jeitinho_brasileiro" }
+            ]
+          },
+          {
+            "texto": "Citar artigos de trânsito e fingir ser estudante de direito para intimidar.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 16 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "conhecedor_das_leis" }
+            ]
+          },
+          {
+            "texto": "Aceitar a punição, deixar o veículo ir para o pátio e pegar um táxi para casa.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -800.0 },
+              { "tipo": "alterar_humor", "delta": -25 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "venda_remedio_tarja_preta_faculdade",
+  "categoria": "crime",
+  "titulo": "Mercado Negro na Faculdade",
+  "descricaoCurta": "Durante a semana de provas finais, um colega desesperado te oferece uma grana para comprar seus comprimidos tarja-preta para foco.",
+  "contentTags": ["substance"],
+  "triggers": {
+    "idadeRange": [18, 30],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "aluno_desesperado",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 18,
+        "idadeMax": 30
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "venda_remedio_tarja_preta_faculdade_cena",
+    "descricaoCurta": "Corredor da faculdade com armários, protagonista entregando pequena cartela de pílulas para colega aflito.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_passa_remedio",
+          "categoria": "interactions",
+          "descricao": "Olhando em volta de soslaio, entregando objeto discreto",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "aluno_suando_frio",
+          "categoria": "emotional",
+          "descricao": "Duas mãos abertas em concha aguardando o objeto com olhar aliviado",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "É semana de exames finais e a biblioteca da faculdade está cheia de zumbis à base de cafeína. Sabendo que você tem receita para TDAH, um colega te aborda chorando no corredor, implorando por alguns comprimidos de Ritalina para conseguir passar em Cálculo II.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Por favor, cara! Eu não durmo há três dias e preciso muito gabaritar essa prova. Te dou R$ 150 por dez comprimidos da sua caixa. Quebra esse galho, te imploro!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Vender a cartela pelo preço oferecido de R$ 150.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 150.0 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "trafico_universitario" }
+            ]
+          },
+          {
+            "texto": "Aproveitar o desespero e vender pelo dobro do preço sugerido (R$ 300).",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 300.0 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "trafico_universitario" }
+            ]
+          },
+          {
+            "texto": "Recusar a venda ilegal e oferecer-se para resumir a matéria e estudar com ele.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "aluno_desesperado", "delta": 20 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "conclusao_graduacao",
+  "categoria": "education_faculdade",
+  "titulo": "O Canudo do Desemprego",
+  "descricaoCurta": "Jogar o capelo pro alto com um sorriso no rosto, enquanto por dentro bate o pânico de saber que amanhã você terá que atualizar o LinkedIn.",
+  "contentTags": ["carreira", "ansiedade"],
+  "triggers": {
+    "idadeRange": [21, 26],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
+    "peso": 50,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "conclusao_graduacao_cena",
+    "descricaoCurta": "Você no palco recebendo o canudo. O fotógrafo pedindo pra sorrir.",
+    "background": "escola_sala",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "sorriso_panico_formatura",
+          "categoria": "emotional",
+          "descricao": "Segurando diploma de canudo falso, sorriso forçado e olhar de pavor do futuro",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Quatro anos gastando dinheiro pra receber um papel enrolado que nem é o diploma de verdade (aquele chega em 90 dias). Parabéns, você é oficialmente um estagiário sênior.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Chorar, mas de desespero financeiro. Focar no mercado.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "formado" },
+              { "tipo": "remover_flag", "flag": "na_faculdade" },
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Comemorar horrores no baile e fingir que as contas não existem.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "formado" },
+              { "tipo": "remover_flag", "flag": "na_faculdade" },
+              { "tipo": "alterar_humor", "delta": 30 },
+              { "tipo": "alterar_dinheiro", "delta": -200 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+}

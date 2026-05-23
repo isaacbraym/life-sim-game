@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "amizade_profunda_faculdade",
+  "categoria": "education_faculdade",
+  "titulo": "Companheiros de Trincheira",
+  "descricaoCurta": "Pessoas que você só tolera porque precisa de alguém pra rachar o Uber e dividir o colapso nervoso da semana de provas.",
+  "contentTags": ["faculdade", "social"],
+  "triggers": {
+    "idadeRange": [18, 22],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 20,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "amigo_faculdade",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 17, "idadeMax": 24 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "amizade_profunda_faculdade_cena",
+    "descricaoCurta": "Biblioteca às 3h da manhã. Estudantes à beira de um AVC.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "zumbi_estudante",
+          "categoria": "emotional",
+          "descricao": "Olheiras profundas, café na mão, tremendo de cafeína",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "zumbi_estudante_2",
+          "categoria": "emotional",
+          "descricao": "Igualmente destruído, olhando pro nada",
+          "rotacoes": [],
+          "expressaoFacial": "desespero",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "no_rosto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Vocês estão sobrevivendo a base de RedBull falsificado e xingamentos à banca avaliadora. Isso cria laços eternos (ou até a formatura).",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Abraçar o caos e fazer amizade sincera pra rachar o xerox.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_amigos_faculdade" },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Roubar as anotações dele quando ele for no banheiro.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+}

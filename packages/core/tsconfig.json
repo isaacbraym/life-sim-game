@@ -1,11 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM"],
-    "moduleResolution": "Bundler",
-    "noEmit": true
+    "paths": {
+      "@core/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }

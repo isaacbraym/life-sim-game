@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "viagem_casal_perrengue_ubatuba",
+  "categoria": "relationship",
+  "titulo": "Fim de Ano Chuvoso",
+  "descricaoCurta": "A sonhada viagem romântica para Ubatuba vira um teste extremo de paciência com chuva constante, mofo no quarto e falta de luz.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [20, 40],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "viagem_casal_perrengue_ubatuba_cena",
+    "descricaoCurta": "Quarto de pousada simples com teto manchado e uma pequena janela mostrando chuva lá fora.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_cansado_cama",
+          "categoria": "emotional",
+          "descricao": "Sentado na beira da cama olhando para a parede com as mãos apoiadas nas pernas",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "parceiro_olhando_janela",
+          "categoria": "emotional",
+          "descricao": "Parado olhando de braços cruzados para a janela chuvosa",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Vocês planejaram a viagem por meses: praia, sol e romance em Ubatuba. Porém, uma chuva torrencial ininterrupta deixou a pousada inteira cheirando a mofo, a praia está interditada e agora acabou a energia elétrica devido a um raio na rede local.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Que ótimo... Cinco dias presos nesse chalé abafado jogando cartas à luz de vela. O que a gente faz agora?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Manter o otimismo, acender velas e propor um jogo de tabuleiro.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Tentar cozinhar com o que sobrou na despensa para distrair.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 10 },
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Desistir de tudo, fazer as malas e voltar de carro para casa.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -15 },
+              { "tipo": "alterar_dinheiro", "delta": -150.0 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

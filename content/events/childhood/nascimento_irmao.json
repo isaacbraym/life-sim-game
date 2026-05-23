@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "nascimento_irmao",
+  "categoria": "childhood",
+  "titulo": "O Fim do Monopólio Afetivo",
+  "descricaoCurta": "Seus pais anunciaram que vem aí um novo herdeiro da miséria. A sua era de ouro como filho único acabou. Prepare-se para dividir o afeto, a atenção e o controle remoto.",
+  "contentTags": ["familia", "drama"],
+  "triggers": {
+    "idadeRange": [5, 11],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_irmao",
+      "presente": false
+    },
+    "peso": 20,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "mae_gravida",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": { "genero": "F", "idadeMin": 24, "idadeMax": 45 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "nascimento_irmao_cena",
+    "descricaoCurta": "Sala de estar. Mãe com barriga visível, sorrindo de forma sádica/feliz. Pai ao lado. Você processando a notícia do seu rebaixamento a segundo plano.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.35, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "processando_noticia",
+          "categoria": "emotional",
+          "descricao": "Expressão de quem acaba de perder todos os seus direitos de realeza doméstica",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.25, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "mae_gravida_feliz",
+          "categoria": "emotional",
+          "descricao": "Mãe com mão no ventre, sorrindo para a criança de forma triunfante",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Você vai ganhar um irmãozinho! Que legal, agora você vai ter com quem dividir seus brinquedos!",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você olha para a barriga dela. Lá dentro tem um parasita em miniatura pronto para usurpar seu território, confiscar seu videogame e fazer você virar babá não remunerada no auge da sua infância.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar convencer seus pais a trocarem o bebê por um cachorro. (Cachorros pelo menos não roubam herança).",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_irmao" },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "ironia_precoce" }
+            ]
+          },
+          {
+            "texto": "Aceitar a derrota e começar a esconder seus brinquedos favoritos no forro do teto.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_irmao" },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "esconderijo_secreto" }
+            ]
+          },
+          {
+            "texto": "Chorar preventivamente para garantir que eles ainda lembram que você existe.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_irmao" },
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "adicionar_flag", "flag": "drama_infantil" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+}

@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "receptacao_celular_olx",
+  "categoria": "crime",
+  "titulo": "O Celular Barato da OLX",
+  "descricaoCurta": "Você encontra um iPhone seminovo por um terço do preço de mercado. O vendedor não tem nota fiscal e quer marcar a entrega rápido.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [16, 60],
+    "peso": 20,
+    "cooldownMeses": 18,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "vendedor_suspeito",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 18,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "receptacao_celular_olx_cena",
+    "descricaoCurta": "Estação do centro comercial movimentada, vendedor mostrando celular de forma velada para protagonista.",
+    "background": "centro_comercial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_exibe_pix",
+          "categoria": "interactions",
+          "descricao": "Olhando celular na mão com dúvida e dedo indicador estendido",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "vendedor_apressado",
+          "categoria": "action",
+          "descricao": "Celular na palma da mão estendida, olhando ao redor constantemente",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Um anúncio na OLX de um iPhone Pro Max por R$ 1.500 te chamou atenção. O vendedor diz que está com pressa porque vai viajar, não tem caixa e nem nota fiscal, e combinou de se encontrar na praça de alimentação do shopping.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Tá funcionando perfeitamente, amigo. Só não tenho a nota porque ficou na casa da minha ex. Faz o PIX de R$ 1.200 agora e leva logo antes que eu desista."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Comprar o celular suspeito torcendo para não ser roubado ou rastreado.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -1200.0 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "celular_olx_frio" }
+            ]
+          },
+          {
+            "texto": "Chantagear o cara dizendo que sabe que é roubado para ele fechar por R$ 700.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 16 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -700.0 },
+              { "tipo": "alterar_humor", "delta": 25 },
+              { "tipo": "adicionar_flag", "flag": "receptador_audaz" }
+            ]
+          },
+          {
+            "texto": "Agradecer, recusar e ir embora. Esse mato tem cachorro.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

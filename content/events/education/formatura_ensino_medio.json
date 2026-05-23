@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "formatura_ensino_medio",
+  "categoria": "education",
+  "titulo": "A Beca de Suor e Lágrimas",
+  "descricaoCurta": "Uma cerimônia de 4 horas num ginásio sem ar condicionado, ouvindo discursos copiados da internet pra pegar um canudo vazio.",
+  "contentTags": ["escola", "tedio"],
+  "triggers": {
+    "idadeRange": [17, 18],
+    "peso": 40,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "formatura_ensino_medio_cena",
+    "descricaoCurta": "Ginásio abafado, alunos de beca suando em bicas.",
+    "background": "escola_sala",
+    "framing": "medium",
+    "humor": "desconfortavel",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "suando_de_beca",
+          "categoria": "emotional",
+          "descricao": "Abanando o rosto com o canudo, desidratando",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "no_rosto",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O orador da turma está falando há 20 minutos sobre 'abrir as asas e voar'. Você só quer abrir o zíper da beca que tem cheiro de mofo.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Do lado de fora, a vida adulta começa. Um boleto chora no escuro.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ficar para a festa ruim. Pelo menos tem salgadinho free.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "formou_ensino_medio" },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_saude", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Tirar a foto com a mãe e fugir pro McDonald's mais próximo.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "formou_ensino_medio" },
+              { "tipo": "alterar_humor", "delta": 25 },
+              { "tipo": "alterar_dinheiro", "delta": -30 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+}

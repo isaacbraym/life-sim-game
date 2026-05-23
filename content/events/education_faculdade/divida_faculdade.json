@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "divida_faculdade",
+  "categoria": "education",
+  "titulo": "O dinheiro acabou",
+  "descricaoCurta": "Conta no vermelho. Boleto da faculdade vencendo. O dinheiro que você tinha calculado não fechou o mês. Agora é resolver.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 22],
+    "requisitos": {
+      "tipo": "todos",
+      "predicados": [
+        { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+        { "tipo": "var", "caminho": "personagem.dinheiro", "operador": "<=", "valor": 200 }
+      ]
+    },
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "divida_faculdade_cena",
+    "descricaoCurta": "Quarto da república. Você com a calculadora e extrato bancário. As contas não fecham.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "calculando_preocupado",
+          "categoria": "emotional",
+          "descricao": "Curvado sobre a mesa, olhando para papéis ou tela, mão no cabelo",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Comida, transporte, xerox, conta de luz. O que sobrou: zero vírgula nada.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Tem algumas opções. Nenhuma é ideal.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pedir ajuda pra família. Aceitar o constrangimento.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 500 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "pediu_dinheiro_familia" }
+            ]
+          },
+          {
+            "texto": "Pegar um bico extra. Trabalhar mais horas.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 400 },
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Cortar tudo que não é essencial. Feijão e arroz por duas semanas.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

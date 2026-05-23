@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "transito_caotico",
+  "categoria": "career",
+  "titulo": "O Custo de Sobreviver",
+  "descricaoCurta": "Passar duas horas em pé num ônibus lotado no calor, ouvindo funk no celular vazado do adolescente ao lado.",
+  "contentTags": ["comedia", "raiva"],
+  "triggers": {
+    "idadeRange": [18, 60],
+    "peso": 50,
+    "cooldownMeses": 1,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "transito_caotico_cena",
+    "descricaoCurta": "Você se segurando no ferro de um ônibus socado de gente.",
+    "background": "onibus_lotado",
+    "framing": "medium",
+    "humor": "raiva",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "segurando_ferro_onibus",
+          "categoria": "action",
+          "descricao": "Braço para cima, suando, cara de ódio matinal",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "alta",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você sente o cheiro de 40 pessoas diferentes ao mesmo tempo. O motorista decide frear com tudo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Se segurar pra não cair em cima da senhorinha.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Colocar fone de ouvido, fechar o olho e fingir que tá em Paris.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

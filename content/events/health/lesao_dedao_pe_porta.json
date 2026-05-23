@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "lesao_dedao_pe_porta",
+  "categoria": "health",
+  "titulo": "O Dedão Inimigo",
+  "descricaoCurta": "Ao passar correndo pela porta, seu dedão do pé se choca com violência contra o portal de madeira. A dor é tão absurda que você quase vê as estrelas no teto.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [5, 90],
+    "peso": 25,
+    "cooldownMeses": 3,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "lesao_dedao_pe_porta_cena",
+    "descricaoCurta": "No quarto, o protagonista pula em um pé só, com a mão no dedão machucado, gritando de dor.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "agressivo",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_chute_porta",
+          "categoria": "action",
+          "descricao": "Apoiado em um pé só, segurando a ponta do outro pé com cara de grito extremo",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O clássico encontro entre o dedão descalço e a quina da porta. Existe aquele meio segundo de vácuo temporal em que a dor ainda não chegou ao cérebro, mas você sabe que sua vida mudou para pior. Logo em seguida, o grito de dor ecoa pela vizinhança.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "MALDITA SEJA A FÍSICA E A LEI DE AÇÃO E REAÇÃO! Meu dedão esquerdo foi reduzido a purê!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pular em um pé só e recitar uma enciclopédia de palavrões para aliviar a tensão.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Aplicar gelo imediatamente e enfaixar a dedeira para segurar a unha.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Ignorar a dor, calçar um tênis bem apertado e sair correndo para pegar o ônibus.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -20 },
+              { "tipo": "alterar_humor", "delta": -20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

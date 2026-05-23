@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "vale_refeicao_acabou",
+  "categoria": "career",
+  "titulo": "A Miséria em Ticket",
+  "descricaoCurta": "Dia 10 do mês. O saldo do seu vale-refeição exibe um melancólico 'R$ 0,15'. Você é sumariamente forçado a esquentar uma marmita triste na copa enquanto os seus colegas vão de Uber comer rodízio.",
+  "contentTags": ["pobreza", "trabalho", "humilhacao"],
+  "triggers": {
+    "idadeRange": [20, 60],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 30,
+    "cooldownMeses": 3,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "vale_refeicao_acabou_cena",
+    "descricaoCurta": "Copa abafada do escritório. Você encarando o prato girando no micro-ondas engordurado, repensando suas escolhas de vida.",
+    "background": "copa_escritorio",
+    "framing": "close",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "olhando_microondas_depressivo",
+          "categoria": "action",
+          "descricao": "Encarando o prato girar no microondas, sentindo a derrota da CLT na alma",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O cheiro característico do seu ovo cozido requentado invade a copa e atrai olhares de puro ódio dos colegas de trabalho. O gerente passa, segura a respiração e te olha com profunda pena.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Comer chorando na mesa de trabalho enquanto finge ler um relatório muito importante.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_dinheiro", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "depressao_clt" }
+            ]
+          },
+          {
+            "texto": "Declarar que está fazendo 'Jejum Intermitente' espiritual por motivos de purificação. (Passar fome com pose de CEO).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_dinheiro", "delta": 20 },
+              { "tipo": "adicionar_flag", "flag": "orgulho_bobo" }
+            ]
+          },
+          {
+            "texto": "Choramingar com o RH alegando que a inflação inviabilizou a dignidade humana do trabalhador.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_dinheiro", "delta": 50 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
+              { "tipo": "adicionar_flag", "flag": "chorao_do_escritorio" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+}

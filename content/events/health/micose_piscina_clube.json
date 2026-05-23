@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "micose_piscina_clube",
+  "categoria": "health",
+  "titulo": "O Pé de Atleta",
+  "descricaoCurta": "Você andou descalço no piso molhado ao redor da piscina do clube social. Dias depois, surge uma coceira infernal entre os dedinhos do pé, com a pele descascando.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [10, 70],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "micose_piscina_clube_cena",
+    "descricaoCurta": "No banheiro, o protagonista olha com nojo e coça o pé avermelhado.",
+    "background": "banheiro",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_cocando_frieira",
+          "categoria": "interactions",
+          "descricao": "Olhando para o próprio pé com expressão de extremo nojo",
+          "rotacoes": [],
+          "expressaoFacial": "nojo",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Aquele passeio descalço pelo vestiário úmido do clube cobrou seu preço. Agora, uma colônia de fungos está fazendo um churrasco clandestino no vão do seu dedinho do pé. A coceira é digna de enlouquecer um monge.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Que desgraça! Frieira é um atestado de humilhação pública. Fica vermelho, descasca e coça mais que sarna!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Comprar uma pomada antifúngica recomendada na farmácia e higienizar todos os calçados.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": -30.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Fazer bochecho... quer dizer, banho de assento com bicarbonato e limão sugerido na internet.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Ignorar a coceira, continuar usando o mesmo tênis sem meia e fingir demência.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -20 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

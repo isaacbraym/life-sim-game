@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "reprovacao_escolar",
+  "categoria": "childhood",
+  "titulo": "Boletim vermelho",
+  "descricaoCurta": "Você rodou de ano. O boletim está na mochila como uma bomba prestes a explodir assim que chegar em casa.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [7, 12],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "notas_baixas",
+      "presente": true
+    },
+    "peso": 35,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "pai_ou_mae",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 55
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "reprovacao_cena",
+    "descricaoCurta": "Sala de estar. Criança entrega o boletim. Pai/mãe lendo com expressão que piora a cada linha.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "entrega_culpado",
+          "categoria": "emotional",
+          "descricao": "Cabeça baixa, braços caídos, segurando papel",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "lendo_boletim_raiva",
+          "categoria": "emotional",
+          "descricao": "Adulto segurando papel, cenho franzido",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Silêncio. Ele/ela está lendo. Você conta os segundos.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Reprovado. Você sabe o que isso significa, né?",
+        "mudancaExpressao": "raiva"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Assumir a culpa e prometer que vai melhorar.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "adicionar_flag", "flag": "prometeu_melhorar_escola" },
+              { "tipo": "remover_flag", "flag": "notas_baixas" }
+            ]
+          },
+          {
+            "texto": "Colocar a culpa no professor.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "culpou_professor" }
+            ]
+          },
+          {
+            "texto": "Ficar em silêncio e absorver a bronca.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
+}

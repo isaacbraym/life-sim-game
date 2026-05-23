@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "bullying_escola",
+  "categoria": "childhood",
+  "titulo": "Processo Seletivo de Traumas",
+  "descricaoCurta": "Seu grupo de colegas decidiu que hoje você é o entretenimento gratuito da turma. A crueldade infantil está em seu ápice.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [7, 12],
+    "peso": 20,
+    "cooldownMeses": 18,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "lider_bullying",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 7,
+        "idadeMax": 14
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "bullying_escola_cena",
+    "descricaoCurta": "Corredor da escola. Um grupo ao fundo, você sozinho. Risos apontados na sua direção.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "encolhido_humilhado",
+          "categoria": "emotional",
+          "descricao": "Postura fechada, ombros caídos, olhar desviado",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.35, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "rindo_apontando",
+          "categoria": "emotional",
+          "descricao": "Rindo, apontando, postura dominante",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Não é a primeira vez. Você já aceitou que sua existência é basicamente uma ofensa pessoal à galera do fundão.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Ih, ó o esquisito ali. Deve tá pensando se hoje ele almoça ou apanha no recreio.",
+        "mudancaExpressao": "arrogante"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ativar o modo invisível. (Se eu não olhar nos olhos, talvez o T-Rex não me veja. Funciona no cinema).",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "sofreu_bullying" },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Mandar uma ofensa pesadíssima sobre a mãe do agressor. (Risco altíssimo de perder os dentes incisivos, mas vai valer a pena).",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "adicionar_flag", "flag": "revidou_bullying_verbalmente" }
+            ]
+          },
+          {
+            "texto": "Partir pra porrada no puro desespero. (Espanque ou seja espancado: a suspensão já tá garantida de qualquer jeito).",
+            "atributoCheck": { "atributo": "forca", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "revidou_bullying_fisicamente" },
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
+}

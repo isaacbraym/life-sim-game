@@ -1,18 +1,18 @@
 import { z } from 'zod';
+import { AtributoRPG } from './effect';
 
 const OperadorComparacao = z.enum(['==', '!=', '>', '<', '>=', '<=']);
 
-// Predicado base (referência variável)
 const PredicadoVariavel = z.object({
   tipo: z.literal('var'),
-  caminho: z.string(),  // ex: 'personagem.atributos.forca', 'npc:mae.relacionamento.afeto'
+  caminho: z.string(),
   operador: OperadorComparacao,
   valor: z.union([z.number(), z.string(), z.boolean()]),
 }).strict();
 
 const PredicadoFlag = z.object({
   tipo: z.literal('flag'),
-  flag: z.string(),  // ex: 'casou_com_alice', 'tem_filho'
+  flag: z.string(),
   presente: z.boolean().default(true),
 }).strict();
 
@@ -29,10 +29,19 @@ const PredicadoIdade = z.object({
   maximo: z.number().int().min(0).max(120).optional(),
 }).strict();
 
-// Composição
+const PredicadoAtributo = z.object({
+  tipo: z.literal('atributo'),
+  atributo: AtributoRPG,
+  operador: OperadorComparacao,
+  valor: z.number().int(),
+}).strict();
+
 const PredicadoFolha = z.union([
-  PredicadoVariavel, PredicadoFlag,
-  PredicadoRelacionamento, PredicadoIdade,
+  PredicadoVariavel,
+  PredicadoFlag,
+  PredicadoRelacionamento,
+  PredicadoIdade,
+  PredicadoAtributo,
 ]);
 
 export type PredicateTree =
@@ -41,7 +50,7 @@ export type PredicateTree =
   | { tipo: 'nao'; predicado: PredicateTree }
   | z.infer<typeof PredicadoFolha>;
 
-export const PredicateTreeSchema: z.ZodType<PredicateTree> = z.lazy(() =>
+export const PredicateTreeSchema: z.ZodType<PredicateTree, z.ZodTypeDef, unknown> = z.lazy(() =>
   z.union([
     z.object({
       tipo: z.literal('todos'),
@@ -56,5 +65,5 @@ export const PredicateTreeSchema: z.ZodType<PredicateTree> = z.lazy(() =>
       predicado: PredicateTreeSchema,
     }).strict(),
     PredicadoFolha,
-  ])
+  ]),
 );

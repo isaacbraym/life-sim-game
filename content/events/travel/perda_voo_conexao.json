@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "perda_voo_conexao",
+  "categoria": "travel",
+  "titulo": "Conexão Perdida",
+  "descricaoCurta": "Durante uma conexão apertada no aeroporto internacional, você se distrai comendo um pão de queijo caro e perde a última chamada de embarque.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 60],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "atendente_cia",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "perda_voo_conexao_cena",
+    "descricaoCurta": "Portão de embarque com placas ao fundo, protagonista implorando ao atendente.",
+    "background": "shopping",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_implorando",
+          "categoria": "emotional",
+          "descricao": "Mãos juntas em sinal de prece, expressão de desespero",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "joinha",
+          "maoDireita": "joinha",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "atendente_negando",
+          "categoria": "interactions",
+          "descricao": "Mãos cruzadas na altura da cintura negando a entrada",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A porta do finger já está trancada e as turbinas do avião começam a girar. O atendente com crachá no pescoço balança a cabeça negativamente.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Sinto muito, senhor. O sistema fechou o voo há cinco minutos. A bagagem despachada já está sendo retirada do porão."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Implorar e explicar que a culpa foi das filas confusas do aeroporto.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "atendente_cia", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          },
+          {
+            "texto": "Negociar friamente no guichê a remarcação gratuita baseando-se nas regras de atraso.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Pagar a multa de remarcação e esperar 8 horas pelo próximo voo.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -400.0 },
+              { "tipo": "alterar_humor", "delta": -25 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

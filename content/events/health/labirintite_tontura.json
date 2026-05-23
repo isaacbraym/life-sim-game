@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "labirintite_tontura",
+  "categoria": "health",
+  "titulo": "O Quarto Giratório",
+  "descricaoCurta": "Você acorda, tenta levantar da cama e o quarto gira mais rápido que o carrossel do parque de diversões. A labirintite te pegou de surpresa.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [30, 80],
+    "peso": 15,
+    "cooldownMeses": 8,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "labirintite_tontura_cena",
+    "descricaoCurta": "No quarto, o protagonista cambaleia tentando se apoiar na parede enquanto tudo parece girar.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_tonto",
+          "categoria": "emotional",
+          "descricao": "Mãos estendidas tentando achar equilíbrio, olhos arregalados de desorientação",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você abriu os olhos e o mundo parecia ter entrado em uma centrífuga de máquina de lavar. O guarda-roupa dança com a janela, e botar os pés no chão exige uma dose de coragem digna de salto de paraquedas.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Meu Deus, eu não tomei uma gota de cachaça ontem e estou mais tonto que o boneco do posto em dia de ventania..."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Deitar reto na cama, fechar os olhos e esperar a terra parar de girar.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Tomar o remédio específico para labirintite e repousar longe de luz forte.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 20 },
+              { "tipo": "alterar_dinheiro", "delta": -35.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Tentar ignorar a tontura e ir limpar a casa escorando nas paredes.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -20 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

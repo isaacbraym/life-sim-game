@@ -1,14 +1,23 @@
 import { z } from 'zod';
 
+export const AtributoRPG = z.enum([
+  'forca', 'inteligencia', 'carisma', 'constituicao', 'sorte',
+]);
+export type AtributoRPG = z.infer<typeof AtributoRPG>;
+
+export const StatusPersonagem = z.enum([
+  'doente', 'preso', 'casado', 'separado', 'aposentado',
+]);
+
 export const Effect = z.discriminatedUnion('tipo', [
   z.object({
     tipo: z.literal('alterar_atributo'),
-    atributo: z.enum(['forca', 'inteligencia', 'carisma', 'constituicao', 'sorte']),
+    atributo: AtributoRPG,
     delta: z.number().int(),
   }).strict(),
   z.object({
     tipo: z.literal('alterar_dinheiro'),
-    delta: z.number(),  // pode ser fracionado (centavos)
+    delta: z.number(),
   }).strict(),
   z.object({
     tipo: z.literal('adicionar_flag'),
@@ -21,7 +30,7 @@ export const Effect = z.discriminatedUnion('tipo', [
   z.object({
     tipo: z.literal('alterar_relacionamento'),
     npcId: z.string(),
-    delta: z.number().int(),  // -100 a 100
+    delta: z.number().int(),
   }).strict(),
   z.object({
     tipo: z.literal('matar_npc'),
@@ -35,16 +44,16 @@ export const Effect = z.discriminatedUnion('tipo', [
   }).strict(),
   z.object({
     tipo: z.literal('alterar_saude'),
-    delta: z.number().int(),  // -100 a 100
+    delta: z.number().int(),
   }).strict(),
   z.object({
     tipo: z.literal('alterar_humor'),
-    delta: z.number().int(),  // -100 a 100
+    delta: z.number().int(),
   }).strict(),
   z.object({
     tipo: z.literal('aplicar_status'),
-    status: z.enum(['doente', 'preso', 'casado', 'separado', 'aposentado']),
-    duracao: z.number().int().optional(),  // em meses; undefined = permanente
+    status: StatusPersonagem,
+    duracao: z.number().int().optional(),
   }).strict(),
   z.object({
     tipo: z.literal('disparar_evento'),
@@ -52,5 +61,4 @@ export const Effect = z.discriminatedUnion('tipo', [
     atrasoMeses: z.number().int().min(0).default(0),
   }).strict(),
 ]);
-
 export type Effect = z.infer<typeof Effect>;

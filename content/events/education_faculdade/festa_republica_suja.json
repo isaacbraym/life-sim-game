@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "festa_republica_suja",
+  "categoria": "education_faculdade",
+  "titulo": "Imunidade de Rebanho",
+  "descricaoCurta": "Entrar em uma república que cheira a cigarro e desespero, beber algo de um balde de pedreiro e torcer pra não pegar tétano.",
+  "contentTags": ["festa", "substance"],
+  "triggers": {
+    "idadeRange": [18, 23],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 25,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "festa_republica_suja_cena",
+    "descricaoCurta": "Festa lotada, chão sujo, pessoas suadas.",
+    "background": "sala_estar",
+    "framing": "wide",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "beber_copo_plastico",
+          "categoria": "action",
+          "descricao": "Bebendo de um copo de plástico amassado",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O chão está tão grudento que arrancou a sola do seu tênis. O banheiro não tem porta, e o papel higiênico acabou em 2014.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Beber o 'Suco de Dinossauro' feito em um tonel de lixo. (Risco biológico iminente).",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -20 },
+              { "tipo": "alterar_humor", "delta": 30 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Ficar na cerveja quente. É ruim, mas pelo menos vem lacrada da fábrica.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

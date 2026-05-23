@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "sindrome_impostor_linkedin",
+  "categoria": "career",
+  "titulo": "A Rede do Sucesso Alheio",
+  "descricaoCurta": "Ver ex-colegas virando diretores no LinkedIn enquanto você formata planilhas.",
+  "contentTags": ["trabalho"],
+  "triggers": {
+    "idadeRange": [22, 35],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 20,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "colega_linkedin",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 22, "idadeMax": 35 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "sindrome_impostor_linkedin_cena",
+    "descricaoCurta": "Quarto escuro iluminado apenas pela luz azul do celular.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "deitado_celular_depresso",
+          "categoria": "emotional",
+          "descricao": "Deitado de lado na cama, encarando a tela com expressão de vazio existencial",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "debaixo_travesseiro",
+          "maoDireita": "segurando_celular",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Tarde da noite. Você abre o LinkedIn e vê o post de um colega de faculdade que mal passava de ano. Ele postou: 'Extremamente honrado em assumir como Head of Innovation aos 25 anos!'. Você desce a tela e olha para as suas planilhas abertas no notebook.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dar os parabéns mentindo para manter o networking.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_relacionamento", "npcId": "colega_linkedin", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Fechar o aplicativo e ler um livro técnico.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Escrever um textão corporativo falso sobre resiliência.",
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "adicionar_flag", "flag": "fanfiqueiro_corporativo" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+}

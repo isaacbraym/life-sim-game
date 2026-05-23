@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "visita_parente_inconveniente",
+  "categoria": "relationship",
+  "titulo": "O Primo de Favor",
+  "descricaoCurta": "Um primo distante pede para dormir no seu sofá por 'dois dias' para fazer uma entrevista. Três semanas depois, ele continua instalado na sua sala de estar.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [20, 50],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "primo_folgado",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 18,
+        "idadeMax": 45
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "visita_parente_inconveniente_cena",
+    "descricaoCurta": "Sala de estar bagunçada, protagonista de pé encarando o primo deitado no sofá com pés para o alto.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_incomodado",
+          "categoria": "emotional",
+          "descricao": "Mãos na cintura com expressão indignada",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "primo_deitado",
+          "categoria": "basic",
+          "descricao": "Deitado folgadamente no tapete ou sofá, mexendo no controle remoto",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O primo já decorou a senha do Netflix, comeu a última fatia de queijo e deixa as meias usadas no tapete. Toda vez que você pergunta sobre a entrevista, ele muda de assunto.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Ô primo, a empresa adiou o processo seletivo para a semana que vem. Posso quebrar seu galho no sofá mais uns diazinhos, né? Família ajuda família!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dar um ultimato claro estabelecendo um prazo definitivo de 48 horas para ele sair.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "primo_folgado", "delta": -25 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          },
+          {
+            "texto": "Desligar a senha do roteador de internet alegando manutenção do provedor.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Engolir o choro, comprar mais mantimentos e esperar a boa vontade dele.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -150.0 },
+              { "tipo": "alterar_humor", "delta": -20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

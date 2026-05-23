@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "automedicacao_ibuprofeno_estomago",
+  "categoria": "health",
+  "titulo": "O Estômago Flamejante",
+  "descricaoCurta": "Para curar uma dorzinha de cabeça, você tomou ibuprofeno de estômago vazio como se fosse bala de hortelã. Agora seu estômago está ardendo como se você tivesse engolido lava.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 80],
+    "peso": 15,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "automedicacao_ibuprofeno_estomago_cena",
+    "descricaoCurta": "Na sala de estar, o protagonista segura a barriga sentindo azia extrema.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_azia",
+          "categoria": "emotional",
+          "descricao": "Mão no estômago com cara de dor e arrependimento",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "fechada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Uma leve dor de cabeça te fez abrir a caixinha de remédios da família. Você tomou 600mg de ibuprofeno sem mastigar nem uma torrada. Agora, a dor de cabeça passou, mas seu esôfago parece uma churrascaria em chamas.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Minha nossa senhora do anti-inflamatório, tá queimando tudo aqui dentro! Acho que fiz um buraco na parede do meu próprio estômago..."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Beber um copo de leite gelado e deitar encolhido no sofá.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Ir à farmácia comprar um protetor gástrico e parar de se automedicar.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": -25.0 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Ignorar a queimação e tomar um café bem forte pra 'despertar'.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -25 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

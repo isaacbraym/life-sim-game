@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_videogame",
+  "categoria": "childhood",
+  "titulo": "O Início do Fim (da Vida Social)",
+  "descricaoCurta": "Você descobriu que apertar botões para um boneco pular na tela é infinitamente melhor do que interagir com seres humanos.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [5, 11],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "conhece_videogame",
+      "presente": false
+    },
+    "peso": 18,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_videogame_cena",
+    "descricaoCurta": "Quarto escuro, criança com olhos arregalados na tela, controle nas mãos.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "jogando_videgame_hipnotizado",
+          "categoria": "action",
+          "descricao": "Inclinado para frente, língua para fora, completamente absorto",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Sua postura já estragou para sempre e seus olhos estão secos, mas você finalmente encontrou a sua vocação: sedentarismo digital.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Quando sua mãe gritou que a janta estava pronta, você sentiu ódio genuíno por precisar se alimentar para continuar vivo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Exigir um desse no aniversário. (E fazer birra se ganhar roupa no lugar).",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "conhece_videogame" },
+              { "tipo": "adicionar_flag", "flag": "quer_videogame" },
+              { "tipo": "alterar_humor", "delta": 20 }
+            ]
+          },
+          {
+            "texto": "Aceitar que essa caixinha brilhante vai consumir todo o seu tempo livre (e o seu dinheiro) pelas próximas décadas.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "conhece_videogame" },
+              { "tipo": "adicionar_flag", "flag": "hobby_games" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

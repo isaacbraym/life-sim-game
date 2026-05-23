@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "intercambio_oportunidade",
+  "categoria": "education",
+  "titulo": "Oportunidade de ir embora",
+  "descricaoCurta": "Saiu uma vaga de intercâmbio. Ou estágio em outra cidade. Você tem a chance de sair do lugar onde sempre viveu por alguns meses. Assustador e tentador na mesma dose.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [19, 23],
+    "requisitos": {
+      "tipo": "todos",
+      "predicados": [
+        { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+        { "tipo": "var", "caminho": "personagem.atributos.inteligencia", "operador": ">=", "valor": 11 }
+      ]
+    },
+    "peso": 15,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "intercambio_oportunidade_cena",
+    "descricaoCurta": "Você com o e-mail de seleção aberto. Aceitar ou não.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "intimo",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "decisao_grande_pela_frente",
+          "categoria": "emotional",
+          "descricao": "De pé, olhando pela janela ou para a tela, peso de decisão visível",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A oportunidade está na tela esperando uma resposta. Tem prazo. O prazo é amanhã.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você vai deixar pra lá e se arrepender, ou vai aceitar e descobrir quem é longe do lugar de sempre?",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aceitar. Vai ser difícil e vai valer.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "fez_intercambio" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 2 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Recusar. Não é o momento certo.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "recusou_intercambio" },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

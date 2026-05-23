@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "gripe_chuva_resfriado",
+  "categoria": "health",
+  "titulo": "O Chuveiro dos Céus",
+  "descricaoCurta": "Você ignorou o conselho de levar o guarda-chuva e levou um banho de chuva torrencial de verão. No dia seguinte, acorda resfriado com a cabeça parecendo um bloco de cimento.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [5, 80],
+    "peso": 25,
+    "cooldownMeses": 4,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "gripe_chuva_resfriado_cena",
+    "descricaoCurta": "No banheiro, o protagonista assoa o nariz encarando o espelho com cara de derrotado.",
+    "background": "banheiro",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_gripado",
+          "categoria": "emotional",
+          "descricao": "Assoando o nariz com lenço de papel",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Aquela chuvinha passageira de verão te pegou sem guarda-chuva a três quarteirões de casa. A profecia materna se cumpriu: você acordou espirrando em cinco idiomas e com o nariz vermelho igual ao do Papai Noel.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Atchim! Meu Deus, acho que gastei um rolo inteiro de papel higiênico só nas últimas duas horas. Minha cabeça pesa uma tonelada..."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Preparar o chá lendário de alho com limão e mel sugerido por sua mãe.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Pedir uma canja de galinha quentinha por aplicativo e ficar de repouso.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": -45.0 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          },
+          {
+            "texto": "Tomar uma antitérmico genérico e ir trabalhar fingindo que é 'só alergia'.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

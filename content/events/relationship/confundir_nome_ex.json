@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "confundir_nome_ex",
+  "categoria": "relationship",
+  "titulo": "A Troca de Nomes",
+  "descricaoCurta": "No meio de um jantar romântico, você se distrai e acidentalmente chama seu parceiro atual pelo nome do seu ex.",
+  "contentTags": ["language"],
+  "triggers": {
+    "idadeRange": [18, 45],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "confundir_nome_ex_cena",
+    "descricaoCurta": "Mesa de restaurante com luz de velas, parceiro paralisado com a taça de vinho na mão e protagonista suando frio.",
+    "background": "restaurante",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_suando_frio",
+          "categoria": "emotional",
+          "descricao": "Sorriso tenso com uma das mãos na nuca e olhar de pânico",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "parceiro_olhar_mortal",
+          "categoria": "emotional",
+          "descricao": "Segurando taça de vinho no ar com olhar arregalado de puro ódio",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "salto_alto",
+          "peDireito": "salto_alto",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O garçom acabou de servir o risoto de funghi. Você solta um empolgado: 'Nossa, esse prato é maravilhoso, né...' seguido pelo nome do seu ex. A música de fundo parece parar. Os clientes nas outras mesas parecem parar. O tempo congela.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Como é que é? Quem é que você acabou de chamar de maravilhoso?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar contornar fingindo que foi uma travada na pronúncia do risoto.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Apelar para o carisma: admitir que foi um ato falho idiota e encher o parceiro de elogios.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Ficar em silêncio absoluto fingindo uma leve tontura súbita.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

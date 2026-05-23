@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "almoco_bandejao",
+  "categoria": "education_faculdade",
+  "titulo": "Roleta Russa Gastronômica",
+  "descricaoCurta": "Encarar a misteriosa carne cinza-azulada do Bandejão universitário para economizar o dinheiro do xerox, sabendo que a sua flora intestinal pode nunca mais se recuperar.",
+  "contentTags": ["comedia", "saude", "pobreza"],
+  "triggers": {
+    "idadeRange": [18, 24],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 35,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "almoco_bandejao_cena",
+    "descricaoCurta": "Estudante encarando uma bandeja de metal amassada com uma gosma de cor alienígena e arroz empapado.",
+    "background": "refeitorio_escola",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "encarando_comida_nojenta",
+          "categoria": "emotional",
+          "descricao": "Garfo na mão, testando a consistência da carne elástica com nojo",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O cardápio diz 'Iscas Bovinas', mas a textura elástica e os tons de roxo sugerem uma nova espécie de fungo catalogada recentemente pelo pessoal de biologia.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Devorar tudo de olhos fechados. Proteína barata é o combustível da graduação.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -20 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 2 },
+              { "tipo": "adicionar_flag", "flag": "estomago_de_avestruz" }
+            ]
+          },
+          {
+            "texto": "Comer apenas o arroz papa e passar o resto do dia com hipoglicemia e mau humor.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "subnutrido" }
+            ]
+          },
+          {
+            "texto": "Chantagear emocionalmente a tia da cozinha por uma colher extra de purê.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "amigo_da_cozinha" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+}

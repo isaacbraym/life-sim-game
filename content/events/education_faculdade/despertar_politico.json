@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "despertar_politico",
+  "categoria": "education",
+  "titulo": "O mundo é maior do que você pensava",
+  "descricaoCurta": "Uma palestra, um professor, uma discussão no corredor. Você começa a enxergar estruturas que antes não via. Pode ser o começo de uma convicção ou de uma decepção longa.",
+  "contentTags": ["political"],
+  "triggers": {
+    "idadeRange": [17, 22],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 12,
+    "cooldownMeses": 36,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "despertar_politico_cena",
+    "descricaoCurta": "Auditório ou praça de alimentação. Uma discussão que virou algo maior.",
+    "background": "escola_sala",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "refletindo_ouvindo",
+          "categoria": "emotional",
+          "descricao": "Braços cruzados pensativo, absorvendo algo que está mudando uma perspectiva",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 55,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você foi porque tinha tempo livre. Ficou porque algo começou a fazer sentido de um jeito diferente.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Certas coisas, uma vez que você enxerga, não dá mais pra não enxergar.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Se engajar. Participar, organizar, aparecer.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "politicamente_ativo" },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 2 }
+            ]
+          },
+          {
+            "texto": "Acompanhar de longe. Informar-se sem se expor.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "conscientizado_politicamente" },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Achar que é complicado demais e se distanciar.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

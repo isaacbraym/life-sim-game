@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "saque_caixa_eletronico_chupa_cabra",
+  "categoria": "crime",
+  "titulo": "O Chupa-Cabra no Caixa Eletrônico",
+  "descricaoCurta": "Ao ir sacar dinheiro, você percebe que a entrada do cartão possui um dispositivo clonador mal encaixado.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 60],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "cliente_fila",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 55
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "saque_caixa_eletronico_chupa_cabra_cena",
+    "descricaoCurta": "Área de caixas eletrônicos vermelhos no shopping, protagonista mexendo na entrada de cartão de costas para outro cliente.",
+    "background": "shopping",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_retira_peca",
+          "categoria": "action",
+          "descricao": "Mão direita estendida tentando puxar algo pequeno fixado no caixa",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "cliente_esperando",
+          "categoria": "interactions",
+          "descricao": "Olhando relógio no pulso com expressão entediada",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Na cabine do caixa do shopping, você nota fita adesiva e plástico mal encaixados no bocal do cartão. Um 'chupa-cabra'. Ele está piscando um LED verde discreto, indicando que já gravou várias trilhas de cartões e senhas de outros clientes.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Oi, amigo... Vai demorar muito aí? Só preciso fazer um depósito rápido antes que o shopping feche."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Remover o dispositivo de fininho e levar a memória com as trilhas copiadas.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 800.0 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "operador_chupacabra" }
+            ]
+          },
+          {
+            "texto": "Arrancar o clonador com um puxão rápido e esconder na jaqueta.",
+            "atributoCheck": { "atributo": "forca", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 800.0 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "operador_chupacabra" }
+            ]
+          },
+          {
+            "texto": "Chamar o segurança do banco e apontar a fraude instalada no terminal.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "cliente_fila", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

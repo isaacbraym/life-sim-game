@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "medo_do_escuro",
+  "categoria": "childhood",
+  "titulo": "Fantasma ou Pilha de Roupa?",
+  "descricaoCurta": "São 3 da manhã. A cadeira do seu quarto tem claramente a silhueta de um demônio pronto para te atacar.",
+  "contentTags": ["trauma", "noite"],
+  "triggers": {
+    "idadeRange": [5, 10],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "medo_do_escuro_cena",
+    "descricaoCurta": "Criança na cama, cobrindo o nariz com a coberta, olhando para o escuro.",
+    "background": "quarto_escuro",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "escondido_coberta",
+          "categoria": "emotional",
+          "descricao": "Só os olhos arregalados para fora da coberta",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A lógica diz que é sua jaqueta pendurada. Mas e se for o chupacabra? O lençol mágico vai te proteger de qualquer perfuração.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Gritar MANHÊÊÊ! (Passar vergonha na madrugada).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Criar coragem, levantar e ligar a luz correndo.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Aceitar a morte e fechar o olho forte. Se ele me comer, pelo menos eu durmo.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

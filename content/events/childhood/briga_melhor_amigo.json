@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "briga_melhor_amigo",
+  "categoria": "childhood",
+  "titulo": "Não fala comigo nunca mais",
+  "descricaoCurta": "Você e seu melhor amigo brigaram de verdade. Não a briguinha de sempre. A briga que faz ficar em silêncio no recreio inteiro.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [7, 12],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_melhor_amigo",
+      "presente": true
+    },
+    "peso": 18,
+    "cooldownMeses": 30,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "melhor_amigo",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 5, "idadeMax": 14 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "briga_melhor_amigo_cena",
+    "descricaoCurta": "Pátio da escola. Dois amigos de costas um pro outro, ou se encarando com raiva.",
+    "background": "escola_patio",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "raiva_magoada",
+          "categoria": "emotional",
+          "descricao": "Postura fechada, braços cruzados, olhar desviado",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "raiva_igual",
+          "categoria": "emotional",
+          "descricao": "Mesmo espelho — raiva e mágoa",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "fechada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Você falou uma coisa que não devia ter falado. Sabe que falou.",
+        "mudancaExpressao": "raiva"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "O pior tipo de briga é quando os dois estão errados e os dois sabem.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pedir desculpa primeiro. Engolir o orgulho.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Esperar ele pedir desculpa primeiro. Pode demorar.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "briga_longa_amigo" }
+            ]
+          },
+          {
+            "texto": "Declarar que a amizade acabou. Com drama total.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "adicionar_flag", "flag": "amizade_em_crise" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

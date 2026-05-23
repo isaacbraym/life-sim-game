@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "espinha_gigante",
+  "categoria": "education",
+  "titulo": "O Terceiro Olho",
+  "descricaoCurta": "Uma espinha com CEP próprio e pulsação no meio do seu nariz bem no dia de tirar a foto da turma.",
+  "contentTags": ["comedia"],
+  "triggers": {
+    "idadeRange": [13, 17],
+    "peso": 25,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "espinha_gigante_cena",
+    "descricaoCurta": "Adolescente de frente pro espelho apavorado com o rosto.",
+    "background": "banheiro",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "espremendo_espinha",
+          "categoria": "action",
+          "descricao": "Dedo no nariz, expressão de dor e concentração",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "no_rosto",
+          "maoDireita": "no_rosto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Não é uma espinha, é um vulcão prestes a entrar em erupção. A foto da turma vai eternizar esse momento vulcânico.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Espremer com violência. (O nariz vai ficar igual um tomate amassado).",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -2 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Passar corretivo da mãe. (Todo mundo vai perceber que você tá de maquiagem mal feita).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Assumir a monstruosidade. Sorrir para a foto com o terceiro olho.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

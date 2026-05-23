@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_dia_faculdade",
+  "categoria": "education",
+  "titulo": "Trote, Ilusão e Xerox",
+  "descricaoCurta": "Bem-vindo à universidade. Onde as promessas de futuro brilhante são rapidamente substituídas por xerox caros e professores que odeiam dar aula.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [17, 20],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "passou_vestibular",
+      "presente": true
+    },
+    "peso": 60,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_dia_faculdade_cena",
+    "descricaoCurta": "Campus universitário. Você chegando no primeiro dia, mapa na mão, tentando descobrir onde fica o bloco certo.",
+    "background": "escola_corredor",
+    "framing": "wide",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "calouro_perdido",
+          "categoria": "emotional",
+          "descricao": "Olhando em volta com mapa ou celular, tentando parecer que sabe onde está",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 55,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você olha pro campus gigantesco e percebe que finalmente pode ser você mesmo: ou seja, um universitário falido e ansioso.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você não tem ideia de onde fica sua sala, e todo mundo parece estar atrasado pra salvar o mundo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Puxar papo com alguém aleatório. (Risco altíssimo de fazer amizade com o maconheiro do curso).",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "na_faculdade" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Sentar na primeira fileira e fingir costume. (Parabéns, você agora é o nerd que vão pedir anotações).",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "na_faculdade" },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Ligar pra mãe em pânico por estar perdido. (Faltou a fralda, calouro?).",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "na_faculdade" },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

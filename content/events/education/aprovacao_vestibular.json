@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "aprovacao_vestibular",
+  "categoria": "education",
+  "titulo": "O nome na lista",
+  "descricaoCurta": "Você procurou. E estava lá. Seu nome, na lista, confirmado. Demorou um segundo pra acreditar.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [17, 19],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "estudando_para_vestibular",
+      "presente": true
+    },
+    "peso": 25,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "aprovacao_vestibular_cena",
+    "descricaoCurta": "Quarto ou sala. Celular na mão. O nome está na lista.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "euforia_aprovacao",
+          "categoria": "emotional",
+          "descricao": "Braço levantado, celular na mão, gritando sozinho",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 100,
+          "maoEsquerda": "joinha",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você leu três vezes. É o seu nome. É a sua nota. Passou.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Uma fase inteira da vida acabou. Outra começa. O intervalo entre as duas dura exatamente esse momento.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ligar pros pais primeiro. Isso é deles também.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "passou_vestibular" },
+              { "tipo": "remover_flag", "flag": "estudando_para_vestibular" },
+              { "tipo": "alterar_humor", "delta": 40 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Ligar pro melhor amigo. Os pais podem esperar dois minutos.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "passou_vestibular" },
+              { "tipo": "remover_flag", "flag": "estudando_para_vestibular" },
+              { "tipo": "alterar_humor", "delta": 40 }
+            ]
+          },
+          {
+            "texto": "Ficar sozinho com isso por um tempo. É seu.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "passou_vestibular" },
+              { "tipo": "remover_flag", "flag": "estudando_para_vestibular" },
+              { "tipo": "alterar_humor", "delta": 35 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

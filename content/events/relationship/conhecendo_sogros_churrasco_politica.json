@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "conhecendo_sogros_churrasco_politica",
+  "categoria": "relationship",
+  "titulo": "O Almoço de Apresentação",
+  "descricaoCurta": "Churrasco de família e o pai do parceiro começa a debater futebol e teorias geopolíticas.",
+  "contentTags": ["substance"],
+  "triggers": {
+    "idadeRange": [20, 40],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    },
+    {
+      "papel": "sogro_chato",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": {
+        "genero": "M",
+        "idadeMin": 40,
+        "idadeMax": 75
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "conhecendo_sogros_churrasco_politica_cena",
+    "descricaoCurta": "Quintal ensolarado de casa residencial com fumaça cinza de churrasqueira ao fundo.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_apreensivo",
+          "categoria": "emotional",
+          "descricao": "Sentado na cadeira de fio com copo de guaraná na mão e sorriso sem graça",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.4, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "sogro_apontando_espeto",
+          "categoria": "emotional",
+          "descricao": "De pé segurando um espeto com asa de frango, gesticulando com a outra mão",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Primeiro churrasco de família na casa dos sogros. O pai do parceiro, com as bochechas vermelhas de cerveja barata, encosta no seu ombro segurando um espeto e pergunta: 'E aí, me diz uma coisa: você acha mesmo que aquele juiz não roubou no jogo de quarta?'",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Porque na minha época a arbitragem prestava. Hoje em dia é tudo esquema."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Concordar veementemente balançando a cabeça.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "sogro_chato", "delta": 20 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Mudar de assunto elogiando sutilmente a costela de porco.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "sogro_chato", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Discordar e defender o juiz usando regras atualizadas da FIFA.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "sogro_chato", "delta": -25 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

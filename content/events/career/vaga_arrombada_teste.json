@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "vaga_arrombada_teste",
+  "categoria": "career",
+  "titulo": "Teste Prático",
+  "descricaoCurta": "Processo seletivo PJ exige planejamento estratégico anual grátis em 24h.",
+  "contentTags": ["trabalho"],
+  "triggers": {
+    "idadeRange": [22, 35],
+    "requisitos": { "tipo": "flag", "flag": "desempregado", "presente": true },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "recrutador_vaga",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 22, "idadeMax": 60 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "vaga_arrombada_teste_cena",
+    "descricaoCurta": "Interface de e-mail corporativa no monitor.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "lendo_email_incredulo",
+          "categoria": "action",
+          "descricao": "Encarando a tela do notebook com expressão de cansaço extremo",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "no_mouse",
+          "maoDireita": "no_teclado",
+          "peEsquerdo": "chinelo",
+          "peDireito": "chinelo",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você se candidata a uma vaga de Analista com 'salário compatível'. O RH responde pedindo um teste prático: montar uma estratégia de marketing anual completa para o produto real deles, incluindo cronograma e custos, com prazo de 24 horas. Trabalho grátis disfarçado.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fazer o teste entregando tudo sob estresse.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "trabalho_gratis" }
+            ]
+          },
+          {
+            "texto": "Recusar e expor a vaga em fóruns corporativos de humor.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Enviar portfólio dizendo que não trabalha de graça.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_relacionamento", "npcId": "recrutador_vaga", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+}

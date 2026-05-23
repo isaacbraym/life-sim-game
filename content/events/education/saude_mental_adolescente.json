@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "saude_mental_adolescente",
+  "categoria": "education",
+  "titulo": "Não tá bem",
+  "descricaoCurta": "Não é frescura. Você acorda sem energia. As coisas que gostava não interessam mais. Funcionar virou um esforço que não devia ser tão grande.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [13, 17],
+    "requisitos": {
+      "tipo": "var",
+      "caminho": "personagem.dinheiro",
+      "operador": ">=",
+      "valor": 0
+    },
+    "peso": 12,
+    "cooldownMeses": 36,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "saude_mental_adolescente_cena",
+    "descricaoCurta": "Quarto, tarde. Você na cama quando não devia estar. O dia passando pela janela.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "deitado_olhando_teto",
+          "categoria": "emotional",
+          "descricao": "Deitado, olhando para cima, sem energia para se mover",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "São duas da tarde. Você não levantou hoje. Não é preguiça. É outra coisa.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você poderia falar com alguém. Mas explicar parece mais difícil que aguentar.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Falar com alguém de confiança. Não precisar carregar isso sozinho.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "adicionar_flag", "flag": "pediu_ajuda_saude_mental" }
+            ]
+          },
+          {
+            "texto": "Forçar uma rotina. Sair, comer, dormir direito.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Continuar na cama. Amanhã talvez melhore.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_saude", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

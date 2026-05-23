@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeira_rejeicao_amorosa",
+  "categoria": "education",
+  "titulo": "O Não Que Ecoa",
+  "descricaoCurta": "Tomar um fora tão monumental e público que altera a sua química cerebral para sempre.",
+  "contentTags": ["trauma", "romance"],
+  "triggers": {
+    "idadeRange": [13, 17],
+    "peso": 25,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "crush",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": { "idadeMin": 13, "idadeMax": 18 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeira_rejeicao_cena",
+    "descricaoCurta": "Corredor. O silêncio após o toco.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "paralisado_choque",
+          "categoria": "emotional",
+          "descricao": "Boca levemente aberta, alma saindo do corpo",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 100,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "desviando_olhar_constrangido",
+          "categoria": "interactions",
+          "descricao": "Olhando pro lado, sorrisinho amarelo, querendo sumir dali",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "no_rosto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Eu te vejo super como um irmão... a gente é tão amigo, sabe?",
+        "mudancaExpressao": "feliz"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "O clássico golpe de misericórdia. Bem-vindo à Friendzone. A água é gelada.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Gaguejar um 'tranquilo, de boa' e morrer por dentro. (Perda severa de dignidade).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -30 },
+              { "tipo": "adicionar_flag", "flag": "friendzone_eterna" }
+            ]
+          },
+          {
+            "texto": "Lançar um 'eu só tava zoando, relaxa' e fugir. (Ninguém acreditou).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "separacao_dos_pais",
+  "categoria": "childhood",
+  "titulo": "A conversa séria",
+  "descricaoCurta": "Eles chamaram você pra sentar. Quando adultos chamam pra sentar com voz assim, não é pra nada bom. Eles vão se separar.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [5, 12],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "pais_separados",
+      "presente": false
+    },
+    "peso": 12,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "pai",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": { "genero": "M", "idadeMin": 25, "idadeMax": 55 }
+    },
+    {
+      "papel": "mae",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": { "genero": "F", "idadeMin": 25, "idadeMax": 55 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "separacao_dos_pais_cena",
+    "descricaoCurta": "Sala de estar. Os dois sentados, você na frente. Ninguém olha nos olhos de ninguém direito.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "sentado_travado",
+          "categoria": "emotional",
+          "descricao": "Sentado, rígido, olhando para frente com expressão fechada",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "pai_cabeca_baixa",
+          "categoria": "emotional",
+          "descricao": "Adulto com cabeça levemente baixa, expressão pesada",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "A gente tem uma coisa pra te falar. Isso não é culpa sua, tá? Em nenhum momento.",
+        "mudancaExpressao": "triste"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Quando alguém começa dizendo que não é culpa sua, já deu.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você ouve as palavras. Separação. Continuar amando. Não vai mudar nada. Vai mudar tudo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Perguntar com quem vai morar.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "pais_separados" },
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Sair do cômodo sem falar nada.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "pais_separados" },
+              { "tipo": "alterar_humor", "delta": -30 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Pedir que eles tentem de novo. Implorar.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "pais_separados" },
+              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

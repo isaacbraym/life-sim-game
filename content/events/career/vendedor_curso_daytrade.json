@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "vendedor_curso_daytrade",
+  "categoria": "career",
+  "titulo": "O Guru da Baia ao Lado",
+  "descricaoCurta": "Um colega de suporte quer te empurrar um curso de day trade e mindset financeiro no cafezinho.",
+  "contentTags": ["trabalho", "substance"],
+  "triggers": {
+    "idadeRange": [22, 35],
+    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "peso": 18,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "cleiton_daytrade",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 20, "idadeMax": 40 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "vendedor_curso_daytrade_cena",
+    "descricaoCurta": "Área de café do escritório com garrafa térmica sobre mesa preta.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "segurando_copo_plastico",
+          "categoria": "emotional",
+          "descricao": "Segurando copinho de café com olhar de tédio e corpo inclinado para trás",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_cafe",
+          "maoDireita": "no_bolso",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "guru_mostrando_celular",
+          "categoria": "emotional",
+          "descricao": "Mostrando a tela do celular entusiasmado, apontando para um gráfico",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_celular",
+          "maoDireita": "apontando_celular",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O Cleiton compreou um curso de investimentos e virou especialista. Ele te encurrala no cafezinho, mostra um gráfico incompreensível com velas verdes e vermelhas no celular e insiste que você pode 'largar essa CLT de merda' se comprar o curso que ele revende.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Cara, em seis meses a gente tá trabalhando da praia e fazendo dez mil por dia. Confia."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ouvir pacientemente e aceitar o link do webinar grátis.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "cleiton_daytrade", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Cortar o assunto dizendo que perdeu tudo no Tigrinho.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Entrar na onda e comprar a mentoria dele parcelada.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -1200 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "investidor_fracassado" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+}

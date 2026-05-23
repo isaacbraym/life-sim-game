@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "dr_aniversario_namoro",
+  "categoria": "relationship",
+  "titulo": "A Surpresa que Não Era Surpresa",
+  "descricaoCurta": "Você chega em casa e percebe que seu parceiro preparou uma surpresa de aniversário de namoro... a qual você esqueceu por completo.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [20, 40],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "parceiro_romantico",
+      "tipoVinculo": "romance"
+    },
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "parceiro_romantico",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "dr_aniversario_namoro_cena",
+    "descricaoCurta": "Sala de estar com mesa decorada com velas e fondue. Parceiro com roupa elegante encarando o protagonista surpreso.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_desesperado",
+          "categoria": "emotional",
+          "descricao": "Olhar aterrorizado com postura encolhida ao perceber a burrada",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "parceiro_decepcionado_bracos_cruzados",
+          "categoria": "emotional",
+          "descricao": "De braços cruzados com expressão de puro sarcasmo e decepção",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você abre a porta de casa vestindo bermuda de tactel e chinelo, segurando uma sacola plástica com pão de forma. Na sala, luz de velas, fondue de chocolate borbulhando e seu amor vestindo a melhor roupa. O silêncio que se segue é mais frio que o polo sul.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Que surpresa maravilhosa você ter vindo... tão despojado. Presumo que a sacola do mercado seja o presente de três anos de namoro?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Improvisar uma poesia dramática declarando que o parceiro é o verdadeiro presente diário.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Dizer que o presente atrasou e discretamente tentar comprar flores por entrega rápida por baixo da mesa.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_dinheiro", "delta": -150 }
+            ]
+          },
+          {
+            "texto": "Assumir a burrada completa, pedir desculpas de joelhos e prometer lavar a louça por trinta dias.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "promessa_louca_lavada" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

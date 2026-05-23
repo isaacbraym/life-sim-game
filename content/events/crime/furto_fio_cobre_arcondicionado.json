@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "furto_fio_cobre_arcondicionado",
+  "categoria": "crime",
+  "titulo": "O Furto de Cobre",
+  "descricaoCurta": "Sem dinheiro para nada, você vê um aparelho de ar-condicionado desprotegido atrás de um prédio e cogita arrancar os fios de cobre.",
+  "contentTags": ["violence"],
+  "triggers": {
+    "idadeRange": [16, 50],
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "comparsa_rua",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 16,
+        "idadeMax": 50
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "furto_fio_cobre_arcondicionado_cena",
+    "descricaoCurta": "Área externa escura nos fundos de um prédio, protagonista com alicate na mão negociando com comparsa.",
+    "background": "escola_patio",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_segura_alicate",
+          "categoria": "action",
+          "descricao": "Olhando fixo com alicate em riste, preparado para cortar",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "fechada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "comparsa_vigilante",
+          "categoria": "action",
+          "descricao": "Olhando por cima do ombro com ar conspiratório",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A pindaíba está forte. Atrás do ginásio escolar, três grandes condensadoras de ar-condicionado estão ao alcance das mãos. O preço do quilo do cobre no ferro-velho subiu. Um alicate grande é tudo o que separa você de algum dinheiro.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Vai rápido, mano! Corta a tubulação grossa ali. Se a ronda passar agora, a gente tá lascado. O quilo tá pagando trinta reais!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Forçar e arrancar a fiação na força bruta usando o alicate.",
+            "atributoCheck": { "atributo": "forca", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 150.0 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "arrancador_de_cobre" }
+            ]
+          },
+          {
+            "texto": "Desparafusar os painéis com calma para tirar o cobre limpo sem fazer barulho.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 15 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 300.0 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "tecnico_do_cobre" }
+            ]
+          },
+          {
+            "texto": "Sair correndo antes que alguém desconfie da sua presença ali.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

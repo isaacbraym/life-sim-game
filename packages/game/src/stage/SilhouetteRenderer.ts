@@ -1,13 +1,13 @@
 /// <reference types="vite/client" />
 import { Graphics } from 'pixi.js';
 import {
-  Esqueleto,
   gerarPathBraco,
   gerarPathPerna,
   PERFIL_BRACO_PADRAO,
   PERFIL_PERNA_PADRAO,
-  PathBraco,
-} from '@lifesim/core';
+} from '@core/silhouette';
+import type { PathBraco } from '@core/silhouette';
+import { Esqueleto } from '@lifesim/core';
 
 const COR_PELE       = 0xf5c5a3;
 const COR_SOMBRA     = 0xe8a882;

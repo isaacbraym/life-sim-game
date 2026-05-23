@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "alergia_camarao_praia",
+  "categoria": "health",
+  "titulo": "O Espetinho da UPA",
+  "descricaoCurta": "Você decide comer um espetinho de camarão na praia vendido por um ambulante. Minutos depois, seu corpo começa a empolar e sua garganta a coçar.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [15, 75],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "vendedor",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 18,
+        "idadeMax": 65
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "alergia_camarao_praia_cena",
+    "descricaoCurta": "Na praia, protagonista começa a empolar após comer camarão oferecido pelo vendedor.",
+    "background": "praia",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_alergico",
+          "categoria": "emotional",
+          "descricao": "Coçando o corpo com expressão de pânico",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "vendedor_camarao",
+          "categoria": "interactions",
+          "descricao": "Segurando um espetinho imaginário com sorriso orgulhoso",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O sol de 40 graus estala na areia. O cheiro do camarão frito no óleo misterioso vence seu bom senso. Você compra um espeto, mas logo sente os lábios formigarem.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Frito na hora, patrão! Limpíssimo! O segredo é o limão galego que já tá cortado desde ontem!"
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Cara... acho que minha glote tá pedindo arrego. E por que tem cinco de você na minha frente?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Correr desesperadamente para a UPA mais próxima.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_dinheiro", "delta": -40.0 }
+            ]
+          },
+          {
+            "texto": "Confiar no seu sistema imunológico e tomar um antialérgico vencido que achou na mochila.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Beber um copo de cachaça para 'desinfetar' o camarão estragado.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -35 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -25 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

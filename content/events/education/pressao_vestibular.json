@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "pressao_vestibular",
+  "categoria": "education",
+  "titulo": "O resto da sua vida começa agora",
+  "descricaoCurta": "Todo adulto que você encontra pergunta o mesmo: e aí, já sabe o que vai fazer? Faculdade, carreira, futuro. Como se 17 anos fosse suficiente pra decidir isso.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [16, 18],
+    "peso": 30,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "familiar_perguntando",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": { "idadeMin": 35, "idadeMax": 70 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "pressao_vestibular_cena",
+    "descricaoCurta": "Almoço de família ou sala de estar. O adulto de plantão chegou com a pergunta. Você com o garfo na mão.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adolescente_entediado_pressionado",
+          "categoria": "emotional",
+          "descricao": "Expressão de quem já ouviu essa pergunta 40 vezes",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adulto_conselheiro_nao_pedido",
+          "categoria": "emotional",
+          "descricao": "Postura de quem tem muita opinião e pouca percepção",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Já escolheu o curso? Medicina é bom. Engenharia. Direito. Vai ter que decidir logo.",
+        "mudancaExpressao": "arrogante"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você olha para o prato. O arroz não tem resposta. Devia ter.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dizer que já tem um plano, mesmo que seja mentira.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "adicionar_flag", "flag": "fingiu_ter_plano_faculdade" }
+            ]
+          },
+          {
+            "texto": "Admitir que não sabe. Aguentar a reação.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Desviar com uma piada. Mudar o assunto.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 8 }
+            ]
+          },
+          {
+            "texto": "Estudar mais. Resolver isso com preparação.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "estudando_para_vestibular" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

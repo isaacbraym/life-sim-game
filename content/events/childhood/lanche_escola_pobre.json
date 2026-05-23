@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "lanche_escola_pobre",
+  "categoria": "childhood",
+  "titulo": "Sua Cesta Básica Mental",
+  "descricaoCurta": "O choque de realidade de abrir a lancheira com pão com margarina murcho enquanto o colega tira um salgadinho caro.",
+  "contentTags": ["social"],
+  "triggers": {
+    "idadeRange": [6, 11],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "lanche_escola_pobre_cena",
+    "descricaoCurta": "Criança olhando tristemente para a própria lancheira.",
+    "background": "patio_escola",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "olhando_lanche_triste",
+          "categoria": "emotional",
+          "descricao": "Olhando para baixo, decepção pura",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O cheiro do pão amanhecido mistura com o cheiro do salgadinho sabor queijo artificial do colega. O capitalismo falhou com você cedo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pedir um pedaço pro colega. (Humilhar-se por glúten).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Comer o pão com ódio. Prometer que um dia será rico.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

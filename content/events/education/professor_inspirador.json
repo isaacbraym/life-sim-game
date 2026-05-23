@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "professor_inspirador",
+  "categoria": "education",
+  "titulo": "O Iludido da Pedagogia",
+  "descricaoCurta": "Aquele professor recém-formado que ainda tem brilho nos olhos e acha que vai mudar o mundo aplicando Paulo Freire. Você tem pena dele.",
+  "contentTags": ["escola", "tristeza"],
+  "triggers": {
+    "idadeRange": [13, 17],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "professor_marcante",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 22, "idadeMax": 30 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "professor_inspirador_cena",
+    "descricaoCurta": "Professor tentando dar uma aula engajada enquanto a turma joga bolinha de papel.",
+    "background": "escola_sala",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.35, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "aluno_sentindo_pena",
+          "categoria": "emotional",
+          "descricao": "Sentado, suspirando, quase querendo mandar a turma calar a boca",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 55,
+          "maoEsquerda": "no_rosto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.35, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "professor_sofrendo",
+          "categoria": "emotional",
+          "descricao": "Tentando sorrir mas a voz está tremendo",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "aberta",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Pessoal, silêncio por favor... Pensei em uma dinâmica super legal pra hoje, usando música!",
+        "mudancaExpressao": "medo"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Alguém joga um pedaço de borracha na lousa. O salário desse cara mal paga o aluguel e ele ainda tenta.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Participar da dinâmica por dó. (A turma toda te julga).",
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "influenciado_por_professor" }
+            ]
+          },
+          {
+            "texto": "Gritar 'CALA A BOCA, GENTE!'. Virar o xerife da sala.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -2 },
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "adicionar_flag", "flag": "influenciado_por_professor" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_amor_platonico",
+  "categoria": "childhood",
+  "titulo": "Aquela pessoa da outra sala",
+  "descricaoCurta": "Você não consegue explicar direito. Só que quando aquela pessoa aparece, você fica estúpido. O coração vai rápido. Você esquece como funciona o idioma.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [8, 12],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "primeiro_amor_infancia",
+      "presente": false
+    },
+    "peso": 20,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "interesse_romantico",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 7, "idadeMax": 13 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_amor_platonico_cena",
+    "descricaoCurta": "Corredor da escola. Você parado, ela/ele passando. O tempo lentifica de forma inexplicável.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "apaixonado_travado",
+          "categoria": "emotional",
+          "descricao": "De pé, completamente travado, olhando para o lado com expressão idiota",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "passando_desavisado",
+          "categoria": "basic",
+          "descricao": "Andando normalmente, alheio ao efeito que causa",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 30,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Ela/ele passou e disse oi. Só oi. Seu cérebro transformou isso em poesia épica.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você vai escrever o nome dela/dele em caderno? Definitivamente não. Provavelmente sim.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar falar com ela/ele amanhã. Preparar um assunto.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "primeiro_amor_infancia" },
+              { "tipo": "alterar_humor", "delta": 20 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Admirar de longe. Com dignidade. Por meses.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "primeiro_amor_infancia" },
+              { "tipo": "adicionar_flag", "flag": "amor_platônico_silencioso" },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Contar pro melhor amigo. Ele vai usar contra você pelo resto da vida.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "primeiro_amor_infancia" },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

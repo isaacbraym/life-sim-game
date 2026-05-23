@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "trancamento_curso",
+  "categoria": "education",
+  "titulo": "Esse não era o curso certo",
+  "descricaoCurta": "Três semestres e você tem certeza: escolheu errado. O curso não encaixa. Você pode trancar, mudar, ou continuar por inércia.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 21],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "trancamento_curso_cena",
+    "descricaoCurta": "Portal da universidade aberto no computador. Campo de solicitação de trancamento. Você com o mouse em cima do botão.",
+    "background": "quarto",
+    "framing": "closeup",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "hesitando_decisao_importante",
+          "categoria": "emotional",
+          "descricao": "Olhando para a tela, mão no queixo, peso visível na postura",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Você passou anos estudando pra entrar aqui. E agora está no site solicitando saída.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Isso não é fracasso. É informação. Mas é difícil sentir assim no momento.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Trancar e planejar a mudança com calma.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "trancou_curso" },
+              { "tipo": "remover_flag", "flag": "na_faculdade" },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Mudar de curso dentro da mesma instituição.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "mudou_de_curso" },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Continuar. Terminar o que começou mesmo sem gostar.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 2 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

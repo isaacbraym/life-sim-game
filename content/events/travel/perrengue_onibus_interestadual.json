@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "perrengue_onibus_interestadual",
+  "categoria": "travel",
+  "titulo": "A Rota do Suor",
+  "descricaoCurta": "Viagem interestadual de 14 horas de ônibus da rodoviária para o interior. O ar-condicionado quebra logo nos primeiros quilômetros sob um sol escaldante.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [16, 65],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "motorista",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 30,
+        "idadeMax": 65
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "perrengue_onibus_interestadual_cena",
+    "descricaoCurta": "Parada de ônibus na estrada poeirenta, protagonista suado reclamando com motorista.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_abanando",
+          "categoria": "action",
+          "descricao": "Mão na testa abanando-se com expressão de exaustão extrema",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "motorista_impaciente",
+          "categoria": "interactions",
+          "descricao": "Apontando para o motor do ônibus com cara de poucos amigos",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O ar-condicionado parou de funcionar e o ar dentro do veículo está denso e quente. O motorista para no acostamento para checar a correia, mas não dá esperanças.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Olha gente, o compressor quebrou. Se quiserem ir no frescor, só abrindo as portinhas de emergência no teto do ônibus."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aguentar o calor firme no banco da janela aberta pelos próximos 500km.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "sobreviveu_onibus_quente" },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Liderar um motim pacífico com os passageiros exigindo troca de ônibus no posto de apoio.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "motorista", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          },
+          {
+            "texto": "Descer no primeiro posto de gasolina, cancelar a viagem e pagar o Uber de volta.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -180.0 },
+              { "tipo": "alterar_humor", "delta": -20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

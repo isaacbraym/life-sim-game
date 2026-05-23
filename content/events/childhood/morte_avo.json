@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "morte_avo",
+  "categoria": "childhood",
+  "titulo": "O velório",
+  "descricaoCurta": "Seu avô ou sua avó morreu. Você provavelmente não sabe muito bem o que fazer com isso. Os adultos ao redor também não sabem, só disfarçam melhor.",
+  "contentTags": ["death", "trauma"],
+  "triggers": {
+    "idadeRange": [5, 12],
+    "peso": 12,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "morte_avo_cena",
+    "descricaoCurta": "Sala de velório ou casa da família. Muita gente de preto que você quase não conhece. Você no canto.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "crianca_no_canto_velorio",
+          "categoria": "emotional",
+          "descricao": "Criança encostada na parede, olhando o movimento dos adultos",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Adultos que você nunca viu abraçam sua mãe. Alguém está fazendo café na cozinha. A vida continua de um jeito estranho ao redor de uma pessoa que parou.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você olha para as mãos. Não sabe o que fazer com as mãos.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Sentar do lado de quem você conhece e ficar em silêncio.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "perdeu_avo" },
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Ajudar com o que puder. Pegar copo, trazer guardanapo.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "perdeu_avo" },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Sair para o quintal. Precisar de ar.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "perdeu_avo" },
+              { "tipo": "alterar_humor", "delta": -18 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "urban_jungle_apartamento",
+  "categoria": "hobby",
+  "titulo": "Obsessão Botânica",
+  "descricaoCurta": "Inspirado por fotos de decoração na internet, você compra trinta tipos de plantas exóticas para seu apartamento. Logo, elas começam a amarelar misteriosamente.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [20, 45],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "florista",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 22,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "urban_jungle_apartamento_cena",
+    "descricaoCurta": "Sala de estar cheia de vasos de plantas caídas, protagonista desesperado com borrifador.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_segurando_borrifador",
+          "categoria": "interactions",
+          "descricao": "Segurando borrifador de plástico com olhar tenso",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "florista_explicando",
+          "categoria": "interactions",
+          "descricao": "Gesticulando calmamente recomendando fertilizante",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A monstera variegata que custou os olhos da cara está com as pontas secas, e os cactos parecem estar apodrecendo por excesso de carinho (ou de água).",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Você tem que regar de acordo com a umidade do solo! Enfia o dedo na terra, meu filho. Se sair sujo, não precisa de água."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Montar uma planilha de regas e estudar as necessidades de luz de cada planta.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "dedo_verde" },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Comprar adubos premium importados sugeridos pelo florista.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -250.0 },
+              { "tipo": "alterar_humor", "delta": 15 }
+            ]
+          },
+          {
+            "texto": "Doar tudo para parentes antes que vire um cemitério botânico.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "casa_sem_planta" },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

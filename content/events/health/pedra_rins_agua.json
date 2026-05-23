@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "pedra_rins_agua",
+  "categoria": "health",
+  "titulo": "O Parto de Pedregulhos",
+  "descricaoCurta": "Anos substituindo água por refrigerante cobram a conta. Você sente uma pontada devastadora nas costas e percebe que está prestes a expelir uma joia da coroa renal.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 70],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "medico",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 28,
+        "idadeMax": 65
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "pedra_rins_agua_cena",
+    "descricaoCurta": "No quarto do hospital, o protagonista na maca de cara contorcida enquanto o médico mostra um copo d'água.",
+    "background": "hospital_quarto",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_colica_renal",
+          "categoria": "emotional",
+          "descricao": "Corpo encurvado segurando as costas com expressão de choro e agonia pura",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "medico_repreensivo",
+          "categoria": "interactions",
+          "descricao": "Apontando o dedo indicador com expressão de lição de moral",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A dor renal é frequentemente comparada ao parto de um dinossauro espinhoso. Você chega na UPA rastejando e o médico te atende com aquela serenidade irritante de quem já viu mil pessoas chorando por preguiça de beber água.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Então, seu cálculo tem 6 milímetros e está descendo raspando tudo. Vamos aplicar um analgésico forte, mas você precisa beber água como se sua vida dependesse disso. E depende."
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Doutor, eu juro que vou virar um peixe de tanto beber água a partir de hoje, só faz essa facada nas minhas costas parar!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tomar o soro com dipirona na veia e comprar uma garrafa térmica de 2 litros para carregar sempre.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": -50.0 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Pagar pela litotripsia a laser para implodir o pedregulho em pedacinhos.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 30 },
+              { "tipo": "alterar_dinheiro", "delta": -550.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Confiar no chá de quebra-pedra caseiro da sua avó e esperar a natureza agir.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -25 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -25 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

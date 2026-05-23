@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "barriga_roncando_prova",
+  "categoria": "education",
+  "titulo": "A Sinfonia da Fome",
+  "descricaoCurta": "Durante uma prova final importantíssima e silenciosa na sala de aula, sua barriga resolve fazer um barulho estrondoso de fome.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [12, 25],
+    "peso": 20,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "barriga_roncando_prova_cena",
+    "descricaoCurta": "Sala de aula silenciosa com carteiras alinhadas, protagonista olhando a prova com desespero enquanto aperta a barriga.",
+    "background": "escola_sala",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_apertando_barriga",
+          "categoria": "emotional",
+          "descricao": "Sentado na carteira, com as duas mãos apertando a barriga e expressão encabulada",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A sala está em silêncio absoluto. Só se ouve o ruído dos lápis batendo no papel e o relógio de parede. De repente, seu estômago vazio protesta contra a falta de café da manhã com um estrondo de baixa frequência que dura cinco segundos inteiros. Três colegas olham para trás na hora.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Forçar uma tosse alta para disfarçar o som tardiamente.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Contrair os músculos abdominais com força total para abafar futuros ruídos.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_saude", "delta": -2 }
+            ]
+          },
+          {
+            "texto": "Pedir licença ao fiscal de prova e correr para beber água no corredor.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "adicionar_flag", "flag": "corredor_da_fome" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

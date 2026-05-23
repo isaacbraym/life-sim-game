@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "infestacao_piolho_escola",
+  "categoria": "health",
+  "titulo": "Os Inquilinos da Cabeça",
+  "descricaoCurta": "Um bilhete na mochila escolar avisa sobre um surto de piolhos na sala de aula. Pouco tempo depois, sua cabeça começa a coçar desesperadamente.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [5, 18],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "mae",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "infestacao_piolho_escola_cena",
+    "descricaoCurta": "No quarto, o protagonista sofre enquanto a mãe se prepara para passar o pente fino com vinagre.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_piolho",
+          "categoria": "emotional",
+          "descricao": "Coçando a cabeça com as duas mãos e cara de desespero",
+          "rotacoes": [],
+          "expressaoFacial": "nojo",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "mae_pente_fino",
+          "categoria": "interactions",
+          "descricao": "Segurando um pente fino com pose de combate",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Um recado rasgado na agenda escolar alertou sobre o surto. Poucas horas depois, você já está coçando o couro cabeludo como se estivesse tocando bateria. O diagnóstico é claro: piolhos colonizaram sua cabeça.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Vem cá agora! Eu falei para não emprestar boné para os amiguinhos! Senta aí que vou passar vinagre morno e esse pente vai arrancar até seus pensamentos!"
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Ai, mãe! Tá ardendo tudo! Vou ficar com cheiro de salada de alface pro resto da semana!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aguentar bravamente a sessão medieval de pente fino com vinagre.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 15 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          },
+          {
+            "texto": "Pedir para comprar um xampu medicamentoso moderno na farmácia da esquina.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 20 },
+              { "tipo": "alterar_dinheiro", "delta": -40.0 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Coçar escondido, fingir que sarou e rezar para os piolhos irem embora sozinhos.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "aplicar_status", "status": "doente" },
+              { "tipo": "alterar_humor", "delta": -20 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

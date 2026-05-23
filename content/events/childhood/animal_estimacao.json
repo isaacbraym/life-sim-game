@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "animal_estimacao",
+  "categoria": "childhood",
+  "titulo": "Pode ficar com ele?",
+  "descricaoCurta": "Um filhote de cachorro apareceu no portão. Ou um gato. Ou um hamster que o amigo não quer mais. A questão é: os seus pais vão deixar?",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [5, 11],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_animal_estimacao",
+      "presente": false
+    },
+    "peso": 20,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "responsavel",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente",
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 55
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "animal_estimacao_cena",
+    "descricaoCurta": "Criança com um filhote nos braços, olhando com os olhos de cachorro para o adulto responsável.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "segurando_animal_implorando",
+          "categoria": "interactions",
+          "descricao": "Criança segurando algo nos braços com expressão de súplica",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adulto_resistindo",
+          "categoria": "emotional",
+          "descricao": "Adulto com braços cruzados mas expressão que já está cedendo",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Nem pensa. Animal em casa dá trabalho, dá dinheiro, dá alergia.",
+        "mudancaExpressao": "desconfiada"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você aperta mais o filhote. Ele lambe sua mão.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Prometer cuidar de tudo sozinho. Dar banho, ração, tudo.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_animal_estimacao" },
+              { "tipo": "alterar_humor", "delta": 25 }
+            ]
+          },
+          {
+            "texto": "Chorar. Funciona às vezes.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "tem_animal_estimacao" },
+              { "tipo": "alterar_humor", "delta": 20 }
+            ]
+          },
+          {
+            "texto": "Aceitar o não. Com a cabeça erguida.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
+}

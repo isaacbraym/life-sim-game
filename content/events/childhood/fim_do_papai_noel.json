@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "fim_do_papai_noel",
+  "categoria": "childhood",
+  "titulo": "A grande revelação",
+  "descricaoCurta": "Um colega de escola garante, com toda a convicção de quem acabou de descobrir, que o Papai Noel não existe. E que na verdade são os pais.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [6, 10],
+    "peso": 30,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "colega_curioso",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 6,
+        "idadeMax": 11
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "fim_do_papai_noel_cena",
+    "descricaoCurta": "Dois colegas na carteira da escola, um sussurrando para o outro com cara de quem revelou segredo de estado.",
+    "background": "escola_sala",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "surpresa_choque",
+          "categoria": "emotional",
+          "descricao": "Criança com expressão de choque, boca aberta",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.25, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "sussurrando",
+          "categoria": "interactions",
+          "descricao": "Colega sussurrando com ar de especialista",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "O Papai Noel não existe. É mentira. São os seus pais que compram os presentes.",
+        "mudancaExpressao": "desconfiada"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você sente que o chão sumiu. Todos esses anos de cartinha...",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "\"Mentira. Você é idiota.\" Negar com convicção.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "negou_fim_papai_noel" },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Processar em silêncio. Começar a fazer as contas.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "aceitou_fim_papai_noel" },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Ir correndo perguntar pra mãe quando chegar em casa.",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "perguntou_sobre_papai_noel" },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
+}

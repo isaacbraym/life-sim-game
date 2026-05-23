@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "professor_egocentrico",
+  "categoria": "education_faculdade",
+  "titulo": "Palestra de 4 Horas",
+  "descricaoCurta": "A aula onde o professor gasta 90% do tempo falando do próprio doutorado e 10% reclamando do salário.",
+  "contentTags": ["escola", "tedio"],
+  "triggers": {
+    "idadeRange": [18, 24],
+    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "peso": 30,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "professor_palestrinha",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": { "idadeMin": 40, "idadeMax": 65 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "professor_egocentrico_cena",
+    "descricaoCurta": "Sala de aula da faculdade. Alunos dormindo, professor falando orgulhoso.",
+    "background": "sala_aula",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "dormindo_sentado",
+          "categoria": "emotional",
+          "descricao": "Cabeça caindo de sono apoiada na mão",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "no_rosto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "falando_palestrinha",
+          "categoria": "interactions",
+          "descricao": "Professor gesticulando muito, queixo erguido",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Pelo 14º dia consecutivo, ele está falando de quando morou na França para o pós-doc.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fingir interesse e balançar a cabeça. (Ganhar simpatia e perder parte da sua alma).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Dormir de olho aberto. Técnica ninja milenar do ensino superior.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_saude", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

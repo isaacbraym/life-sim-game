@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "gato_energia_vizinho",
+  "categoria": "crime",
+  "titulo": "O Gato de Luz",
+  "descricaoCurta": "Com a tarifa de energia nas alturas, surge a ideia de fazer uma ligação clandestina ('gato') direto no poste do condomínio.",
+  "contentTags": ["political"],
+  "triggers": {
+    "idadeRange": [21, 60],
+    "peso": 20,
+    "cooldownMeses": 18,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "eletricista",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 60
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "gato_energia_vizinho_cena",
+    "descricaoCurta": "Rua residencial perto do poste de luz, protagonista e eletricista negociando.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_cochichando",
+          "categoria": "interactions",
+          "descricao": "Olhando em volta de maneira suspeita com a mão perto da boca",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "eletricista_pensativo",
+          "categoria": "interactions",
+          "descricao": "Mão no queixo com olhar calculista",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "bota",
+          "peDireito": "bota",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A conta de luz veio com bandeira vermelha patamar 2 e você mal ligou o ar-condicionado. Um eletricista que faz 'bicos' no bairro se oferece para dar um jeito no relógio medidor.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Rapaz, por duzentos reais eu deixo seu medidor girando pela metade. Ninguém da distribuidora desconfia, faço isso direto."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fazer você mesmo a ligação clandestina à noite para economizar o eletricista.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "gato_eletrico" },
+              { "tipo": "alterar_dinheiro", "delta": 400.0 }
+            ]
+          },
+          {
+            "texto": "Pagar o eletricista para fazer o serviço técnico profissional clandestino.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "gato_eletrico" },
+              { "tipo": "alterar_dinheiro", "delta": -200.0 }
+            ]
+          },
+          {
+            "texto": "Recusar e pagar a conta inteira para dormir de cabeça fria.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -350.0 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

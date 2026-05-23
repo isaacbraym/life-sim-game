@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_contato_alcool",
+  "categoria": "education",
+  "titulo": "Batismo de Fogo (e Corote)",
+  "descricaoCurta": "Alguém te estende um copo de plástico com um líquido radioativo que tem cheiro de desinfetante hospitalar e promessas de vômito.",
+  "contentTags": ["substance"],
+  "triggers": {
+    "idadeRange": [14, 17],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "bebeu_pela_primeira_vez",
+      "presente": false
+    },
+    "peso": 18,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_alcool_cena",
+    "descricaoCurta": "Festa ou área externa. Alguém estende uma garrafa ou copo. Você olha pra isso.",
+    "background": "sala_estar",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "avaliando_copo_incerto",
+          "categoria": "emotional",
+          "descricao": "Olhando para o objeto na mão com expressão de avaliação",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 55,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Seu cérebro implora por água, mas a sua necessidade desesperada de aprovação social grita muito mais alto.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Virar de uma vez. (O seu fígado que lute no futuro para processar esse veneno).",
+            "efeitos": [
+              { "tipo": "adicionar_flag", "flag": "bebeu_pela_primeira_vez" },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_saude", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Recusar educadamente. (Parabéns, você acaba de garantir o título de palestrinha chato do grupo pelos próximos 5 anos).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Dar um golinho de bebê, fazer careta e dizer que tem notas amadeiradas. (Ninguém acreditou, mas você tentou).",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 8 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}

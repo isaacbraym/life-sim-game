@@ -1,6 +1,5 @@
 import type { Event } from '../schemas/event';
-import { avaliarPredicado } from './PredicateEvaluator';
-import type { GameState } from './PredicateEvaluator';
+import { avaliarPredicado, type GameState } from './PredicateEvaluator';
 
 // ---------------------------------------------------------------------------
 // Tipos auxiliares
@@ -14,17 +13,12 @@ export interface FiltroEventosParams {
   readonly eventos: readonly Event[];
   readonly estado: GameState;
   readonly idadeAtualAnos: number;
-  readonly flagsDisparadas: readonly string[];
 }
 
 // ---------------------------------------------------------------------------
 // Helpers internos
 // ---------------------------------------------------------------------------
 
-/**
- * Retorna true se o cooldown do evento já expirou (ou nunca foi disparado).
- * Compara em meses para alinhar com a unidade canônica de tempo (idadeAtualMeses).
- */
 function eventoPassaCooldown(evento: Event, estado: GameState): boolean {
   const { cooldownMeses, uniqueOnce } = evento.triggers;
 
@@ -36,11 +30,10 @@ function eventoPassaCooldown(evento: Event, estado: GameState): boolean {
     const foiDisparado = estado.personagem.eventosVividos.includes(evento.eventoId);
     if (!foiDisparado) return true;
 
-    const mesAtual = estado.personagem.idadeAtualMeses;
     const mesUltimoDisparo = estado.cooldownRegistry[evento.eventoId];
     if (mesUltimoDisparo === undefined) return true;
 
-    return mesAtual - mesUltimoDisparo >= cooldownMeses;
+    return estado.personagem.idadeAtualMeses - mesUltimoDisparo >= cooldownMeses;
   }
 
   return true;
@@ -86,5 +79,5 @@ export function sortearEvento(
     if (pontoAleatorio <= acumulado) return evento;
   }
 
-  return eventosFiltrados[eventosFiltrados.length - 1];
+  return eventosFiltrados.at(-1);
 }

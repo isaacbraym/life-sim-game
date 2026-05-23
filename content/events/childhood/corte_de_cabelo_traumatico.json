@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "corte_de_cabelo_traumatico",
+  "categoria": "childhood",
+  "titulo": "Projeto Chitãozinho",
+  "descricaoCurta": "Sua mãe decidiu economizar no salão e passou a tesoura no seu cabelo. O bullying amanhã é garantido.",
+  "contentTags": ["comedia", "trauma"],
+  "triggers": {
+    "idadeRange": [5, 10],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "corte_de_cabelo_traumatico_cena",
+    "descricaoCurta": "Criança na frente do espelho, chorando por dentro com o cabelo torto.",
+    "background": "banheiro",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "olhando_espelho_choque",
+          "categoria": "emotional",
+          "descricao": "Chocado com o próprio reflexo",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "na_cabeca",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O chão está cheio de tufos de cabelo. Sua mãe diz que ficou lindo. O espelho diz que você parece um cogumelo triste.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Chorar compulsivamente. (Sua mãe vai te xingar por ser ingrato).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          },
+          {
+            "texto": "Aceitar o destino e ir pra escola de boné.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "visita_parente_chato",
+  "categoria": "childhood",
+  "titulo": "O Aperto de Bochecha Letal",
+  "descricaoCurta": "Aquela tia que cheira a naftalina chegou para apertar sua cara e perguntar das namoradinhas.",
+  "contentTags": ["social"],
+  "triggers": {
+    "idadeRange": [6, 12],
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "visita_parente_chato_cena",
+    "descricaoCurta": "Tia apertando as bochechas da criança indefesa.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "rosto_amassado",
+          "categoria": "emotional",
+          "descricao": "Sofrendo abuso de bochechas",
+          "rotacoes": [],
+          "expressaoFacial": "desespero",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A dor física na bochecha só é superada pela dor psicológica da pergunta: E as namoradinhas?",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dar um sorriso falso e responder educadamente. (Você ganha R$5 discretamente).",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Fugir pro quarto alegando que precisa cagar. (Segurança garantida).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+}

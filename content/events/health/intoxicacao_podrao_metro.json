@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "intoxicacao_podrao_metro",
+  "categoria": "health",
+  "titulo": "O Molho Verde Verdejante",
+  "descricaoCurta": "Você sai faminto da estação de metrô às 23h e se depara com o clássico 'podrão' de calçada. O cheiro de bacon é convidativo, mas a cor do molho verde é quase fluorescente.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [18, 60],
+    "peso": 25,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "vendedor",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "descartavel",
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 65
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "intoxicacao_podrao_metro_cena",
+    "descricaoCurta": "Rua à noite, protagonista hesitando em frente ao vendedor do carrinho de lanches.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_faminto",
+          "categoria": "interactions",
+          "descricao": "Mão na barriga, olhar indeciso",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "vendedor_sorridente",
+          "categoria": "interactions",
+          "descricao": "Sorrindo de braços abertos oferecendo o lanche",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O estômago ronca como um motor de fusca velho. O vendedor de jaleco levemente encardido te oferece o combo completo por um preço inacreditavelmente baixo.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Vai completo, chefia? Tem batata palha, uva passa, purê, e a maionese caseira que é receita secreta da minha família!"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Encarar o lanche completo com todas as maioneses caseiras fora da geladeira.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": -12.0 }
+            ]
+          },
+          {
+            "texto": "Pedir o lanche sem molho verde ou maionese caseira para segurança.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_dinheiro", "delta": -12.0 },
+              { "tipo": "alterar_saude", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Recusar e ir para casa comer um miojo seguro.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

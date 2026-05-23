@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "separacao_divisao_bens_cachorro",
+  "categoria": "relationship",
+  "titulo": "A Guarda do Vira-Lata",
+  "descricaoCurta": "A partilha de bens após o término emperra no ponto mais sensível de todos: quem vai ficar com a custódia do cachorro adotado.",
+  "contentTags": ["trauma"],
+  "triggers": {
+    "idadeRange": [20, 40],
+    "requisitos": {
+      "tipo": "relacionamento",
+      "comNpcRole": "ex_parceiro",
+      "tipoVinculo": "romance"
+    },
+    "peso": 15,
+    "cooldownMeses": 12,
+    "uniqueOnce": true
+  },
+  "cast": [
+    {
+      "papel": "ex_parceiro",
+      "tipo": "relacional",
+      "persistenciaApos": "permanente"
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "separacao_divisao_bens_cachorro_cena",
+    "descricaoCurta": "Sala de estar vazia com algumas caixas de papelão empilhadas e o cachorro invisível no tapete.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_apontando_chao",
+          "categoria": "interactions",
+          "descricao": "Apontando para baixo em direção ao tapete com olhar sério",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "ex_bracos_cruzados",
+          "categoria": "emotional",
+          "descricao": "Em pé com expressão triste e firme, olhando para baixo",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O apartamento está quase vazio, restando apenas caixas de papelão espalhadas pela sala. A geladeira e a TV já foram divididas sem grandes brigas, mas sobrou o cachorro caramelo, Rex. Nenhum de vocês quer abrir mão do bicho que adotaram juntos.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Você fica com o micro-ondas e o sofá se eu levar o Rex. Eu não posso viver sem ele."
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Propor guarda compartilhada (uma quinzena com cada um).",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "guarda_compartilhada_rex" },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Abrir mão do cachorro em troca de compensação financeira.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 5 },
+              { "tipo": "alterar_dinheiro", "delta": 1500.0 },
+              { "tipo": "alterar_humor", "delta": -25 }
+            ]
+          },
+          {
+            "texto": "Bater o pé e insistir que o cachorro fica com você.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": -30 },
+              { "tipo": "adicionar_flag", "flag": "ficou_com_rex" },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+}

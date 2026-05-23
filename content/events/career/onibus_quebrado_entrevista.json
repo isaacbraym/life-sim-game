@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "onibus_quebrado_entrevista",
+  "categoria": "career",
+  "titulo": "Obstáculo Metropolitano",
+  "descricaoCurta": "Seu ônibus quebra no meio da avenida a caminho da entrevista final para o emprego ideal.",
+  "contentTags": ["trabalho"],
+  "triggers": {
+    "idadeRange": [22, 35],
+    "requisitos": { "tipo": "flag", "flag": "desempregado", "presente": true },
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "recrutador_vaga",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 25, "idadeMax": 60 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "onibus_quebrado_entrevista_cena",
+    "descricaoCurta": "Calçada suja sob sol escaldante, ônibus parado soltando fumaça cinza.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "desesperado_na_rua",
+          "categoria": "emotional",
+          "descricao": "Olhando para o celular com o cabelo desgrenhado de vento e testa suada",
+          "rotacoes": [],
+          "expressaoFacial": "assustada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "segurando_paleto",
+          "maoDireita": "segurando_celular",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Dia da última etapa do processo seletivo dos seus sonhos. Você de terno completo. No meio do caminho, o motor do ônibus explode em fumaça preta. O motorista abre as portas e avisa que quebrou. Faltam 15 minutos e não há ponto de táxi por perto.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Pedir um carro de aplicativo com tarifa dinâmica abusiva.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -60 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Correr os dois quilômetros finais sob o sol de meio-dia.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "entrevista_suada" }
+            ]
+          },
+          {
+            "texto": "Ligar para a empresa explicando e pedir para remarcar.",
+            "efeitos": [
+              { "tipo": "alterar_relacionamento", "npcId": "recrutador_vaga", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+}

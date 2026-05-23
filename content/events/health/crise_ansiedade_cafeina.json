@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "crise_ansiedade_cafeina",
+  "categoria": "health",
+  "titulo": "O Café da Morte",
+  "descricaoCurta": "Você abusou do café de garrafa térmica da copa do trabalho para aguentar o expediente. Agora, seu coração está batendo a 180 BPM e você acha que está tendo um troço.",
+  "contentTags": ["trauma", "substance"],
+  "triggers": {
+    "idadeRange": [16, 65],
+    "peso": 25,
+    "cooldownMeses": 3,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "crise_ansiedade_cafeina_cena",
+    "descricaoCurta": "No escritório, o protagonista está trêmulo e suando frio após excesso de cafeína.",
+    "background": "escritorio_open",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_taquicardia",
+          "categoria": "emotional",
+          "descricao": "Mão no peito, olhos arregalados de desespero",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "fechada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Para sobreviver à reunião das 14h, você tomou quatro copinhos plásticos daquele café de garrafa térmica que parece asfalto derretido. De repente, a planilha de Excel começa a piscar e você sente o coração sair pela boca.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "protagonista",
+        "texto": "Socorro... minhas mãos estão formigando. Será que o café de escritório foi batizado com energético?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Beber dois copos d'água e fazer exercícios de respiração no banheiro.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Jurar de joelhos que nunca mais toma café e ir tomar um ar lá fora.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Pesquisar seus sintomas na internet para confirmar se é um ataque cardíaco fulminante.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -20 },
+              { "tipo": "alterar_humor", "delta": -25 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "traicao_amigo_proximo",
+  "categoria": "education",
+  "titulo": "Foi o seu amigo",
+  "descricaoCurta": "Você ficou sabendo. Pode ter sido fofoca espalhada, namorado/a beijado/a, vaga tomada, segredo contado. O pior é que era aquele amigo.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [13, 18],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_melhor_amigo",
+      "presente": true
+    },
+    "peso": 15,
+    "cooldownMeses": 36,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "amigo_traidor",
+      "tipo": "relacional",
+      "persistenciaApos": "recorrente",
+      "constraints": { "idadeMin": 12, "idadeMax": 19 }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "traicao_amigo_proximo_cena",
+    "descricaoCurta": "Confronto direto. Você com a informação, ele/ela tentando explicar.",
+    "background": "escola_patio",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "magoado_raiva_contida",
+          "categoria": "emotional",
+          "descricao": "Raiva e mágoa ao mesmo tempo, olhar fixo",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "se_explicando_sem_saida",
+          "categoria": "emotional",
+          "descricao": "Mãos abertas em gesto de explicação, claramente sem argumento",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "aberta",
+          "maoDireita": "aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Eu posso explicar. Não é o que você tá pensando.",
+        "mudancaExpressao": "medo"
+      },
+      {
+        "tipo": "narracao",
+        "texto": "É exatamente o que você tá pensando.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Cortar o contato. Sem drama, sem explicação.",
+            "efeitos": [
+              { "tipo": "remover_flag", "flag": "tem_melhor_amigo" },
+              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Dar espaço e ver se consegue perdoar mais pra frente.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "amizade_em_crise" }
+            ]
+          },
+          {
+            "texto": "Explodir tudo aqui. Falar tudo o que nunca falou.",
+            "efeitos": [
+              { "tipo": "remover_flag", "flag": "tem_melhor_amigo" },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  },
+  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+}
