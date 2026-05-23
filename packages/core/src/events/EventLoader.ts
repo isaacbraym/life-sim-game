@@ -4,6 +4,20 @@ declare global {
   }
 }
 
+type EfeitoOpcao = {
+  readonly tipo: string;
+  readonly [chave: string]: unknown;
+};
+
+type OpcaoEvento = {
+  readonly texto: string;
+  readonly efeitos?: readonly EfeitoOpcao[];
+  readonly atributoCheck?: {
+    readonly atributo: string;
+    readonly dificuldade: number;
+  };
+};
+
 type Evento = {
   readonly id: string;
   readonly faseDaVida?: string;
@@ -16,7 +30,7 @@ type Evento = {
   readonly titulo?: string;
   readonly descricao?: string;
   readonly icone?: string;
-  readonly opcoes?: readonly { readonly texto: string }[];
+  readonly opcoes?: readonly OpcaoEvento[];
 };
 
 type ModuloEvento = {
@@ -29,16 +43,33 @@ function ehObjeto(valor: unknown): valor is Readonly<Record<string, unknown>> {
   return typeof valor === 'object' && Boolean(valor);
 }
 
+function normalizarId(valor: unknown): string | undefined {
+  if (!ehObjeto(valor)) return undefined;
+
+  const id = 'id' in valor ? valor.id : 'eventoId' in valor ? valor.eventoId : undefined;
+  return typeof id === 'string' ? id : undefined;
+}
+
 function extrairExportDefault(modulo: unknown): unknown {
   if (!ehObjeto(modulo) || !('default' in modulo)) {
     return undefined;
   }
 
-  return (modulo as ModuloEvento).default;
+  const exportDefault = (modulo as ModuloEvento).default;
+  const id = normalizarId(exportDefault);
+
+  if (!ehObjeto(exportDefault) || id === undefined) {
+    return exportDefault;
+  }
+
+  return {
+    ...exportDefault,
+    id,
+  };
 }
 
 function ehEvento(valor: unknown): valor is Evento {
-  return ehObjeto(valor) && typeof valor.id === 'string';
+  return normalizarId(valor) !== undefined;
 }
 
 export async function carregarTodosEventos(): Promise<readonly Evento[]> {

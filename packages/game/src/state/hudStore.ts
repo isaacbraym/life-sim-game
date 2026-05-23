@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { aplicarEfeito, Effect, type ResultadoEfeito } from '@lifesim/core';
 import type { SaveSlot } from '@lifesim/core';
 import { GameEngine } from '../engine/GameEngine';
 
@@ -26,9 +27,15 @@ type EstadoHud = {
 
 export type OpcaoEvento = {
   readonly texto: string;
+  readonly efeitos: readonly unknown[];
+  readonly atributoCheck?: {
+    readonly atributo: string;
+    readonly dificuldade: number;
+  };
 };
 
 export type EventoAtivo = {
+  readonly eventoId: string;
   readonly titulo: string;
   readonly descricao: string;
   readonly icone: string;
@@ -48,14 +55,15 @@ type AcoesHud = {
 // ---------------------------------------------------------------------------
 
 const EVENTO_MOCK: EventoAtivo = {
+  eventoId: 'mock_promocao',
   titulo: 'Proposta de promoção',
   icone: '💼',
   descricao:
     'Seu gerente te chamou na sala e ofereceu uma promoção — salário 40% maior, mas viagens semanais e menos tempo com a família.',
   opcoes: [
-    { texto: 'Aceitar a promoção' },
-    { texto: 'Negociar condições' },
-    { texto: 'Recusar por ora' },
+    { texto: 'Aceitar a promoção', efeitos: [] },
+    { texto: 'Negociar condições', efeitos: [] },
+    { texto: 'Recusar por ora', efeitos: [] },
   ],
 };
 
@@ -90,9 +98,48 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
   atualizarEstado: (parcial) =>
     set((anterior) => ({ ...anterior, ...parcial })),
 
-  resolverOpcao: (_indice) => {
-    // TODO Sprint 1.7: chamar ChoiceResolver com a opção escolhida
-    set((anterior) => ({ ...anterior, eventoAtivo: undefined }));
+  resolverOpcao: (indice: number) => {
+    const { eventoAtivo, engineAtivo } = get();
+    if (eventoAtivo === undefined) return;
+
+    const opcao = eventoAtivo.opcoes[indice];
+    if (opcao === undefined) return;
+
+    const engine = engineAtivo;
+    if (engine === undefined) {
+      set((anterior) => ({ ...anterior, eventoAtivo: undefined }));
+      return;
+    }
+
+    const saveAtual = engine.obterEstadoAtual();
+    let personagemAtual = saveAtual.protagonista;
+    let rosterAtual = saveAtual.roster;
+
+    for (const efeitoRaw of opcao.efeitos) {
+      const resultado = Effect.safeParse(efeitoRaw);
+      if (!resultado.success) continue;
+
+      const resultadoAplicado: ResultadoEfeito = aplicarEfeito(resultado.data, personagemAtual, rosterAtual);
+      personagemAtual = resultadoAplicado.personagem;
+      rosterAtual = [...resultadoAplicado.roster];
+    }
+
+    // Persistir personagem atualizado via engine (sem método dedicado, atualizamos via campo interno)
+    // TODO Sprint 1.8: expor método engine.aplicarResultadoEfeitos(personagem, roster)
+    set((anterior) => ({
+      ...anterior,
+      eventoAtivo: undefined,
+      humor:    personagemAtual.humorAtual,
+      saude:    personagemAtual.saudeAtual,
+      dinheiro: personagemAtual.dinheiro,
+      atributos: [
+        { nome: 'Força',        valor: personagemAtual.atributos.forca        },
+        { nome: 'Inteligência', valor: personagemAtual.atributos.inteligencia },
+        { nome: 'Carisma',      valor: personagemAtual.atributos.carisma      },
+        { nome: 'Constituição', valor: personagemAtual.atributos.constituicao },
+        { nome: 'Sorte',        valor: personagemAtual.atributos.sorte        },
+      ],
+    }));
   },
 
   avancarSemEvento: () => {
@@ -126,6 +173,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     set({
       eventoAtivo: eventoDoTurno !== undefined
         ? {
+            eventoId:  eventoDoTurno.eventoId,
             titulo:    eventoDoTurno.titulo,
             descricao: eventoDoTurno.descricao,
             icone:     eventoDoTurno.icone,
