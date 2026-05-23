@@ -1,11 +1,4 @@
-export type GameState = {
-  readonly anoNascimento: number;
-  readonly humor: number;
-  readonly saude: number;
-  readonly atributos: Readonly<Record<string, number>>;
-  readonly flags: readonly string[];
-  readonly cooldownRegistry: Readonly<Record<string, number>>;
-};
+import type { EstadoDeJogo } from './EstadoDeJogo';
 
 export type Predicado = unknown;
 
@@ -55,14 +48,13 @@ function ehPredicadoComFilho(predicado: Predicado): predicado is PredicadoComFil
   return ehObjetoPredicado(predicado) && predicado.predicado !== undefined;
 }
 
-function calcularIdade(estadoAtual: GameState, anoAtual: number): number {
-  return anoAtual - estadoAtual.anoNascimento;
+function calcularIdade(estadoAtual: EstadoDeJogo): number {
+  return estadoAtual.anoAtual - estadoAtual.anoNascimento;
 }
 
 export function evaluarPredicado(
   predicado: Predicado,
-  estadoAtual: GameState,
-  anoAtual: number,
+  estadoAtual: EstadoDeJogo,
 ): boolean {
   if (!ehObjetoPredicado(predicado) || typeof predicado.tipo !== 'string') {
     return true;
@@ -70,10 +62,10 @@ export function evaluarPredicado(
 
   switch (predicado.tipo) {
     case 'idade_min':
-      return ehPredicadoComValor(predicado) && calcularIdade(estadoAtual, anoAtual) >= predicado.valor;
+      return ehPredicadoComValor(predicado) && calcularIdade(estadoAtual) >= predicado.valor;
 
     case 'idade_max':
-      return ehPredicadoComValor(predicado) && calcularIdade(estadoAtual, anoAtual) <= predicado.valor;
+      return ehPredicadoComValor(predicado) && calcularIdade(estadoAtual) <= predicado.valor;
 
     case 'atributo_min': {
       if (!ehPredicadoComAtributo(predicado)) return false;
@@ -105,7 +97,7 @@ export function evaluarPredicado(
       return (
         ehPredicadoComLista(predicado) &&
         predicado.predicados.every(predicadoInterno =>
-          evaluarPredicado(predicadoInterno, estadoAtual, anoAtual),
+          evaluarPredicado(predicadoInterno, estadoAtual),
         )
       );
 
@@ -113,12 +105,12 @@ export function evaluarPredicado(
       return (
         ehPredicadoComLista(predicado) &&
         predicado.predicados.some(predicadoInterno =>
-          evaluarPredicado(predicadoInterno, estadoAtual, anoAtual),
+          evaluarPredicado(predicadoInterno, estadoAtual),
         )
       );
 
     case 'not':
-      return ehPredicadoComFilho(predicado) && !evaluarPredicado(predicado.predicado, estadoAtual, anoAtual);
+      return ehPredicadoComFilho(predicado) && !evaluarPredicado(predicado.predicado, estadoAtual);
 
     default:
       return true;

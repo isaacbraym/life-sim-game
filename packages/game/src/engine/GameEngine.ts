@@ -2,6 +2,7 @@ import type { SaveSlot } from '@lifesim/core';
 import { filtrarEventosElegiveis, sortearEvento, EventLoader, RosterDeNpcs, db } from '@lifesim/core';
 // envelhecerRoster não está no barrel de @lifesim/core (NpcAging.ts não foi adicionado ao npc/index.ts)
 import { envelhecerRoster } from '@core/npc/NpcAging';
+import { salvarParaEstadoDeJogo } from '@core/events/EstadoDeJogo';
 
 // ---------------------------------------------------------------------------
 // Tipos públicos
@@ -86,19 +87,11 @@ export class GameEngine {
     // 3. Carregar eventos disponíveis
     const todosEventos = await this.eventLoader.carregarTodos();
 
-    // 4. Converter SaveSlot para o GameState do PredicateEvaluator
-    const estadoParaFiltro = {
-      anoNascimento:    this.saveAtivo.protagonista.dataNascimento.ano,
-      humor:            this.saveAtivo.protagonista.humorAtual,
-      saude:            this.saveAtivo.protagonista.saudeAtual,
-      // Atributos tem campos string → number; cast seguro para Record<string, number>
-      atributos:        this.saveAtivo.protagonista.atributos as Readonly<Record<string, number>>,
-      flags:            this.saveAtivo.protagonista.flags,
-      cooldownRegistry: this.saveAtivo.cooldownRegistry,
-    };
+    // 4. Converter SaveSlot para o estado canônico do motor de eventos
+    const estadoParaFiltro = salvarParaEstadoDeJogo(this.saveAtivo, anoAtual);
 
     // 5. Filtrar eventos elegíveis
-    const elegiveis = filtrarEventosElegiveis(todosEventos, estadoParaFiltro, anoAtual);
+    const elegiveis = filtrarEventosElegiveis(todosEventos, estadoParaFiltro);
 
     // 6. Sortear evento
     const sorteado = sortearEvento(elegiveis);

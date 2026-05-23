@@ -1,40 +1,7 @@
+import type { EstadoDeJogo } from './EstadoDeJogo';
+
 type Predicado = unknown;
-
-type EfeitoHumor = {
-  readonly tipo: 'humor';
-  readonly delta: number;
-};
-
-type EfeitoSaude = {
-  readonly tipo: 'saude';
-  readonly delta: number;
-};
-
-type EfeitoDinheiro = {
-  readonly tipo: 'dinheiro';
-  readonly delta: number;
-};
-
-type EfeitoAtributo = {
-  readonly tipo: 'atributo';
-  readonly atributo: string;
-  readonly delta: number;
-};
-
-type EfeitoCooldown = {
-  readonly tipo: 'cooldown';
-  readonly eventoId: string;
-  readonly anoExpiracao: number;
-};
-
-type EfeitoConhecido =
-  | EfeitoHumor
-  | EfeitoSaude
-  | EfeitoDinheiro
-  | EfeitoAtributo
-  | EfeitoCooldown;
-
-type Efeito = EfeitoConhecido | unknown;
+type Efeito = unknown;
 
 type Choice = {
   readonly texto: string;
@@ -42,14 +9,6 @@ type Choice = {
   readonly condicao?: Predicado;
   readonly eventoId?: string;
   readonly cooldownMeses?: number;
-};
-
-type GameState = {
-  readonly cooldownRegistry: Readonly<Record<string, number>>;
-  readonly humor?: number;
-  readonly saude?: number;
-  readonly dinheiro?: number;
-  readonly atributos?: Readonly<Record<string, number>>;
 };
 
 const VALOR_MINIMO_PERCENTUAL = 0;
@@ -72,19 +31,16 @@ function ehObjeto(valor: unknown): valor is Readonly<Record<string, unknown>> {
   return typeof valor === 'object' && Boolean(valor);
 }
 
-function ehEfeitoHumor(efeito: Efeito): efeito is EfeitoHumor {
-  return ehObjeto(efeito) && efeito.tipo === 'humor' && typeof efeito.delta === 'number';
+function ehEfeitoComDelta(
+  efeito: Efeito,
+  tipo: string,
+): efeito is Readonly<Record<string, unknown>> & { readonly delta: number } {
+  return ehObjeto(efeito) && efeito.tipo === tipo && typeof efeito.delta === 'number';
 }
 
-function ehEfeitoSaude(efeito: Efeito): efeito is EfeitoSaude {
-  return ehObjeto(efeito) && efeito.tipo === 'saude' && typeof efeito.delta === 'number';
-}
-
-function ehEfeitoDinheiro(efeito: Efeito): efeito is EfeitoDinheiro {
-  return ehObjeto(efeito) && efeito.tipo === 'dinheiro' && typeof efeito.delta === 'number';
-}
-
-function ehEfeitoAtributo(efeito: Efeito): efeito is EfeitoAtributo {
+function ehEfeitoAtributo(
+  efeito: Efeito,
+): efeito is Readonly<Record<string, unknown>> & { readonly atributo: string; readonly delta: number } {
   return (
     ehObjeto(efeito) &&
     efeito.tipo === 'atributo' &&
@@ -93,7 +49,9 @@ function ehEfeitoAtributo(efeito: Efeito): efeito is EfeitoAtributo {
   );
 }
 
-function ehEfeitoCooldown(efeito: Efeito): efeito is EfeitoCooldown {
+function ehEfeitoCooldown(
+  efeito: Efeito,
+): efeito is Readonly<Record<string, unknown>> & { readonly eventoId: string; readonly anoExpiracao: number } {
   return (
     ehObjeto(efeito) &&
     efeito.tipo === 'cooldown' &&
@@ -102,25 +60,25 @@ function ehEfeitoCooldown(efeito: Efeito): efeito is EfeitoCooldown {
   );
 }
 
-function aplicarEfeito(estadoAtual: GameState, efeito: Efeito): GameState {
-  if (ehEfeitoHumor(efeito)) {
+function aplicarEfeito(estadoAtual: EstadoDeJogo, efeito: Efeito): EstadoDeJogo {
+  if (ehEfeitoComDelta(efeito, 'humor')) {
     return {
       ...estadoAtual,
-      humor: limitarPercentual(obterNumero(estadoAtual.humor) + efeito.delta),
+      humor: limitarPercentual(estadoAtual.humor + efeito.delta),
     };
   }
 
-  if (ehEfeitoSaude(efeito)) {
+  if (ehEfeitoComDelta(efeito, 'saude')) {
     return {
       ...estadoAtual,
-      saude: limitarPercentual(obterNumero(estadoAtual.saude) + efeito.delta),
+      saude: limitarPercentual(estadoAtual.saude + efeito.delta),
     };
   }
 
-  if (ehEfeitoDinheiro(efeito)) {
+  if (ehEfeitoComDelta(efeito, 'dinheiro')) {
     return {
       ...estadoAtual,
-      dinheiro: obterNumero(estadoAtual.dinheiro) + efeito.delta,
+      dinheiro: estadoAtual.dinheiro + efeito.delta,
     };
   }
 
@@ -129,7 +87,7 @@ function aplicarEfeito(estadoAtual: GameState, efeito: Efeito): GameState {
       ...estadoAtual,
       atributos: {
         ...estadoAtual.atributos,
-        [efeito.atributo]: obterNumero(estadoAtual.atributos?.[efeito.atributo]) + efeito.delta,
+        [efeito.atributo]: obterNumero(estadoAtual.atributos[efeito.atributo]) + efeito.delta,
       },
     };
   }
@@ -149,9 +107,8 @@ function aplicarEfeito(estadoAtual: GameState, efeito: Efeito): GameState {
 
 function aplicarCooldownDaEscolha(
   escolha: Choice,
-  estadoAtual: GameState,
-  anoAtual: number,
-): GameState {
+  estadoAtual: EstadoDeJogo,
+): EstadoDeJogo {
   if (escolha.eventoId === undefined || escolha.cooldownMeses === undefined || escolha.cooldownMeses <= 0) {
     return estadoAtual;
   }
@@ -160,17 +117,16 @@ function aplicarCooldownDaEscolha(
     ...estadoAtual,
     cooldownRegistry: {
       ...estadoAtual.cooldownRegistry,
-      [escolha.eventoId]: calcularAnoExpiracao(anoAtual, escolha.cooldownMeses),
+      [escolha.eventoId]: calcularAnoExpiracao(estadoAtual.anoAtual, escolha.cooldownMeses),
     },
   };
 }
 
 export function resolverEscolha(
   escolha: Choice,
-  estadoAtual: GameState,
-  anoAtual: number,
-): GameState {
-  const estadoComEfeitos = escolha.efeitos.reduce<GameState>(aplicarEfeito, estadoAtual);
+  estadoAtual: EstadoDeJogo,
+): EstadoDeJogo {
+  const estadoComEfeitos = escolha.efeitos.reduce<EstadoDeJogo>(aplicarEfeito, estadoAtual);
 
-  return aplicarCooldownDaEscolha(escolha, estadoComEfeitos, anoAtual);
+  return aplicarCooldownDaEscolha(escolha, estadoComEfeitos);
 }
