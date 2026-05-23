@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import type { SaveSlot } from '@lifesim/core';
+import { GameEngine } from '../engine/GameEngine';
 
 // ---------------------------------------------------------------------------
 // Tipos
@@ -19,6 +21,7 @@ type EstadoHud = {
   readonly dinheiro: number;
   readonly eventoAtivo: EventoAtivo | undefined;
   readonly atributos: readonly AtributoRpg[];
+  readonly engineAtivo: GameEngine | undefined;
 };
 
 export type OpcaoEvento = {
@@ -36,10 +39,12 @@ type AcoesHud = {
   readonly atualizarEstado: (parcial: Partial<EstadoHud>) => void;
   readonly resolverOpcao: (indice: number) => void;
   readonly avancarSemEvento: () => void;
+  readonly inicializarEngine: (save: SaveSlot) => void;
+  readonly avancarTurno: () => Promise<void>;
 };
 
 // ---------------------------------------------------------------------------
-// Mock inicial — substituir por conexão real ao GameState no Sprint 1.6
+// Mock inicial
 // ---------------------------------------------------------------------------
 
 const EVENTO_MOCK: EventoAtivo = {
@@ -72,30 +77,66 @@ const ESTADO_INICIAL: EstadoHud = {
   dinheiro: 3450,
   eventoAtivo: EVENTO_MOCK,
   atributos: ATRIBUTOS_MOCK,
+  engineAtivo: undefined,
 };
 
 // ---------------------------------------------------------------------------
 // Store
 // ---------------------------------------------------------------------------
 
-export const useHudStore = create<EstadoHud & AcoesHud>((set) => ({
+export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
   ...ESTADO_INICIAL,
 
   atualizarEstado: (parcial) =>
     set((anterior) => ({ ...anterior, ...parcial })),
 
   resolverOpcao: (_indice) => {
-    // TODO Sprint 1.6: chamar ChoiceResolver com a opção escolhida
+    // TODO Sprint 1.7: chamar ChoiceResolver com a opção escolhida
     set((anterior) => ({ ...anterior, eventoAtivo: undefined }));
   },
 
   avancarSemEvento: () => {
-    // TODO Sprint 1.6: avançar calendário via GameEngine
+    // Fallback usado quando não há engine ativo
     set((anterior) => ({
       ...anterior,
       idadeAnos: anterior.idadeAnos + 1,
       anoAtual: anterior.anoAtual + 1,
       eventoAtivo: EVENTO_MOCK,
     }));
+  },
+
+  inicializarEngine: (save: SaveSlot) => {
+    const engine = new GameEngine(save);
+    set({ engineAtivo: engine });
+  },
+
+  avancarTurno: async () => {
+    const engine = get().engineAtivo;
+
+    if (engine === undefined) {
+      // Sem engine ativo: usa comportamento mock
+      get().avancarSemEvento();
+      return;
+    }
+
+    const eventoDoTurno = await engine.avancarTurno();
+    const saveAtualizado = engine.obterEstadoAtual();
+    const protagonista = saveAtualizado.protagonista;
+
+    set({
+      eventoAtivo: eventoDoTurno !== undefined
+        ? {
+            titulo:    eventoDoTurno.titulo,
+            descricao: eventoDoTurno.descricao,
+            icone:     eventoDoTurno.icone,
+            opcoes:    eventoDoTurno.opcoes,
+          }
+        : undefined,
+      anoAtual:  saveAtualizado.estadoMundo.anoAtual,
+      idadeAnos: Math.floor(protagonista.idadeAtualMeses / 12),
+      humor:     protagonista.humorAtual,
+      saude:     protagonista.saudeAtual,
+      dinheiro:  protagonista.dinheiro,
+    });
   },
 }));

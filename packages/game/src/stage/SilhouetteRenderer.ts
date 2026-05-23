@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 import { Graphics } from 'pixi.js';
 import {
   gerarPathBraco,
