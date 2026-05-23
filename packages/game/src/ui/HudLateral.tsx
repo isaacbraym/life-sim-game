@@ -1,4 +1,6 @@
 import React from 'react';
+import type { AtributoRpg } from '../state/hudStore';
+import { PainelAtributos } from './PainelAtributos';
 import './HudLateral.css';
 
 // ---------------------------------------------------------------------------
@@ -26,6 +28,7 @@ type PropsHudLateral = {
   readonly humor: number;
   readonly saude: number;
   readonly dinheiro: number;
+  readonly atributos: readonly AtributoRpg[];
   readonly aoClicarAtividade: (idAtividade: string) => void;
 };
 
@@ -83,6 +86,7 @@ export function HudLateral({
   humor,
   saude,
   dinheiro,
+  atributos,
   aoClicarAtividade,
 }: PropsHudLateral): React.JSX.Element {
   return (
@@ -110,6 +114,12 @@ export function HudLateral({
         <div className="hud-dinheiro-rotulo">Dinheiro</div>
         <div className="hud-dinheiro-valor">{formatarDinheiro(dinheiro)}</div>
       </div>
+
+      <div className="hud-divisor" />
+
+      {/* Atributos RPG */}
+      <div className="hud-secao-titulo">Atributos</div>
+      <PainelAtributos atributos={atributos} />
 
       <div className="hud-divisor" />
 

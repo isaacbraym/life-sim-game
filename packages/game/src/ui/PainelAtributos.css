@@ -1,0 +1,69 @@
+.painel-atributos {
+  --surface2:   #1e2332;
+  --border:     #2a3045;
+  --text:       #e8eaf0;
+  --text-muted: #6b7594;
+  --accent:     #5b8dee;
+  --red:        #e05c5c;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+/* ── Card base ── */
+.painel-atrib-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ── Sorte: linha inteira em row ── */
+.painel-atrib-card--sorte {
+  grid-column: span 2;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+}
+
+/* ── Textos ── */
+.painel-atrib-abrev {
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.painel-atrib-valor {
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1;
+}
+
+.painel-atrib-mod {
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* ── Cores do modificador ── */
+.painel-atrib-mod--positivo { color: var(--accent); }
+.painel-atrib-mod--zero     { color: var(--text-muted); }
+.painel-atrib-mod--negativo { color: var(--red); }
+
+/* ── Ajustes Sorte ── */
+.painel-atrib-card--sorte .painel-atrib-abrev { font-size: 10px; }
+.painel-atrib-card--sorte .painel-atrib-valor { font-size: 20px; }
+.painel-atrib-card--sorte .painel-atrib-mod   { font-size: 12px; }

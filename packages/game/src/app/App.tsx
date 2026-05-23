@@ -13,6 +13,7 @@ export function App(): React.JSX.Element {
     humor,
     saude,
     dinheiro,
+    atributos,
     eventoAtivo,
     resolverOpcao,
     avancarSemEvento,
@@ -41,6 +42,7 @@ export function App(): React.JSX.Element {
         humor={humor}
         saude={saude}
         dinheiro={dinheiro}
+        atributos={atributos}
         aoClicarAtividade={aoClicarAtividade}
       />
 

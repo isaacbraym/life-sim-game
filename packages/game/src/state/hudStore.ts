@@ -4,6 +4,11 @@ import { create } from 'zustand';
 // Tipos
 // ---------------------------------------------------------------------------
 
+export type AtributoRpg = {
+  readonly nome: string;
+  readonly valor: number;
+};
+
 type EstadoHud = {
   readonly nomePersonagem: string;
   readonly profissaoAtual: string;
@@ -13,6 +18,7 @@ type EstadoHud = {
   readonly saude: number;
   readonly dinheiro: number;
   readonly eventoAtivo: EventoAtivo | undefined;
+  readonly atributos: readonly AtributoRpg[];
 };
 
 export type OpcaoEvento = {
@@ -48,6 +54,14 @@ const EVENTO_MOCK: EventoAtivo = {
   ],
 };
 
+const ATRIBUTOS_MOCK: readonly AtributoRpg[] = [
+  { nome: 'Força',        valor: 8  },
+  { nome: 'Inteligência', valor: 14 },
+  { nome: 'Carisma',      valor: 12 },
+  { nome: 'Constituição', valor: 11 },
+  { nome: 'Sorte',        valor: 16 },
+];
+
 const ESTADO_INICIAL: EstadoHud = {
   nomePersonagem: 'Lucas Mendes',
   profissaoAtual: 'Analista Financeiro',
@@ -57,6 +71,7 @@ const ESTADO_INICIAL: EstadoHud = {
   saude: 82,
   dinheiro: 3450,
   eventoAtivo: EVENTO_MOCK,
+  atributos: ATRIBUTOS_MOCK,
 };
 
 // ---------------------------------------------------------------------------
