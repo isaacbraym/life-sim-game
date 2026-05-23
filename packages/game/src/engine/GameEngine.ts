@@ -94,7 +94,7 @@ export class GameEngine {
       // Atributos tem campos string → number; cast seguro para Record<string, number>
       atributos:        this.saveAtivo.protagonista.atributos as Readonly<Record<string, number>>,
       flags:            this.saveAtivo.protagonista.flags,
-      cooldownRegistry: {} as Readonly<Record<string, number>>, // TODO Sprint 1.7: mapear do save
+      cooldownRegistry: this.saveAtivo.cooldownRegistry,
     };
 
     // 5. Filtrar eventos elegíveis
@@ -129,6 +129,16 @@ export class GameEngine {
 
   obterEstadoAtual(): SaveSlot {
     return this.saveAtivo;
+  }
+
+  registrarCooldown(eventoId: string, anoExpiracao: number): void {
+    this.saveAtivo = {
+      ...this.saveAtivo,
+      cooldownRegistry: {
+        ...this.saveAtivo.cooldownRegistry,
+        [eventoId]: anoExpiracao,
+      },
+    };
   }
 
   async salvar(): Promise<void> {
