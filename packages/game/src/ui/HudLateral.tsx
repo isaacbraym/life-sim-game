@@ -30,6 +30,7 @@ type PropsHudLateral = {
   readonly dinheiro: number;
   readonly atributos: readonly AtributoRpg[];
   readonly aoClicarAtividade: (idAtividade: string) => void;
+  readonly aoNovoJogo?: () => void;
 };
 
 // ---------------------------------------------------------------------------
@@ -88,9 +89,17 @@ export function HudLateral({
   dinheiro,
   atributos,
   aoClicarAtividade,
+  aoNovoJogo,
 }: PropsHudLateral): React.JSX.Element {
   return (
     <aside className="hud-lateral" aria-label="Status do personagem">
+
+      {/* Novo Jogo — botão temporário */}
+      {aoNovoJogo !== undefined && (
+        <button className="hud-novo-jogo-btn" onClick={aoNovoJogo}>
+          + Novo Jogo
+        </button>
+      )}
 
       {/* Identidade */}
       <div className="hud-identidade">
