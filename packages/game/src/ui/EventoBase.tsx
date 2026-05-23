@@ -1,5 +1,6 @@
 import React from 'react';
 import type { EventoAtivo } from '../state/hudStore';
+import { useHudStore } from '../state/hudStore';
 import './EventoBase.css';
 
 // ---------------------------------------------------------------------------
@@ -9,7 +10,6 @@ import './EventoBase.css';
 type PropsEventoBase = {
   readonly evento: EventoAtivo | undefined;
   readonly aoEscolher: (indice: number) => void;
-  readonly aoAvancar: () => void;
 };
 
 // ---------------------------------------------------------------------------
@@ -19,12 +19,13 @@ type PropsEventoBase = {
 export function EventoBase({
   evento,
   aoEscolher,
-  aoAvancar,
 }: PropsEventoBase): React.JSX.Element {
+  const avancarTurno = useHudStore((s) => s.avancarTurno);
+
   if (evento === undefined) {
     return (
       <div className="evento-base evento-base--vazio">
-        <button className="evento-btn-avancar" onClick={aoAvancar}>
+        <button className="evento-btn-avancar" onClick={() => { void avancarTurno(); }}>
           Avançar →
         </button>
       </div>
@@ -53,7 +54,7 @@ export function EventoBase({
 
         <button
           className="evento-btn-avancar"
-          onClick={aoAvancar}
+          onClick={() => { void avancarTurno(); }}
           aria-label="Avançar sem tomar decisão"
         >
           Avançar →

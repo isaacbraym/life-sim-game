@@ -16,7 +16,6 @@ export function App(): React.JSX.Element {
     atributos,
     eventoAtivo,
     resolverOpcao,
-    avancarSemEvento,
   } = useHudStore();
 
   function aoClicarAtividade(idAtividade: string): void {
@@ -62,7 +61,6 @@ export function App(): React.JSX.Element {
         <EventoBase
           evento={eventoAtivo}
           aoEscolher={resolverOpcao}
-          aoAvancar={avancarSemEvento}
         />
       </div>
     </div>
