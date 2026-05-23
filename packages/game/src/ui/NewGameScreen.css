@@ -1,0 +1,296 @@
+.ng-tela {
+  --bg:         #0f1117;
+  --surface:    #181c25;
+  --surface2:   #1e2332;
+  --border:     #2a3045;
+  --text:       #e8eaf0;
+  --text-muted: #6b7594;
+  --accent:     #5b8dee;
+  --red:        #e05c5c;
+
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 40px 16px;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  z-index: 100;
+}
+
+/* ── Card central ── */
+.ng-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.ng-titulo {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Seção ── */
+.ng-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ng-secao-titulo {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.ng-secao-titulo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Inputs ── */
+.ng-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ng-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ng-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.ng-input {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.ng-input:focus {
+  border-color: var(--accent);
+}
+
+.ng-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.45;
+}
+
+.ng-erro {
+  font-size: 12px;
+  color: var(--red);
+  margin: 0;
+}
+
+/* ── Toggle gênero ── */
+.ng-toggle-grupo {
+  display: flex;
+  gap: 8px;
+}
+
+.ng-toggle-btn {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.ng-toggle-btn:hover:not(.ng-toggle-btn--ativo) {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.ng-toggle-btn--ativo {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+/* ── Ritmo ── */
+.ng-ritmo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ng-ritmo-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 11px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.ng-ritmo-btn:hover:not(.ng-ritmo-btn--ativo) {
+  border-color: var(--accent);
+}
+
+.ng-ritmo-btn--ativo {
+  background: rgba(91, 141, 238, 0.1);
+  border-color: var(--accent);
+}
+
+.ng-ritmo-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ng-ritmo-btn--ativo .ng-ritmo-nome {
+  color: var(--accent);
+}
+
+.ng-ritmo-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── Rolar atributos ── */
+.ng-rolar-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.ng-rolar-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* ── Grid de atributos ── */
+.ng-atrib-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ng-atrib-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.ng-atrib-nome {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.ng-atrib-valor {
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.ng-atrib-mod {
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ── Ações ── */
+.ng-acoes {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+.ng-btn-cancelar {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.ng-btn-cancelar:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.ng-btn-comecar {
+  padding: 10px 28px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.ng-btn-comecar:hover:not(:disabled) {
+  background: #6d9cf0;
+  border-color: #6d9cf0;
+}
+
+.ng-btn-comecar:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

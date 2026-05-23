@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PixiStage } from '../stage/PixiStage';
 import { HudLateral } from '../ui/HudLateral';
 import { EventoBase } from '../ui/EventoBase';
+import { NewGameScreen } from '../ui/NewGameScreen';
+import type { DadosNovoPersonagem } from '../ui/NewGameScreen';
 import { useHudStore } from '../state/hudStore';
 
 export function App(): React.JSX.Element {
+  const [telaAtual, setTelaAtual] = useState<'jogo' | 'novo_personagem'>('jogo');
+
   const {
     nomePersonagem,
     profissaoAtual,
@@ -21,6 +25,21 @@ export function App(): React.JSX.Element {
   function aoClicarAtividade(idAtividade: string): void {
     // TODO Sprint 1.6: conectar ao ActivityEngine
     console.log('Atividade selecionada:', idAtividade);
+  }
+
+  function aoConfirmarNovoPersonagem(dados: DadosNovoPersonagem): void {
+    // TODO Sprint 1.7: inicializar GameEngine com save gerado a partir de dados
+    console.log('Novo personagem:', dados);
+    setTelaAtual('jogo');
+  }
+
+  if (telaAtual === 'novo_personagem') {
+    return (
+      <NewGameScreen
+        aoConfirmar={aoConfirmarNovoPersonagem}
+        aoCancelar={() => setTelaAtual('jogo')}
+      />
+    );
   }
 
   return (
@@ -43,6 +62,7 @@ export function App(): React.JSX.Element {
         dinheiro={dinheiro}
         atributos={atributos}
         aoClicarAtividade={aoClicarAtividade}
+        aoNovoJogo={() => setTelaAtual('novo_personagem')}
       />
 
       <div
