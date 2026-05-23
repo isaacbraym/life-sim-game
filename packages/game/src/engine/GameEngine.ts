@@ -7,12 +7,26 @@ import { envelhecerRoster } from '@core/npc/NpcAging';
 // Tipos públicos
 // ---------------------------------------------------------------------------
 
+export type EfeitoOpcaoDoTurno = {
+  readonly tipo: string;
+  readonly [chave: string]: unknown;
+};
+
+export type OpcaoDoTurno = {
+  readonly texto: string;
+  readonly efeitos: readonly EfeitoOpcaoDoTurno[];
+  readonly atributoCheck?: {
+    readonly atributo: string;
+    readonly dificuldade: number;
+  };
+};
+
 export type EventoDoTurno = {
   readonly eventoId: string;
   readonly titulo: string;
   readonly descricao: string;
   readonly icone: string;
-  readonly opcoes: readonly { readonly texto: string }[];
+  readonly opcoes: readonly OpcaoDoTurno[];
 };
 
 // ---------------------------------------------------------------------------
@@ -80,7 +94,7 @@ export class GameEngine {
       // Atributos tem campos string → number; cast seguro para Record<string, number>
       atributos:        this.saveAtivo.protagonista.atributos as Readonly<Record<string, number>>,
       flags:            this.saveAtivo.protagonista.flags,
-      cooldownRegistry: {} as Readonly<Record<string, number>>, // TODO Sprint 1.7: mapear do save
+      cooldownRegistry: this.saveAtivo.cooldownRegistry,
     };
 
     // 5. Filtrar eventos elegíveis
@@ -98,17 +112,33 @@ export class GameEngine {
     const eventoCompleto = todosEventos.find(e => e.id === sorteado.id);
     if (eventoCompleto === undefined) return undefined;
 
+    const opcoesComEfeitos: OpcaoDoTurno[] = (eventoCompleto.opcoes ?? []).map(opcao => ({
+      texto:         opcao.texto,
+      efeitos:       opcao.efeitos ?? [],
+      atributoCheck: opcao.atributoCheck,
+    }));
+
     return {
       eventoId:  eventoCompleto.id,
       titulo:    eventoCompleto.titulo    ?? eventoCompleto.id,
       descricao: eventoCompleto.descricao ?? '',
       icone:     eventoCompleto.icone     ?? '❓',
-      opcoes:    eventoCompleto.opcoes    ?? [],
+      opcoes:    opcoesComEfeitos,
     };
   }
 
   obterEstadoAtual(): SaveSlot {
     return this.saveAtivo;
+  }
+
+  registrarCooldown(eventoId: string, anoExpiracao: number): void {
+    this.saveAtivo = {
+      ...this.saveAtivo,
+      cooldownRegistry: {
+        ...this.saveAtivo.cooldownRegistry,
+        [eventoId]: anoExpiracao,
+      },
+    };
   }
 
   async salvar(): Promise<void> {

@@ -1,0 +1,2407 @@
+﻿// Vida 2.5D | Package: core | Gerado: 23/05/2026 17:46
+
+// == CONFIGS ==
+
+// --- package.json [packages\core\package.json] ---
+{
+  "name": "@lifesim/core",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dexie": "^4.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}
+
+
+// --- tsconfig.json [packages\core\tsconfig.json] ---
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@core/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}
+
+// == CODIGO FONTE [48 arquivos] ==
+
+// --- AplicadorEfeitos.ts [packages\core\src\engine\AplicadorEfeitos.ts] ---
+import type { Character } from '../schemas/character';
+import type { Effect } from '../schemas/effect';
+import type { Npc } from '../schemas/npc';
+
+export type ResultadoEfeito = {
+  readonly personagem: Character;
+  readonly roster: readonly Npc[];
+};
+
+function limitarValor(valor: number, minimo: number, maximo: number): number {
+  return Math.min(maximo, Math.max(minimo, valor));
+}
+
+function atualizarRelacionamentoNpc(npc: Npc, delta: number): Npc {
+  return {
+    ...npc,
+    relacionamentoComJogador: {
+      ...npc.relacionamentoComJogador,
+      afeto: limitarValor(npc.relacionamentoComJogador.afeto + delta, -100, 100),
+    },
+  };
+}
+
+function matarNpc(npc: Npc, causa: string): Npc {
+  return {
+    ...npc,
+    vivo: false,
+    dataMorte: {
+      ano: 0,
+      mes: 1,
+      causa,
+    },
+  };
+}
+
+export function aplicarEfeito(
+  efeito: Effect,
+  personagem: Character,
+  roster: readonly Npc[],
+): ResultadoEfeito {
+  switch (efeito.tipo) {
+    case 'alterar_atributo':
+      return {
+        personagem: {
+          ...personagem,
+          atributos: {
+            ...personagem.atributos,
+            [efeito.atributo]: limitarValor(personagem.atributos[efeito.atributo] + efeito.delta, 1, 20),
+          },
+        },
+        roster,
+      };
+
+    case 'alterar_dinheiro':
+      return {
+        personagem: {
+          ...personagem,
+          dinheiro: personagem.dinheiro + efeito.delta,
+        },
+        roster,
+      };
+
+    case 'adicionar_flag':
+      return {
+        personagem: personagem.flags.includes(efeito.flag)
+          ? personagem
+          : {
+              ...personagem,
+              flags: [...personagem.flags, efeito.flag],
+            },
+        roster,
+      };
+
+    case 'remover_flag':
+      return {
+        personagem: {
+          ...personagem,
+          flags: personagem.flags.filter(flagAtual => flagAtual !== efeito.flag),
+        },
+        roster,
+      };
+
+    case 'alterar_relacionamento':
+      return {
+        personagem,
+        roster: roster.map(npc =>
+          npc.npcId === efeito.npcId ? atualizarRelacionamentoNpc(npc, efeito.delta) : npc,
+        ),
+      };
+
+    case 'matar_npc':
+      return {
+        personagem,
+        roster: roster.map(npc => (npc.npcId === efeito.npcId ? matarNpc(npc, efeito.causa) : npc)),
+      };
+
+    case 'mudar_profissao':
+      return {
+        personagem: {
+          ...personagem,
+          profissaoAtual: efeito.profissao,
+          salarioMensal: efeito.salario ?? personagem.salarioMensal,
+        },
+        roster,
+      };
+
+    case 'alterar_saude':
+      return {
+        personagem: {
+          ...personagem,
+          saudeAtual: limitarValor(personagem.saudeAtual + efeito.delta, 0, 100),
+        },
+        roster,
+      };
+
+    case 'alterar_humor':
+      return {
+        personagem: {
+          ...personagem,
+          humorAtual: limitarValor(personagem.humorAtual + efeito.delta, 0, 100),
+        },
+        roster,
+      };
+
+    case 'aplicar_status':
+    case 'disparar_evento':
+      return {
+        personagem,
+        roster,
+      };
+  }
+}
+
+
+// --- index.ts [packages\core\src\engine\index.ts] ---
+export * from './AplicadorEfeitos';
+
+
+// --- ChoiceResolver.ts [packages\core\src\events\ChoiceResolver.ts] ---
+type Predicado = unknown;
+
+type EfeitoHumor = {
+  readonly tipo: 'humor';
+  readonly delta: number;
+};
+
+type EfeitoSaude = {
+  readonly tipo: 'saude';
+  readonly delta: number;
+};
+
+type EfeitoDinheiro = {
+  readonly tipo: 'dinheiro';
+  readonly delta: number;
+};
+
+type EfeitoAtributo = {
+  readonly tipo: 'atributo';
+  readonly atributo: string;
+  readonly delta: number;
+};
+
+type EfeitoCooldown = {
+  readonly tipo: 'cooldown';
+  readonly eventoId: string;
+  readonly anoExpiracao: number;
+};
+
+type EfeitoConhecido =
+  | EfeitoHumor
+  | EfeitoSaude
+  | EfeitoDinheiro
+  | EfeitoAtributo
+  | EfeitoCooldown;
+
+type Efeito = EfeitoConhecido | unknown;
+
+type Choice = {
+  readonly texto: string;
+  readonly efeitos: readonly Efeito[];
+  readonly condicao?: Predicado;
+  readonly eventoId?: string;
+  readonly cooldownMeses?: number;
+};
+
+type GameState = {
+  readonly cooldownRegistry: Readonly<Record<string, number>>;
+  readonly humor?: number;
+  readonly saude?: number;
+  readonly dinheiro?: number;
+  readonly atributos?: Readonly<Record<string, number>>;
+};
+
+const VALOR_MINIMO_PERCENTUAL = 0;
+const VALOR_MAXIMO_PERCENTUAL = 100;
+const MESES_POR_ANO = 12;
+
+function limitarPercentual(valor: number): number {
+  return Math.min(VALOR_MAXIMO_PERCENTUAL, Math.max(VALOR_MINIMO_PERCENTUAL, valor));
+}
+
+function obterNumero(valor: unknown): number {
+  return typeof valor === 'number' ? valor : 0;
+}
+
+function calcularAnoExpiracao(anoAtual: number, cooldownMeses: number): number {
+  return anoAtual + Math.ceil(cooldownMeses / MESES_POR_ANO);
+}
+
+function ehObjeto(valor: unknown): valor is Readonly<Record<string, unknown>> {
+  return typeof valor === 'object' && Boolean(valor);
+}
+
+function ehEfeitoHumor(efeito: Efeito): efeito is EfeitoHumor {
+  return ehObjeto(efeito) && efeito.tipo === 'humor' && typeof efeito.delta === 'number';
+}
+
+function ehEfeitoSaude(efeito: Efeito): efeito is EfeitoSaude {
+  return ehObjeto(efeito) && efeito.tipo === 'saude' && typeof efeito.delta === 'number';
+}
+
+function ehEfeitoDinheiro(efeito: Efeito): efeito is EfeitoDinheiro {
+  return ehObjeto(efeito) && efeito.tipo === 'dinheiro' && typeof efeito.delta === 'number';
+}
+
+function ehEfeitoAtributo(efeito: Efeito): efeito is EfeitoAtributo {
+  return (
+    ehObjeto(efeito) &&
+    efeito.tipo === 'atributo' &&
+    typeof efeito.atributo === 'string' &&
+    typeof efeito.delta === 'number'
+  );
+}
+
+function ehEfeitoCooldown(efeito: Efeito): efeito is EfeitoCooldown {
+  return (
+    ehObjeto(efeito) &&
+    efeito.tipo === 'cooldown' &&
+    typeof efeito.eventoId === 'string' &&
+    typeof efeito.anoExpiracao === 'number'
+  );
+}
+
+function aplicarEfeito(estadoAtual: GameState, efeito: Efeito): GameState {
+  if (ehEfeitoHumor(efeito)) {
+    return {
+      ...estadoAtual,
+      humor: limitarPercentual(obterNumero(estadoAtual.humor) + efeito.delta),
+    };
+  }
+
+  if (ehEfeitoSaude(efeito)) {
+    return {
+      ...estadoAtual,
+      saude: limitarPercentual(obterNumero(estadoAtual.saude) + efeito.delta),
+    };
+  }
+
+  if (ehEfeitoDinheiro(efeito)) {
+    return {
+      ...estadoAtual,
+      dinheiro: obterNumero(estadoAtual.dinheiro) + efeito.delta,
+    };
+  }
+
+  if (ehEfeitoAtributo(efeito)) {
+    return {
+      ...estadoAtual,
+      atributos: {
+        ...estadoAtual.atributos,
+        [efeito.atributo]: obterNumero(estadoAtual.atributos?.[efeito.atributo]) + efeito.delta,
+      },
+    };
+  }
+
+  if (ehEfeitoCooldown(efeito)) {
+    return {
+      ...estadoAtual,
+      cooldownRegistry: {
+        ...estadoAtual.cooldownRegistry,
+        [efeito.eventoId]: efeito.anoExpiracao,
+      },
+    };
+  }
+
+  return estadoAtual;
+}
+
+function aplicarCooldownDaEscolha(
+  escolha: Choice,
+  estadoAtual: GameState,
+  anoAtual: number,
+): GameState {
+  if (escolha.eventoId === undefined || escolha.cooldownMeses === undefined || escolha.cooldownMeses <= 0) {
+    return estadoAtual;
+  }
+
+  return {
+    ...estadoAtual,
+    cooldownRegistry: {
+      ...estadoAtual.cooldownRegistry,
+      [escolha.eventoId]: calcularAnoExpiracao(anoAtual, escolha.cooldownMeses),
+    },
+  };
+}
+
+export function resolverEscolha(
+  escolha: Choice,
+  estadoAtual: GameState,
+  anoAtual: number,
+): GameState {
+  const estadoComEfeitos = escolha.efeitos.reduce<GameState>(aplicarEfeito, estadoAtual);
+
+  return aplicarCooldownDaEscolha(escolha, estadoComEfeitos, anoAtual);
+}
+
+
+// --- EventLoader.ts [packages\core\src\events\EventLoader.ts] ---
+declare global {
+  interface ImportMeta {
+    glob(padrao: string, opcoes: { readonly eager: true }): Record<string, unknown>;
+  }
+}
+
+type Evento = {
+  readonly id: string;
+  readonly faseDaVida?: string;
+  readonly condicao?: unknown;
+  readonly triggers?: {
+    readonly uniqueOnce?: boolean;
+    readonly cooldownMeses?: number;
+    readonly peso?: number;
+  };
+  readonly titulo?: string;
+  readonly descricao?: string;
+  readonly icone?: string;
+  readonly opcoes?: readonly { readonly texto: string }[];
+};
+
+type ModuloEvento = {
+  readonly default: unknown;
+};
+
+const modulosDeEventos = import.meta.glob('/content/events/**/*.json', { eager: true });
+
+function ehObjeto(valor: unknown): valor is Readonly<Record<string, unknown>> {
+  return typeof valor === 'object' && Boolean(valor);
+}
+
+function extrairExportDefault(modulo: unknown): unknown {
+  if (!ehObjeto(modulo) || !('default' in modulo)) {
+    return undefined;
+  }
+
+  return (modulo as ModuloEvento).default;
+}
+
+function ehEvento(valor: unknown): valor is Evento {
+  return ehObjeto(valor) && typeof valor.id === 'string';
+}
+
+export async function carregarTodosEventos(): Promise<readonly Evento[]> {
+  const eventos: Evento[] = [];
+  let descartados = 0;
+
+  for (const modulo of Object.values(modulosDeEventos)) {
+    const candidato = extrairExportDefault(modulo);
+
+    if (ehEvento(candidato)) {
+      eventos.push(candidato);
+    } else {
+      descartados += 1;
+    }
+  }
+
+  if (descartados > 0) {
+    console.warn(`EventLoader descartou ${descartados} evento(s) sem id string.`);
+  }
+
+  return eventos;
+}
+
+export class EventLoader {
+  carregarTodos(): Promise<readonly Evento[]> {
+    return carregarTodosEventos();
+  }
+}
+
+
+// --- EventPool.ts [packages\core\src\events\EventPool.ts] ---
+import { evaluarPredicado, type GameState, type Predicado } from './PredicateEvaluator';
+
+type FaseDaVida = 'infancia' | 'adolescencia' | 'jovem_adulto' | 'adulto';
+
+export type Evento = {
+  readonly id: string;
+  readonly faseDaVida?: string;
+  readonly condicao?: Predicado;
+  readonly triggers?: {
+    readonly uniqueOnce?: boolean;
+    readonly cooldownMeses?: number;
+  };
+};
+
+type EventoSorteavel = Evento & {
+  readonly triggers?: Evento['triggers'] & {
+    readonly peso?: number;
+  };
+};
+
+function calcularIdade(estadoAtual: GameState, anoAtual: number): number {
+  return anoAtual - estadoAtual.anoNascimento;
+}
+
+function resolverFaseDaVida(idadeAtual: number): FaseDaVida {
+  if (idadeAtual <= 12) return 'infancia';
+  if (idadeAtual <= 17) return 'adolescencia';
+  if (idadeAtual <= 24) return 'jovem_adulto';
+
+  return 'adulto';
+}
+
+function registroExiste(registro: Readonly<Record<string, number>>, chave: string): boolean {
+  return Object.prototype.hasOwnProperty.call(registro, chave);
+}
+
+function eventoPassaUniqueOnce(evento: Evento, estadoAtual: GameState): boolean {
+  if (evento.triggers?.uniqueOnce !== true) return true;
+
+  return !registroExiste(estadoAtual.cooldownRegistry, evento.id);
+}
+
+function eventoPassaCooldown(evento: Evento, estadoAtual: GameState, anoAtual: number): boolean {
+  const anoExpiracao = estadoAtual.cooldownRegistry[evento.id];
+
+  return anoExpiracao === undefined || anoExpiracao <= anoAtual;
+}
+
+function eventoPassaFaseDaVida(evento: Evento, faseAtual: FaseDaVida): boolean {
+  return evento.faseDaVida === undefined || evento.faseDaVida === faseAtual;
+}
+
+function eventoPassaCondicao(evento: Evento, estadoAtual: GameState, anoAtual: number): boolean {
+  return evento.condicao === undefined || evaluarPredicado(evento.condicao, estadoAtual, anoAtual);
+}
+
+export function filtrarEventosElegiveis(
+  todosEventos: readonly Evento[],
+  estadoAtual: GameState,
+  anoAtual: number,
+): readonly Evento[] {
+  const faseAtual = resolverFaseDaVida(calcularIdade(estadoAtual, anoAtual));
+
+  return todosEventos.filter(evento => {
+    if (!eventoPassaUniqueOnce(evento, estadoAtual)) return false;
+    if (!eventoPassaCooldown(evento, estadoAtual, anoAtual)) return false;
+    if (!eventoPassaFaseDaVida(evento, faseAtual)) return false;
+    if (!eventoPassaCondicao(evento, estadoAtual, anoAtual)) return false;
+
+    return true;
+  });
+}
+
+export function sortearEvento(
+  eventosFiltrados: readonly EventoSorteavel[],
+  geradorAleatorio: () => number = Math.random,
+): EventoSorteavel | undefined {
+  if (eventosFiltrados.length === 0) return undefined;
+
+  const totalPeso = eventosFiltrados.reduce(
+    (soma, evento) => soma + (evento.triggers?.peso ?? 1),
+    0,
+  );
+  const pontoAleatorio = geradorAleatorio() * totalPeso;
+
+  let acumulado = 0;
+  for (const evento of eventosFiltrados) {
+    acumulado += evento.triggers?.peso ?? 1;
+    if (pontoAleatorio <= acumulado) return evento;
+  }
+
+  return eventosFiltrados.at(-1);
+}
+
+
+// --- index.ts [packages\core\src\events\index.ts] ---
+export * from './EventLoader';
+export * from './PredicateEvaluator';
+export * from './EventPool';
+export * from './ChoiceResolver';
+
+
+// --- PredicateEvaluator.ts [packages\core\src\events\PredicateEvaluator.ts] ---
+export type GameState = {
+  readonly anoNascimento: number;
+  readonly humor: number;
+  readonly saude: number;
+  readonly atributos: Readonly<Record<string, number>>;
+  readonly flags: readonly string[];
+  readonly cooldownRegistry: Readonly<Record<string, number>>;
+};
+
+export type Predicado = unknown;
+
+type ObjetoPredicado = Readonly<Record<string, unknown>>;
+
+type PredicadoComValor = ObjetoPredicado & {
+  readonly valor: number;
+};
+
+type PredicadoComAtributo = PredicadoComValor & {
+  readonly atributo: string;
+};
+
+type PredicadoComFlag = ObjetoPredicado & {
+  readonly flag: string;
+};
+
+type PredicadoComLista = ObjetoPredicado & {
+  readonly predicados: readonly Predicado[];
+};
+
+type PredicadoComFilho = ObjetoPredicado & {
+  readonly predicado: Predicado;
+};
+
+function ehObjetoPredicado(predicado: Predicado): predicado is ObjetoPredicado {
+  return typeof predicado === 'object' && Boolean(predicado);
+}
+
+function ehPredicadoComValor(predicado: Predicado): predicado is PredicadoComValor {
+  return ehObjetoPredicado(predicado) && typeof predicado.valor === 'number';
+}
+
+function ehPredicadoComAtributo(predicado: Predicado): predicado is PredicadoComAtributo {
+  return ehPredicadoComValor(predicado) && typeof predicado.atributo === 'string';
+}
+
+function ehPredicadoComFlag(predicado: Predicado): predicado is PredicadoComFlag {
+  return ehObjetoPredicado(predicado) && typeof predicado.flag === 'string';
+}
+
+function ehPredicadoComLista(predicado: Predicado): predicado is PredicadoComLista {
+  return ehObjetoPredicado(predicado) && Array.isArray(predicado.predicados);
+}
+
+function ehPredicadoComFilho(predicado: Predicado): predicado is PredicadoComFilho {
+  return ehObjetoPredicado(predicado) && predicado.predicado !== undefined;
+}
+
+function calcularIdade(estadoAtual: GameState, anoAtual: number): number {
+  return anoAtual - estadoAtual.anoNascimento;
+}
+
+export function evaluarPredicado(
+  predicado: Predicado,
+  estadoAtual: GameState,
+  anoAtual: number,
+): boolean {
+  if (!ehObjetoPredicado(predicado) || typeof predicado.tipo !== 'string') {
+    return true;
+  }
+
+  switch (predicado.tipo) {
+    case 'idade_min':
+      return ehPredicadoComValor(predicado) && calcularIdade(estadoAtual, anoAtual) >= predicado.valor;
+
+    case 'idade_max':
+      return ehPredicadoComValor(predicado) && calcularIdade(estadoAtual, anoAtual) <= predicado.valor;
+
+    case 'atributo_min': {
+      if (!ehPredicadoComAtributo(predicado)) return false;
+
+      const valorAtributo = estadoAtual.atributos[predicado.atributo];
+      return valorAtributo !== undefined && valorAtributo >= predicado.valor;
+    }
+
+    case 'atributo_max': {
+      if (!ehPredicadoComAtributo(predicado)) return false;
+
+      const valorAtributo = estadoAtual.atributos[predicado.atributo];
+      return valorAtributo !== undefined && valorAtributo <= predicado.valor;
+    }
+
+    case 'humor_min':
+      return ehPredicadoComValor(predicado) && estadoAtual.humor >= predicado.valor;
+
+    case 'saude_min':
+      return ehPredicadoComValor(predicado) && estadoAtual.saude >= predicado.valor;
+
+    case 'flag_ativo':
+      return ehPredicadoComFlag(predicado) && estadoAtual.flags.includes(predicado.flag);
+
+    case 'flag_ausente':
+      return ehPredicadoComFlag(predicado) && !estadoAtual.flags.includes(predicado.flag);
+
+    case 'and':
+      return (
+        ehPredicadoComLista(predicado) &&
+        predicado.predicados.every(predicadoInterno =>
+          evaluarPredicado(predicadoInterno, estadoAtual, anoAtual),
+        )
+      );
+
+    case 'or':
+      return (
+        ehPredicadoComLista(predicado) &&
+        predicado.predicados.some(predicadoInterno =>
+          evaluarPredicado(predicadoInterno, estadoAtual, anoAtual),
+        )
+      );
+
+    case 'not':
+      return ehPredicadoComFilho(predicado) && !evaluarPredicado(predicado.predicado, estadoAtual, anoAtual);
+
+    default:
+      return true;
+  }
+}
+
+export const avaliarPredicado = evaluarPredicado;
+
+
+// --- FABRIK.ts [packages\core\src\ik\FABRIK.ts] ---
+import type { Ponto } from '../rig/Joint';
+
+// TODO: implementar FABRIK iterativo
+export function resolverFABRIK(
+  _joints: Ponto[],
+  _comprimentos: number[],
+  _alvo: Ponto,
+  _maxIteracoes: number,
+  _tolerancia: number,
+): Ponto[] {
+  throw new Error('not implemented');
+}
+
+
+// --- index.ts [packages\core\src\ik\index.ts] ---
+export * from './TwoBoneIK';
+export * from './FABRIK';
+
+
+// --- TwoBoneIK.ts [packages\core\src\ik\TwoBoneIK.ts] ---
+import type { Ponto } from '../rig/Joint';
+
+export type ResultadoIK = {
+  readonly anguloSuperior: number;
+  readonly anguloInferior: number;
+};
+
+// TODO: implementar solver analítico via lei dos cossenos
+export function resolverTwoBoneIK(
+  _origem: Ponto,
+  _alvo: Ponto,
+  _comprimentoSuperior: number,
+  _comprimentoInferior: number,
+  _direcaoDobra: -1 | 1,
+  _limites: { readonly flexaoMin: number; readonly flexaoMax: number },
+): ResultadoIK {
+  throw new Error('not implemented');
+}
+
+
+// --- index.ts [packages\core\src\index.ts] ---
+export * from './schemas';
+export * from './rig';
+export * from './ik';
+export * from './events';
+export * from './rpg';
+export * from './npc';
+export * from './persistence';
+export * from './render';
+
+export const VERSAO_CORE = '0.0.1';
+
+export * from './engine';
+
+
+// --- Aging.ts [packages\core\src\npc\Aging.ts] ---
+import type { Npc } from '../schemas/npc';
+
+// TODO: aplicar envelhecimento visual e físico ao NPC
+export function aplicarEnvelhecimento(_npc: Npc, _anoAtual: number): Npc {
+  throw new Error('not implemented');
+}
+
+
+// --- index.ts [packages\core\src\npc\index.ts] ---
+export * from './NpcRoster';
+export * from './NpcAging';
+export * from './NpcGenerator';
+export * from './NpcMatcher';
+export * from './Aging';
+
+
+// --- NpcAging.ts [packages\core\src\npc\NpcAging.ts] ---
+import type { Npc } from '../schemas/npc';
+
+export type ResultadoEnvelhecimento = {
+  readonly npc: Npc;
+  /** true se algum traço variável mudou nesta chamada */
+  readonly houveMudancaVisual: boolean;
+};
+
+function calcularIdade(npc: Npc, anoAtual: number): number {
+  return anoAtual - npc.dataNascimento.ano;
+}
+
+export function envelhecerNpc(npc: Npc, anoAtual: number): Npc {
+  if (!npc.vivo) {
+    return npc;
+  }
+
+  const idade = calcularIdade(npc, anoAtual);
+
+  if (idade > 90) {
+    return {
+      ...npc,
+      vivo: false,
+    };
+  }
+
+  const variaveis = npc.tracosVariaveis;
+
+  const temGrisalho = idade >= 45 ? true : variaveis.temGrisalho;
+  const temRugas = idade >= 55 ? true : variaveis.temRugas;
+
+  let temOlheiras = variaveis.temOlheiras;
+  if (idade >= 35 && !temOlheiras) {
+    if (Math.sin(npc.npcId.length * anoAtual) > 0.4) {
+      temOlheiras = true;
+    }
+  }
+
+  let usaOculos = variaveis.usaOculos;
+  if (idade >= 40 && !usaOculos) {
+    if (Math.sin(npc.npcId.length * anoAtual + 1) > 0.5) {
+      usaOculos = true;
+    }
+  }
+
+  const delta = Math.round(Math.sin(npc.npcId.length + anoAtual) * 2);
+  const pesoAtual = Math.min(150, Math.max(40, variaveis.pesoAtual + delta));
+
+  return {
+    ...npc,
+    tracosVariaveis: {
+      ...variaveis,
+      temGrisalho,
+      temRugas,
+      temOlheiras,
+      usaOculos,
+      pesoAtual,
+    },
+  };
+}
+
+export function envelhecerRoster(
+  roster: readonly Npc[],
+  anoAtual: number,
+): Npc[] {
+  return roster.map(npc => envelhecerNpc(npc, anoAtual));
+}
+
+export function envelhecerRosterComRelatorio(
+  roster: readonly Npc[],
+  anoAtual: number,
+): {
+  readonly rosterAtualizado: Npc[];
+  readonly npcsMudados: readonly string[];
+} {
+  const rosterAtualizado: Npc[] = [];
+  const npcsMudados: string[] = [];
+
+  for (const npc of roster) {
+    const npcEnvelhecido = envelhecerNpc(npc, anoAtual);
+    rosterAtualizado.push(npcEnvelhecido);
+
+    if (!npc.vivo) {
+      continue;
+    }
+
+    const v1 = npc.tracosVariaveis;
+    const v2 = npcEnvelhecido.tracosVariaveis;
+
+    const mudouVisual =
+      v1.temGrisalho !== v2.temGrisalho ||
+      v1.temRugas !== v2.temRugas ||
+      v1.temOlheiras !== v2.temOlheiras ||
+      v1.usaOculos !== v2.usaOculos ||
+      v1.pesoAtual !== v2.pesoAtual ||
+      npc.vivo !== npcEnvelhecido.vivo;
+
+    if (mudouVisual) {
+      npcsMudados.push(npc.npcId);
+    }
+  }
+
+  return { rosterAtualizado, npcsMudados };
+}
+
+
+// --- NpcGenerator.ts [packages\core\src\npc\NpcGenerator.ts] ---
+import type { Npc } from '../schemas/npc';
+import type { SelectorNpc } from '../schemas/event';
+
+function rng(semente: number, min: number, max: number): number {
+  const x = Math.sin(semente) * 10000;
+  return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
+}
+
+export function gerarNpcNovo(seletor: SelectorNpc, semente: number): Npc {
+  let sementeAtual = semente;
+  const proximoRandom = (min: number, max: number): number => {
+    const res = rng(sementeAtual, min, max);
+    sementeAtual += 1;
+    return res;
+  };
+
+  // Nomes e sobrenomes brasileiros (10 masculinos, 10 femininos)
+  const nomesMasculinos = [
+    'Gabriel', 'Lucas', 'Mateus', 'Pedro', 'João',
+    'Felipe', 'Thiago', 'Bruno', 'Arthur', 'Daniel'
+  ];
+  const nomesFemininos = [
+    'Julia', 'Beatriz', 'Larissa', 'Mariana', 'Camila',
+    'Amanda', 'Sofia', 'Letícia', 'Carolina', 'Isabela'
+  ];
+  const sobrenomes = [
+    'Silva', 'Santos', 'Oliveira', 'Souza', 'Rodrigues',
+    'Ferreira', 'Alves', 'Pereira', 'Lima', 'Gomes'
+  ];
+
+  // Gênero: respeitar seletor.constraints.genero; se 'qualquer' ou indefinido, sortear
+  const generoConstrained = seletor.constraints?.genero;
+  const genero: 'M' | 'F' | 'outro' =
+    generoConstrained === 'M' || generoConstrained === 'F'
+      ? generoConstrained
+      : proximoRandom(0, 1) === 0 ? 'M' : 'F';
+
+  // Nome: sortear correspondente ao gênero
+  const listaNomes = genero === 'M' ? nomesMasculinos : nomesFemininos;
+  const nomeIdx = proximoRandom(0, listaNomes.length - 1);
+  const nome = listaNomes[nomeIdx] ?? 'Lucas';
+
+  const sobrenomeIdx = proximoRandom(0, sobrenomes.length - 1);
+  const sobrenome = sobrenomes[sobrenomeIdx] ?? 'Silva';
+
+  // Data de Nascimento
+  // respeitar idadeMin/idadeMax do seletor se presentes; senão 1960–2000
+  // Usaremos 2024 como o ano de referência padrão para calcular idade.
+  const anoReferencia = 2024;
+  const idadeMin = seletor.constraints?.idadeMin;
+  const idadeMax = seletor.constraints?.idadeMax;
+
+  const anoMax = idadeMin !== undefined ? anoReferencia - idadeMin : 2000;
+  const anoMin = idadeMax !== undefined ? anoReferencia - idadeMax : 1960;
+
+  // Garante limites conformes com a validação de DataNascimento (1900 a 2025)
+  const anoMinVal = Math.max(1900, Math.min(anoMin, anoMax));
+  const anoMaxVal = Math.min(2025, Math.max(anoMin, anoMax));
+
+  const ano = proximoRandom(anoMinVal, anoMaxVal);
+  const mes = proximoRandom(1, 12);
+  const dia = proximoRandom(1, 28); // 28 para simplificar dias válidos em fevereiro
+
+  // Profissão
+  const profissoes = [
+    'Vendedor', 'Professor', 'Médico', 'Advogado', 'Engenheiro',
+    'Motorista', 'Enfermeiro', 'Cozinheiro', 'Assistente Administrativo', 'Desenvolvedor'
+  ];
+  const profIdx = proximoRandom(0, profissoes.length - 1);
+  const profissaoAtual = profissoes[profIdx] ?? 'Vendedor';
+
+  // Estilo Corporal Base: respeitar seletor.constraints.estiloCorporal se presente; senão sortear entre ['magro', 'medio', 'atletico', 'gordo']
+  const estiloCorporalConstrained = seletor.constraints?.estiloCorporal;
+  const estilosCorporais: Array<'atletico' | 'magro' | 'gordo' | 'medio'> = ['magro', 'medio', 'atletico', 'gordo'];
+  let estiloCorporalBase: 'atletico' | 'magro' | 'gordo' | 'medio';
+
+  if (estiloCorporalConstrained && estiloCorporalConstrained !== 'qualquer') {
+    estiloCorporalBase = estiloCorporalConstrained;
+  } else {
+    const estiloIdx = proximoRandom(0, estilosCorporais.length - 1);
+    estiloCorporalBase = estilosCorporais[estiloIdx] ?? 'medio';
+  }
+
+  // Traços Físicos: gerar de forma determinística
+  const tonsPele = ['#ffdbac', '#f1c27d', '#e0ac69', '#c68642', '#8d5524'];
+  const skinIdx = proximoRandom(0, tonsPele.length - 1);
+  const corPele = tonsPele[skinIdx] ?? '#ffdbac';
+
+  const coresOlhos = ['#1c7847', '#2e536f', '#3d6756', '#634e34', '#2e1d0c'];
+  const olhosIdx = proximoRandom(0, coresOlhos.length - 1);
+  const corOlhos = coresOlhos[olhosIdx] ?? '#634e34';
+
+  const formatosRosto: Array<'oval' | 'redondo' | 'quadrado' | 'triangular' | 'coracao'> = ['oval', 'redondo', 'quadrado', 'triangular', 'coracao'];
+  const rostoIdx = proximoRandom(0, formatosRosto.length - 1);
+  const formatoRosto = formatosRosto[rostoIdx] ?? 'oval';
+
+  const formatosNariz: Array<'reto' | 'arrebitado' | 'aquilino' | 'pequeno' | 'largo'> = ['reto', 'arrebitado', 'aquilino', 'pequeno', 'largo'];
+  const narizIdx = proximoRandom(0, formatosNariz.length - 1);
+  const formatoNariz = formatosNariz[narizIdx] ?? 'reto';
+
+  const formatosBoca: Array<'fina' | 'cheia' | 'pequena' | 'larga'> = ['fina', 'cheia', 'pequena', 'larga'];
+  const bocaIdx = proximoRandom(0, formatosBoca.length - 1);
+  const formatoBoca = formatosBoca[bocaIdx] ?? 'fina';
+
+  const alturaBase = proximoRandom(140, 210) / 100;
+
+  // Traços Variáveis
+  const coresCabelo = ['#090806', '#2c222b', '#715035', '#b38b6d', '#a56b46', '#debc99'];
+  const cabeloIdx = proximoRandom(0, coresCabelo.length - 1);
+  const corCabelo = coresCabelo[cabeloIdx] ?? '#090806';
+
+  const estilosCabelo = ['curto', 'longo', 'ondulado', 'liso', 'crespo', 'careca'];
+  const estiloCabeloIdx = proximoRandom(0, estilosCabelo.length - 1);
+  const estiloCabelo = estilosCabelo[estiloCabeloIdx] ?? 'curto';
+
+  const pesoAtual = proximoRandom(50, 100);
+
+  // Relacionamento com Personagem (relacionamentoComJogador)
+  // relacionamentoComPersonagem.afetoInicial: valor entre 30 e 70 (neutro por default)
+  const afetoInicial = proximoRandom(30, 70);
+
+  return {
+    schemaVersion: '1.0.0',
+    npcId: `npc_${semente}`,
+    nome,
+    sobrenome,
+    genero,
+    dataNascimento: {
+      ano,
+      mes,
+      dia
+    },
+    tracosFisicos: {
+      corPele,
+      corOlhos,
+      formatoRosto,
+      formatoNariz,
+      formatoBoca,
+      estiloCorporalBase,
+      alturaBase
+    },
+    tracosVariaveis: {
+      corCabelo,
+      estiloCabelo,
+      temGrisalho: false,
+      temRugas: false,
+      temOlheiras: false,
+      usaOculos: false,
+      pesoAtual,
+      alturaAtual: alturaBase
+    },
+    persistencia: seletor.persistenciaApos,
+    tags: [],
+    profissaoAtual,
+    statusFinanceiro: 'medio',
+    relacionamentoComJogador: {
+      tipo: 'conhecido',
+      afeto: afetoInicial,
+      conhecidoDesde: {
+        ano,
+        mes
+      }
+    },
+    relacionamentosComOutrosNpcs: {},
+    vivo: true,
+    historicoInteracoes: []
+  };
+}
+
+
+// --- NpcMatcher.ts [packages\core\src\npc\NpcMatcher.ts] ---
+import type { Npc } from '../schemas/npc';
+import type { SelectorNpc } from '../schemas/event';
+import { gerarNpcNovo } from './NpcGenerator';
+import { RosterDeNpcs } from './NpcRoster';
+
+// ---------------------------------------------------------------------------
+// Tipos exportados
+// ---------------------------------------------------------------------------
+
+export type ResultadoSelecaoNpc = {
+  readonly npc: Npc;
+  readonly foiCriado: boolean;
+};
+
+// ---------------------------------------------------------------------------
+// Helpers internos
+// ---------------------------------------------------------------------------
+
+function npcSatisfazConstraints(
+  npc: Npc,
+  constraints: SelectorNpc['constraints'],
+  anoAtual: number,
+): boolean {
+  const { genero, idadeMin, idadeMax, estiloCorporal, profissao } = constraints;
+
+  if (genero !== undefined && genero !== 'qualquer' && npc.genero !== genero) return false;
+
+  const idadeNpc = anoAtual - npc.dataNascimento.ano;
+  if (idadeMin !== undefined && idadeNpc < idadeMin) return false;
+  if (idadeMax !== undefined && idadeNpc > idadeMax) return false;
+
+  if (estiloCorporal !== undefined && estiloCorporal !== 'qualquer') {
+    if (npc.tracosFisicos.estiloCorporalBase !== estiloCorporal) return false;
+  }
+
+  if (profissao !== undefined && npc.profissaoAtual !== profissao) return false;
+
+  return true;
+}
+
+// ---------------------------------------------------------------------------
+// API pública
+// ---------------------------------------------------------------------------
+
+/**
+ * Seleciona NPC elegível do roster ou cria um novo se necessário.
+ *
+ * Regras de prioridade:
+ * 1. tipo === 'sempre_novo' ou persistenciaApos === 'descartavel' → sempre cria novo
+ * 2. Busca no roster: vivos, não-descartáveis, satisfazem constraints
+ * 3. Se não encontrar elegível → cria novo via gerarNpcNovo
+ *
+ * @param seletor   Critério de seleção do evento
+ * @param roster    Roster ativo do save
+ * @param semente   Valor numérico para seleção determinística
+ * @param anoAtual  Ano corrente no calendário do jogo (para cálculo de idade)
+ */
+export function selecionarOuCriarNpc(
+  seletor: SelectorNpc,
+  roster: RosterDeNpcs,
+  semente: number,
+  anoAtual: number,
+): ResultadoSelecaoNpc {
+  const deveSerSempreNovo =
+    seletor.tipo === 'sempre_novo' ||
+    seletor.persistenciaApos === 'descartavel';
+
+  if (!deveSerSempreNovo) {
+    const candidatos = roster
+      .listarVivos()
+      .filter(npc => npc.persistencia !== 'descartavel')
+      .filter(npc => npcSatisfazConstraints(npc, seletor.constraints, anoAtual));
+
+    if (candidatos.length > 0) {
+      const indice = semente % candidatos.length;
+      const npcSelecionado = candidatos[indice];
+      if (npcSelecionado !== undefined) {
+        return { npc: npcSelecionado, foiCriado: false };
+      }
+    }
+  }
+
+  return { npc: gerarNpcNovo(seletor, semente), foiCriado: true };
+}
+
+// --- NpcRoster.ts [packages\core\src\npc\NpcRoster.ts] ---
+import type { Npc } from '../schemas/npc';
+
+export class RosterDeNpcs {
+  private readonly npcs: Map<string, Npc> = new Map();
+
+  adicionar(npc: Npc): void {
+    this.npcs.set(npc.npcId, npc);
+  }
+
+  buscarPorId(id: string): Npc | undefined {
+    return this.npcs.get(id);
+  }
+
+  listarTodos(): Npc[] {
+    return Array.from(this.npcs.values());
+  }
+
+  listarVivos(): Npc[] {
+    return this.listarTodos().filter((npc) => npc.vivo);
+  }
+}
+
+
+// --- exporters.ts [packages\core\src\persistence\exporters.ts] ---
+import { db } from './GameDB';
+
+// TODO: implementar export completo com hash SHA-256
+export async function exportarSave(_saveId: string): Promise<Blob> {
+  void db;
+  throw new Error('not implemented');
+}
+
+// TODO: implementar import com validação de checksum + Zod
+export async function importarSave(_blob: Blob): Promise<void> {
+  throw new Error('not implemented');
+}
+
+
+// --- GameDB.ts [packages\core\src\persistence\GameDB.ts] ---
+import Dexie, { type Table } from 'dexie';
+import type { SaveSlot } from '../schemas/save';
+import type { Character } from '../schemas/character';
+import type { Npc } from '../schemas/npc';
+
+export type EntradaLogEvento = {
+  id?: number;
+  saveId: string;
+  eventoId: string;
+  ano: number;
+  mes: number;
+  idadeNoMomento: number;
+  escolhaIndice: number;
+  resultadoDado?: 'falha_critica' | 'falha' | 'sucesso' | 'sucesso_critico';
+  rolagemD20?: number;
+  timestamp: number;
+};
+
+export class VidaGameDB extends Dexie {
+  saves!: Table<SaveSlot, string>;
+  characters!: Table<Character, string>;
+  npcs!: Table<Npc, string>;
+  events!: Table<EntradaLogEvento, number>;
+
+  constructor() {
+    super('Vida25DGame');
+    this.version(1).stores({
+      saves: 'saveId, ultimaPartida',
+      characters: 'characterId, saveId, idadeAtualMeses',
+      npcs: 'npcId, saveId, persistencia',
+      events: '++id, saveId, ano, eventoId',
+    });
+  }
+}
+
+export const db = new VidaGameDB();
+
+
+// --- index.ts [packages\core\src\persistence\index.ts] ---
+export * from './GameDB';
+export * from './exporters';
+export * from './SaveManager';
+
+
+
+// --- SaveManager.ts [packages\core\src\persistence\SaveManager.ts] ---
+import { db } from './GameDB';
+import type { SaveSlot } from '../schemas/save';
+import type { Character } from '../schemas/character';
+import type { Npc } from '../schemas/npc';
+import { SaveSlot as SaveSlotSchema } from '../schemas/save';
+
+export async function listarSaves(): Promise<SaveSlot[]> {
+  const saves = await db.saves.toArray();
+  return saves.sort((a, b) => b.ultimaPartida.localeCompare(a.ultimaPartida));
+}
+
+export async function carregarSave(saveId: string): Promise<SaveSlot | undefined> {
+  return await db.saves.get(saveId);
+}
+
+export async function salvarSave(save: SaveSlot): Promise<void> {
+  const parseResult = SaveSlotSchema.safeParse(save);
+  if (!parseResult.success) {
+    throw new Error(`Save inválido: ${JSON.stringify(parseResult.error.format())}`);
+  }
+
+  await db.saves.put(save);
+
+  // Anexa o saveId ao protagonista e aos NPCs para fins de indexação e cascata no Dexie
+  const protagonistaComSaveId = {
+    ...save.protagonista,
+    saveId: save.saveId,
+  } as any;
+  await db.characters.put(protagonistaComSaveId);
+
+  for (const npc of save.roster) {
+    const npcComSaveId = {
+      ...npc,
+      saveId: save.saveId,
+    } as any;
+    await db.npcs.put(npcComSaveId);
+  }
+}
+
+export async function criarNovoSave(nome: string, protagonista: Character): Promise<SaveSlot> {
+  const saveId = crypto.randomUUID();
+  const dataIso = new Date().toISOString();
+
+
+  const novoSave: SaveSlot = {
+    schemaVersion: '1.0.0',
+    saveId,
+    nomeSlot: nome,
+    criadoEm: dataIso,
+    ultimaPartida: dataIso,
+    tempoJogadoMs: 0,
+    configuracoes: {
+      ritmo: 'anual',
+      conteudoAdultoLiberado: false,
+      idioma: 'pt-BR',
+    },
+    protagonista,
+    roster: [],
+    estadoMundo: {
+      anoAtual: protagonista.dataNascimento.ano,
+      mesAtual: 1,
+      flagsGlobais: [],
+    },
+  };
+
+  await salvarSave(novoSave);
+  return novoSave;
+}
+
+export async function deletarSave(saveId: string): Promise<void> {
+  await db.saves.delete(saveId);
+  await db.characters.where('saveId').equals(saveId).delete();
+  await db.npcs.where('saveId').equals(saveId).delete();
+}
+
+
+// --- index.ts [packages\core\src\render\index.ts] ---
+export * from './RigRenderer';
+export * from './SceneRenderer';
+
+
+// --- RigRenderer.ts [packages\core\src\render\RigRenderer.ts] ---
+import type { Esqueleto } from '../rig/Skeleton';
+
+// TODO: implementar renderização de rig via PixiJS Graphics + Bézier
+// Nota: importar PIXI apenas em runtime (não no core, que é isomórfico)
+export class RigRenderer {
+  renderizar(_esqueleto: Esqueleto, _container: unknown): void {
+    throw new Error('not implemented');
+  }
+}
+
+
+// --- SceneRenderer.ts [packages\core\src\render\SceneRenderer.ts] ---
+// TODO: implementar orquestração de cena com múltiplos rigs
+export class SceneRenderer {
+  renderizarCena(_sceneJson: unknown, _container: unknown): void {
+    throw new Error('not implemented');
+  }
+}
+
+
+// --- constraints.ts [packages\core\src\rig\constraints.ts] ---
+import type { JointId } from '../schemas/pose';
+import type { Limites } from './Joint';
+
+// Ranges anatômicos por joint em graus
+export const LIMITES_ANATOMICOS: Readonly<Record<JointId, Limites>> = {
+  root_pelvis:  { minGraus: -180, maxGraus: 180 },
+  spine:        { minGraus: -30,  maxGraus: 30  },
+  neck:         { minGraus: -57,  maxGraus: 57  },
+  head:         { minGraus: -69,  maxGraus: 69  },
+  shoulder_L:   { minGraus: -180, maxGraus: 180 },
+  elbow_L:      { minGraus: 0,    maxGraus: 150 },
+  wrist_L:      { minGraus: -75,  maxGraus: 75  },
+  shoulder_R:   { minGraus: -180, maxGraus: 180 },
+  elbow_R:      { minGraus: 0,    maxGraus: 150 },
+  wrist_R:      { minGraus: -75,  maxGraus: 75  },
+  hip_L:        { minGraus: -90,  maxGraus: 90  },
+  knee_L:       { minGraus: 0,    maxGraus: 140 },
+  ankle_L:      { minGraus: -30,  maxGraus: 40  },
+  hip_R:        { minGraus: -90,  maxGraus: 90  },
+  knee_R:       { minGraus: 0,    maxGraus: 140 },
+};
+
+
+// --- ForwardKinematics.ts [packages\core\src\rig\ForwardKinematics.ts] ---
+import type { JointId } from '../schemas/pose';
+import type { Joint } from './Joint';
+
+// TODO: implementar FK top-down com matrizes 2D
+export function computarFK(
+  _juntas: Map<JointId, Joint>,
+  _ordemTopologica: JointId[],
+): Map<JointId, { x: number; y: number; rotacao: number }> {
+  throw new Error('not implemented');
+}
+
+
+// --- index.ts [packages\core\src\rig\index.ts] ---
+export * from './Joint';
+export * from './Skeleton';
+export * from './ForwardKinematics';
+export * from './constraints';
+
+
+// --- Joint.d.ts [packages\core\src\rig\Joint.d.ts] ---
+import type { JointId } from '../schemas/pose';
+export type Ponto = {
+    readonly x: number;
+    readonly y: number;
+};
+export type Limites = {
+    readonly minGraus: number;
+    readonly maxGraus: number;
+};
+export type Joint = {
+    readonly id: JointId;
+    readonly parentId: JointId | null;
+    localPosition: Ponto;
+    rotacaoLocal: number;
+    readonly comprimento: number;
+    readonly limites: Limites;
+};
+//# sourceMappingURL=Joint.d.ts.map
+
+// --- Joint.ts [packages\core\src\rig\Joint.ts] ---
+import type { JointId } from '../schemas/pose';
+
+export type Ponto = { readonly x: number; readonly y: number };
+
+export type Limites = {
+  readonly minGraus: number;
+  readonly maxGraus: number;
+};
+
+export type Joint = {
+  readonly id: JointId;
+  readonly parentId: JointId | null;
+  localPosition: Ponto;
+  rotacaoLocal: number;  // radianos
+  readonly comprimento: number;
+  readonly limites: Limites;
+};
+
+
+// --- Skeleton.ts [packages\core\src\rig\Skeleton.ts] ---
+import type { JointId } from '../schemas/pose';
+import type { Joint, Ponto } from './Joint';
+
+export class Esqueleto {
+  readonly juntas: Map<JointId, Joint>;
+
+  constructor(juntas: Map<JointId, Joint>) {
+    this.juntas = juntas;
+  }
+
+  computarForwardKinematics(): void {
+    throw new Error('not implemented');
+  }
+
+  posicaoMundialDe(_id: JointId): Ponto {
+    throw new Error('not implemented');
+  }
+}
+
+
+// --- Attributes.ts [packages\core\src\rpg\Attributes.ts] ---
+import type { Atributos } from '../schemas/character';
+import type { AtributoRPG } from '../schemas/effect';
+
+export const ATRIBUTO_MINIMO = 1;
+export const ATRIBUTO_MAXIMO = 20;
+
+export function gerarAtributosIniciais(): Atributos {
+  throw new Error('not implemented');
+}
+
+export function clampAtributo(valor: number): number {
+  return Math.min(ATRIBUTO_MAXIMO, Math.max(ATRIBUTO_MINIMO, valor));
+}
+
+export function calcularModificador(valorAtributo: number): number {
+  return Math.floor((valorAtributo - 10) / 2);
+}
+
+export function modificadorDe(atributos: Atributos, atributo: AtributoRPG): number {
+  return calcularModificador(atributos[atributo]);
+}
+
+
+// --- D20Roll.ts [packages\core\src\rpg\D20Roll.ts] ---
+export type TierResultado = 'falha_critica' | 'falha' | 'sucesso' | 'sucesso_critico';
+
+export const TIER_FALHA_CRITICA = 1;
+export const TIER_FALHA_MAX = 9;
+export const TIER_SUCESSO_MIN = 10;
+export const TIER_SUCESSO_CRITICO = 20;
+
+export function rolarD20(): number {
+  return Math.floor(Math.random() * 20) + 1;
+}
+
+export function classificarResultado(roll: number, modificador: number, dc: number): TierResultado {
+  if (roll === TIER_FALHA_CRITICA) return 'falha_critica';
+  if (roll === TIER_SUCESSO_CRITICO) return 'sucesso_critico';
+  const efetivo = roll + modificador;
+  return efetivo >= dc ? 'sucesso' : 'falha';
+}
+
+
+// --- index.ts [packages\core\src\rpg\index.ts] ---
+export * from './Attributes';
+export * from './D20Roll';
+export * from './Modifiers';
+
+
+// --- Modifiers.ts [packages\core\src\rpg\Modifiers.ts] ---
+export { calcularModificador, modificadorDe } from './Attributes';
+
+
+// --- character.ts [packages\core\src\schemas\character.ts] ---
+import { z } from 'zod';
+
+export const Atributos = z.object({
+  forca: z.number().int().min(1).max(20),
+  inteligencia: z.number().int().min(1).max(20),
+  carisma: z.number().int().min(1).max(20),
+  constituicao: z.number().int().min(1).max(20),
+  sorte: z.number().int().min(1).max(20),
+}).strict();
+export type Atributos = z.infer<typeof Atributos>;
+
+export const FormatoRosto = z.enum(['oval', 'redondo', 'quadrado', 'triangular', 'coracao']);
+export const FormatoNariz = z.enum(['reto', 'arrebitado', 'aquilino', 'pequeno', 'largo']);
+export const FormatoBoca = z.enum(['fina', 'cheia', 'pequena', 'larga']);
+export const EstiloCorporal = z.enum(['atletico', 'magro', 'gordo', 'medio']);
+
+export const TracosFisicos = z.object({
+  corPele: z.string().regex(/^#[0-9a-f]{6}$/i),
+  corOlhos: z.string().regex(/^#[0-9a-f]{6}$/i),
+  formatoRosto: FormatoRosto,
+  formatoNariz: FormatoNariz,
+  formatoBoca: FormatoBoca,
+  estiloCorporalBase: EstiloCorporal,
+  alturaBase: z.number().min(1.4).max(2.1),
+}).strict();
+export type TracosFisicos = z.infer<typeof TracosFisicos>;
+
+export const TracosVariaveis = z.object({
+  corCabelo: z.string().regex(/^#[0-9a-f]{6}$/i),
+  estiloCabelo: z.string(),
+  temGrisalho: z.boolean().default(false),
+  temRugas: z.boolean().default(false),
+  temOlheiras: z.boolean().default(false),
+  usaOculos: z.boolean().default(false),
+  pesoAtual: z.number().min(30).max(200),
+  alturaAtual: z.number().min(0.5).max(2.1),
+}).strict();
+export type TracosVariaveis = z.infer<typeof TracosVariaveis>;
+
+export const DataNascimento = z.object({
+  ano: z.number().int().min(1900).max(2025),
+  mes: z.number().int().min(1).max(12),
+  dia: z.number().int().min(1).max(31),
+}).strict();
+
+export const Character = z.object({
+  schemaVersion: z.literal('1.0.0'),
+  characterId: z.string().uuid(),
+  nome: z.string().min(1).max(100),
+  sobrenome: z.string().min(1).max(100),
+  genero: z.enum(['M', 'F', 'outro']),
+  dataNascimento: DataNascimento,
+  idadeAtualMeses: z.number().int().min(0),
+  tracosFisicos: TracosFisicos,
+  tracosVariaveis: TracosVariaveis,
+  atributos: Atributos,
+  atributosGeneticos: Atributos,
+  dinheiro: z.number().default(0),
+  humorAtual: z.number().int().min(0).max(100).default(70),
+  saudeAtual: z.number().int().min(0).max(100).default(100),
+  profissaoAtual: z.string().optional(),
+  salarioMensal: z.number().min(0).default(0),
+  flags: z.array(z.string()).default([]),
+  eventosVividos: z.array(z.string()).default([]),
+}).strict();
+export type Character = z.infer<typeof Character>;
+
+
+// --- effect.ts [packages\core\src\schemas\effect.ts] ---
+import { z } from 'zod';
+
+export const AtributoRPG = z.enum([
+  'forca', 'inteligencia', 'carisma', 'constituicao', 'sorte',
+]);
+export type AtributoRPG = z.infer<typeof AtributoRPG>;
+
+export const StatusPersonagem = z.enum([
+  'doente', 'preso', 'casado', 'separado', 'aposentado',
+]);
+
+export const Effect = z.discriminatedUnion('tipo', [
+  z.object({
+    tipo: z.literal('alterar_atributo'),
+    atributo: AtributoRPG,
+    delta: z.number().int(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('alterar_dinheiro'),
+    delta: z.number(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('adicionar_flag'),
+    flag: z.string(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('remover_flag'),
+    flag: z.string(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('alterar_relacionamento'),
+    npcId: z.string(),
+    delta: z.number().int(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('matar_npc'),
+    npcId: z.string(),
+    causa: z.string(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('mudar_profissao'),
+    profissao: z.string(),
+    salario: z.number().optional(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('alterar_saude'),
+    delta: z.number().int(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('alterar_humor'),
+    delta: z.number().int(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('aplicar_status'),
+    status: StatusPersonagem,
+    duracao: z.number().int().optional(),
+  }).strict(),
+  z.object({
+    tipo: z.literal('disparar_evento'),
+    eventoId: z.string(),
+    atrasoMeses: z.number().int().min(0).default(0),
+  }).strict(),
+]);
+export type Effect = z.infer<typeof Effect>;
+
+
+// --- event.ts [packages\core\src\schemas\event.ts] ---
+import { z } from 'zod';
+import { Scene } from './scene';
+import { PredicateTreeSchema } from './predicate';
+
+export const CategoriaEvento = z.enum([
+  'childhood', 'education', 'career', 'relationship',
+  'crime', 'health', 'hobby', 'mortality', 'finance', 'travel',
+]);
+export type CategoriaEvento = z.infer<typeof CategoriaEvento>;
+
+export const TagConteudo = z.enum([
+  'violence', 'sexual', 'substance', 'language', 'death', 'trauma', 'religious', 'political',
+]);
+export type TagConteudo = z.infer<typeof TagConteudo>;
+
+export const TipoNpcEvento = z.enum(['relacional', 'sempre_novo']);
+
+export const SelectorNpc = z.object({
+  papel: z.string(),
+  tipo: TipoNpcEvento,
+  persistenciaApos: z.enum(['permanente', 'recorrente', 'descartavel']).default('descartavel'),
+  constraints: z.object({
+    genero: z.enum(['M', 'F', 'qualquer']).optional(),
+    idadeMin: z.number().int().min(0).max(120).optional(),
+    idadeMax: z.number().int().min(0).max(120).optional(),
+    estiloCorporal: z.enum(['atletico', 'magro', 'gordo', 'medio', 'qualquer']).optional(),
+    profissao: z.string().optional(),
+  }).strict().default({}),
+}).strict();
+export type SelectorNpc = z.infer<typeof SelectorNpc>;
+
+export const Event = z.object({
+  schemaVersion: z.literal('1.0.0'),
+  eventoId: z.string().regex(/^[a-z][a-z0-9_]*$/),
+  categoria: CategoriaEvento,
+  titulo: z.string().min(3).max(100),
+  descricaoCurta: z.string().min(3).max(300),
+  contentTags: z.array(TagConteudo).default([]),
+  triggers: z.object({
+    idadeRange: z.tuple([z.number().int().min(0), z.number().int().min(0)]).optional(),
+    requisitos: PredicateTreeSchema.optional(),
+    peso: z.number().min(0).max(100).default(10),
+    cooldownMeses: z.number().int().min(0).default(0),
+    uniqueOnce: z.boolean().default(false),
+  }).strict(),
+  cast: z.array(SelectorNpc).default([]),
+  scene: Scene,
+  metadata: z.object({
+    criadoEm: z.string().datetime(),
+    criadoPor: z.enum(['humano', 'ia_assistido', 'ia_validada']),
+    revisadoPor: z.string().optional(),
+    versao: z.number().int().min(1).default(1),
+  }).strict(),
+}).strict();
+export type Event = z.infer<typeof Event>;
+
+
+// --- index.ts [packages\core\src\schemas\index.ts] ---
+export * from './pose';
+export * from './effect';
+export * from './predicate';
+export * from './scene';
+export * from './character';
+export * from './npc';
+export * from './event';
+export * from './save';
+
+
+// --- npc.ts [packages\core\src\schemas\npc.ts] ---
+import { z } from 'zod';
+import { TracosFisicos, TracosVariaveis, Atributos, DataNascimento } from './character';
+
+export const PersistenciaNpc = z.enum(['permanente', 'recorrente', 'descartavel']);
+export type PersistenciaNpc = z.infer<typeof PersistenciaNpc>;
+
+export const TipoVinculo = z.enum([
+  'familia_pai', 'familia_mae', 'familia_irmao', 'familia_filho',
+  'familia_conjuge', 'familia_extendida',
+  'amigo_proximo', 'amigo_casual', 'colega_trabalho', 'colega_escola',
+  'chefe', 'subordinado',
+  'romance_atual', 'ex_romance',
+  'inimigo', 'rival',
+  'profissional', 'conhecido',
+]);
+export type TipoVinculo = z.infer<typeof TipoVinculo>;
+
+export const Relacionamento = z.object({
+  tipo: TipoVinculo,
+  afeto: z.number().int().min(-100).max(100).default(0),
+  conhecidoDesde: z.object({
+    ano: z.number().int(),
+    mes: z.number().int().min(1).max(12),
+  }).strict(),
+  ultimaInteracao: z.object({
+    ano: z.number().int(),
+    mes: z.number().int().min(1).max(12),
+    eventoId: z.string(),
+  }).strict().optional(),
+}).strict();
+export type Relacionamento = z.infer<typeof Relacionamento>;
+
+export const Npc = z.object({
+  schemaVersion: z.literal('1.0.0'),
+  npcId: z.string().uuid(),
+  nome: z.string().min(1).max(100),
+  sobrenome: z.string().min(1).max(100),
+  genero: z.enum(['M', 'F', 'outro']),
+  dataNascimento: DataNascimento,
+  tracosFisicos: TracosFisicos,
+  tracosVariaveis: TracosVariaveis,
+  atributos: Atributos.optional(),
+  persistencia: PersistenciaNpc,
+  tags: z.array(z.string()).default([]),
+  profissaoAtual: z.string().optional(),
+  statusFinanceiro: z.enum(['pobre', 'medio', 'rico', 'milionario']).default('medio'),
+  relacionamentoComJogador: Relacionamento,
+  relacionamentosComOutrosNpcs: z.record(z.string(), Relacionamento).default({}),
+  vivo: z.boolean().default(true),
+  dataMorte: z.object({
+    ano: z.number().int(),
+    mes: z.number().int().min(1).max(12),
+    causa: z.string(),
+  }).strict().optional(),
+  historicoInteracoes: z.array(z.object({
+    eventoId: z.string(),
+    ano: z.number().int(),
+    mes: z.number().int(),
+  }).strict()).default([]),
+}).strict();
+export type Npc = z.infer<typeof Npc>;
+
+
+// --- pose.d.ts [packages\core\src\schemas\pose.d.ts] ---
+import { z } from 'zod';
+export declare const JointId: z.ZodEnum<["root_pelvis", "spine", "neck", "head", "shoulder_L", "elbow_L", "wrist_L", "shoulder_R", "elbow_R", "wrist_R", "hip_L", "knee_L", "ankle_L", "hip_R", "knee_R"]>;
+export type JointId = z.infer<typeof JointId>;
+export declare const ExpressaoFacial: z.ZodEnum<["neutra", "feliz", "triste", "raiva", "surpresa", "medo", "nojo", "flertando", "cansada", "desconfiada", "arrogante"]>;
+export type ExpressaoFacial = z.infer<typeof ExpressaoFacial>;
+export declare const PresetMao: z.ZodEnum<["relaxada", "aberta", "fechada", "apontando", "joinha", "palma_aberta", "segurando_objeto", "dedo_do_meio"]>;
+export type PresetMao = z.infer<typeof PresetMao>;
+export declare const PresetPe: z.ZodEnum<["descalco", "tenis", "sapato_social", "bota", "salto_alto", "na_ponta", "relaxado_no_chao"]>;
+export type PresetPe = z.infer<typeof PresetPe>;
+export declare const RotacaoJoint: z.ZodObject<{
+    jointId: z.ZodEnum<["root_pelvis", "spine", "neck", "head", "shoulder_L", "elbow_L", "wrist_L", "shoulder_R", "elbow_R", "wrist_R", "hip_L", "knee_L", "ankle_L", "hip_R", "knee_R"]>;
+    rotacaoGraus: z.ZodNumber;
+}, "strict", z.ZodTypeAny, {
+    jointId: "root_pelvis" | "spine" | "neck" | "head" | "shoulder_L" | "elbow_L" | "wrist_L" | "shoulder_R" | "elbow_R" | "wrist_R" | "hip_L" | "knee_L" | "ankle_L" | "hip_R" | "knee_R";
+    rotacaoGraus: number;
+}, {
+    jointId: "root_pelvis" | "spine" | "neck" | "head" | "shoulder_L" | "elbow_L" | "wrist_L" | "shoulder_R" | "elbow_R" | "wrist_R" | "hip_L" | "knee_L" | "ankle_L" | "hip_R" | "knee_R";
+    rotacaoGraus: number;
+}>;
+export type RotacaoJoint = z.infer<typeof RotacaoJoint>;
+export declare const CategoriaPose: z.ZodEnum<["basic", "interactions", "emotional", "action"]>;
+export type CategoriaPose = z.infer<typeof CategoriaPose>;
+export declare const MetadataPose: z.ZodObject<{
+    criadoEm: z.ZodString;
+    criadoPor: z.ZodEnum<["humano", "ia", "ia_validada"]>;
+    aprovadoEm: z.ZodOptional<z.ZodString>;
+    versao: z.ZodDefault<z.ZodNumber>;
+}, "strict", z.ZodTypeAny, {
+    criadoEm: string;
+    criadoPor: "humano" | "ia" | "ia_validada";
+    versao: number;
+    aprovadoEm?: string | undefined;
+}, {
+    criadoEm: string;
+    criadoPor: "humano" | "ia" | "ia_validada";
+    aprovadoEm?: string | undefined;
+    versao?: number | undefined;
+}>;
+export declare const Pose: z.ZodObject<{
+    schemaVersion: z.ZodLiteral<"1.0.0">;
+    poseId: z.ZodString;
+    categoria: z.ZodEnum<["basic", "interactions", "emotional", "action"]>;
+    descricao: z.ZodString;
+    rotacoes: z.ZodArray<z.ZodObject<{
+        jointId: z.ZodEnum<["root_pelvis", "spine", "neck", "head", "shoulder_L", "elbow_L", "wrist_L", "shoulder_R", "elbow_R", "wrist_R", "hip_L", "knee_L", "ankle_L", "hip_R", "knee_R"]>;
+        rotacaoGraus: z.ZodNumber;
+    }, "strict", z.ZodTypeAny, {
+        jointId: "root_pelvis" | "spine" | "neck" | "head" | "shoulder_L" | "elbow_L" | "wrist_L" | "shoulder_R" | "elbow_R" | "wrist_R" | "hip_L" | "knee_L" | "ankle_L" | "hip_R" | "knee_R";
+        rotacaoGraus: number;
+    }, {
+        jointId: "root_pelvis" | "spine" | "neck" | "head" | "shoulder_L" | "elbow_L" | "wrist_L" | "shoulder_R" | "elbow_R" | "wrist_R" | "hip_L" | "knee_L" | "ankle_L" | "hip_R" | "knee_R";
+        rotacaoGraus: number;
+    }>, "many">;
+    expressaoFacial: z.ZodEnum<["neutra", "feliz", "triste", "raiva", "surpresa", "medo", "nojo", "flertando", "cansada", "desconfiada", "arrogante"]>;
+    intensidadeExpressao: z.ZodDefault<z.ZodNumber>;
+    maoEsquerda: z.ZodDefault<z.ZodEnum<["relaxada", "aberta", "fechada", "apontando", "joinha", "palma_aberta", "segurando_objeto", "dedo_do_meio"]>>;
+    maoDireita: z.ZodDefault<z.ZodEnum<["relaxada", "aberta", "fechada", "apontando", "joinha", "palma_aberta", "segurando_objeto", "dedo_do_meio"]>>;
+    peEsquerdo: z.ZodDefault<z.ZodEnum<["descalco", "tenis", "sapato_social", "bota", "salto_alto", "na_ponta", "relaxado_no_chao"]>>;
+    peDireito: z.ZodDefault<z.ZodEnum<["descalco", "tenis", "sapato_social", "bota", "salto_alto", "na_ponta", "relaxado_no_chao"]>>;
+    metadata: z.ZodObject<{
+        criadoEm: z.ZodString;
+        criadoPor: z.ZodEnum<["humano", "ia", "ia_validada"]>;
+        aprovadoEm: z.ZodOptional<z.ZodString>;
+        versao: z.ZodDefault<z.ZodNumber>;
+    }, "strict", z.ZodTypeAny, {
+        criadoEm: string;
+        criadoPor: "humano" | "ia" | "ia_validada";
+        versao: number;
+        aprovadoEm?: string | undefined;
+    }, {
+        criadoEm: string;
+        criadoPor: "humano" | "ia" | "ia_validada";
+        aprovadoEm?: string | undefined;
+        versao?: number | undefined;
+    }>;
+}, "strict", z.ZodTypeAny, {
+    schemaVersion: "1.0.0";
+    poseId: string;
+    categoria: "basic" | "interactions" | "emotional" | "action";
+    descricao: string;
+    rotacoes: {
+        jointId: "root_pelvis" | "spine" | "neck" | "head" | "shoulder_L" | "elbow_L" | "wrist_L" | "shoulder_R" | "elbow_R" | "wrist_R" | "hip_L" | "knee_L" | "ankle_L" | "hip_R" | "knee_R";
+        rotacaoGraus: number;
+    }[];
+    expressaoFacial: "neutra" | "feliz" | "triste" | "raiva" | "surpresa" | "medo" | "nojo" | "flertando" | "cansada" | "desconfiada" | "arrogante";
+    intensidadeExpressao: number;
+    maoEsquerda: "relaxada" | "aberta" | "fechada" | "apontando" | "joinha" | "palma_aberta" | "segurando_objeto" | "dedo_do_meio";
+    maoDireita: "relaxada" | "aberta" | "fechada" | "apontando" | "joinha" | "palma_aberta" | "segurando_objeto" | "dedo_do_meio";
+    peEsquerdo: "descalco" | "tenis" | "sapato_social" | "bota" | "salto_alto" | "na_ponta" | "relaxado_no_chao";
+    peDireito: "descalco" | "tenis" | "sapato_social" | "bota" | "salto_alto" | "na_ponta" | "relaxado_no_chao";
+    metadata: {
+        criadoEm: string;
+        criadoPor: "humano" | "ia" | "ia_validada";
+        versao: number;
+        aprovadoEm?: string | undefined;
+    };
+}, {
+    schemaVersion: "1.0.0";
+    poseId: string;
+    categoria: "basic" | "interactions" | "emotional" | "action";
+    descricao: string;
+    rotacoes: {
+        jointId: "root_pelvis" | "spine" | "neck" | "head" | "shoulder_L" | "elbow_L" | "wrist_L" | "shoulder_R" | "elbow_R" | "wrist_R" | "hip_L" | "knee_L" | "ankle_L" | "hip_R" | "knee_R";
+        rotacaoGraus: number;
+    }[];
+    expressaoFacial: "neutra" | "feliz" | "triste" | "raiva" | "surpresa" | "medo" | "nojo" | "flertando" | "cansada" | "desconfiada" | "arrogante";
+    metadata: {
+        criadoEm: string;
+        criadoPor: "humano" | "ia" | "ia_validada";
+        aprovadoEm?: string | undefined;
+        versao?: number | undefined;
+    };
+    intensidadeExpressao?: number | undefined;
+    maoEsquerda?: "relaxada" | "aberta" | "fechada" | "apontando" | "joinha" | "palma_aberta" | "segurando_objeto" | "dedo_do_meio" | undefined;
+    maoDireita?: "relaxada" | "aberta" | "fechada" | "apontando" | "joinha" | "palma_aberta" | "segurando_objeto" | "dedo_do_meio" | undefined;
+    peEsquerdo?: "descalco" | "tenis" | "sapato_social" | "bota" | "salto_alto" | "na_ponta" | "relaxado_no_chao" | undefined;
+    peDireito?: "descalco" | "tenis" | "sapato_social" | "bota" | "salto_alto" | "na_ponta" | "relaxado_no_chao" | undefined;
+}>;
+export type Pose = z.infer<typeof Pose>;
+//# sourceMappingURL=pose.d.ts.map
+
+// --- pose.ts [packages\core\src\schemas\pose.ts] ---
+import { z } from 'zod';
+
+export const JointId = z.enum([
+  'root_pelvis', 'spine', 'neck', 'head',
+  'shoulder_L', 'elbow_L', 'wrist_L',
+  'shoulder_R', 'elbow_R', 'wrist_R',
+  'hip_L', 'knee_L', 'ankle_L',
+  'hip_R', 'knee_R',
+]);
+export type JointId = z.infer<typeof JointId>;
+
+export const ExpressaoFacial = z.enum([
+  'neutra', 'feliz', 'triste', 'raiva', 'surpresa', 'medo',
+  'nojo', 'flertando', 'cansada', 'desconfiada', 'arrogante',
+]);
+export type ExpressaoFacial = z.infer<typeof ExpressaoFacial>;
+
+export const PresetMao = z.enum([
+  'relaxada', 'aberta', 'fechada', 'apontando',
+  'joinha', 'palma_aberta', 'segurando_objeto', 'dedo_do_meio',
+]);
+export type PresetMao = z.infer<typeof PresetMao>;
+
+export const PresetPe = z.enum([
+  'descalco', 'tenis', 'sapato_social', 'bota',
+  'salto_alto', 'na_ponta', 'relaxado_no_chao',
+]);
+export type PresetPe = z.infer<typeof PresetPe>;
+
+export const RotacaoJoint = z.object({
+  jointId: JointId,
+  rotacaoGraus: z.number().min(-180).max(180),
+}).strict();
+export type RotacaoJoint = z.infer<typeof RotacaoJoint>;
+
+export const CategoriaPose = z.enum(['basic', 'interactions', 'emotional', 'action']);
+export type CategoriaPose = z.infer<typeof CategoriaPose>;
+
+export const MetadataPose = z.object({
+  criadoEm: z.string().datetime(),
+  criadoPor: z.enum(['humano', 'ia', 'ia_validada']),
+  aprovadoEm: z.string().datetime().optional(),
+  versao: z.number().int().min(1).default(1),
+}).strict();
+
+export const Pose = z.object({
+  schemaVersion: z.literal('1.0.0'),
+  poseId: z.string().regex(/^[a-z][a-z0-9_]*$/),
+  categoria: CategoriaPose,
+  descricao: z.string().min(3).max(200),
+  rotacoes: z.array(RotacaoJoint),
+  expressaoFacial: ExpressaoFacial,
+  intensidadeExpressao: z.number().min(0).max(100).default(50),
+  maoEsquerda: PresetMao.default('relaxada'),
+  maoDireita: PresetMao.default('relaxada'),
+  peEsquerdo: PresetPe.default('descalco'),
+  peDireito: PresetPe.default('descalco'),
+  metadata: MetadataPose,
+}).strict();
+export type Pose = z.infer<typeof Pose>;
+
+
+// --- predicate.ts [packages\core\src\schemas\predicate.ts] ---
+import { z } from 'zod';
+import { AtributoRPG } from './effect';
+
+const OperadorComparacao = z.enum(['==', '!=', '>', '<', '>=', '<=']);
+
+const PredicadoVariavel = z.object({
+  tipo: z.literal('var'),
+  caminho: z.string(),
+  operador: OperadorComparacao,
+  valor: z.union([z.number(), z.string(), z.boolean()]),
+}).strict();
+
+const PredicadoFlag = z.object({
+  tipo: z.literal('flag'),
+  flag: z.string(),
+  presente: z.boolean().default(true),
+}).strict();
+
+const PredicadoRelacionamento = z.object({
+  tipo: z.literal('relacionamento'),
+  comNpcRole: z.string(),
+  tipoVinculo: z.enum(['familia', 'amigo', 'romance', 'inimizade', 'profissional']),
+  nivelMinimo: z.number().min(-100).max(100).optional(),
+}).strict();
+
+const PredicadoIdade = z.object({
+  tipo: z.literal('idade'),
+  minimo: z.number().int().min(0).max(120).optional(),
+  maximo: z.number().int().min(0).max(120).optional(),
+}).strict();
+
+const PredicadoAtributo = z.object({
+  tipo: z.literal('atributo'),
+  atributo: AtributoRPG,
+  operador: OperadorComparacao,
+  valor: z.number().int(),
+}).strict();
+
+const PredicadoFolha = z.union([
+  PredicadoVariavel,
+  PredicadoFlag,
+  PredicadoRelacionamento,
+  PredicadoIdade,
+  PredicadoAtributo,
+]);
+
+export type PredicateTree =
+  | { tipo: 'todos'; predicados: PredicateTree[] }
+  | { tipo: 'algum'; predicados: PredicateTree[] }
+  | { tipo: 'nao'; predicado: PredicateTree }
+  | z.infer<typeof PredicadoFolha>;
+
+export const PredicateTreeSchema: z.ZodType<PredicateTree, z.ZodTypeDef, unknown> = z.lazy(() =>
+  z.union([
+    z.object({
+      tipo: z.literal('todos'),
+      predicados: z.array(PredicateTreeSchema),
+    }).strict(),
+    z.object({
+      tipo: z.literal('algum'),
+      predicados: z.array(PredicateTreeSchema),
+    }).strict(),
+    z.object({
+      tipo: z.literal('nao'),
+      predicado: PredicateTreeSchema,
+    }).strict(),
+    PredicadoFolha,
+  ]),
+);
+
+
+// --- save.ts [packages\core\src\schemas\save.ts] ---
+import { z } from 'zod';
+import { Character } from './character';
+import { Npc } from './npc';
+
+export const RitmoJogo = z.enum(['mensal', 'semestral', 'anual']);
+export type RitmoJogo = z.infer<typeof RitmoJogo>;
+
+export const ConfiguracoesSave = z.object({
+  ritmo: RitmoJogo,
+  conteudoAdultoLiberado: z.boolean().default(false),
+  idioma: z.enum(['pt-BR', 'en-US']).default('pt-BR'),
+}).strict();
+
+export const EstadoMundo = z.object({
+  anoAtual: z.number().int(),
+  mesAtual: z.number().int().min(1).max(12),
+  flagsGlobais: z.array(z.string()).default([]),
+}).strict();
+
+export const SaveSlot = z.object({
+  schemaVersion: z.literal('1.0.0'),
+  saveId: z.string().uuid(),
+  nomeSlot: z.string().min(1).max(50),
+  criadoEm: z.string().datetime(),
+  ultimaPartida: z.string().datetime(),
+  tempoJogadoMs: z.number().int().min(0).default(0),
+  configuracoes: ConfiguracoesSave,
+  protagonista: Character,
+  roster: z.array(Npc),
+  estadoMundo: EstadoMundo,
+}).strict();
+export type SaveSlot = z.infer<typeof SaveSlot>;
+
+
+// --- scene.ts [packages\core\src\schemas\scene.ts] ---
+import { z } from 'zod';
+import { Pose, ExpressaoFacial } from './pose';
+import { Effect } from './effect';
+import { PredicateTreeSchema } from './predicate';
+
+export const Background = z.enum([
+  'sala_estar', 'cozinha', 'quarto', 'banheiro',
+  'rua_residencial', 'centro_comercial', 'praca',
+  'escola_sala', 'escola_corredor', 'escola_patio',
+  'escritorio_open', 'escritorio_sala_reuniao',
+  'restaurante', 'bar', 'balada',
+  'hospital_quarto', 'hospital_corredor',
+  'parque', 'praia', 'shopping',
+  'igreja', 'cemiterio',
+  'fundo_vazio',
+]);
+export type Background = z.infer<typeof Background>;
+
+export const HumorCena = z.enum([
+  'comico', 'tenso', 'melancolico', 'intimo',
+  'caotico', 'neutro', 'romantico', 'agressivo',
+]);
+export type HumorCena = z.infer<typeof HumorCena>;
+
+export const PapelAtor = z.enum([
+  'protagonista', 'npc_primario', 'npc_secundario', 'npc_terciario',
+]);
+export type PapelAtor = z.infer<typeof PapelAtor>;
+
+export const FramingCamera = z.enum(['wide', 'medium', 'close', 'closeup']);
+
+export const Ator = z.object({
+  papel: PapelAtor,
+  posicao: z.object({
+    x: z.number().min(-1).max(1),
+    y: z.number().min(0).max(1),
+    facing: z.enum(['L', 'R']),
+  }).strict(),
+  pose: Pose,
+  zOrder: z.number().int().default(0),
+}).strict();
+export type Ator = z.infer<typeof Ator>;
+
+export const Contato = z.object({
+  fromAtorPapel: PapelAtor,
+  fromSocket: z.string(),
+  toAtorPapel: PapelAtor,
+  toSocket: z.string(),
+}).strict();
+
+export const OpcaoEscolha = z.object({
+  texto: z.string().min(1).max(200),
+  requisitos: PredicateTreeSchema.optional(),
+  atributoCheck: z.object({
+    atributo: z.enum(['forca', 'inteligencia', 'carisma', 'constituicao', 'sorte']),
+    dificuldade: z.number().int().min(1).max(30),
+  }).strict().optional(),
+  efeitos: z.array(Effect),
+  proximoEventoId: z.string().optional(),
+}).strict();
+export type OpcaoEscolha = z.infer<typeof OpcaoEscolha>;
+
+const BeatNarracao = z.object({
+  tipo: z.literal('narracao'),
+  texto: z.string().min(1).max(500),
+  tags: z.array(z.string()).default([]),
+}).strict();
+
+const BeatDialogo = z.object({
+  tipo: z.literal('dialogo'),
+  papelAtor: PapelAtor,
+  texto: z.string().min(1).max(500),
+  mudancaExpressao: ExpressaoFacial.optional(),
+}).strict();
+
+const BeatTransicao = z.object({
+  tipo: z.literal('transicao'),
+  efeito: z.enum(['fade', 'cut', 'dissolve', 'slide_L', 'slide_R']),
+  duracaoMs: z.number().int().min(0).max(5000),
+}).strict();
+
+const BeatEscolha = z.object({
+  tipo: z.literal('escolha'),
+  opcoes: z.array(OpcaoEscolha).min(2).max(5),
+}).strict();
+
+export const Beat = z.discriminatedUnion('tipo', [
+  BeatNarracao,
+  BeatDialogo,
+  BeatTransicao,
+  BeatEscolha,
+]);
+export type Beat = z.infer<typeof Beat>;
+
+export const Scene = z.object({
+  schemaVersion: z.literal('1.0.0'),
+  sceneId: z.string().regex(/^[a-z][a-z0-9_]*$/),
+  descricaoCurta: z.string().min(3).max(200),
+  background: Background,
+  framing: FramingCamera,
+  humor: HumorCena,
+  atores: z.array(Ator).min(1).max(4),
+  contatos: z.array(Contato).default([]),
+  beats: z.array(Beat).min(1),
+  metadata: z.object({
+    criadoEm: z.string().datetime(),
+    criadoPor: z.enum(['humano', 'ia', 'ia_validada']),
+    aprovadoEm: z.string().datetime().optional(),
+    versao: z.number().int().min(1).default(1),
+  }).strict(),
+}).strict();
+export type Scene = z.infer<typeof Scene>;
+
+
+// --- BezierSegment.d.ts [packages\core\src\silhouette\BezierSegment.d.ts] ---
+import type { Ponto } from '../rig/Joint';
+export type PerfilBraco = {
+    espessuraOmbro: number;
+    espessuraBiceps: number;
+    espessuraCotovelo: number;
+    espessuraAntebraco: number;
+    espessuraPulso: number;
+};
+export type PerfilPerna = {
+    espessuraQuadril: number;
+    espessuraCoxa: number;
+    espessuraJoelho: number;
+    espessuraPanturrilha: number;
+    espessuraTornozelo: number;
+};
+export type PerfilTronco = {
+    larguraOmbros: number;
+    larguraCintura: number;
+    larguraQuadril: number;
+    profundidadeTorax: number;
+};
+export declare const PERFIL_BRACO_PADRAO: PerfilBraco;
+export declare const PERFIL_PERNA_PADRAO: PerfilPerna;
+export declare const PERFIL_TRONCO_PADRAO: PerfilTronco;
+export type PathBraco = {
+    esq: {
+        p0: Ponto;
+        cp1: Ponto;
+        cp2: Ponto;
+        p1: Ponto;
+        cp3: Ponto;
+        cp4: Ponto;
+        p2: Ponto;
+    };
+    dir: {
+        p0: Ponto;
+        cp1: Ponto;
+        cp2: Ponto;
+        p1: Ponto;
+        cp3: Ponto;
+        cp4: Ponto;
+        p2: Ponto;
+    };
+    capOmbro: Ponto;
+    capPulso: Ponto;
+};
+export declare function gerarPathBraco(ombro: Ponto, cotovelo: Ponto, pulso: Ponto, perfil: PerfilBraco, espelhar?: boolean): PathBraco;
+export declare function gerarPathPerna(quadril: Ponto, joelho: Ponto, tornozelo: Ponto, perfil: PerfilPerna, espelhar?: boolean): PathBraco;
+//# sourceMappingURL=BezierSegment.d.ts.map
+
+// --- BezierSegment.ts [packages\core\src\silhouette\BezierSegment.ts] ---
+import type { Ponto } from '../rig/Joint';
+
+export type PerfilBraco = {
+  espessuraOmbro: number;
+  espessuraBiceps: number;
+  espessuraCotovelo: number;
+  espessuraAntebraco: number;
+  espessuraPulso: number;
+};
+
+export type PerfilPerna = {
+  espessuraQuadril: number;
+  espessuraCoxa: number;
+  espessuraJoelho: number;
+  espessuraPanturrilha: number;
+  espessuraTornozelo: number;
+};
+
+export type PerfilTronco = {
+  larguraOmbros: number;
+  larguraCintura: number;
+  larguraQuadril: number;
+  profundidadeTorax: number;
+};
+
+export const PERFIL_BRACO_PADRAO: PerfilBraco = {
+  espessuraOmbro: 14,
+  espessuraBiceps: 18,
+  espessuraCotovelo: 13,
+  espessuraAntebraco: 16,
+  espessuraPulso: 7,
+};
+
+export const PERFIL_PERNA_PADRAO: PerfilPerna = {
+  espessuraQuadril: 26,
+  espessuraCoxa: 28,
+  espessuraJoelho: 16,
+  espessuraPanturrilha: 20,
+  espessuraTornozelo: 10,
+};
+
+export const PERFIL_TRONCO_PADRAO: PerfilTronco = {
+  larguraOmbros: 50,
+  larguraCintura: 32,
+  larguraQuadril: 46,
+  profundidadeTorax: 0.15,
+};
+
+function subtrair(a: Ponto, b: Ponto): Ponto {
+  return { x: a.x - b.x, y: a.y - b.y };
+}
+
+function comprimentoVetor(v: Ponto): number {
+  return Math.sqrt(v.x * v.x + v.y * v.y);
+}
+
+function normalizar(v: Ponto): Ponto {
+  const c = comprimentoVetor(v);
+  if (c < 0.001) return { x: 0, y: -1 };
+  return { x: v.x / c, y: v.y / c };
+}
+
+function perpendicularEsquerda(v: Ponto): Ponto {
+  return { x: -v.y, y: v.x };
+}
+
+function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * t;
+}
+
+function pontoPerpendicular(
+  origem: Ponto,
+  direcao: Ponto,
+  distancia: number
+): { esq: Ponto; dir: Ponto } {
+  const perp = perpendicularEsquerda(normalizar(direcao));
+  return {
+    esq: { x: origem.x + perp.x * distancia, y: origem.y + perp.y * distancia },
+    dir: { x: origem.x - perp.x * distancia, y: origem.y - perp.y * distancia },
+  };
+}
+
+const calcularCPCubicoAlongado = (pInicio: Ponto, pFim: Ponto, pMeio: Ponto, dirNorm: Ponto, stretch: number) => {
+  const cX = (4 / 3) * pMeio.x - (1 / 6) * pInicio.x - (1 / 6) * pFim.x;
+  const cY = (4 / 3) * pMeio.y - (1 / 6) * pInicio.y - (1 / 6) * pFim.y;
+  return {
+    cp1: { x: cX - dirNorm.x * stretch, y: cY - dirNorm.y * stretch },
+    cp2: { x: cX + dirNorm.x * stretch, y: cY + dirNorm.y * stretch },
+  };
+};
+
+// ─── BRACO ───────────────────────────────────────────────────────────────────
+
+export type PathBraco = {
+  esq: { p0: Ponto; cp1: Ponto; cp2: Ponto; p1: Ponto; cp3: Ponto; cp4: Ponto; p2: Ponto };
+  dir: { p0: Ponto; cp1: Ponto; cp2: Ponto; p1: Ponto; cp3: Ponto; cp4: Ponto; p2: Ponto };
+  capOmbro: Ponto;
+  capPulso: Ponto;
+};
+
+export function gerarPathBraco(
+  ombro: Ponto,
+  cotovelo: Ponto,
+  pulso: Ponto,
+  perfil: PerfilBraco,
+  espelhar = false
+): PathBraco {
+  const sinal = espelhar ? -1 : 1;
+
+  const dirBraco = subtrair(cotovelo, ombro);
+  const dirAntebraco = subtrair(pulso, cotovelo);
+
+  const meioBraco = { x: lerp(ombro.x, cotovelo.x, 0.45), y: lerp(ombro.y, cotovelo.y, 0.45) };
+  const meioAntebraco = { x: lerp(cotovelo.x, pulso.x, 0.35), y: lerp(cotovelo.y, pulso.y, 0.35) };
+
+  const pOmbro = pontoPerpendicular(ombro, dirBraco, perfil.espessuraOmbro / 2 * sinal);
+  const pBiceps = pontoPerpendicular(meioBraco, dirBraco, perfil.espessuraBiceps / 2 * sinal);
+  
+  const dirCotovelo = normalizar({ x: dirBraco.x + dirAntebraco.x, y: dirBraco.y + dirAntebraco.y });
+  const pCotovelo = pontoPerpendicular(cotovelo, dirCotovelo, perfil.espessuraCotovelo / 2 * sinal);
+  
+  const pAntebraco = pontoPerpendicular(meioAntebraco, dirAntebraco, perfil.espessuraAntebraco / 2 * sinal);
+  const pPulso = pontoPerpendicular(pulso, dirAntebraco, perfil.espessuraPulso / 2 * sinal);
+
+  const dirBNorm = normalizar(dirBraco);
+  const dirANorm = normalizar(dirAntebraco);
+  const stretchB = comprimentoVetor(dirBraco) * 0.2;
+  const stretchA = comprimentoVetor(dirAntebraco) * 0.2;
+
+  const cps_bE = calcularCPCubicoAlongado(pOmbro.esq, pCotovelo.esq, pBiceps.esq, dirBNorm, stretchB);
+  const cps_bD = calcularCPCubicoAlongado(pOmbro.dir, pCotovelo.dir, pBiceps.dir, dirBNorm, stretchB);
+  const cps_aE = calcularCPCubicoAlongado(pCotovelo.esq, pPulso.esq, pAntebraco.esq, dirANorm, stretchA);
+  const cps_aD = calcularCPCubicoAlongado(pCotovelo.dir, pPulso.dir, pAntebraco.dir, dirANorm, stretchA);
+
+  return {
+    esq: {
+      p0: pOmbro.esq,
+      cp1: cps_bE.cp1, cp2: cps_bE.cp2,
+      p1: pCotovelo.esq,
+      cp3: cps_aE.cp1, cp4: cps_aE.cp2,
+      p2: pPulso.esq,
+    },
+    dir: {
+      p0: pPulso.dir,
+      cp1: cps_aD.cp2, cp2: cps_aD.cp1,
+      p1: pCotovelo.dir,
+      cp3: cps_bD.cp2, cp4: cps_bD.cp1,
+      p2: pOmbro.dir,
+    },
+    capOmbro: ombro,
+    capPulso: pulso,
+  };
+}
+
+// ─── PERNA ───────────────────────────────────────────────────────────────────
+
+export function gerarPathPerna(
+  quadril: Ponto,
+  joelho: Ponto,
+  tornozelo: Ponto,
+  perfil: PerfilPerna,
+  espelhar = false
+): PathBraco {
+  const sinal = espelhar ? -1 : 1;
+
+  const dirCoxa = subtrair(joelho, quadril);
+  const dirPanturrilha = subtrair(tornozelo, joelho);
+
+  const meioCoxa = { x: lerp(quadril.x, joelho.x, 0.45), y: lerp(quadril.y, joelho.y, 0.45) };
+  const meioPant = { x: lerp(joelho.x, tornozelo.x, 0.25), y: lerp(joelho.y, tornozelo.y, 0.25) };
+
+  const pQuadril = pontoPerpendicular(quadril, dirCoxa, perfil.espessuraQuadril / 2 * sinal);
+  const pCoxa = pontoPerpendicular(meioCoxa, dirCoxa, perfil.espessuraCoxa / 2 * sinal);
+  
+  const dirJoelho = normalizar({ x: dirCoxa.x + dirPanturrilha.x, y: dirCoxa.y + dirPanturrilha.y });
+  const pJoelho = pontoPerpendicular(joelho, dirJoelho, perfil.espessuraJoelho / 2 * sinal);
+  
+  const pPanturrilha = pontoPerpendicular(meioPant, dirPanturrilha, perfil.espessuraPanturrilha / 2 * sinal);
+  const pTornozelo = pontoPerpendicular(tornozelo, dirPanturrilha, perfil.espessuraTornozelo / 2 * sinal);
+
+  const dirCNorm = normalizar(dirCoxa);
+  const dirPNorm = normalizar(dirPanturrilha);
+  const stretchC = comprimentoVetor(dirCoxa) * 0.2;
+  const stretchP = comprimentoVetor(dirPanturrilha) * 0.2;
+
+  const cps_cE = calcularCPCubicoAlongado(pQuadril.esq, pJoelho.esq, pCoxa.esq, dirCNorm, stretchC);
+  const cps_cD = calcularCPCubicoAlongado(pQuadril.dir, pJoelho.dir, pCoxa.dir, dirCNorm, stretchC);
+  const cps_pE = calcularCPCubicoAlongado(pJoelho.esq, pTornozelo.esq, pPanturrilha.esq, dirPNorm, stretchP);
+  const cps_pD = calcularCPCubicoAlongado(pJoelho.dir, pTornozelo.dir, pPanturrilha.dir, dirPNorm, stretchP);
+
+  return {
+    esq: {
+      p0: pQuadril.esq,
+      cp1: cps_cE.cp1, cp2: cps_cE.cp2,
+      p1: pJoelho.esq,
+      cp3: cps_pE.cp1, cp4: cps_pE.cp2,
+      p2: pTornozelo.esq,
+    },
+    dir: {
+      p0: pTornozelo.dir,
+      cp1: cps_pD.cp2, cp2: cps_pD.cp1,
+      p1: pJoelho.dir,
+      cp3: cps_cD.cp2, cp4: cps_cD.cp1,
+      p2: pQuadril.dir,
+    },
+    capOmbro: quadril,
+    capPulso: tornozelo,
+  };
+}
+
+
+// --- index.d.ts [packages\core\src\silhouette\index.d.ts] ---
+export { gerarPathBraco, gerarPathPerna, PERFIL_BRACO_PADRAO, PERFIL_PERNA_PADRAO, PERFIL_TRONCO_PADRAO, } from './BezierSegment';
+export type { PerfilBraco, PerfilPerna, PerfilTronco, PathBraco, } from './BezierSegment';
+//# sourceMappingURL=index.d.ts.map
+
+// --- index.ts [packages\core\src\silhouette\index.ts] ---
+export {
+  gerarPathBraco,
+  gerarPathPerna,
+  PERFIL_BRACO_PADRAO,
+  PERFIL_PERNA_PADRAO,
+  PERFIL_TRONCO_PADRAO,
+} from './BezierSegment';
+
+export type {
+  PerfilBraco,
+  PerfilPerna,
+  PerfilTronco,
+  PathBraco,
+} from './BezierSegment';
+
+

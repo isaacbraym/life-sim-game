@@ -61,6 +61,7 @@ export async function criarNovoSave(nome: string, protagonista: Character): Prom
       mesAtual: 1,
       flagsGlobais: [],
     },
+    cooldownRegistry: {},
   };
 
   await salvarSave(novoSave);

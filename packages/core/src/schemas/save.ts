@@ -28,5 +28,6 @@ export const SaveSlot = z.object({
   protagonista: Character,
   roster: z.array(Npc),
   estadoMundo: EstadoMundo,
+  cooldownRegistry: z.record(z.string(), z.number().int()).default({}),
 }).strict();
 export type SaveSlot = z.infer<typeof SaveSlot>;
