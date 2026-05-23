@@ -1,0 +1,7 @@
+﻿// Vida 2.5D | Package: dev-tools | Gerado: 23/05/2026 17:46
+
+// == CONFIGS ==
+
+// == CODIGO FONTE [0 arquivos] ==
+
+
