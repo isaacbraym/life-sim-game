@@ -8,3 +8,5 @@ export * from './persistence';
 export * from './render';
 
 export const VERSAO_CORE = '0.0.1';
+
+export * from './engine';
