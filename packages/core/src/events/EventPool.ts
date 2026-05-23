@@ -1,81 +1,91 @@
-import type { Event } from '../schemas/event';
-import { avaliarPredicado, type GameState } from './PredicateEvaluator';
+import { evaluarPredicado, type GameState, type Predicado } from './PredicateEvaluator';
 
-// ---------------------------------------------------------------------------
-// Tipos auxiliares
-// ---------------------------------------------------------------------------
+type FaseDaVida = 'infancia' | 'adolescencia' | 'jovem_adulto' | 'adulto';
 
-export type EventoCarregado = Event & {
-  readonly runtimeId: string;
+export type Evento = {
+  readonly id: string;
+  readonly faseDaVida?: string;
+  readonly condicao?: Predicado;
+  readonly triggers?: {
+    readonly uniqueOnce?: boolean;
+    readonly cooldownMeses?: number;
+  };
 };
 
-export interface FiltroEventosParams {
-  readonly eventos: readonly Event[];
-  readonly estado: GameState;
-  readonly idadeAtualAnos: number;
+type EventoSorteavel = Evento & {
+  readonly triggers?: Evento['triggers'] & {
+    readonly peso?: number;
+  };
+};
+
+function calcularIdade(estadoAtual: GameState, anoAtual: number): number {
+  return anoAtual - estadoAtual.anoNascimento;
 }
 
-// ---------------------------------------------------------------------------
-// Helpers internos
-// ---------------------------------------------------------------------------
+function resolverFaseDaVida(idadeAtual: number): FaseDaVida {
+  if (idadeAtual <= 12) return 'infancia';
+  if (idadeAtual <= 17) return 'adolescencia';
+  if (idadeAtual <= 24) return 'jovem_adulto';
 
-function eventoPassaCooldown(evento: Event, estado: GameState): boolean {
-  const { cooldownMeses, uniqueOnce } = evento.triggers;
-
-  if (uniqueOnce) {
-    return !estado.personagem.eventosVividos.includes(evento.eventoId);
-  }
-
-  if (cooldownMeses > 0) {
-    const foiDisparado = estado.personagem.eventosVividos.includes(evento.eventoId);
-    if (!foiDisparado) return true;
-
-    const mesUltimoDisparo = estado.cooldownRegistry[evento.eventoId];
-    if (mesUltimoDisparo === undefined) return true;
-
-    return estado.personagem.idadeAtualMeses - mesUltimoDisparo >= cooldownMeses;
-  }
-
-  return true;
+  return 'adulto';
 }
 
-// ---------------------------------------------------------------------------
-// API pública
-// ---------------------------------------------------------------------------
+function registroExiste(registro: Readonly<Record<string, number>>, chave: string): boolean {
+  return Object.prototype.hasOwnProperty.call(registro, chave);
+}
 
-export function filtrarEventosElegiveis(params: FiltroEventosParams): Event[] {
-  const { eventos, estado, idadeAtualAnos } = params;
+function eventoPassaUniqueOnce(evento: Evento, estadoAtual: GameState): boolean {
+  if (evento.triggers?.uniqueOnce !== true) return true;
 
-  return eventos.filter(evento => {
-    const { idadeRange, requisitos } = evento.triggers;
+  return !registroExiste(estadoAtual.cooldownRegistry, evento.id);
+}
 
-    if (idadeRange !== undefined) {
-      const [minAnos, maxAnos] = idadeRange;
-      if (idadeAtualAnos < minAnos || idadeAtualAnos > maxAnos) return false;
-    }
+function eventoPassaCooldown(evento: Evento, estadoAtual: GameState, anoAtual: number): boolean {
+  const anoExpiracao = estadoAtual.cooldownRegistry[evento.id];
 
-    if (!eventoPassaCooldown(evento, estado)) return false;
+  return anoExpiracao === undefined || anoExpiracao <= anoAtual;
+}
 
-    if (requisitos !== undefined) {
-      if (!avaliarPredicado(requisitos, estado)) return false;
-    }
+function eventoPassaFaseDaVida(evento: Evento, faseAtual: FaseDaVida): boolean {
+  return evento.faseDaVida === undefined || evento.faseDaVida === faseAtual;
+}
+
+function eventoPassaCondicao(evento: Evento, estadoAtual: GameState, anoAtual: number): boolean {
+  return evento.condicao === undefined || evaluarPredicado(evento.condicao, estadoAtual, anoAtual);
+}
+
+export function filtrarEventosElegiveis(
+  todosEventos: readonly Evento[],
+  estadoAtual: GameState,
+  anoAtual: number,
+): readonly Evento[] {
+  const faseAtual = resolverFaseDaVida(calcularIdade(estadoAtual, anoAtual));
+
+  return todosEventos.filter(evento => {
+    if (!eventoPassaUniqueOnce(evento, estadoAtual)) return false;
+    if (!eventoPassaCooldown(evento, estadoAtual, anoAtual)) return false;
+    if (!eventoPassaFaseDaVida(evento, faseAtual)) return false;
+    if (!eventoPassaCondicao(evento, estadoAtual, anoAtual)) return false;
 
     return true;
   });
 }
 
 export function sortearEvento(
-  eventosFiltrados: readonly Event[],
-  rng: () => number = Math.random,
-): Event | undefined {
+  eventosFiltrados: readonly EventoSorteavel[],
+  geradorAleatorio: () => number = Math.random,
+): EventoSorteavel | undefined {
   if (eventosFiltrados.length === 0) return undefined;
 
-  const totalPeso = eventosFiltrados.reduce((soma, ev) => soma + ev.triggers.peso, 0);
-  const pontoAleatorio = rng() * totalPeso;
+  const totalPeso = eventosFiltrados.reduce(
+    (soma, evento) => soma + (evento.triggers?.peso ?? 1),
+    0,
+  );
+  const pontoAleatorio = geradorAleatorio() * totalPeso;
 
   let acumulado = 0;
   for (const evento of eventosFiltrados) {
-    acumulado += evento.triggers.peso;
+    acumulado += evento.triggers?.peso ?? 1;
     if (pontoAleatorio <= acumulado) return evento;
   }
 
