@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Atributos } from '@lifesim/core';
-import { calcularModificador } from '@lifesim/core';
+import { calcularModificador, gerarAtributosIniciais } from '@lifesim/core';
 import './NewGameScreen.css';
 
 // ---------------------------------------------------------------------------
@@ -51,24 +51,9 @@ const ENTRADAS_ATRIBUTO: readonly EntradaAtributo[] = [
 // Helpers
 // ---------------------------------------------------------------------------
 
-// gerarAtributosIniciais() de @core/rpg/Attributes ainda não está implementada.
-// Usamos esta versão local com o método 4d6-drop-lowest do D&D 5e.
-function rolarAtributos(): Atributos {
-  function rolar4d6(): number {
-    const d1 = Math.floor(Math.random() * 6) + 1;
-    const d2 = Math.floor(Math.random() * 6) + 1;
-    const d3 = Math.floor(Math.random() * 6) + 1;
-    const d4 = Math.floor(Math.random() * 6) + 1;
-    return d1 + d2 + d3 + d4 - Math.min(d1, d2, d3, d4);
-  }
-  return {
-    forca:        rolar4d6(),
-    inteligencia: rolar4d6(),
-    carisma:      rolar4d6(),
-    constituicao: rolar4d6(),
-    sorte:        rolar4d6(),
-  };
-}
+// Usa 4d6-drop-lowest (D&D 5e) via gerarAtributosIniciais do core.
+// Para atributos com herança genética entre pai/mãe, ver
+// gerarAtributosGeneticos em @core/npc/NpcGenerator.
 
 function formatarModificador(valor: number): string {
   const mod = calcularModificador(valor);
@@ -89,7 +74,7 @@ export function NewGameScreen({ aoConfirmar, aoCancelar }: PropsNewGameScreen): 
   const [sobrenomeSelecionado, setSobrenomeSelecionado] = useState('');
   const [generoSelecionado,    setGeneroSelecionado]    = useState<'M' | 'F' | 'outro'>('M');
   const [ritmoSelecionado,     setRitmoSelecionado]     = useState<'mensal' | 'semestral' | 'anual'>('anual');
-  const [atributos,            setAtributos]            = useState<Atributos>(rolarAtributos);
+  const [atributos,            setAtributos]            = useState<Atributos>(gerarAtributosIniciais);
   const [erroNome,             setErroNome]             = useState<string | undefined>(undefined);
 
   const podeConfirmar =
@@ -186,7 +171,7 @@ export function NewGameScreen({ aoConfirmar, aoCancelar }: PropsNewGameScreen): 
             <span className="ng-secao-titulo">Atributos</span>
             <button
               className="ng-rolar-btn"
-              onClick={() => setAtributos(rolarAtributos())}
+              onClick={() => setAtributos(gerarAtributosIniciais())}
             >
               🎲 Rolar novamente
             </button>
