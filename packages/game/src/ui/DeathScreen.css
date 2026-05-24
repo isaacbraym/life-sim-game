@@ -1,0 +1,225 @@
+/* ============================================================================
+   DeathScreen — tela de fim de vida
+   ============================================================================ */
+
+.dth-tela {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--vida-bg);
+  color: var(--vida-text);
+  font-family: var(--vida-font);
+  padding: var(--vida-space-8) var(--vida-space-6);
+  gap: var(--vida-space-6);
+  overflow-y: auto;
+  animation: dth-fade-in 0.6s ease;
+}
+
+@keyframes dth-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Divisor ── */
+.dth-divisor {
+  width: min(480px, 100%);
+  height: 1px;
+  background: var(--vida-border);
+}
+
+/* ── Helpers ── */
+.dth-mono {
+  font-family: var(--vida-font-mono);
+}
+
+/* ── 1. Epitáfio ── */
+.dth-epitafio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--vida-space-2);
+  text-align: center;
+  padding-top: var(--vida-space-8);
+}
+
+.dth-epitafio-nome {
+  font-size: var(--vida-fs-22);
+  font-weight: 700;
+  color: var(--vida-text);
+  letter-spacing: -0.02em;
+}
+
+.dth-epitafio-anos {
+  display: flex;
+  align-items: center;
+  gap: var(--vida-space-2);
+  font-size: var(--vida-fs-17);
+  color: var(--vida-muted);
+}
+
+.dth-epitafio-traco {
+  color: var(--vida-dim);
+}
+
+.dth-epitafio-idade {
+  font-size: var(--vida-fs-12);
+  color: var(--vida-dim);
+  font-style: italic;
+}
+
+/* ── 2. Estatísticas ── */
+.dth-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--vida-space-3);
+  width: min(480px, 100%);
+}
+
+.dth-stat-item {
+  background: var(--vida-surface);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r);
+  padding: var(--vida-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dth-stat-rotulo {
+  font-size: var(--vida-fs-9);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--vida-muted);
+  font-weight: 600;
+}
+
+.dth-stat-valor {
+  font-size: var(--vida-fs-13);
+  color: var(--vida-text-soft);
+  font-weight: 500;
+}
+
+.dth-stat-valor--adjetivo {
+  color: var(--vida-accent-hi);
+  font-style: italic;
+}
+
+/* ── 3. Barras de atributos ── */
+.dth-atributos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vida-space-2);
+  width: min(480px, 100%);
+}
+
+.dth-barra {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dth-barra-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dth-barra-nome {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dth-barra-valor {
+  font-family: var(--vida-font-mono);
+  font-size: var(--vida-fs-12);
+  font-weight: 500;
+}
+
+.dth-barra-valor--accent { color: var(--vida-accent-hi); }
+.dth-barra-valor--green  { color: var(--vida-green);     }
+.dth-barra-valor--yellow { color: var(--vida-yellow);    }
+.dth-barra-valor--red    { color: var(--vida-red);       }
+
+.dth-barra-trilho {
+  height: 5px;
+  background: var(--vida-surface2);
+  border-radius: var(--vida-r-pill);
+  overflow: hidden;
+}
+
+.dth-barra-fill {
+  height: 100%;
+  border-radius: var(--vida-r-pill);
+  transition: width var(--vida-trans-slow);
+}
+
+.dth-barra-fill--accent { background: var(--vida-accent);  }
+.dth-barra-fill--green  { background: var(--vida-green);   }
+.dth-barra-fill--yellow { background: var(--vida-yellow);  }
+.dth-barra-fill--red    { background: var(--vida-red);     }
+
+/* ── 4. Citação ── */
+.dth-citacao {
+  width: min(480px, 100%);
+  font-size: var(--vida-fs-13);
+  color: var(--vida-muted);
+  font-style: italic;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0;
+  padding: 0 var(--vida-space-4);
+}
+
+/* ── 5. Ações ── */
+.dth-acoes {
+  display: flex;
+  gap: var(--vida-space-3);
+  padding-bottom: var(--vida-space-8);
+}
+
+.dth-btn {
+  padding: 10px 28px;
+  border-radius: var(--vida-r);
+  font-size: var(--vida-fs-13);
+  font-family: var(--vida-font);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--vida-trans), transform var(--vida-trans-fast);
+}
+
+.dth-btn:active {
+  transform: scale(0.97);
+}
+
+.dth-btn--primario {
+  background: var(--vida-accent);
+  border: 1px solid var(--vida-accent);
+  color: #ffffff;
+}
+
+.dth-btn--primario:hover {
+  opacity: 0.88;
+}
+
+.dth-btn--secundario {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  color: var(--vida-text-soft);
+}
+
+.dth-btn--secundario:hover {
+  border-color: var(--vida-border-hi);
+  color: var(--vida-text);
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .dth-stats  { grid-template-columns: 1fr; }
+  .dth-acoes  { flex-direction: column; width: 100%; }
+  .dth-btn    { width: 100%; text-align: center; }
+}
