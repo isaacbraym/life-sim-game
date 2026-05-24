@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_crush_escola",
+  "categoria": "education",
+  "titulo": "O Efeito Borboleta do Amor",
+  "descricaoCurta": "Você vê aquela pessoa do 2º ano passar no corredor em câmera lenta. Suas mãos suam e você cogita mudar todo o seu trajeto só para cruzar caminho com ela.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      13,
+      17
+    ],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_crush_escola_cena",
+    "descricaoCurta": "Corredor de escola movimentado, protagonista paralisado olhando para o nada.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "romantico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_suspirando",
+          "categoria": "emotional",
+          "descricao": "Parado no corredor de braços caídos, olhar sonhador e sorriso bobo",
+          "rotacoes": [],
+          "expressaoFacial": "flertando",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Ela passa em câmera lenta. O vento (que não existe no corredor fechado) balança o cabelo dela. Você sente que, se não falar nada agora, vai se arrepender pelo resto do ensino médio.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar puxar assunto fingindo ter dúvidas sobre a matéria de física.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "falou_com_crush"
+              }
+            ]
+          },
+          {
+            "texto": "Mandar um bilhete anônimo com letras recortadas de revista.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "bilhete_sequestro"
+              }
+            ]
+          },
+          {
+            "texto": "Passar direto fingindo um desinteresse profundo e tropeçar no próprio cadarço.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -2
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia",
+    "versao": 1
+  }
+}

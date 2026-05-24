@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "promocao_surpresa_cargo_vazio",
+  "categoria": "career",
+  "titulo": "Herança Corporativa Maldita",
+  "descricaoCurta": "O coordenador pediu demissão de forma repentina após um surto. A diretoria te promove hoje para o cargo dele, mas em 'fase de testes' sem aumento salarial.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      19,
+      22
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "promocao_surpresa_cargo_vazio_cena",
+    "descricaoCurta": "Sala do diretor da empresa com móveis de madeira nobre e plantas caras.",
+    "background": "escritorio_sala_reuniao",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "recebendo_promocao",
+          "categoria": "emotional",
+          "descricao": "Sentado ereto, com sorriso sem graça e sobrancelhas arqueadas em sinal de dúvida",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "'Vemos muito potencial em você para assumir a coordenação do time, é um grande passo!', diz o diretor. O que ele não diz é que você vai assumir o triplo das obrigações mantendo seu holerite antigo.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aceitar a promoção imediatamente e atualizar o título no LinkedIn hoje mesmo.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "coordenador_sem_aumento"
+              }
+            ]
+          },
+          {
+            "texto": "Recusar educadamente sob a desculpa de querer focar em consolidar suas tarefas técnicas.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
+            ]
+          },
+          {
+            "texto": "Exigir o reajuste salarial por escrito antes de assinar qualquer novo termo de responsabilidade.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 14
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 300
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "coordenador_promovido"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia",
+    "versao": 1
+  }
+}

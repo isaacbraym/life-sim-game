@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "zoacao_apelido_infame",
+  "categoria": "education",
+  "titulo": "Batismo Social de Fogo",
+  "descricaoCurta": "Um pequeno tropeço seu na cantina com um suco de uva resulta em um apelido infame que a sala adota com velocidade assustadora.",
+  "contentTags": [
+    "trauma"
+  ],
+  "triggers": {
+    "idadeRange": [
+      13,
+      16
+    ],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "zoacao_apelido_infame_cena",
+    "descricaoCurta": "Pátio da escola cheio de alunos apontando e rindo.",
+    "background": "escola_patio",
+    "framing": "wide",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_sujo_suco",
+          "categoria": "emotional",
+          "descricao": "De pé com camisa manchada de roxo, cabeça baixa de vergonha",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "fechada",
+          "maoDireita": "fechada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O suco de uva derramou exatamente na altura da sua virilha. Antes de você pegar um guardanapo, o palhaço da turma grita: 'Olha lá o Mancha Roxa!'. O rebanho escolar repete o coro em uníssono.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Abraçar o apelido, rir de si mesmo e fingir que achou genial.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "texto": "Tentar desviar o foco criando um codinome pior para o líder da zoação.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "guerra_de_apelidos"
+              }
+            ]
+          },
+          {
+            "texto": "Fingir surdez seletiva e ir chorar na cabine do banheiro.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mancha_roxa_eterno"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia",
+    "versao": 1
+  }
+}

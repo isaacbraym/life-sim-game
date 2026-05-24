@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "reprovacao_conselho_classe",
+  "categoria": "education",
+  "titulo": "O Julgamento dos Deuses da Escola",
+  "descricaoCurta": "Você ficou de recuperação in física e biologia. Sua nota final está na mão do temido Conselho de Classe, que decide se você repete de ano ou passa pelo poder da piedade.",
+  "contentTags": [
+    "trauma"
+  ],
+  "triggers": {
+    "idadeRange": [
+      15,
+      17
+    ],
+    "peso": 10,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "reprovacao_conselho_classe_cena",
+    "descricaoCurta": "Corredor silencioso da escola com luzes fluorescentes piscando, porta da sala dos professores fechada.",
+    "background": "escola_corredor",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_aflito_corredor",
+          "categoria": "emotional",
+          "descricao": "Sentado no banco do corredor, roendo as unhas e olhando fixamente para a porta fechada",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Os professores estão trancados na sala decidindo o seu destino acadêmico. O destino da sua vida social no próximo ano depende de um conselho de professores cansados que querem ir embora.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Implorar clemência pessoalmente no corredor ao final da reunião.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "piedade_conselho"
+              }
+            ]
+          },
+          {
+            "texto": "Escrever uma carta detalhando como o divórcio dos seus pais afetou suas notas em fotossíntese.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "manipulador_emocional"
+              }
+            ]
+          },
+          {
+            "texto": "Aceitar a derrota iminente e planejar seu reinado como o aluno mais velho da nova sala.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -30
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "reprovou_ensino_medio"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia",
+    "versao": 1
+  }
+}
