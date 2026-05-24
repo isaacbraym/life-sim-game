@@ -31,8 +31,62 @@ export type EventoDoTurno = {
   readonly descricao: string;
   readonly icone: string;
   readonly opcoes: readonly OpcaoDoTurno[];
+  // [FIX QA] cooldown é por-EVENTO (Event.triggers.cooldownMeses no schema),
+  // não por-opção. Propagado para a UI registrar via engine.registrarCooldown.
+  readonly cooldownMeses?: number;
   readonly resultadoRolagem?: ResultadoRolagem;
 };
+
+// [FIX QA] Estrutura mínima de Beat para extrair opções do scene canônico.
+type BeatComOpcoes = {
+  readonly tipo: 'escolha';
+  readonly opcoes?: readonly {
+    readonly texto?: string;
+    readonly efeitos?: readonly EfeitoOpcaoDoTurno[];
+    readonly atributoCheck?: { readonly atributo: string; readonly dificuldade: number };
+  }[];
+};
+
+function ehBeatEscolha(beat: unknown): beat is BeatComOpcoes {
+  return typeof beat === 'object'
+    && beat !== null
+    && (beat as { tipo?: unknown }).tipo === 'escolha';
+}
+
+/**
+ * Extrai opções de um evento. Suporta dois formatos:
+ *   1. Top-level `evento.opcoes` (formato simplificado do EventLoader)
+ *   2. Schema canônico: opções dentro de `evento.scene.beats[].opcoes`
+ *      (beat com `tipo: 'escolha'`)
+ */
+function extrairOpcoes(evento: Readonly<Record<string, unknown>>): OpcaoDoTurno[] {
+  // Formato simplificado
+  const opcoesTopLevel = evento.opcoes;
+  if (Array.isArray(opcoesTopLevel)) {
+    return opcoesTopLevel.map((opcao: Record<string, unknown>) => ({
+      texto:         typeof opcao.texto === 'string' ? opcao.texto : '',
+      efeitos:       Array.isArray(opcao.efeitos) ? opcao.efeitos as readonly EfeitoOpcaoDoTurno[] : [],
+      atributoCheck: opcao.atributoCheck as OpcaoDoTurno['atributoCheck'],
+    }));
+  }
+
+  // Schema canônico — buscar beat de escolha
+  const scene = evento.scene;
+  if (typeof scene !== 'object' || scene === null) return [];
+  const beats = (scene as { beats?: unknown }).beats;
+  if (!Array.isArray(beats)) return [];
+
+  for (const beat of beats) {
+    if (!ehBeatEscolha(beat)) continue;
+    const opcoes = beat.opcoes ?? [];
+    return opcoes.map((opcao) => ({
+      texto:         opcao.texto ?? '',
+      efeitos:       opcao.efeitos ?? [],
+      atributoCheck: opcao.atributoCheck,
+    }));
+  }
+  return [];
+}
 
 // ---------------------------------------------------------------------------
 // Constantes
@@ -109,11 +163,15 @@ export class GameEngine {
     const eventoCompleto = todosEventos.find(e => e.id === sorteado.id);
     if (eventoCompleto === undefined) return undefined;
 
-    const opcoesComEfeitos: OpcaoDoTurno[] = (eventoCompleto.opcoes ?? []).map(opcao => ({
-      texto:         opcao.texto,
-      efeitos:       opcao.efeitos ?? [],
-      atributoCheck: opcao.atributoCheck,
-    }));
+    // [FIX QA] Extrai opções suportando tanto o formato top-level quanto
+    // o schema canônico (scene.beats[].opcoes).
+    const opcoesComEfeitos: OpcaoDoTurno[] = extrairOpcoes(
+      eventoCompleto as unknown as Readonly<Record<string, unknown>>,
+    );
+
+    // [FIX QA] Propaga o cooldownMeses do evento (era lido erradamente de opcao)
+    const triggers = (eventoCompleto as unknown as { triggers?: { cooldownMeses?: number } }).triggers;
+    const cooldownDoEvento = triggers?.cooldownMeses;
 
     return {
       eventoId:  eventoCompleto.id,
@@ -121,6 +179,7 @@ export class GameEngine {
       descricao: eventoCompleto.descricao ?? '',
       icone:     eventoCompleto.icone     ?? '❓',
       opcoes:    opcoesComEfeitos,
+      cooldownMeses: cooldownDoEvento,
     };
   }
 

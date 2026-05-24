@@ -31,10 +31,10 @@ type EstadoHud = {
   readonly ritmoAtual: 'mensal' | 'semestral' | 'anual' | undefined;
 };
 
+// [FIX QA] cooldownMeses removido — pertence ao EVENTO (Event.triggers), não à opção
 export type OpcaoEvento = {
   readonly texto: string;
   readonly efeitos: readonly unknown[];
-  readonly cooldownMeses?: number;
   readonly atributoCheck?: {
     readonly atributo: string;
     readonly dificuldade: number;
@@ -47,6 +47,8 @@ export type EventoAtivo = {
   readonly descricao: string;
   readonly icone: string;
   readonly opcoes: readonly OpcaoEvento[];
+  // [FIX QA] cooldown do evento, propagado pelo GameEngine
+  readonly cooldownMeses?: number;
 };
 
 type AcoesHud = {
@@ -163,10 +165,11 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
       };
     }
 
-    // Registrar cooldown se a opção define um
-    if (opcao.cooldownMeses !== undefined && opcao.cooldownMeses > 0) {
+    // [FIX QA] Registrar cooldown do EVENTO (cooldownMeses é per-event, não per-option)
+    const cooldownMeses = eventoAtivo.cooldownMeses;
+    if (cooldownMeses !== undefined && cooldownMeses > 0) {
       const anoAtual = saveAtual.estadoMundo.anoAtual;
-      const anoExpiracao = anoAtual + Math.ceil(opcao.cooldownMeses / 12);
+      const anoExpiracao = anoAtual + Math.ceil(cooldownMeses / 12);
       engineAtivo.registrarCooldown(eventoAtivo.eventoId, anoExpiracao);
     }
 
@@ -230,11 +233,12 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     set({
       eventoAtivo: eventoDoTurno !== undefined
         ? {
-            eventoId:  eventoDoTurno.eventoId,
-            titulo:    eventoDoTurno.titulo,
-            descricao: eventoDoTurno.descricao,
-            icone:     eventoDoTurno.icone,
-            opcoes:    eventoDoTurno.opcoes,
+            eventoId:      eventoDoTurno.eventoId,
+            titulo:        eventoDoTurno.titulo,
+            descricao:     eventoDoTurno.descricao,
+            icone:         eventoDoTurno.icone,
+            opcoes:        eventoDoTurno.opcoes,
+            cooldownMeses: eventoDoTurno.cooldownMeses,
           }
         : undefined,
       ultimaRolagem: eventoDoTurno?.resultadoRolagem,
