@@ -1,10 +1,17 @@
 import { create } from 'zustand';
-import { aplicarEfeito, Effect, rolarD20ComModificador } from '@lifesim/core';
-import type { SaveSlot } from '@lifesim/core';
+import {
+  aplicarEfeito,
+  carregarTodosEventos,
+  Effect,
+  Event as EventSchema,
+  GameEngine as CoreGameEngine,
+  rolarD20ComModificador,
+} from '@lifesim/core';
+import type { Event as CoreEvent, ResultadoResolucao, SaveSlot } from '@lifesim/core';
 import { ATIVIDADES_BASE } from '@core/activities/ActivityCatalog';
 import { realizarAtividade as realizarAtividadeCore } from '@core/activities/ActivityEngine';
 import { salvarSave } from '@core/persistence/SaveManager';
-import { GameEngine, type ResultadoRolagem } from '../engine/GameEngine';
+import { GameEngine as GameEngineLegado, type ResultadoRolagem } from '../engine/GameEngine';
 
 // ---------------------------------------------------------------------------
 // Tipos
@@ -15,6 +22,8 @@ export type AtributoRpg = {
   readonly valor: number;
 };
 
+type TelaHud = 'jogo' | 'selecionar_save' | 'novo_personagem' | 'configuracoes' | 'morte';
+
 type EstadoHud = {
   readonly nomePersonagem: string;
   readonly profissaoAtual: string;
@@ -24,9 +33,13 @@ type EstadoHud = {
   readonly saude: number;
   readonly dinheiro: number;
   readonly eventoAtivo: EventoAtivo | undefined;
+  readonly eventoPrincipalAtivo: CoreEvent | undefined;
+  readonly resultadoEventoAtivo: ResultadoResolucao | undefined;
   readonly ultimaRolagem?: ResultadoRolagem;
   readonly atributos: readonly AtributoRpg[];
-  readonly engineAtivo: GameEngine | undefined;
+  readonly engineAtivo: GameEngineLegado | undefined;
+  readonly saveAtual: SaveSlot | undefined;
+  readonly telaAtual: TelaHud | undefined;
   // [NEW] feat/ui-sprint-1-5 — EventLog, SettingsScreen, DeathScreen
   readonly eventosVividos: readonly string[];
   readonly conteudoAdultoAtivo: boolean;
@@ -57,6 +70,9 @@ export type EventoAtivo = {
 type AcoesHud = {
   readonly atualizarEstado: (parcial: Partial<EstadoHud>) => void;
   readonly resolverOpcao: (indice: number) => void;
+  readonly avancarTempo: () => void;
+  readonly resolverEventoAtivo: (idOpcao: string) => void;
+  readonly confirmarResultado: () => void;
   readonly avancarSemEvento: () => void;
   readonly inicializarEngine: (save: SaveSlot) => void;
   readonly avancarTurno: () => Promise<void>;
@@ -99,9 +115,13 @@ const ESTADO_INICIAL: EstadoHud = {
   saude: 82,
   dinheiro: 3450,
   eventoAtivo: EVENTO_MOCK,
+  eventoPrincipalAtivo: undefined,
+  resultadoEventoAtivo: undefined,
   ultimaRolagem: undefined,
   atributos: ATRIBUTOS_MOCK,
   engineAtivo: undefined,
+  saveAtual: undefined,
+  telaAtual: 'jogo',
   eventosVividos: [],
   conteudoAdultoAtivo: false,
   saveIdAtivo: undefined,
@@ -116,6 +136,38 @@ function atributosParaHud(protagonista: SaveSlot['protagonista']): readonly Atri
     { nome: 'ConstituiÃ§Ã£o', valor: protagonista.atributos.constituicao },
     { nome: 'Sorte',        valor: protagonista.atributos.sorte        },
   ];
+}
+
+function estadoHudDoSave(save: SaveSlot): Pick<
+  EstadoHud,
+  'nomePersonagem' | 'profissaoAtual' | 'idadeAnos' | 'anoAtual' | 'humor' | 'saude' | 'dinheiro' | 'eventosVividos' | 'atributos'
+> {
+  const protagonista = save.protagonista;
+
+  return {
+    nomePersonagem: `${protagonista.nome} ${protagonista.sobrenome}`,
+    profissaoAtual: protagonista.profissaoAtual ?? '',
+    idadeAnos: Math.floor(protagonista.idadeAtualMeses / 12),
+    anoAtual: save.estadoMundo.anoAtual,
+    humor: protagonista.humorAtual,
+    saude: protagonista.saudeAtual,
+    dinheiro: protagonista.dinheiro,
+    eventosVividos: protagonista.eventosVividos,
+    atributos: atributosParaHud(protagonista),
+  };
+}
+
+function validarEventosCanonicos(eventos: readonly unknown[]): readonly CoreEvent[] {
+  const eventosValidos: CoreEvent[] = [];
+
+  for (const evento of eventos) {
+    const resultado = EventSchema.safeParse(evento);
+    if (resultado.success) {
+      eventosValidos.push(resultado.data);
+    }
+  }
+
+  return eventosValidos;
 }
 
 // ---------------------------------------------------------------------------
@@ -189,11 +241,13 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
 
     // Persistir via engine
     engineAtivo.aplicarResultadoEfeitos(protagonistaAtual, rosterAtual);
+    const saveAtualizado = engineAtivo.obterEstadoAtual();
     void engineAtivo.salvarEstadoAtual();
 
     // Atualizar store
     set((anterior) => ({
       ...anterior,
+      saveAtual: saveAtualizado,
       eventoAtivo: undefined,
       ultimaRolagem: rolagemResultado,
       humor:    protagonistaAtual.humorAtual,
@@ -210,6 +264,65 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     }));
   },
 
+  avancarTempo: () => {
+    const saveAtual = get().saveAtual ?? get().engineAtivo?.obterEstadoAtual();
+    if (saveAtual === undefined) return;
+
+    void carregarTodosEventos()
+      .then((eventosCarregados) => {
+        const eventos = validarEventosCanonicos(eventosCarregados);
+        const engine = new CoreGameEngine();
+        const { saveAposTempo, eventoSorteado } = engine.avancarTempoEContinuar(saveAtual, eventos);
+        const morteProtagonista = engine.verificarMorte(saveAposTempo.protagonista);
+
+        set((anterior) => ({
+          ...anterior,
+          ...estadoHudDoSave(saveAposTempo),
+          saveAtual: saveAposTempo,
+          eventoPrincipalAtivo: morteProtagonista.morto ? undefined : eventoSorteado,
+          resultadoEventoAtivo: undefined,
+          telaAtual: morteProtagonista.morto ? 'morte' : anterior.telaAtual,
+        }));
+      })
+      .catch((erro: unknown) => {
+        console.error('Falha ao avancar tempo.', erro);
+      });
+  },
+
+  resolverEventoAtivo: (idOpcao: string) => {
+    const { saveAtual, eventoPrincipalAtivo } = get();
+    if (saveAtual === undefined || eventoPrincipalAtivo === undefined) return;
+
+    const engine = new CoreGameEngine();
+    const resultado = engine.resolverOpcao(saveAtual, eventoPrincipalAtivo, idOpcao);
+    const protagonistaMorto = resultado.mortesDetectadas.some(
+      (morte) => morte.tipo === 'protagonista',
+    );
+
+    set((anterior) => ({
+      ...anterior,
+      ...estadoHudDoSave(resultado.saveAtualizado),
+      saveAtual: resultado.saveAtualizado,
+      eventoPrincipalAtivo: undefined,
+      resultadoEventoAtivo: resultado,
+      telaAtual: protagonistaMorto ? 'morte' : anterior.telaAtual,
+    }));
+  },
+
+  confirmarResultado: () => {
+    const resultado = get().resultadoEventoAtivo;
+    const saveParaPersistir = resultado?.saveAtualizado ?? get().saveAtual;
+
+    set((anterior) => ({
+      ...anterior,
+      resultadoEventoAtivo: undefined,
+    }));
+
+    if (saveParaPersistir !== undefined) {
+      void salvarSave(saveParaPersistir);
+    }
+  },
+
   avancarSemEvento: () => {
     // Fallback usado quando não há engine ativo
     set((anterior) => ({
@@ -221,9 +334,13 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
   },
 
   inicializarEngine: (save: SaveSlot) => {
-    const engine = new GameEngine(save);
+    const engine = new GameEngineLegado(save);
     set({
+      ...estadoHudDoSave(save),
       engineAtivo: engine,
+      saveAtual: save,
+      eventoPrincipalAtivo: undefined,
+      resultadoEventoAtivo: undefined,
       saveIdAtivo: save.saveId,
       conteudoAdultoAtivo: save.configuracoes.conteudoAdultoLiberado,
       ritmoAtual: save.configuracoes.ritmo,
@@ -256,6 +373,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
           }
         : undefined,
       ultimaRolagem: eventoDoTurno?.resultadoRolagem,
+      saveAtual: saveAtualizado,
       anoAtual:  saveAtualizado.estadoMundo.anoAtual,
       idadeAnos: Math.floor(protagonista.idadeAtualMeses / 12),
       humor:     protagonista.humorAtual,
@@ -294,10 +412,12 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     };
 
     engine.aplicarResultadoEfeitos(protagonistaComLog, saveAtual.roster);
-    void salvarSave(engine.obterEstadoAtual());
+    const saveAtualizado = engine.obterEstadoAtual();
+    void salvarSave(saveAtualizado);
 
     set((anterior) => ({
       ...anterior,
+      saveAtual: saveAtualizado,
       nomePersonagem: `${protagonistaComLog.nome} ${protagonistaComLog.sobrenome}`,
       profissaoAtual: protagonistaComLog.profissaoAtual ?? '',
       idadeAnos: Math.floor(protagonistaComLog.idadeAtualMeses / 12),
@@ -314,7 +434,9 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     const engine = get().engineAtivo;
     if (engine !== undefined) {
       engine.atualizarConfiguracoes({ conteudoAdultoLiberado: valor });
+      const saveAtualizado = engine.obterEstadoAtual();
       void engine.salvarEstadoAtual();
+      set((anterior) => ({ ...anterior, saveAtual: saveAtualizado }));
     }
   },
 }));
