@@ -39,9 +39,7 @@ export function App(): React.JSX.Element {
     idadeAnos,
     anoAtual,
     dinheiro,
-    atributos,
     eventoAtivo,
-    eventosVividos,
     ritmoAtual,
     resolverOpcao,
     inicializarEngine,
@@ -167,31 +165,6 @@ export function App(): React.JSX.Element {
     realizarAtividade(idAtividade);
   }
 
-  // ── Simulação de morte (stub para teste) ──────────────────────────────────
-  // TODO Sprint 1.6: remover botão de simulação
-
-  function simularMorte(): void {
-    const buscarValor = (nome: string): number =>
-      atributos.find((a) => a.nome === nome)?.valor ?? 10;
-
-    setDadosMorte({
-      nomeCompleto:        nomePersonagem,
-      anoNascimento:       anoAtual - idadeAnos,
-      anoMorte:            anoAtual,
-      atributosFinal: {
-        forca:        buscarValor('Força'),
-        inteligencia: buscarValor('Inteligência'),
-        carisma:      buscarValor('Carisma'),
-        constituicao: buscarValor('Constituição'),
-        sorte:        buscarValor('Sorte'),
-      },
-      dinheirFinal:        dinheiro,
-      totalEventosVividos: eventosVividos.length,
-      profissaoFinal:      profissaoAtual !== '' ? profissaoAtual : undefined,
-    });
-    setTelaAtual('morte');
-  }
-
   // ── Renderização condicional ───────────────────────────────────────────────
 
   // Boot ainda não decidiu — render vazio para não piscar a tela de jogo
@@ -270,27 +243,6 @@ export function App(): React.JSX.Element {
           </div>
         </div>
 
-        {/* TODO Sprint 1.6: remover botão de simulação de morte */}
-        <button
-          style={{
-            position: 'fixed',
-            bottom: 12,
-            right: 12,
-            background: 'rgba(236, 104, 104, 0.12)',
-            border: '1px solid var(--vida-red)',
-            borderRadius: 8,
-            color: 'var(--vida-red)',
-            padding: '6px 12px',
-            fontSize: 11,
-            cursor: 'pointer',
-            fontFamily: 'var(--vida-font)',
-            zIndex: 50,
-          }}
-          onClick={simularMorte}
-          aria-label="Simular morte (modo teste)"
-        >
-          ☠ Simular morte
-        </button>
       </div>
 
       {/* SettingsScreen como overlay sobre o jogo */}
