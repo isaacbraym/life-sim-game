@@ -3,6 +3,7 @@ import type { SaveSlot } from '../schemas/save';
 import type { Character } from '../schemas/character';
 import type { Npc } from '../schemas/npc';
 import { SaveSlot as SaveSlotSchema } from '../schemas/save';
+import { migrarSave } from './Migracoes';
 
 export async function listarSaves(): Promise<SaveSlot[]> {
   const saves = await db.saves.toArray();
@@ -39,7 +40,14 @@ export async function carregarSaveSeguro(saveId: string): Promise<
     return { tipo: 'corrompido', saveId };
   }
 
-  const validation = SaveSlotSchema.safeParse(salvo);
+  let saveMigrado: SaveSlot;
+  try {
+    saveMigrado = migrarSave(salvo);
+  } catch (erro) {
+    return { tipo: 'corrompido', saveId };
+  }
+
+  const validation = SaveSlotSchema.safeParse(saveMigrado);
   if (!validation.success) {
     return { tipo: 'corrompido', saveId };
   }
