@@ -6,7 +6,8 @@
     "build": "pnpm --filter game build",
     "dev": "pnpm --filter game dev",
     "typecheck": "pnpm -r typecheck",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "validate:events": "node scripts/validate-events.mjs"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.0.0",

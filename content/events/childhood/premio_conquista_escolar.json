@@ -4,15 +4,33 @@
   "categoria": "childhood",
   "titulo": "O Pedaço de Plástico Dourado",
   "descricaoCurta": "Ganhar um diploma de papel sulfite que sua mãe vai colocar na geladeira até amarelar e cair. A recompensa real? Mais lição de casa.",
-  "contentTags": ["escola", "comedia"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [7, 12],
+    "idadeRange": [
+      7,
+      12
+    ],
     "requisitos": {
       "tipo": "algum",
       "predicados": [
-        { "tipo": "var", "caminho": "personagem.atributos.inteligencia", "operador": ">=", "valor": 12 },
-        { "tipo": "var", "caminho": "personagem.atributos.forca", "operador": ">=", "valor": 12 },
-        { "tipo": "var", "caminho": "personagem.atributos.carisma", "operador": ">=", "valor": 12 }
+        {
+          "tipo": "var",
+          "caminho": "personagem.atributos.inteligencia",
+          "operador": ">=",
+          "valor": 12
+        },
+        {
+          "tipo": "var",
+          "caminho": "personagem.atributos.forca",
+          "operador": ">=",
+          "valor": 12
+        },
+        {
+          "tipo": "var",
+          "caminho": "personagem.atributos.carisma",
+          "operador": ">=",
+          "valor": 12
+        }
       ]
     },
     "peso": 15,
@@ -30,7 +48,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "segurando_trofeu_triste",
@@ -43,7 +65,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 2
+          }
         },
         "zOrder": 0
       }
@@ -61,23 +87,50 @@
           {
             "texto": "Sorrir amarelo para a foto da escola. (Todo mundo vai te achar o nerdão).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "ganhou_premio_escolar" },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "ganhou_premio_escolar"
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           },
           {
             "texto": "Vender a medalha pro colega em troca de duas coxinhas.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_dinheiro", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "ganhou_premio_escolar" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "ganhou_premio_escolar"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 2
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 2
+  }
 }

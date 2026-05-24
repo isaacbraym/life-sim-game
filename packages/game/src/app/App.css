@@ -34,6 +34,28 @@
   border-bottom: 1px solid var(--vida-border);
 }
 
+/* ── Tela de boot (enquanto lista de saves carrega) ── */
+.vida-app--boot {
+  background: var(--vida-bg);
+}
+
+/* ── Toast de erro (overlay sobre LoadGameScreen) ── */
+.vida-app__erro-toast {
+  position: fixed;
+  bottom: var(--vida-space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--vida-red);
+  color: #ffffff;
+  padding: var(--vida-space-3) var(--vida-space-5);
+  border-radius: var(--vida-r);
+  font-size: var(--vida-fs-12);
+  font-family: var(--vida-font);
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-width: 80vw;
+}
+
 /* ── Mobile (≤ 768px): top bar fixa, rails colapsam, stage 34vh, evento rola ── */
 @media (max-width: 768px) {
   .vida-app__corpo {

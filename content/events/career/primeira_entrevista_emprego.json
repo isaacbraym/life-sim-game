@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeira_entrevista_emprego",
+  "categoria": "career",
+  "titulo": "A Sabatina dos Desesperados",
+  "descricaoCurta": "Você está na recepção de uma grande empresa disputando uma vaga de júnior contra pessoas que listaram 'fluência em mandarim' e 'três intercâmbios' no currículo.",
+  "contentTags": [
+    "language"
+  ],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeira_entrevista_emprego_cena",
+    "descricaoCurta": "Recepção moderna de escritório com sofás cinzas e recepção envidraçada.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_terno_apertado",
+          "categoria": "emotional",
+          "descricao": "Sentado ereto com camisa social abotoada até o pescoço e sorriso tenso de entrevista",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O candidato ao seu lado está explicando para o outro como ele estagiou em Harvard e fala três línguas mortas. Seu maior mérito é ter formatado o computador do seu tio na semana passada.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Dobrar a aposta mentindo que aprendeu mandarim básico assistindo a filmes de artes marciais.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 14
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mentiu_mandarim"
+              }
+            ]
+          },
+          {
+            "texto": "Apostar na honestidade brutal e focar na sua vontade desesperada de pagar a fatura do cartão.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "honesto_brutal"
+              }
+            ]
+          },
+          {
+            "texto": "Fingir um ataque de pânico na recepção para poder ir embora e remarcar por e-mail.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

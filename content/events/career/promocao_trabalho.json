@@ -4,17 +4,37 @@
   "categoria": "career",
   "titulo": "O Dobro de Trabalho, 50 Reais de Aumento",
   "descricaoCurta": "Ser promovido a 'Analista Sênior' para acumular a função de três pessoas demitidas. A expectativa de vida acabou de cair.",
-  "contentTags": ["trabalho", "ansiedade"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [21, 40],
+    "idadeRange": [
+      21,
+      40
+    ],
     "requisitos": {
       "tipo": "todos",
       "predicados": [
-        { "tipo": "flag", "flag": "tem_emprego", "presente": true },
-        { "tipo": "algum", "predicados": [
-          { "tipo": "var", "caminho": "personagem.atributos.inteligencia", "operador": ">=", "valor": 12 },
-          { "tipo": "var", "caminho": "personagem.atributos.carisma", "operador": ">=", "valor": 12 }
-        ]}
+        {
+          "tipo": "flag",
+          "flag": "tem_emprego",
+          "presente": true
+        },
+        {
+          "tipo": "algum",
+          "predicados": [
+            {
+              "tipo": "var",
+              "caminho": "personagem.atributos.inteligencia",
+              "operador": ">=",
+              "valor": 12
+            },
+            {
+              "tipo": "var",
+              "caminho": "personagem.atributos.carisma",
+              "operador": ">=",
+              "valor": 12
+            }
+          ]
+        }
       ]
     },
     "peso": 20,
@@ -26,7 +46,10 @@
       "papel": "chefe_anunciando",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 30, "idadeMax": 60 }
+      "constraints": {
+        "idadeMin": 30,
+        "idadeMax": 60
+      }
     }
   ],
   "scene": {
@@ -39,7 +62,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "lendo_contrato_puto",
@@ -52,13 +79,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 2
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "chefe_falsiane",
@@ -71,7 +106,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 2
+          }
         },
         "zOrder": 0
       }
@@ -90,23 +129,50 @@
           {
             "texto": "Aceitar. É melhor que nada e ajuda a pagar a Netflix.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "foi_promovido" },
-              { "tipo": "alterar_dinheiro", "delta": 50 },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_saude", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "foi_promovido"
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 50
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Recusar a promoção por desaforo. (O chefe fica puto).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -2 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -2
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 2
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 2
+  }
 }

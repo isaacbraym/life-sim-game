@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "festival_musica_garagem",
+  "categoria": "education",
+  "titulo": "O Rock de Garagem Sem Afinador",
+  "descricaoCurta": "Sua banda de colégio foi convidada para o festival estudantil. O guitarrista não sabe o que é metrônomo e o vocalista está com a voz quebrando por causa da puberdade.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      15,
+      17
+    ],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "festival_musica_garagem_cena",
+    "descricaoCurta": "Palco improvisado no ginásio da escola com refletores coloridos simples.",
+    "background": "escola_patio",
+    "framing": "wide",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_no_palco",
+          "categoria": "action",
+          "descricao": "Segurando cabo de microfone com as duas mãos, inclinado para a frente com olhar focado",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A quadra está cheia de adolescentes esperando o show começar. Sua banda sobe ao palco. Na primeira nota do solo de guitarra, o som sai parecido com um gato sendo espremido numa porta.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aumentar a distorção do amplificador no máximo para esconder a falta de ensaio.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
+            ]
+          },
+          {
+            "texto": "Fazer saltos performáticos no palco para distrair a plateia dos erros de nota.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "rockstar_de_ginasio"
+              }
+            ]
+          },
+          {
+            "texto": "Fingir um defeito técnico no microfone e declarar fim antecipado da apresentação.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

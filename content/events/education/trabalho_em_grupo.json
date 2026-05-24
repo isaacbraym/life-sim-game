@@ -4,9 +4,12 @@
   "categoria": "education",
   "titulo": "Gestão de Incompetentes",
   "descricaoCurta": "O inferno de ter que fazer a cartolina inteira sozinho enquanto o resto do grupo joga truco no fundo.",
-  "contentTags": ["escola", "raiva"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [12, 17],
+    "idadeRange": [
+      12,
+      17
+    ],
     "peso": 30,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -16,13 +19,17 @@
     "schemaVersion": "1.0.0",
     "sceneId": "trabalho_em_grupo_cena",
     "descricaoCurta": "Aluno desesperado segurando canetinhas, outros rindo ao fundo.",
-    "background": "sala_aula",
+    "background": "escola_sala",
     "framing": "wide",
-    "humor": "raiva",
+    "humor": "neutro",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "escrevendo_furioso",
@@ -31,11 +38,15 @@
           "rotacoes": [],
           "expressaoFacial": "raiva",
           "intensidadeExpressao": 85,
-          "maoEsquerda": "na_mesa",
+          "maoEsquerda": "relaxada",
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       }
@@ -53,21 +64,43 @@
           {
             "texto": "Fazer tudo sozinho e colocar o nome de todo mundo. (Pacifista otário).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 2 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 2
+              }
             ]
           },
           {
             "texto": "Tirar o nome do inútil principal. (Preparar pro barraco no intervalo).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

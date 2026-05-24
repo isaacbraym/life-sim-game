@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "prova_final_desespero",
+  "categoria": "education",
+  "titulo": "O Apocalipse das Notas",
+  "descricaoCurta": "Faltam 10 minutos para a prova final de matemática e as fórmulas na sua mente se misturaram com a letra de um funk antigo.",
+  "contentTags": [
+    "trauma"
+  ],
+  "triggers": {
+    "idadeRange": [
+      14,
+      17
+    ],
+    "peso": 25,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "prova_final_desespero_cena",
+    "descricaoCurta": "Sala de aula silenciosa, folhas de prova sobre a mesa, protagonista roendo a tampa da caneta.",
+    "background": "escola_sala",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "roendo_caneta",
+          "categoria": "emotional",
+          "descricao": "Sentado, roendo a tampa da caneta com olhos arregalados de pânico",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 95,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A folha de respostas está em branco e o relógio avança implacavelmente. O teorema de Pitágoras foi completamente substituído na sua cabeça pelo refrão de uma música chiclete.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Confiar na cola clássica escrita a lápis na régua transparente.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "colou_na_final"
+              }
+            ]
+          },
+          {
+            "texto": "Deduzir as fórmulas usando lógica pura, desespero e intuição.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "texto": "Chutar tudo na diagonal do cartão de respostas para formar um desenho de raio.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "chutou_tudo_raio"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

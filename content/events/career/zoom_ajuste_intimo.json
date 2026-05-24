@@ -4,10 +4,19 @@
   "categoria": "career",
   "titulo": "Câmera Indiscreta",
   "descricaoCurta": "Um ajuste íntimo transmitido por engano para toda a diretoria na chamada de vídeo.",
-  "contentTags": ["trabalho", "sexual", "humilhacao"],
+  "contentTags": [
+    "sexual"
+  ],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 10,
     "cooldownMeses": 24,
     "uniqueOnce": true
@@ -17,7 +26,10 @@
       "papel": "gerente_rh",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 25, "idadeMax": 60 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 60
+      }
     }
   ],
   "scene": {
@@ -30,7 +42,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "ajeitando_calca_live",
@@ -39,11 +55,15 @@
           "rotacoes": [],
           "expressaoFacial": "neutra",
           "intensidadeExpressao": 50,
-          "maoEsquerda": "na_calca",
-          "maoDireita": "na_calca",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -60,30 +80,61 @@
         "opcoes": [
           {
             "texto": "Fingir travamento e fechar a tampa do notebook.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -25 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           },
           {
             "texto": "Mandar mensagem privada fingindo que nada aconteceu.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           },
           {
             "texto": "Assumir a vergonha e pedir desculpas formais ao RH.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "gerente_rh", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "ajeitada_publica" }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "gerente_rh",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "ajeitada_publica"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

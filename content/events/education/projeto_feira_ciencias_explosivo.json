@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "projeto_feira_ciencias_explosivo",
+  "categoria": "education",
+  "titulo": "Termodinâmica de Fundo de Quintal",
+  "descricaoCurta": "Seu grupo da feira de ciências resolveu criar o clássico vulcão de bicarbonato, mas alguém colocou a dose de vinagre de nível industrial.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      13,
+      17
+    ],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "projeto_feira_ciencias_explosivo_cena",
+    "descricaoCurta": "Quadra da escola cheia de mesas de feira de ciências com maquetes, fumaça branca ao fundo.",
+    "background": "escola_patio",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_chocado_ciencias",
+          "categoria": "emotional",
+          "descricao": "De pé, segurando proveta de plástico, com boca aberta e expressão de surpresa",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A maquete de argila treme. O bicarbonato reage de forma violenta com o ácido acético ultra-concentrado. A maquete explode espalhando espuma roxa grudenta num raio de três metros, incluindo o casaco do juiz da feira.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fazer a demonstração explosiva na mesa do diretor para tentar impressionar o júri.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "vencedor_feira_explosao"
+              }
+            ]
+          },
+          {
+            "texto": "Ajustar as proporções químicas milimetricamente para um efeito contido e tedioso.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "texto": "Abandonar a ciência e cobrir o vulcão com purpurina alegando ser arte conceitual.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

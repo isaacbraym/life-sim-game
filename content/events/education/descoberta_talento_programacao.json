@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "descoberta_talento_programacao",
+  "categoria": "education",
+  "titulo": "O Nascimento de um Hacker",
+  "descricaoCurta": "Durante a aula de informática, você consegue burlar o bloqueio do laboratório e rodar um jogo de navegador secreto. A sala te olha como se você fosse o Neo do Matrix.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      13,
+      17
+    ],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "descoberta_talento_programacao_cena",
+    "descricaoCurta": "Laboratório de informática com monitores antigos de tubo, protagonista sorrindo de canto.",
+    "background": "escola_sala",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_programando",
+          "categoria": "interactions",
+          "descricao": "Sentado, mãos estendidas simulando digitação rápida com olhar focado",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Enquanto a professora ensina a criar pastas no Windows 98, você edita o arquivo hosts e libera o acesso a jogos em flash. Em segundos, metade da sala está jogando em silêncio sob seu comando.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Cobrar cinco reais de cada colega para instalar o desbloqueio nas máquinas deles.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 25
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
+            ]
+          },
+          {
+            "texto": "Manter o segredo trancado para uso exclusivo nas aulas mais insuportáveis.",
+            "efeitos": [
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
+            ]
+          },
+          {
+            "texto": "Se gabar no pátio até que a professora de informática ouça e resete o proxy.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

@@ -6,11 +6,45 @@ import { SaveSlot as SaveSlotSchema } from '../schemas/save';
 
 export async function listarSaves(): Promise<SaveSlot[]> {
   const saves = await db.saves.toArray();
-  return saves.sort((a, b) => b.ultimaPartida.localeCompare(a.ultimaPartida));
+  const validSaves: SaveSlot[] = [];
+
+  for (const s of saves) {
+    const parseResult = SaveSlotSchema.safeParse(s);
+    if (!parseResult.success) {
+      console.warn(`Save corrompido omitido (ID: ${s.saveId || 'desconhecido'}):`, parseResult.error.format());
+      continue;
+    }
+    validSaves.push(parseResult.data);
+  }
+
+  return validSaves.sort((a, b) => b.ultimaPartida.localeCompare(a.ultimaPartida));
 }
 
 export async function carregarSave(saveId: string): Promise<SaveSlot | undefined> {
   return await db.saves.get(saveId);
+}
+
+export async function carregarSaveSeguro(saveId: string): Promise<
+  | { tipo: 'ok'; save: SaveSlot }
+  | { tipo: 'corrompido'; saveId: string }
+  | { tipo: 'nao_encontrado'; saveId: string }
+> {
+  const salvo = await db.saves.get(saveId);
+  if (salvo === undefined) {
+    return { tipo: 'nao_encontrado', saveId };
+  }
+
+  const integridadeOk = await verificarIntegridade(saveId);
+  if (!integridadeOk) {
+    return { tipo: 'corrompido', saveId };
+  }
+
+  const validation = SaveSlotSchema.safeParse(salvo);
+  if (!validation.success) {
+    return { tipo: 'corrompido', saveId };
+  }
+
+  return { tipo: 'ok', save: validation.data };
 }
 
 async function calcularHashSave(save: SaveSlot): Promise<string> {
@@ -127,6 +161,22 @@ export class SaveManager {
 
   async verificarIntegridade(saveId: string): Promise<boolean> {
     return verificarIntegridade(saveId);
+  }
+
+  async listarSaves(): Promise<SaveSlot[]> {
+    return listarSaves();
+  }
+
+  async deletarSave(saveId: string): Promise<void> {
+    return deletarSave(saveId);
+  }
+
+  async carregarSaveSeguro(saveId: string): Promise<
+    | { tipo: 'ok'; save: SaveSlot }
+    | { tipo: 'corrompido'; saveId: string }
+    | { tipo: 'nao_encontrado'; saveId: string }
+  > {
+    return carregarSaveSeguro(saveId);
   }
 }
 

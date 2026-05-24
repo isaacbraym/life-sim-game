@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "campanha_gremio_estudantil",
+  "categoria": "education",
+  "titulo": "Política de Parquinho",
+  "descricaoCurta": "As eleições do grêmio estudantil começaram. Suas propostas de 'bebedouro de refrigerante' disputam votos contra propostas de 'papel higiênico de folha dupla'.",
+  "contentTags": [
+    "political"
+  ],
+  "triggers": {
+    "idadeRange": [
+      15,
+      17
+    ],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "campanha_gremio_estudantil_cena",
+    "descricaoCurta": "Pátio escolar com cartazes coloridos pendurados nas colunas.",
+    "background": "escola_patio",
+    "framing": "wide",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_politico",
+          "categoria": "interactions",
+          "descricao": "De pé gesticulando com as duas mãos abertas em sinal de promessa eleitoral",
+          "rotacoes": [],
+          "expressaoFacial": "feliz",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A democracia do ensino médio é um ambiente selvagem de suborno moral. A chapa rival está prometendo ar-condicionado na quadra de cimento. Você precisa reagir com demagogia pesada.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Fazer um comício em cima do banco da cantina distribuindo pirulitos genéricos.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "candidato_gremio"
+              }
+            ]
+          },
+          {
+            "texto": "Espalhar boatos anônimos de que a chapa rival apoia o aumento de aulas de matemática.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "campanha_suja_escola"
+              }
+            ]
+          },
+          {
+            "texto": "Retirar sua candidatura em troca da promessa de um cargo de vice-secretário na chapa vencedora.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "politico_de_bastidores"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

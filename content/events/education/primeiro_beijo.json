@@ -4,9 +4,12 @@
   "categoria": "education",
   "titulo": "O Desastre Mecânico",
   "descricaoCurta": "Aconteceu. Ou quase. Aquele momento trágico em que dois pré-adolescentes desengonçados, provavelmente de aparelho fixo, decidem trocar fluidos de forma desajeitada sob o olhar de reprovação da sociedade.",
-  "contentTags": ["romance", "drama", "caos"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [11, 15],
+    "idadeRange": [
+      11,
+      15
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "primeiro_beijo",
@@ -21,7 +24,10 @@
       "papel": "interesse_romantico_beijo",
       "tipo": "sempre_novo",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 11, "idadeMax": 16 }
+      "constraints": {
+        "idadeMin": 11,
+        "idadeMax": 16
+      }
     }
   ],
   "scene": {
@@ -34,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "pre_beijo_panico",
@@ -47,13 +57,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 2
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.2,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "pre_beijo_aproximando",
@@ -66,7 +84,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 2
+          }
         },
         "zOrder": 0
       }
@@ -84,32 +106,71 @@
           {
             "texto": "Mandar bala. Fechar os olhos e torcer para não precisar de cirurgia reconstrutiva.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "primeiro_beijo" },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_beijo"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Desviar na última fração de segundo fingindo um espirro violento. (Salvar sua dignidade, mas virar piada).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "correu_do_beijo" },
-              { "tipo": "adicionar_flag", "flag": "traumatizado" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "correu_do_beijo"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "traumatizado"
+              }
             ]
           },
           {
             "texto": "Bater a testa na dele(a) por erro de cálculo geométrico. (Um clássico da puberdade).",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "adicionar_flag", "flag": "traumatizado" },
-              { "tipo": "adicionar_flag", "flag": "cabecada_amorosa" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "traumatizado"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "cabecada_amorosa"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 2
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 2 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 2
+  }
 }

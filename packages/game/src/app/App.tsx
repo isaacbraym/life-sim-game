@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PixiStage } from '../stage/PixiStage';
-import { HudLateral } from '../ui/HudLateral';
 import { BarraSuperior } from '../ui/BarraSuperior';
 import { EventoBase } from '../ui/EventoBase';
 import { NewGameScreen } from '../ui/NewGameScreen';
 import { SettingsScreen } from '../ui/SettingsScreen';
 import { DeathScreen } from '../ui/DeathScreen';
+import { LoadGameScreen } from '../ui/LoadGameScreen';
 import type { DadosNovoPersonagem } from '../ui/NewGameScreen';
 import type { DeathScreenProps } from '../ui/DeathScreen';
 import { useHudStore } from '../state/hudStore';
 import { v4 as uuidv4 } from 'uuid';
-import { SaveManager } from '@core/persistence/SaveManager';
+import type { SaveSlot } from '@lifesim/core';
+import { SaveManager, listarSaves, carregarSave, deletarSave } from '@core/persistence/SaveManager';
 import { gerarAtributosIniciais } from '@core/rpg/Attributes';
 import { gerarRosterInicial } from '@core/npc/NpcGenerator';
 import './App.css';
@@ -19,23 +20,24 @@ import './App.css';
 // Tipos
 // ---------------------------------------------------------------------------
 
-type TelaAtual = 'jogo' | 'novo_personagem' | 'configuracoes' | 'morte';
+type TelaAtual = 'jogo' | 'selecionar_save' | 'novo_personagem' | 'configuracoes' | 'morte';
 
 // ---------------------------------------------------------------------------
 // Componente
 // ---------------------------------------------------------------------------
 
 export function App(): React.JSX.Element {
-  const [telaAtual,  setTelaAtual]  = useState<TelaAtual>('jogo');
-  const [dadosMorte, setDadosMorte] = useState<Omit<DeathScreenProps, 'aoNovaVida' | 'aoMenuPrincipal'> | undefined>(undefined);
+  const [telaAtual,    setTelaAtual]    = useState<TelaAtual>('jogo');
+  const [dadosMorte,   setDadosMorte]   = useState<Omit<DeathScreenProps, 'aoNovaVida' | 'aoMenuPrincipal'> | undefined>(undefined);
+  const [saves,        setSaves]        = useState<readonly SaveSlot[]>([]);
+  const [bootCompleto, setBootCompleto] = useState<boolean>(false);
+  const [erroCarregar, setErroCarregar] = useState<string | undefined>(undefined);
 
   const {
     nomePersonagem,
     profissaoAtual,
     idadeAnos,
     anoAtual,
-    humor,
-    saude,
     dinheiro,
     atributos,
     eventoAtivo,
@@ -44,6 +46,64 @@ export function App(): React.JSX.Element {
     inicializarEngine,
     realizarAtividade,
   } = useHudStore();
+
+  // ── Boot: listar saves e decidir tela inicial ─────────────────────────────
+
+  useEffect(() => {
+    let cancelado = false;
+    async function carregarListaInicial(): Promise<void> {
+      try {
+        const lista = await listarSaves();
+        if (cancelado) return;
+        setSaves(lista);
+        setTelaAtual(lista.length > 0 ? 'selecionar_save' : 'novo_personagem');
+      } catch (erro) {
+        if (cancelado) return;
+        console.error('[App] Falha ao listar saves no boot:', erro);
+        setSaves([]);
+        setTelaAtual('novo_personagem');
+      } finally {
+        if (!cancelado) setBootCompleto(true);
+      }
+    }
+    void carregarListaInicial();
+    return () => { cancelado = true; };
+  }, []);
+
+  async function recarregarSaves(): Promise<void> {
+    try {
+      const lista = await listarSaves();
+      setSaves(lista);
+    } catch (erro) {
+      console.error('[App] Falha ao re-listar saves:', erro);
+    }
+  }
+
+  async function aoContinuarSave(saveId: string): Promise<void> {
+    setErroCarregar(undefined);
+    try {
+      const save = await carregarSave(saveId);
+      if (save === undefined) {
+        setErroCarregar('Save não encontrado. Atualize a lista.');
+        await recarregarSaves();
+        return;
+      }
+      inicializarEngine(save);
+      setTelaAtual('jogo');
+    } catch (erro) {
+      console.error('[App] Falha ao carregar save:', erro);
+      setErroCarregar('Não foi possível carregar este save. Tente novamente.');
+    }
+  }
+
+  async function aoDeletarSave(saveId: string): Promise<void> {
+    try {
+      await deletarSave(saveId);
+      await recarregarSaves();
+    } catch (erro) {
+      console.error('[App] Falha ao deletar save:', erro);
+    }
+  }
 
   // ── Novo personagem ────────────────────────────────────────────────────────
 
@@ -96,6 +156,7 @@ export function App(): React.JSX.Element {
 
     inicializarEngine(novoSave);
     setTelaAtual('jogo');
+    void recarregarSaves();
   }
 
   // ── Atividades ────────────────────────────────────────────────────────────
@@ -131,11 +192,35 @@ export function App(): React.JSX.Element {
 
   // ── Renderização condicional ───────────────────────────────────────────────
 
+  // Boot ainda não decidiu — render vazio para não piscar a tela de jogo
+  if (!bootCompleto) {
+    return <div className="vida-app vida-app--boot" />;
+  }
+
+  if (telaAtual === 'selecionar_save') {
+    return (
+      <>
+        <LoadGameScreen
+          saves={saves}
+          aoContinuar={(saveId) => { void aoContinuarSave(saveId); }}
+          aoDeletar={(saveId) => { void aoDeletarSave(saveId); }}
+          aoNovoJogo={() => {
+            setErroCarregar(undefined);
+            setTelaAtual('novo_personagem');
+          }}
+        />
+        {erroCarregar !== undefined && (
+          <div className="vida-app__erro-toast" role="alert">{erroCarregar}</div>
+        )}
+      </>
+    );
+  }
+
   if (telaAtual === 'novo_personagem') {
     return (
       <NewGameScreen
         aoConfirmar={(dados) => { void aoConfirmarNovoPersonagem(dados); }}
-        aoCancelar={() => setTelaAtual('jogo')}
+        aoCancelar={() => setTelaAtual(saves.length > 0 ? 'selecionar_save' : 'novo_personagem')}
       />
     );
   }
@@ -172,19 +257,6 @@ export function App(): React.JSX.Element {
         />
 
         <div className="vida-app__corpo">
-          <HudLateral
-            nomePersonagem={nomePersonagem}
-            profissaoAtual={profissaoAtual}
-            idadeAnos={idadeAnos}
-            anoAtual={anoAtual}
-            humor={humor}
-            saude={saude}
-            dinheiro={dinheiro}
-            atributos={atributos}
-            aoClicarAtividade={aoClicarAtividade}
-            aoNovoJogo={() => setTelaAtual('novo_personagem')}
-          />
-
           <div className="vida-app__centro">
             <div className="vida-app__stage">
               <PixiStage />

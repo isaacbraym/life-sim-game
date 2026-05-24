@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "confronto_professor_autoridade",
+  "categoria": "education",
+  "titulo": "A Rebelião dos Cadernos",
+  "descricaoCurta": "O professor de história deu uma opinião absurda sobre a data do tratado de Tordesilhas. Você sabe a resposta certa, mas o ego dele é mais frágil que casca de ovo.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      14,
+      17
+    ],
+    "peso": 15,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "confronto_professor_autoridade_cena",
+    "descricaoCurta": "Sala de aula, protagonista de pé ao lado da carteira apontando para o livro.",
+    "background": "escola_sala",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_confrontando",
+          "categoria": "action",
+          "descricao": "De pé apontando o dedo indicador para a frente com olhar firme de correção",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "'Tordesilhas foi assinado em 1494, não em 1500', você diz. O silêncio na sala é cortado pelo ranger de dentes do professor, que larga o giz com força.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Corrigir o professor em tom professoral, lendo em voz alta o livro didático oficial.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "inimigo_do_professor"
+              }
+            ]
+          },
+          {
+            "texto": "Ficar quieto e desenhar o professor sendo engolido por um tiranossauro no rodapé do caderno.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
+            ]
+          },
+          {
+            "texto": "Instigar o nerd da frente a fazer a pergunta difícil por você.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

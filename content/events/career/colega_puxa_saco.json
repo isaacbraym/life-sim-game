@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "O CEO de CNPJ Alheio",
   "descricaoCurta": "Ter que lidar com o colega que ganha o mesmo que você, mas veste a camisa como se fosse o dono.",
-  "contentTags": ["trabalho", "raiva"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [20, 60],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      20,
+      60
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 35,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "colega_insuportavel",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 22, "idadeMax": 50 }
+      "constraints": {
+        "idadeMin": 22,
+        "idadeMax": 50
+      }
     }
   ],
   "scene": {
@@ -26,11 +36,15 @@
     "descricaoCurta": "Escritório. O colega bajulando o chefe enquanto você tenta não vomitar.",
     "background": "escritorio_open",
     "framing": "medium",
-    "humor": "raiva",
+    "humor": "neutro",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "revirando_olhos",
@@ -43,13 +57,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "pose_de_vencedor_corporativo",
@@ -58,11 +80,15 @@
           "rotacoes": [],
           "expressaoFacial": "feliz",
           "intensidadeExpressao": 90,
-          "maoEsquerda": "na_cintura",
-          "maoDireita": "na_cintura",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       }
@@ -86,20 +112,38 @@
           {
             "texto": "Ignorar e focar em ir embora às 18h em ponto.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Dar uma alfinetada passivo-agressiva sobre o banco de horas dele.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -2 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -2
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

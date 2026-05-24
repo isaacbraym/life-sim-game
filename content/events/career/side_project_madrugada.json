@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "side_project_madrugada",
+  "categoria": "career",
+  "titulo": "A Dupla Jornada do Delírio",
+  "descricaoCurta": "Você passa as madrugadas codando um aplicativo revolucionário de entrega de ração de gato por drones, enquanto luta para não cochilar nas reuniões do seu emprego real.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      19,
+      22
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "side_project_madrugada_cena",
+    "descricaoCurta": "Quarto bagunçado à noite com luz do monitor refletindo no rosto do protagonista cansado.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_zumbi",
+          "categoria": "emotional",
+          "descricao": "Sentado curvado de pijama na cadeira de escritório com ombros desabados",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Seu cérebro opera em modo zumbi. Você sente que a inovação tecnológica exige sacrifícios de sono, mas a gerência do seu trabalho diurno está desconfiada da sua lentidão nas respostas do chat.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Codar seu projeto no computador da firma durante as reuniões chatas do time.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "codando_na_firma"
+              }
+            ]
+          },
+          {
+            "texto": "Desistir da startup de drones e focar na estabilidade burocrática do seu emprego CLT.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "texto": "Pedir demissão hoje para viver do seu aplicativo antes mesmo de ter qualquer usuário ativo.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 14
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 25
+              },
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "fundador_sem_teto"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

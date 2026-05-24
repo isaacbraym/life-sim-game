@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "demissao_precoce_mes",
+  "categoria": "career",
+  "titulo": "Recorde de Velocidade CLT",
+  "descricaoCurta": "Exatamente 23 dias após sua contratação, o gerente de RH te chama para um 'bate-papo rápido de alinhamento'. O crachá sobre a mesa já indica o resultado.",
+  "contentTags": [
+    "trauma"
+  ],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "demissao_precoce_mes_cena",
+    "descricaoCurta": "Sala de reunião envidraçada pequena, folha de demissão impressa sobre a mesa de MDF.",
+    "background": "escritorio_sala_reuniao",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_demitido",
+          "categoria": "emotional",
+          "descricao": "Sentado ereto, com os braços largados e expressão de incredulidade",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 90,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A recrutadora começa com o clássico 'você tem muito potencial, mas o momento macroeconômico...'. Basicamente, você custava mais do que a margem da empresa permitia nas contas do trimestre.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Agradecer educadamente o feedback e implorar por uma carta de recomendação.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_emprego"
+              }
+            ]
+          },
+          {
+            "texto": "Fazer um escândalo no corredor gritando que a startup vai quebrar antes do natal.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "demissao_escandalosa"
+              }
+            ]
+          },
+          {
+            "texto": "Furtar as canetas premium da sala de reunião e sair com a cabeça erguida.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "cleptomano_corporativo"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

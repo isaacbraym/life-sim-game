@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "headhunter_linkedin_vaga_fantasma",
+  "categoria": "career",
+  "titulo": "A Sereia do Recrutamento",
+  "descricaoCurta": "Um perfil sem foto no LinkedIn com o título 'Headhunter de Elite' te manda mensagem sobre uma 'oportunidade confidencial de carreira internacional' que parece boa demais.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "headhunter_linkedin_vaga_fantasma_cena",
+    "descricaoCurta": "Quarto, tela de monitor exibindo a caixa de entrada de rede social profissional.",
+    "background": "quarto",
+    "framing": "closeup",
+    "humor": "neutro",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "lendo_mensagem_recrutadora",
+          "categoria": "emotional",
+          "descricao": "Segurando celular, arquando as sobrancelhas e franzindo o cenho de curiosidade",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A mensagem diz: 'Olá! Seu perfil se destaca muito na nossa busca por talentos disruptivos. Vaga 100% home office, salário em dólar líquido'. Você tem menos de 6 meses de experiência na área.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Enviar portfólio completo imediatamente e gravar vídeo de apresentação falando inglês rápido.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "aplicou_vaga_fantasma"
+              }
+            ]
+          },
+          {
+            "texto": "Ignorar e anunciar a conta por suspeita de phishing e roubo de dados pessoais.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "texto": "Responder usando jargões corporativos vazios em inglês para testar se é um robô de recrutamento.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

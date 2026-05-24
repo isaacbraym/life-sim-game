@@ -1,13 +1,20 @@
 {
   "schemaVersion": "1.0.0",
   "eventoId": "grupo_whatsapp_curso",
-  "categoria": "education_faculdade",
+  "categoria": "education",
   "titulo": "A Caverna do Dragão Acadêmica",
   "descricaoCurta": "O grupo que era para resumos vira um antro de figurinhas políticas e fofocas.",
-  "contentTags": ["comedia"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 24],
-    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "idadeRange": [
+      18,
+      24
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -23,7 +30,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "olhando_celular_descrente",
@@ -36,7 +47,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -54,20 +69,38 @@
           {
             "texto": "Silenciar por 1 ano. Nunca mais abrir.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Mandar um figurinha debochada pra colocar lenha na fogueira.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

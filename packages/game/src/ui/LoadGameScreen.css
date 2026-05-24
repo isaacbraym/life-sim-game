@@ -1,0 +1,231 @@
+/* ===========================================================================
+   LoadGameScreen — seleção de save ao iniciar o jogo
+   =========================================================================== */
+
+.lg-tela {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: var(--vida-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--vida-space-6);
+  font-family: var(--vida-font);
+  color: var(--vida-text);
+}
+
+/* ── Card principal ─────────────────────────────────────────────────────── */
+
+.lg-card {
+  background: var(--vida-surface);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-lg);
+  box-shadow: var(--vida-shadow-modal);
+  width: 100%;
+  max-width: 560px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Card de estado vazio ───────────────────────────────────────────────── */
+
+.lg-vazio-card {
+  background: var(--vida-surface);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-lg);
+  box-shadow: var(--vida-shadow-modal);
+  width: 100%;
+  max-width: 460px;
+  padding: var(--vida-space-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--vida-space-4);
+}
+
+.lg-vazio-mensagem {
+  color: var(--vida-muted);
+  font-size: var(--vida-fs-13);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+/* ── Cabeçalho ──────────────────────────────────────────────────────────── */
+
+.lg-cabecalho {
+  padding: var(--vida-space-6) var(--vida-space-6) var(--vida-space-3);
+  border-bottom: 1px solid var(--vida-border);
+}
+
+.lg-titulo {
+  font-size: var(--vida-fs-20);
+  font-weight: 600;
+  color: var(--vida-text);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.lg-subtitulo {
+  font-size: var(--vida-fs-12);
+  color: var(--vida-muted);
+  margin: var(--vida-space-1) 0 0;
+}
+
+/* ── Lista ──────────────────────────────────────────────────────────────── */
+
+.lg-lista {
+  list-style: none;
+  margin: 0;
+  padding: var(--vida-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--vida-space-2);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.lg-item {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r);
+  padding: var(--vida-space-3) var(--vida-space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--vida-space-4);
+  transition: border-color var(--vida-trans), background var(--vida-trans);
+}
+
+.lg-item:hover {
+  border-color: var(--vida-border-hi);
+  background: var(--vida-surface3);
+}
+
+.lg-item-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--vida-space-1);
+}
+
+.lg-item-nome {
+  font-size: var(--vida-fs-14);
+  font-weight: 600;
+  color: var(--vida-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lg-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--vida-space-1);
+}
+
+.lg-meta-pill {
+  background: var(--vida-accent-bg);
+  border: 1px solid var(--vida-accent-soft);
+  border-radius: var(--vida-r-pill);
+  padding: 2px 8px;
+  font-size: var(--vida-fs-10);
+  color: var(--vida-accent);
+  font-family: var(--vida-font-mono);
+}
+
+.lg-meta-pill--dinheiro {
+  color: var(--vida-green);
+  background: rgba(91, 194, 141, 0.08);
+  border-color: rgba(91, 194, 141, 0.25);
+}
+
+.lg-item-ultima {
+  font-size: var(--vida-fs-10);
+  color: var(--vida-muted);
+  font-family: var(--vida-font-mono);
+}
+
+/* ── Ações ─────────────────────────────────────────────────────────────── */
+
+.lg-acoes,
+.lg-confirma {
+  display: flex;
+  align-items: center;
+  gap: var(--vida-space-2);
+  flex-shrink: 0;
+}
+
+.lg-confirma-texto {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-red);
+  margin-right: var(--vida-space-1);
+}
+
+/* ── Botões ────────────────────────────────────────────────────────────── */
+
+.lg-btn-primario,
+.lg-btn-secundario,
+.lg-btn-perigo {
+  font-family: var(--vida-font);
+  font-size: var(--vida-fs-12);
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: var(--vida-r-sm);
+  cursor: pointer;
+  transition: background var(--vida-trans), border-color var(--vida-trans), color var(--vida-trans);
+  white-space: nowrap;
+}
+
+.lg-btn-primario {
+  background: var(--vida-accent);
+  border: 1px solid var(--vida-accent);
+  color: #ffffff;
+}
+
+.lg-btn-primario:hover {
+  background: var(--vida-accent-hi);
+  border-color: var(--vida-accent-hi);
+}
+
+.lg-btn-secundario {
+  background: transparent;
+  border: 1px solid var(--vida-border);
+  color: var(--vida-text-soft);
+}
+
+.lg-btn-secundario:hover {
+  border-color: var(--vida-border-hi);
+  color: var(--vida-text);
+  background: var(--vida-surface);
+}
+
+.lg-btn-perigo {
+  background: var(--vida-red);
+  border: 1px solid var(--vida-red);
+  color: #ffffff;
+}
+
+.lg-btn-perigo:hover {
+  background: #f57878;
+  border-color: #f57878;
+}
+
+.lg-btn-grande {
+  padding: 10px 24px;
+  font-size: var(--vida-fs-13);
+  min-width: 200px;
+}
+
+/* ── Rodapé ────────────────────────────────────────────────────────────── */
+
+.lg-rodape {
+  padding: var(--vida-space-4) var(--vida-space-6);
+  border-top: 1px solid var(--vida-border);
+  display: flex;
+  justify-content: center;
+}

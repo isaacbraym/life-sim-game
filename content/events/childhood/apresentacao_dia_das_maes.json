@@ -4,9 +4,12 @@
   "categoria": "childhood",
   "titulo": "Vergonha Alheia Materna",
   "descricaoCurta": "Dançar fantasiado de girassol enquanto sua mãe chora de orgulho e você chora de humilhação.",
-  "contentTags": ["escola", "social"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [5, 9],
+    "idadeRange": [
+      5,
+      9
+    ],
     "peso": 30,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -16,13 +19,17 @@
     "schemaVersion": "1.0.0",
     "sceneId": "apresentacao_dia_das_maes_cena",
     "descricaoCurta": "Criança fantasiada no palco de escola.",
-    "background": "auditorio_escola",
+    "background": "fundo_vazio",
     "framing": "wide",
     "humor": "comico",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "danca_vergonhosa",
@@ -31,11 +38,15 @@
           "rotacoes": [],
           "expressaoFacial": "medo",
           "intensidadeExpressao": 70,
-          "maoEsquerda": "alta",
-          "maoDireita": "alta",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -53,21 +64,42 @@
           {
             "texto": "Fazer a coreografia com dedicação. (Para ver sua mãe feliz).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Ficar imóvel como um totem. Se eu não me mexer, a música acaba logo.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "adicionar_flag", "flag": "trauma_palco" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trauma_palco"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

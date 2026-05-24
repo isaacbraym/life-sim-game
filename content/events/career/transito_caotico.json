@@ -4,9 +4,12 @@
   "categoria": "career",
   "titulo": "O Custo de Sobreviver",
   "descricaoCurta": "Passar duas horas em pé num ônibus lotado no calor, ouvindo funk no celular vazado do adolescente ao lado.",
-  "contentTags": ["comedia", "raiva"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 60],
+    "idadeRange": [
+      18,
+      60
+    ],
     "peso": 50,
     "cooldownMeses": 1,
     "uniqueOnce": false
@@ -16,13 +19,17 @@
     "schemaVersion": "1.0.0",
     "sceneId": "transito_caotico_cena",
     "descricaoCurta": "Você se segurando no ferro de um ônibus socado de gente.",
-    "background": "onibus_lotado",
+    "background": "fundo_vazio",
     "framing": "medium",
-    "humor": "raiva",
+    "humor": "neutro",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "segurando_ferro_onibus",
@@ -31,11 +38,15 @@
           "rotacoes": [],
           "expressaoFacial": "raiva",
           "intensidadeExpressao": 80,
-          "maoEsquerda": "alta",
+          "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -53,21 +64,42 @@
           {
             "texto": "Se segurar pra não cair em cima da senhorinha.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "forca",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Colocar fone de ouvido, fechar o olho e fingir que tá em Paris.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

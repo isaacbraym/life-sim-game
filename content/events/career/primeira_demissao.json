@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "O Passaralho Bateu na Porta",
   "descricaoCurta": "Sexta-feira, 17h45. O RH te chama no Teams para um 'papo rápido'. A famosa reestruturação te alcançou.",
-  "contentTags": ["trabalho", "tenso"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [20, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      20,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 18,
     "cooldownMeses": 30,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "rh_demissao",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 25, "idadeMax": 50 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 50
+      }
     }
   ],
   "scene": {
@@ -30,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "ouvindo_demissao",
@@ -43,7 +57,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 2
+          }
         },
         "zOrder": 1
       }
@@ -61,24 +79,54 @@
           {
             "texto": "Engolir o choro, dizer 'obrigado pela oportunidade' feito um corno manso.",
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_emprego" },
-              { "tipo": "adicionar_flag", "flag": "foi_demitido" },
-              { "tipo": "alterar_humor", "delta": -25 }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "foi_demitido"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              }
             ]
           },
           {
             "texto": "Fazer textão no LinkedIn romantizando a demissão (e implorando vaga).",
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_emprego" },
-              { "tipo": "adicionar_flag", "flag": "foi_demitido" },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "foi_demitido"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 2
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 2
+  }
 }

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "freelance_sobrinho_pagamento",
+  "categoria": "career",
+  "titulo": "O Preço da Amizade Profissional",
+  "descricaoCurta": "Um conhecido te pede um 'freelazinho rápido' para criar a identidade do pet shop dele. Na hora do pagamento, ele oferece exposição e ração de gato.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "freelance_sobrinho_pagamento_cena",
+    "descricaoCurta": "Quarto escuro à noite, tela de notebook exibindo software de design gráfico.",
+    "background": "quarto",
+    "framing": "closeup",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "designer_irritado",
+          "categoria": "emotional",
+          "descricao": "Segurando a cabeça com uma mão, olhando irritado para a tela do notebook",
+          "rotacoes": [],
+          "expressaoFacial": "raiva",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Após passar três noites criando variações de logotipos de gatinhos fofos, o cliente envia um áudio: 'Cara, ficou show! Vou divulgar seu nome para os meus 300 seguidores como pagamento, fechou?'",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Entregar o trabalho com marca d'água gigantesca impossível de remover.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "vingança_do_designer"
+              }
+            ]
+          },
+          {
+            "texto": "Aceitar a exposição e chorar no travesseiro de raiva do mundo corporativo.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
+            ]
+          },
+          {
+            "texto": "Cobrar o valor integral de mercado sob ameaça de processo extrajudicial.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 14
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 150
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

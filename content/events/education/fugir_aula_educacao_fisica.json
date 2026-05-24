@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "fugir_aula_educacao_fisica",
+  "categoria": "education",
+  "titulo": "Operação Evasão Escolar",
+  "descricaoCurta": "O dia está lindo e a aula de educação física é apenas dar voltas na quadra sob o sol de meio-dia. O muro de trás da escola parece extremamente escalável.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      14,
+      17
+    ],
+    "peso": 15,
+    "cooldownMeses": 6,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "fugir_aula_educacao_fisica_cena",
+    "descricaoCurta": "Fundo da quadra de esportes, perto de um muro de concreto alto com plantas trepadeiras.",
+    "background": "escola_patio",
+    "framing": "wide",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_olhando_muro",
+          "categoria": "action",
+          "descricao": "De pé, olhando para cima com as mãos na cintura avaliando o muro",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O professor de educação física está ocupado apitando um jogo de futebol de quem levou chuteira. O muro dos fundos é a única barreira entre você e a liberdade de ir tomar um sorvete.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Saltar o muro de forma acrobática aproveitando o ponto cego da câmera.",
+            "atributoCheck": {
+              "atributo": "forca",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "forca",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "fugiu_da_escola"
+              }
+            ]
+          },
+          {
+            "texto": "Fingir cólicas intestinais avassaladoras para ir se deitar na enfermaria.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 11
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "enfermaria_vadiagem"
+              }
+            ]
+          },
+          {
+            "texto": "Ficar e jogar queimada sob o sol quente para evitar problemas.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

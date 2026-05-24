@@ -4,9 +4,12 @@
   "categoria": "childhood",
   "titulo": "O Aperto de Bochecha Letal",
   "descricaoCurta": "Aquela tia que cheira a naftalina chegou para apertar sua cara e perguntar das namoradinhas.",
-  "contentTags": ["social"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [6, 12],
+    "idadeRange": [
+      6,
+      12
+    ],
     "peso": 25,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -22,20 +25,28 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "rosto_amassado",
           "categoria": "emotional",
           "descricao": "Sofrendo abuso de bochechas",
           "rotacoes": [],
-          "expressaoFacial": "desespero",
+          "expressaoFacial": "triste",
           "intensidadeExpressao": 80,
           "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -53,21 +64,42 @@
           {
             "texto": "Dar um sorriso falso e responder educadamente. (Você ganha R$5 discretamente).",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 5 },
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Fugir pro quarto alegando que precisa cagar. (Segurança garantida).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

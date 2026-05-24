@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "proposta_transferencia_filial",
+  "categoria": "career",
+  "titulo": "O Exílio Corporativo",
+  "descricaoCurta": "A diretoria te propõe uma transferência estratégica para a filial da empresa no interior. É sua chance de crescer, ou a forma que acharam de se livrar de você.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "proposta_transferencia_filial_cena",
+    "descricaoCurta": "Escritório corporativo com persianas semi-fechadas, protagonista avaliando papelada.",
+    "background": "escritorio_sala_reuniao",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "analisando_contrato",
+          "categoria": "interactions",
+          "descricao": "Sentado, segurando papel com as duas mãos, testa franzida em dúvida",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O gerente de operações explica que a nova filial no interior precisa do seu 'perfil dinâmico'. Você sabe que a cidade tem menos de 20 mil habitantes e o cinema mais próximo fica a duas horas de estrada.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aceitar a transferência de mala e cuia apostando no custo de vida mais baixo do interior.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "exilado_no_interior"
+              }
+            ]
+          },
+          {
+            "texto": "Negociar uma ajuda de custo absurda até a gerência desistir e enviar outro.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 100
+              }
+            ]
+          },
+          {
+            "texto": "Recusar categoricamente e começar a procurar outra vaga antes que a demissão venha.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

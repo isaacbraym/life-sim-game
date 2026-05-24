@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_estagio_cafeteira",
+  "categoria": "career",
+  "titulo": "O Mestre da Cafeína",
+  "descricaoCurta": "Seu primeiro dia de estágio. O gerente te dá uma missão crítica de alta complexidade: aprender a mexer na cafeteira italiana sem explodir a copa.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_estagio_cafeteira_cena",
+    "descricaoCurta": "Copa de escritório moderna com pia inox e armários planejados.",
+    "background": "cozinha",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "estagiario_cafeteira",
+          "categoria": "interactions",
+          "descricao": "Segurando garrafa de café e olhando desconfiado para a máquina expressa",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A diretoria está reunida na sala principal e precisa de café urgente. Você encara a máquina cheia de botões cromados que parece o painel de comando de um caça supersônico.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Desmontar a cafeteira para limpar e esquecer completamente como remonta.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "quebrou_cafeteira"
+              }
+            ]
+          },
+          {
+            "texto": "Pesquisar um tutorial no YouTube em silêncio no banheiro por vinte minutos.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "expert_em_cafe"
+              }
+            ]
+          },
+          {
+            "texto": "Comprar expressos na cafeteria da esquina com o seu próprio dinheiro e fingir autoria.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

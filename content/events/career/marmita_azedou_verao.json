@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "Almoço Estragado",
   "descricaoCurta": "O ar-condicionado e a geladeira da firma quebram num calor recorde e sua marmita estraga.",
-  "contentTags": ["trabalho", "pobreza"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 22,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -23,7 +30,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "marmita_estragada_olhar",
@@ -32,11 +43,15 @@
           "rotacoes": [],
           "expressaoFacial": "triste",
           "intensidadeExpressao": 90,
-          "maoEsquerda": "segurando_garfo",
-          "maoDireita": "tampando_nariz",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -53,30 +68,59 @@
         "opcoes": [
           {
             "texto": "Comer assim mesmo para não desperdiçar comida.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -25 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Gastar o dinheiro do transporte almoçando na esquina.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -45 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -45
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Almoçar apenas o café grátis da firma e bolacha salgada.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

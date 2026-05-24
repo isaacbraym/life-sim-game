@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "conflito_gerente_microgestao",
+  "categoria": "career",
+  "titulo": "O Olho de Sauron Corporativo",
+  "descricaoCurta": "Seu chefe te pede atualizações de status a cada 15 minutos e quer aprovar até a cor da fonte do e-mail interno de aviso do bolo de sexta.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "conflito_gerente_microgestao_cena",
+    "descricaoCurta": "Mesa de escritório open space, telefone piscando luz vermelha de chamada pendente.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_no_mouse",
+          "categoria": "emotional",
+          "descricao": "Segurando o mouse com rigidez e encarando a tela com olhar focado e cansado",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O chat do Teams pisca sem parar: 'Já terminou? Como está o progresso? Pode compartilhar a tela?'. A microgestão é tão pesada que você passa metade do tempo apenas explicando o que vai fazer na outra metade.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Programar um script de relatórios automáticos detalhados até ele implorar para parar de receber.",
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
+            ]
+          },
+          {
+            "texto": "Acatar tudo em silêncio, reportando status obsessivamente e perdendo a sanidade.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
+            ]
+          },
+          {
+            "texto": "Marcar uma conversa franca para delimitar espaços profissionais saudáveis.",
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

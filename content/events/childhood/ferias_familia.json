@@ -4,9 +4,12 @@
   "categoria": "childhood",
   "titulo": "Férias no Cativeiro Móvel",
   "descricaoCurta": "A viagem de férias chegou. Prepare-se para seis horas de confinamento com a família em um hatch 1.0 sem ar-condicionado, ouvindo as mesmas piadas e o mesmo CD arranhado do seu tio.",
-  "contentTags": ["familia", "viagem"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [5, 12],
+    "idadeRange": [
+      5,
+      12
+    ],
     "peso": 18,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -16,13 +19,17 @@
     "schemaVersion": "1.0.0",
     "sceneId": "ferias_familia_cena",
     "descricaoCurta": "Posto de gasolina na beira da estrada. Carro com capô aberto saindo fumaça. Família discutindo ao redor e você derretendo no banco de trás.",
-    "background": "posto_gasolina",
+    "background": "fundo_vazio",
     "framing": "wide",
     "humor": "caotico",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "depressao_infantil",
@@ -33,11 +40,11 @@
           "intensidadeExpressao": 90,
           "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
-          "peEsquerdo": "chinelo",
-          "peDireito": "chinelo",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
           "metadata": {
             "criadoEm": "2026-05-22T00:00:00.000Z",
-            "criadoPor": "agente",
+            "criadoPor": "ia",
             "versao": 2
           }
         },
@@ -62,26 +69,59 @@
           {
             "texto": "Tentar se afogar na parte rasa para ver se te dão atenção. (Pelo menos a ambulância tem ar-condicionado).",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "drama_infantil" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "drama_infantil"
+              }
             ]
           },
           {
             "texto": "Fazer greve de fome no quarto mofado da pousada. (Declarar guerra silenciosa contra a diversão familiar).",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Virar o ditador do castelo de areia e chutar os baldes de crianças menores. (Descontar sua frustração em inocentes).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "bully_mirim" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "bully_mirim"
+              }
             ]
           }
         ]
@@ -89,13 +129,13 @@
     ],
     "metadata": {
       "criadoEm": "2026-05-22T00:00:00.000Z",
-      "criadoPor": "agente",
+      "criadoPor": "ia",
       "versao": 2
     }
   },
   "metadata": {
     "criadoEm": "2026-05-22T00:00:00.000Z",
-    "criadoPor": "agente",
+    "criadoPor": "humano",
     "versao": 2
   }
 }

@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "empresa_grande_vs_startup",
+  "categoria": "career",
+  "titulo": "O Dilema do Crachá",
+  "descricaoCurta": "Duas propostas na mesa: uma vaga de suporte numa multinacional gigante e engessada, ou ser o 'líder de inovação generalista' numa startup que opera numa mesa de pingue-pongue.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [
+      18,
+      22
+    ],
+    "peso": 15,
+    "cooldownMeses": 24,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "empresa_grande_vs_startup_cena",
+    "descricaoCurta": "Escritório moderno, protagonista com o dedo indicador encostado na bochecha, pensativo.",
+    "background": "escritorio_open",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_indeciso",
+          "categoria": "emotional",
+          "descricao": "De pé, segurando o queixo e olhando para cima em sinal de forte dúvida",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A corporação oferece plano de saúde excelente e regras rígidas. A startup oferece café ruim à vontade, cerveja de graça na sexta e cobrança aos domingos.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Escolher a multinacional pelo vale-refeição generoso e a estabilidade burocrática.",
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "vida_corporativa_corporacao"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_emprego"
+              }
+            ]
+          },
+          {
+            "texto": "Escolher a startup pela promessa de crescimento acelerado e estoque grátis de energético.",
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trabalha_em_startup"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_emprego"
+              }
+            ]
+          },
+          {
+            "texto": "Recusar ambas e continuar vivendo de bicos informais para manter sua autonomia de horário.",
+            "efeitos": [
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "vendedor_autonomo"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

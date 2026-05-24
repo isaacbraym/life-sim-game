@@ -1,13 +1,20 @@
 {
   "schemaVersion": "1.0.0",
   "eventoId": "professor_egocentrico",
-  "categoria": "education_faculdade",
+  "categoria": "education",
   "titulo": "Palestra de 4 Horas",
   "descricaoCurta": "A aula onde o professor gasta 90% do tempo falando do próprio doutorado e 10% reclamando do salário.",
-  "contentTags": ["escola", "tedio"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 24],
-    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "idadeRange": [
+      18,
+      24
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
     "peso": 30,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -17,20 +24,27 @@
       "papel": "professor_palestrinha",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 40, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 40,
+        "idadeMax": 65
+      }
     }
   ],
   "scene": {
     "schemaVersion": "1.0.0",
     "sceneId": "professor_egocentrico_cena",
     "descricaoCurta": "Sala de aula da faculdade. Alunos dormindo, professor falando orgulhoso.",
-    "background": "sala_aula",
+    "background": "escola_sala",
     "framing": "medium",
     "humor": "melancolico",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "dormindo_sentado",
@@ -39,17 +53,25 @@
           "rotacoes": [],
           "expressaoFacial": "cansada",
           "intensidadeExpressao": 80,
-          "maoEsquerda": "no_rosto",
+          "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "falando_palestrinha",
@@ -62,7 +84,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -80,21 +106,42 @@
           {
             "texto": "Fingir interesse e balançar a cabeça. (Ganhar simpatia e perder parte da sua alma).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Dormir de olho aberto. Técnica ninja milenar do ensino superior.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_saude", "delta": 5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }
