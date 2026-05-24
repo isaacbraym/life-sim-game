@@ -24,6 +24,11 @@ type EstadoHud = {
   readonly ultimaRolagem?: ResultadoRolagem;
   readonly atributos: readonly AtributoRpg[];
   readonly engineAtivo: GameEngine | undefined;
+  // [NEW] feat/ui-sprint-1-5 — EventLog, SettingsScreen, DeathScreen
+  readonly eventosVividos: readonly string[];
+  readonly conteudoAdultoAtivo: boolean;
+  readonly saveIdAtivo: string | undefined;
+  readonly ritmoAtual: 'mensal' | 'semestral' | 'anual' | undefined;
 };
 
 export type OpcaoEvento = {
@@ -50,6 +55,8 @@ type AcoesHud = {
   readonly avancarSemEvento: () => void;
   readonly inicializarEngine: (save: SaveSlot) => void;
   readonly avancarTurno: () => Promise<void>;
+  // [NEW]
+  readonly alterarConteudoAdulto: (valor: boolean) => void;
 };
 
 // ---------------------------------------------------------------------------
@@ -89,6 +96,10 @@ const ESTADO_INICIAL: EstadoHud = {
   ultimaRolagem: undefined,
   atributos: ATRIBUTOS_MOCK,
   engineAtivo: undefined,
+  eventosVividos: [],
+  conteudoAdultoAtivo: false,
+  saveIdAtivo: undefined,
+  ritmoAtual: undefined,
 };
 
 // ---------------------------------------------------------------------------
@@ -171,6 +182,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
       humor:    protagonistaAtual.humorAtual,
       saude:    protagonistaAtual.saudeAtual,
       dinheiro: protagonistaAtual.dinheiro,
+      eventosVividos: protagonistaAtual.eventosVividos,
       atributos: [
         { nome: 'Força',        valor: protagonistaAtual.atributos.forca        },
         { nome: 'Inteligência', valor: protagonistaAtual.atributos.inteligencia },
@@ -193,7 +205,13 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
 
   inicializarEngine: (save: SaveSlot) => {
     const engine = new GameEngine(save);
-    set({ engineAtivo: engine });
+    set({
+      engineAtivo: engine,
+      saveIdAtivo: save.saveId,
+      conteudoAdultoAtivo: save.configuracoes.conteudoAdultoLiberado,
+      ritmoAtual: save.configuracoes.ritmo,
+      eventosVividos: save.protagonista.eventosVividos,
+    });
   },
 
   avancarTurno: async () => {
@@ -225,6 +243,11 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
       humor:     protagonista.humorAtual,
       saude:     protagonista.saudeAtual,
       dinheiro:  protagonista.dinheiro,
+      eventosVividos: protagonista.eventosVividos,
     });
   },
+
+  // [NEW]
+  alterarConteudoAdulto: (valor: boolean) =>
+    set((anterior) => ({ ...anterior, conteudoAdultoAtivo: valor })),
 }));
