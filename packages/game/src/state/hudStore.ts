@@ -251,7 +251,13 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     });
   },
 
-  // [NEW]
-  alterarConteudoAdulto: (valor: boolean) =>
-    set((anterior) => ({ ...anterior, conteudoAdultoAtivo: valor })),
+  // [FIX QA] alterarConteudoAdulto agora também persiste no SaveSlot via engine
+  alterarConteudoAdulto: (valor: boolean) => {
+    set((anterior) => ({ ...anterior, conteudoAdultoAtivo: valor }));
+    const engine = get().engineAtivo;
+    if (engine !== undefined) {
+      engine.atualizarConfiguracoes({ conteudoAdultoLiberado: valor });
+      void engine.salvarEstadoAtual();
+    }
+  },
 }));

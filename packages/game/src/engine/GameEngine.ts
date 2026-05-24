@@ -197,6 +197,18 @@ export class GameEngine {
     };
   }
 
+  // [FIX QA] Atualiza configurações do save (conteúdo adulto, idioma).
+  // Antes, conteudoAdultoAtivo no hudStore não persistia no SaveSlot.
+  atualizarConfiguracoes(parcial: Partial<SaveSlot['configuracoes']>): void {
+    this.saveAtivo = {
+      ...this.saveAtivo,
+      configuracoes: {
+        ...this.saveAtivo.configuracoes,
+        ...parcial,
+      },
+    };
+  }
+
   aplicarResultadoEfeitos(
     protagonistaAtualizado: import('@lifesim/core').Character,
     rosterAtualizado: readonly import('@lifesim/core').Npc[],
