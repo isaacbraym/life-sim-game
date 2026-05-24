@@ -12,6 +12,7 @@ import { useHudStore } from '../state/hudStore';
 import { v4 as uuidv4 } from 'uuid';
 import type { SaveSlot } from '@lifesim/core';
 import { SaveManager, listarSaves, carregarSave, deletarSave } from '@core/persistence/SaveManager';
+import { registrarAutosave } from '@core/persistence/AutosaveOrchestrator';
 import { gerarAtributosIniciais } from '@core/rpg/Attributes';
 import { gerarRosterInicial } from '@core/npc/NpcGenerator';
 import './App.css';
@@ -187,6 +188,10 @@ export function App(): React.JSX.Element {
       totalEventosVividos: eventosVividos.length,
       profissaoFinal:      profissaoAtual !== '' ? profissaoAtual : undefined,
     });
+    const engine = useHudStore.getState().engineAtivo;
+    if (engine !== undefined) {
+      registrarAutosave(engine.obterEstadoAtual(), 'forcar');
+    }
     setTelaAtual('morte');
   }
 
@@ -253,7 +258,13 @@ export function App(): React.JSX.Element {
           anoAtual={anoAtual}
           dinheiro={dinheiro}
           aoNovoJogo={() => setTelaAtual('novo_personagem')}
-          aoAbrirConfig={() => setTelaAtual('configuracoes')}
+          aoAbrirConfig={() => {
+            const engine = useHudStore.getState().engineAtivo;
+            if (engine !== undefined) {
+              registrarAutosave(engine.obterEstadoAtual(), 'forcar');
+            }
+            setTelaAtual('configuracoes');
+          }}
         />
 
         <div className="vida-app__corpo">
