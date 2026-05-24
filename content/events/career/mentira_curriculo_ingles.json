@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "English Conversation Time",
   "descricaoCurta": "Seu inglês avançado do currículo é colocado à prova em plena entrevista de emprego.",
-  "contentTags": ["trabalho"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "desempregado", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "desempregado",
+      "presente": true
+    },
     "peso": 20,
     "cooldownMeses": 18,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "entrevistadora_rh",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 24, "idadeMax": 55 }
+      "constraints": {
+        "idadeMin": 24,
+        "idadeMax": 55
+      }
     }
   ],
   "scene": {
@@ -30,26 +40,38 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "candidato_suando",
           "categoria": "emotional",
           "descricao": "Sentado reto, com a testa brilhando de suor e sorriso nervoso congelado",
           "rotacoes": [],
-          "expressaoFacial": "assustada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 80,
-          "maoEsquerda": "no_colo",
-          "maoDireita": "no_colo",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "rh_entrevista_sorriso",
@@ -58,11 +80,15 @@
           "rotacoes": [],
           "expressaoFacial": "feliz",
           "intensidadeExpressao": 60,
-          "maoEsquerda": "sobre_a_prancheta",
-          "maoDireita": "segurando_caneta",
-          "peEsquerdo": "sapato_salto",
-          "peDireito": "sapato_salto",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -84,31 +110,66 @@
         "opcoes": [
           {
             "texto": "Tentar improvisar falando rápido com termos de negócios.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Fingir tosse crônica e pedir licença para beber água.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Confessar na hora que seu inglês é mais instrumental.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "entrevistadora_rh", "delta": -20 },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "ingles_de_espanhol" }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "entrevistadora_rh",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "ingles_de_espanhol"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

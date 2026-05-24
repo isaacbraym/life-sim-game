@@ -4,9 +4,12 @@
   "categoria": "education",
   "titulo": "O Histórico do Terror",
   "descricaoCurta": "O suor frio e o pânico absoluto quando a mãe pega seu computador desbloqueado com abas perigosas abertas.",
-  "contentTags": ["comedia", "tenso"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [13, 17],
+    "idadeRange": [
+      13,
+      17
+    ],
     "peso": 25,
     "cooldownMeses": 24,
     "uniqueOnce": true
@@ -16,7 +19,10 @@
       "papel": "mae_furiosa",
       "tipo": "relacional",
       "persistenciaApos": "permanente",
-      "constraints": { "idadeMin": 30, "idadeMax": 55 }
+      "constraints": {
+        "idadeMin": 30,
+        "idadeMax": 55
+      }
     }
   ],
   "scene": {
@@ -29,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "panico_silencioso",
@@ -38,11 +48,15 @@
           "rotacoes": [],
           "expressaoFacial": "medo",
           "intensidadeExpressao": 95,
-          "maoEsquerda": "na_cabeca",
-          "maoDireita": "na_cabeca",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -60,21 +74,43 @@
           {
             "texto": "Puxar o cabo da tomada da parede num pulo suicida. (Você salvou sua dignidade, mas perdeu o PC).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "forca",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Fugir de casa por 3 horas até a poeira baixar. (Covarde, mas eficaz).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": -1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

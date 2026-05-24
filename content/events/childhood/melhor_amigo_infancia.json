@@ -4,9 +4,12 @@
   "categoria": "childhood",
   "titulo": "O Parasita Simbiótico",
   "descricaoCurta": "Vocês se uniram pelo ódio mútuo a um professor e por precisarem de álibi. Uma amizade baseada puramente em conveniência e chantagem emocional.",
-  "contentTags": ["social", "comedia"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [6, 11],
+    "idadeRange": [
+      6,
+      11
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "tem_melhor_amigo",
@@ -37,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "sorriso_malicioso",
@@ -52,7 +59,7 @@
           "peDireito": "tenis",
           "metadata": {
             "criadoEm": "2026-05-19T00:00:00.000Z",
-            "criadoPor": "ai",
+            "criadoPor": "ia",
             "versao": 2
           }
         },
@@ -60,7 +67,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.2,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "conspirando_junto",
@@ -75,7 +86,7 @@
           "peDireito": "tenis",
           "metadata": {
             "criadoEm": "2026-05-19T00:00:00.000Z",
-            "criadoPor": "ai",
+            "criadoPor": "ia",
             "versao": 2
           }
         },
@@ -106,16 +117,33 @@
           {
             "texto": "Selar a aliança maligna. É bom ter um cúmplice.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_melhor_amigo" },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_melhor_amigo"
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Usar ele como bode expiatório e fugir.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 2 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 2
+              }
             ]
           }
         ]
@@ -123,13 +151,13 @@
     ],
     "metadata": {
       "criadoEm": "2026-05-19T00:00:00.000Z",
-      "criadoPor": "ai",
+      "criadoPor": "ia",
       "versao": 2
     }
   },
   "metadata": {
     "criadoEm": "2026-05-19T00:00:00.000Z",
-    "criadoPor": "ai",
+    "criadoPor": "ia_assistido",
     "versao": 2
   }
 }

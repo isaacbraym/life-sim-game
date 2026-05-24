@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "Teste Prático",
   "descricaoCurta": "Processo seletivo PJ exige planejamento estratégico anual grátis em 24h.",
-  "contentTags": ["trabalho"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "desempregado", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "desempregado",
+      "presente": true
+    },
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "recrutador_vaga",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 22, "idadeMax": 60 }
+      "constraints": {
+        "idadeMin": 22,
+        "idadeMax": 60
+      }
     }
   ],
   "scene": {
@@ -30,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "lendo_email_incredulo",
@@ -39,11 +53,15 @@
           "rotacoes": [],
           "expressaoFacial": "triste",
           "intensidadeExpressao": 70,
-          "maoEsquerda": "no_mouse",
-          "maoDireita": "no_teclado",
-          "peEsquerdo": "chinelo",
-          "peDireito": "chinelo",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -60,31 +78,65 @@
         "opcoes": [
           {
             "texto": "Fazer o teste entregando tudo sob estresse.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "adicionar_flag", "flag": "trabalho_gratis" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trabalho_gratis"
+              }
             ]
           },
           {
             "texto": "Recusar e expor a vaga em fóruns corporativos de humor.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Enviar portfólio dizendo que não trabalha de graça.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_relacionamento", "npcId": "recrutador_vaga", "delta": -15 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "recrutador_vaga",
+                "delta": -15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

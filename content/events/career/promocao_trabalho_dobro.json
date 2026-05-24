@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "Os Novos Desafios",
   "descricaoCurta": "Seu chefe te oferece novos desafios profissionais em uma conversa particular na sala de reuniões.",
-  "contentTags": ["trabalho"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 25,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "gerente_direto",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 25, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 65
+      }
     }
   ],
   "scene": {
@@ -30,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "escutando_chefe_ansioso",
@@ -40,16 +54,24 @@
           "expressaoFacial": "neutra",
           "intensidadeExpressao": 60,
           "maoEsquerda": "relaxada",
-          "maoDireita": "sobre_a_mesa",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "gerente_gesticulando_carreira",
@@ -58,11 +80,15 @@
           "rotacoes": [],
           "expressaoFacial": "feliz",
           "intensidadeExpressao": 70,
-          "maoEsquerda": "no_ar",
-          "maoDireita": "no_ar",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -85,30 +111,63 @@
           {
             "texto": "Aceitar sorrindo e agradecer a oportunidade de ouro.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "adicionar_flag", "flag": "trabalhador_explorado" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trabalhador_explorado"
+              }
             ]
           },
           {
             "texto": "Negociar cláusula de revisão salarial em 3 meses.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 500 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 500
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Recusar educadamente alegando foco em metas atuais.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "gerente_direto", "delta": -15 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "gerente_direto",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

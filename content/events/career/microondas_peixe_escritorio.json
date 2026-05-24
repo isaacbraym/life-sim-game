@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "O Aroma do Sucesso",
   "descricaoCurta": "O micro-ondas do refeitório virou uma arma química e o escritório inteiro agora cheira a peixe.",
-  "contentTags": ["trabalho", "humilhacao"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -17,52 +24,71 @@
       "papel": "gerente_rh",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 25, "idadeMax": 60 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 60
+      }
     }
   ],
   "scene": {
     "schemaVersion": "1.0.0",
     "sceneId": "microondas_peixe_escritorio_cena",
     "descricaoCurta": "Copa do escritório impregnada com cheiro de pescada requentada.",
-    "background": "copa_escritorio",
+    "background": "fundo_vazio",
     "framing": "medium",
     "humor": "comico",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "segurando_marmita_sem_graca",
           "categoria": "emotional",
           "descricao": "Segurando um pote de plástico vermelho com as bochechas coradas",
           "rotacoes": [],
-          "expressaoFacial": "envergonhada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 85,
-          "maoEsquerda": "segurando_marmita",
+          "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "gerente_rh_furious",
           "categoria": "emotional",
           "descricao": "Apertando o nariz com dois dedos de forma teatral",
           "rotacoes": [],
-          "expressaoFacial": "irritada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 90,
-          "maoEsquerda": "no_nariz",
-          "maoDireita": "na_cintura",
-          "peEsquerdo": "sapato_salto",
-          "peDireito": "sapato_salto",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -84,31 +110,66 @@
         "opcoes": [
           {
             "texto": "Assumir a culpa e oferecer uma bala de hortelã.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_relacionamento", "npcId": "gerente_rh", "delta": 10 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "gerente_rh",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Culpar discretamente o estagiário que acabou de ir ao banheiro.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Fingir horror e reclamar do cheiro junto com ela.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_atributo", "atributo": "sorte", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "sorte",
+                "delta": 1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

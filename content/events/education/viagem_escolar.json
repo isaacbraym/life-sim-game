@@ -4,9 +4,12 @@
   "categoria": "education",
   "titulo": "Excursão de Risco Biológico",
   "descricaoCurta": "Passar 8 horas num ônibus de excursão com cheiro de Cheetos e suor adolescente, lutando até a morte pelo banco do fundão.",
-  "contentTags": ["viagem", "caos"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [14, 17],
+    "idadeRange": [
+      14,
+      17
+    ],
     "peso": 14,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -16,13 +19,17 @@
     "schemaVersion": "1.0.0",
     "sceneId": "viagem_escolar_cena",
     "descricaoCurta": "Ônibus em movimento, som alto, cheiro duvidoso.",
-    "background": "onibus_lotado",
+    "background": "fundo_vazio",
     "framing": "wide",
     "humor": "caotico",
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "tentando_dormir_onibus",
@@ -31,11 +38,15 @@
           "rotacoes": [],
           "expressaoFacial": "raiva",
           "intensidadeExpressao": 70,
-          "maoEsquerda": "na_cabeca",
-          "maoDireita": "na_cabeca",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 2
+          }
         },
         "zOrder": 0
       }
@@ -53,22 +64,46 @@
           {
             "texto": "Tentar puxar ronco em meio ao caos.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_saude", "delta": 5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Ir pro fundão ser da turma da bagunça e sujar o nome na escola.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 25 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 25
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": -1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 2
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "ai", "versao": 2 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 2
+  }
 }

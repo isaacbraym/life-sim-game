@@ -4,10 +4,19 @@
   "categoria": "career",
   "titulo": "Paredes Têm Ouvidos",
   "descricaoCurta": "Você fala mal do gerente no banheiro e descobre que ele estava na cabine ao lado.",
-  "contentTags": ["trabalho", "language"],
+  "contentTags": [
+    "language"
+  ],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 18,
     "cooldownMeses": 24,
     "uniqueOnce": true
@@ -17,13 +26,19 @@
       "papel": "gerente_setor",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 25, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 65
+      }
     },
     {
       "papel": "colega_trabalho",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 20, "idadeMax": 60 }
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 60
+      }
     }
   ],
   "scene": {
@@ -36,26 +51,38 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "lavando_mao_pasmado",
           "categoria": "emotional",
           "descricao": "Olhando de lado com o olho arregalado enquanto a torneira está aberta",
           "rotacoes": [],
-          "expressaoFacial": "assustada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 95,
-          "maoEsquerda": "na_pia",
-          "maoDireita": "na_pia",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "gerente_secando_maos",
@@ -64,11 +91,15 @@
           "rotacoes": [],
           "expressaoFacial": "neutra",
           "intensidadeExpressao": 90,
-          "maoEsquerda": "segurando_papel",
-          "maoDireita": "segurando_papel",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -90,30 +121,63 @@
         "opcoes": [
           {
             "texto": "Fingir demência e responder sobre o relatório.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "gerente_setor", "delta": -30 },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "gerente_setor",
+                "delta": -30
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           },
           {
             "texto": "Pedir desculpas e justificar que está sob muito estresse.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "gerente_setor", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "gerente_setor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           },
           {
             "texto": "Culpar o colega dizendo que ele quem puxou o assunto.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -3 },
-              { "tipo": "alterar_relacionamento", "npcId": "colega_trabalho", "delta": -40 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -3
+              },
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "colega_trabalho",
+                "delta": -40
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

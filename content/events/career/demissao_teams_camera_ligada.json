@@ -4,10 +4,19 @@
   "categoria": "career",
   "titulo": "Reunião Geral de Alinhamento",
   "descricaoCurta": "Um convite de reunião coletiva de última hora numa sexta-feira às 17h45.",
-  "contentTags": ["trabalho", "trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 15,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -17,7 +26,10 @@
       "papel": "ceo_empresa",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 30, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 30,
+        "idadeMax": 65
+      }
     }
   ],
   "scene": {
@@ -30,26 +42,38 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "pijama_colher_doce",
           "categoria": "emotional",
           "descricao": "Segurando colher cheia de leite condensado, expressão de choque",
           "rotacoes": [],
-          "expressaoFacial": "assustada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 95,
-          "maoEsquerda": "segurando_lata",
-          "maoDireita": "segurando_colher",
-          "peEsquerdo": "chinelo",
-          "peDireito": "chinelo",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "ceo_apresentando",
@@ -59,10 +83,14 @@
           "expressaoFacial": "neutra",
           "intensidadeExpressao": 70,
           "maoEsquerda": "relaxada",
-          "maoDireita": "gesticulando",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -84,31 +112,65 @@
         "opcoes": [
           {
             "texto": "Desligar a webcam correndo e torcer pelo anonimato.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_saude", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Colocar um sorriso e raspar a colher na lata ao vivo.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 2 },
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "adicionar_flag", "flag": "audaz_no_copo" }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 2
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "audaz_no_copo"
+              }
             ]
           },
           {
             "texto": "Fechar o notebook de vez e mandar 'caiu a força' no grupo.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

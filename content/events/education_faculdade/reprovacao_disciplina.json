@@ -2,12 +2,19 @@
   "schemaVersion": "1.0.0",
   "eventoId": "reprovacao_disciplina",
   "categoria": "education",
-  "titulo": "DP",
+  "titulo": "Pegou DP",
   "descricaoCurta": "Você foi reprovado. Vai ter que pegar DP. É uma matéria que você vai carregar pra sempre ou refazer no próximo semestre. De qualquer forma, o semestre que veio depois ficou mais pesado.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 23],
-    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "idadeRange": [
+      18,
+      23
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
     "peso": 18,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -23,7 +30,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "olhando_nota_ruim",
@@ -36,7 +47,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -54,31 +69,68 @@
           {
             "texto": "Refazer no próximo semestre e tirar nota boa.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "teve_dp" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_dp"
+              }
             ]
           },
           {
             "texto": "Aceitar o DP e carregar junto com o resto.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "teve_dp" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_dp"
+              }
             ]
           },
           {
             "texto": "Ver se dá pra fazer revisão de prova ou recurso.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "adicionar_flag", "flag": "teve_dp" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_dp"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

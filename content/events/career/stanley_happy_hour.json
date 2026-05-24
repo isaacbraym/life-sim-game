@@ -4,10 +4,19 @@
   "categoria": "career",
   "titulo": "O Copo Sagrado",
   "descricaoCurta": "Happy hour da empresa no boteco e você derramando cerveja no diretor.",
-  "contentTags": ["trabalho", "substance"],
+  "contentTags": [
+    "substance"
+  ],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 15,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -17,7 +26,10 @@
       "papel": "diretor_ops",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 30, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 30,
+        "idadeMax": 65
+      }
     }
   ],
   "scene": {
@@ -30,39 +42,55 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "segurando_copo_lagoinha",
           "categoria": "emotional",
           "descricao": "Olhando assustado com o copo vazio de vidro americano na mão",
           "rotacoes": [],
-          "expressaoFacial": "assustada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 85,
-          "maoEsquerda": "segurando_copo_americano",
+          "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "diretor_molhado",
           "categoria": "emotional",
           "descricao": "Olhando para a própria calça molhada, segurando o copo térmico verde",
           "rotacoes": [],
-          "expressaoFacial": "irritada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 80,
-          "maoEsquerda": "segurando_copo_termico",
-          "maoDireita": "apontando_calca",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -85,29 +113,61 @@
           {
             "texto": "Oferecer um guardanapo de papel engordurado do bar.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "diretor_ops", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "diretor_ops",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Comprar outra cerveja (a mais barata da casa) para repor.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -25 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Fazer piada rápida para descontrair e pedir desculpas.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "alterar_relacionamento", "npcId": "diretor_ops", "delta": 15 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "diretor_ops",
+                "delta": 15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

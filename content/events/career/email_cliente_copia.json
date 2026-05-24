@@ -4,10 +4,19 @@
   "categoria": "career",
   "titulo": "Responder a Todos",
   "descricaoCurta": "Você envia um e-mail reclamando do cliente chato e coloca ele próprio em cópia por engano.",
-  "contentTags": ["trabalho", "language", "humilhacao"],
+  "contentTags": [
+    "language"
+  ],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 15,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -17,7 +26,10 @@
       "papel": "cliente_insatisfeito",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 25, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 65
+      }
     }
   ],
   "scene": {
@@ -30,20 +42,28 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "desespero_teclado",
           "categoria": "emotional",
           "descricao": "Com as duas mãos na cabeça e a boca aberta de desespero encarando a tela",
           "rotacoes": [],
-          "expressaoFacial": "assustada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 100,
-          "maoEsquerda": "na_cabeca",
-          "maoDireita": "na_cabeca",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -65,31 +85,66 @@
         "opcoes": [
           {
             "texto": "Culpar o corretor ortográfico automático.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "cliente_insatisfeito", "delta": -25 },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "cliente_insatisfeito",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           },
           {
             "texto": "Pedir desculpas sinceras e marcar uma reunião.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "cliente_insatisfeito", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "cliente_insatisfeito",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           },
           {
             "texto": "Dizer que foi hackeado e desligar o computador.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": -2 },
-              { "tipo": "alterar_humor", "delta": -30 },
-              { "tipo": "adicionar_flag", "flag": "mentiroso_digital" }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": -2
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -30
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mentiroso_digital"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "Obstáculo Metropolitano",
   "descricaoCurta": "Seu ônibus quebra no meio da avenida a caminho da entrevista final para o emprego ideal.",
-  "contentTags": ["trabalho"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "desempregado", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "desempregado",
+      "presente": true
+    },
     "peso": 20,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "recrutador_vaga",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 25, "idadeMax": 60 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 60
+      }
     }
   ],
   "scene": {
@@ -30,20 +40,28 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "F" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "desesperado_na_rua",
           "categoria": "emotional",
           "descricao": "Olhando para o celular com o cabelo desgrenhado de vento e testa suada",
           "rotacoes": [],
-          "expressaoFacial": "assustada",
+          "expressaoFacial": "neutra",
           "intensidadeExpressao": 90,
-          "maoEsquerda": "segurando_paleto",
-          "maoDireita": "segurando_celular",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -61,30 +79,63 @@
           {
             "texto": "Pedir um carro de aplicativo com tarifa dinâmica abusiva.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -60 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -60
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Correr os dois quilômetros finais sob o sol de meio-dia.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "entrevista_suada" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "entrevista_suada"
+              }
             ]
           },
           {
             "texto": "Ligar para a empresa explicando e pedir para remarcar.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "recrutador_vaga", "delta": -15 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "recrutador_vaga",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

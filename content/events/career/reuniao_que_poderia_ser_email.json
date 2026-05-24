@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "A Tortura em Slides",
   "descricaoCurta": "Fingir prestar atenção por 2 horas enquanto o chefe literalmente lê em voz alta o que já está escrito no telão.",
-  "contentTags": ["trabalho", "tedio"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [20, 60],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      20,
+      60
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 40,
     "cooldownMeses": 3,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "chefe_chato",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 35, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 35,
+        "idadeMax": 65
+      }
     }
   ],
   "scene": {
@@ -30,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "tedio_mortal",
@@ -39,17 +53,25 @@
           "rotacoes": [],
           "expressaoFacial": "cansada",
           "intensidadeExpressao": 90,
-          "maoEsquerda": "no_rosto",
+          "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.4, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.4,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "apontando_slide",
@@ -62,7 +84,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -80,21 +106,42 @@
           {
             "texto": "Rabiscar no caderno e fingir que está fazendo anotações cruciais.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Dormir de olho aberto mantendo o maxilar rígido.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_saude", "delta": 5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

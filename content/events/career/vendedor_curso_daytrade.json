@@ -4,10 +4,19 @@
   "categoria": "career",
   "titulo": "O Guru da Baia ao Lado",
   "descricaoCurta": "Um colega de suporte quer te empurrar um curso de day trade e mindset financeiro no cafezinho.",
-  "contentTags": ["trabalho", "substance"],
+  "contentTags": [
+    "substance"
+  ],
   "triggers": {
-    "idadeRange": [22, 35],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      35
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 18,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -17,7 +26,10 @@
       "papel": "cleiton_daytrade",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 20, "idadeMax": 40 }
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 40
+      }
     }
   ],
   "scene": {
@@ -30,7 +42,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "segurando_copo_plastico",
@@ -39,17 +55,25 @@
           "rotacoes": [],
           "expressaoFacial": "cansada",
           "intensidadeExpressao": 60,
-          "maoEsquerda": "segurando_cafe",
-          "maoDireita": "no_bolso",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "guru_mostrando_celular",
@@ -58,11 +82,15 @@
           "rotacoes": [],
           "expressaoFacial": "feliz",
           "intensidadeExpressao": 85,
-          "maoEsquerda": "segurando_celular",
-          "maoDireita": "apontando_celular",
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -85,30 +113,64 @@
           {
             "texto": "Ouvir pacientemente e aceitar o link do webinar grátis.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "cleiton_daytrade", "delta": 15 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "cleiton_daytrade",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Cortar o assunto dizendo que perdeu tudo no Tigrinho.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Entrar na onda e comprar a mentoria dele parcelada.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -1200 },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "investidor_fracassado" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -1200
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "investidor_fracassado"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "agente", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  }
 }

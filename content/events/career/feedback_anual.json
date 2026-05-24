@@ -4,10 +4,17 @@
   "categoria": "career",
   "titulo": "Sessão de Terapia Involuntária",
   "descricaoCurta": "O RH fingindo se importar com sua saúde mental, te chamando de 'resiliente' e te dando um aumento de 2%.",
-  "contentTags": ["trabalho", "tenso"],
+  "contentTags": [],
   "triggers": {
-    "idadeRange": [22, 60],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      60
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "rh_falso",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 25, "idadeMax": 50 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 50
+      }
     }
   ],
   "scene": {
@@ -30,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "sorriso_falso_tenso",
@@ -43,13 +57,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "segurando_prancheta",
@@ -62,7 +84,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,22 +112,46 @@
           {
             "texto": "Concordar e acenar docemente.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_dinheiro", "delta": 100 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 100
+              }
             ]
           },
           {
             "texto": "Perguntar se 'sentimento de dono' vem com 'salário de dono'. (Risco de justa causa).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 30 },
-              { "tipo": "alterar_dinheiro", "delta": -500 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -2 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 30
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -500
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -2
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

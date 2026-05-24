@@ -4,9 +4,14 @@
   "categoria": "education",
   "titulo": "O Não Que Ecoa",
   "descricaoCurta": "Tomar um fora tão monumental e público que altera a sua química cerebral para sempre.",
-  "contentTags": ["trauma", "romance"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [13, 17],
+    "idadeRange": [
+      13,
+      17
+    ],
     "peso": 25,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -16,7 +21,10 @@
       "papel": "crush",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 13, "idadeMax": 18 }
+      "constraints": {
+        "idadeMin": 13,
+        "idadeMax": 18
+      }
     }
   ],
   "scene": {
@@ -29,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "paralisado_choque",
@@ -42,13 +54,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "desviando_olhar_constrangido",
@@ -57,11 +77,15 @@
           "rotacoes": [],
           "expressaoFacial": "neutra",
           "intensidadeExpressao": 50,
-          "maoEsquerda": "no_rosto",
+          "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -85,21 +109,42 @@
           {
             "texto": "Gaguejar um 'tranquilo, de boa' e morrer por dentro. (Perda severa de dignidade).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -30 },
-              { "tipo": "adicionar_flag", "flag": "friendzone_eterna" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -30
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "friendzone_eterna"
+              }
             ]
           },
           {
             "texto": "Lançar um 'eu só tava zoando, relaxa' e fugir. (Ninguém acreditou).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "ai", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
 }

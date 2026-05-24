@@ -38,7 +38,7 @@
           "rotacoes": [],
           "expressaoFacial": "raiva",
           "intensidadeExpressao": 85,
-          "maoEsquerda": "na_cabeca",
+          "maoEsquerda": "relaxada",
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
@@ -119,7 +119,7 @@
   },
   "metadata": {
     "criadoEm": "2026-05-24T00:00:00.000Z",
-    "criadoPor": "ia",
+    "criadoPor": "ia_assistido",
     "versao": 1
   }
 }
