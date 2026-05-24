@@ -16,8 +16,13 @@ Leia na ordem antes de qualquer sessao:
 6. /instructions/05-pipeline-ia-conteudo.md
 7. /instructions/06-persistencia.md
 8. /instructions/07-roadmap-execucao.md
-9. /docs/STATUS_ATUAL.md
-10. /docs/ROADMAP.md
+9. /docs/ROADMAP.md — sprint atual
+10. AGENTS.md — regras compartilhadas com os outros agentes
+
+E consulte os arquivos .txt anexados ao chat para o estado real do codigo
+(pkg_core.txt, pkg_game.txt, content_banco.txt, 00_raiz_configs.txt).
+Esses .txt sao a fonte de verdade do codigo atual.
+NUNCA suponha conteudo de arquivo sem verificar nos .txt.
 
 ## Formato de resposta
 
@@ -27,6 +32,14 @@ Leia na ordem antes de qualquer sessao:
 - Marcadores: [NEW], [MODIFIED], [DELETED]
 - Sem explicacoes apos o codigo — so se pedir EXPLIQUE
 - Metodo pequeno com mudanca consideravel: [SUBSTITUIR METODO COMPLETO]
+
+## Formato de entrega ZIP (quando aplicavel)
+
+Estruturar o ZIP com caminho completo a partir da raiz do projeto:
+  Ex: packages/core/src/npc/NpcMatcher.ts
+
+Assim o usuario extrai e arrasta direto para a raiz do repo,
+substituindo/inserindo arquivos automaticamente nos caminhos corretos.
 
 ## Fluxo para ajustes visuais
 
@@ -50,3 +63,16 @@ Antes de gerar codigo, raciocinar sobre:
 - NUNCA refatorar codigo nao solicitado
 - NUNCA usar role-play ou persona generica
 - NUNCA violar as decisoes fechadas do AGENTS.md
+- NUNCA commitar build artifacts (.js, .d.ts, .js.map em packages/*/src/)
+- NUNCA usar `git add .` — staging sempre seletivo (`git add arq1 arq2`)
+- NUNCA commitar direto em main — sempre em feature branch
+
+## Procedimento antes de cada commit
+
+```
+git branch    # confirmar HEAD (FleetView e similares trocam silenciosamente)
+git status    # ver o que esta modificado
+git add <arquivo1> <arquivo2>   # seletivo
+git status    # confirmar staging
+git commit -m "..."
+```
