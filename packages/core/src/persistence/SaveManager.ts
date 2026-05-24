@@ -73,3 +73,38 @@ export async function deletarSave(saveId: string): Promise<void> {
   await db.characters.where('saveId').equals(saveId).delete();
   await db.npcs.where('saveId').equals(saveId).delete();
 }
+
+export class SaveManager {
+  async criarNovoSave(params: {
+    nomeSlot: string;
+    ritmo: 'mensal' | 'semestral' | 'anual';
+    protagonista: Character;
+  }): Promise<SaveSlot> {
+    const saveId = crypto.randomUUID();
+    const dataIso = new Date().toISOString();
+    const novoSave: SaveSlot = {
+      schemaVersion: '1.0.0',
+      saveId,
+      nomeSlot: params.nomeSlot,
+      criadoEm: dataIso,
+      ultimaPartida: dataIso,
+      tempoJogadoMs: 0,
+      configuracoes: {
+        ritmo: params.ritmo,
+        conteudoAdultoLiberado: false,
+        idioma: 'pt-BR',
+      },
+      protagonista: params.protagonista,
+      roster: [],
+      estadoMundo: {
+        anoAtual: params.protagonista.dataNascimento.ano,
+        mesAtual: 1,
+        flagsGlobais: [],
+      },
+      cooldownRegistry: {},
+    };
+    await salvarSave(novoSave);
+    return novoSave;
+  }
+}
+

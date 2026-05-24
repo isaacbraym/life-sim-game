@@ -134,6 +134,22 @@ export class GameEngine {
     };
   }
 
+  aplicarResultadoEfeitos(
+    protagonistaAtualizado: import('@lifesim/core').Character,
+    rosterAtualizado: readonly import('@lifesim/core').Npc[],
+  ): void {
+    this.saveAtivo = {
+      ...this.saveAtivo,
+      protagonista: protagonistaAtualizado,
+      roster: [...rosterAtualizado],
+      ultimaPartida: new Date().toISOString(),
+    };
+  }
+
+  async salvarEstadoAtual(): Promise<void> {
+    await this.salvar();
+  }
+
   async salvar(): Promise<void> {
     await db.saves.put(this.saveAtivo);
   }

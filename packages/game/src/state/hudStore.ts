@@ -28,6 +28,7 @@ type EstadoHud = {
 export type OpcaoEvento = {
   readonly texto: string;
   readonly efeitos: readonly unknown[];
+  readonly cooldownMeses?: number;
   readonly atributoCheck?: {
     readonly atributo: string;
     readonly dificuldade: number;
@@ -105,39 +106,56 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     const opcao = eventoAtivo.opcoes[indice];
     if (opcao === undefined) return;
 
-    const engine = engineAtivo;
-    if (engine === undefined) {
+    if (engineAtivo === undefined) {
       set((anterior) => ({ ...anterior, eventoAtivo: undefined }));
       return;
     }
 
-    const saveAtual = engine.obterEstadoAtual();
-    let personagemAtual = saveAtual.protagonista;
+    const saveAtual = engineAtivo.obterEstadoAtual();
+    let protagonistaAtual = saveAtual.protagonista;
     let rosterAtual = saveAtual.roster;
 
+    // Aplicar efeitos canonicos via AplicadorEfeitos
     for (const efeitoRaw of opcao.efeitos) {
       const resultado = Effect.safeParse(efeitoRaw);
       if (!resultado.success) continue;
-
-      const resultadoAplicado: ResultadoEfeito = aplicarEfeito(resultado.data, personagemAtual, rosterAtual);
-      personagemAtual = resultadoAplicado.personagem;
-      rosterAtual = [...resultadoAplicado.roster];
+      const aplicado = aplicarEfeito(resultado.data, protagonistaAtual, rosterAtual);
+      protagonistaAtual = aplicado.personagem;
+      rosterAtual = [...aplicado.roster];
     }
 
-    // Persistir personagem atualizado via engine (sem método dedicado, atualizamos via campo interno)
-    // TODO Sprint 1.8: expor método engine.aplicarResultadoEfeitos(personagem, roster)
+    // Registrar evento como vivido
+    if (!protagonistaAtual.eventosVividos.includes(eventoAtivo.eventoId)) {
+      protagonistaAtual = {
+        ...protagonistaAtual,
+        eventosVividos: [...protagonistaAtual.eventosVividos, eventoAtivo.eventoId],
+      };
+    }
+
+    // Registrar cooldown se a opção define um
+    if (opcao.cooldownMeses !== undefined && opcao.cooldownMeses > 0) {
+      const anoAtual = saveAtual.estadoMundo.anoAtual;
+      const anoExpiracao = anoAtual + Math.ceil(opcao.cooldownMeses / 12);
+      engineAtivo.registrarCooldown(eventoAtivo.eventoId, anoExpiracao);
+    }
+
+    // Persistir via engine
+    engineAtivo.aplicarResultadoEfeitos(protagonistaAtual, rosterAtual);
+    void engineAtivo.salvarEstadoAtual();
+
+    // Atualizar store
     set((anterior) => ({
       ...anterior,
       eventoAtivo: undefined,
-      humor:    personagemAtual.humorAtual,
-      saude:    personagemAtual.saudeAtual,
-      dinheiro: personagemAtual.dinheiro,
+      humor:    protagonistaAtual.humorAtual,
+      saude:    protagonistaAtual.saudeAtual,
+      dinheiro: protagonistaAtual.dinheiro,
       atributos: [
-        { nome: 'Força',        valor: personagemAtual.atributos.forca        },
-        { nome: 'Inteligência', valor: personagemAtual.atributos.inteligencia },
-        { nome: 'Carisma',      valor: personagemAtual.atributos.carisma      },
-        { nome: 'Constituição', valor: personagemAtual.atributos.constituicao },
-        { nome: 'Sorte',        valor: personagemAtual.atributos.sorte        },
+        { nome: 'Força',        valor: protagonistaAtual.atributos.forca        },
+        { nome: 'Inteligência', valor: protagonistaAtual.atributos.inteligencia },
+        { nome: 'Carisma',      valor: protagonistaAtual.atributos.carisma      },
+        { nome: 'Constituição', valor: protagonistaAtual.atributos.constituicao },
+        { nome: 'Sorte',        valor: protagonistaAtual.atributos.sorte        },
       ],
     }));
   },

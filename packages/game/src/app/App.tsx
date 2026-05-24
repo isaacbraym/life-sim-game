@@ -5,6 +5,9 @@ import { EventoBase } from '../ui/EventoBase';
 import { NewGameScreen } from '../ui/NewGameScreen';
 import type { DadosNovoPersonagem } from '../ui/NewGameScreen';
 import { useHudStore } from '../state/hudStore';
+import { v4 as uuidv4 } from 'uuid';
+import { SaveManager } from '@core/persistence/SaveManager';
+import { gerarAtributosIniciais } from '@core/rpg/Attributes';
 
 export function App(): React.JSX.Element {
   const [telaAtual, setTelaAtual] = useState<'jogo' | 'novo_personagem'>('jogo');
@@ -20,6 +23,7 @@ export function App(): React.JSX.Element {
     atributos,
     eventoAtivo,
     resolverOpcao,
+    inicializarEngine,
   } = useHudStore();
 
   function aoClicarAtividade(idAtividade: string): void {
@@ -27,16 +31,59 @@ export function App(): React.JSX.Element {
     console.log('Atividade selecionada:', idAtividade);
   }
 
-  function aoConfirmarNovoPersonagem(dados: DadosNovoPersonagem): void {
-    // TODO Sprint 1.7: inicializar GameEngine com save gerado a partir de dados
-    console.log('Novo personagem:', dados);
+  async function aoConfirmarNovoPersonagem(dados: DadosNovoPersonagem): Promise<void> {
+    const anoNascimento = 1990 + Math.floor(Math.random() * 16); // 1990–2005
+    const saveManager = new SaveManager();
+
+    const novoSave = await saveManager.criarNovoSave({
+      nomeSlot: `${dados.nome} ${dados.sobrenome}`,
+      ritmo: dados.ritmo,
+      protagonista: {
+        schemaVersion: '1.0.0' as const,
+        characterId: uuidv4(),
+        nome: dados.nome,
+        sobrenome: dados.sobrenome,
+        genero: dados.genero,
+        dataNascimento: { ano: anoNascimento, mes: 1, dia: 1 },
+        idadeAtualMeses: 0,
+        tracosFisicos: {
+          corPele: '#f1c27d',
+          corOlhos: '#634e34',
+          formatoRosto: 'oval',
+          formatoNariz: 'reto',
+          formatoBoca: 'fina',
+          estiloCorporalBase: 'medio',
+          alturaBase: 1.70,
+        },
+        tracosVariaveis: {
+          corCabelo: '#090806',
+          estiloCabelo: 'curto',
+          temGrisalho: false,
+          temRugas: false,
+          temOlheiras: false,
+          usaOculos: false,
+          pesoAtual: 70,
+          alturaAtual: 1.70,
+        },
+        atributos: dados.atributos,
+        atributosGeneticos: dados.atributos,
+        dinheiro: 0,
+        humorAtual: 70,
+        saudeAtual: 100,
+        salarioMensal: 0,
+        flags: [],
+        eventosVividos: [],
+      },
+    });
+
+    inicializarEngine(novoSave);
     setTelaAtual('jogo');
   }
 
   if (telaAtual === 'novo_personagem') {
     return (
       <NewGameScreen
-        aoConfirmar={aoConfirmarNovoPersonagem}
+        aoConfirmar={(dados) => { void aoConfirmarNovoPersonagem(dados); }}
         aoCancelar={() => setTelaAtual('jogo')}
       />
     );
