@@ -8,6 +8,7 @@ import {
   rolarD20ComModificador,
 } from '@lifesim/core';
 import type { Event as CoreEvent, ResultadoResolucao, SaveSlot } from '@lifesim/core';
+import type { TierResultado } from '@core/rpg/D20Roll';
 import { ATIVIDADES_BASE } from '@core/activities/ActivityCatalog';
 import { realizarAtividade as realizarAtividadeCore } from '@core/activities/ActivityEngine';
 import { salvarSave } from '@core/persistence/SaveManager';
@@ -24,6 +25,13 @@ export type AtributoRpg = {
 };
 
 type TelaHud = 'jogo' | 'selecionar_save' | 'novo_personagem' | 'configuracoes' | 'morte';
+
+export type EntradaLog = {
+  readonly eventoId: string;
+  readonly anoEvento: number;
+  readonly mesEvento: number;
+  readonly tier?: TierResultado;
+};
 
 type EstadoHud = {
   readonly nomePersonagem: string;
@@ -43,6 +51,7 @@ type EstadoHud = {
   readonly telaAtual: TelaHud | undefined;
   // [NEW] feat/ui-sprint-1-5 — EventLog, SettingsScreen, DeathScreen
   readonly eventosVividos: readonly string[];
+  readonly logEventos: readonly EntradaLog[];
   readonly conteudoAdultoAtivo: boolean;
   readonly saveIdAtivo: string | undefined;
   readonly ritmoAtual: 'mensal' | 'semestral' | 'anual' | undefined;
@@ -124,17 +133,26 @@ const ESTADO_INICIAL: EstadoHud = {
   saveAtual: undefined,
   telaAtual: 'jogo',
   eventosVividos: [],
+  logEventos: [],
   conteudoAdultoAtivo: false,
   saveIdAtivo: undefined,
   ritmoAtual: undefined,
 };
 
+function derivarTier(rolagem: ResultadoRolagem | undefined): TierResultado | undefined {
+  if (rolagem === undefined) return undefined;
+  if (rolagem.falhaGrave) return 'falha_critica';
+  if (rolagem.critico)    return 'sucesso_critico';
+  if (rolagem.passou)     return 'sucesso';
+  return 'falha';
+}
+
 function atributosParaHud(protagonista: SaveSlot['protagonista']): readonly AtributoRpg[] {
   return [
-    { nome: 'ForÃ§a',        valor: protagonista.atributos.forca        },
-    { nome: 'InteligÃªncia', valor: protagonista.atributos.inteligencia },
+    { nome: 'Força',        valor: protagonista.atributos.forca        },
+    { nome: 'Inteligência', valor: protagonista.atributos.inteligencia },
     { nome: 'Carisma',      valor: protagonista.atributos.carisma      },
-    { nome: 'ConstituiÃ§Ã£o', valor: protagonista.atributos.constituicao },
+    { nome: 'Constituição', valor: protagonista.atributos.constituicao },
     { nome: 'Sorte',        valor: protagonista.atributos.sorte        },
   ];
 }
@@ -245,6 +263,13 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     const saveAtualizado = engineAtivo.obterEstadoAtual();
     registrarAutosave(saveAtualizado, 'forcar');
 
+    const novaEntrada: EntradaLog = {
+      eventoId:  eventoAtivo.eventoId,
+      anoEvento: saveAtual.estadoMundo.anoAtual,
+      mesEvento: saveAtual.estadoMundo.mesAtual,
+      tier:      derivarTier(rolagemResultado),
+    };
+
     // Atualizar store
     set((anterior) => ({
       ...anterior,
@@ -255,6 +280,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
       saude:    protagonistaAtual.saudeAtual,
       dinheiro: protagonistaAtual.dinheiro,
       eventosVividos: protagonistaAtual.eventosVividos,
+      logEventos: [...anterior.logEventos, novaEntrada],
       atributos: [
         { nome: 'Força',        valor: protagonistaAtual.atributos.forca        },
         { nome: 'Inteligência', valor: protagonistaAtual.atributos.inteligencia },

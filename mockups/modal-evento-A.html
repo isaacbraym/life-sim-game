@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Modal Evento — Sugestão A (Conservador)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #0f1117;
+    --surface:    #181c25;
+    --surface2:   #1e2332;
+    --border:     #2a3045;
+    --text:       #e8eaf0;
+    --text-muted: #6b7594;
+    --accent:     #5b8dee;
+    --green:      #4caf7d;
+    --yellow:     #e8b84b;
+    --red:        #e05c5c;
+    --font:       'DM Sans', sans-serif;
+    --mono:       'DM Mono', monospace;
+    --r8:         8px;
+    --r12:        12px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  /* ── Overlay ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r12);
+    width: 100%;
+    max-width: 440px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .icone {
+    font-size: 28px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .header-texto { flex: 1; }
+
+  .titulo {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    margin-top: 4px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 10px;
+  }
+
+  /* ── Divisor ── */
+  .divisor {
+    height: 1px;
+    background: var(--border);
+    margin: 0 -24px;
+    width: calc(100% + 48px);
+  }
+
+  /* ── Descrição ── */
+  .descricao {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.88;
+  }
+
+  /* ── Opções ── */
+  .opcoes { display: flex; flex-direction: column; gap: 8px; }
+
+  .opcao-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r8);
+    padding: 12px 14px;
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text);
+    transition: border-color .15s, background .15s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .opcao-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(91,141,238,.08);
+  }
+
+  .opcao-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .opcao-texto { font-weight: 500; }
+
+  .opcao-efeitos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .chip--green  { background: rgba(76,175,125,.15); color: var(--green); border: 1px solid rgba(76,175,125,.3); }
+  .chip--red    { background: rgba(224, 92,92,.15);  color: var(--red);   border: 1px solid rgba(224,92,92,.3); }
+  .chip--yellow { background: rgba(232,184,75,.15); color: var(--yellow); border: 1px solid rgba(232,184,75,.3); }
+  .chip--blue   { background: rgba(91,141,238,.15); color: var(--accent); border: 1px solid rgba(91,141,238,.3); }
+  .chip--muted  { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* Opção travada: tooltip nativo */
+  .opcao-btn[title]:disabled { cursor: not-allowed; }
+
+  /* ── Estado: resolvendo ── */
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .estado-resolvendo {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* ── Demo controls ── */
+  .demo-bar {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 200;
+  }
+
+  .demo-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r8);
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+
+  .demo-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  .label-sugestao {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r8);
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="label-sugestao">Sugestão A — Conservador (estilo BitLife)</div>
+
+<!-- Overlay + Card -->
+<div class="overlay">
+  <div class="card" id="card">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="icone">💼</div>
+      <div class="header-texto">
+        <div class="titulo">Proposta de promoção</div>
+        <div class="meta">
+          <span class="meta-chip">Ano 1997 · Mês 4</span>
+          <span class="meta-chip">Carreira</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divisor"></div>
+
+    <!-- Descrição -->
+    <p class="descricao">
+      Seu gerente te chamou na sala e ofereceu uma promoção — salário 40% maior,
+      mas viagens semanais e menos tempo com a família. Uma oportunidade que não
+      volta tão cedo.
+    </p>
+
+    <!-- Opções -->
+    <div class="opcoes" id="opcoes">
+
+      <button class="opcao-btn" onclick="selecionar(this)">
+        <span class="opcao-texto">Aceitar a promoção</span>
+        <div class="opcao-efeitos">
+          <span class="chip chip--green">Dinheiro +R$800/mês</span>
+          <span class="chip chip--red">Humor −10</span>
+          <span class="chip chip--blue">flag: promovido</span>
+        </div>
+      </button>
+
+      <button class="opcao-btn" onclick="selecionar(this)">
+        <span class="opcao-texto">Negociar condições</span>
+        <div class="opcao-efeitos">
+          <span class="chip chip--blue">Rolagem: Carisma</span>
+          <span class="chip chip--yellow">Dinheiro +R$400/mês</span>
+        </div>
+      </button>
+
+      <button class="opcao-btn" disabled title="Requer: Profissão ativa (não preenchida)">
+        <span class="opcao-texto">Pedir transferência de departamento</span>
+        <div class="opcao-efeitos">
+          <span class="chip chip--muted">Indisponível: sem profissão</span>
+        </div>
+      </button>
+
+      <button class="opcao-btn" onclick="selecionar(this)">
+        <span class="opcao-texto">Recusar por ora</span>
+        <div class="opcao-efeitos">
+          <span class="chip chip--yellow">Humor +5</span>
+          <span class="chip chip--muted">Sem efeito financeiro</span>
+        </div>
+      </button>
+
+    </div>
+
+    <!-- Estado: resolvendo (oculto por padrão) -->
+    <div class="estado-resolvendo" id="estado-resolvendo" style="display:none">
+      <span class="spinner"></span>
+      Processando decisão…
+    </div>
+
+  </div>
+</div>
+
+<!-- Controles de demo -->
+<div class="demo-bar">
+  <button class="demo-btn" onclick="toggleResolvendo()">Simular: resolvendo</button>
+</div>
+
+<script>
+let resolvendo = false;
+
+function selecionar(btn) {
+  if (resolvendo) return;
+  document.querySelectorAll('.opcao-btn').forEach(b => b.style.borderColor = '');
+  btn.style.borderColor = 'var(--accent)';
+  setTimeout(() => {
+    toggleResolvendo(true);
+    setTimeout(() => { toggleResolvendo(false); btn.style.borderColor = ''; }, 2000);
+  }, 120);
+}
+
+function toggleResolvendo(force) {
+  resolvendo = force !== undefined ? force : !resolvendo;
+  const estadoEl = document.getElementById('estado-resolvendo');
+  const btns = document.querySelectorAll('.opcao-btn:not(:disabled)');
+  if (resolvendo) {
+    estadoEl.style.display = 'flex';
+    btns.forEach(b => { b.disabled = true; b.dataset.tmpDisabled = '1'; });
+  } else {
+    estadoEl.style.display = 'none';
+    btns.forEach(b => { if (b.dataset.tmpDisabled) { b.disabled = false; delete b.dataset.tmpDisabled; } });
+  }
+}
+</script>
+</body>
+</html>

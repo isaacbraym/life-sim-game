@@ -205,6 +205,18 @@
   color: var(--vida-green);
 }
 
+.sett-btn--menu {
+  width: 100%;
+  justify-content: center;
+  border-color: var(--vida-muted);
+  color: var(--vida-muted);
+}
+
+.sett-btn--menu:hover:not(:disabled) {
+  border-color: var(--vida-text);
+  color: var(--vida-text);
+}
+
 /* Input file escondido */
 .sett-input-file {
   position: absolute;

@@ -71,6 +71,69 @@
   font-family: var(--vida-font);
 }
 
+/* ── Data ── */
+.ev-log__data {
+  font-size: 10px;
+  color: var(--vida-muted);
+  font-family: var(--vida-font-mono);
+  flex-shrink: 0;
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+/* ── Chip de tier ── */
+.ev-log__chip {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 100px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.ev-log__chip--critico {
+  background: rgba(76, 175, 125, 0.15);
+  color: var(--vida-green);
+  border: 1px solid rgba(76, 175, 125, 0.3);
+}
+
+.ev-log__chip--sucesso {
+  background: rgba(91, 141, 238, 0.12);
+  color: var(--vida-accent);
+  border: 1px solid rgba(91, 141, 238, 0.25);
+}
+
+.ev-log__chip--falha {
+  background: rgba(232, 184, 75, 0.1);
+  color: var(--vida-yellow);
+  border: 1px solid rgba(232, 184, 75, 0.25);
+}
+
+.ev-log__chip--falha-critica {
+  background: rgba(224, 92, 92, 0.12);
+  color: var(--vida-red);
+  border: 1px solid rgba(224, 92, 92, 0.25);
+}
+
+/* ── Borda-esquerda por tier (sobrescreve --recente quando presente) ── */
+.ev-log__entrada--critico {
+  border-left-color: var(--vida-green);
+}
+
+.ev-log__entrada--sucesso {
+  border-left-color: var(--vida-accent);
+}
+
+.ev-log__entrada--falha {
+  border-left-color: var(--vida-yellow);
+}
+
+.ev-log__entrada--falha-critica {
+  border-left-color: var(--vida-red);
+}
+
 /* ── Animação de entrada ── */
 @keyframes ev-slide-in {
   from {

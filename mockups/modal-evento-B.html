@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Modal Evento — Sugestão B (Intermediária)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #0f1117;
+    --surface:    #181c25;
+    --surface2:   #1e2332;
+    --border:     #2a3045;
+    --text:       #e8eaf0;
+    --text-muted: #6b7594;
+    --accent:     #5b8dee;
+    --green:      #4caf7d;
+    --yellow:     #e8b84b;
+    --red:        #e05c5c;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  /* ── Overlay ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(8, 10, 18, 0.80);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeIn .2s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ── Card ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid rgba(91,141,238,.25);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(91,141,238,.08),
+      0 4px 32px rgba(0,0,0,.5),
+      0 0 40px rgba(91,141,238,.06);
+    animation: slideUp .25s cubic-bezier(.16,1,.3,1);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(16px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0)  scale(1); }
+  }
+
+  /* ── Faixa de categoria ── */
+  .categoria-faixa {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), rgba(91,141,238,.3));
+  }
+
+  /* ── Corpo do card ── */
+  .corpo { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .icone-container {
+    width: 44px; height: 44px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .header-texto { flex: 1; }
+
+  .titulo {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .subtitulo {
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  /* ── Descrição ── */
+  .descricao {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(232,234,240,.82);
+    padding: 14px;
+    background: var(--surface2);
+    border-radius: 8px;
+    border-left: 2px solid var(--accent);
+  }
+
+  /* ── Opções ── */
+  .opcoes { display: flex; flex-direction: column; gap: 8px; }
+
+  .opcao {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    overflow: hidden;
+    transition: border-color .18s, box-shadow .18s, transform .1s;
+    position: relative;
+  }
+
+  .opcao:hover:not(:disabled) {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(91,141,238,.15), 0 2px 12px rgba(0,0,0,.3);
+    transform: translateY(-1px);
+  }
+
+  .opcao:active:not(:disabled) { transform: translateY(0); }
+
+  .opcao:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+
+  .opcao-inner {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .opcao-texto {
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .opcao-efeitos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .chip--green  { background: rgba(76,175,125,.15); color: var(--green); border: 1px solid rgba(76,175,125,.25); }
+  .chip--red    { background: rgba(224,92,92,.15);  color: var(--red);   border: 1px solid rgba(224,92,92,.25); }
+  .chip--yellow { background: rgba(232,184,75,.15); color: var(--yellow); border: 1px solid rgba(232,184,75,.25); }
+  .chip--blue   { background: rgba(91,141,238,.15); color: var(--accent); border: 1px solid rgba(91,141,238,.25); }
+  .chip--muted  { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* Faixinha de hover no topo de cada opção */
+  .opcao::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .18s;
+  }
+  .opcao:hover:not(:disabled)::before { opacity: 1; }
+
+  /* Indicador numérico */
+  .opcao-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .opcao-linha {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* ── Rodapé do card ── */
+  .rodape {
+    padding: 0 24px 20px;
+  }
+
+  .resolver-status {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(91,141,238,.06);
+    border: 1px solid rgba(91,141,238,.15);
+    border-radius: 8px;
+  }
+
+  .spinner {
+    width: 13px; height: 13px;
+    border: 2px solid rgba(91,141,238,.25);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .65s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Demo bar ── */
+  .demo-bar {
+    position: fixed; bottom: 16px; right: 16px;
+    display: flex; gap: 8px; z-index: 200;
+  }
+
+  .demo-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .demo-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  .label-sugestao {
+    position: fixed; top: 16px; left: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="label-sugestao">Sugestão B — Intermediária (glow + animação)</div>
+
+<div class="overlay">
+  <div class="card" id="card">
+
+    <div class="categoria-faixa"></div>
+
+    <div class="corpo">
+
+      <!-- Header -->
+      <div class="header">
+        <div class="icone-container">💼</div>
+        <div class="header-texto">
+          <div class="titulo">Proposta de promoção</div>
+          <div class="subtitulo">
+            <span class="chip-meta">Ano 1997 · Abr</span>
+            <span class="chip-meta">Carreira</span>
+            <span class="chip-meta">Cooldown: 24 meses</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Descrição -->
+      <p class="descricao">
+        Seu gerente te chamou na sala e ofereceu uma promoção — salário 40% maior,
+        mas viagens semanais e menos tempo com a família. Uma oportunidade que não
+        volta tão cedo.
+      </p>
+
+      <!-- Opções -->
+      <div class="opcoes" id="opcoes">
+
+        <button class="opcao" onclick="selecionar(this)">
+          <div class="opcao-inner">
+            <div class="opcao-linha">
+              <span class="opcao-num">1</span>
+              <span class="opcao-texto">Aceitar a promoção</span>
+            </div>
+            <div class="opcao-efeitos">
+              <span class="chip chip--green">Dinheiro +R$800/mês</span>
+              <span class="chip chip--red">Humor −10</span>
+              <span class="chip chip--blue">flag: promovido</span>
+            </div>
+          </div>
+        </button>
+
+        <button class="opcao" onclick="selecionar(this)">
+          <div class="opcao-inner">
+            <div class="opcao-linha">
+              <span class="opcao-num">2</span>
+              <span class="opcao-texto">Negociar condições</span>
+            </div>
+            <div class="opcao-efeitos">
+              <span class="chip chip--blue">Rolagem: Carisma</span>
+              <span class="chip chip--yellow">Dinheiro +R$400/mês</span>
+            </div>
+          </div>
+        </button>
+
+        <button class="opcao" disabled title="Requer: Profissão ativa (não preenchida)">
+          <div class="opcao-inner">
+            <div class="opcao-linha">
+              <span class="opcao-num">3</span>
+              <span class="opcao-texto">Pedir transferência de departamento</span>
+            </div>
+            <div class="opcao-efeitos">
+              <span class="chip chip--muted">Indisponível: sem profissão</span>
+            </div>
+          </div>
+        </button>
+
+        <button class="opcao" onclick="selecionar(this)">
+          <div class="opcao-inner">
+            <div class="opcao-linha">
+              <span class="opcao-num">4</span>
+              <span class="opcao-texto">Recusar por ora</span>
+            </div>
+            <div class="opcao-efeitos">
+              <span class="chip chip--yellow">Humor +5</span>
+              <span class="chip chip--muted">Sem efeito financeiro</span>
+            </div>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Rodapé resolvendo (oculto por padrão) -->
+    <div class="rodape" id="rodape" style="display:none">
+      <div class="resolver-status">
+        <span class="spinner"></span>
+        Processando sua decisão… aguarde
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="demo-bar">
+  <button class="demo-btn" onclick="toggleResolvendo()">Simular: resolvendo</button>
+  <button class="demo-btn" onclick="resetar()">Reset</button>
+</div>
+
+<script>
+let resolvendo = false;
+
+function selecionar(btn) {
+  if (resolvendo) return;
+  document.querySelectorAll('.opcao:not(:disabled)').forEach(b => {
+    b.style.borderColor = '';
+    b.style.boxShadow = '';
+  });
+  btn.style.borderColor = 'var(--accent)';
+  btn.style.boxShadow = '0 0 0 1px rgba(91,141,238,.3), 0 2px 12px rgba(0,0,0,.3)';
+  setTimeout(() => { toggleResolvendo(true); }, 150);
+  setTimeout(() => { toggleResolvendo(false); resetar(); }, 2200);
+}
+
+function toggleResolvendo(force) {
+  resolvendo = force !== undefined ? force : !resolvendo;
+  const rodape = document.getElementById('rodape');
+  const btns   = document.querySelectorAll('.opcao:not([disabled])');
+
+  if (resolvendo) {
+    rodape.style.display = '';
+    btns.forEach(b => { b.disabled = true; b.dataset.tmp = '1'; });
+  } else {
+    rodape.style.display = 'none';
+    btns.forEach(b => { if (b.dataset.tmp) { b.disabled = false; delete b.dataset.tmp; } });
+  }
+}
+
+function resetar() {
+  document.querySelectorAll('.opcao:not([disabled])').forEach(b => {
+    b.style.borderColor = '';
+    b.style.boxShadow   = '';
+  });
+}
+</script>
+</body>
+</html>

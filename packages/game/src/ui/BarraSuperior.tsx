@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { IconBase } from './IconBase';
+import { BotaoAvancarTempo } from './BotaoAvancarTempo';
 import './BarraSuperior.css';
 
 type PropsBarraSuperior = {
@@ -15,6 +16,9 @@ type PropsBarraSuperior = {
   readonly idadeAnos: number;
   readonly anoAtual: number;
   readonly dinheiro: number;
+  readonly ritmo?: 'mensal' | 'semestral' | 'anual';
+  readonly aoAvancarTempo?: () => void;
+  readonly desabilitadoAvancar?: boolean;
   readonly aoNovoJogo?: () => void;
   readonly aoAbrirSave?: () => void;
   readonly aoAbrirConfig?: () => void;
@@ -34,6 +38,9 @@ export function BarraSuperior({
   idadeAnos,
   anoAtual,
   dinheiro,
+  ritmo,
+  aoAvancarTempo,
+  desabilitadoAvancar = false,
   aoNovoJogo,
   aoAbrirSave,
   aoAbrirConfig,
@@ -72,6 +79,14 @@ export function BarraSuperior({
           {anoAtual}
         </span>
       </div>
+
+      {ritmo !== undefined && aoAvancarTempo !== undefined && (
+        <BotaoAvancarTempo
+          ritmo={ritmo}
+          aoAvancar={aoAvancarTempo}
+          desabilitado={desabilitadoAvancar}
+        />
+      )}
 
       <div className="vida-topbar__direita">
         <div className="vida-topbar__carteira" aria-label="Dinheiro atual">
