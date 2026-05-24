@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHudStore } from '../state/hudStore';
+import type { EntradaLog } from '../state/hudStore';
 import './EventLog.css';
 
 // ---------------------------------------------------------------------------
@@ -14,13 +15,26 @@ type EventLogProps = { readonly className?: string };
 
 const MAX_ENTRADAS = 50;
 
-function formatarEntrada(eventoId: string): string {
+const TIER_CONFIG: Readonly<Record<NonNullable<EntradaLog['tier']>, { rotulo: string; classe: string }>> = {
+  sucesso_critico: { rotulo: 'Crítico!', classe: 'ev-log__chip--critico'       },
+  sucesso:         { rotulo: 'Sucesso',  classe: 'ev-log__chip--sucesso'        },
+  falha:           { rotulo: 'Falha',    classe: 'ev-log__chip--falha'          },
+  falha_critica:   { rotulo: 'Falha!',   classe: 'ev-log__chip--falha-critica'  },
+};
+
+const BORDA_TIER: Readonly<Record<NonNullable<EntradaLog['tier']>, string>> = {
+  sucesso_critico: 'ev-log__entrada--critico',
+  sucesso:         'ev-log__entrada--sucesso',
+  falha:           'ev-log__entrada--falha',
+  falha_critica:   'ev-log__entrada--falha-critica',
+};
+
+function formatarEventoId(eventoId: string): string {
   return eventoId
     .replace(/_/g, ' ')
     .replace(/^./, (c) => c.toUpperCase());
 }
 
-/** Opacidade decrescente para entradas mais antigas (índice 0 = mais recente). */
 function opacidadeEntrada(indice: number, total: number): number {
   if (total <= 1) return 1;
   const minOpacidade = 0.35;
@@ -32,10 +46,9 @@ function opacidadeEntrada(indice: number, total: number): number {
 // ---------------------------------------------------------------------------
 
 export function EventLog({ className }: EventLogProps): React.JSX.Element {
-  const eventosVividos = useHudStore((s) => s.eventosVividos);
+  const logEventos = useHudStore((s) => s.logEventos);
 
-  // Mais recente no topo, máximo 50
-  const entradas = [...eventosVividos].reverse().slice(0, MAX_ENTRADAS);
+  const entradas = [...logEventos].reverse().slice(0, MAX_ENTRADAS);
 
   if (entradas.length === 0) {
     return (
@@ -45,7 +58,7 @@ export function EventLog({ className }: EventLogProps): React.JSX.Element {
     );
   }
 
-  const exibirFade = eventosVividos.length > MAX_ENTRADAS;
+  const exibirFade = logEventos.length > MAX_ENTRADAS;
 
   return (
     <div
@@ -54,16 +67,28 @@ export function EventLog({ className }: EventLogProps): React.JSX.Element {
       role="log"
       aria-live="polite"
     >
-      {entradas.map((eventoId, i) => (
-        <div
-          key={`${eventoId}-${i}`}
-          className={`ev-log__entrada${i === 0 ? ' ev-log__entrada--recente' : ''}`}
-          style={{ opacity: opacidadeEntrada(i, entradas.length) }}
-        >
-          <span className="ev-log__icone" aria-hidden="true">📋</span>
-          <span className="ev-log__texto">{formatarEntrada(eventoId)}</span>
-        </div>
-      ))}
+      {entradas.map((entrada, i) => {
+        const tierCfg  = entrada.tier !== undefined ? TIER_CONFIG[entrada.tier]  : undefined;
+        const bordaCls = entrada.tier !== undefined ? BORDA_TIER[entrada.tier]   : '';
+        return (
+          <div
+            key={`${entrada.eventoId}-${entrada.anoEvento}-${entrada.mesEvento}-${i}`}
+            className={`ev-log__entrada${i === 0 ? ' ev-log__entrada--recente' : ''}${bordaCls !== '' ? ` ${bordaCls}` : ''}`}
+            style={{ opacity: opacidadeEntrada(i, entradas.length) }}
+          >
+            <span
+              className="ev-log__data"
+              aria-label={`Ano ${entrada.anoEvento}, mês ${entrada.mesEvento}`}
+            >
+              {entrada.anoEvento}/{String(entrada.mesEvento).padStart(2, '0')}
+            </span>
+            <span className="ev-log__texto">{formatarEventoId(entrada.eventoId)}</span>
+            {tierCfg !== undefined && (
+              <span className={`ev-log__chip ${tierCfg.classe}`}>{tierCfg.rotulo}</span>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
