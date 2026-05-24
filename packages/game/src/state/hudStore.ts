@@ -11,6 +11,7 @@ import type { Event as CoreEvent, ResultadoResolucao, SaveSlot } from '@lifesim/
 import { ATIVIDADES_BASE } from '@core/activities/ActivityCatalog';
 import { realizarAtividade as realizarAtividadeCore } from '@core/activities/ActivityEngine';
 import { salvarSave } from '@core/persistence/SaveManager';
+import { registrarAutosave } from '@core/persistence/AutosaveOrchestrator';
 import { GameEngine as GameEngineLegado, type ResultadoRolagem } from '../engine/GameEngine';
 
 // ---------------------------------------------------------------------------
@@ -242,7 +243,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     // Persistir via engine
     engineAtivo.aplicarResultadoEfeitos(protagonistaAtual, rosterAtual);
     const saveAtualizado = engineAtivo.obterEstadoAtual();
-    void engineAtivo.salvarEstadoAtual();
+    registrarAutosave(saveAtualizado, 'forcar');
 
     // Atualizar store
     set((anterior) => ({
@@ -413,7 +414,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
 
     engine.aplicarResultadoEfeitos(protagonistaComLog, saveAtual.roster);
     const saveAtualizado = engine.obterEstadoAtual();
-    void salvarSave(saveAtualizado);
+    registrarAutosave(saveAtualizado, 'agendar');
 
     set((anterior) => ({
       ...anterior,
@@ -435,7 +436,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
     if (engine !== undefined) {
       engine.atualizarConfiguracoes({ conteudoAdultoLiberado: valor });
       const saveAtualizado = engine.obterEstadoAtual();
-      void engine.salvarEstadoAtual();
+      registrarAutosave(saveAtualizado, 'agendar');
       set((anterior) => ({ ...anterior, saveAtual: saveAtualizado }));
     }
   },

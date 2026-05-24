@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "lesao_exercicio_academia",
+  "categoria": "health",
+  "titulo": "O Peso do Ego",
+  "descricaoCurta": "Ao tentar levantar uma carga absurda de peso no levantamento terra para impressionar alguém na academia, sua coluna faz um barulho suspeito de galho seco quebrando.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [16, 65],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "lesao_exercicio_cena",
+    "descricaoCurta": "Academia de musculação, halteres e barras no fundo, você curvado segurando a coxa ou a lombar.",
+    "background": "parque",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "academia_lesionado",
+          "categoria": "action",
+          "descricao": "Segurando a lombar com expressão de dor aguda, de pé ao lado da barra pesada.",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A barra está carregada de anilhas pretas de ferro. Você percebe que a pessoa que você acha bonita está olhando na sua direção. Você respira fundo, faz cara de bravo e puxa.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "A barra sobe cinco centímetros antes de uma dor aguda e gelada cruzar a sua região lombar. A pessoa bonita continua olhando, mas agora com pena.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Usar toda a sua força bruta para terminar o movimento de qualquer jeito.",
+            "atributoCheck": { "atributo": "forca", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "orgulho_intacto" }
+            ]
+          },
+          {
+            "texto": "Soltar a barra fazendo muito barulho e fingir que era apenas um aquecimento.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Sentar no chão fingindo estar alongando para disfarçar o choro.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "lesao_lombar_cronica" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

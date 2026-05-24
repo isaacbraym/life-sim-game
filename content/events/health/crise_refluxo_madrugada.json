@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "crise_refluxo_madrugada",
+  "categoria": "health",
+  "titulo": "O Vulcão do Esôfago",
+  "descricaoCurta": "Você acorda às 3h da manhã sentindo que engoliu lava vulcânica. O jantar de pizza fria com molho de pimenta cobrou o preço de forma violenta.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [20, 75],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "crise_refluxo_cena",
+    "descricaoCurta": "Quarto escuro no meio da noite, você sentado assustado na cama.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "refluxo_sofrido",
+          "categoria": "basic",
+          "descricao": "Sentado na cama segurando a boca com olhar de pânico e dor no peito.",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Um gosto ácido e quente sobe pela sua garganta. A sensação é de que um pequeno dragão decidiu fazer um churrasco no seu peito enquanto você dormia.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Beber um copo de leite gelado para tentar apagar o incêndio esofágico.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Procurar desesperadamente por um antiácido e dormir sentado.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Ficar deitado sofrendo e jurar que nunca mais vai comer pizza tarde da noite (uma mentira descarada).",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

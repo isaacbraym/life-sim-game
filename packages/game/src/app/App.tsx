@@ -12,6 +12,7 @@ import { useHudStore } from '../state/hudStore';
 import { v4 as uuidv4 } from 'uuid';
 import type { SaveSlot } from '@lifesim/core';
 import { SaveManager, listarSaves, carregarSave, deletarSave } from '@core/persistence/SaveManager';
+import { forcarAutosave } from '@core/persistence/Autosave';
 import { gerarAtributosIniciais } from '@core/rpg/Attributes';
 import { gerarRosterInicial } from '@core/npc/NpcGenerator';
 import './App.css';
@@ -253,7 +254,13 @@ export function App(): React.JSX.Element {
           anoAtual={anoAtual}
           dinheiro={dinheiro}
           aoNovoJogo={() => setTelaAtual('novo_personagem')}
-          aoAbrirConfig={() => setTelaAtual('configuracoes')}
+          aoAbrirConfig={() => {
+            const salvoAtual = useHudStore.getState().saveAtual;
+            if (salvoAtual !== undefined) {
+              void forcarAutosave(salvoAtual);
+            }
+            setTelaAtual('configuracoes');
+          }}
         />
 
         <div className="vida-app__corpo">

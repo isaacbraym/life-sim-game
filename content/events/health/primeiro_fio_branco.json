@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_fio_branco",
+  "categoria": "health",
+  "titulo": "A Geada Capilar",
+  "descricaoCurta": "Ao escovar os dentes pela manhã, você percebe um reflexo prateado estranho na sua têmpora. É ele: seu primeiro fio de cabelo branco.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [25, 55],
+    "peso": 20,
+    "cooldownMeses": 120,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_fio_branco_cena",
+    "descricaoCurta": "Banheiro de manhã, você muito próximo do espelho, inspecionando a cabeça.",
+    "background": "banheiro",
+    "framing": "closeup",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "descobrindo_fio_branco",
+          "categoria": "basic",
+          "descricao": "Encarando o espelho de muito perto com os olhos esbugalhados de choque.",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Um pequeno filamento de pura sabedoria (ou estresse acumulado) brilha sob a lâmpada fluorescente. Você percebe que a juventude eterna é um mito de marketing.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Aceitar o envelhecimento natural com elegância capilar.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Arrancar o fio branco com uma pinça, desafiando a biologia.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -2 },
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "adicionar_flag", "flag": "negador_da_idade" }
+            ]
+          },
+          {
+            "texto": "Pesquisar no Google sobre calvície e tratamentos caros imediatamente.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -50.0 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

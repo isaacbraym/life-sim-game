@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "emprestar_dinheiro_parente",
+  "categoria": "relationship",
+  "titulo": "O Empréstimo Familiar",
+  "descricaoCurta": "Um primo distante te manda mensagem elogiando sua foto de perfil antes de pedir trezentos reais emprestados 'para pagar o gás'. Você sabe que a chance de retorno é menor que a de ganhar na Mega-Sena.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [20, 60],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "emprestimo_familiar_cena",
+    "descricaoCurta": "Você encarando a tela do celular deitado na cama, franzindo a testa com desconfiança.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "primo_pedindo_pix",
+          "categoria": "basic",
+          "descricao": "Olhando para o celular com expressão de extrema desconfiança e ironia.",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O clássico golpe do 'Pix de volta semana que vem'. Ele promete pelo nome da falecida avó de vocês que o dinheiro retornará com juros emocionais.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Emprestar o dinheiro sabendo que nunca mais o verá. (Generosidade tola).",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": -300.0 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Inventar uma desculpa de que seu dinheiro está preso em um fundo de investimento de resgate longo.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Deixar a mensagem no vácuo e fingir demência no próximo encontro familiar.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "adicionar_flag", "flag": "primo_pao_duro" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

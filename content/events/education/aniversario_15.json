@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "aniversario_15",
+  "categoria": "education",
+  "titulo": "Quinze Anos e Nenhuma Certeza",
+  "descricaoCurta": "Seu aniversário de 15 anos. Esperava uma festa de arromba ou um presente lendário, mas ganhou um conselho valioso e muita vergonha alheia.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [15, 15],
+    "peso": 90,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "aniversario_15_cena",
+    "descricaoCurta": "Quarto com pôsteres na parede e roupas espalhadas pelo chão.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adolescente_quinze_anos",
+          "categoria": "basic",
+          "descricao": "Sentado na cama olhando para o teto com fones no pescoço.",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "15 anos. A metade da sua adolescência. A idade dos bailes de debutante (que você não teve) ou de ganhar uma moto de cinquenta cilindradas (que seus pais vetaram por motivos óbvios de segurança e orçamento).",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Seu pai entra no quarto com cara de quem vai te dar o sermão da montanha, mas apenas bate no seu ombro e diz: 'Agora você já pode responder criminalmente por alguns atos, hein? Fica esperto.'",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Sorrir com sarcasmo e voltar a ouvir música triste. (Estilo clássico rebelde).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Pedir um aumento na mesada alegando responsabilidade civil crescente.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 10.0 },
+              { "tipo": "alterar_humor", "delta": 10 }
+            ]
+          },
+          {
+            "texto": "Fazer cara de quem entendeu a ameaça velada.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

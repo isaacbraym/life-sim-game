@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeira_recuperacao_escola",
+  "categoria": "education",
+  "titulo": "A Caneta Vermelha",
+  "descricaoCurta": "Sua primeira nota vermelha em matemática. Uma obra de arte em tinta vermelha que exige a assinatura dos seus responsáveis legais.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [11, 16],
+    "peso": 60,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeira_recuperacao_cena",
+    "descricaoCurta": "Sala de aula vazia após a saída dos alunos, você segurando uma prova amassada.",
+    "background": "escola_sala",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "estudante_desesperado",
+          "categoria": "emotional",
+          "descricao": "Encarando a prova vermelha com olhos esbugalhados de pânico.",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Um redondo 3,5 adorna o topo da folha de prova. O professor escreveu 'Estude mais!' com três pontos de exclamação que parecem facadas no seu orgulho acadêmico.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Seus pais esperam boletins perfeitos. Entregar isso assinado é pedir para passar o final de semana sem videogame ou internet.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Treinar a assinatura do seu pai contra a luz da janela.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "falsificador_junior" }
+            ]
+          },
+          {
+            "texto": "Contar a verdade e chorar preventivamente antes de levarem bronca.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Dizer que perdeu a prova no caminho de volta.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "adicionar_flag", "flag": "mentiroso_recorrente" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

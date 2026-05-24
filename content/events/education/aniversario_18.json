@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "aniversario_18",
+  "categoria": "education",
+  "titulo": "A Maioridade Penal",
+  "descricaoCurta": "Parabéns, você agora é legalmente responsável por todas as suas péssimas decisões. O Estado comemora te dando direito a voto e prisão.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 18],
+    "peso": 90,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "aniversario_18_cena",
+    "descricaoCurta": "Uma calçada vazia sob o sol forte, você olhando para a sua nova identidade.",
+    "background": "rua_residencial",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "adulto_recem_formado",
+          "categoria": "basic",
+          "descricao": "Olhando para o próprio documento com cara de preocupação.",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 65,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Dezoito anos. O dia em que a sociedade finge que você virou um adulto funcional e o sargento do exército te convoca para jurar à bandeira usando um sapato que machuca o calcanhar.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "O primeiro boleto oficial chega no seu nome, impresso em papel reciclado áspero. É o batismo de fogo da vida adulta.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Ignorar o boleto e fingir que é um engano. (Tática clássica do avestruz).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_dinheiro", "delta": -15.0 },
+              { "tipo": "adicionar_flag", "flag": "nome_sujo_no_serasa" }
+            ]
+          },
+          {
+            "texto": "Tentar decifrar as taxas de juros cobradas usando sua inteligência.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Pedir dinheiro aos seus pais para quitar a dívida imediatamente.",
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 15.0 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

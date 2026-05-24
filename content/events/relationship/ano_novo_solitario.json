@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "ano_novo_solitario",
+  "categoria": "relationship",
+  "titulo": "A Valsa da Meia-Noite",
+  "descricaoCurta": "O ano novo chegou. Em vez de estar em uma festa na praia bebendo espumante caro, você está em casa de moletom, comendo macarrão instantâneo e ouvindo os fogos de artifício distantes.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 70],
+    "peso": 15,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "ano_novo_solitario_cena",
+    "descricaoCurta": "Sala escura com a TV ligada exibindo a contagem regressiva oficial do ano novo.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_solitario_ano_novo",
+          "categoria": "basic",
+          "descricao": "Sentado com as pernas cruzadas no sofá, segurando uma tigela de plástico com expressão neutra.",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 50,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A contagem regressiva na tela termina. O apresentador da TV pula de alegria sob confetes virtuais. Pela janela, o som de estouros se mistura com o latido desesperado dos cães da vizinhança.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Escrever metas ambiciosas para o ano que se inicia. (Esperança renovada).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Fazer uma postagem sarcástica na internet sobre a falsidade das viradas de ano.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Apenas escovar os dentes e dormir às 0h05 como se fosse uma terça-feira comum.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

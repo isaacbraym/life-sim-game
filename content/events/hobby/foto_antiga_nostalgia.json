@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "foto_antiga_nostalgia",
+  "categoria": "hobby",
+  "titulo": "O Fantasma do Passado",
+  "descricaoCurta": "Você encontra um arquivo de foto antiga da sua época de escola. As roupas largas e o corte de cabelo duvidoso te causam danos estéticos e existenciais severos.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 60],
+    "peso": 20,
+    "cooldownMeses": 48,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "foto_antiga_cena",
+    "descricaoCurta": "Você segurando um papel quadrado pequeno com olhar semicerrado de vergonha.",
+    "background": "sala_estar",
+    "framing": "close",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_nostalgico",
+          "categoria": "basic",
+          "descricao": "Olhando para uma foto na mão com um sorriso torto e testa franzida de vergonha.",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Lá está você, posando ao lado de uma parede pichada, fazendo um sinal de paz e amor com os dedos e usando uma camisa três tamanhos maior do que o necessário. A autoconfiança daquela época é invejável e inexplicável.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Postar nas redes sociais como piada no 'Throwback Thursday'.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Guardar a foto bem fundo na gaveta para que ninguém mais a veja.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Ficar contemplando a foto e entrar em uma leve melancolia sobre o tempo que passa.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

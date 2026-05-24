@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "almoco_familia_politica",
+  "categoria": "relationship",
+  "titulo": "O Banquete das Cobranças",
+  "descricaoCurta": "Almoço de domingo na casa dos parentes. O churrasco está ótimo, mas as cobranças sobre carreira, casamento e aquisição de bens são servidas como prato principal.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 50],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "tio_curioso",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": {
+        "idadeMin": 40,
+        "idadeMax": 70
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "almoco_familia_cena",
+    "descricaoCurta": "Sala de jantar bagunçada com pratos de sobremesa vazios e copos de refrigerante.",
+    "background": "sala_estar",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "sobrinho_pressionado",
+          "categoria": "basic",
+          "descricao": "Segurando um garfo de sobremesa com sorriso amarelo e ombros tensos.",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "tio_questionador",
+          "categoria": "basic",
+          "descricao": "Palito de dente na boca, apontando com o dedo indicador gesticulando.",
+          "rotacoes": [],
+          "expressaoFacial": "arrogante",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "apontando",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A maionese de batata já está esquentando na mesa. Seu tio encosta a cadeira, dá um tapinha nas costas dele mesmo e se vira para você com o olhar de quem vai dar um conselho financeiro não solicitado.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "E aí, campeão? Na sua idade eu já tinha dois filhos, um consórcio de Fusca pago e uma casa própria de três quartos. E você aí, só nesse tal de computador?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Usar seu carisma para mudar de assunto focando no campeonato de futebol.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Explicar a inflação imobiliária e a diferença macroeconômica de 1980 para hoje.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Engolir o desaforo junto com um pedaço de pudim morno.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}
