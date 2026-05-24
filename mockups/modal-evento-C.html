@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Modal Evento — Sugestão C (Ousada)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:         #0f1117;
+    --surface:    #181c25;
+    --surface2:   #1e2332;
+    --border:     #2a3045;
+    --text:       #e8eaf0;
+    --text-muted: #6b7594;
+    --accent:     #5b8dee;
+    --green:      #4caf7d;
+    --yellow:     #e8b84b;
+    --red:        #e05c5c;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  /* ── Overlay ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(5, 7, 14, 0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeIn .2s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ── Card principal (2 colunas) ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 720px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    overflow: hidden;
+    box-shadow: 0 8px 48px rgba(0,0,0,.6), 0 0 0 1px rgba(91,141,238,.06);
+    animation: slideUp .28s cubic-bezier(.16,1,.3,1);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* ── Coluna esquerda: rig ── */
+  .col-rig {
+    background: var(--surface2);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fundo decorativo */
+  .col-rig::before {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(91,141,238,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .rig-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+
+  /* SVG placeholder do rig */
+  .rig-svg {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Personagem SVG estilizado */
+  .personagem-svg {
+    width: 120px;
+    height: 220px;
+    filter: drop-shadow(0 4px 16px rgba(91,141,238,.2));
+  }
+
+  .rig-nome {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+  }
+
+  .rig-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 3px;
+  }
+
+  /* Status pills na coluna esquerda */
+  .status-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .status-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    padding: 4px 8px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+  }
+
+  .pill-valor { font-weight: 500; }
+  .pill-valor--green  { color: var(--green);  }
+  .pill-valor--yellow { color: var(--yellow); }
+  .pill-valor--blue   { color: var(--accent); }
+
+  /* ── Coluna direita: conteúdo ── */
+  .col-conteudo {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Cabeçalho direito */
+  .right-header {
+    padding: 20px 22px 16px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(91,141,238,.04) 0%, transparent 100%);
+  }
+
+  .cat-faixa {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .cat-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: .5; transform: scale(.8); }
+  }
+
+  .titulo {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+  }
+
+  .meta-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .meta-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  /* Área de scroll do conteúdo */
+  .right-body {
+    flex: 1;
+    padding: 16px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+    max-height: 480px;
+  }
+
+  /* Descrição */
+  .descricao {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: rgba(232,234,240,.8);
+    background: rgba(30,35,50,.7);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 2px solid rgba(91,141,238,.4);
+  }
+
+  /* Opções */
+  .opcoes-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .opcoes { display: flex; flex-direction: column; gap: 7px; }
+
+  .opcao {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: border-color .15s, background .15s, transform .1s;
+    position: relative;
+  }
+
+  .opcao:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(91,141,238,.06);
+    transform: translateX(2px);
+  }
+
+  .opcao:active:not(:disabled) { transform: translateX(0); }
+
+  .opcao:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  /* Faixa lateral de cor na opção hovered */
+  .opcao::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .opcao:hover:not(:disabled)::after { opacity: 1; }
+
+  .opcao-inner {
+    padding: 11px 13px 11px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .opcao-linha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .opcao-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 600;
+    min-width: 14px;
+  }
+
+  .opcao-texto {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .opcao-efeitos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding-left: 24px;
+  }
+
+  .chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    padding: 1.5px 6px;
+    border-radius: 3px;
+  }
+
+  .chip--green  { background: rgba(76,175,125,.15); color: var(--green); border: 1px solid rgba(76,175,125,.2); }
+  .chip--red    { background: rgba(224,92,92,.15);  color: var(--red);   border: 1px solid rgba(224,92,92,.2); }
+  .chip--yellow { background: rgba(232,184,75,.15); color: var(--yellow); border: 1px solid rgba(232,184,75,.2); }
+  .chip--blue   { background: rgba(91,141,238,.15); color: var(--accent); border: 1px solid rgba(91,141,238,.2); }
+  .chip--muted  { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* ── Rodapé ── */
+  .right-footer {
+    padding: 12px 22px;
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,.15);
+  }
+
+  .resolvendo-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .spinner {
+    width: 13px; height: 13px;
+    border: 2px solid rgba(91,141,238,.2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .6s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hint-normal {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .kbd {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 9px;
+  }
+
+  /* ── Demo bar ── */
+  .demo-bar {
+    position: fixed; bottom: 16px; right: 16px;
+    display: flex; gap: 8px; z-index: 200;
+  }
+
+  .demo-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .demo-btn:hover { color: var(--text); border-color: var(--accent); }
+
+  .label-sugestao {
+    position: fixed; top: 16px; left: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="label-sugestao">Sugestão C — Ousada (duas colunas + rig)</div>
+
+<div class="overlay">
+  <div class="card">
+
+    <!-- ── Coluna esquerda: rig ── -->
+    <div class="col-rig">
+
+      <span class="rig-label">Protagonista</span>
+
+      <div class="rig-svg">
+        <!-- Silhueta SVG estilizada do personagem (placeholder do rig PixiJS) -->
+        <svg class="personagem-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pele" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#f1c27d"/>
+              <stop offset="100%" style="stop-color:#c8935a"/>
+            </linearGradient>
+            <linearGradient id="roupa" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#2a3a6a"/>
+              <stop offset="100%" style="stop-color:#1a253a"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Sombra/reflexo no chão -->
+          <ellipse cx="60" cy="215" rx="28" ry="5" fill="rgba(0,0,0,.25)"/>
+
+          <!-- Perna direita (atrás) -->
+          <path d="M52 120 Q50 150 48 170 Q47 182 50 185 Q54 188 58 185 Q60 175 62 165 Q64 145 66 120Z"
+                fill="#1a253a" opacity="0.8"/>
+
+          <!-- Perna esquerda (frente) -->
+          <path d="M54 120 Q52 152 50 172 Q49 183 53 186 Q57 189 61 186 Q63 176 65 166 Q67 145 68 120Z"
+                fill="#243055"/>
+
+          <!-- Tronco / camisa -->
+          <path d="M34 72 Q30 82 30 120 Q30 124 60 124 Q90 124 90 120 Q90 82 86 72 Q76 64 60 62 Q44 64 34 72Z"
+                fill="url(#roupa)"/>
+
+          <!-- Detalhe gravata / camisa -->
+          <path d="M57 72 L60 68 L63 72 L61 100 L59 100Z" fill="rgba(91,141,238,.5)"/>
+
+          <!-- Braço direito (atrás) -->
+          <path d="M86 72 Q98 76 102 96 Q104 106 100 112 Q96 116 92 112 Q90 105 88 96 Q84 84 82 76Z"
+                fill="#1a253a" opacity="0.8"/>
+
+          <!-- Braço esquerdo (frente) -->
+          <path d="M34 72 Q22 76 18 96 Q16 106 20 112 Q24 116 28 112 Q30 105 32 96 Q36 84 38 76Z"
+                fill="url(#roupa)"/>
+
+          <!-- Mão esquerda -->
+          <ellipse cx="18" cy="113" rx="6" ry="5" fill="url(#pele)"/>
+          <!-- Mão direita -->
+          <ellipse cx="102" cy="113" rx="6" ry="5" fill="url(#pele)"/>
+
+          <!-- Pescoço -->
+          <rect x="54" y="52" width="12" height="14" rx="4" fill="url(#pele)"/>
+
+          <!-- Cabeça -->
+          <ellipse cx="60" cy="40" rx="20" ry="24" fill="url(#pele)" filter="url(#glow)"/>
+
+          <!-- Olhos -->
+          <ellipse cx="53" cy="36" rx="3" ry="3.5" fill="#634e34"/>
+          <ellipse cx="67" cy="36" rx="3" ry="3.5" fill="#634e34"/>
+          <ellipse cx="53" cy="35.5" rx="1.5" ry="2" fill="#1a0d00"/>
+          <ellipse cx="67" cy="35.5" rx="1.5" ry="2" fill="#1a0d00"/>
+
+          <!-- Cabelo -->
+          <path d="M40 32 Q42 18 60 16 Q78 18 80 32 Q76 20 60 19 Q44 20 40 32Z"
+                fill="#090806"/>
+
+          <!-- Pés -->
+          <ellipse cx="52" cy="186" rx="9" ry="4" fill="#1a1a2a"/>
+          <ellipse cx="62" cy="186" rx="9" ry="4" fill="#1a1a2a"/>
+        </svg>
+      </div>
+
+      <div>
+        <div class="rig-nome">Lucas Mendes</div>
+        <div class="rig-meta">27 anos · 1997</div>
+      </div>
+
+      <!-- Mini stats do personagem -->
+      <div class="status-pills">
+        <div class="status-pill">
+          <span>Humor</span>
+          <span class="pill-valor pill-valor--yellow">68</span>
+        </div>
+        <div class="status-pill">
+          <span>Saúde</span>
+          <span class="pill-valor pill-valor--green">82</span>
+        </div>
+        <div class="status-pill">
+          <span>Carisma</span>
+          <span class="pill-valor pill-valor--blue">12</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Coluna direita: evento ── -->
+    <div class="col-conteudo">
+
+      <div class="right-header">
+        <div class="cat-faixa">
+          <span class="cat-dot"></span>
+          CARREIRA · ANO 1997 · ABR
+        </div>
+        <div class="titulo">Proposta de promoção</div>
+        <div class="meta-chips">
+          <span class="meta-chip">💼 Trabalho</span>
+          <span class="meta-chip">Cooldown: 24 meses</span>
+        </div>
+      </div>
+
+      <div class="right-body">
+
+        <p class="descricao">
+          Seu gerente te chamou na sala e ofereceu uma promoção — salário 40% maior,
+          mas viagens semanais e menos tempo com a família. Uma oportunidade que não
+          volta tão cedo.
+        </p>
+
+        <span class="opcoes-label">Escolha uma ação</span>
+
+        <div class="opcoes" id="opcoes">
+
+          <button class="opcao" onclick="selecionar(this)">
+            <div class="opcao-inner">
+              <div class="opcao-linha">
+                <span class="opcao-num">01</span>
+                <span class="opcao-texto">Aceitar a promoção</span>
+              </div>
+              <div class="opcao-efeitos">
+                <span class="chip chip--green">Dinheiro +R$800/mês</span>
+                <span class="chip chip--red">Humor −10</span>
+                <span class="chip chip--blue">flag: promovido</span>
+              </div>
+            </div>
+          </button>
+
+          <button class="opcao" onclick="selecionar(this)">
+            <div class="opcao-inner">
+              <div class="opcao-linha">
+                <span class="opcao-num">02</span>
+                <span class="opcao-texto">Negociar condições</span>
+              </div>
+              <div class="opcao-efeitos">
+                <span class="chip chip--blue">Rolagem: Carisma</span>
+                <span class="chip chip--yellow">Dinheiro +R$400/mês</span>
+              </div>
+            </div>
+          </button>
+
+          <button class="opcao" disabled title="Requer: Profissão ativa (não preenchida)">
+            <div class="opcao-inner">
+              <div class="opcao-linha">
+                <span class="opcao-num">03</span>
+                <span class="opcao-texto">Pedir transferência de departamento</span>
+              </div>
+              <div class="opcao-efeitos">
+                <span class="chip chip--muted">Indisponível: sem profissão</span>
+              </div>
+            </div>
+          </button>
+
+          <button class="opcao" onclick="selecionar(this)">
+            <div class="opcao-inner">
+              <div class="opcao-linha">
+                <span class="opcao-num">04</span>
+                <span class="opcao-texto">Recusar por ora</span>
+              </div>
+              <div class="opcao-efeitos">
+                <span class="chip chip--yellow">Humor +5</span>
+                <span class="chip chip--muted">Sem efeito financeiro</span>
+              </div>
+            </div>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Rodapé -->
+      <div class="right-footer">
+        <div id="hint-normal" class="hint-normal">
+          <span>Escolha uma opção para resolver o evento</span>
+        </div>
+        <div id="resolvendo-bar" class="resolvendo-bar" style="display:none">
+          <span class="spinner"></span>
+          <span>Processando decisão…</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="demo-bar">
+  <button class="demo-btn" onclick="toggleResolvendo()">Simular: resolvendo</button>
+  <button class="demo-btn" onclick="resetar()">Reset</button>
+</div>
+
+<script>
+let resolvendo = false;
+
+function selecionar(btn) {
+  if (resolvendo) return;
+  document.querySelectorAll('.opcao:not(:disabled)').forEach(b => {
+    b.style.borderColor = '';
+    b.style.background  = '';
+  });
+  btn.style.borderColor = 'var(--accent)';
+  btn.style.background  = 'rgba(91,141,238,.08)';
+  setTimeout(() => { toggleResolvendo(true); }, 150);
+  setTimeout(() => { toggleResolvendo(false); resetar(); }, 2300);
+}
+
+function toggleResolvendo(force) {
+  resolvendo = force !== undefined ? force : !resolvendo;
+  const hint    = document.getElementById('hint-normal');
+  const barSpn  = document.getElementById('resolvendo-bar');
+  const btns    = document.querySelectorAll('.opcao:not([disabled])');
+
+  if (resolvendo) {
+    hint.style.display   = 'none';
+    barSpn.style.display = 'flex';
+    btns.forEach(b => { b.disabled = true; b.dataset.tmp = '1'; });
+  } else {
+    hint.style.display   = 'flex';
+    barSpn.style.display = 'none';
+    btns.forEach(b => { if (b.dataset.tmp) { b.disabled = false; delete b.dataset.tmp; } });
+  }
+}
+
+function resetar() {
+  document.querySelectorAll('.opcao:not([disabled])').forEach(b => {
+    b.style.borderColor = '';
+    b.style.background  = '';
+  });
+}
+</script>
+</body>
+</html>
