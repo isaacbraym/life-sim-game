@@ -665,6 +665,7 @@ export declare const SaveSlot: z.ZodObject<{
         flagsGlobais?: string[] | undefined;
     }>;
     cooldownRegistry: z.ZodDefault<z.ZodRecord<z.ZodString, z.ZodNumber>>;
+    hashIntegridade: z.ZodOptional<z.ZodString>;
 }, "strict", z.ZodTypeAny, {
     criadoEm: string;
     schemaVersion: "1.0.0";
@@ -815,6 +816,7 @@ export declare const SaveSlot: z.ZodObject<{
         flagsGlobais: string[];
     };
     cooldownRegistry: Record<string, number>;
+    hashIntegridade?: string | undefined;
 }, {
     criadoEm: string;
     schemaVersion: "1.0.0";
@@ -965,6 +967,7 @@ export declare const SaveSlot: z.ZodObject<{
     };
     tempoJogadoMs?: number | undefined;
     cooldownRegistry?: Record<string, number> | undefined;
+    hashIntegridade?: string | undefined;
 }>;
 export type SaveSlot = z.infer<typeof SaveSlot>;
 //# sourceMappingURL=save.d.ts.map

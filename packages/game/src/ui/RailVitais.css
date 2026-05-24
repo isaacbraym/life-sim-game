@@ -1,0 +1,94 @@
+/* ============================================================================
+   RailVitais · styles
+   Destino: packages/game/src/ui/RailVitais.css
+   ============================================================================ */
+
+.vida-rail-vitais {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--vida-surface);
+  border-right: 1px solid var(--vida-border);
+  padding: var(--vida-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--vida-space-3);
+  overflow-y: auto;
+  font-family: var(--vida-font);
+}
+
+.vida-rail-vitais__caps {
+  font-size: var(--vida-fs-9);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--vida-dim);
+  font-family: var(--vida-font-mono);
+  margin-top: var(--vida-space-2);
+}
+.vida-rail-vitais__caps:first-child { margin-top: 0; }
+
+/* ── Stat radial ── */
+.vida-rail-vitais__stat {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vida-rail-vitais__stat-fundo { stroke: var(--vida-border); }
+.vida-rail-vitais__stat-anel  { transition: stroke-dashoffset var(--vida-trans-slow); }
+
+.vida-rail-vitais__stat-anel--verde    { stroke: var(--vida-green); }
+.vida-rail-vitais__stat-anel--amarelo  { stroke: var(--vida-yellow); }
+.vida-rail-vitais__stat-anel--vermelho { stroke: var(--vida-red); }
+
+.vida-rail-vitais__stat-num {
+  font-family: var(--vida-font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--vida-text);
+}
+
+.vida-rail-vitais__stat-texto {
+  display: flex;
+  flex-direction: column;
+}
+
+.vida-rail-vitais__stat-rotulo {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-text-soft);
+  font-weight: 500;
+}
+
+.vida-rail-vitais__stat-coment {
+  font-size: var(--vida-fs-10);
+  color: var(--vida-muted);
+  font-family: var(--vida-font-mono);
+  margin-top: 2px;
+}
+
+.vida-rail-vitais__placeholder {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-muted);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ── Mobile: vira drawer/bottom-sheet; o App.tsx esconde por padrão ── */
+@media (max-width: 768px) {
+  .vida-rail-vitais {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--vida-border);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--vida-space-2);
+    padding: var(--vida-space-3);
+  }
+  .vida-rail-vitais__caps { width: 100%; }
+  .vida-rail-vitais__stat { flex: 1; min-width: 140px; }
+}

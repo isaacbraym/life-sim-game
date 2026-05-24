@@ -1,0 +1,154 @@
+/* ============================================================================
+   BarraSuperior · styles
+   Destino: packages/game/src/ui/BarraSuperior.css
+   ============================================================================ */
+
+.vida-topbar {
+  background: var(--vida-surface);
+  border-bottom: 1px solid var(--vida-border);
+  padding: var(--vida-space-3) var(--vida-space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--vida-space-4);
+  flex-shrink: 0;
+  font-family: var(--vida-font);
+}
+
+/* ── Botão ícone ── */
+.vida-topbar__icone {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  color: var(--vida-muted);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--vida-r-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--vida-trans), border-color var(--vida-trans);
+}
+.vida-topbar__icone:hover {
+  color: var(--vida-text);
+  border-color: var(--vida-accent);
+}
+.vida-topbar__icone:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Identidade ── */
+.vida-topbar__identidade {
+  display: flex;
+  align-items: center;
+  gap: var(--vida-space-3);
+  min-width: 0;
+}
+
+.vida-topbar__avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--vida-r);
+  background: linear-gradient(135deg, #2a3a5c, #1e2880);
+  border: 1px solid var(--vida-border);
+  flex-shrink: 0;
+}
+
+.vida-topbar__nome-bloco {
+  min-width: 0;
+}
+
+.vida-topbar__nome {
+  font-size: var(--vida-fs-14);
+  font-weight: 600;
+  color: var(--vida-text);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.vida-topbar__profissao {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-muted);
+  margin-top: 2px;
+}
+
+.vida-topbar__divisor {
+  width: 1px;
+  height: 28px;
+  background: var(--vida-border);
+  flex-shrink: 0;
+}
+
+/* ── Chips ── */
+.vida-topbar__chips {
+  display: flex;
+  gap: var(--vida-space-1);
+  flex-wrap: wrap;
+}
+
+.vida-topbar__chip {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-pill);
+  padding: 4px 10px;
+  font-size: var(--vida-fs-11);
+  color: var(--vida-text-soft);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vida-topbar__chip--mono {
+  font-family: var(--vida-font-mono);
+  letter-spacing: 0.06em;
+}
+
+/* ── Direita (carteira + ações) ── */
+.vida-topbar__direita {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--vida-space-4);
+}
+
+.vida-topbar__carteira {
+  text-align: right;
+  line-height: 1.1;
+}
+
+.vida-topbar__carteira-rotulo {
+  font-size: var(--vida-fs-9);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--vida-dim);
+  font-weight: 600;
+  font-family: var(--vida-font-mono);
+}
+
+.vida-topbar__carteira-valor {
+  font-family: var(--vida-font-mono);
+  font-size: var(--vida-fs-17);
+  font-weight: 500;
+  color: var(--vida-green);
+  margin-top: 2px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .vida-topbar {
+    padding: var(--vida-space-2) var(--vida-space-3);
+    gap: var(--vida-space-2);
+  }
+  .vida-topbar__divisor,
+  .vida-topbar__chips,
+  .vida-topbar__profissao {
+    display: none;
+  }
+  .vida-topbar__nome { max-width: none; }
+  .vida-topbar__carteira-rotulo { display: none; }
+  .vida-topbar__carteira-valor { font-size: var(--vida-fs-14); }
+}

@@ -13,7 +13,10 @@ export declare class SaveManager {
         protagonista: Character;
         roster?: Npc[];
     }): Promise<SaveSlot>;
+    verificarIntegridade(saveId: string): Promise<boolean>;
 }
 export declare function exportarSave(saveId: string): Promise<string>;
 export declare function importarSave(jsonString: string): Promise<SaveSlot>;
+export declare function verificarIntegridade(saveId: string): Promise<boolean>;
+export declare function solicitarPersistenciaStorage(): Promise<boolean>;
 //# sourceMappingURL=SaveManager.d.ts.map

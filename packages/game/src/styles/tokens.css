@@ -1,0 +1,121 @@
+/* ===========================================================================
+   Vida 2.5D — Design Tokens
+   ----------------------------------------------------------------------------
+   ▸ Destino no repo: packages/game/src/styles/tokens.css
+   ▸ Importar UMA vez em: packages/game/src/main.tsx
+       import './styles/tokens.css';
+       import './index.css';
+   ▸ Todos os componentes refatorados consomem var(--vida-…)
+   =========================================================================== */
+
+/* — Fontes — */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ── Cor · superfícies ─────────────────────────────────────────────── */
+  --vida-bg:        #0e1320;
+  --vida-surface:   #161b2c;
+  --vida-surface2:  #1d2338;
+  --vida-surface3:  #262d47;
+  --vida-border:    #2c3450;
+  --vida-border-hi: #3d4670;
+
+  /* ── Cor · texto ───────────────────────────────────────────────────── */
+  --vida-text:      #e8eaf0;
+  --vida-text-soft: #c4cae0;
+  --vida-muted:     #7a83a3;
+  --vida-dim:       #454d70;
+
+  /* ── Cor · acento (azul-cobalto padrão; troque por uma das paletas alternativas abaixo)  ── */
+  --vida-accent:      #6c98ff;
+  --vida-accent-hi:   #8aacff;
+  --vida-accent-soft: rgba(108, 152, 255, 0.14);
+  --vida-accent-bg:   rgba(108, 152, 255, 0.06);
+
+  /* ── Cor · semântica ────────────────────────────────────────────────── */
+  --vida-green:  #5bc28d;
+  --vida-yellow: #eec25c;
+  --vida-red:    #ec6868;
+  --vida-purple: #b48cf7;
+
+  /* ── Tipografia ─────────────────────────────────────────────────────── */
+  --vida-font:        'DM Sans', system-ui, sans-serif;
+  --vida-font-mono:   'JetBrains Mono', 'DM Mono', 'Courier New', monospace;
+
+  --vida-fs-9:  9px;
+  --vida-fs-10: 10px;
+  --vida-fs-11: 11px;
+  --vida-fs-12: 12px;
+  --vida-fs-13: 13px;
+  --vida-fs-14: 14px;
+  --vida-fs-17: 17px;
+  --vida-fs-20: 20px;
+  --vida-fs-22: 22px;
+
+  /* ── Spacing · base 4 ───────────────────────────────────────────────── */
+  --vida-space-1:  4px;
+  --vida-space-2:  8px;
+  --vida-space-3:  12px;
+  --vida-space-4:  16px;
+  --vida-space-5:  20px;
+  --vida-space-6:  24px;
+  --vida-space-8:  32px;
+
+  /* ── Radius ─────────────────────────────────────────────────────────── */
+  --vida-r-sm: 6px;
+  --vida-r:    10px;
+  --vida-r-lg: 14px;
+  --vida-r-xl: 18px;
+  --vida-r-pill: 999px;
+
+  /* ── Sombras ────────────────────────────────────────────────────────── */
+  --vida-shadow-card:  0 1px 0 rgba(0, 0, 0, 0.2);
+  --vida-shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.6);
+  --vida-shadow-fab:   0 6px 20px rgba(108, 152, 255, 0.5);
+
+  /* ── Transições padrão ──────────────────────────────────────────────── */
+  --vida-trans-fast: 0.12s ease;
+  --vida-trans:      0.18s ease;
+  --vida-trans-slow: 0.32s ease;
+}
+
+/* ── Paletas alternativas (opt-in via classe no <body> ou <html>) ── */
+:root.theme-musgo {
+  --vida-accent:      #8ab667;
+  --vida-accent-hi:   #a3c984;
+  --vida-accent-soft: rgba(138, 182, 103, 0.16);
+  --vida-accent-bg:   rgba(138, 182, 103, 0.06);
+  --vida-shadow-fab:  0 6px 20px rgba(138, 182, 103, 0.5);
+}
+
+:root.theme-magenta {
+  --vida-accent:      #d97cb3;
+  --vida-accent-hi:   #e89bc4;
+  --vida-accent-soft: rgba(217, 124, 179, 0.16);
+  --vida-accent-bg:   rgba(217, 124, 179, 0.06);
+  --vida-shadow-fab:  0 6px 20px rgba(217, 124, 179, 0.5);
+}
+
+:root.theme-terracota {
+  --vida-accent:      #e08465;
+  --vida-accent-hi:   #ed9a7d;
+  --vida-accent-soft: rgba(224, 132, 101, 0.16);
+  --vida-accent-bg:   rgba(224, 132, 101, 0.06);
+  --vida-shadow-fab:  0 6px 20px rgba(224, 132, 101, 0.5);
+}
+
+/* ── Foco visível (acessibilidade) ── */
+:root :focus-visible {
+  outline: 2px solid var(--vida-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Scrollbars discretas dentro de painéis ── */
+.vida-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.vida-scroll::-webkit-scrollbar-thumb {
+  background: var(--vida-border);
+  border-radius: 4px;
+}
+.vida-scroll::-webkit-scrollbar-thumb:hover { background: var(--vida-border-hi); }
+.vida-scroll::-webkit-scrollbar-track { background: transparent; }

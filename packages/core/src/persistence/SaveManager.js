@@ -7,22 +7,36 @@ export async function listarSaves() {
 export async function carregarSave(saveId) {
     return await db.saves.get(saveId);
 }
+async function calcularHashSave(save) {
+    const salvoSemHash = { ...save, hashIntegridade: undefined };
+    const texto = JSON.stringify(salvoSemHash);
+    const buffer = new TextEncoder().encode(texto);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 export async function salvarSave(save) {
-    const parseResult = SaveSlotSchema.safeParse(save);
+    const hash = await calcularHashSave(save);
+    const saveComHash = { ...save, hashIntegridade: hash };
+    const parseResult = SaveSlotSchema.safeParse(saveComHash);
     if (!parseResult.success) {
         throw new Error(`Save inválido: ${JSON.stringify(parseResult.error.format())}`);
     }
-    await db.saves.put(save);
+    // Double-buffered save swap
+    const saveTemp = { ...saveComHash, saveId: `${saveComHash.saveId}_temp` };
+    await db.saves.put(saveTemp);
+    await db.saves.put(saveComHash);
+    await db.saves.delete(saveTemp.saveId);
     // Anexa o saveId ao protagonista e aos NPCs para fins de indexação e cascata no Dexie
     const protagonistaComSaveId = {
-        ...save.protagonista,
-        saveId: save.saveId,
+        ...saveComHash.protagonista,
+        saveId: saveComHash.saveId,
     };
     await db.characters.put(protagonistaComSaveId);
-    for (const npc of save.roster) {
+    for (const npc of saveComHash.roster) {
         const npcComSaveId = {
             ...npc,
-            saveId: save.saveId,
+            saveId: saveComHash.saveId,
         };
         await db.npcs.put(npcComSaveId);
     }
@@ -52,6 +66,7 @@ export async function criarNovoSave(nome, protagonista, roster) {
         cooldownRegistry: {},
     };
     await salvarSave(novoSave);
+    void solicitarPersistenciaStorage();
     return novoSave;
 }
 export async function deletarSave(saveId) {
@@ -85,7 +100,11 @@ export class SaveManager {
             cooldownRegistry: {},
         };
         await salvarSave(novoSave);
+        void solicitarPersistenciaStorage();
         return novoSave;
+    }
+    async verificarIntegridade(saveId) {
+        return verificarIntegridade(saveId);
     }
 }
 export async function exportarSave(saveId) {
@@ -132,5 +151,23 @@ export async function importarSave(jsonString) {
     }
     await salvarSave(saveImportado);
     return saveImportado;
+}
+export async function verificarIntegridade(saveId) {
+    const salvo = await db.saves.get(saveId);
+    if (salvo === undefined)
+        return false;
+    if (salvo.hashIntegridade === undefined)
+        return true; // saves antigos: aceitar
+    const hashEsperado = await calcularHashSave(salvo);
+    return hashEsperado === salvo.hashIntegridade;
+}
+export async function solicitarPersistenciaStorage() {
+    if (typeof navigator === 'undefined' || !('storage' in navigator) || !('persist' in navigator.storage)) {
+        return false; // browser não suporta ou ambiente node
+    }
+    const jaEhPersistente = await navigator.storage.persisted();
+    if (jaEhPersistente)
+        return true;
+    return navigator.storage.persist();
 }
 //# sourceMappingURL=SaveManager.js.map

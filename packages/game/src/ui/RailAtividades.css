@@ -1,0 +1,92 @@
+/* ============================================================================
+   RailAtividades · styles
+   Destino: packages/game/src/ui/RailAtividades.css
+   ============================================================================ */
+
+.vida-rail-atividades {
+  width: 200px;
+  flex-shrink: 0;
+  background: var(--vida-surface);
+  border-left: 1px solid var(--vida-border);
+  padding: var(--vida-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--vida-space-2);
+  overflow-y: auto;
+  font-family: var(--vida-font);
+}
+
+.vida-rail-atividades__caps {
+  font-size: var(--vida-fs-9);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--vida-dim);
+  font-family: var(--vida-font-mono);
+  margin-bottom: 2px;
+}
+
+.vida-rail-atividades__card {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--vida-font);
+  color: var(--vida-text);
+  transition: border-color var(--vida-trans), background var(--vida-trans);
+  width: 100%;
+}
+.vida-rail-atividades__card:hover {
+  border-color: var(--vida-accent);
+  background: var(--vida-accent-bg);
+}
+.vida-rail-atividades__card:active {
+  transform: scale(0.985);
+}
+.vida-rail-atividades__card:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.vida-rail-atividades__topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vida-rail-atividades__icone {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--vida-surface3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vida-accent);
+  flex-shrink: 0;
+}
+
+.vida-rail-atividades__rotulo {
+  font-size: var(--vida-fs-13);
+  font-weight: 600;
+  color: var(--vida-text);
+}
+
+.vida-rail-atividades__hint {
+  font-size: var(--vida-fs-10);
+  color: var(--vida-muted);
+  font-family: var(--vida-font-mono);
+  line-height: 1.35;
+}
+
+/* ── Mobile: vira FAB + bottom sheet (sheet implementado fora deste componente) ── */
+@media (max-width: 768px) {
+  .vida-rail-atividades {
+    display: none;
+  }
+}

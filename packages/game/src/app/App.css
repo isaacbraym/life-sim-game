@@ -1,0 +1,44 @@
+/* ============================================================================
+   App layout — grid de 3 zonas
+   Destino: packages/game/src/app/App.css
+   ============================================================================ */
+
+.vida-app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: var(--vida-bg);
+  color: var(--vida-text);
+  font-family: var(--vida-font);
+  overflow: hidden;
+}
+
+.vida-app__corpo {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.vida-app__centro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.vida-app__stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--vida-border);
+}
+
+/* ── Mobile (≤ 768px): top bar fixa, rails colapsam, stage 34vh, evento rola ── */
+@media (max-width: 768px) {
+  .vida-app__corpo {
+    flex-direction: column;
+  }
+  .vida-app__centro { flex: 1; min-height: 0; }
+  .vida-app__stage  { flex: 0 0 34vh; }
+}

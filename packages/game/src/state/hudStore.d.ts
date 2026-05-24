@@ -1,5 +1,5 @@
 import type { SaveSlot } from '@lifesim/core';
-import { GameEngine } from '../engine/GameEngine';
+import { GameEngine, type ResultadoRolagem } from '../engine/GameEngine';
 export type AtributoRpg = {
     readonly nome: string;
     readonly valor: number;
@@ -13,6 +13,7 @@ type EstadoHud = {
     readonly saude: number;
     readonly dinheiro: number;
     readonly eventoAtivo: EventoAtivo | undefined;
+    readonly ultimaRolagem?: ResultadoRolagem;
     readonly atributos: readonly AtributoRpg[];
     readonly engineAtivo: GameEngine | undefined;
 };

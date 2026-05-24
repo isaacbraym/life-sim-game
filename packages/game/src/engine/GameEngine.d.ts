@@ -1,4 +1,6 @@
 import type { SaveSlot } from '@lifesim/core';
+import type { ResultadoRolagem } from '@core/rpg/D20Roll';
+export type { ResultadoRolagem };
 export type EfeitoOpcaoDoTurno = {
     readonly tipo: string;
     readonly [chave: string]: unknown;
@@ -17,6 +19,7 @@ export type EventoDoTurno = {
     readonly descricao: string;
     readonly icone: string;
     readonly opcoes: readonly OpcaoDoTurno[];
+    readonly resultadoRolagem?: ResultadoRolagem;
 };
 export declare class GameEngine {
     private saveAtivo;

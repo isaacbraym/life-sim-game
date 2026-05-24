@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { aplicarEfeito, Effect } from '@lifesim/core';
+import { aplicarEfeito, Effect, rolarD20ComModificador } from '@lifesim/core';
 import { GameEngine } from '../engine/GameEngine';
 // ---------------------------------------------------------------------------
 // Mock inicial
@@ -31,6 +31,7 @@ const ESTADO_INICIAL = {
     saude: 82,
     dinheiro: 3450,
     eventoAtivo: EVENTO_MOCK,
+    ultimaRolagem: undefined,
     atributos: ATRIBUTOS_MOCK,
     engineAtivo: undefined,
 };
@@ -44,16 +45,33 @@ export const useHudStore = create((set, get) => ({
         const { eventoAtivo, engineAtivo } = get();
         if (eventoAtivo === undefined)
             return;
-        const opcao = eventoAtivo.opcoes[indice];
+        let opcao = eventoAtivo.opcoes[indice];
         if (opcao === undefined)
             return;
         if (engineAtivo === undefined) {
-            set((anterior) => ({ ...anterior, eventoAtivo: undefined }));
+            set((anterior) => ({ ...anterior, eventoAtivo: undefined, ultimaRolagem: undefined }));
             return;
         }
         const saveAtual = engineAtivo.obterEstadoAtual();
         let protagonistaAtual = saveAtual.protagonista;
         let rosterAtual = saveAtual.roster;
+        let rolagemResultado;
+        // Resolver atributoCheck se presente
+        if (opcao.atributoCheck !== undefined) {
+            const { atributo, dificuldade } = opcao.atributoCheck;
+            const chaveAtributo = atributo;
+            const valorAtributo = protagonistaAtual.atributos[chaveAtributo] ?? 10;
+            rolagemResultado = rolarD20ComModificador(valorAtributo, dificuldade);
+            // Se falha grave: aplicar apenas o primeiro efeito, geralmente negativo.
+            // Se falha normal: não aplicar efeitos por enquanto.
+            // Se passou ou crítico: aplicar todos os efeitos normalmente.
+            if (rolagemResultado.falhaGrave) {
+                opcao = { ...opcao, efeitos: opcao.efeitos.slice(0, 1) };
+            }
+            else if (!rolagemResultado.passou) {
+                opcao = { ...opcao, efeitos: [] };
+            }
+        }
         // Aplicar efeitos canonicos via AplicadorEfeitos
         for (const efeitoRaw of opcao.efeitos) {
             const resultado = Effect.safeParse(efeitoRaw);
@@ -83,6 +101,7 @@ export const useHudStore = create((set, get) => ({
         set((anterior) => ({
             ...anterior,
             eventoAtivo: undefined,
+            ultimaRolagem: rolagemResultado,
             humor: protagonistaAtual.humorAtual,
             saude: protagonistaAtual.saudeAtual,
             dinheiro: protagonistaAtual.dinheiro,
@@ -128,6 +147,7 @@ export const useHudStore = create((set, get) => ({
                     opcoes: eventoDoTurno.opcoes,
                 }
                 : undefined,
+            ultimaRolagem: eventoDoTurno?.resultadoRolagem,
             anoAtual: saveAtualizado.estadoMundo.anoAtual,
             idadeAnos: Math.floor(protagonista.idadeAtualMeses / 12),
             humor: protagonista.humorAtual,
