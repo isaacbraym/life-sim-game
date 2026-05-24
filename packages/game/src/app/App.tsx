@@ -42,6 +42,7 @@ export function App(): React.JSX.Element {
     eventosVividos,
     resolverOpcao,
     inicializarEngine,
+    realizarAtividade,
   } = useHudStore();
 
   // ── Novo personagem ────────────────────────────────────────────────────────
@@ -100,8 +101,7 @@ export function App(): React.JSX.Element {
   // ── Atividades ────────────────────────────────────────────────────────────
 
   function aoClicarAtividade(idAtividade: string): void {
-    // TODO Sprint 1.6: conectar ao ActivityEngine
-    console.log('Atividade selecionada:', idAtividade);
+    realizarAtividade(idAtividade);
   }
 
   // ── Simulação de morte (stub para teste) ──────────────────────────────────
