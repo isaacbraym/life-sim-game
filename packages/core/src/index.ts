@@ -6,6 +6,7 @@ export * from './rpg';
 export * from './npc';
 export * from './persistence';
 export * from './render';
+export * from './activities';
 
 export const VERSAO_CORE = '0.0.1';
 

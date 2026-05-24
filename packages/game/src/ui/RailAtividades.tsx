@@ -1,45 +1,54 @@
-/* ============================================================================
-   RailAtividades — coluna direita com cards de atividade
-   ----------------------------------------------------------------------------
-   ▸ Destino: packages/game/src/ui/RailAtividades.tsx
-   ▸ Componente NOVO. Substitui a metade-inferior do antigo HudLateral
-     (a lista de atividades livres).
-   ▸ Cada atividade vira card com ícone + título + hint (custo / efeito).
-   ============================================================================ */
-
 import React from 'react';
+import { ATIVIDADES_BASE } from '@core/activities/ActivityCatalog';
 import { IconBase, type IconName } from './IconBase';
 import './RailAtividades.css';
 
-type Atividade = {
-  readonly id: string;
-  readonly rotulo: string;
-  readonly icone: IconName;
-  readonly hint: string;
-};
-
-const ATIVIDADES: readonly Atividade[] = [
-  { id: 'academia',        rotulo: 'Academia',        icone: 'dumbbell', hint: '−R$ 80 · +Saúde'    },
-  { id: 'estudar',         rotulo: 'Estudar',         icone: 'book',     hint: '+Inteligência'      },
-  { id: 'sair_noite',      rotulo: 'Sair à noite',    icone: 'glass',    hint: '+Humor / −Saúde'    },
-  { id: 'consulta_medica', rotulo: 'Consulta médica', icone: 'cross',    hint: '−R$ 220 · +Saúde'   },
-  { id: 'ver_pessoas',     rotulo: 'Ver pessoas',     icone: 'people',   hint: '12 conhecidos'      },
-] as const;
-
 type PropsRailAtividades = {
   readonly aoClicarAtividade: (idAtividade: string) => void;
+  readonly idadeAnos: number;
 };
+
+const ICONES_SUPORTADOS: readonly IconName[] = [
+  'menu',
+  'settings',
+  'save',
+  'calendar',
+  'wallet',
+  'dice',
+  'sparkle',
+  'plus',
+  'close',
+  'pause',
+  'play',
+  'arrow-right',
+  'arrow-left',
+  'heart',
+  'people',
+  'dumbbell',
+  'book',
+  'glass',
+  'cross',
+];
+
+function normalizarIcone(icone: string): IconName {
+  return ICONES_SUPORTADOS.includes(icone as IconName) ? icone as IconName : 'sparkle';
+}
 
 export function RailAtividades({
   aoClicarAtividade,
+  idadeAnos,
 }: PropsRailAtividades): React.JSX.Element {
+  const atividadesDisponiveis = ATIVIDADES_BASE.filter(
+    (atividade) => idadeAnos >= atividade.idadeMinima,
+  );
+
   return (
     <aside
       className="vida-rail-atividades vida-scroll"
       aria-label="Atividades livres"
     >
       <div className="vida-rail-atividades__caps">Atividades livres</div>
-      {ATIVIDADES.map((at) => (
+      {atividadesDisponiveis.map((at) => (
         <button
           key={at.id}
           className="vida-rail-atividades__card"
@@ -47,7 +56,7 @@ export function RailAtividades({
         >
           <div className="vida-rail-atividades__topo">
             <span className="vida-rail-atividades__icone">
-              <IconBase name={at.icone} size={14} />
+              <IconBase name={normalizarIcone(at.icone)} size={14} />
             </span>
             <span className="vida-rail-atividades__rotulo">{at.rotulo}</span>
           </div>

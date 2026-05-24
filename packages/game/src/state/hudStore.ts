@@ -1,6 +1,9 @@
 import { create } from 'zustand';
 import { aplicarEfeito, Effect, rolarD20ComModificador } from '@lifesim/core';
 import type { SaveSlot } from '@lifesim/core';
+import { ATIVIDADES_BASE } from '@core/activities/ActivityCatalog';
+import { realizarAtividade as realizarAtividadeCore } from '@core/activities/ActivityEngine';
+import { salvarSave } from '@core/persistence/SaveManager';
 import { GameEngine, type ResultadoRolagem } from '../engine/GameEngine';
 
 // ---------------------------------------------------------------------------
@@ -57,6 +60,7 @@ type AcoesHud = {
   readonly avancarSemEvento: () => void;
   readonly inicializarEngine: (save: SaveSlot) => void;
   readonly avancarTurno: () => Promise<void>;
+  readonly realizarAtividade: (idAtividade: string) => void;
   // [NEW]
   readonly alterarConteudoAdulto: (valor: boolean) => void;
 };
@@ -103,6 +107,16 @@ const ESTADO_INICIAL: EstadoHud = {
   saveIdAtivo: undefined,
   ritmoAtual: undefined,
 };
+
+function atributosParaHud(protagonista: SaveSlot['protagonista']): readonly AtributoRpg[] {
+  return [
+    { nome: 'ForÃ§a',        valor: protagonista.atributos.forca        },
+    { nome: 'InteligÃªncia', valor: protagonista.atributos.inteligencia },
+    { nome: 'Carisma',      valor: protagonista.atributos.carisma      },
+    { nome: 'ConstituiÃ§Ã£o', valor: protagonista.atributos.constituicao },
+    { nome: 'Sorte',        valor: protagonista.atributos.sorte        },
+  ];
+}
 
 // ---------------------------------------------------------------------------
 // Store
@@ -252,6 +266,49 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
   },
 
   // [FIX QA] alterarConteudoAdulto agora também persiste no SaveSlot via engine
+  realizarAtividade: (idAtividade: string) => {
+    const atividade = ATIVIDADES_BASE.find((item) => item.id === idAtividade);
+
+    if (atividade === undefined) {
+      set((anterior) => ({
+        ...anterior,
+        eventosVividos: [...anterior.eventosVividos, `Atividade desconhecida: ${idAtividade}`],
+      }));
+      return;
+    }
+
+    const engine = get().engineAtivo;
+    if (engine === undefined) {
+      set((anterior) => ({
+        ...anterior,
+        eventosVividos: [...anterior.eventosVividos, `Sem save ativo para ${atividade.rotulo}`],
+      }));
+      return;
+    }
+
+    const saveAtual = engine.obterEstadoAtual();
+    const resultado = realizarAtividadeCore(atividade, saveAtual.protagonista);
+    const protagonistaComLog = {
+      ...resultado.protagonistaAtualizado,
+      eventosVividos: [...resultado.protagonistaAtualizado.eventosVividos, resultado.log],
+    };
+
+    engine.aplicarResultadoEfeitos(protagonistaComLog, saveAtual.roster);
+    void salvarSave(engine.obterEstadoAtual());
+
+    set((anterior) => ({
+      ...anterior,
+      nomePersonagem: `${protagonistaComLog.nome} ${protagonistaComLog.sobrenome}`,
+      profissaoAtual: protagonistaComLog.profissaoAtual ?? '',
+      idadeAnos: Math.floor(protagonistaComLog.idadeAtualMeses / 12),
+      humor: protagonistaComLog.humorAtual,
+      saude: protagonistaComLog.saudeAtual,
+      dinheiro: protagonistaComLog.dinheiro,
+      eventosVividos: protagonistaComLog.eventosVividos,
+      atributos: atributosParaHud(protagonistaComLog),
+    }));
+  },
+
   alterarConteudoAdulto: (valor: boolean) => {
     set((anterior) => ({ ...anterior, conteudoAdultoAtivo: valor }));
     const engine = get().engineAtivo;
