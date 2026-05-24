@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "eventoId": "ciume_curtida_foto_antiga",
   "categoria": "relationship",
-  "titulo": "O Like de 2018",
-  "descricaoCurta": "Um like acidental seu em uma foto antiga de outra pessoa nas redes sociais vira o assunto principal de uma DR tensa.",
+  "titulo": "Arqueologia Digital Proibida",
+  "descricaoCurta": "Um duplo toque acidental em uma foto de praia de 2018 do(a) ex de um conhecido vira uma audiência de custódia na sala.",
   "contentTags": ["language"],
   "triggers": {
     "idadeRange": [20, 40],
@@ -74,19 +74,19 @@
     "beats": [
       {
         "tipo": "narracao",
-        "texto": "Enquanto vasculhava redes sociais na madrugada, seu dedo escorregou e deu 'like' em uma foto de praia de 2018 de um conhecido. Embora você tenha retirado a curtida em dois segundos, a notificação já tinha aparecido na tela do parceiro, que agora exige explicações.",
+        "texto": "O clássico deslize de scroll. Embora você tenha desfeito o like em 0.4 segundos, o servidor foi mais rápido e despachou a notificação arqueológica fatal direto para a tela do seu parceiro.",
         "tags": []
       },
       {
         "tipo": "dialogo",
         "papelAtor": "npc_primario",
-        "texto": "Eu só quero saber o que você estava fazendo às três da manhã rolando o perfil dessa pessoa até fotos de quatro anos atrás!"
+        "texto": "Eu só quero que o perito digital me explique o que você estava fazendo às 3 da manhã escavando fósseis no perfil alheio!"
       },
       {
         "tipo": "escolha",
         "opcoes": [
           {
-            "texto": "Explicar racionalmente que foi apenas um acidente de scroll.",
+            "texto": "Argumentar que foi um espasmo motor involuntário causado pelo cansaço do dedão.",
             "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
             "efeitos": [
               { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 10 },
@@ -94,7 +94,7 @@
             ]
           },
           {
-            "texto": "Pedir desculpas e encher o parceiro de elogios e abraços.",
+            "texto": "Apagar o incêndio com bajulação extrema e promessas de detox digital.",
             "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
             "efeitos": [
               { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 20 },
@@ -102,7 +102,7 @@
             ]
           },
           {
-            "texto": "Ficar na defensiva e reclamar de invasão de privacidade.",
+            "texto": "Entrar em modo de defesa corporativo e alegar invasão de privacidade de dados.",
             "efeitos": [
               { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -25 },
               { "tipo": "adicionar_flag", "flag": "crise_ciumes" },

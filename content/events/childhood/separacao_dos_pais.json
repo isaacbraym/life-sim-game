@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "eventoId": "separacao_dos_pais",
   "categoria": "childhood",
-  "titulo": "A conversa séria",
-  "descricaoCurta": "Eles chamaram você pra sentar. Quando adultos chamam pra sentar com voz assim, não é pra nada bom. Eles vão se separar.",
+  "titulo": "Desinvestimento Mútuo",
+  "descricaoCurta": "Seus pais convocaram uma 'reunião extraordinária' na sala. Quando casados usam jargão corporativo em casa, a demissão de alguém é iminente.",
   "contentTags": ["trauma"],
   "triggers": {
     "idadeRange": [5, 12],
@@ -33,7 +33,7 @@
   "scene": {
     "schemaVersion": "1.0.0",
     "sceneId": "separacao_dos_pais_cena",
-    "descricaoCurta": "Sala de estar. Os dois sentados, você na frente. Ninguém olha nos olhos de ninguém direito.",
+    "descricaoCurta": "Sala de estar. Dois sócios prestes a liquidar a empresa familiar.",
     "background": "sala_estar",
     "framing": "medium",
     "humor": "melancolico",
@@ -82,43 +82,43 @@
       {
         "tipo": "dialogo",
         "papelAtor": "npc_primario",
-        "texto": "A gente tem uma coisa pra te falar. Isso não é culpa sua, tá? Em nenhum momento.",
+        "texto": "Querido, resolvemos fazer um pivot de carreira familiar. Basicamente, estamos descontinuando nossa joint venture conjugal.",
         "mudancaExpressao": "triste"
       },
       {
         "tipo": "narracao",
-        "texto": "Quando alguém começa dizendo que não é culpa sua, já deu.",
+        "texto": "Eles estão se separando. A boa notícia é que você ganha dois natais. A má notícia é que a partir de agora seu psicólogo está garantido.",
         "tags": []
       },
       {
         "tipo": "narracao",
-        "texto": "Você ouve as palavras. Separação. Continuar amando. Não vai mudar nada. Vai mudar tudo.",
+        "texto": "Você ouve as promessas de que 'nada vai mudar' enquanto calcula quem vai ficar com a TV e a senha da Netflix.",
         "tags": []
       },
       {
         "tipo": "escolha",
         "opcoes": [
           {
-            "texto": "Perguntar com quem vai morar.",
+            "texto": "Perguntar quem herda a custódia do videogame e as assinaturas de streaming.",
             "efeitos": [
               { "tipo": "adicionar_flag", "flag": "pais_separados" },
-              { "tipo": "alterar_humor", "delta": -20 },
+              { "tipo": "alterar_humor", "delta": -15 },
               { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
             ]
           },
           {
-            "texto": "Sair do cômodo sem falar nada.",
+            "texto": "Sair em silêncio e calcular se isso significa mesada em dobro.",
             "efeitos": [
               { "tipo": "adicionar_flag", "flag": "pais_separados" },
-              { "tipo": "alterar_humor", "delta": -30 },
+              { "tipo": "alterar_humor", "delta": -25 },
               { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
             ]
           },
           {
-            "texto": "Pedir que eles tentem de novo. Implorar.",
+            "texto": "Fazer um apelo melodramático de novela das nove e chorar no tapete.",
             "efeitos": [
               { "tipo": "adicionar_flag", "flag": "pais_separados" },
-              { "tipo": "alterar_humor", "delta": -25 },
+              { "tipo": "alterar_humor", "delta": -20 },
               { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
             ]
           }

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "eventoId": "fim_do_papai_noel",
   "categoria": "childhood",
-  "titulo": "A grande revelação",
-  "descricaoCurta": "Um colega de escola garante, com toda a convicção de quem acabou de descobrir, que o Papai Noel não existe. E que na verdade são os pais.",
+  "titulo": "A Morte do Capitalismo Mágico",
+  "descricaoCurta": "Um colega de escola com pose de investidor mirim decide estourar a bolha especulativa da sua infância: Papai Noel não existe.",
   "contentTags": [],
   "triggers": {
     "idadeRange": [6, 10],
@@ -82,26 +82,26 @@
       {
         "tipo": "dialogo",
         "papelAtor": "npc_primario",
-        "texto": "O Papai Noel não existe. É mentira. São os seus pais que compram os presentes.",
+        "texto": "Você ainda acredita em um idoso que gerencia trabalho análogo à escravidão em terras polares para dar presentes grátis? Acorda, cara. É o corporativismo dos seus pais.",
         "mudancaExpressao": "desconfiada"
       },
       {
         "tipo": "narracao",
-        "texto": "Você sente que o chão sumiu. Todos esses anos de cartinha...",
+        "texto": "Seu mundo cai. Aquelas cartinhas cheias de suborno emocional para ganhar brinquedos... eram todas direcionadas ao departamento financeiro errado.",
         "tags": []
       },
       {
         "tipo": "escolha",
         "opcoes": [
           {
-            "texto": "\"Mentira. Você é idiota.\" Negar com convicção.",
+            "texto": "Denunciar o infiel à professora por propagação de fake news natalinas.",
             "efeitos": [
               { "tipo": "adicionar_flag", "flag": "negou_fim_papai_noel" },
               { "tipo": "alterar_humor", "delta": 5 }
             ]
           },
           {
-            "texto": "Processar em silêncio. Começar a fazer as contas.",
+            "texto": "Processar a informação em silêncio e recalcular o orçamento familiar secreto.",
             "atributoCheck": { "atributo": "inteligencia", "dificuldade": 10 },
             "efeitos": [
               { "tipo": "adicionar_flag", "flag": "aceitou_fim_papai_noel" },
@@ -110,7 +110,7 @@
             ]
           },
           {
-            "texto": "Ir correndo perguntar pra mãe quando chegar em casa.",
+            "texto": "Enquadrar sua mãe na cozinha e exigir um inventário completo dos presentes retroativos.",
             "efeitos": [
               { "tipo": "adicionar_flag", "flag": "perguntou_sobre_papai_noel" },
               { "tipo": "alterar_humor", "delta": -10 }

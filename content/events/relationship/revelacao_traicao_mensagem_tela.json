@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "eventoId": "revelacao_traicao_mensagem_tela",
   "categoria": "relationship",
-  "titulo": "A Tela que Acendeu",
-  "descricaoCurta": "Uma mensagem suspeita no celular do parceiro na calada da noite expõe uma traição em potencial.",
+  "titulo": "A Notificação Proibida",
+  "descricaoCurta": "Uma notificação noturna no celular do seu parceiro acende a tela. O conteúdo revela que ele está compartilhando mais do que apenas a conta do streaming com outra pessoa.",
   "contentTags": ["trauma", "language"],
   "triggers": {
     "idadeRange": [20, 40],
@@ -55,14 +55,14 @@
     "beats": [
       {
         "tipo": "narracao",
-        "texto": "Madrugada silenciosa. O parceiro capotou de sono ao seu lado. O celular dele, esquecido na mesinha de cabeceira, vibra e acende a tela. Você olha de relance e lê na barra de notificações: 'Aquele beijo ontem foi ótimo, mal posso esperar pelo próximo'. O remetente tem um emoji de coração.",
+        "texto": "Silêncio profundo na madrugada, exceto pelo ronco rítmico do seu parceiro ao lado. O celular dele vibra na mesa de cabeceira. Uma notificação brilha na tela bloqueada: 'Aquela sobremesa ontem à noite foi maravilhosa, mas o prato principal foi melhor ainda'. O contato está salvo como 'Roberto Encanador 🛠️', mas o emoji de coração no final sugere que a prestação de serviços é bem mais íntima.",
         "tags": []
       },
       {
         "tipo": "escolha",
         "opcoes": [
           {
-            "texto": "Acordar o parceiro na hora exigindo explicações.",
+            "texto": "Chutar o parceiro da cama às 3 da manhã exigindo uma auditoria imediata das tubulações.",
             "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
             "efeitos": [
               { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -40 },
@@ -70,7 +70,7 @@
             ]
           },
           {
-            "texto": "Desbloquear o celular para colher provas em silêncio.",
+            "texto": "Desbloquear o aparelho com precisão cirúrgica para extrair prints para o dossiê de separação.",
             "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
             "efeitos": [
               { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -20 },
@@ -79,7 +79,7 @@
             ]
           },
           {
-            "texto": "Ignorar, virar para o lado e chorar baixinho até dormir.",
+            "texto": "Virar para o outro lado, fingir demência e chorar silenciosamente enquanto repensa sua vida.",
             "efeitos": [
               { "tipo": "alterar_humor", "delta": -30 },
               { "tipo": "alterar_saude", "delta": -5 }

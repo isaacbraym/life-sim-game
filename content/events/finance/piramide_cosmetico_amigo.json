@@ -3,7 +3,7 @@
   "eventoId": "piramide_cosmetico_amigo",
   "categoria": "finance",
   "titulo": "O Empreendedor de Elite",
-  "descricaoCurta": "Um antigo colega de escola te convida para um café e tenta te recrutar para um negócio de marketing multinível de perfumes e cosméticos.",
+  "descricaoCurta": "Um antigo colega de escola que não fala com você há 8 anos te convida para um café. Alerta vermelho de esquema de pirâmide.",
   "contentTags": ["political"],
   "triggers": {
     "idadeRange": [20, 50],
@@ -73,27 +73,27 @@
     "beats": [
       {
         "tipo": "narracao",
-        "texto": "Ele chega vestindo terno barato de microfibra e coloca dois catálogos perfumados sobre a mesa de fórmica da cafeteria, falando sobre 'independência financeira' e 'ser seu próprio chefe'.",
+        "texto": "Ele chega vestindo um terno de microfibra três tamanhos maior e joga catálogos perfumados na mesa, falando sobre 'independência financeira' e 'mindset de crescimento'.",
         "tags": []
       },
       {
         "tipo": "dialogo",
         "papelAtor": "npc_primario",
-        "texto": "Você só precisa investir trezentos reais no kit inicial de perfumes e recrutar mais cinco amigos. Em três meses você compra uma Ferrari, confia!"
+        "texto": "Você só precisa investir trezentos reais no kit inicial de essências e recrutar cinco amigos. Se cada um trouxer mais cinco, em três meses você compra uma Ferrari, confia!"
       },
       {
         "tipo": "escolha",
         "opcoes": [
           {
-            "texto": "Desmascarar a farsa mostrando que a conta matemática de recrutamento é insustentável.",
+            "texto": "Desmascarar o golpe provando matematicamente que o modelo exige mais recrutas do que a população da Terra.",
             "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "amigo_vendedor", "delta": 15 },
+              { "tipo": "alterar_relacionamento", "npcId": "amigo_vendedor", "delta": -15 },
               { "tipo": "alterar_humor", "delta": 10 }
             ]
           },
           {
-            "texto": "Ouvir tudo, comer os salgados por conta dele e ir embora sem comprar nada.",
+            "texto": "Ouvir o pitch pacientemente, comer três pães de queijo na conta dele e ir embora dizendo que vai 'analisar o Whitepaper'.",
             "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
             "efeitos": [
               { "tipo": "alterar_dinheiro", "delta": 20.0 },
@@ -101,7 +101,7 @@
             ]
           },
           {
-            "texto": "Inventar uma desculpa de que seu gato está doente e fugir da cafeteria.",
+            "texto": "Fingir um trote telefônico urgente sobre o sequestro do seu gato imaginário e fugir da cafeteria.",
             "efeitos": [
               { "tipo": "alterar_relacionamento", "npcId": "amigo_vendedor", "delta": -10 },
               { "tipo": "alterar_humor", "delta": 5 }
