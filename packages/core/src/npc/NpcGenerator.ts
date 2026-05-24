@@ -1,5 +1,7 @@
 import type { Npc } from '../schemas/npc';
 import type { SelectorNpc } from '../schemas/event';
+import type { Atributos } from '../schemas/character';
+import { gerarAtributosGeneticos, gerarAtributosIniciais } from '../rpg/Attributes';
 
 function rng(semente: number, min: number, max: number): number {
   const x = Math.sin(semente) * 10000;
@@ -311,5 +313,28 @@ export function gerarRosterInicial(
   }
 
   return roster;
+}
+
+export function gerarAtributosNpcComHeranca(
+  atributosPai: Atributos | undefined,
+  atributosMae: Atributos | undefined,
+  semente: number,
+): Atributos {
+  if (atributosPai !== undefined && atributosMae !== undefined) {
+    return gerarAtributosGeneticos(atributosPai, atributosMae, semente);
+  }
+  // Se um dos pais não disponível: gerar aleatório com viés do pai disponível
+  const base = atributosPai ?? atributosMae;
+  if (base !== undefined) {
+    const aleatorio = gerarAtributosIniciais();
+    return {
+      forca:        Math.round((base.forca + aleatorio.forca) / 2),
+      inteligencia: Math.round((base.inteligencia + aleatorio.inteligencia) / 2),
+      carisma:      Math.round((base.carisma + aleatorio.carisma) / 2),
+      constituicao: Math.round((base.constituicao + aleatorio.constituicao) / 2),
+      sorte:        Math.round((base.sorte + aleatorio.sorte) / 2),
+    };
+  }
+  return gerarAtributosIniciais();
 }
 

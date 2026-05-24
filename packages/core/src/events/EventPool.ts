@@ -38,13 +38,29 @@ function registroExiste(registro: Readonly<Record<string, number>>, chave: strin
 function eventoPassaUniqueOnce(evento: Evento, estadoAtual: EstadoDeJogo): boolean {
   if (evento.triggers?.uniqueOnce !== true) return true;
 
-  return !registroExiste(estadoAtual.cooldownRegistry, evento.id);
+  return !estadoAtual.flags.includes(`viu_${evento.id}`);
 }
 
-function eventoPassaCooldown(evento: Evento, estadoAtual: EstadoDeJogo): boolean {
-  const anoExpiracao = estadoAtual.cooldownRegistry[evento.id];
+function eventoPassaCooldown(
+  evento: Evento,
+  estadoAtual: EstadoDeJogo,
+): boolean {
+  // 1. Se uniqueOnce for true, verifica se o evento já foi visto via flags
+  if (evento.triggers?.uniqueOnce === true) {
+    if (estadoAtual.flags.includes(`viu_${evento.id}`)) {
+      return false;
+    }
+  }
 
-  return anoExpiracao === undefined || anoExpiracao <= estadoAtual.anoAtual;
+  // 2. Se cooldownMeses for maior que zero, verifica se o anoExpiracao no cooldownRegistry já passou
+  if (evento.triggers?.cooldownMeses !== undefined && evento.triggers.cooldownMeses > 0) {
+    const anoExpiracao = estadoAtual.cooldownRegistry[evento.id];
+    if (anoExpiracao !== undefined && estadoAtual.anoAtual < anoExpiracao) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 function eventoPassaFaseDaVida(evento: Evento, faseAtual: FaseDaVida): boolean {
