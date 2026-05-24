@@ -1,0 +1,84 @@
+/* ============================================================================
+   EventLog — histórico de eventos vividos
+   ============================================================================ */
+
+.ev-log {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+}
+
+/* Fade-out no rodapé quando lista está truncada */
+.ev-log--fade::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background: linear-gradient(to bottom, transparent, var(--vida-surface));
+  pointer-events: none;
+  display: block;
+}
+
+/* ── Estado vazio ── */
+.ev-log--vazio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+}
+
+.ev-log__vazio-texto {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ── Entradas ── */
+.ev-log__entrada {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: var(--vida-r-sm);
+  background: var(--vida-surface);
+  border-left: 3px solid transparent;
+  transition: opacity var(--vida-trans-slow);
+  animation: ev-slide-in 0.22s ease;
+}
+
+.ev-log__entrada--recente {
+  background: var(--vida-surface2);
+  border-left-color: var(--vida-accent);
+}
+
+.ev-log__icone {
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.ev-log__texto {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-text-soft);
+  line-height: 1.45;
+  font-family: var(--vida-font);
+}
+
+/* ── Animação de entrada ── */
+@keyframes ev-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
