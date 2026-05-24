@@ -7,9 +7,10 @@
      migra para BarraSuperior + RailVitais + RailAtividades).
    ============================================================================ */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { AtributoRpg } from '../state/hudStore';
 import { PainelAtributos } from './PainelAtributos';
+import { EventLog } from './EventLog';
 import './RailVitais.css';
 
 type PropsRailVitais = {
@@ -72,6 +73,8 @@ export function RailVitais({
   saude,
   atributos,
 }: PropsRailVitais): React.JSX.Element {
+  const [historicoAberto, setHistoricoAberto] = useState(false);
+
   return (
     <aside
       className="vida-rail-vitais vida-scroll"
@@ -89,6 +92,19 @@ export function RailVitais({
       <p className="vida-rail-vitais__placeholder">
         Lista de NPCs próximos aparecerá aqui na Sprint 1.5.
       </p>
+
+      {/* [NEW] Histórico de eventos colapsável */}
+      <button
+        className="vida-rail-vitais__historico-toggle"
+        onClick={() => setHistoricoAberto((v) => !v)}
+        aria-expanded={historicoAberto}
+      >
+        <span>📋 Histórico</span>
+        <span className="vida-rail-vitais__historico-seta">
+          {historicoAberto ? '▲' : '▼'}
+        </span>
+      </button>
+      {historicoAberto && <EventLog className="vida-rail-vitais__historico" />}
     </aside>
   );
 }

@@ -78,6 +78,39 @@
   line-height: 1.45;
 }
 
+/* ── Histórico colapsável ── */
+.vida-rail-vitais__historico-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-sm);
+  padding: 5px 8px;
+  color: var(--vida-muted);
+  font-size: var(--vida-fs-10);
+  font-weight: 600;
+  font-family: var(--vida-font);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  transition: border-color var(--vida-trans), color var(--vida-trans);
+}
+
+.vida-rail-vitais__historico-toggle:hover {
+  border-color: var(--vida-accent);
+  color: var(--vida-text);
+}
+
+.vida-rail-vitais__historico-seta {
+  font-size: 8px;
+}
+
+.vida-rail-vitais__historico {
+  margin-top: 2px;
+}
+
 /* ── Mobile: vira drawer/bottom-sheet; o App.tsx esconde por padrão ── */
 @media (max-width: 768px) {
   .vida-rail-vitais {
