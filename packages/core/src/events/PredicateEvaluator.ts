@@ -14,6 +14,21 @@ type PredicadoComAtributo = PredicadoComValor & {
 
 type PredicadoComFlag = ObjetoPredicado & {
   readonly flag: string;
+  readonly presente?: boolean;
+};
+
+type PredicadoComIdade = ObjetoPredicado & {
+  readonly minimo?: number;
+  readonly maximo?: number;
+};
+
+type PredicadoComComparacao = ObjetoPredicado & {
+  readonly operador: string;
+  readonly valor: number | string | boolean;
+};
+
+type PredicadoVar = PredicadoComComparacao & {
+  readonly caminho: string;
 };
 
 type PredicadoComLista = ObjetoPredicado & {
@@ -40,6 +55,21 @@ function ehPredicadoComFlag(predicado: Predicado): predicado is PredicadoComFlag
   return ehObjetoPredicado(predicado) && typeof predicado.flag === 'string';
 }
 
+function ehPredicadoComIdade(predicado: Predicado): predicado is PredicadoComIdade {
+  return ehObjetoPredicado(predicado)
+    && (typeof predicado.minimo === 'number' || typeof predicado.maximo === 'number');
+}
+
+function ehPredicadoComComparacao(predicado: Predicado): predicado is PredicadoComComparacao {
+  return ehObjetoPredicado(predicado)
+    && typeof predicado.operador === 'string'
+    && ['number', 'string', 'boolean'].includes(typeof predicado.valor);
+}
+
+function ehPredicadoVar(predicado: Predicado): predicado is PredicadoVar {
+  return ehPredicadoComComparacao(predicado) && typeof predicado.caminho === 'string';
+}
+
 function ehPredicadoComLista(predicado: Predicado): predicado is PredicadoComLista {
   return ehObjetoPredicado(predicado) && Array.isArray(predicado.predicados);
 }
@@ -50,6 +80,44 @@ function ehPredicadoComFilho(predicado: Predicado): predicado is PredicadoComFil
 
 function calcularIdade(estadoAtual: EstadoDeJogo): number {
   return estadoAtual.anoAtual - estadoAtual.anoNascimento;
+}
+
+function comparar(
+  esquerdo: number | string | boolean | undefined,
+  operador: string,
+  direito: number | string | boolean,
+): boolean {
+  if (esquerdo === undefined) return false;
+
+  switch (operador) {
+    case '==':
+      return esquerdo === direito;
+    case '!=':
+      return esquerdo !== direito;
+    case '>':
+      return typeof esquerdo === 'number' && typeof direito === 'number' && esquerdo > direito;
+    case '<':
+      return typeof esquerdo === 'number' && typeof direito === 'number' && esquerdo < direito;
+    case '>=':
+      return typeof esquerdo === 'number' && typeof direito === 'number' && esquerdo >= direito;
+    case '<=':
+      return typeof esquerdo === 'number' && typeof direito === 'number' && esquerdo <= direito;
+    default:
+      return false;
+  }
+}
+
+function lerVariavel(caminho: string, estadoAtual: EstadoDeJogo): number | string | boolean | undefined {
+  const variaveis: Readonly<Record<string, number | string | boolean>> = {
+    anoAtual: estadoAtual.anoAtual,
+    anoNascimento: estadoAtual.anoNascimento,
+    humor: estadoAtual.humor,
+    saude: estadoAtual.saude,
+    dinheiro: estadoAtual.dinheiro,
+    idade: calcularIdade(estadoAtual),
+  };
+
+  return variaveis[caminho];
 }
 
 export function evaluarPredicado(
@@ -93,7 +161,29 @@ export function evaluarPredicado(
     case 'flag_ausente':
       return ehPredicadoComFlag(predicado) && !estadoAtual.flags.includes(predicado.flag);
 
+    case 'flag':
+      return (
+        ehPredicadoComFlag(predicado) &&
+        estadoAtual.flags.includes(predicado.flag) === (predicado.presente ?? true)
+      );
+
+    case 'idade':
+      return ehPredicadoComIdade(predicado)
+        && (predicado.minimo === undefined || calcularIdade(estadoAtual) >= predicado.minimo)
+        && (predicado.maximo === undefined || calcularIdade(estadoAtual) <= predicado.maximo);
+
+    case 'atributo': {
+      if (!ehPredicadoComAtributo(predicado) || !ehPredicadoComComparacao(predicado)) return false;
+
+      return comparar(estadoAtual.atributos[predicado.atributo], predicado.operador, predicado.valor);
+    }
+
+    case 'var':
+      return ehPredicadoVar(predicado)
+        && comparar(lerVariavel(predicado.caminho, estadoAtual), predicado.operador, predicado.valor);
+
     case 'and':
+    case 'todos':
       return (
         ehPredicadoComLista(predicado) &&
         predicado.predicados.every(predicadoInterno =>
@@ -102,6 +192,7 @@ export function evaluarPredicado(
       );
 
     case 'or':
+    case 'algum':
       return (
         ehPredicadoComLista(predicado) &&
         predicado.predicados.some(predicadoInterno =>
@@ -110,6 +201,7 @@ export function evaluarPredicado(
       );
 
     case 'not':
+    case 'nao':
       return ehPredicadoComFilho(predicado) && !evaluarPredicado(predicado.predicado, estadoAtual);
 
     default:
