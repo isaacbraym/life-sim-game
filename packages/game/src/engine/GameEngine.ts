@@ -3,6 +3,9 @@ import { filtrarEventosElegiveis, sortearEvento, EventLoader, RosterDeNpcs, db }
 // envelhecerRoster não está no barrel de @lifesim/core (NpcAging.ts não foi adicionado ao npc/index.ts)
 import { envelhecerRoster } from '@core/npc/NpcAging';
 import { salvarParaEstadoDeJogo } from '@core/events/EstadoDeJogo';
+import type { ResultadoRolagem } from '@core/rpg/D20Roll';
+
+export type { ResultadoRolagem };
 
 // ---------------------------------------------------------------------------
 // Tipos públicos
@@ -28,6 +31,7 @@ export type EventoDoTurno = {
   readonly descricao: string;
   readonly icone: string;
   readonly opcoes: readonly OpcaoDoTurno[];
+  readonly resultadoRolagem?: ResultadoRolagem;
 };
 
 // ---------------------------------------------------------------------------

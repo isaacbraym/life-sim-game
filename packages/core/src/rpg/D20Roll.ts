@@ -15,3 +15,32 @@ export function classificarResultado(roll: number, modificador: number, dc: numb
   const efetivo = roll + modificador;
   return efetivo >= dc ? 'sucesso' : 'falha';
 }
+
+export type ResultadoRolagem = {
+  readonly rolagem: number;
+  readonly modificador: number;
+  readonly total: number;
+  readonly dificuldade: number;
+  readonly passou: boolean;
+  readonly critico: boolean;
+  readonly falhaGrave: boolean;
+};
+
+export function rolarD20ComModificador(
+  valorAtributo: number,
+  dificuldade: number,
+): ResultadoRolagem {
+  const rolagem = rolarD20();
+  const modificador = Math.floor((valorAtributo - 10) / 2);
+  const total = rolagem + modificador;
+
+  return {
+    rolagem,
+    modificador,
+    total,
+    dificuldade,
+    passou: total >= dificuldade || rolagem === TIER_SUCESSO_CRITICO,
+    critico: rolagem === TIER_SUCESSO_CRITICO,
+    falhaGrave: rolagem === TIER_FALHA_CRITICA,
+  };
+}
