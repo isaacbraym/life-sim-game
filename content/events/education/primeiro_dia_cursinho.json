@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "primeiro_dia_cursinho",
+  "categoria": "education",
+  "titulo": "A Fábrica de Vestibulandos",
+  "descricaoCurta": "Primeiro dia de cursinho pré-vestibular. O cheiro de café requentado e desespero existencial flutua no ar da sala de estudos lotada.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [16, 19],
+    "peso": 60,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "primeiro_dia_cursinho_cena",
+    "descricaoCurta": "Sala de aula de cursinho pré-vestibular entupida de cadeiras universitárias.",
+    "background": "escola_sala",
+    "framing": "wide",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "estudante_cursinho",
+          "categoria": "basic",
+          "descricao": "Sentado na carteira cercado por pilhas de apostilas gigantescas.",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 65,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Bem-vindo à antecâmara da universidade. O cursinho é onde o espírito adolescente vai para ser esmagado por apostilas de 800 páginas e macetes bobos sobre equações de química orgânica.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "O professor de física entra vestindo uma fantasia de palhaço e cantando um axé sobre calorimetria. A vergonha alheia é palpável, mas todos anotam sem piscar.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Anotar tudo fanaticamente e beber café solúvel na garrafa térmica.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Sentar no fundão e jogar jogo da velha com o vizinho de carteira.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Tentar puxar assunto com o nerd da primeira fileira para colar dele depois.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

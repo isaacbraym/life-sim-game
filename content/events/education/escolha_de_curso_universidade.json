@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "escolha_de_curso_universidade",
+  "categoria": "education",
+  "titulo": "A Escolha de Sofia do Sisu",
+  "descricaoCurta": "Sua nota do Enem está na tela. Você tem dez minutos para escolher se quer seguir seu sonho ou garantir o almoço dos próximos dez anos.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [17, 21],
+    "peso": 70,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "escolha_de_curso_universidade_cena",
+    "descricaoCurta": "Você encarando a tela de um laptop que exibe o site do Sisu travando.",
+    "background": "quarto",
+    "framing": "close",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "estudante_escolhendo_curso",
+          "categoria": "emotional",
+          "descricao": "Olhos fixos na tela piscando com expressão de desespero absoluto.",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A página de notas de corte atualiza à meia-noite. O botão de confirmação do curso é a sua passagem direta para o mercado corporativo ou para o subdesenvolvimento criativo.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Você tem o direito de escolher duas opções. Mas as notas sobem dez pontos a cada hora e o servidor do governo parece estar rodando em uma batata.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Escolher Engenharia para fingir que gosta de cálculo e quer ser rico.",
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "adicionar_flag", "flag": "estudante_engenharia" }
+            ]
+          },
+          {
+            "texto": "Escolher Filosofia para seguir seu coração e viver de luz.",
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "adicionar_flag", "flag": "estudante_filosofia" }
+            ]
+          },
+          {
+            "texto": "Atualizar a página no último segundo na esperança do sistema não cair.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_dinheiro", "delta": 50.0 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

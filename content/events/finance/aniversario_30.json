@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "aniversario_30",
+  "categoria": "finance",
+  "titulo": "A Curva do Envelhecimento",
+  "descricaoCurta": "Você acorda com 30 anos. Uma pontada nas costas te dá as boas-vindas à nova década de dores articulares e conversas sobre investimentos.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [30, 30],
+    "peso": 90,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "aniversario_30_cena",
+    "descricaoCurta": "Quarto escuro pela manhã, você sentado na beira da cama segurando as costas.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "protagonista_trinta_anos",
+          "categoria": "basic",
+          "descricao": "Sentado na beira da cama, massageando a região lombar com expressão sofrida.",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 70,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Trinta anos. O jovem clássico virou adulto oficial. Suas noites de sono agora exigem um planejamento estratégico de postura e a sua fatura do cartão é dominada por compras de utilidades domésticas.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Ao tentar levantar da cama para começar o dia, um estalo seco na região lombar faz o mundo girar por um segundo. A física do envelhecimento começou.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Alongar com calma e tentar levantar sem usar as mãos de apoio.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 14 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Ficar deitado mais trinta minutos e aceitar o seu destino sedentário.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -5 }
+            ]
+          },
+          {
+            "texto": "Tomar uma dose dupla de analgésico e fingir que ainda tem 20 anos.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -15 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "aplicar_status", "status": "doente" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

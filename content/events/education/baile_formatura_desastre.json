@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "baile_formatura_desastre",
+  "categoria": "education",
+  "titulo": "A Valsa dos Desajeitados",
+  "descricaoCurta": "O baile de formatura do Ensino Médio. Você gastou metade da sua economia em um terno alugado que cheira a naftalina e tem mangas longas demais.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [17, 18],
+    "peso": 60,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "baile_formatura_desastre_cena",
+    "descricaoCurta": "Salão de festas decorado de forma cafona, com luzes piscantes e fumaça artificial.",
+    "background": "balada",
+    "framing": "wide",
+    "humor": "comico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "formando_desajeitado",
+          "categoria": "basic",
+          "descricao": "Tentando ajeitar a gravata borboleta torta com sorriso nervoso.",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O grande baile. A mesa de salgados frios está lotada de salgadinhos de massa folhada suspeitos e o DJ insiste em tocar músicas dos anos 80 que ninguém ali ouve de verdade.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Seu par de dança te puxa para a pista de dança bem no momento da valsa tradicional. Cinquenta casais te olham. A pressão mecânica é avassaladora.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar impressionar com passos acrobáticos ousados.",
+            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "adicionar_flag", "flag": "rei_da_pista" }
+            ]
+          },
+          {
+            "texto": "Ficar parado feito um poste fingindo que está sentindo o ritmo.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": -1 }
+            ]
+          },
+          {
+            "texto": "Fingir uma cãibra súbita na panturrilha e correr para o banheiro.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "adicionar_flag", "flag": "medroso_de_baile" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

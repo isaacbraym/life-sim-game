@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "crise_insonia_pensamentos",
+  "categoria": "health",
+  "titulo": "A Reunião das Cringes",
+  "descricaoCurta": "Você acorda às 4h da manhã com a mente a mil por hora, lembrando daquele comentário vergonhoso que você fez na frente da sua paixão da escola em 2014.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [15, 60],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "insonia_cena",
+    "descricaoCurta": "Quarto escuro e silencioso, você encarando o teto com olhos abertos.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "melancolico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "insonia_desesperada",
+          "categoria": "basic",
+          "descricao": "Deitado de costas, mãos na testa, olhos arregalados encarando o teto.",
+          "rotacoes": [],
+          "expressaoFacial": "cansada",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O silêncio da noite é propício para a auto-humilhação retroativa. Seu cérebro decide projetar em alta definição todos os seus piores momentos sociais dos últimos dez anos.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Tentar racionalizar a vergonha alheia usando lógica para dormir.",
+            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Levantar e comer um pedaço de queijo na porta da geladeira.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          },
+          {
+            "texto": "Ficar rolando na cama sofrendo até o despertador tocar.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

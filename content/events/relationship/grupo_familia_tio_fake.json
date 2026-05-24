@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "grupo_familia_tio_fake",
+  "categoria": "relationship",
+  "titulo": "A Verdade Paralela",
+  "descricaoCurta": "Seu tio compartilha uma notícia absurdamente falsa no grupo da família no WhatsApp, com letras maiúsculas e emojis de alerta vermelho. O silêncio dos outros parentes é ensurdecedor.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [15, 60],
+    "peso": 20,
+    "cooldownMeses": 12,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "grupo_familia_cena",
+    "descricaoCurta": "Você deitado no sofá olhando fixamente para a tela do celular com cara de indignação.",
+    "background": "sala_estar",
+    "framing": "close",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "celular_indignado",
+          "categoria": "basic",
+          "descricao": "Segurando o celular na horizontal com expressão de choque e incredulidade.",
+          "rotacoes": [],
+          "expressaoFacial": "surpresa",
+          "intensidadeExpressao": 80,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "A manchete diz: 'ATENÇÃO: Novo chip alienígena está sendo implantado via vacina contra gripe!' A imagem anexa é um print de baixa qualidade do filme Matrix com uma legenda em vermelho piscante.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Enviar um link de agência de checagem desmentindo o boato. (Combate à desinformação).",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "nerd_chato_do_grupo" }
+            ]
+          },
+          {
+            "texto": "Mandar um meme irônico de ficção científica para zoar o post.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Apenas visualizar e silenciar o grupo da família por um ano inteiro.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "heranca_familia_disputa",
+  "categoria": "relationship",
+  "titulo": "A Partilha das Miudezas",
+  "descricaoCurta": "Um tio distante faleceu deixando um terreno no interior do estado e um jogo de xícaras de porcelana chinesa. A família inicia um torneio de artes marciais passivo-agressivas pela partilha.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [25, 75],
+    "peso": 15,
+    "cooldownMeses": 120,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "partilha_heranca_cena",
+    "descricaoCurta": "Sala de reuniões ou escritório com papéis sobre a mesa de madeira comprida.",
+    "background": "escritorio_sala_reuniao",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "herdeiro_expectante",
+          "categoria": "basic",
+          "descricao": "Sentado na cadeira com os dedos entrelaçados, fingindo sobriedade e luto.",
+          "rotacoes": [],
+          "expressaoFacial": "neutra",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "relaxada",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O testamento é lido. Parentes que não se falavam desde o natal de 2018 agora choram copiosamente enquanto medem o valor venal das xícaras no Mercado Livre pelo celular.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Reivindicar sua parte na herança usando argumentos jurídicos inventados.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -15 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+              { "tipo": "adicionar_flag", "flag": "deserdado_de_fato" }
+            ]
+          },
+          {
+            "texto": "Tentar a sorte no sorteio das caixas de pertences antigos.",
+            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "efeitos": [
+              { "tipo": "alterar_dinheiro", "delta": 250.0 },
+              { "tipo": "alterar_humor", "delta": 20 }
+            ]
+          },
+          {
+            "texto": "Dizer que não quer nada e manter sua integridade moral intacta.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

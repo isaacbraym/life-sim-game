@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "alergia_poeira_faxina",
+  "categoria": "health",
+  "titulo": "A Vingança dos Ácaros",
+  "descricaoCurta": "Você decide ser um membro produtivo da sociedade e limpar debaixo do guarda-roupa. Uma nuvem de poeira ancestral sobe e os ácaros declaram guerra às suas vias aéreas.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [10, 75],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "alergia_poeira_cena",
+    "descricaoCurta": "Quarto com vassoura e pano de chão no chão, você espirrando segurando um lenço de papel.",
+    "background": "quarto",
+    "framing": "medium",
+    "humor": "caotico",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "espirrando_forte",
+          "categoria": "action",
+          "descricao": "Segurando um lenço de papel cobrindo o nariz com olhos vermelhos e lacrimejantes.",
+          "rotacoes": [],
+          "expressaoFacial": "triste",
+          "intensidadeExpressao": 85,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "descalco",
+          "peDireito": "descalco",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Basta empurrar a primeira gaveta do armário para que uma nuvem cinza suba. Seus olhos começam a coçar imediatamente e uma sequência de oito espirros seguidos quase quebra a sua costela.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Lutar bravamente contra o pó e terminar a limpeza de máscara de pano.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -10 },
+              { "tipo": "alterar_humor", "delta": 10 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Abandonar tudo, deitar no sofá e aceitar a poeira como parte da decoração.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": -5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          },
+          {
+            "texto": "Tomar uma dose cavalar de antialérgico que dá sono e apagar.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -15 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "transicao_fundamental_medio",
+  "categoria": "education",
+  "titulo": "O Pátio dos Gigantes",
+  "descricaoCurta": "Seu primeiro dia no Ensino Médio. Os veteranos parecem ter três metros de altura e barba na cara, enquanto você ainda tem espinhas e medo.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [14, 14],
+    "peso": 80,
+    "cooldownMeses": 0,
+    "uniqueOnce": true
+  },
+  "cast": [],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "transicao_fundamental_medio_cena",
+    "descricaoCurta": "Corredor da escola cheio de adolescentes conversando em grupos.",
+    "background": "escola_corredor",
+    "framing": "wide",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "novato_perdido",
+          "categoria": "basic",
+          "descricao": "Segurando as alças da mochila com força, olhando ao redor com timidez.",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "segurando_objeto",
+          "peEsquerdo": "tenis",
+          "peDireito": "tenis",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "Adeus, Ensino Fundamental. Você agora está no Ensino Médio. Onde as notas importam um pouco mais e a escala hierárquica social é impiedosa. O pátio parece uma arena de gladiadores de boné e tênis de marca.",
+        "tags": []
+      },
+      {
+        "tipo": "narracao",
+        "texto": "Um grupo de veteranos do terceiro ano passa rindo alto e olhando na sua direção. Seu instinto básico diz para fingir que está lendo uma mensagem importante no celular.",
+        "tags": []
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Caminhar de cabeça erguida e ignorar a intimidação visual.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": 5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Perguntar onde fica a biblioteca para escapar do corredor principal.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Tentar se enturmar fazendo uma piada autodepreciativa com o primeiro que vir.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -10 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
+              { "tipo": "adicionar_flag", "flag": "palhaco_do_corredor" }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}

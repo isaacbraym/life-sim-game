@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "1.0.0",
+  "eventoId": "consulta_medica_rotina",
+  "categoria": "health",
+  "titulo": "O Sermão do Jaleco",
+  "descricaoCurta": "Sua consulta médica de rotina. O doutor olha para a sua ficha com aquela expressão julgadora de quem sabe que você não come salada há meses.",
+  "contentTags": [],
+  "triggers": {
+    "idadeRange": [18, 80],
+    "peso": 20,
+    "cooldownMeses": 24,
+    "uniqueOnce": false
+  },
+  "cast": [
+    {
+      "papel": "doutor_julgador",
+      "tipo": "sempre_novo",
+      "persistenciaApos": "recorrente",
+      "constraints": {
+        "idadeMin": 30,
+        "idadeMax": 70
+      }
+    }
+  ],
+  "scene": {
+    "schemaVersion": "1.0.0",
+    "sceneId": "consulta_medica_rotina_cena",
+    "descricaoCurta": "Consultório asséptico com luz fluorescente fria. Você na cadeira em frente ao médico.",
+    "background": "hospital_quarto",
+    "framing": "medium",
+    "humor": "tenso",
+    "atores": [
+      {
+        "papel": "protagonista",
+        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "paciente_tenso",
+          "categoria": "basic",
+          "descricao": "Sentado ereto, mãos nos joelhos, sorriso tenso.",
+          "rotacoes": [],
+          "expressaoFacial": "medo",
+          "intensidadeExpressao": 60,
+          "maoEsquerda": "palma_aberta",
+          "maoDireita": "palma_aberta",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 1
+      },
+      {
+        "papel": "npc_primario",
+        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "pose": {
+          "schemaVersion": "1.0.0",
+          "poseId": "medico_analisando",
+          "categoria": "basic",
+          "descricao": "Olhando papéis com testa franzida e óculos na ponta do nariz.",
+          "rotacoes": [],
+          "expressaoFacial": "desconfiada",
+          "intensidadeExpressao": 75,
+          "maoEsquerda": "segurando_objeto",
+          "maoDireita": "relaxada",
+          "peEsquerdo": "sapato_social",
+          "peDireito": "sapato_social",
+          "metadata": {
+            "criadoEm": "2026-05-24T19:10:40.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
+        },
+        "zOrder": 0
+      }
+    ],
+    "contatos": [],
+    "beats": [
+      {
+        "tipo": "narracao",
+        "texto": "O médico folheia o resultado dos seus exames de sangue fazendo um som estalado com a língua. Cada 'hmmm' dele encurta sua expectativa de vida em dois anos.",
+        "tags": []
+      },
+      {
+        "tipo": "dialogo",
+        "papelAtor": "npc_primario",
+        "texto": "Então... seu colesterol está brincando de montanha-russa, e a parte de exercícios físicos na sua ficha está em branco. Quer comentar?"
+      },
+      {
+        "tipo": "escolha",
+        "opcoes": [
+          {
+            "texto": "Mentir dizendo que pratica corrida de rua três vezes por semana.",
+            "efeitos": [
+              { "tipo": "alterar_humor", "delta": -5 },
+              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Tentar provar que seu coração é forte através de um checkup de constituição.",
+            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 10 },
+              { "tipo": "alterar_humor", "delta": 15 },
+              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+            ]
+          },
+          {
+            "texto": "Aceitar as críticas em silêncio e prometer comer alface amanhã.",
+            "efeitos": [
+              { "tipo": "alterar_saude", "delta": 5 },
+              { "tipo": "alterar_humor", "delta": -10 }
+            ]
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "criadoEm": "2026-05-24T19:10:40.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
+  },
+  "metadata": {
+    "criadoEm": "2026-05-24T19:10:40.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  }
+}
