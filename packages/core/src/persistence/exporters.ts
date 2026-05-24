@@ -1,12 +1,3 @@
-import { db } from './GameDB';
-
-// TODO: implementar export completo com hash SHA-256
-export async function exportarSave(_saveId: string): Promise<Blob> {
-  void db;
-  throw new Error('not implemented');
-}
-
-// TODO: implementar import com validação de checksum + Zod
-export async function importarSave(_blob: Blob): Promise<void> {
-  throw new Error('not implemented');
-}
+// As funções exportarSave e importarSave foram migradas para o SaveManager.ts.
+// Este arquivo pode ser mantido vazio ou excluído futuramente.
+export {};

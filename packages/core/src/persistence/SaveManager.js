@@ -27,7 +27,7 @@ export async function salvarSave(save) {
         await db.npcs.put(npcComSaveId);
     }
 }
-export async function criarNovoSave(nome, protagonista) {
+export async function criarNovoSave(nome, protagonista, roster) {
     const saveId = crypto.randomUUID();
     const dataIso = new Date().toISOString();
     const novoSave = {
@@ -43,7 +43,7 @@ export async function criarNovoSave(nome, protagonista) {
             idioma: 'pt-BR',
         },
         protagonista,
-        roster: [],
+        roster: roster ?? [],
         estadoMundo: {
             anoAtual: protagonista.dataNascimento.ano,
             mesAtual: 1,
@@ -76,7 +76,7 @@ export class SaveManager {
                 idioma: 'pt-BR',
             },
             protagonista: params.protagonista,
-            roster: [],
+            roster: params.roster ?? [],
             estadoMundo: {
                 anoAtual: params.protagonista.dataNascimento.ano,
                 mesAtual: 1,
@@ -87,5 +87,50 @@ export class SaveManager {
         await salvarSave(novoSave);
         return novoSave;
     }
+}
+export async function exportarSave(saveId) {
+    const salvo = await db.saves.get(saveId);
+    if (salvo === undefined) {
+        throw new Error(`Save não encontrado: ${saveId}`);
+    }
+    const exportacao = {
+        versaoExportacao: '1.0.0',
+        exportadoEm: new Date().toISOString(),
+        payload: salvo,
+    };
+    return JSON.stringify(exportacao, null, 2);
+}
+export async function importarSave(jsonString) {
+    let parseado;
+    try {
+        parseado = JSON.parse(jsonString);
+    }
+    catch {
+        throw new Error('JSON inválido — arquivo corrompido ou não é um save do Vida 2.5D.');
+    }
+    if (typeof parseado !== 'object' ||
+        parseado === null ||
+        !('payload' in parseado)) {
+        throw new Error('Formato de exportação inválido.');
+    }
+    const resultado = SaveSlotSchema.safeParse(parseado.payload);
+    if (!resultado.success) {
+        throw new Error(`Save com schema inválido: ${resultado.error.issues.map(i => i.message).join(', ')}`);
+    }
+    const saveImportado = resultado.data;
+    const saveExistente = await db.saves.get(saveImportado.saveId);
+    if (saveExistente !== undefined) {
+        // Já existe: gerar novo ID para não sobrescrever
+        const saveComNovoId = {
+            ...saveImportado,
+            saveId: crypto.randomUUID(),
+            nomeSlot: `${saveImportado.nomeSlot} (importado)`,
+            ultimaPartida: new Date().toISOString(),
+        };
+        await salvarSave(saveComNovoId);
+        return saveComNovoId;
+    }
+    await salvarSave(saveImportado);
+    return saveImportado;
 }
 //# sourceMappingURL=SaveManager.js.map

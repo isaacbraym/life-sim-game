@@ -7,6 +7,7 @@ import { NewGameScreen } from '../ui/NewGameScreen';
 import { useHudStore } from '../state/hudStore';
 import { v4 as uuidv4 } from 'uuid';
 import { SaveManager } from '@core/persistence/SaveManager';
+import { gerarRosterInicial } from '@core/npc/NpcGenerator';
 export function App() {
     const [telaAtual, setTelaAtual] = useState('jogo');
     const { nomePersonagem, profissaoAtual, idadeAnos, anoAtual, humor, saude, dinheiro, atributos, eventoAtivo, resolverOpcao, inicializarEngine, } = useHudStore();
@@ -17,9 +18,11 @@ export function App() {
     async function aoConfirmarNovoPersonagem(dados) {
         const anoNascimento = 1990 + Math.floor(Math.random() * 16); // 1990–2005
         const saveManager = new SaveManager();
+        const rosterFamiliar = gerarRosterInicial(anoNascimento, Date.now() % 100000);
         const novoSave = await saveManager.criarNovoSave({
             nomeSlot: `${dados.nome} ${dados.sobrenome}`,
             ritmo: dados.ritmo,
+            roster: rosterFamiliar,
             protagonista: {
                 schemaVersion: '1.0.0',
                 characterId: uuidv4(),

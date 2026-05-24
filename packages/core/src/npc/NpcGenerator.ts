@@ -166,3 +166,150 @@ export function gerarNpcNovo(seletor: SelectorNpc, semente: number): Npc {
     historicoInteracoes: []
   };
 }
+
+export function gerarRosterInicial(
+  anoNascimentoProtagonista: number,
+  sementeBase: number,
+): Npc[] {
+  const roster: Npc[] = [];
+
+  const rngLocal = (semente: number, min: number, max: number) => {
+    const x = Math.sin(semente) * 10000;
+    const valor = Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
+    return { valor, proximaSemente: semente + 1 };
+  };
+
+  // 1. Gerar pai
+  const seletorPai: SelectorNpc = {
+    papel: 'pai',
+    tipo: 'sempre_novo',
+    persistenciaApos: 'permanente',
+    constraints: {
+      genero: 'M',
+    },
+  };
+  const sementePai = sementeBase;
+  const p1 = rngLocal(sementePai, 20, 45);
+  const idadePaiNoNascimento = p1.valor;
+  const anoNascimentoPai = anoNascimentoProtagonista - idadePaiNoNascimento;
+  const p2 = rngLocal(p1.proximaSemente, 1, 12);
+  const mesNascimentoPai = p2.valor;
+  const p3 = rngLocal(p2.proximaSemente, 1, 28);
+  const diaNascimentoPai = p3.valor;
+
+  const paiRaw = gerarNpcNovo(seletorPai, sementePai);
+  const pai: Npc = {
+    ...paiRaw,
+    npcId: crypto.randomUUID(),
+    dataNascimento: {
+      ano: anoNascimentoPai,
+      mes: mesNascimentoPai,
+      dia: diaNascimentoPai,
+    },
+    persistencia: 'permanente',
+    relacionamentoComJogador: {
+      tipo: 'familia_pai',
+      afeto: 70,
+      conhecidoDesde: {
+        ano: anoNascimentoProtagonista,
+        mes: 1,
+      },
+    },
+  };
+  roster.push(pai);
+
+  // 2. Gerar mãe
+  const seletorMae: SelectorNpc = {
+    papel: 'mae',
+    tipo: 'sempre_novo',
+    persistenciaApos: 'permanente',
+    constraints: {
+      genero: 'F',
+    },
+  };
+  const sementeMae = sementeBase + 100;
+  const m1 = rngLocal(sementeMae, 20, 42);
+  const idadeMaeNoNascimento = m1.valor;
+  const anoNascimentoMae = anoNascimentoProtagonista - idadeMaeNoNascimento;
+  const m2 = rngLocal(m1.proximaSemente, 1, 12);
+  const mesNascimentoMae = m2.valor;
+  const m3 = rngLocal(m2.proximaSemente, 1, 28);
+  const diaNascimentoMae = m3.valor;
+
+  const maeRaw = gerarNpcNovo(seletorMae, sementeMae);
+  const mae: Npc = {
+    ...maeRaw,
+    npcId: crypto.randomUUID(),
+    dataNascimento: {
+      ano: anoNascimentoMae,
+      mes: mesNascimentoMae,
+      dia: diaNascimentoMae,
+    },
+    persistencia: 'permanente',
+    relacionamentoComJogador: {
+      tipo: 'familia_mae',
+      afeto: 75,
+      conhecidoDesde: {
+        ano: anoNascimentoProtagonista,
+        mes: 1,
+      },
+    },
+  };
+  roster.push(mae);
+
+  // 3. Sortear número de irmãos (0, 1 ou 2)
+  const numIrmaos = sementeBase % 3;
+  for (let i = 0; i < numIrmaos; i++) {
+    const sementeIrmao = sementeBase + 200 + (i * 50);
+    const i1 = rngLocal(sementeIrmao, 0, 1);
+    const eMaisVelho = i1.valor === 0;
+
+    let i2;
+    if (eMaisVelho) {
+      i2 = rngLocal(i1.proximaSemente, anoNascimentoProtagonista - 8, anoNascimentoProtagonista - 1);
+    } else {
+      i2 = rngLocal(i1.proximaSemente, anoNascimentoProtagonista + 1, anoNascimentoProtagonista + 6);
+    }
+    const anoNascimentoIrmao = i2.valor;
+
+    const i3 = rngLocal(i2.proximaSemente, 0, 1);
+    const generoIrmao: 'M' | 'F' = i3.valor === 0 ? 'M' : 'F';
+
+    const i4 = rngLocal(i3.proximaSemente, 1, 12);
+    const mesNascimentoIrmao = i4.valor;
+
+    const i5 = rngLocal(i4.proximaSemente, 1, 28);
+    const diaNascimentoIrmao = i5.valor;
+
+    const seletorIrmao: SelectorNpc = {
+      papel: 'irmao',
+      tipo: 'sempre_novo',
+      persistenciaApos: 'permanente',
+      constraints: {
+        genero: generoIrmao,
+      },
+    };
+    const irmaoRaw = gerarNpcNovo(seletorIrmao, sementeIrmao);
+    const irmao: Npc = {
+      ...irmaoRaw,
+      npcId: crypto.randomUUID(),
+      dataNascimento: {
+        ano: anoNascimentoIrmao,
+        mes: mesNascimentoIrmao,
+        dia: diaNascimentoIrmao,
+      },
+      persistencia: 'permanente',
+      relacionamentoComJogador: {
+        tipo: 'familia_irmao',
+        afeto: 50,
+        conhecidoDesde: eMaisVelho
+          ? { ano: anoNascimentoProtagonista, mes: 1 }
+          : { ano: anoNascimentoIrmao, mes: mesNascimentoIrmao },
+      },
+    };
+    roster.push(irmao);
+  }
+
+  return roster;
+}
+
