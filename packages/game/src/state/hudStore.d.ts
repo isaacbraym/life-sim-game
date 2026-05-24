@@ -16,6 +16,10 @@ type EstadoHud = {
     readonly ultimaRolagem?: ResultadoRolagem;
     readonly atributos: readonly AtributoRpg[];
     readonly engineAtivo: GameEngine | undefined;
+    readonly eventosVividos: readonly string[];
+    readonly conteudoAdultoAtivo: boolean;
+    readonly saveIdAtivo: string | undefined;
+    readonly ritmoAtual: 'mensal' | 'semestral' | 'anual' | undefined;
 };
 export type OpcaoEvento = {
     readonly texto: string;
@@ -39,6 +43,7 @@ type AcoesHud = {
     readonly avancarSemEvento: () => void;
     readonly inicializarEngine: (save: SaveSlot) => void;
     readonly avancarTurno: () => Promise<void>;
+    readonly alterarConteudoAdulto: (valor: boolean) => void;
 };
 export declare const useHudStore: import("zustand").UseBoundStore<import("zustand").StoreApi<EstadoHud & AcoesHud>>;
 export {};

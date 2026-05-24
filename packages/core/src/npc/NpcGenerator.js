@@ -1,3 +1,4 @@
+import { gerarAtributosGeneticos, gerarAtributosIniciais } from '../rpg/Attributes';
 function rng(semente, min, max) {
     const x = Math.sin(semente) * 10000;
     return Math.floor((x - Math.floor(x)) * (max - min + 1)) + min;
@@ -270,5 +271,23 @@ export function gerarRosterInicial(anoNascimentoProtagonista, sementeBase) {
         roster.push(irmao);
     }
     return roster;
+}
+export function gerarAtributosNpcComHeranca(atributosPai, atributosMae, semente) {
+    if (atributosPai !== undefined && atributosMae !== undefined) {
+        return gerarAtributosGeneticos(atributosPai, atributosMae, semente);
+    }
+    // Se um dos pais não disponível: gerar aleatório com viés do pai disponível
+    const base = atributosPai ?? atributosMae;
+    if (base !== undefined) {
+        const aleatorio = gerarAtributosIniciais();
+        return {
+            forca: Math.round((base.forca + aleatorio.forca) / 2),
+            inteligencia: Math.round((base.inteligencia + aleatorio.inteligencia) / 2),
+            carisma: Math.round((base.carisma + aleatorio.carisma) / 2),
+            constituicao: Math.round((base.constituicao + aleatorio.constituicao) / 2),
+            sorte: Math.round((base.sorte + aleatorio.sorte) / 2),
+        };
+    }
+    return gerarAtributosIniciais();
 }
 //# sourceMappingURL=NpcGenerator.js.map

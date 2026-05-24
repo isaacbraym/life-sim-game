@@ -1,0 +1,235 @@
+/* ============================================================================
+   SettingsScreen — overlay de configurações
+   ============================================================================ */
+
+.sett-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 11, 22, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: sett-fade-in 0.18s ease;
+}
+
+@keyframes sett-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Card ── */
+.sett-card {
+  background: var(--vida-surface);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-lg);
+  box-shadow: var(--vida-shadow-modal);
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  padding: var(--vida-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--vida-space-3);
+  animation: sett-slide-up 0.22s ease;
+}
+
+@keyframes sett-slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── Cabeçalho ── */
+.sett-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--vida-space-2);
+}
+
+.sett-titulo {
+  font-size: var(--vida-fs-17);
+  font-weight: 700;
+  color: var(--vida-text);
+  letter-spacing: -0.01em;
+}
+
+.sett-fechar {
+  background: transparent;
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-sm);
+  color: var(--vida-muted);
+  font-size: var(--vida-fs-13);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--vida-trans), color var(--vida-trans);
+}
+.sett-fechar:hover {
+  border-color: var(--vida-accent);
+  color: var(--vida-text);
+}
+
+/* ── Seção título ── */
+.sett-secao-titulo {
+  font-size: var(--vida-fs-9);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--vida-dim);
+  font-weight: 600;
+  margin-top: var(--vida-space-1);
+}
+
+/* ── Divisor ── */
+.sett-divisor {
+  height: 1px;
+  background: var(--vida-border);
+  margin: var(--vida-space-1) 0;
+}
+
+/* ── Linha de configuração ── */
+.sett-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--vida-space-3);
+  padding: var(--vida-space-2) 0;
+}
+
+.sett-linha--coluna {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sett-linha-topo {
+  display: flex;
+  align-items: center;
+  gap: var(--vida-space-2);
+}
+
+.sett-linha-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sett-linha-label {
+  font-size: var(--vida-fs-13);
+  font-weight: 500;
+  color: var(--vida-text);
+}
+
+.sett-linha-sub {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-muted);
+  line-height: 1.4;
+}
+
+/* ── Badge de ritmo ── */
+.sett-badge {
+  background: var(--vida-accent-soft);
+  border: 1px solid var(--vida-accent);
+  border-radius: var(--vida-r-pill);
+  padding: 2px 10px;
+  font-size: var(--vida-fs-11);
+  color: var(--vida-accent-hi);
+  font-family: var(--vida-font-mono);
+  font-weight: 500;
+}
+
+/* ── Toggle iOS ── */
+.sett-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--vida-surface3);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-pill);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--vida-trans), border-color var(--vida-trans);
+}
+
+.sett-toggle--ativo {
+  background: var(--vida-accent);
+  border-color: var(--vida-accent);
+}
+
+.sett-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: var(--vida-text);
+  border-radius: 50%;
+  transition: transform var(--vida-trans);
+  display: block;
+}
+
+.sett-toggle--ativo .sett-toggle-thumb {
+  transform: translateX(20px);
+}
+
+/* ── Botões de dados ── */
+.sett-btn {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r);
+  color: var(--vida-text-soft);
+  font-size: var(--vida-fs-13);
+  font-family: var(--vida-font);
+  font-weight: 500;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: border-color var(--vida-trans), color var(--vida-trans), background var(--vida-trans);
+}
+
+.sett-btn:hover:not(:disabled) {
+  border-color: var(--vida-accent);
+  color: var(--vida-text);
+}
+
+.sett-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sett-btn--ok {
+  border-color: var(--vida-green);
+  color: var(--vida-green);
+}
+
+/* Input file escondido */
+.sett-input-file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Mensagem de erro ── */
+.sett-msg-erro {
+  font-size: var(--vida-fs-11);
+  color: var(--vida-red);
+  line-height: 1.4;
+}
+
+/* ── Sobre ── */
+.sett-sobre {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sett-sobre p {
+  font-size: var(--vida-fs-12);
+  color: var(--vida-muted);
+  margin: 0;
+}

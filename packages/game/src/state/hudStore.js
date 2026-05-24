@@ -34,6 +34,10 @@ const ESTADO_INICIAL = {
     ultimaRolagem: undefined,
     atributos: ATRIBUTOS_MOCK,
     engineAtivo: undefined,
+    eventosVividos: [],
+    conteudoAdultoAtivo: false,
+    saveIdAtivo: undefined,
+    ritmoAtual: undefined,
 };
 // ---------------------------------------------------------------------------
 // Store
@@ -105,6 +109,8 @@ export const useHudStore = create((set, get) => ({
             humor: protagonistaAtual.humorAtual,
             saude: protagonistaAtual.saudeAtual,
             dinheiro: protagonistaAtual.dinheiro,
+            // [MODIFIED] — sincroniza eventosVividos com o personagem atualizado
+            eventosVividos: protagonistaAtual.eventosVividos,
             atributos: [
                 { nome: 'Força', valor: protagonistaAtual.atributos.forca },
                 { nome: 'Inteligência', valor: protagonistaAtual.atributos.inteligencia },
@@ -125,7 +131,14 @@ export const useHudStore = create((set, get) => ({
     },
     inicializarEngine: (save) => {
         const engine = new GameEngine(save);
-        set({ engineAtivo: engine });
+        // [MODIFIED] — sincroniza campos extras do save na store
+        set({
+            engineAtivo: engine,
+            saveIdAtivo: save.saveId,
+            conteudoAdultoAtivo: save.configuracoes.conteudoAdultoLiberado,
+            ritmoAtual: save.configuracoes.ritmo,
+            eventosVividos: save.protagonista.eventosVividos,
+        });
     },
     avancarTurno: async () => {
         const engine = get().engineAtivo;
@@ -153,7 +166,11 @@ export const useHudStore = create((set, get) => ({
             humor: protagonista.humorAtual,
             saude: protagonista.saudeAtual,
             dinheiro: protagonista.dinheiro,
+            // [MODIFIED] — sincroniza eventosVividos após turno
+            eventosVividos: protagonista.eventosVividos,
         });
     },
+    // [NEW]
+    alterarConteudoAdulto: (valor) => set((anterior) => ({ ...anterior, conteudoAdultoAtivo: valor })),
 }));
 //# sourceMappingURL=hudStore.js.map

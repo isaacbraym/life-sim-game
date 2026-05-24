@@ -1,5 +1,7 @@
 import type { Ponto } from '../rig/Joint';
 
+export type { Ponto };
+
 export type PerfilBraco = {
   espessuraOmbro: number;
   espessuraBiceps: number;
@@ -21,6 +23,18 @@ export type PerfilTronco = {
   larguraCintura: number;
   larguraQuadril: number;
   profundidadeTorax: number;
+};
+
+export type PerfilMembro = {
+  readonly espessuraInicio: number;
+  readonly espessuraMeio: number;
+  readonly espessuraFim: number;
+  readonly curvatura: number;
+};
+
+export type SegmentoPath = {
+  readonly pontos: readonly Ponto[];
+  readonly handles: readonly Ponto[];
 };
 
 export const PERFIL_BRACO_PADRAO: PerfilBraco = {
@@ -66,6 +80,198 @@ function perpendicularEsquerda(v: Ponto): Ponto {
 
 function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
+}
+
+function clamp(valor: number, minimo: number, maximo: number): number {
+  return Math.min(Math.max(valor, minimo), maximo);
+}
+
+function somar(a: Ponto, b: Ponto): Ponto {
+  return { x: a.x + b.x, y: a.y + b.y };
+}
+
+function multiplicar(v: Ponto, escala: number): Ponto {
+  return { x: v.x * escala, y: v.y * escala };
+}
+
+function distanciaEntre(a: Ponto, b: Ponto): number {
+  return comprimentoVetor(subtrair(b, a));
+}
+
+export function normalPerpendicular(a: Ponto, b: Ponto): Ponto {
+  return normalizar(perpendicularEsquerda(subtrair(b, a)));
+}
+
+export function lerpPonto(a: Ponto, b: Ponto, t: number): Ponto {
+  return { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) };
+}
+
+function normalMedia(a: Ponto, b: Ponto): Ponto {
+  const soma = somar(a, b);
+
+  if (comprimentoVetor(soma) < 0.001) {
+    return a;
+  }
+
+  return normalizar(soma);
+}
+
+function criarHandlesFechados(
+  pontos: readonly Ponto[],
+  curvatura: number,
+): readonly Ponto[] {
+  if (pontos.length < 2) {
+    return [];
+  }
+
+  const intensidade = clamp(0.1 + curvatura * 0.16, 0.08, 0.28);
+  const handles: Ponto[] = [];
+
+  for (let indice = 0; indice < pontos.length; indice += 1) {
+    const atual = pontos[indice];
+    const anterior = pontos[(indice - 1 + pontos.length) % pontos.length];
+    const proximo = pontos[(indice + 1) % pontos.length];
+    const destino = pontos[(indice + 1) % pontos.length];
+    const destinoProximo = pontos[(indice + 2) % pontos.length];
+
+    if (
+      atual === undefined ||
+      anterior === undefined ||
+      proximo === undefined ||
+      destino === undefined ||
+      destinoProximo === undefined
+    ) {
+      continue;
+    }
+
+    const tangenteAtual = subtrair(proximo, anterior);
+    const tangenteDestino = subtrair(destinoProximo, atual);
+
+    handles.push(somar(atual, multiplicar(tangenteAtual, intensidade)));
+    handles.push(subtrair(destino, multiplicar(tangenteDestino, intensidade)));
+  }
+
+  return handles;
+}
+
+export function gerarPathMembroOrganico(
+  inicio: Ponto,
+  meio: Ponto,
+  fim: Ponto,
+  perfil: PerfilMembro,
+  lado: 'L' | 'R',
+): SegmentoPath {
+  const sinal = lado === 'L' ? 1 : -1;
+  const curvatura = clamp(perfil.curvatura, 0, 1);
+  const n1 = multiplicar(normalPerpendicular(inicio, meio), sinal);
+  const n2 = multiplicar(normalPerpendicular(meio, fim), sinal);
+  const nMeio = normalMedia(n1, n2);
+
+  const pontoInicioA = somar(inicio, multiplicar(n1, perfil.espessuraInicio));
+  const pontoMeioA = somar(meio, multiplicar(nMeio, perfil.espessuraMeio));
+  const pontoFimA = somar(fim, multiplicar(n2, perfil.espessuraFim));
+  const pontoFimB = subtrair(fim, multiplicar(n2, perfil.espessuraFim));
+  const pontoMeioB = subtrair(meio, multiplicar(nMeio, perfil.espessuraMeio));
+  const pontoInicioB = subtrair(inicio, multiplicar(n1, perfil.espessuraInicio));
+
+  const pontos = [
+    pontoInicioA,
+    pontoMeioA,
+    pontoFimA,
+    pontoFimB,
+    pontoMeioB,
+    pontoInicioB,
+  ];
+
+  return {
+    pontos,
+    handles: criarHandlesFechados(pontos, curvatura),
+  };
+}
+
+export function gerarPathTronco(
+  pescoco: Ponto,
+  ombroL: Ponto,
+  ombroR: Ponto,
+  quadrilL: Ponto,
+  quadrilR: Ponto,
+  perfil: {
+    readonly larguraTopo: number;
+    readonly larguraBase: number;
+    readonly curvatura: number;
+  },
+): SegmentoPath {
+  const curvatura = clamp(perfil.curvatura, 0, 1);
+  const centroOmbros = lerpPonto(ombroL, ombroR, 0.5);
+  const centroQuadril = lerpPonto(quadrilL, quadrilR, 0.5);
+  const eixoHorizontalBase = normalizar(subtrair(ombroR, ombroL));
+  const eixoHorizontal = comprimentoVetor(eixoHorizontalBase) < 0.001
+    ? { x: 1, y: 0 }
+    : eixoHorizontalBase;
+  const centroCintura = lerpPonto(pescoco, centroQuadril, 0.62);
+
+  const meiaLarguraOmbros = Math.max(
+    perfil.larguraTopo / 2,
+    distanciaEntre(ombroL, ombroR) / 2,
+  );
+  const meiaLarguraQuadril = Math.max(
+    perfil.larguraBase / 2,
+    distanciaEntre(quadrilL, quadrilR) / 2,
+  );
+  const meiaLarguraCintura = lerp(
+    meiaLarguraOmbros,
+    meiaLarguraQuadril,
+    0.45,
+  ) * (0.82 - curvatura * 0.08);
+
+  const ombroEsquerdo = subtrair(centroOmbros, multiplicar(eixoHorizontal, meiaLarguraOmbros));
+  const ombroDireito = somar(centroOmbros, multiplicar(eixoHorizontal, meiaLarguraOmbros));
+  const cinturaEsquerda = subtrair(centroCintura, multiplicar(eixoHorizontal, meiaLarguraCintura));
+  const cinturaDireita = somar(centroCintura, multiplicar(eixoHorizontal, meiaLarguraCintura));
+  const quadrilEsquerdo = subtrair(centroQuadril, multiplicar(eixoHorizontal, meiaLarguraQuadril));
+  const quadrilDireito = somar(centroQuadril, multiplicar(eixoHorizontal, meiaLarguraQuadril));
+
+  const pontos = [
+    ombroEsquerdo,
+    cinturaEsquerda,
+    quadrilEsquerdo,
+    quadrilDireito,
+    cinturaDireita,
+    ombroDireito,
+  ];
+
+  return {
+    pontos,
+    handles: criarHandlesFechados(pontos, curvatura),
+  };
+}
+
+export function gerarPathCabeca(
+  centro: Ponto,
+  raioH: number,
+  raioV: number,
+): SegmentoPath {
+  const kappa = 0.552284749831;
+  const pontoTopo = { x: centro.x, y: centro.y - raioV };
+  const pontoDireito = { x: centro.x + raioH, y: centro.y };
+  const pontoBase = { x: centro.x, y: centro.y + raioV };
+  const pontoEsquerdo = { x: centro.x - raioH, y: centro.y };
+  const ajusteH = raioH * kappa;
+  const ajusteV = raioV * kappa;
+
+  return {
+    pontos: [pontoTopo, pontoDireito, pontoBase, pontoEsquerdo],
+    handles: [
+      { x: centro.x + ajusteH, y: centro.y - raioV },
+      { x: centro.x + raioH, y: centro.y - ajusteV },
+      { x: centro.x + raioH, y: centro.y + ajusteV },
+      { x: centro.x + ajusteH, y: centro.y + raioV },
+      { x: centro.x - ajusteH, y: centro.y + raioV },
+      { x: centro.x - raioH, y: centro.y + ajusteV },
+      { x: centro.x - raioH, y: centro.y - ajusteV },
+      { x: centro.x - ajusteH, y: centro.y - raioV },
+    ],
+  };
 }
 
 function pontoPerpendicular(
