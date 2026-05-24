@@ -9,6 +9,7 @@ import './SettingsScreen.css';
 
 type SettingsScreenProps = {
   readonly aoFechar: () => void;
+  readonly aoMenuPrincipal: () => void;
 };
 
 type StatusExport = 'idle' | 'carregando' | 'ok' | 'erro';
@@ -32,7 +33,7 @@ function nomeArquivoExport(): string {
 // Componente
 // ---------------------------------------------------------------------------
 
-export function SettingsScreen({ aoFechar }: SettingsScreenProps): React.JSX.Element {
+export function SettingsScreen({ aoFechar, aoMenuPrincipal }: SettingsScreenProps): React.JSX.Element {
   const {
     conteudoAdultoAtivo,
     alterarConteudoAdulto,
@@ -195,6 +196,18 @@ export function SettingsScreen({ aoFechar }: SettingsScreenProps): React.JSX.Ele
         <div className="sett-sobre">
           <p>Vida 2.5D — versão 0.1.0-alpha</p>
           <p>Feito com TypeScript, React e PixiJS</p>
+        </div>
+
+        <div className="sett-divisor" />
+
+        {/* Voltar ao menu */}
+        <div className="sett-linha">
+          <button
+            className="sett-btn sett-btn--menu"
+            onClick={aoMenuPrincipal}
+          >
+            ← Voltar ao menu
+          </button>
         </div>
 
       </div>

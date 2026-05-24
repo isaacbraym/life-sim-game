@@ -237,7 +237,7 @@ export function App(): React.JSX.Element {
         }}
         aoMenuPrincipal={() => {
           setDadosMorte(undefined);
-          setTelaAtual('jogo');
+          setTelaAtual('selecionar_save');
         }}
       />
     );
@@ -295,7 +295,10 @@ export function App(): React.JSX.Element {
 
       {/* SettingsScreen como overlay sobre o jogo */}
       {telaAtual === 'configuracoes' && (
-        <SettingsScreen aoFechar={() => setTelaAtual('jogo')} />
+        <SettingsScreen
+          aoFechar={() => setTelaAtual('jogo')}
+          aoMenuPrincipal={() => setTelaAtual('selecionar_save')}
+        />
       )}
     </>
   );
