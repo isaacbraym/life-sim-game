@@ -1,0 +1,57 @@
+/* ============================================================================
+   BotaoAvancarTempo — botão primário de avanço de turno na BarraSuperior
+   ============================================================================ */
+
+.btn-avancar-tempo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: rgba(91, 141, 238, 0.12);
+  border: 1px solid var(--vida-accent);
+  border-radius: var(--vida-r-sm);
+  color: var(--vida-accent);
+  font-family: var(--vida-font);
+  font-size: var(--vida-fs-12);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--vida-trans), box-shadow var(--vida-trans), opacity var(--vida-trans);
+}
+
+.btn-avancar-tempo:hover:not(:disabled) {
+  background: rgba(91, 141, 238, 0.22);
+  box-shadow: 0 0 0 1px rgba(91, 141, 238, 0.3);
+}
+
+.btn-avancar-tempo:active:not(:disabled) {
+  background: rgba(91, 141, 238, 0.28);
+}
+
+.btn-avancar-tempo:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  border-color: var(--vida-border);
+  color: var(--vida-muted);
+  background: transparent;
+}
+
+.btn-avancar-tempo__icone {
+  flex-shrink: 0;
+  transition: transform var(--vida-trans);
+}
+
+.btn-avancar-tempo:hover:not(:disabled) .btn-avancar-tempo__icone {
+  transform: translateX(2px);
+}
+
+/* Mobile: ocultar label, manter apenas ícone */
+@media (max-width: 768px) {
+  .btn-avancar-tempo__label {
+    display: none;
+  }
+
+  .btn-avancar-tempo {
+    padding: 7px 10px;
+  }
+}

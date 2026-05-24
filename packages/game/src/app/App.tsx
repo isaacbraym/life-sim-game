@@ -42,9 +42,11 @@ export function App(): React.JSX.Element {
     atributos,
     eventoAtivo,
     eventosVividos,
+    ritmoAtual,
     resolverOpcao,
     inicializarEngine,
     realizarAtividade,
+    avancarTurno,
   } = useHudStore();
 
   // ── Boot: listar saves e decidir tela inicial ─────────────────────────────
@@ -252,6 +254,9 @@ export function App(): React.JSX.Element {
           idadeAnos={idadeAnos}
           anoAtual={anoAtual}
           dinheiro={dinheiro}
+          ritmo={ritmoAtual}
+          aoAvancarTempo={() => { void avancarTurno(); }}
+          desabilitadoAvancar={eventoAtivo !== undefined}
           aoNovoJogo={() => setTelaAtual('novo_personagem')}
           aoAbrirConfig={() => setTelaAtual('configuracoes')}
         />
