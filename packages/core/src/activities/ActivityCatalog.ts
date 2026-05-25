@@ -1,3 +1,4 @@
+// @deprecated Use ActivityBridge.converterAtividadeParaAcao para converter para ActionDefinition.
 import { z } from 'zod';
 import { Effect } from '../schemas/effect';
 import type { Effect as Efeito } from '../schemas/effect';
