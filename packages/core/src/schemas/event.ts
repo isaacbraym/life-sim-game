@@ -45,6 +45,12 @@ export const Event = z.object({
   }).strict(),
   cast: z.array(SelectorNpc).default([]),
   scene: Scene,
+  localContextId: z.string().optional(),
+  narrativeWeight: z.enum(['routine', 'relevant', 'major']).optional(),
+  eraDisponivel: z.object({
+    startYear: z.number().int(),
+    endYear: z.number().int().optional(),
+  }).strict().optional(),
   metadata: z.object({
     criadoEm: z.string().datetime(),
     criadoPor: z.enum(['humano', 'ia_assistido', 'ia_validada']),

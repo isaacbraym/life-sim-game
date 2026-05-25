@@ -4,10 +4,19 @@
   "categoria": "career",
   "titulo": "O tanque está vazio",
   "descricaoCurta": "Você acordou e não conseguiu sair da cama. Não é preguiça. É que você deu tudo por meses e não sobrou nada. O trabalho foi secando devagar até não restar mais nada para dar.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [22, 45],
-    "requisitos": { "tipo": "flag", "flag": "tem_emprego", "presente": true },
+    "idadeRange": [
+      22,
+      45
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "tem_emprego",
+      "presente": true
+    },
     "peso": 12,
     "cooldownMeses": 36,
     "uniqueOnce": false
@@ -23,7 +32,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "esgotamento_total",
@@ -36,7 +49,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -59,35 +76,89 @@
           {
             "texto": "Tirar uma licença médica. O corpo está pedindo pausa.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "teve_burnout" },
-              { "tipo": "alterar_saude", "delta": -20 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": -1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_burnout"
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": -1
+              }
             ]
           },
           {
             "texto": "Ir trabalhar de qualquer jeito. Vai passar.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "teve_burnout" },
-              { "tipo": "alterar_saude", "delta": -30 },
-              { "tipo": "alterar_humor", "delta": -25 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": -2 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_burnout"
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -30
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": -2
+              }
             ]
           },
           {
             "texto": "Conversar com alguém — médico, psicólogo, amigo próximo.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "teve_burnout" },
-              { "tipo": "adicionar_flag", "flag": "pediu_ajuda_saude_mental" },
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_burnout"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pediu_ajuda_saude_mental"
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "trabalho",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

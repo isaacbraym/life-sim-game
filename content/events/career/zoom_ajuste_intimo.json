@@ -136,5 +136,10 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "humano",
     "versao": 1
+  },
+  "localContextId": "trabalho",
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }
