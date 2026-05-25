@@ -8,6 +8,10 @@ export * from './persistence';
 export * from './render';
 export * from './activities';
 export * from './tempo';
+export * from './era';
+export * from './lifephase';
+export * from './log';
+export * from './interaction';
 
 export const VERSAO_CORE = '0.0.1';
 
