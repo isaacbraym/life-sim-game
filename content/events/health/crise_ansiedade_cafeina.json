@@ -4,9 +4,15 @@
   "categoria": "health",
   "titulo": "O Café da Morte",
   "descricaoCurta": "Você abusou do café de garrafa térmica da copa do trabalho para aguentar o expediente. Agora, seu coração está batendo a 180 BPM e você acha que está tendo um troço.",
-  "contentTags": ["trauma", "substance"],
+  "contentTags": [
+    "trauma",
+    "substance"
+  ],
   "triggers": {
-    "idadeRange": [16, 65],
+    "idadeRange": [
+      16,
+      65
+    ],
     "peso": 25,
     "cooldownMeses": 3,
     "uniqueOnce": false
@@ -22,7 +28,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_taquicardia",
@@ -61,24 +71,45 @@
         "opcoes": [
           {
             "texto": "Beber dois copos d'água e fazer exercícios de respiração no banheiro.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Jurar de joelhos que nunca mais toma café e ir tomar um ar lá fora.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 5 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Pesquisar seus sintomas na internet para confirmar se é um ataque cardíaco fulminante.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -20 },
-              { "tipo": "alterar_humor", "delta": -25 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              }
             ]
           }
         ]
@@ -94,5 +125,9 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

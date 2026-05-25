@@ -6,7 +6,10 @@
   "descricaoCurta": "Ao escovar os dentes pela manhã, você percebe um reflexo prateado estranho na sua têmpora. É ele: seu primeiro fio de cabelo branco.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [25, 55],
+    "idadeRange": [
+      25,
+      55
+    ],
     "peso": 20,
     "cooldownMeses": 120,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "descobrindo_fio_branco",
@@ -56,25 +63,50 @@
         "opcoes": [
           {
             "texto": "Aceitar o envelhecimento natural com elegância capilar.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Arrancar o fio branco com uma pinça, desafiando a biologia.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -2 },
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "negador_da_idade" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -2
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "negador_da_idade"
+              }
             ]
           },
           {
             "texto": "Pesquisar no Google sobre calvície e tratamentos caros imediatamente.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -50.0 },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -50
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
@@ -90,5 +122,6 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "major"
 }

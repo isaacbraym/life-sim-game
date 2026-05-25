@@ -6,7 +6,10 @@
   "descricaoCurta": "Você ignorou o conselho de levar o guarda-chuva e levou um banho de chuva torrencial de verão. No dia seguinte, acorda resfriado com a cabeça parecendo um bloco de cimento.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [5, 80],
+    "idadeRange": [
+      5,
+      80
+    ],
     "peso": 25,
     "cooldownMeses": 4,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_gripado",
@@ -61,26 +68,53 @@
         "opcoes": [
           {
             "texto": "Preparar o chá lendário de alho com limão e mel sugerido por sua mãe.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Pedir uma canja de galinha quentinha por aplicativo e ficar de repouso.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 15 },
-              { "tipo": "alterar_dinheiro", "delta": -45.0 },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -45
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           },
           {
             "texto": "Tomar uma antitérmico genérico e ir trabalhar fingindo que é 'só alergia'.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
@@ -96,5 +130,6 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }
