@@ -6,7 +6,10 @@
   "descricaoCurta": "Seu tio compartilha uma notícia absurdamente falsa no grupo da família no WhatsApp, com letras maiúsculas e emojis de alerta vermelho. O silêncio dos outros parentes é ensurdecedor.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [15, 60],
+    "idadeRange": [
+      15,
+      60
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "celular_indignado",
@@ -57,22 +64,42 @@
           {
             "texto": "Enviar um link de agência de checagem desmentindo o boato. (Combate à desinformação).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "nerd_chato_do_grupo" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "nerd_chato_do_grupo"
+              }
             ]
           },
           {
             "texto": "Mandar um meme irônico de ficção científica para zoar o post.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Apenas visualizar e silenciar o grupo da família por um ano inteiro.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
@@ -88,5 +115,10 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

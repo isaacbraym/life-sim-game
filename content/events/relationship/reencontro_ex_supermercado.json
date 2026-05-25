@@ -6,7 +6,10 @@
   "descricaoCurta": "Você reencontra seu ex-parceiro no supermercado no pior dia possível: você está com roupas desleixadas e segurando papel higiênico barato.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [20, 40],
+    "idadeRange": [
+      20,
+      40
+    ],
     "requisitos": {
       "tipo": "relacionamento",
       "comNpcRole": "ex_parceiro",
@@ -33,7 +36,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_segura_compras",
@@ -46,13 +53,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "ex_com_carrinho",
@@ -65,7 +80,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -87,31 +106,67 @@
         "opcoes": [
           {
             "texto": "Puxar assunto com simpatia e fingir que está tudo ótimo.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 15 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "ex_parceiro",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Dar um aceno rápido e sair fingindo pressa.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "ex_parceiro",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Fazer uma piada sobre seu estado lamentável.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "ex_parceiro", "delta": 20 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "ex_parceiro",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "routine"
 }

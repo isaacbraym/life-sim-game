@@ -6,7 +6,10 @@
   "descricaoCurta": "Sua mãe entra em pânico porque a internet sumiu e a culpa é presumidamente sua. Você assume o papel de analista de TI da família.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [12, 45],
+    "idadeRange": [
+      12,
+      45
+    ],
     "peso": 25,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "suporte_tecnico_sofrido",
@@ -56,24 +63,47 @@
         "opcoes": [
           {
             "texto": "Resolver o problema pacientemente passo a passo com didática impecável.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Apenas clicar no botão de ativar o Wi-Fi sem explicar nada e sair andando.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Aproveitar para cobrar uma taxa de serviço ou um bolo fresco.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 5.0 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           }
         ]
@@ -89,5 +119,10 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

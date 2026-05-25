@@ -4,9 +4,14 @@
   "categoria": "relationship",
   "titulo": "A Ilusão da Liberdade",
   "descricaoCurta": "Você faz 21 anos. Nenhuma festa chique nos EUA, apenas a realidade brasileira de metrô cheio e boletos acumulados na gaveta.",
-  "contentTags": ["substance"],
+  "contentTags": [
+    "substance"
+  ],
   "triggers": {
-    "idadeRange": [21, 21],
+    "idadeRange": [
+      21,
+      21
+    ],
     "peso": 90,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +27,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "universitario_bebado",
@@ -61,25 +70,51 @@
         "opcoes": [
           {
             "texto": "Virar a bebida de uma vez. O fígado que lute.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Derramar a bebida discretamente sob a mesa plástica.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           },
           {
             "texto": "Recusar e pedir uma água mineral sem gás. (A sobriedade é o novo cool).",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
@@ -95,5 +130,7 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "localContextId": "bar",
+  "narrativeWeight": "major"
 }

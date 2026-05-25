@@ -6,7 +6,10 @@
   "descricaoCurta": "Almoço de domingo na casa dos parentes. O churrasco está ótimo, mas as cobranças sobre carreira, casamento e aquisição de bens são servidas como prato principal.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 50],
+    "idadeRange": [
+      18,
+      50
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "sobrinho_pressionado",
@@ -55,7 +62,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "tio_questionador",
@@ -94,24 +105,47 @@
         "opcoes": [
           {
             "texto": "Usar seu carisma para mudar de assunto focando no campeonato de futebol.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Explicar a inflação imobiliária e a diferença macroeconômica de 1980 para hoje.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Engolir o desaforo junto com um pedaço de pudim morno.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
@@ -127,5 +161,7 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }

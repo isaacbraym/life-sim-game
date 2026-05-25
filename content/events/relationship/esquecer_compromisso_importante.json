@@ -6,7 +6,10 @@
   "descricaoCurta": "Você esquece completamente de um encontro importante porque passou quatro horas seguidas assistindo a documentários sobre a fabricação de lápis.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [15, 60],
+    "idadeRange": [
+      15,
+      60
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "esquecido_assustado",
@@ -67,22 +74,41 @@
           {
             "texto": "Mentir descaradamente dizendo que seu celular caiu no modo silencioso automático.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
-              { "tipo": "adicionar_flag", "flag": "parceiro_desconfiado" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "parceiro_desconfiado"
+              }
             ]
           },
           {
             "texto": "Pedir desculpas sinceras e propor pagar o jantar em dobro no dia seguinte.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -120.0 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -120
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Dizer a verdade: que se distraiu na internet. (Honestidade radical).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           }
         ]
@@ -98,5 +124,10 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

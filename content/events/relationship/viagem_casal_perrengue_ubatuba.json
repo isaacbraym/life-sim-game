@@ -6,7 +6,10 @@
   "descricaoCurta": "A sonhada viagem romântica para Ubatuba vira um teste extremo de paciência com chuva constante, mofo no quarto e falta de luz.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [20, 40],
+    "idadeRange": [
+      20,
+      40
+    ],
     "requisitos": {
       "tipo": "relacionamento",
       "comNpcRole": "parceiro_romantico",
@@ -33,7 +36,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_cansado_cama",
@@ -46,13 +53,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "parceiro_olhando_janela",
@@ -65,7 +80,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -87,33 +106,76 @@
         "opcoes": [
           {
             "texto": "Manter o otimismo, acender velas e propor um jogo de tabuleiro.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 15 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Tentar cozinhar com o que sobrou na despensa para distrair.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 10 },
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Desistir de tudo, fazer as malas e voltar de carro para casa.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -15 },
-              { "tipo": "alterar_dinheiro", "delta": -150.0 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -150
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }

@@ -4,9 +4,14 @@
   "categoria": "relationship",
   "titulo": "O Print do Erro",
   "descricaoCurta": "Você tira um print da conversa do seu parceiro para mandar para seu melhor amigo fofocar, mas acaba enviando o print na própria conversa do casal.",
-  "contentTags": ["language"],
+  "contentTags": [
+    "language"
+  ],
   "triggers": {
-    "idadeRange": [16, 50],
+    "idadeRange": [
+      16,
+      50
+    ],
     "requisitos": {
       "tipo": "relacionamento",
       "comNpcRole": "parceiro_romantico",
@@ -33,7 +38,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_desespero_celular",
@@ -46,13 +55,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "parceiro_com_celular_bravo",
@@ -65,7 +82,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -87,32 +108,75 @@
         "opcoes": [
           {
             "texto": "Tentar apagar correndo para todos e torcer para o parceiro fingir que não viu.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Fazer graça e inventar que estava testando se a resolução da sua tela estava boa.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Pedir desculpas sinceramente pela fofoca e admitir a vergonha.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 5 },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "fofoqueiro_revelado" }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "fofoqueiro_revelado"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

@@ -4,9 +4,14 @@
   "categoria": "relationship",
   "titulo": "Arqueologia Digital Proibida",
   "descricaoCurta": "Um duplo toque acidental em uma foto de praia de 2018 do(a) ex de um conhecido vira uma audiência de custódia na sala.",
-  "contentTags": ["language"],
+  "contentTags": [
+    "language"
+  ],
   "triggers": {
-    "idadeRange": [20, 40],
+    "idadeRange": [
+      20,
+      40
+    ],
     "requisitos": {
       "tipo": "relacionamento",
       "comNpcRole": "parceiro_romantico",
@@ -33,7 +38,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_explicando_like",
@@ -46,13 +55,21 @@
           "maoDireita": "aberta",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "parceiro_mostra_celular",
@@ -65,7 +82,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -87,32 +108,75 @@
         "opcoes": [
           {
             "texto": "Argumentar que foi um espasmo motor involuntário causado pelo cansaço do dedão.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Apagar o incêndio com bajulação extrema e promessas de detox digital.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 20 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Entrar em modo de defesa corporativo e alegar invasão de privacidade de dados.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -25 },
-              { "tipo": "adicionar_flag", "flag": "crise_ciumes" },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -25
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "crise_ciumes"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

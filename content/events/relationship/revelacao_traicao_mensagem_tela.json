@@ -4,9 +4,15 @@
   "categoria": "relationship",
   "titulo": "A Notificação Proibida",
   "descricaoCurta": "Uma notificação noturna no celular do seu parceiro acende a tela. O conteúdo revela que ele está compartilhando mais do que apenas a conta do streaming com outra pessoa.",
-  "contentTags": ["trauma", "language"],
+  "contentTags": [
+    "trauma",
+    "language"
+  ],
   "triggers": {
-    "idadeRange": [20, 40],
+    "idadeRange": [
+      20,
+      40
+    ],
     "requisitos": {
       "tipo": "relacionamento",
       "comNpcRole": "parceiro_romantico",
@@ -33,7 +39,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_chocada_celular",
@@ -46,7 +56,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -63,32 +77,74 @@
         "opcoes": [
           {
             "texto": "Chutar o parceiro da cama às 3 da manhã exigindo uma auditoria imediata das tubulações.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -40 },
-              { "tipo": "alterar_humor", "delta": -25 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -40
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              }
             ]
           },
           {
             "texto": "Desbloquear o aparelho com precisão cirúrgica para extrair prints para o dossiê de separação.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -20 },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "adicionar_flag", "flag": "desconfiado_da_relacao" }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "desconfiado_da_relacao"
+              }
             ]
           },
           {
             "texto": "Virar para o outro lado, fingir demência e chorar silenciosamente enquanto repensa sua vida.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -30 },
-              { "tipo": "alterar_saude", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -30
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

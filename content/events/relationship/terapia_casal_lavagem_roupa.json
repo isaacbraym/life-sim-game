@@ -4,9 +4,14 @@
   "categoria": "relationship",
   "titulo": "Limpando a Sujeira",
   "descricaoCurta": "Na primeira sessão de terapia de casal, o terapeuta parece concordar com todas as críticas que seu parceiro faz sobre você.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [20, 40],
+    "idadeRange": [
+      20,
+      40
+    ],
     "requisitos": {
       "tipo": "relacionamento",
       "comNpcRole": "parceiro_romantico",
@@ -33,7 +38,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_encabulado_sofa",
@@ -46,13 +55,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "parceiro_aponta_dedo",
@@ -65,7 +82,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -87,35 +108,84 @@
         "opcoes": [
           {
             "texto": "Argumentar de forma madura, demonstrando autocrítica sincera.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 15 },
-              { "tipo": "alterar_dinheiro", "delta": -250.0 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -250
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Tentar usar de charme para se defender de forma descontraída.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 5 },
-              { "tipo": "alterar_dinheiro", "delta": -250.0 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -250
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Ficar na defensiva, acusando a terapeuta de parcialidade.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -20 },
-              { "tipo": "alterar_dinheiro", "delta": -250.0 },
-              { "tipo": "adicionar_flag", "flag": "terapia_casal_fracasso" },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -250
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "terapia_casal_fracasso"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }
