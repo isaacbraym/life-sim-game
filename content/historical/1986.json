@@ -1,0 +1,55 @@
+{
+  "ano": 1986,
+  "eventos": [
+    {
+      "id": "1986_01_plano_cruzado",
+      "manchete": "O governo anuncia um novo plano econômico, congelando preços nos mercados e criando fiscais do povo para vigiar as prateleiras.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 50
+        }
+      ],
+      "eraDisponivel": { "startYear": 1986, "endYear": 1986 }
+    },
+    {
+      "id": "1986_02_copa_mexico",
+      "manchete": "As ruas são pintadas de verde e amarelo para acompanhar o mundial de futebol, mas a eliminação dramática nos pênaltis deixa o país em silêncio.",
+      "tags": ["esporte", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1986, "endYear": 1986 }
+    },
+    {
+      "id": "1986_03_febre_locadora",
+      "manchete": "As primeiras locadoras de vídeo começam a surgir nos bairros, virando o novo ponto de encontro do fim de semana para alugar fitas.",
+      "tags": ["cultura", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1986, "endYear": 1986 }
+    },
+    {
+      "id": "1986_04_celular_tijolo",
+      "manchete": "Algumas poucas pessoas ricas começam a circular com aparelhos de telefone enormes, pesados como tijolos, chamando atenção na rua.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1986, "endYear": 1986 }
+    },
+    {
+      "id": "1986_05_cruzado_desabastecimento",
+      "manchete": "O congelamento de preços gera falta de produtos básicos nos mercados, e comprar carne ou leite vira uma verdadeira caçada.",
+      "tags": ["economia", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -2
+        }
+      ],
+      "eraDisponivel": { "startYear": 1986, "endYear": 1986 }
+    }
+  ]
+}
