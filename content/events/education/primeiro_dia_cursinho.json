@@ -6,7 +6,10 @@
   "descricaoCurta": "Primeiro dia de cursinho pré-vestibular. O cheiro de café requentado e desespero existencial flutua no ar da sala de estudos lotada.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [16, 19],
+    "idadeRange": [
+      16,
+      19
+    ],
     "peso": 60,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "estudante_cursinho",
@@ -62,23 +69,47 @@
           {
             "texto": "Anotar tudo fanaticamente e beber café solúvel na garrafa térmica.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Sentar no fundão e jogar jogo da velha com o vizinho de carteira.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": -1
+              }
             ]
           },
           {
             "texto": "Tentar puxar assunto com o nerd da primeira fileira para colar dele depois.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           }
         ]
@@ -94,5 +125,7 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major"
 }

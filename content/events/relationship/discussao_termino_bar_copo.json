@@ -4,9 +4,15 @@
   "categoria": "relationship",
   "titulo": "Última Rodada",
   "descricaoCurta": "Uma DR definitiva em um bar movimentado se transforma em uma cena de término dramático sob os olhares dos garçons.",
-  "contentTags": ["substance", "language"],
+  "contentTags": [
+    "substance",
+    "language"
+  ],
   "triggers": {
-    "idadeRange": [20, 40],
+    "idadeRange": [
+      20,
+      40
+    ],
     "requisitos": {
       "tipo": "relacionamento",
       "comNpcRole": "parceiro_romantico",
@@ -33,7 +39,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_olhar_copo",
@@ -46,13 +56,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "parceiro_gesticulando_olhar",
@@ -65,7 +83,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -87,35 +109,84 @@
         "opcoes": [
           {
             "texto": "Tentar acalmar a situação e pedir mais uma chance.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": 15 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Concordar que a relação acabou e terminar de forma amigável.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -10 },
-              { "tipo": "aplicar_status", "status": "separado" },
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "adicionar_flag", "flag": "termino_amigavel" }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -10
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "separado"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "termino_amigavel"
+              }
             ]
           },
           {
             "texto": "Chutar o balde, pagar a conta e sair andando do bar.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "parceiro_romantico", "delta": -40 },
-              { "tipo": "aplicar_status", "status": "separado" },
-              { "tipo": "alterar_dinheiro", "delta": -60.0 },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "adicionar_flag", "flag": "termino_baraco" }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "parceiro_romantico",
+                "delta": -40
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "separado"
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -60
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "termino_baraco"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "bar",
+  "narrativeWeight": "major"
 }

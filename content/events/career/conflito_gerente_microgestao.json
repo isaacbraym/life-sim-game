@@ -132,5 +132,7 @@
     "criadoEm": "2026-05-24T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "localContextId": "trabalho",
+  "narrativeWeight": "routine"
 }

@@ -4,9 +4,14 @@
   "categoria": "relationship",
   "titulo": "O Primo de Favor",
   "descricaoCurta": "Um primo distante pede para dormir no seu sofá por 'dois dias' para fazer uma entrevista. Três semanas depois, ele continua instalado na sua sala de estar.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [20, 50],
+    "idadeRange": [
+      20,
+      50
+    ],
     "peso": 20,
     "cooldownMeses": 24,
     "uniqueOnce": true
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_incomodado",
@@ -45,13 +54,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.2,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "primo_deitado",
@@ -64,7 +81,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,30 +107,65 @@
         "opcoes": [
           {
             "texto": "Dar um ultimato claro estabelecendo um prazo definitivo de 48 horas para ele sair.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "primo_folgado", "delta": -25 },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "primo_folgado",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           },
           {
             "texto": "Desligar a senha do roteador de internet alegando manutenção do provedor.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Engolir o choro, comprar mais mantimentos e esperar a boa vontade dele.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -150.0 },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -150
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

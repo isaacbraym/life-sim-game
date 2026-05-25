@@ -4,9 +4,14 @@
   "categoria": "health",
   "titulo": "O Quarto Giratório",
   "descricaoCurta": "Você acorda, tenta levantar da cama e o quarto gira mais rápido que o carrossel do parque de diversões. A labirintite te pegou de surpresa.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [30, 80],
+    "idadeRange": [
+      30,
+      80
+    ],
     "peso": 15,
     "cooldownMeses": 8,
     "uniqueOnce": false
@@ -22,7 +27,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_tonto",
@@ -62,25 +71,52 @@
           {
             "texto": "Deitar reto na cama, fechar os olhos e esperar a terra parar de girar.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 5 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Tomar o remédio específico para labirintite e repousar longe de luz forte.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 20 },
-              { "tipo": "alterar_dinheiro", "delta": -35.0 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -35
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Tentar ignorar a tontura e ir limpar a casa escorando nas paredes.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -20 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -20
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
@@ -96,5 +132,6 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

@@ -6,7 +6,10 @@
   "descricaoCurta": "O ano novo chegou. Em vez de estar em uma festa na praia bebendo espumante caro, você está em casa de moletom, comendo macarrão instantâneo e ouvindo os fogos de artifício distantes.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 70],
+    "idadeRange": [
+      18,
+      70
+    ],
     "peso": 15,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_solitario_ano_novo",
@@ -57,22 +64,42 @@
           {
             "texto": "Escrever metas ambiciosas para o ano que se inicia. (Esperança renovada).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Fazer uma postagem sarcástica na internet sobre a falsidade das viradas de ano.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           },
           {
             "texto": "Apenas escovar os dentes e dormir às 0h05 como se fosse uma terça-feira comum.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
@@ -88,5 +115,10 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

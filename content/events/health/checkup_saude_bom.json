@@ -6,7 +6,10 @@
   "descricaoCurta": "Seus exames voltaram e, contra todas as leis da física e da nutrição, seus índices de saúde estão perfeitos. Até o médico parece desconfiado de algum erro de laboratório.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 70],
+    "idadeRange": [
+      18,
+      70
+    ],
     "peso": 20,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "paciente_saudavel",
@@ -57,25 +64,54 @@
           {
             "texto": "Comemorar comendo um combo gigante de fast-food para reequilibrar o sistema.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": 20 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              }
             ]
           },
           {
             "texto": "Tentar usar sua sorte para ver se ganha imunidade contra resfriados temporária.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 15 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "sorte", "delta": 1 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "sorte",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Manter a rotina saudável por pelo menos três dias antes de desistir.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 5 },
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           }
         ]
@@ -91,5 +127,6 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

@@ -6,7 +6,10 @@
   "descricaoCurta": "Um colega de escola com pose de investidor mirim decide estourar a bolha especulativa da sua infância: Papai Noel não existe.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [6, 10],
+    "idadeRange": [
+      6,
+      10
+    ],
     "peso": 30,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "surpresa_choque",
@@ -55,7 +62,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.25, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.25,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "sussurrando",
@@ -96,24 +107,49 @@
           {
             "texto": "Denunciar o infiel à professora por propagação de fake news natalinas.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "negou_fim_papai_noel" },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "negou_fim_papai_noel"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Processar a informação em silêncio e recalcular o orçamento familiar secreto.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "aceitou_fim_papai_noel" },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "aceitou_fim_papai_noel"
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Enquadrar sua mãe na cozinha e exigir um inventário completo dos presentes retroativos.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "perguntou_sobre_papai_noel" },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perguntou_sobre_papai_noel"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
@@ -129,5 +165,7 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "humano",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

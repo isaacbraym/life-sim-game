@@ -4,9 +4,14 @@
   "categoria": "health",
   "titulo": "O Dedão Inimigo",
   "descricaoCurta": "Ao passar correndo pela porta, seu dedão do pé se choca com violência contra o portal de madeira. A dor é tão absurda que você quase vê as estrelas no teto.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [5, 90],
+    "idadeRange": [
+      5,
+      90
+    ],
     "peso": 25,
     "cooldownMeses": 3,
     "uniqueOnce": false
@@ -22,7 +27,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_chute_porta",
@@ -62,23 +71,44 @@
           {
             "texto": "Pular em um pé só e recitar uma enciclopédia de palavrões para aliviar a tensão.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Aplicar gelo imediatamente e enfaixar a dedeira para segurar a unha.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Ignorar a dor, calçar um tênis bem apertado e sair correndo para pegar o ônibus.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -20 },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           }
         ]
@@ -94,5 +124,6 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

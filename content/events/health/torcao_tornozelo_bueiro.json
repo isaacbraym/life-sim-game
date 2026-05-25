@@ -4,9 +4,14 @@
   "categoria": "health",
   "titulo": "A Armadilha Urbana",
   "descricaoCurta": "Você vinha andando distraído no celular e pisou em falso na quina de um bueiro quebrado. Seu tornozelo esquerdo dobra como um origami.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [10, 80],
+    "idadeRange": [
+      10,
+      80
+    ],
     "peso": 20,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -22,7 +27,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_torcao_tornozelo",
@@ -62,25 +71,52 @@
           {
             "texto": "Pegar um Uber direto para o hospital e fazer um raio-X para conferir se fraturou.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 20 },
-              { "tipo": "alterar_dinheiro", "delta": -120.0 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -120
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Tentar mancar até a farmácia mais próxima e comprar uma faixa elástica compressiva.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 5 },
-              { "tipo": "alterar_dinheiro", "delta": -30.0 },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -30
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           },
           {
             "texto": "Ir para casa pulando e tratar com gelo feito de saquinho de ervilha congelada.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
@@ -96,5 +132,9 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

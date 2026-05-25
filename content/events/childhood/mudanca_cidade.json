@@ -6,7 +6,10 @@
   "descricaoCurta": "Trabalho do pai, da mãe, ou porque sim. A família vai mudar de cidade. Você deixa a escola, os amigos, o bairro. Recomeça do zero.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [6, 12],
+    "idadeRange": [
+      6,
+      12
+    ],
     "peso": 10,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "olhando_quarto_vazio",
@@ -35,7 +42,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -58,33 +69,81 @@
           {
             "texto": "Ver o lado bom. Nova cidade, nova chance.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "mudou_de_cidade" },
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "perfil_adaptavel" }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mudou_de_cidade"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perfil_adaptavel"
+              }
             ]
           },
           {
             "texto": "Guardar rancor dos pais por isso por uns meses.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "mudou_de_cidade" },
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "adicionar_flag", "flag": "ressentimento_mudanca" }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mudou_de_cidade"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "ressentimento_mudanca"
+              }
             ]
           },
           {
             "texto": "Fazer um esforço genuíno de despedida de tudo.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 9 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 9
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "mudou_de_cidade" },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 2 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mudou_de_cidade"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 2
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

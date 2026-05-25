@@ -2,279 +2,282 @@
 
 ## Visão geral das fases
 
-| Fase | Objetivo | Duração estimada | Entregável final | Status |
-|---|---|---|---|---|
-| **0** | Validar hipóteses técnicas críticas | 4–6 semanas | Loop completo: descrição PT-BR → IA → JSON → render → ajuste manual → save | ✅ Concluída |
-| **1** | MVP jogável end-to-end | 10–14 semanas | Vida completa (nascimento aos 80+) jogável, sem crashes, com 80–120 eventos | 🚧 Em curso (Sprint 1.10) |
-| **2** | Conteúdo e profundidade | 12–20 semanas | 500–1000 eventos, conteúdo histórico, múltiplas gerações, 15–20 carreiras | ⏳ Não iniciada |
-| **3** | Polimento e launch web | 8–12 semanas | PWA pública, ads, tradução EN, soft launch | ⏳ Não iniciada |
-| **4** | Mobile + backend (condicional) | 12–16 semanas | iOS e Android nas lojas, FastAPI + cloud sync | ⏳ Não iniciada |
+| Fase | Objetivo | Duração estimada | Entregável final |
+|---|---|---|---|
+| **0** | Validar hipóteses técnicas críticas | 6–8 semanas | Rig + exploração point-and-click funcionando + pipeline IA gerando cômodos |
+| **1** | MVP jogável end-to-end | 14–18 semanas | Vida completa jogável com exploração de 5+ locais, 80–120 eventos |
+| **2** | Conteúdo e profundidade | 14–20 semanas | 500+ eventos, 15+ locais, conteúdo histórico 1985–2025, múltiplas gerações |
+| **3** | Polimento e launch web | 8–12 semanas | PWA pública, ads, tradução EN, soft launch |
+| **4** | Mobile + backend (condicional) | 12–16 semanas | iOS e Android nas lojas, cloud sync |
 
-**Total estimado**: 46–68 semanas (~12–16 meses) para chegar até Fase 3 (launch público web). Fase 4 condicional ao sucesso da Fase 3.
-
-Assumindo 15–20 horas/semana de dedicação solo + IA como acelerador.
+**Total estimado**: 54–78 semanas (~13–18 meses) para Fase 3. Fase 4 condicional ao sucesso da Fase 3.
 
 ---
 
-## 🚧 Sprint atual: 1.10 — Motor de tempo + ciclo de evento principal
+## Fase 0 — Validação de hipóteses críticas
 
-**Em andamento.** Trabalho dividido entre três agentes em branches separados:
+A fase mais importante. Prova que o stack escolhido funciona antes de investir em conteúdo.
 
-| Agente | Branch | Foco |
-|---|---|---|
-| Codex | `feat/tempo-engine-e-evento-principal` | TempoEngine, GameEngine (orquestrador), ResultadoResolucao, hudStore.avancarTempo |
-| Antigravity/Gemini | `feat/autosave-e-conteudo-tempo` | Autosave debounced, sistema de migração de save, +25 eventos de transição etária |
-| Claude Code | `feat/tempo-ui-e-event-modal` | BotaoAvancarTempo, ModalEventoPrincipal, ResultadoEventoOverlay, remoção do simularMorte debug |
+### Sprint 0.1 — Scaffold (1 semana)
 
-**Critério de saída**: clicar "Avançar tempo" avança o calendário conforme o ritmo do save, envelhece o roster, sorteia um evento principal, abre modal bloqueante, jogador escolhe opção, d20 resolve com 4 tiers, efeitos aplicados, autosave dispara, fluxo volta para o jogo livre. Se saúde ≤ 0, transiciona para tela de morte.
+Monorepo configurado, stack instalada, PWA deployada e instalável em 3 plataformas.
 
----
+Instalar novas libs:
+```bash
+pnpm add gsap@^3.13
+pnpm add @pixi/ui@^2.2.0
+```
 
-## Fase 0 — Validação de hipóteses críticas ✅
+**Critério**: PWA instalável no celular Android e iOS, carrega offline.
 
-Fase concluída. Todos os critérios de saída atingidos: rig com 15 joints renderizando em PixiJS, IK two-bone + FABRIK funcionando, silhuetas Bézier sem vincos, schema Zod de Scene completo, pipeline IA via Claude Structured Outputs validado, scene-validator MVP operacional.
+### Sprint 0.2 — Rig estático com 4 orientações (1–2 semanas)
 
-### Sprints da Fase 0 (histórico)
+- Rig de 15 joints em pose T estática
+- 4 orientações implementadas (PERFIL_ESQUERDO/DIREITO, FRONTAL, COSTAS)
+- Silhueta orgânica contínua sem vincos
+- `RenderLayer` com `sortFunction` por Y (z-sorting)
+- Escala leve por profundidade (0.85 no fundo, 1.05 na frente)
+- Modo debug com toggle de joints
 
-| Sprint | Entregável principal | Status |
-|---|---|---|
-| 0.1 — Scaffold | Monorepo PNPM + Vite + React + PixiJS v8 + PWA + CI/CD + deploy | ✅ |
-| 0.2 — Rig estático | 15 joints, FK top-down, silhueta de braço/perna/tronco/cabeça | ✅ |
-| 0.3 — Poses + interpolação | Schema Pose, loader, lerp entre 3 poses hardcoded | ✅ |
-| 0.4 — IK + 2 personagens | TwoBoneIK analítico, FABRIK iterativo, constraint-driven posing | ✅ |
-| 0.5 — Pipeline Claude | Scene schema, generate-scene CLI, validação multi-camada, repair loop | ✅ |
-| 0.6 — Validador visual | Scene-validator com Monaco + canvas embedded + edição two-way | ✅ |
+**Critério**: personagem visualmente coerente em pose T, 60fps, z-sorting funcional com 2 sprites, 4 orientações distintas sem quebra de silhueta.
+
+### Sprint 0.3 — Primeiro cômodo navegável (1–2 semanas)
+
+**Este é o sprint crítico novo.** Valida a mecânica central de exploração.
+
+- `ComodoDefinition` hardcoded (sala simples, 3 objetos interativos)
+- `ExplorationScene` com background placeholder (retângulo colorido)
+- Objetos com highlight ao hover
+- Click em objeto → personagem tweena via GSAP até `posicaoDeInteracao`
+- `ActionBubble` React overlay aparece após chegar
+- 2 ações disponíveis no ActionBubble (uma `direct`, uma `check`)
+- `VisualFeedback` floating label após resolução
+- `InteractionLock` durante resolução
+
+**Critério**: clicar em qualquer objeto da sala faz o personagem andar até ele, ActionBubble aparece, escolha resolve com feedback visual, controle retorna. 60fps. Sem pathfinding.
+
+### Sprint 0.4 — WorldMapScreen + transição entre cômodos (1 semana)
+
+- `WorldMapScreen` com 3 locais clicáveis (Casa, Escola, Academia)
+- Cada local tem 2 cômodos hardcoded
+- Transição entre cômodos via fade (GSAP)
+- Transição cômodo → WorldMapScreen ao clicar em saída tipo `'mapa'`
+- Save guarda `currentLocationId` e `currentRoomId`
+
+**Critério**: navegar Casa → Escola → cômodo de entrada → outro cômodo → WorldMapScreen sem crash. Estado correto após fechar e reabrir navegador.
+
+### Sprint 0.5 — Poses + animações de movimento (1 semana)
+
+- Ciclos de caminhada para PERFIL_ESQUERDO/DIREITO
+- Ciclo de idle para as 4 orientações
+- Transição de orientação ao mudar direção durante movimento
+- Interpolação suave entre poses (lerp com easing)
+
+**Critério**: personagem caminha com animação suave, muda de orientação coerentemente, idle visual enquanto parado.
+
+### Sprint 0.6 — Pipeline de cômodos via IA (1–2 semanas)
+
+- Schema `ComodoDefinition` completo em Zod
+- CLI `generate-room` com Anthropic SDK + Structured Outputs
+- Pipeline: grid ASCII → JSON → Zod.safeParse → validação
+- Retry loop (máximo 2 retries com erro injetado)
+- Room Validator básico: renderiza cômodo gerado, permite ajustar posições
+
+**Critério**: digitar "Academia anos 90 com 5 aparelhos" → CLI gera JSON válido em <45s → Room Validator renderiza visualmente com objetos em posições coerentes.
+
+### Sprint 0.7 — Pipeline de poses/cenas (mantido do design original) (1 semana)
+
+Validação do pipeline de geração de cenas de personagem. Ver spec original.
+
+### 🎯 Critério de saída da Fase 0
+
+Loop completo funcional:
+
+1. WorldMapScreen → escolher local → entrar em cômodo
+2. Personagem caminha por click-to-move
+3. Clicar em objeto → ActionBubble → escolher ação → resolver → feedback visual → log
+4. Sair do local → WorldMapScreen
+5. Gerar cômodo via CLI → validar no Room Validator → commitar
+6. Gerar cena/pose via CLI → validar no Scene Validator → commitar
+
+**Se este loop não funciona, não avance para Fase 1.**
 
 ---
 
 ## Fase 1 — MVP jogável
 
-### Sprint 1.1 — Save & schema Dexie ✅
+### Sprint 1.1 — Save & schema Dexie v3 (2 semanas)
 
-Concluído. Entregáveis:
-- Schema Dexie v1, GameDB inicializado
-- SaveManager com criarNovoSave, carregarSave, salvarSave
-- Export/import JSON com validação Zod
-- Hash SHA-256 de integridade, double-buffered save (slot temporário + swap atômico)
-- `navigator.storage.persist()` chamado após primeiro save
+- Schema Dexie v3 completo (todas as tabelas novas: `homeSave`, `locationState`, `progressao`, `lifeLog`)
+- Save slot creation com `BirthProfile`
+- Load save com restauração de `currentLocationId` / `currentRoomId`
+- Export/import JSON
+- Hash de integridade + double-buffered save
+- `navigator.storage.persist()`
 
-### Sprint 1.2 — Motor de eventos + RPG ✅
+**Critério**: criar save, explorar 2 locais, fechar navegador, reabrir, exatamente no mesmo cômodo.
 
-Concluído. Entregáveis:
-- Schemas Zod completos: Effect (discriminatedUnion), Event, Choice
-- EventLoader normaliza id/eventoId
-- EventPool com cooldown real (eventoPassaCooldown)
-- AplicadorEfeitos com 11 tipos de efeito discriminados
-- Sistema D20 com 4 tiers (falha crítica/falha/sucesso/sucesso crítico)
-- Modificadores estilo D&D 5e: `(atributo - 10) / 2` arredondado para baixo
-- atributoCheck e gerarAtributosIniciais (4d6-drop-lowest)
+### Sprint 1.2 — Motor de eventos + RPG (2 semanas)
 
-### Sprint 1.3 — NPC roster ✅
+- Event loader + manifest builder
+- `PredicateEvaluator` com suporte a `localContextId`
+- `EventPool` com weighted random + cooldown + uniqueOnce
+- `ActionResolver` unificado (`direct` + `check`)
+- `ProgressionTracker` com contadores e limiares
+- D20 + DC + modificadores + 4 tiers
+- `EffectEngine` aplicando todos os tipos de efeito
 
-Concluído. Entregáveis:
-- NpcGenerator, NpcMatcher, NpcRoster
-- gerarRosterInicial — família inicial com idades coerentes
-- gerarAtributosGeneticos (mulberry32 seedável + herança dos pais)
-- envelhecerRoster + envelhecerRosterComRelatorio
-- Tags de persistência: permanente, recorrente, descartavel
+**Critério**: ação com `check` em academia dispara D20, aplica modificador de Força, mostra resultado correto. Treinar 6 vezes no mês gera consequência de +1 Força com log.
 
-### Sprint 1.4 — Conteúdo seed ✅
+### Sprint 1.3 — LifeLog 5 camadas (1 semana)
 
-Concluído acima do alvo. Entregáveis:
-- 168+ eventos JSON em content/banco
-- Cobertura por categoria: childhood (29), education (41 + 7 faculdade), career (26), relationship (20), emotional (163), interactions (58), action (31), health/crime/basic (~18 cada), hobby/finance/travel (3 cada)
-- 5 eventos reescritos com humor ácido como padrão tonal de referência
+- `LifeLog` implementado com as 5 camadas
+- Persistence em Dexie com subscribe debounced
+- `LifeLogPanel` React exibindo entradas por camada
+- Geração automática de `resumo_periodico` ao avançar mês
 
-### Sprint 1.5 — UI completa (base) ✅
+**Critério**: jogar 3 meses, ver log com ações simples, consequências e resumo mensal. Log persiste após reload.
 
-Concluído. Entregáveis:
-- BarraSuperior, RailVitais, RailAtividades (substituindo HudLateral legado)
-- EventLog com formatação por tipo
-- EventoBase (modal de evento simplificado)
-- NewGameScreen (cria SaveSlot real + família inicial via gerarRosterInicial)
-- SettingsScreen (toggle de conteúdo adulto + export/import)
-- DeathScreen (epitáfio + estatísticas + botão "nova vida")
-- PixiStage renderizando personagem em T-pose
-- Paleta visual definitiva (cores, tipografia DM Sans + DM Mono)
+### Sprint 1.4 — NPC roster + presença nos locais (2 semanas)
 
-### Sprint 1.6–1.8 — Consolidação técnica (intercalada)
+- `NpcGenerator` com aparência por seed + `TracosFixos`/`TracosVariaveis`
+- Roster inicial ao nascer (pai, mãe, possíveis irmãos)
+- `NpcMatcher` instanciando NPCs nos slots de `ComodoDefinition`
+- NPCs visíveis nos cômodos com idle contextual
+- Click em NPC → ActionBubble com ações de relacionamento
+- Painel de NPC (5 abas) acessível via NpcPanel
 
-Iterações intermediárias executadas em paralelo aos sprints maiores. Entregáveis:
-- Refatoração HudLateral → BarraSuperior + Rails (migração de layout)
-- Persistência: solicitarPersistenciaStorage automática
-- Engine: registrarCooldown, aplicarResultadoEfeitos integrados
-- hudStore: eventosVividos, conteudoAdulto, resolverOpcao reais
-- Infra: .npmrc com shamefully-hoist (fix picocolors/PostCSS)
-- Infra: build artifacts removidos do git, .gitignore corrigido
+**Critério**: ir à escola e ver colegas de classe fisicamente no cômodo. Clicar em colega → opções de interação. Painel NPC com linha do tempo de eventos compartilhados.
 
-### Sprint 1.9 — Load Game + Activity Engine + Save listing ✅
+### Sprint 1.5 — LifePhase + WorldMapScreen dinâmico (2 semanas)
 
-| Agente | Branch | Entregáveis |
-|---|---|---|
-| Claude Code | `feat/load-game-screen-e-limpeza-ui` (entregou em `feat/save-listing-e-conteudo` por troca de HEAD) | LoadGameScreen, remoção do HudLateral, fix de comentário desatualizado em NewGameScreen |
-| Codex | `feat/activity-engine-e-limpeza-core` | ActivityCatalog (10 atividades), ActivityEngine (função pura), realizarAtividade no hudStore, deleção do ChoiceResolver dead code |
-| Antigravity/Gemini | `feat/save-listing-e-conteudo` | listarSaves, deletarSave, carregarSaveSeguro no SaveManager, +20 eventos em education(13-17) e career(18-22), script `validate:events`, auditoria fora de escopo de 48 eventos antigos (corrige problemas de enum Zod) |
+- `LifePhaseManager` calculando fase por idade
+- `WorldMapScreen` filtrando locais por fase + requisitos
+- `NewGameGenerator` com `BirthProfile` + estrutura familiar inicial
+- Fases `bebe` e `crianca`: experiência limitada sem WorldMapScreen completo
+- `EraResolver` filtrando objetos/móveis por `YearContext`
 
-Lições documentadas (vão para AGENTS.md): nunca `git add .` em prompts de agentes, sempre `git branch` antes de commit, escopo de Gemini precisa ser explícito.
+**Critério**: personagem nascido em 1990 em família de classe média inicia sem WorldMapScreen. Ao crescer, mapa se expande. Sala de aula tem objetos coerentes com 1996 (sem smartphones, sem internet).
 
-### Sprint 1.10 — Motor de tempo + evento principal 🚧 (atual)
+### Sprint 1.6 — Casa + sistema de mobília (3 semanas)
 
-Detalhes acima na seção "Sprint atual".
+- `HouseDefinition` + template de casa inicial por `BirthProfile.condicaoHabitacional`
+- Cômodos da casa como qualquer outro local (explorável)
+- `FurnitureCatalog` com 20–30 móveis iniciais por era
+- Móveis como `InteractableObject` com `ActionDefinition`
+- `FurnitureCatalog` UI (sidebar de compra)
+- Drag-and-drop com grid/snap em PixiJS
+- `HomeSaveState` persistido em Dexie
+- Efeitos passivos de móveis (conforto, energia, humor)
 
-### Sprint 1.11 — Polimento + playtest (planejado)
+**Critério**: entrar no quarto da casa, clicar na cama → dormir (recupera energia, avança tempo). Comprar um computador, posicioná-lo na sala, clicar nele → opções de estudar/jogar.
 
-| Tarefa | Detalhe |
+### Sprint 1.7 — Conteúdo seed (3 semanas)
+
+80–120 eventos cobrindo nascimento até 25 anos, adaptados para o novo modelo:
+
+| Categoria | Quantidade |
 |---|---|
-| Localização PT-BR canônica | i18next configurado, todas strings extraídas |
-| Áudio MVP | SFX para clicks, transições, eventos importantes |
-| 5–10 testers externos | Amigos/família que joguem 1+ vida completa |
-| Balanceamento | Ajustar pesos de eventos, DCs, efeitos baseado em feedback |
-| Bundle splitting | Resolver aviso `chunk > 500 kB` via manualChunks em Vite |
-| Investigar enums Zod restritivos | Issue do Sprint 1.9: decidir caso a caso ampliar enum ou aceitar perda em contentTags/background/facing |
-| Bug fixing | Resolver críticos antes de Fase 2 |
+| childhood (0–12) + home/school context | 25–30 |
+| education adolescente (escola) | 20–25 |
+| education faculdade (18–22) | 15–20 |
+| career (primeiro emprego) | 10–15 |
+| relationship (família, romance) | 15–20 |
+| crime/health/hobby | 5–10 |
 
-**Critério**: 10 testers jogam uma vida completa (nascimento aos 80+) sem crashes; 70%+ deles relatam vontade de jogar novamente.
+Cada evento tem `localContextId`, `narrativeWeight`, `eraDisponivel` definidos.
+
+**Critério**: vida de nascimento (1990) até 25 anos jogável sem repetições óbvias; eventos aparecem nos locais certos; log narrativo conta uma história coerente.
+
+### Sprint 1.8 — Conteúdo histórico 1985–2025 (delegado ao Gemini)
+
+CLI Gemini gera `content/historical/YYYY.json` para cada ano. Revisão humana dos anos mais sensíveis.
+
+### Sprint 1.9 — UI completa + HUD (2 semanas)
+
+- HUD adaptado para modo exploração (sem botão "Avançar Tempo" visível durante exploração)
+- Botão "Passar tempo" disponível no WorldMapScreen e em ações específicas
+- `LifeLogPanel` navegável
+- Painel de status do personagem (atributos, dinheiro, humor, energia)
+- Notificações de progressão atingida
+- Tela de morte
+
+### Sprint 1.10 — Polimento Fase 1 (2 semanas)
+
+- Performance: 60fps em mobile mid-range
+- Bundle < 500KB gzipped
+- Cold start < 3s em mobile
+- Testes de regressão: save/load, progressão, eventos
+- Playtests com 3–5 pessoas externas
 
 ### 🎯 Critério de saída da Fase 1
 
-MVP rodando em produção (Cloudflare Pages), jogável end-to-end, com base de testers validando que o loop é divertido.
+- Vida completa de nascimento (1985–2000) aos 80+ anos jogável
+- Mínimo 5 locais exploráveis com NPCs presentes
+- Sistema de casa com mobília funcional
+- Log narrativo conta história coerente da vida
+- Sem crashes em sessão de 2h
 
 ---
 
 ## Fase 2 — Conteúdo e profundidade
 
-Foco: escala. Pipeline de conteúdo + carreiras profundas + simulação autônoma de NPCs.
+**15+ locais** (novos: praça, mercado, delegacia, cartório, hospital completo, parque de diversões)
 
-### Blocos principais
+**Carreiras** com locais de trabalho específicos por profissão
 
-**Pipeline histórico** (3–4 semanas)
-- Script Python coleta Wikipedia/Wikidata 1990–2025
-- Curador IA parafraseia conforme blacklist
-- Revisão humana de todos arquivos `historical/{ano}.json`
-- Integração no jogo: noticiário, eventos vinculados
+**Simulação autônoma de NPCs** — NPCs envelhecem, mudam de emprego, casam entre si sem o jogador ver
 
-**Expansão de eventos** (6–8 semanas, paralelo)
-- 500–1000 eventos cobrindo dos 25 aos 80 anos
-- Cobertura completa de carreiras, relacionamentos, crime, saúde, hobby
-- Equilíbrio entre eventos sérios e cômicos
+**Múltiplas gerações** — jogar como descendente com herança de roster e atributos genéticos
 
-**15–20 carreiras com árvores narrativas** (4–6 semanas)
-- Cada carreira: 20–40 eventos próprios
-- Progressão por níveis
-- Eventos específicos ligados à profissão
+**Era visual completa** — ambientes visualmente diferentes por década (80s retrô, 90s, 2000s, 2010s)
 
-**Múltiplas gerações** (2 semanas)
-- Após morte do personagem, opção "jogar como descendente"
-- Herda parte do roster, atributos genéticos parcialmente
-- Novo save vinculado ao anterior por `linhagem_id`
-
-**Simulação autônoma de NPCs** (3 semanas)
-- NPCs envelhecem, mudam de emprego, se relacionam entre si **sem o jogador ver**
-- Periodicamente eventos "off-screen" alteram NPCs do roster
-- Jogador descobre via reencontros ("seu antigo chefe abriu empresa própria")
+**HousingMarket** — comprar e alugar diferentes casas com progressão do personagem
 
 ### 🎯 Critério de saída da Fase 2
 
 - 500+ eventos no pool
-- 15+ carreiras jogáveis
-- Conteúdo histórico cobrindo 1990–anoAtual
+- 15+ locais exploráveis
+- Conteúdo histórico 1985–2025 completo
 - Múltiplas gerações funcionais
+- Era visual funcionando em pelo menos 3 décadas
 
 ---
 
 ## Fase 3 — Polimento e launch web
 
-| Bloco | Duração |
-|---|---|
-| Performance pass | 2 sem |
-| Onboarding UX (tutorial, install prompt) | 2 sem |
-| Identidade visual final (UI design pass) | 3 sem |
-| Tradução EN-US (paralelo com pipeline IA) | 2 sem |
-| Monetização (ads + telemetria) | 1 sem |
-| Soft launch (Reddit, itch.io, TikTok) | 1 sem |
-| Bug fixing e ajustes pós-feedback | 2 sem |
-
-### 🎯 Critério de saída da Fase 3
-
-- 1.000 usuários mensais ativos
-- NPS positivo
-- Churn 7 dias <50%
-- Ads gerando pelo menos US$ 50/mês (sinal de tração)
+- Performance pass
+- Onboarding UX (tutorial, install prompt)
+- Identidade visual final
+- Tradução EN-US
+- Monetização (ads entre vidas)
+- Soft launch (Reddit, itch.io, TikTok)
 
 ---
 
 ## Fase 4 — Mobile + backend (CONDICIONAL)
 
-Só ativar se Fase 3 mostrar tração real. Caso contrário, melhor iterar mais a versão web.
-
-| Bloco | Duração |
-|---|---|
-| Setup Capacitor + plugins essenciais | 2 sem |
-| Adaptações de UI mobile | 3 sem |
-| Build iOS, submissão Apple | 2 sem |
-| Build Android, submissão Google | 1 sem |
-| Backend FastAPI (auth + sync) | 4 sem |
-| Cloud sync no client | 2 sem |
-| IAP (cosméticos, scenarios) | 2 sem |
-| Marketing de launch mobile | 2 sem |
-
-### 🎯 Critério de saída da Fase 4
-
-- Apps aprovados nas duas lojas
-- 10k downloads cumulativos em 6 meses
-- Sync funcional sem corrupção de save
-
----
-
-## Como esta seção é atualizada
-
-Cada sprint concluído migra de "🚧 atual" para "✅ histórico" com bullets dos entregáveis reais (não do plano original). O bloco "Sprint atual" no topo é reescrito a cada início de sprint. Esse arquivo é a fonte oficial de status arquitetural — os `.txt` capturados refletem o código real entre as atualizações.
+Só ativar se Fase 3 mostrar tração. Capacitor para iOS/Android, FastAPI + cloud sync.
 
 ---
 
 ## Anti-padrões a evitar
 
-1. **Pular validação da Fase 0** — "vamos só começar a fazer eventos, depois ajustamos o rig" → garantia de retrabalho massivo (já evitado ✅)
-2. **Adicionar features fora do roadmap** — "e se eu adicionasse um sistema de roupas customizáveis na Fase 1?" → ladrão de tempo
-3. **Perfeccionismo visual na Fase 0/1** — silhueta perfeita pode esperar a Fase 1.11
-4. **Escrever 20 eventos antes de validar pipeline** — gera retrabalho se algo no pipeline mudar
-5. **Otimizar performance antes de medir** — só otimize quando DevTools mostrar problema real
-6. **Adiar testes em mobile real** — emuladores mentem; teste em hardware fraco regularmente
-7. **Aceitar conteúdo da IA sem validar visualmente** — IA gera coisas anatomicamente impossíveis silenciosamente
-8. **Investir em backend antes de validar produto** — Fase 4 é condicional; cliente local funciona perfeitamente sozinho
-9. **Adicionar libs sem necessidade clara** — cada dep nova é custo de manutenção
-10. **Commitar direto em `main`** — sempre via feature branch + PR, mesmo solo
-11. **Agentes IA fazendo `git add .`** — staging seletivo obrigatório; ambientes como FleetView puxam arquivos órfãos
-12. **Agentes IA fazendo trabalho fora do escopo** — Gemini no Sprint 1.9 corrigiu 48 eventos antigos não pedidos; brief precisa ser explícito sobre restrição
+1. **Pular Sprint 0.3** — "vamos logo para eventos, depois colocamos a exploração" → retrabalho massivo
+2. **Pathfinding antes de validar que não precisa** — tween direto é suficiente para sala única
+3. **Arte antes de mecânica** — placeholders são suficientes até Fase 1.9
+4. **Cutscene separada quando ActionBubble funciona** — complexidade desnecessária
+5. **Mundo aberto antes de world map estável** — adicionar ruas depois de validar locais isolados
+6. **Build mode completo antes de furniture básico** — decoração simples primeiro
+7. **Gerar 200 eventos antes de validar o pipeline novo** — valide com 10 eventos primeiro
 
----
-
-## Riscos principais e mitigações
+## Riscos principais
 
 | Risco | Probabilidade | Impacto | Mitigação |
 |---|---|---|---|
-| Rig não fica visualmente convincente | Baixa (validado na Fase 0) | Alto | Sprint 0.2 validou cedo |
-| Pipeline IA produz cenas inúteis | Média | Alto | Few-shots de qualidade; repair loop; humano sempre valida |
-| iOS apaga saves | Alta | Médio | UX educativa de instalação; auto-export; persist API |
-| Burnout solo | Alta | Crítico | Limites semanais; pausa entre fases; manter outras coisas na vida |
-| Custo IA escala demais | Baixa | Médio | Prompt caching; orçamento mensal cap; batches noturnos |
-| Plágio detectado em notícia histórica | Baixa | Alto | Paráfrase obrigatória; blacklist; revisão humana |
-| Browser API quebra entre versões | Baixa | Médio | Polyfills onde necessário; testes em múltiplos browsers |
-| Stack desatualiza durante desenvolvimento | Média | Baixo | Lock de versões em `package.json`; updates em batch trimestral |
-| Agentes IA quebram convenções em branches paralelas | Média | Médio | PR obrigatório + revisão humana; checklist em todo prompt; AGENTS.md como source of truth |
-| Ambiente do agente troca HEAD silenciosamente | Confirmado no 1.9 | Médio | `git branch` antes de cada commit; staging seletivo (`git add arq1 arq2`, nunca `git add .`) |
-
----
-
-## Métricas de saúde do desenvolvimento
-
-Acompanhe semanalmente:
-
-- **Velocidade**: tarefas concluídas vs planejadas no sprint
-- **Débito técnico**: TODOs no código, issues abertas
-- **Cobertura de testes**: pelo menos 60% em `packages/core` ao fim da Fase 1
-- **Performance**: FPS médio em cenas típicas, em desktop e mobile mid-range
-- **Tamanho do bundle**: alvo <500KB gzipped no Sprint 1.11
-- **Tempo de cold start**: alvo <3s em mobile mid-range
-
-Reavaliar roadmap a cada fase concluída — adaptar baseado em aprendizados reais.
+| Exploração não fica satisfatória visualmente | Média | Alto | Sprint 0.3 valida cedo; ajustar ângulo oblíquo conforme necessário |
+| Click-to-move parece estranho sem obstáculos | Baixa | Médio | NavZona limita onde o personagem pode ir; tween direto é aceitável |
+| Móveis difíceis de posicionar em mobile | Média | Médio | Grid snap facilita; testar em touch desde Sprint 1.6 |
+| Pipeline IA gera cômodos inutilizáveis | Média | Alto | Few-shots de qualidade; room-validator obrigatório antes de commitar |
+| Conteúdo histórico 1985–1989 escasso | Baixa | Baixo | Gemini gera; revisão humana só dos anos mais importantes |
+| Burnout solo | Alta | Crítico | Limites semanais, pausas entre fases, celebrar cada sprint |

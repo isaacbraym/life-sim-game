@@ -4,9 +4,14 @@
   "categoria": "education",
   "titulo": "Baile da Vergonha Alheia",
   "descricaoCurta": "Hormônios em ebulição, música estourada e gente fingindo que sabe beber. O ecossistema completo e patético da adolescência.",
-  "contentTags": ["substance"],
+  "contentTags": [
+    "substance"
+  ],
   "triggers": {
-    "idadeRange": [14, 17],
+    "idadeRange": [
+      14,
+      17
+    ],
     "peso": 22,
     "cooldownMeses": 10,
     "uniqueOnce": false
@@ -22,7 +27,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.4,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "recemchegado_festa",
@@ -35,7 +44,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -57,37 +70,78 @@
         "opcoes": [
           {
             "texto": "Se jogar na pista e passar vergonha garantida. (Amanhã você vai ser meme no grupo da escola).",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Ficar no canto com o celular, fingindo que está trocando mensagens super importantes.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Aceitar bebida duvidosa de copo plástico pra tentar parecer descolado. (Spoiller: você vai vomitar no tapete).",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "bebeu_pela_primeira_vez" },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_saude", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "bebeu_pela_primeira_vez"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Ir embora mais cedo. (Sua cama é infinitamente superior a essa bagunça fedida).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "adicionar_flag", "flag": "perfil_introvertido" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perfil_introvertido"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

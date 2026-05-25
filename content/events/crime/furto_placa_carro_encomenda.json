@@ -6,7 +6,10 @@
   "descricaoCurta": "Um sujeito ligado a desmanches de carros te oferece duzentos reais para furtar a placa Mercosul de um modelo específico de veículo.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 50],
+    "idadeRange": [
+      18,
+      50
+    ],
     "peso": 15,
     "cooldownMeses": 18,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_capuz",
@@ -45,13 +52,21 @@
           "maoDireita": "fechada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "contato_chateado",
@@ -64,7 +79,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,33 +105,72 @@
         "opcoes": [
           {
             "texto": "Usar uma chave de fenda silenciosamente para retirar a placa sem fazer barulho.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 200.0 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "furtador_de_placas" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 200
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "furtador_de_placas"
+              }
             ]
           },
           {
             "texto": "Puxar a placa com força bruta para sair correndo mais rápido do local.",
-            "atributoCheck": { "atributo": "forca", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "forca",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 200.0 },
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "furtador_de_placas" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 200
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "furtador_de_placas"
+              }
             ]
           },
           {
             "texto": "Negar o trampo. Clonagem de carro é dor de cabeça garantida.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

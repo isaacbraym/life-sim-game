@@ -4,9 +4,14 @@
   "categoria": "education",
   "titulo": "Batismo de Fogo (e Corote)",
   "descricaoCurta": "Alguém te estende um copo de plástico com um líquido radioativo que tem cheiro de desinfetante hospitalar e promessas de vômito.",
-  "contentTags": ["substance"],
+  "contentTags": [
+    "substance"
+  ],
   "triggers": {
-    "idadeRange": [14, 17],
+    "idadeRange": [
+      14,
+      17
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "bebeu_pela_primeira_vez",
@@ -27,7 +32,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "avaliando_copo_incerto",
@@ -40,7 +49,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -58,29 +71,61 @@
           {
             "texto": "Virar de uma vez. (O seu fígado que lute no futuro para processar esse veneno).",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "bebeu_pela_primeira_vez" },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_saude", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "bebeu_pela_primeira_vez"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Recusar educadamente. (Parabéns, você acaba de garantir o título de palestrinha chato do grupo pelos próximos 5 anos).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Dar um golinho de bebê, fazer careta e dizer que tem notas amadeiradas. (Ninguém acreditou, mas você tentou).",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 8 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 8
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major"
 }

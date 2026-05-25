@@ -4,9 +4,14 @@
   "categoria": "health",
   "titulo": "O Parto de Pedregulhos",
   "descricaoCurta": "Anos substituindo água por refrigerante cobram a conta. Você sente uma pontada devastadora nas costas e percebe que está prestes a expelir uma joia da coroa renal.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [18, 70],
+    "idadeRange": [
+      18,
+      70
+    ],
     "peso": 20,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_colica_renal",
@@ -55,7 +64,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "medico_repreensivo",
@@ -100,26 +113,56 @@
           {
             "texto": "Tomar o soro com dipirona na veia e comprar uma garrafa térmica de 2 litros para carregar sempre.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 15 },
-              { "tipo": "alterar_dinheiro", "delta": -50.0 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -50
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Pagar pela litotripsia a laser para implodir o pedregulho em pedacinhos.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 30 },
-              { "tipo": "alterar_dinheiro", "delta": -550.0 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 30
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -550
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Confiar no chá de quebra-pedra caseiro da sua avó e esperar a natureza agir.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -25 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -25 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -25
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              }
             ]
           }
         ]
@@ -135,5 +178,6 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

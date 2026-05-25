@@ -4,9 +4,14 @@
   "categoria": "relationship",
   "titulo": "Jantar à Luz de Velas",
   "descricaoCurta": "Primeiro encontro na casa da paquera e a janta é uma surpresa gastronômica duvidosa.",
-  "contentTags": ["sexual"],
+  "contentTags": [
+    "sexual"
+  ],
   "triggers": {
-    "idadeRange": [20, 40],
+    "idadeRange": [
+      20,
+      40
+    ],
     "peso": 25,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "encarando_prato_miojo",
@@ -45,13 +54,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "paquera_orgulhosa_miojo",
@@ -64,7 +81,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,31 +107,71 @@
         "opcoes": [
           {
             "texto": "Elogiar o prato e fingir que é comida de alta gastronomia.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "paquera_encontro", "delta": 20 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "paquera_encontro",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Comer em silêncio rezando para não ter congestão na noite.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_relacionamento", "npcId": "paquera_encontro", "delta": 5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "paquera_encontro",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Sugerir pedir uma pizza pelo celular discretamente.",
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "paquera_encontro", "delta": -15 },
-              { "tipo": "alterar_dinheiro", "delta": -50 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "paquera_encontro",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -50
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2013
+  }
 }

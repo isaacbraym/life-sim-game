@@ -6,7 +6,10 @@
   "descricaoCurta": "Você encontra um arquivo de foto antiga da sua época de escola. As roupas largas e o corte de cabelo duvidoso te causam danos estéticos e existenciais severos.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 60],
+    "idadeRange": [
+      18,
+      60
+    ],
     "peso": 20,
     "cooldownMeses": 48,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_nostalgico",
@@ -56,23 +63,43 @@
         "opcoes": [
           {
             "texto": "Postar nas redes sociais como piada no 'Throwback Thursday'.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Guardar a foto bem fundo na gaveta para que ninguém mais a veja.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Ficar contemplando a foto e entrar em uma leve melancolia sobre o tempo que passa.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           }
         ]
@@ -88,5 +115,6 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

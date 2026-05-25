@@ -6,7 +6,10 @@
   "descricaoCurta": "Sua primeira nota vermelha em matemática. Uma obra de arte em tinta vermelha que exige a assinatura dos seus responsáveis legais.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [11, 16],
+    "idadeRange": [
+      11,
+      16
+    ],
     "peso": 60,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "estudante_desesperado",
@@ -61,25 +68,51 @@
         "opcoes": [
           {
             "texto": "Treinar a assinatura do seu pai contra a luz da janela.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "falsificador_junior" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "falsificador_junior"
+              }
             ]
           },
           {
             "texto": "Contar a verdade e chorar preventivamente antes de levarem bronca.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Dizer que perdeu a prova no caminho de volta.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "mentiroso_recorrente" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mentiroso_recorrente"
+              }
             ]
           }
         ]
@@ -95,5 +128,10 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

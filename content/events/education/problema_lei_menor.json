@@ -4,9 +4,14 @@
   "categoria": "education",
   "titulo": "Abordagem policial",
   "descricaoCurta": "Estava no lugar errado, ou foi o lugar certo e a decisão errada. A viatura parou, a luz apontou, agora é você e um policial.",
-  "contentTags": ["violence"],
+  "contentTags": [
+    "violence"
+  ],
   "triggers": {
-    "idadeRange": [14, 17],
+    "idadeRange": [
+      14,
+      17
+    ],
     "peso": 10,
     "cooldownMeses": 36,
     "uniqueOnce": false
@@ -22,7 +27,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "parado_maos_visiveis",
@@ -35,7 +44,11 @@
           "maoDireita": "palma_aberta",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -57,33 +70,74 @@
         "opcoes": [
           {
             "texto": "Cooperar completamente. Documentos, respostas diretas.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "teve_abordagem_policial" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_abordagem_policial"
+              }
             ]
           },
           {
             "texto": "Perguntar o motivo da abordagem. Dentro dos seus direitos.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "teve_abordagem_policial" },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_abordagem_policial"
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Ficar nervoso e falar coisas desnecessárias.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -25 },
-              { "tipo": "adicionar_flag", "flag": "teve_abordagem_policial" },
-              { "tipo": "adicionar_flag", "flag": "problema_com_policia" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "teve_abordagem_policial"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "problema_com_policia"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "routine"
 }

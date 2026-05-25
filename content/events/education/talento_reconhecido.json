@@ -6,14 +6,34 @@
   "descricaoCurta": "Alguém viu o que você fez — um texto, um código, um desenho, uma música, um argumento — e disse: você tem talento de verdade. Não foi elogio vazio.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [13, 17],
+    "idadeRange": [
+      13,
+      17
+    ],
     "requisitos": {
       "tipo": "algum",
       "predicados": [
-        { "tipo": "flag", "flag": "hobby_musica", "presente": true },
-        { "tipo": "flag", "flag": "hobby_desenho", "presente": true },
-        { "tipo": "flag", "flag": "hobby_leitura", "presente": true },
-        { "tipo": "var", "caminho": "personagem.atributos.inteligencia", "operador": ">=", "valor": 13 }
+        {
+          "tipo": "flag",
+          "flag": "hobby_musica",
+          "presente": true
+        },
+        {
+          "tipo": "flag",
+          "flag": "hobby_desenho",
+          "presente": true
+        },
+        {
+          "tipo": "flag",
+          "flag": "hobby_leitura",
+          "presente": true
+        },
+        {
+          "tipo": "var",
+          "caminho": "personagem.atributos.inteligencia",
+          "operador": ">=",
+          "valor": 13
+        }
       ]
     },
     "peso": 15,
@@ -25,7 +45,10 @@
       "papel": "pessoa_reconhecendo",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 20, "idadeMax": 60 }
+      "constraints": {
+        "idadeMin": 20,
+        "idadeMax": 60
+      }
     }
   ],
   "scene": {
@@ -38,7 +61,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "recebendo_elogio_surpreso",
@@ -51,13 +78,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "adulto_reconhecendo_talento",
@@ -70,7 +105,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -94,23 +133,53 @@
           {
             "texto": "Levar a sério. Investir mais nesse caminho.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "talento_reconhecido" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "talento_reconhecido"
+              }
             ]
           },
           {
             "texto": "Agradecer e continuar como estava. Não mudar nada.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "talento_reconhecido" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "talento_reconhecido"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "routine"
 }

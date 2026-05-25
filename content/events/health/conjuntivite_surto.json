@@ -4,9 +4,14 @@
   "categoria": "health",
   "titulo": "O Olhar do Exterminador",
   "descricaoCurta": "Há um surto de conjuntivite na cidade e você pegou. Seus olhos estão vermelhos, inchados e colados por uma secreção suspeita.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [10, 75],
+    "idadeRange": [
+      10,
+      75
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_oculos_escuros",
@@ -55,7 +64,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "farmaceutico_recuando",
@@ -100,25 +113,52 @@
           {
             "texto": "Comprar o colírio indicado e seguir as regras de higiene à risca.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 20 },
-              { "tipo": "alterar_dinheiro", "delta": -45.0 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -45
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Fazer compressa de chá de camomila morno sugerido por sua tia.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Ir trabalhar de óculos escuros e espalhar o vírus para toda a firma.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
@@ -134,5 +174,6 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

@@ -4,9 +4,14 @@
   "categoria": "travel",
   "titulo": "Conexão Perdida",
   "descricaoCurta": "Durante uma conexão apertada no aeroporto internacional, você se distrai comendo um pão de queijo caro e perde a última chamada de embarque.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [18, 60],
+    "idadeRange": [
+      18,
+      60
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_implorando",
@@ -45,13 +54,21 @@
           "maoDireita": "joinha",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "atendente_negando",
@@ -64,7 +81,11 @@
           "maoDireita": "fechada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,30 +107,61 @@
         "opcoes": [
           {
             "texto": "Implorar e explicar que a culpa foi das filas confusas do aeroporto.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "atendente_cia", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "atendente_cia",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           },
           {
             "texto": "Negociar friamente no guichê a remarcação gratuita baseando-se nas regras de atraso.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Pagar a multa de remarcação e esperar 8 horas pelo próximo voo.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -400.0 },
-              { "tipo": "alterar_humor", "delta": -25 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -400
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "routine"
 }

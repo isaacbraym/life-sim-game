@@ -6,7 +6,10 @@
   "descricaoCurta": "Você subiu na laje para pegar aquele bronzeado carioca usando uma mistura caseira suspeita. Agora, sua pele está vermelha fluorescente e você não consegue nem vestir uma camiseta.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [14, 60],
+    "idadeRange": [
+      14,
+      60
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_ardendo_sol",
@@ -62,26 +69,56 @@
           {
             "texto": "Comprar uma loção pós-sol de calamina e dormir imóvel de costas para o colchão.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 10 },
-              { "tipo": "alterar_dinheiro", "delta": -25.0 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Ir ao pronto-socorro buscar um creme de queimadura e receita de anti-inflamatório.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 20 },
-              { "tipo": "alterar_dinheiro", "delta": -45.0 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -45
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Passar margarina gelada no corpo por indicação de um fórum obscuro da internet.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -25 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -25
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           }
         ]
@@ -97,5 +134,9 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

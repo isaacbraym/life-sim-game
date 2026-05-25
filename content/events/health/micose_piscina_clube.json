@@ -6,7 +6,10 @@
   "descricaoCurta": "Você andou descalço no piso molhado ao redor da piscina do clube social. Dias depois, surge uma coceira infernal entre os dedinhos do pé, com a pele descascando.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [10, 70],
+    "idadeRange": [
+      10,
+      70
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_cocando_frieira",
@@ -62,25 +69,52 @@
           {
             "texto": "Comprar uma pomada antifúngica recomendada na farmácia e higienizar todos os calçados.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 15 },
-              { "tipo": "alterar_dinheiro", "delta": -30.0 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -30
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Fazer bochecho... quer dizer, banho de assento com bicarbonato e limão sugerido na internet.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Ignorar a coceira, continuar usando o mesmo tênis sem meia e fingir demência.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -20 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -20
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
@@ -96,5 +130,9 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

@@ -6,7 +6,10 @@
   "descricaoCurta": "Armado com uma lata de spray no bolso, você e um parceiro cogitam deixar uma marca rebelde no muro da escola à noite.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [12, 22],
+    "idadeRange": [
+      12,
+      22
+    ],
     "peso": 25,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_spray",
@@ -45,13 +52,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "parceiro_olhando",
@@ -64,7 +79,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,30 +105,60 @@
         "opcoes": [
           {
             "texto": "Caprichar num protesto artístico detalhado contra a carga horária de aulas.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "pichador_artistico" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pichador_artistico"
+              }
             ]
           },
           {
             "texto": "Escrever apenas a sigla da turma com pressa e sair correndo logo em seguida.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "tagger_rapido" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tagger_rapido"
+              }
             ]
           },
           {
             "texto": "Desistir do vandalismo, guardar o spray e ir embora comer um dogão.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

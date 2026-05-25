@@ -6,7 +6,10 @@
   "descricaoCurta": "Trabalho de fim de semana, entregador, caixa, babá, monitor. Não importa o que é — é dinheiro que você ganhou. Diferente de ganhar.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [14, 17],
+    "idadeRange": [
+      14,
+      17
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "tem_emprego",
@@ -21,7 +24,10 @@
       "papel": "chefe_primeiro_bico",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 25, "idadeMax": 55 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 55
+      }
     }
   ],
   "scene": {
@@ -34,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "atento_primeiro_dia_trabalho",
@@ -47,13 +57,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "chefe_explicando",
@@ -66,7 +84,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -89,33 +111,75 @@
         "opcoes": [
           {
             "texto": "Dar o máximo desde o primeiro dia. Impressionar.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_emprego" },
-              { "tipo": "adicionar_flag", "flag": "primeiro_emprego_dedicado" },
-              { "tipo": "alterar_dinheiro", "delta": 300 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_emprego_dedicado"
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 300
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Fazer o mínimo pra não ser mandado embora.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_emprego" },
-              { "tipo": "alterar_dinheiro", "delta": 200 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 200
+              }
             ]
           },
           {
             "texto": "Observar tudo. Aprender como funciona o lugar.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_emprego" },
-              { "tipo": "alterar_dinheiro", "delta": 200 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_emprego"
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 200
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major"
 }

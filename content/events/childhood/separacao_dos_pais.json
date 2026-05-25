@@ -4,9 +4,14 @@
   "categoria": "childhood",
   "titulo": "Desinvestimento Mútuo",
   "descricaoCurta": "Seus pais convocaram uma 'reunião extraordinária' na sala. Quando casados usam jargão corporativo em casa, a demissão de alguém é iminente.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [5, 12],
+    "idadeRange": [
+      5,
+      12
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "pais_separados",
@@ -21,13 +26,21 @@
       "papel": "pai",
       "tipo": "relacional",
       "persistenciaApos": "permanente",
-      "constraints": { "genero": "M", "idadeMin": 25, "idadeMax": 55 }
+      "constraints": {
+        "genero": "M",
+        "idadeMin": 25,
+        "idadeMax": 55
+      }
     },
     {
       "papel": "mae",
       "tipo": "relacional",
       "persistenciaApos": "permanente",
-      "constraints": { "genero": "F", "idadeMin": 25, "idadeMax": 55 }
+      "constraints": {
+        "genero": "F",
+        "idadeMin": 25,
+        "idadeMax": 55
+      }
     }
   ],
   "scene": {
@@ -40,7 +53,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "sentado_travado",
@@ -53,13 +70,21 @@
           "maoDireita": "fechada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.4,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "pai_cabeca_baixa",
@@ -72,7 +97,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -101,31 +130,71 @@
           {
             "texto": "Perguntar quem herda a custódia do videogame e as assinaturas de streaming.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "pais_separados" },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pais_separados"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Sair em silêncio e calcular se isso significa mesada em dobro.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "pais_separados" },
-              { "tipo": "alterar_humor", "delta": -25 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pais_separados"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Fazer um apelo melodramático de novela das nove e chorar no tapete.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "pais_separados" },
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pais_separados"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

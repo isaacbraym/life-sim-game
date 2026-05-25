@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "O Cafezinho do Guarda",
   "descricaoCurta": "Você é parado em uma blitz com o IPVA atrasado. O guarda de trânsito começa a enrolar e solta aquela velha indireta.",
-  "contentTags": ["political"],
+  "contentTags": [
+    "political"
+  ],
   "triggers": {
-    "idadeRange": [18, 70],
+    "idadeRange": [
+      18,
+      70
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_apreensivo",
@@ -45,13 +54,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "guarda_analisando",
@@ -64,7 +81,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "bota",
           "peDireito": "bota",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,32 +107,68 @@
         "opcoes": [
           {
             "texto": "Sugerir pagar uma 'cerveja' ou um 'cafezinho' de R$ 150 para ele liberar o carro.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -150.0 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "jeitinho_brasileiro" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -150
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "jeitinho_brasileiro"
+              }
             ]
           },
           {
             "texto": "Citar artigos de trânsito e fingir ser estudante de direito para intimidar.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 16 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 16
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "conhecedor_das_leis" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "conhecedor_das_leis"
+              }
             ]
           },
           {
             "texto": "Aceitar a punição, deixar o veículo ir para o pátio e pegar um táxi para casa.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -800.0 },
-              { "tipo": "alterar_humor", "delta": -25 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -800
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

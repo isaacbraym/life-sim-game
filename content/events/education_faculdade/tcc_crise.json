@@ -6,8 +6,15 @@
   "descricaoCurta": "O orientador visualizou e não respondeu. O Word ameaça fechar sem salvar. É agora que você entende por que universitário chora no banho.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [20, 24],
-    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "idadeRange": [
+      20,
+      24
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
     "peso": 30,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -23,7 +30,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "virada_noite_tcc",
@@ -36,7 +47,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -58,36 +73,88 @@
         "opcoes": [
           {
             "texto": "Virar a noite. Entregar um Frankenstein acadêmico movido a desespero.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tcc_entregue" },
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 2 },
-              { "tipo": "alterar_humor", "delta": 20 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tcc_entregue"
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 2
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              }
             ]
           },
           {
             "texto": "Pedir prorrogação pro orientador (também conhecido como implorar por misericórdia chorando áudio no zap).",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Dormir e seja o que Deus quiser. (A nota mínima ainda é aprovação, foda-se).",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tcc_entregue" },
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tcc_entregue"
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "major"
 }

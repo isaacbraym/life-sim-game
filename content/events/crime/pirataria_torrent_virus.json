@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "O Torrent da Discórdia",
   "descricaoCurta": "Você quer muito jogar o mais novo lançamento de videogame, mas o preço oficial é abusivo. A alternativa rápida é baixar uma versão crackeada via torrent.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [15, 35],
+    "idadeRange": [
+      15,
+      35
+    ],
     "peso": 25,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_no_computador",
@@ -45,13 +54,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "amigo_nerd_apontando",
@@ -64,7 +81,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,31 +107,65 @@
         "opcoes": [
           {
             "texto": "Ignorar o aviso, desligar o antivírus e instalar de qualquer jeito.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "gamer_pirata" },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "gamer_pirata"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           },
           {
             "texto": "Pedir para o amigo examinar e limpar os arquivos antes de instalar.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "amigo_nerd", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "amigo_nerd",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Deletar o arquivo correndo e comprar o jogo original na promoção.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -250.0 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -250
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

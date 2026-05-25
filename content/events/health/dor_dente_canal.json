@@ -4,9 +4,14 @@
   "categoria": "health",
   "titulo": "O Motorzinho da Agonia",
   "descricaoCurta": "Um de seus molares começa a pulsar com uma dor aguda e insuportável no meio de um feriadão prolongado. Você vai precisar encarar o famigerado tratamento de canal.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [18, 65],
+    "idadeRange": [
+      18,
+      65
+    ],
     "peso": 20,
     "cooldownMeses": 18,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_dor_dente",
@@ -55,7 +64,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "dentista_broca",
@@ -100,26 +113,56 @@
           {
             "texto": "Encarar a broca, pagar a franquia do plano e fazer o canal de vez.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 25 },
-              { "tipo": "alterar_dinheiro", "delta": -350.0 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 25
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -350
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           },
           {
             "texto": "Tentar apelar para o carisma e conseguir um parcelamento amigável em 10 vezes.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 25 },
-              { "tipo": "alterar_dinheiro", "delta": -320.0 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 25
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -320
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Adiar a consulta e continuar tomando analgésicos fortes com água de torneira.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -25 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -25
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           }
         ]
@@ -135,5 +178,6 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

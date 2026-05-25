@@ -4,9 +4,14 @@
   "categoria": "health",
   "titulo": "Os Inquilinos da Cabeça",
   "descricaoCurta": "Um bilhete na mochila escolar avisa sobre um surto de piolhos na sala de aula. Pouco tempo depois, sua cabeça começa a coçar desesperadamente.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [5, 18],
+    "idadeRange": [
+      5,
+      18
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_piolho",
@@ -55,7 +64,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "mae_pente_fino",
@@ -99,26 +112,53 @@
         "opcoes": [
           {
             "texto": "Aguentar bravamente a sessão medieval de pente fino com vinagre.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 15 },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           },
           {
             "texto": "Pedir para comprar um xampu medicamentoso moderno na farmácia da esquina.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": 20 },
-              { "tipo": "alterar_dinheiro", "delta": -40.0 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -40
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Coçar escondido, fingir que sarou e rezar para os piolhos irem embora sozinhos.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "aplicar_status", "status": "doente" },
-              { "tipo": "alterar_humor", "delta": -20 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              }
             ]
           }
         ]
@@ -134,5 +174,6 @@
     "criadoEm": "2026-05-22T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "routine"
 }

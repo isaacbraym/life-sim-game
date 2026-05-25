@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "O Falso Sequestro por Telefone",
   "descricaoCurta": "Você recebe uma ligação desesperada no meio da noite de alguém fingindo ser seu parente sequestrado.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [18, 80],
+    "idadeRange": [
+      18,
+      80
+    ],
     "peso": 15,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_panico_telefone",
@@ -45,13 +54,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "golpista_fala_celular",
@@ -64,7 +81,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -87,31 +108,71 @@
           {
             "texto": "Entrar em desespero e transferir R$ 2.000 (o limite noturno do PIX).",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -2000.0 },
-              { "tipo": "alterar_humor", "delta": -45 },
-              { "tipo": "adicionar_flag", "flag": "caiu_no_falso_sequestro" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -2000
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -45
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "caiu_no_falso_sequestro"
+              }
             ]
           },
           {
             "texto": "Manter o sangue frio, enrolar o cara e tentar ligar para o parente de outro telefone.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Zombar do sequestrador dizendo que você não tem parentes vivos e desligar.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "adicionar_flag", "flag": "trollou_o_sequestrador" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trollou_o_sequestrador"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

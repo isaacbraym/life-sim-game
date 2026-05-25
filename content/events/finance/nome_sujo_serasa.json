@@ -4,9 +4,14 @@
   "categoria": "finance",
   "titulo": "O Fantasma do Serasa",
   "descricaoCurta": "Você tenta solicitar um cartão de crédito melhor, mas é recusado. Ao consultar o Serasa, descobre que seu nome foi negativado por uma dívida de R$ 15,20 de anos atrás.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [19, 50],
+    "idadeRange": [
+      19,
+      50
+    ],
     "peso": 25,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_desesperado",
@@ -45,13 +54,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "gerente_apontando_tela",
@@ -64,7 +81,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,30 +107,61 @@
         "opcoes": [
           {
             "texto": "Ligar no suporte e negociar de forma enérgica para contestar a dívida indevida.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "gerente_banco", "delta": 5 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "gerente_banco",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Pagar o valor cobrado com juros imediatamente para limpar o CPF logo.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -55.0 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -55
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Ignorar a cobrança e deixar o nome sujo por mais cinco anos.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "nome_sujo" },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "nome_sujo"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "routine"
 }

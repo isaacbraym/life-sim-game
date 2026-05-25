@@ -1,0 +1,50 @@
+{
+  "ano": 1985,
+  "eventos": [
+    {
+      "id": "1985_01_redemocratizacao",
+      "manchete": "O país vive o início de uma nova era política após décadas de regime militar.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1985, "endYear": 1985 }
+    },
+    {
+      "id": "1985_02_superinflacao",
+      "manchete": "A inflação decola e os preços nos supermercados mudam de manhã para de tarde, desafiando a economia doméstica.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -50
+        }
+      ],
+      "eraDisponivel": { "startYear": 1985, "endYear": 1985 }
+    },
+    {
+      "id": "1985_03_rock_in_rio",
+      "manchete": "Um festival de música gigantesco traz astros internacionais do rock e mobiliza multidões no barro e na lama.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1985, "endYear": 1985 }
+    },
+    {
+      "id": "1985_04_vitoria_formula1",
+      "manchete": "As manhãs de domingo ficam mais emocionantes com a bandeira brasileira cruzando a linha de chegada nas pistas europeias.",
+      "tags": ["esporte"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1985, "endYear": 1985 }
+    },
+    {
+      "id": "1985_05_microcomputador",
+      "manchete": "Os primeiros computadores pessoais nacionais começam a dar as caras em escritórios e lares mais abastados.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1985, "endYear": 1985 }
+    }
+  ]
+}

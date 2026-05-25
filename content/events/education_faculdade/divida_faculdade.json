@@ -6,12 +6,24 @@
   "descricaoCurta": "Conta no vermelho. Boleto da faculdade vencendo. O dinheiro que você tinha calculado não fechou o mês. Agora é resolver.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 22],
+    "idadeRange": [
+      18,
+      22
+    ],
     "requisitos": {
       "tipo": "todos",
       "predicados": [
-        { "tipo": "flag", "flag": "na_faculdade", "presente": true },
-        { "tipo": "var", "caminho": "personagem.dinheiro", "operador": "<=", "valor": 200 }
+        {
+          "tipo": "flag",
+          "flag": "na_faculdade",
+          "presente": true
+        },
+        {
+          "tipo": "var",
+          "caminho": "personagem.dinheiro",
+          "operador": "<=",
+          "valor": 200
+        }
       ]
     },
     "peso": 25,
@@ -29,7 +41,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "calculando_preocupado",
@@ -42,7 +58,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -65,31 +85,70 @@
           {
             "texto": "Pedir ajuda pra família. Aceitar o constrangimento.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 500 },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "pediu_dinheiro_familia" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 500
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pediu_dinheiro_familia"
+              }
             ]
           },
           {
             "texto": "Pegar um bico extra. Trabalhar mais horas.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 400 },
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 400
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Cortar tudo que não é essencial. Feijão e arroz por duas semanas.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "routine"
 }

@@ -4,9 +4,14 @@
   "categoria": "hobby",
   "titulo": "O Monstro do Crossfit",
   "descricaoCurta": "Você aceita fazer uma aula experimental de crossfit para sair do sedentarismo. No final do treino, o coach exige que você tombe um pneu de trator gigante.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [18, 45],
+    "idadeRange": [
+      18,
+      45
+    ],
     "peso": 25,
     "cooldownMeses": 24,
     "uniqueOnce": true
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_exaurido",
@@ -45,13 +54,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "coach_gritando",
@@ -64,7 +81,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,32 +107,69 @@
         "opcoes": [
           {
             "texto": "Dar o último suspiro de energia e erguer o pneu com toda força.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "sobreviveu_crossfit" },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_saude", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "sobreviveu_crossfit"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Pedir ajuda e focar na mecânica correta para não se machucar.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "coach", "delta": 5 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "coach",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Fingir uma cãibra violenta na panturrilha e sentar para tomar água.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "desistiu_treino" },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "desistiu_treino"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

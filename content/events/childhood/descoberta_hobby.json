@@ -6,7 +6,10 @@
   "descricaoCurta": "Você tentou por acidente. Ou alguém empurrou. O fato é que você descobriu algo que faz sentido nas suas mãos: um instrumento, um esporte, um desenho, uma câmera.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [6, 12],
+    "idadeRange": [
+      6,
+      12
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "tem_hobby",
@@ -27,7 +30,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "absorto_atividade",
@@ -40,7 +47,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -63,43 +74,105 @@
           {
             "texto": "Música. Pedir pra aprender de verdade.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
-              { "tipo": "adicionar_flag", "flag": "hobby_musica" },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_hobby"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "hobby_musica"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Desenho. Comprar mais cadernos.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
-              { "tipo": "adicionar_flag", "flag": "hobby_desenho" },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_hobby"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "hobby_desenho"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Esporte. Treinar todo dia.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
-              { "tipo": "adicionar_flag", "flag": "hobby_esporte" },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_hobby"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "hobby_esporte"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "forca",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Leitura. Já tem uma pilha esperando.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_hobby" },
-              { "tipo": "adicionar_flag", "flag": "hobby_leitura" },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 2 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_hobby"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "hobby_leitura"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 2
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

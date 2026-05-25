@@ -6,7 +6,10 @@
   "descricaoCurta": "Você acorda com 30 anos. Uma pontada nas costas te dá as boas-vindas à nova década de dores articulares e conversas sobre investimentos.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [30, 30],
+    "idadeRange": [
+      30,
+      30
+    ],
     "peso": 90,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_trinta_anos",
@@ -61,26 +68,54 @@
         "opcoes": [
           {
             "texto": "Alongar com calma e tentar levantar sem usar as mãos de apoio.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Ficar deitado mais trinta minutos e aceitar o seu destino sedentário.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Tomar uma dose dupla de analgésico e fingir que ainda tem 20 anos.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "aplicar_status", "status": "doente" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "aplicar_status",
+                "status": "doente"
+              }
             ]
           }
         ]
@@ -96,5 +131,6 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "narrativeWeight": "major"
 }

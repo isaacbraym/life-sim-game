@@ -101,5 +101,10 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }
