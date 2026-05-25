@@ -6,7 +6,10 @@
   "descricaoCurta": "Seu primeiro dia no Ensino Médio. Os veteranos parecem ter três metros de altura e barba na cara, enquanto você ainda tem espinhas e medo.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [14, 14],
+    "idadeRange": [
+      14,
+      14
+    ],
     "peso": 80,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.4,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "novato_perdido",
@@ -62,23 +69,47 @@
           {
             "texto": "Caminhar de cabeça erguida e ignorar a intimidação visual.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Perguntar onde fica a biblioteca para escapar do corredor principal.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Tentar se enturmar fazendo uma piada autodepreciativa com o primeiro que vir.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
-              { "tipo": "adicionar_flag", "flag": "palhaco_do_corredor" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "palhaco_do_corredor"
+              }
             ]
           }
         ]
@@ -94,5 +125,10 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

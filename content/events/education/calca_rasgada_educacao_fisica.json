@@ -6,7 +6,10 @@
   "descricaoCurta": "Durante um agachamento ou chute na aula de educação física, sua calça ou bermuda rasga exatamente na costura de trás, diante da turma inteira.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [10, 18],
+    "idadeRange": [
+      10,
+      18
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_calca_rasgada",
@@ -35,7 +42,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       }
@@ -52,30 +63,62 @@
         "opcoes": [
           {
             "texto": "Entrar na brincadeira, fazer uma pose engraçada e rir de si mesmo.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Sair correndo de costas direto para a enfermaria/diretoria sem olhar para trás.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           },
           {
             "texto": "Amarrar o casaco de moletom na cintura e fingir que é uma nova tendência de moda.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -8 },
-              { "tipo": "adicionar_flag", "flag": "moletom_salvador" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -8
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "moletom_salvador"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major"
 }

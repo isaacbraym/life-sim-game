@@ -6,7 +6,10 @@
   "descricaoCurta": "Parabéns, você agora é legalmente responsável por todas as suas péssimas decisões. O Estado comemora te dando direito a voto e prisão.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 18],
+    "idadeRange": [
+      18,
+      18
+    ],
     "peso": 90,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "adulto_recem_formado",
@@ -62,24 +69,49 @@
           {
             "texto": "Ignorar o boleto e fingir que é um engano. (Tática clássica do avestruz).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_dinheiro", "delta": -15.0 },
-              { "tipo": "adicionar_flag", "flag": "nome_sujo_no_serasa" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "nome_sujo_no_serasa"
+              }
             ]
           },
           {
             "texto": "Tentar decifrar as taxas de juros cobradas usando sua inteligência.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Pedir dinheiro aos seus pais para quitar a dívida imediatamente.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 15.0 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
@@ -95,5 +127,7 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major"
 }

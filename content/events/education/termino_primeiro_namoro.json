@@ -6,7 +6,10 @@
   "descricaoCurta": "Acabou. Pode ter sido você, pode ter sido ele/ela, pode ter sido os dois. O resultado é o mesmo: aquela sensação de buraco no peito que você nunca tinha sentido antes.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [13, 18],
+    "idadeRange": [
+      13,
+      18
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "tem_namorado",
@@ -21,7 +24,10 @@
       "papel": "ex_namorado",
       "tipo": "relacional",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 12, "idadeMax": 19 }
+      "constraints": {
+        "idadeMin": 12,
+        "idadeMax": 19
+      }
     }
   ],
   "scene": {
@@ -34,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.25, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.25,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "magoado_contendo",
@@ -47,13 +57,21 @@
           "maoDireita": "fechada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "culpado_desconfortavel",
@@ -66,7 +84,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -89,34 +111,79 @@
         "opcoes": [
           {
             "texto": "Terminar com dignidade. Sem drama.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_namorado" },
-              { "tipo": "adicionar_flag", "flag": "terminou_bem" },
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_namorado"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "terminou_bem"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Chorar. Não tem dignidade que aguente isso.",
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_namorado" },
-              { "tipo": "alterar_humor", "delta": -30 }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_namorado"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -30
+              }
             ]
           },
           {
             "texto": "Tentar convencer a não terminar.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 16 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 16
+            },
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_namorado" },
-              { "tipo": "alterar_humor", "delta": -25 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_namorado"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "routine"
 }

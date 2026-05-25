@@ -6,7 +6,10 @@
   "descricaoCurta": "Todo adulto que você encontra pergunta o mesmo: e aí, já sabe o que vai fazer? Faculdade, carreira, futuro. Como se 17 anos fosse suficiente pra decidir isso.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [16, 18],
+    "idadeRange": [
+      16,
+      18
+    ],
     "peso": 30,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -16,7 +19,10 @@
       "papel": "familiar_perguntando",
       "tipo": "relacional",
       "persistenciaApos": "permanente",
-      "constraints": { "idadeMin": 35, "idadeMax": 70 }
+      "constraints": {
+        "idadeMin": 35,
+        "idadeMax": 70
+      }
     }
   ],
   "scene": {
@@ -29,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "adolescente_entediado_pressionado",
@@ -42,13 +52,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "adulto_conselheiro_nao_pedido",
@@ -61,7 +79,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -85,36 +107,75 @@
           {
             "texto": "Dizer que já tem um plano, mesmo que seja mentira.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "adicionar_flag", "flag": "fingiu_ter_plano_faculdade" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "fingiu_ter_plano_faculdade"
+              }
             ]
           },
           {
             "texto": "Admitir que não sabe. Aguentar a reação.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Desviar com uma piada. Mudar o assunto.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 8 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 8
+              }
             ]
           },
           {
             "texto": "Estudar mais. Resolver isso com preparação.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "estudando_para_vestibular" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "estudando_para_vestibular"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "relevant"
 }

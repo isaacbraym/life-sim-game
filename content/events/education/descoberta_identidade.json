@@ -6,7 +6,10 @@
   "descricaoCurta": "A adolescência é o único momento da vida em que você pode reinventar quem você é a cada semestre e ninguém acha tão estranho assim. Você está descobrindo.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [13, 17],
+    "idadeRange": [
+      13,
+      17
+    ],
     "peso": 18,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "olhando_espelho_refletindo",
@@ -35,7 +42,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -58,39 +69,90 @@
           {
             "texto": "Alguém que vai na frente. Liderança, visibilidade.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 2 },
-              { "tipo": "adicionar_flag", "flag": "perfil_lider" },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 2
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perfil_lider"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Alguém que observa. Prefere entender a aparecer.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 2 },
-              { "tipo": "adicionar_flag", "flag": "perfil_observador" },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 2
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perfil_observador"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Alguém que resiste. Questiona tudo, obedece pouco.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
-              { "tipo": "alterar_atributo", "atributo": "sorte", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "perfil_rebelde" },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "sorte",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perfil_rebelde"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Ainda não saber. E ficar ok com isso por agora.",
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "routine"
 }

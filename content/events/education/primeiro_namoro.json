@@ -6,7 +6,10 @@
   "descricaoCurta": "A incrível experiência de ter alguém para cobrar satisfação do que você está fazendo no fim de semana. O amor é lindo (e exaustivo).",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [13, 17],
+    "idadeRange": [
+      13,
+      17
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "tem_namorado",
@@ -21,7 +24,10 @@
       "papel": "primeiro_namorado",
       "tipo": "sempre_novo",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 12, "idadeMax": 18 }
+      "constraints": {
+        "idadeMin": 12,
+        "idadeMax": 18
+      }
     }
   ],
   "scene": {
@@ -34,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "adolescente_nervoso_feliz",
@@ -47,13 +57,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.25, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.25,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "declarando_timido",
@@ -66,7 +84,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -90,30 +112,66 @@
           {
             "texto": "Dizer Sim. (O primeiro de muitos relacionamentos que vão te custar muita terapia no futuro).",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_namorado" },
-              { "tipo": "adicionar_flag", "flag": "primeiro_namoro_aceito" },
-              { "tipo": "alterar_humor", "delta": 30 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_namorado"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_namoro_aceito"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 30
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Pedir um tempo pra pensar. (Fazer cu doce clássico, só pra valorizar o passe).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Recusar com gentileza. (E fugir correndo porque compromisso nessa idade é pura loucura).",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "recusou_primeiro_namoro" },
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "recusou_primeiro_namoro"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "escola",
+  "narrativeWeight": "major"
 }
