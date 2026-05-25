@@ -1,0 +1,55 @@
+{
+  "ano": 1999,
+  "eventos": [
+    {
+      "id": "1999_01_desvalorizacao_real",
+      "manchete": "A desvalorização cambial força o fim do pareamento rígido com a moeda norte-americana, encarecendo produtos importados rapidamente.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -80
+        }
+      ],
+      "eraDisponivel": { "startYear": 1999, "endYear": 1999 }
+    },
+    {
+      "id": "1999_02_bug_do_milenio_temor",
+      "manchete": "A aproximação da virada de século causa temor global com o possível colapso de sistemas de computadores antigos devido a datas de dois dígitos.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1999, "endYear": 1999 }
+    },
+    {
+      "id": "1999_03_mensageiros_e_chats",
+      "manchete": "Mensageiros de texto instantâneos e salas de bate-papo de portais famosos viram a principal atração digital dos jovens.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1999, "endYear": 1999 }
+    },
+    {
+      "id": "1999_04_apagao_eletrico",
+      "manchete": "Um blecaute de grandes proporções deixa vários estados do país às escuras, trazendo à tona debates sobre a estabilidade do setor de energia.",
+      "tags": ["cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -1
+        }
+      ],
+      "eraDisponivel": { "startYear": 1999, "endYear": 1999 }
+    },
+    {
+      "id": "1999_05_pagode_febre",
+      "manchete": "Grupos de pagode romântico e ritmos dançantes dominam as rádios e as apresentações dominicais de televisão em todo o país.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1999, "endYear": 1999 }
+    }
+  ]
+}

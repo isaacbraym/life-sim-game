@@ -1,0 +1,55 @@
+{
+  "ano": 1996,
+  "eventos": [
+    {
+      "id": "1996_01_fenomeno_musical_tragedia",
+      "manchete": "Um grupo musical cômico que virou mania nacional e conquistou crianças e adultos sofre um trágico acidente, deixando o país em luto.",
+      "tags": ["cultura", "entretenimento", "trauma"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -3
+        }
+      ],
+      "eraDisponivel": { "startYear": 1996, "endYear": 1996 }
+    },
+    {
+      "id": "1996_02_clone_ovelha",
+      "manchete": "Cientistas anunciam o nascimento do primeiro clone bem-sucedido de um mamífero a partir de uma célula adulta, reacendendo debates sobre ética.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1996, "endYear": 1996 }
+    },
+    {
+      "id": "1996_03_internet_discada_meia_noite",
+      "manchete": "Conectar-se à internet após a meia-noite ou nos fins de semana vira rotina para economizar pulsos telefônicos.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1996, "endYear": 1996 }
+    },
+    {
+      "id": "1996_04_olimpiadas_medalhas",
+      "manchete": "O país vibra com conquistas inéditas no vôlei de praia e no basquete feminino durante o maior torneio esportivo mundial.",
+      "tags": ["esporte"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1996, "endYear": 1996 }
+    },
+    {
+      "id": "1996_05_crescimento_importados",
+      "manchete": "A moeda estável e o câmbio favorável enchem as lojas de produtos eletrônicos e novidades importadas de fácil acesso.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 40
+        }
+      ],
+      "eraDisponivel": { "startYear": 1996, "endYear": 1996 }
+    }
+  ]
+}

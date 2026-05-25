@@ -1,0 +1,55 @@
+{
+  "ano": 1998,
+  "eventos": [
+    {
+      "id": "1998_01_derrota_copa_franca",
+      "manchete": "A esperada final do mundial de futebol termina em decepção coletiva após uma derrota apática, deixando as ruas silenciosas.",
+      "tags": ["esporte", "trauma"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -2
+        }
+      ],
+      "eraDisponivel": { "startYear": 1998, "endYear": 1998 }
+    },
+    {
+      "id": "1998_02_privatizacao_telecom",
+      "manchete": "A privatização do sistema estatal de telecomunicações promete baratear o acesso a linhas fixas, que antes custavam pequenas fortunas.",
+      "tags": ["economia", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1998, "endYear": 1998 }
+    },
+    {
+      "id": "1998_03_arquivos_mp3",
+      "manchete": "Arquivos de música compactada no formato digital começam a se espalhar pela rede, mudando a forma como as pessoas colecionam canções.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1998, "endYear": 1998 }
+    },
+    {
+      "id": "1998_04_febre_cinema_titanic",
+      "manchete": "Uma superprodução cinematográfica sobre um trágico naufrágio vira fenômeno de bilheteria e faz os cinemas terem filas intermináveis.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1998, "endYear": 1998 }
+    },
+    {
+      "id": "1998_05_crise_cambial",
+      "manchete": "Rumores de desvalorização cambial elevam as taxas de juros no país, deixando financiamentos e empréstimos proibitivos.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -50
+        }
+      ],
+      "eraDisponivel": { "startYear": 1998, "endYear": 1998 }
+    }
+  ]
+}

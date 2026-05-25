@@ -1,0 +1,50 @@
+{
+  "ano": 2000,
+  "eventos": [
+    {
+      "id": "2000_01_virada_seculo_bug",
+      "manchete": "A virada para o novo milênio é celebrada sem incidentes tecnológicos graves, aliviando o medo do temido bug nos computadores.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2000, "endYear": 2000 }
+    },
+    {
+      "id": "2000_02_debates_politicos",
+      "manchete": "Denúncias e escândalos no parlamento nacional reacendem as discussões sobre transparência e ética nas votações do poder legislativo.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2000, "endYear": 2000 }
+    },
+    {
+      "id": "2000_03_celulares_monofonicos",
+      "manchete": "Novos aparelhos celulares menores com toques monofônicos e jogos clássicos simples de tela começam a se tornar onipresentes na rotina.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2000, "endYear": 2000 }
+    },
+    {
+      "id": "2000_04_aniversario_pais",
+      "manchete": "Grandes desfiles e discussões acadêmicas marcam os quinhentos anos do desembarque europeu no território nacional.",
+      "tags": ["cultura", "politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2000, "endYear": 2000 }
+    },
+    {
+      "id": "2000_05_pressao_combustiveis",
+      "manchete": "Avisos de aumento nos preços dos combustíveis começam a pressionar as tarifas de transporte e encarecer o custo de vida nas metrópoles.",
+      "tags": ["economia", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -30
+        }
+      ],
+      "eraDisponivel": { "startYear": 2000, "endYear": 2000 }
+    }
+  ]
+}
