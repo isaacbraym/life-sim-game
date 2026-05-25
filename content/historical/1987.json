@@ -1,0 +1,55 @@
+{
+  "ano": 1987,
+  "eventos": [
+    {
+      "id": "1987_01_crise_cruzado",
+      "manchete": "O plano econômico entra em colapso, a inflação volta a disparar e o dinheiro some das carteiras mais rápido do que antes.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -100
+        }
+      ],
+      "eraDisponivel": { "startYear": 1987, "endYear": 1987 }
+    },
+    {
+      "id": "1987_02_constituinte",
+      "manchete": "Deputados e senadores se reúnem em Brasília para iniciar os debates de elaboração de uma nova carta de direitos para o país.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1987, "endYear": 1987 }
+    },
+    {
+      "id": "1987_03_popularizacao_vhs",
+      "manchete": "Ter um aparelho reprodutor de fitas de vídeo em casa deixa de ser luxo de poucos e vira febre nas salas de estar.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1987, "endYear": 1987 }
+    },
+    {
+      "id": "1987_04_fitas_cassete",
+      "manchete": "Fazer fitas de áudio gravadas da rádio para dar de presente a amigos ou namorados vira o principal passatempo musical dos jovens.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1987, "endYear": 1987 }
+    },
+    {
+      "id": "1987_05_cruzado_ii",
+      "manchete": "Novos congelamentos econômicos e mudanças nas regras de poupança deixam o comércio confuso e o povo apreensivo.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -1
+        }
+      ],
+      "eraDisponivel": { "startYear": 1987, "endYear": 1987 }
+    }
+  ]
+}
