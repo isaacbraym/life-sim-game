@@ -1,0 +1,55 @@
+{
+  "ano": 1990,
+  "eventos": [
+    {
+      "id": "1990_01_plano_collor_confisco",
+      "manchete": "Em uma medida chocante e inesperada, o novo governo decreta o bloqueio temporário das contas de poupança e das contas correntes acima de um limite irrisório.",
+      "tags": ["economia", "politica"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -500
+        }
+      ],
+      "eraDisponivel": { "startYear": 1990, "endYear": 1990 }
+    },
+    {
+      "id": "1990_02_abertura_economica",
+      "manchete": "As fronteiras comerciais começam a ser abertas para produtos vindos de fora, trazendo brinquedos, eletrônicos e carros importados nunca antes vistos no país.",
+      "tags": ["economia", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1990, "endYear": 1990 }
+    },
+    {
+      "id": "1990_03_videogame_16bits_brasil",
+      "manchete": "O console de 16 bits mais famoso da época chega oficialmente às lojas brasileiras, iniciando uma grande disputa pela liderança da preferência das crianças.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1990, "endYear": 1990 }
+    },
+    {
+      "id": "1990_04_novela_natureza",
+      "manchete": "Uma novela revolucionária gravada nas planícies alagadas do interior do país bate recordes de audiência e traz à tona discussões sobre preservação ecológica.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1990, "endYear": 1990 }
+    },
+    {
+      "id": "1990_05_mudanca_moeda_novamente",
+      "manchete": "O país muda novamente o nome da sua moeda nacional em meio à crise financeira provocada pelas medidas drásticas do governo.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -3
+        }
+      ],
+      "eraDisponivel": { "startYear": 1990, "endYear": 1990 }
+    }
+  ]
+}
