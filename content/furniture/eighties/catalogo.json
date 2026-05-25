@@ -1,0 +1,332 @@
+[
+  {
+    "id": "sofa_retro_floral",
+    "nome": "Sofá Retrô Floral",
+    "categoria": "assento",
+    "assetId": "sofa_retro_floral_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 1 },
+    "preco": 1200,
+    "valorDeRevenda": 600,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 2,
+      "humor": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["retro", "sala", "conforto"],
+    "descricao": "Sofá clássico de três lugares revestido com tecido de estampa de flores marrons e laranjas."
+  },
+  {
+    "id": "poltrona_reclinavel_couro",
+    "nome": "Poltrona Reclinável de Courino",
+    "categoria": "assento",
+    "assetId": "poltrona_couro_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 600,
+    "valorDeRevenda": 300,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["retro", "sala", "escritorio"],
+    "descricao": "Poltrona macia com revestimento sintético que range ao sentar e reclina em até três posições."
+  },
+  {
+    "id": "cadeira_escritorio_simples",
+    "nome": "Cadeira de Escritório Simples",
+    "categoria": "assento",
+    "assetId": "cadeira_escritorio_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 150,
+    "valorDeRevenda": 75,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "conforto": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["trabalho", "escritorio"],
+    "descricao": "Cadeira giratória básica com assento de espuma fina azul e estrutura metálica."
+  },
+  {
+    "id": "banquinho_madeira_cozinha",
+    "nome": "Banquinho de Cozinha",
+    "categoria": "assento",
+    "assetId": "banquinho_cozinha_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 50,
+    "valorDeRevenda": 25,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "conforto": 0
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["cozinha", "simples"],
+    "descricao": "Pequeno banco de madeira maciça torneada, comum nas cozinhas brasileiras da época."
+  },
+  {
+    "id": "cama_casal_jacaranda",
+    "nome": "Cama de Casal Jacarandá",
+    "categoria": "cama",
+    "assetId": "cama_casal_jacaranda_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 3 },
+    "preco": 1800,
+    "valorDeRevenda": 900,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 2
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["quarto", "casal"],
+    "descricao": "Estrutura robusta feita em madeira de jacarandá de lei com cabeceira trabalhada."
+  },
+  {
+    "id": "cama_solteiro_formica",
+    "nome": "Cama de Solteiro de Fórmica",
+    "categoria": "cama",
+    "assetId": "cama_solteiro_formica_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 3 },
+    "preco": 700,
+    "valorDeRevenda": 350,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 2,
+      "energia": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["quarto", "solteiro"],
+    "descricao": "Cama clássica juvenil com cabeceira revestida em fórmica imitando veios de madeira natural."
+  },
+  {
+    "id": "beliche_ferro_reforcado",
+    "nome": "Beliche de Ferro",
+    "categoria": "cama",
+    "assetId": "beliche_ferro_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 3 },
+    "preco": 900,
+    "valorDeRevenda": 450,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 1,
+      "energia": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["quarto", "juvenil", "compartilhado"],
+    "descricao": "Estrutura metálica tubular cinza com duas camas sobrepostas e escada lateral soldada."
+  },
+  {
+    "id": "tv_crt_20_polegadas",
+    "nome": "TV de Tubo 20 Polegadas",
+    "categoria": "tecnologia",
+    "assetId": "tv_tubo_20_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 1500,
+    "valorDeRevenda": 750,
+    "acoes": ["assistir_tv"],
+    "efeitos": {
+      "humor": 2,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["sala", "tecnologia", "lazer"],
+    "descricao": "Televisor a cores de tubo em gabinete de madeira com seletores giratórios para os canais VHF e UHF."
+  },
+  {
+    "id": "radio_gravador_cassete",
+    "nome": "Rádio Gravador Cassete",
+    "categoria": "tecnologia",
+    "assetId": "boombox_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 450,
+    "valorDeRevenda": 225,
+    "acoes": ["ouvir_musica"],
+    "efeitos": {
+      "humor": 2
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["portatil", "musica", "lazer"],
+    "descricao": "Rádio e tocador de fitas com alça metálica dobrável e antenas telescópicas para sintonia AM/FM."
+  },
+  {
+    "id": "toca_discos_vinil",
+    "nome": "Toca-Discos de Vinil",
+    "categoria": "tecnologia",
+    "assetId": "toca_discos_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 800,
+    "valorDeRevenda": 400,
+    "acoes": ["ouvir_musica"],
+    "efeitos": {
+      "humor": 3,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["sala", "musica", "retro"],
+    "descricao": "Aparelho de som toca-discos integrado com amplificador, tampa de acrílico fumê e agulha de reposição."
+  },
+  {
+    "id": "videocassete_vhs_4cabecas",
+    "nome": "Videocassete VHS 4 Cabeças",
+    "categoria": "tecnologia",
+    "assetId": "videocassete_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 1200,
+    "valorDeRevenda": 600,
+    "acoes": ["reproduzir_fita"],
+    "efeitos": {
+      "humor": 3,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["sala", "tecnologia", "lazer"],
+    "descricao": "Aparelho reprodutor de fitas cassete VHS com quatro cabeças de leitura para imagens mais nítidas."
+  },
+  {
+    "id": "geladeira_retro_marrom",
+    "nome": "Geladeira Retrô Marrom",
+    "categoria": "eletrodomestico",
+    "assetId": "geladeira_marrom_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 2000,
+    "valorDeRevenda": 1000,
+    "acoes": ["conservar_alimentos"],
+    "efeitos": {
+      "conforto": 2
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["cozinha", "eletro"],
+    "descricao": "Geladeira de porta única na cor marrom com congelador interno simples e puxador de trinco clássico."
+  },
+  {
+    "id": "fogao_4bocas_gas",
+    "nome": "Fogão a Gás 4 Bocas",
+    "categoria": "eletrodomestico",
+    "assetId": "fogao_gas_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 550,
+    "valorDeRevenda": 275,
+    "acoes": ["cozinhar"],
+    "efeitos": {
+      "conforto": 2
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["cozinha", "eletro"],
+    "descricao": "Fogão esmaltado branco de quatro bocas com acendimento manual por fósforos e forno a gás."
+  },
+  {
+    "id": "ventilador_mesa_retro",
+    "nome": "Ventilador de Mesa",
+    "categoria": "eletrodomestico",
+    "assetId": "ventilador_mesa_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 180,
+    "valorDeRevenda": 90,
+    "acoes": ["refrescar"],
+    "efeitos": {
+      "conforto": 1,
+      "energia": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["lazer", "casa"],
+    "descricao": "Ventilador de três pás de plástico azul, botão giratório e grade de proteção simples."
+  },
+  {
+    "id": "liquidificador_retro_copo_vidro",
+    "nome": "Liquidificador Copo de Vidro",
+    "categoria": "eletrodomestico",
+    "assetId": "liquidificador_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 120,
+    "valorDeRevenda": 60,
+    "acoes": ["bater_ingredientes"],
+    "efeitos": {
+      "conforto": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["cozinha", "eletro"],
+    "descricao": "Liquidificador de base cromada com copo de vidro pesado e 3 velocidades acionadas por teclas."
+  },
+  {
+    "id": "estante_livros_madeira",
+    "nome": "Estante de Madeira Modulada",
+    "categoria": "decoracao",
+    "assetId": "estante_madeira_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 1 },
+    "preco": 1100,
+    "valorDeRevenda": 550,
+    "acoes": [],
+    "efeitos": {
+      "statusSocial": 1,
+      "humor": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["sala", "decoracao"],
+    "descricao": "Estante de parede modulada de madeira escura com prateleiras de livros e nicho para TV de tubo."
+  },
+  {
+    "id": "abajur_cupula_tecido",
+    "nome": "Abajur com Cúpula de Tecido",
+    "categoria": "decoracao",
+    "assetId": "abajur_tecido_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 150,
+    "valorDeRevenda": 75,
+    "acoes": [],
+    "efeitos": {
+      "conforto": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["quarto", "sala", "decoracao"],
+    "descricao": "Luminária de cabeceira com base de cerâmica decorada e cúpula de tecido plissado bege."
+  },
+  {
+    "id": "quadro_natureza_morta",
+    "nome": "Quadro Natureza Morta",
+    "categoria": "decoracao",
+    "assetId": "quadro_flores_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 250,
+    "valorDeRevenda": 125,
+    "acoes": [],
+    "efeitos": {
+      "humor": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["sala", "decoracao"],
+    "descricao": "Pintura a óleo reproduzindo flores secas em um vaso de cerâmica, com moldura dourada trabalhada."
+  },
+  {
+    "id": "telefone_disco_baquelite",
+    "nome": "Telefone Fixo de Disco",
+    "categoria": "tecnologia",
+    "assetId": "telefone_disco_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 300,
+    "valorDeRevenda": 150,
+    "acoes": ["fazer_ligacao"],
+    "efeitos": {
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["comunicacao", "casa"],
+    "descricao": "Aparelho de telefone fixo analógico preto com discador rotativo mecânico e campainha de metal interna."
+  },
+  {
+    "id": "aparelho_fax_retro",
+    "nome": "Aparelho de Fax Térmico",
+    "categoria": "tecnologia",
+    "assetId": "aparelho_fax_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 1400,
+    "valorDeRevenda": 700,
+    "acoes": ["enviar_fax"],
+    "efeitos": {
+      "statusSocial": 2
+    },
+    "availability": { "startYear": 1985, "endYear": 1989 },
+    "tags": ["comunicacao", "escritorio", "tecnologia"],
+    "descricao": "Máquina de transmissão de fax por rolo de papel térmico, com monofone acoplado."
+  }
+]
