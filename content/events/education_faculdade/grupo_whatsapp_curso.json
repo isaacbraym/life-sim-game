@@ -102,5 +102,10 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "routine",
+  "eraDisponivel": {
+    "startYear": 2005
   }
 }

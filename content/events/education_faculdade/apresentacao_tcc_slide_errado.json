@@ -6,7 +6,10 @@
   "descricaoCurta": "No dia da apresentação final do TCC ou de um trabalho muito importante, você conecta o pendrive e abre o arquivo de slides errado na tela do projetor.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 26],
+    "idadeRange": [
+      18,
+      26
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_desespero_tcc",
@@ -35,7 +42,11 @@
           "maoDireita": "fechada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       }
@@ -52,30 +63,62 @@
         "opcoes": [
           {
             "texto": "Manter a postura, sorrir e fazer uma piada rápida integrando o meme na introdução do seu tema.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Correr até o notebook e fechar o arquivo na velocidade da luz fingindo falha técnica do sistema.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Desculpar-se repetidamente vermelho de vergonha e começar a tremer de nervoso.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "adicionar_flag", "flag": "trauma_tcc" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trauma_tcc"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "major"
 }

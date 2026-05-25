@@ -6,7 +6,10 @@
   "descricaoCurta": "Você vai morar em república. Dividir banheiro, cozinha e silêncio com pessoas que você não escolheu. Vai formar laços ou vai odiar metade deles. Às vezes as duas coisas.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [17, 21],
+    "idadeRange": [
+      17,
+      21
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "na_faculdade",
@@ -21,7 +24,10 @@
       "papel": "colega_republica",
       "tipo": "sempre_novo",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 17, "idadeMax": 25 }
+      "constraints": {
+        "idadeMin": 17,
+        "idadeMax": 25
+      }
     }
   ],
   "scene": {
@@ -34,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.35, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.35,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "desempacotando_exausto",
@@ -47,13 +57,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "colega_descontraido",
@@ -66,7 +84,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -90,30 +112,65 @@
           {
             "texto": "Propor uma reunião de regras. Organizar desde o início.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "mora_em_republica" },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mora_em_republica"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Ir com a maré. As regras aparecem quando precisam.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "mora_em_republica" },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mora_em_republica"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           },
           {
             "texto": "Estabelecer o quarto como território pessoal e minimizar contato.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "mora_em_republica" },
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "adicionar_flag", "flag": "perfil_introvertido" }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mora_em_republica"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perfil_introvertido"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "major"
 }

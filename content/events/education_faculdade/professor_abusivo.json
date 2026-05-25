@@ -6,8 +6,15 @@
   "descricaoCurta": "Ele humilhou alguém na frente da turma. Ou foi você. Tem professor que confunde autoridade com crueldade. Você precisa decidir o que faz com isso.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 22],
-    "requisitos": { "tipo": "flag", "flag": "na_faculdade", "presente": true },
+    "idadeRange": [
+      18,
+      22
+    ],
+    "requisitos": {
+      "tipo": "flag",
+      "flag": "na_faculdade",
+      "presente": true
+    },
     "peso": 14,
     "cooldownMeses": 30,
     "uniqueOnce": false
@@ -17,7 +24,10 @@
       "papel": "professor_abusivo",
       "tipo": "sempre_novo",
       "persistenciaApos": "descartavel",
-      "constraints": { "idadeMin": 35, "idadeMax": 65 }
+      "constraints": {
+        "idadeMin": 35,
+        "idadeMax": 65
+      }
     }
   ],
   "scene": {
@@ -30,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.35, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.35,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "aluno_humilhado_resistindo",
@@ -43,13 +57,21 @@
           "maoDireita": "fechada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.35, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.35,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "professor_arrogante_poder",
@@ -62,7 +84,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -85,32 +111,72 @@
         "opcoes": [
           {
             "texto": "Responder com calma e precisão. Não dar o braço a torcer.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "enfrentou_professor_abusivo" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "enfrentou_professor_abusivo"
+              }
             ]
           },
           {
             "texto": "Engolir e responder o que sabe. Sobreviver a aula.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Registrar reclamação na coordenação depois.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "reclamou_de_professor" },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "reclamou_de_professor"
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "routine"
 }

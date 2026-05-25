@@ -6,12 +6,24 @@
   "descricaoCurta": "Saiu uma vaga de intercâmbio. Ou estágio em outra cidade. Você tem a chance de sair do lugar onde sempre viveu por alguns meses. Assustador e tentador na mesma dose.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [19, 23],
+    "idadeRange": [
+      19,
+      23
+    ],
     "requisitos": {
       "tipo": "todos",
       "predicados": [
-        { "tipo": "flag", "flag": "na_faculdade", "presente": true },
-        { "tipo": "var", "caminho": "personagem.atributos.inteligencia", "operador": ">=", "valor": 11 }
+        {
+          "tipo": "flag",
+          "flag": "na_faculdade",
+          "presente": true
+        },
+        {
+          "tipo": "var",
+          "caminho": "personagem.atributos.inteligencia",
+          "operador": ">=",
+          "valor": 11
+        }
       ]
     },
     "peso": 15,
@@ -29,7 +41,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "decisao_grande_pela_frente",
@@ -42,7 +58,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -65,23 +85,53 @@
           {
             "texto": "Aceitar. Vai ser difícil e vai valer.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "fez_intercambio" },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 2 },
-              { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "fez_intercambio"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 2
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "inteligencia",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Recusar. Não é o momento certo.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "recusou_intercambio" },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "recusou_intercambio"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "major"
 }

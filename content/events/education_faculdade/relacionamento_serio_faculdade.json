@@ -6,12 +6,23 @@
   "descricaoCurta": "Não é como os namoros de escola. Você mora perto, tem autonomia, tem história. Esse relacionamento pode durar anos. Ou pode acabar em três meses. Mas você sente que é diferente.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 22],
+    "idadeRange": [
+      18,
+      22
+    ],
     "requisitos": {
       "tipo": "todos",
       "predicados": [
-        { "tipo": "flag", "flag": "na_faculdade", "presente": true },
-        { "tipo": "flag", "flag": "tem_namorado", "presente": false }
+        {
+          "tipo": "flag",
+          "flag": "na_faculdade",
+          "presente": true
+        },
+        {
+          "tipo": "flag",
+          "flag": "tem_namorado",
+          "presente": false
+        }
       ]
     },
     "peso": 20,
@@ -23,7 +34,10 @@
       "papel": "interesse_faculdade",
       "tipo": "sempre_novo",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 17, "idadeMax": 25 }
+      "constraints": {
+        "idadeMin": 17,
+        "idadeMax": 25
+      }
     }
   ],
   "scene": {
@@ -36,7 +50,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "conversa_intima_interessado",
@@ -49,13 +67,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.2,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "igualmente_interessado",
@@ -68,7 +94,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-20T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -91,28 +121,58 @@
           {
             "texto": "Assumir o relacionamento. Ir em frente.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "tem_namorado" },
-              { "tipo": "alterar_humor", "delta": 30 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tem_namorado"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 30
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Ir devagar. Sem pressa de nomear.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 20 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              }
             ]
           },
           {
             "texto": "Não está no momento certo pra relacionamento. Ser honesto.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-20T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-20T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-20T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "faculdade",
+  "narrativeWeight": "routine"
 }
