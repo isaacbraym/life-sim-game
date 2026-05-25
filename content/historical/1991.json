@@ -1,0 +1,50 @@
+{
+  "ano": 1991,
+  "eventos": [
+    {
+      "id": "1991_01_impeachment_inicio",
+      "manchete": "Rumores e denúncias graves no topo do poder começam a mobilizar a sociedade, com conversas sobre a destituição do presidente ganhando as ruas.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1991, "endYear": 1991 }
+    },
+    {
+      "id": "1991_02_hiperinflacao_cotidiano",
+      "manchete": "A inflação não dá trégua e os preços continuam mudando em ritmo veloz, forçando as famílias a gastarem o salário no mesmo dia para evitar perdas.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -80
+        }
+      ],
+      "eraDisponivel": { "startYear": 1991, "endYear": 1991 }
+    },
+    {
+      "id": "1991_03_abertura_comercial",
+      "manchete": "O mercado nacional se abre de vez para novidades estrangeiras, e os primeiros eletrodomésticos importados começam a aparecer nas vitrines.",
+      "tags": ["economia", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1991, "endYear": 1991 }
+    },
+    {
+      "id": "1991_04_shoppings_popularizacao",
+      "manchete": "Os grandes centros comerciais fechados com ar-condicionado se espalham pelas cidades, virando a nova febre de passeio de fim de semana.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1991, "endYear": 1991 }
+    },
+    {
+      "id": "1991_05_vinil_perda_espaco",
+      "manchete": "Os tradicionais bolachões pretos de vinil começam a sumir das prateleiras, dando espaço para novas mídias de áudio menores.",
+      "tags": ["cultura", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1991, "endYear": 1991 }
+    }
+  ]
+}
