@@ -11,6 +11,7 @@ import type { DadosNovoPersonagem } from '../ui/NewGameScreen';
 import type { DeathScreenProps } from '../ui/DeathScreen';
 import { useHudStore } from '../state/hudStore';
 import { useExplorationStore } from '../state/explorationStore';
+import { obterComodoEntrada } from '../content/locationCatalog';
 import { v4 as uuidv4 } from 'uuid';
 import type { SaveSlot } from '@lifesim/core';
 import type { ComodoDefinition } from '@core/schemas/location';
@@ -48,6 +49,7 @@ export function App(): React.JSX.Element {
   const [saves,        setSaves]        = useState<readonly SaveSlot[]>([]);
   const [bootCompleto, setBootCompleto] = useState<boolean>(false);
   const [erroCarregar, setErroCarregar] = useState<string | undefined>(undefined);
+  const comodoAtualId = useExplorationStore((estado) => estado.comodoAtualId);
 
   const {
     nomePersonagem,
@@ -79,7 +81,8 @@ export function App(): React.JSX.Element {
 
   const aoLocalEscolhido = useCallback((localId: string, comodoId: string) => {
     void transicionarTelaAtiva('exploracao', () => {
-      useExplorationStore.getState().entrarEmExploracao(localId, comodoId);
+      const comodoEntradaId = obterComodoEntrada(localId) ?? comodoId;
+      useExplorationStore.getState().entrarEmExploracao(localId, comodoEntradaId);
     });
   }, [transicionarTelaAtiva]);
 
@@ -296,8 +299,8 @@ export function App(): React.JSX.Element {
               {telaAtiva === 'mapa' && (
                 <WorldMapScreen onLocalEscolhido={aoLocalEscolhido} />
               )}
-              {telaAtiva === 'exploracao' && (
-                <ExplorationScene onSaida={aoSaidaExploracao} />
+              {telaAtiva === 'exploracao' && comodoAtualId !== undefined && (
+                <ExplorationScene comodoId={comodoAtualId} onSaida={aoSaidaExploracao} />
               )}
               {telaAtiva === 'carregando' && (
                 <div className="vida-app__carregando" aria-label="Carregando" />

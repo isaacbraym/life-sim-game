@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Application, Container, Graphics, Text } from 'pixi.js';
 import { gsap } from 'gsap';
@@ -10,6 +10,7 @@ import { resolverAcao } from '@core/interaction/ActionResolver';
 import { interactionLock } from '@core/interaction/InteractionLock';
 import { CharacterController } from '@game/stage/CharacterController';
 import { RoomController } from '@game/stage/RoomController';
+import { obterComodo } from '@game/content/locationCatalog';
 import { useExplorationStore } from '@game/state/explorationStore';
 import { useHudStore } from '@game/state/hudStore';
 import { ActionBubble } from '@game/ui/ActionBubble';
@@ -18,57 +19,9 @@ import { mostrarFeedback } from '@game/ui/VisualFeedback';
 type DestinoSaida = ComodoDefinition['pontosDeSaida'][number]['destino'];
 
 export type ExplorationSceneProps = {
+  readonly comodoId: string;
   readonly onSaida: (destino: DestinoSaida) => void;
 };
-
-const COMODO_TESTE = {
-  id: 'sala_teste',
-  localId: 'casa',
-  nome: 'Sala de Teste',
-  backgroundAsset: 'placeholder',
-  tamanho: { largura: 960, altura: 540 },
-  navZonas: [
-    {
-      id: 'zona_principal',
-      poligono: [
-        { x: 80, y: 280 },
-        { x: 880, y: 280 },
-        { x: 880, y: 460 },
-        { x: 80, y: 460 },
-      ],
-    },
-  ],
-  pontosDeSaida: [
-    {
-      id: 'saida_mapa',
-      posicao: { x: 50, y: 380 },
-      destino: { tipo: 'mapa' },
-      rotulo: 'Sair',
-    },
-  ],
-  objetos: [
-    {
-      id: 'sofa',
-      tipo: 'assento',
-      posicao: { x: 300, y: 310 },
-      tamanho: { largura: 120, altura: 60 },
-      posicaoDeInteracao: { x: 360, y: 380 },
-      assetId: 'placeholder',
-      acoes: ['descansar', 'conversar'],
-    },
-    {
-      id: 'tv',
-      tipo: 'entretenimento',
-      posicao: { x: 600, y: 290 },
-      tamanho: { largura: 80, altura: 50 },
-      posicaoDeInteracao: { x: 600, y: 370 },
-      assetId: 'placeholder',
-      acoes: ['assistir_tv'],
-    },
-  ],
-  npcsElegiveis: [],
-  ambientTags: ['casa'],
-} satisfies ComodoDefinition;
 
 function criarPersonagemPlaceholder(): Container {
   const personagem = new Container();
@@ -132,7 +85,8 @@ function estadoAtualDoJogo(): EstadoDeJogo {
   };
 }
 
-export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.Element {
+export function ExplorationScene({ comodoId, onSaida }: ExplorationSceneProps): React.JSX.Element {
+  const comodo = useMemo(() => obterComodo(comodoId), [comodoId]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const appRef = useRef<Application | undefined>(undefined);
   const roomControllerRef = useRef<RoomController | undefined>(undefined);
@@ -208,13 +162,13 @@ export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (canvas === null || appRef.current !== undefined) return;
+    if (canvas === null || appRef.current !== undefined || comodo === undefined) return;
 
     let desmontado = false;
     const app = new Application();
     const personagem = criarPersonagemPlaceholder();
     const characterController = new CharacterController();
-    const fade = criarOverlayFade(COMODO_TESTE);
+    const fade = criarOverlayFade(comodo);
     const roomController = new RoomController({
       onObjetoClicado: (objeto) => {
         const estado = useExplorationStore.getState();
@@ -261,8 +215,8 @@ export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.
 
     void app.init({
       canvas,
-      width: COMODO_TESTE.tamanho.largura,
-      height: COMODO_TESTE.tamanho.altura,
+      width: comodo.tamanho.largura,
+      height: comodo.tamanho.altura,
       backgroundColor: 0x11151c,
       antialias: true,
       autoDensity: true,
@@ -280,7 +234,7 @@ export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.
       fadeRef.current = fade;
 
       app.stage.sortableChildren = true;
-      roomController.carregarComodo(app, COMODO_TESTE);
+      roomController.carregarComodo(app, comodo);
       app.stage.addChild(personagem);
       app.stage.addChild(fade);
     });
@@ -300,7 +254,23 @@ export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.
       fadeRef.current = undefined;
       useExplorationStore.getState().sairDeExploracao();
     };
-  }, [limparTimers, onSaida]);
+  }, [comodo, limparTimers, onSaida]);
+
+  if (comodo === undefined) {
+    return (
+      <div style={estilos.erro}>
+        <h2 style={estilos.erroTitulo}>Comodo nao encontrado</h2>
+        <p style={estilos.erroTexto}>{comodoId}</p>
+        <button
+          type="button"
+          style={estilos.erroBotao}
+          onClick={() => onSaida({ tipo: 'mapa' })}
+        >
+          Voltar ao mapa
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div style={estilos.raiz}>
@@ -335,5 +305,39 @@ const estilos = {
     position: 'absolute',
     inset: 0,
     pointerEvents: 'none',
+  },
+  erro: {
+    width: '100%',
+    height: '100%',
+    minHeight: 540,
+    display: 'grid',
+    alignContent: 'center',
+    justifyItems: 'center',
+    gap: 12,
+    padding: 24,
+    background: '#11151c',
+    color: '#f5f0e8',
+    textAlign: 'center',
+  },
+  erroTitulo: {
+    margin: 0,
+    fontSize: 24,
+    fontWeight: 700,
+  },
+  erroTexto: {
+    margin: 0,
+    color: '#cbd5e1',
+    fontSize: 14,
+  },
+  erroBotao: {
+    marginTop: 8,
+    border: '1px solid rgba(255, 255, 255, 0.18)',
+    borderRadius: 8,
+    background: '#243043',
+    color: '#f5f0e8',
+    cursor: 'pointer',
+    font: 'inherit',
+    fontWeight: 700,
+    padding: '10px 14px',
   },
 } satisfies Record<string, React.CSSProperties>;
