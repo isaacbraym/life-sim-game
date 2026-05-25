@@ -1,0 +1,50 @@
+{
+  "ano": 1993,
+  "eventos": [
+    {
+      "id": "1993_01_plano_real_preparacao",
+      "manchete": "Um novo plano econômico começa a ser desenhado nos bastidores, com promessas de debelar a inflação de forma definitiva sem congelamentos.",
+      "tags": ["economia", "politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1993, "endYear": 1993 }
+    },
+    {
+      "id": "1993_02_urv_cotidiano",
+      "manchete": "A Unidade Real de Valor (URV) passa a constar nas etiquetas dos produtos e nos holerites, funcionando como um indexador temporário no dia a dia.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -40
+        }
+      ],
+      "eraDisponivel": { "startYear": 1993, "endYear": 1993 }
+    },
+    {
+      "id": "1993_03_tv_assinatura_expansao",
+      "manchete": "A oferta de televisão por assinatura se expande nas capitais, trazendo canais de desenhos e esportes 24 horas por dia.",
+      "tags": ["entretenimento", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1993, "endYear": 1993 }
+    },
+    {
+      "id": "1993_04_videogame_16bit_sucesso",
+      "manchete": "Os consoles de videogame de 16 bits vivem o seu auge no país, com locadoras cheias de crianças disputando fitas nos fins de semana.",
+      "tags": ["entretenimento", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1993, "endYear": 1993 }
+    },
+    {
+      "id": "1993_05_computador_domestico",
+      "manchete": "Os primeiros computadores pessoais começam a entrar timidamente nas salas e quartos das famílias brasileiras, substituindo os antigos videogames na promessa de estudos.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1993, "endYear": 1993 }
+    }
+  ]
+}
