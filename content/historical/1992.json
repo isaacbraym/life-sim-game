@@ -1,0 +1,50 @@
+{
+  "ano": 1992,
+  "eventos": [
+    {
+      "id": "1992_01_caras_pintadas",
+      "manchete": "Multidões de jovens com os rostos pintados de verde e amarelo tomam as avenidas do país exigindo mudanças e ética na política.",
+      "tags": ["politica", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1992, "endYear": 1992 }
+    },
+    {
+      "id": "1992_02_cpi_politica",
+      "manchete": "Uma grande comissão de inquérito em Brasília investiga esquemas de corrupção, parando a nação em frente à TV a cada depoimento bombástico.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1992, "endYear": 1992 }
+    },
+    {
+      "id": "1992_03_plano_fracasso",
+      "manchete": "O novo pacote de medidas econômicas falha em conter a alta dos preços, gerando descontentamento generalizado e incerteza no comércio.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -70
+        }
+      ],
+      "eraDisponivel": { "startYear": 1992, "endYear": 1992 }
+    },
+    {
+      "id": "1992_04_cd_players",
+      "manchete": "Os tocadores de discos compactos a laser ganham espaço nas lojas brasileiras, trazendo alta fidelidade sonora e o fim dos chiados dos vinis.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1992, "endYear": 1992 }
+    },
+    {
+      "id": "1992_05_pagers",
+      "manchete": "Dispositivos de mensagens de texto de bolso (os bipes) começam a se tornar o novo símbolo de status entre profissionais e executivos nas grandes cidades.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1992, "endYear": 1992 }
+    }
+  ]
+}
