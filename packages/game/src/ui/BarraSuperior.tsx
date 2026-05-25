@@ -8,6 +8,7 @@
 import React from 'react';
 import { IconBase } from './IconBase';
 import { BotaoAvancarTempo } from './BotaoAvancarTempo';
+import { useExplorationStore } from '../state/explorationStore';
 import './BarraSuperior.css';
 
 type PropsBarraSuperior = {
@@ -45,6 +46,8 @@ export function BarraSuperior({
   aoAbrirSave,
   aoAbrirConfig,
 }: PropsBarraSuperior): React.JSX.Element {
+  const modoExploracao = useExplorationStore((estado) => estado.modoExploracao);
+
   return (
     <header className="vida-topbar" role="banner">
       {aoNovoJogo && (
@@ -80,7 +83,7 @@ export function BarraSuperior({
         </span>
       </div>
 
-      {ritmo !== undefined && aoAvancarTempo !== undefined && (
+      {!modoExploracao && ritmo !== undefined && aoAvancarTempo !== undefined && (
         <BotaoAvancarTempo
           ritmo={ritmo}
           aoAvancar={aoAvancarTempo}

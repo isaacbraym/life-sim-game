@@ -1,4 +1,5 @@
 import React from 'react';
+import { useExplorationStore } from '../state/explorationStore';
 import './BotaoAvancarTempo.css';
 
 type PropsBotaoAvancarTempo = {
@@ -17,7 +18,13 @@ export function BotaoAvancarTempo({
   ritmo,
   aoAvancar,
   desabilitado,
-}: PropsBotaoAvancarTempo): React.JSX.Element {
+}: PropsBotaoAvancarTempo): React.JSX.Element | null {
+  const modoExploracao = useExplorationStore((estado) => estado.modoExploracao);
+
+  if (modoExploracao) {
+    return null;
+  }
+
   return (
     <button
       className="btn-avancar-tempo"
