@@ -1,0 +1,50 @@
+{
+  "ano": 2005,
+  "eventos": [
+    {
+      "id": "2005_01_mensalao_crise",
+      "manchete": "Denúncias de repasses regulares de recursos a parlamentares provocam uma das maiores crises políticas da história recente do país.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2005, "endYear": 2005 }
+    },
+    {
+      "id": "2005_02_greve_policiais",
+      "manchete": "Paralisações de forças de segurança pública em grandes metrópoles geram sensação de insegurança e afetam o comércio local.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -30
+        }
+      ],
+      "eraDisponivel": { "startYear": 2005, "endYear": 2005 }
+    },
+    {
+      "id": "2005_03_youtube_chega",
+      "manchete": "Uma nova plataforma internacional de compartilhamento de vídeos curtos em formato digital começa a se popularizar no Brasil.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2005, "endYear": 2005 }
+    },
+    {
+      "id": "2005_04_celular_comum",
+      "manchete": "O uso de telefones celulares se espalha massivamente, deixando de ser um item de elite e virando ferramenta essencial de trabalho diário.",
+      "tags": ["tecnologia", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2005, "endYear": 2005 }
+    },
+    {
+      "id": "2005_05_orkut_novidades",
+      "manchete": "Recursos visuais e jogos simples em redes sociais começam a prender a atenção das pessoas no horário de trabalho e estudo.",
+      "tags": ["entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2005, "endYear": 2005 }
+    }
+  ]
+}
