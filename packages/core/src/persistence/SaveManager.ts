@@ -4,6 +4,11 @@ import type { Character } from '../schemas/character';
 import type { Npc } from '../schemas/npc';
 import { SaveSlot as SaveSlotSchema } from '../schemas/save';
 import { migrarSave } from './Migracoes';
+import type {
+  RegistroLocationState,
+  RegistroProgressao,
+  RegistroHomeSave,
+} from './GameDB';
 
 export async function listarSaves(): Promise<SaveSlot[]> {
   const saves = await db.saves.toArray();
@@ -259,5 +264,29 @@ export async function solicitarPersistenciaStorage(): Promise<boolean> {
   const jaEhPersistente = await navigator.storage.persisted();
   if (jaEhPersistente) return true;
   return navigator.storage.persist();
+}
+
+export async function salvarLocationState(estado: RegistroLocationState): Promise<void> {
+  await db.locationState.put(estado);
+}
+
+export async function carregarLocationState(saveId: string): Promise<RegistroLocationState | undefined> {
+  return db.locationState.get(saveId);
+}
+
+export async function salvarProgressao(progressao: RegistroProgressao): Promise<void> {
+  await db.progressao.put(progressao);
+}
+
+export async function carregarProgressao(saveId: string): Promise<RegistroProgressao | undefined> {
+  return db.progressao.get(saveId);
+}
+
+export async function salvarHomeSave(homeSave: RegistroHomeSave): Promise<void> {
+  await db.homeSave.put(homeSave);
+}
+
+export async function carregarHomeSave(saveId: string): Promise<RegistroHomeSave | undefined> {
+  return db.homeSave.get(saveId);
 }
 
