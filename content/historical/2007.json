@@ -1,0 +1,50 @@
+{
+  "ano": 2007,
+  "eventos": [
+    {
+      "id": "2007_01_iphone_eua",
+      "manchete": "O lançamento de um telefone revolucionário com tela totalmente sensível ao toque nos Estados Unidos domina as conversas de tecnologia.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2007, "endYear": 2007 }
+    },
+    {
+      "id": "2007_02_bolsa_subindo",
+      "manchete": "O mercado de ações brasileiro atinge recordes sucessivos em meio ao otimismo econômico global e à entrada de capital externo.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 50
+        }
+      ],
+      "eraDisponivel": { "startYear": 2007, "endYear": 2007 }
+    },
+    {
+      "id": "2007_03_pac_anunciado",
+      "manchete": "É lançado um grande programa governamental focado em acelerar investimentos de infraestrutura em estradas, energia e saneamento.",
+      "tags": ["politica", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2007, "endYear": 2007 }
+    },
+    {
+      "id": "2007_04_reality_shows",
+      "manchete": "Programas de televisão baseados em confinamento e votação do público geram audiência recorde e viram tema de debates nas ruas e na internet.",
+      "tags": ["entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2007, "endYear": 2007 }
+    },
+    {
+      "id": "2007_05_banda_larga_cresce",
+      "manchete": "Os planos de internet residencial de alta velocidade barateiam, permitindo o download de músicas e vídeos mais pesados sem longas esperas.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2007, "endYear": 2007 }
+    }
+  ]
+}
