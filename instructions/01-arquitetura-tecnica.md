@@ -2,387 +2,368 @@
 
 ## Princípio fundamental
 
-**100% código, sem game engine.** O projeto não usa Unity, Godot, Unreal, Phaser, ct.js ou similares. O desenvolvedor não vai mexer com editor visual de engine. Toda lógica, render e estado vivem em TypeScript.
+**100% código, sem game engine.** O projeto não usa Unity, Godot, Unreal, Phaser, ct.js ou similares. Toda lógica, render e estado vivem em TypeScript.
 
-A justificativa: o requisito de geração procedural via JSON declarativo, com rig invisível adaptável e personagens variados gerados em tempo de execução, é fundamentalmente incompatível com workflows de engine baseados em editor visual. Engines obrigam um workflow editor-first; este projeto é code-first.
+A justificativa: o requisito de exploração point-and-click declarativa com rig invisível adaptável, geração procedural de ambientes via JSON e personagens variados gerados em runtime é fundamentalmente incompatível com workflows de engine baseados em editor visual.
 
 ## Stack frontend (jogo + dev tools)
 
 | Camada | Tecnologia | Versão alvo | Por quê |
 |---|---|---|---|
-| Linguagem | TypeScript | 5.3+ strict | Type safety crítico para schemas de cena, rig, eventos |
+| Linguagem | TypeScript | 5.3+ strict | Type safety crítico para schemas de cena, rig, eventos, cômodos |
 | Build / dev server | Vite | 5+ | HMR rápido, `vite-plugin-pwa`, ESM nativo |
-| UI framework | React | 18+ | Shell de UI, painéis, HUD, dev tools |
-| Renderer 2D | PixiJS | v8 | WebGL/WebGPU, mesh deformável, Graphics Bézier |
-| State management | Zustand | 4+ | Leve, sem boilerplate, integra bem com Pixi |
-| Validação de schema | Zod | 3+ | Source-of-truth única para schemas (poses, cenas, eventos) |
+| UI framework | React | 18+ | Shell de UI, HUD, ActionBubble overlay, painéis, dev tools |
+| Renderer 2D | PixiJS | v8.7+ | WebGL/WebGPU, RenderLayer com z-sorting, mesh deformável |
+| Tweens / animação | GSAP | 3.13+ | Movimento click-to-move, transições de cômodo, feedback visual. **100% grátis para uso comercial desde abr/2025** |
+| UI in-canvas | @pixi/ui | v2.x | Componentes PixiJS nativos para HUD permanente (barras, botões in-world). v2.x = compatível com PixiJS v8 |
+| State management | Zustand | 4+ | Fonte da verdade única; PixiJS lê via subscribe imperativo, React via hooks |
+| Validação de schema | Zod | 3+ | Source-of-truth para todos os schemas (poses, cenas, eventos, cômodos, ações, móveis) |
 | Persistência local | Dexie.js | 4+ | Wrapper IndexedDB com schema migrations |
 | PWA | vite-plugin-pwa + Workbox | atual | Service worker, manifest, cache strategies |
 | Localização | i18next | 23+ | Pt-BR canônico, EN-US planejado |
 
 **Bibliotecas explicitamente proibidas:**
-- Spine runtime, DragonBones runtime, Live2D Cubism (formato proprietário, custo, ou abandono)
-- `localStorage`/`sessionStorage` para save principal (apenas para flags efêmeras)
-- jQuery, Lodash inteiro (use `lodash-es` com tree-shaking se realmente precisar)
+- Spine runtime, DragonBones runtime, Live2D Cubism
+- `localStorage`/`sessionStorage` para save principal
+- jQuery, Lodash inteiro
 - Three.js (este é 2.5D, não 3D)
+- pixi-projection (abandonado no v6, sem suporte v8)
+- easystar.js / pathfinding.js (sala única com interactionPoints declarados não precisa de pathfinding)
+- matter.js / planck.js (sem física dinâmica = sem necessidade; AABB manual cobre furniture placement)
+- pixi-isometric-tilemaps / traviso.js (isométrico clássico 45°, incompatível com oblíqua 15°)
 - Qualquer game engine
 
 ## Stack mobile (fase 4)
 
-- **Capacitor 6+** como wrapper para iOS e Android. Justificativa: arquitetura "native project first" (gera projetos Xcode e Android Studio reais), plugins maduros para IAP/share/haptics, transição PWA → Capacitor é literalmente `npx cap init && npx cap add ios android`.
-- **Bubblewrap (TWA)** como alternativa Android-only para Play Store mais econômica.
-
-Tauri considerado e descartado para mobile (mobile beta ainda imaturo em 2026). Reservado para eventual build desktop nativo na Fase 5.
+Capacitor 6+ como wrapper para iOS e Android.
 
 ## Stack backend (fase 4)
 
-- **FastAPI** (Python 3.12+) para API REST de auth e sync de saves
-- **PostgreSQL 16+** com extensão JSONB para armazenar saves complexos
-- **pgvector** opcional para "encontrar eventos similares" via embeddings
-- **Auth.js** ou **Supabase Auth** para autenticação
-- **Cloudflare R2** ou **AWS S3** para storage de assets pesados (avatars compartilhados, screenshots)
-
-Schemas compartilhados entre frontend e backend: Zod no frontend → JSON Schema canônico via `zod-to-json-schema` → Pydantic no backend (geração automática no build).
-
-## Hospedagem e deploy
-
-| Recurso | Serviço | Custo estimado |
-|---|---|---|
-| PWA (fase 1-3) | Cloudflare Pages (free tier) | US$ 0 |
-| Domínio | Cloudflare Registrar ou Registro.br | ~US$ 15-30/ano |
-| Backend (fase 4) | Hetzner VPS CX22 ou Fly.io free tier | ~US$ 5/mês ou free |
-| Storage backend | Cloudflare R2 | <US$ 5/mês para baixo volume |
-| Apple Developer Program | Apple | US$ 99/ano |
-| Google Play Developer | Google | US$ 25 (taxa única) |
-| Anthropic API (dev-time) | Anthropic | ~US$ 100-300 acumulado durante todo o desenvolvimento |
-| **Total ano 1** | | **<US$ 200** |
+FastAPI (Python 3.12+), PostgreSQL 16+, Cloudflare R2 para assets.
 
 ## Monorepo: estrutura PNPM workspaces
 
-Estrutura escolhida: **monorepo com PNPM workspaces**, sem Turborepo ainda (overhead desnecessário para solo dev no início). Migrar para Turborepo só se o tempo de build cumulativo ficar dolorido.
-
 ```
 life-sim-game/
-├── package.json                    # workspace root, scripts orquestradores
+├── package.json
 ├── pnpm-workspace.yaml
-├── tsconfig.base.json              # config compartilhada
-├── .nvmrc                          # Node 20+ obrigatório
+├── tsconfig.base.json
+├── .nvmrc                          # Node 20+
 ├── .gitignore
-├── .github/
-│   └── workflows/
-│       ├── ci.yml                  # lint + typecheck + test em PRs
-│       └── deploy-preview.yml      # deploy Cloudflare Pages em push
+├── .github/workflows/
+│   ├── ci.yml
+│   └── deploy-preview.yml
 │
 ├── packages/
-│   ├── core/                       # motor reutilizável
+│   ├── core/                       # motor reutilizável (sem dep de React)
 │   ├── game/                       # app principal (o jogo)
-│   └── dev-tools/                  # ferramentas internas
+│   └── dev-tools/                  # ferramentas internas (nunca em produção)
 │
 ├── content/                        # banco de conteúdo versionado em Git
 │   ├── events/
 │   ├── poses/
 │   ├── historical/
+│   ├── locations/                  # NEW: definições de locais e cômodos
+│   ├── furniture/                  # NEW: catálogo de móveis por era
+│   ├── eras/                       # NEW: EraDefinition por década
 │   └── presets/
 │
-├── scripts/                        # automação Python/Node CLI
-└── docs/                           # documentação técnica viva
+├── scripts/
+└── docs/
 ```
 
 ### packages/core/ — motor reutilizável
 
-Contém toda a lógica reutilizada entre o jogo final e as dev tools. Sem dependência de React (pode ser usado em qualquer host: jogo, validador, simulador headless).
+Sem dependência de React. Usado por jogo, dev tools e CLI de conteúdo.
 
 ```
-packages/core/
-├── package.json
-├── tsconfig.json
-└── src/
-    ├── index.ts                    # entry barrel
-    ├── rig/
-    │   ├── Skeleton.ts             # 15 joints, FK
-    │   ├── Joint.ts                # tipo Joint e helpers
-    │   ├── ForwardKinematics.ts
-    │   ├── constraints.ts          # ranges anatômicos por joint
-    │   └── index.ts
-    ├── ik/
-    │   ├── TwoBoneIK.ts            # solver analítico
-    │   ├── FABRIK.ts               # solver iterativo
-    │   └── index.ts
-    ├── silhouette/
-    │   ├── BezierSegment.ts        # geração de path por segmento
-    │   ├── BodyProfile.ts          # presets de proporção
-    │   └── index.ts
-    ├── mesh/
-    │   ├── MeshSkinning.ts         # vertex deformation manual
-    │   └── index.ts
-    ├── schemas/
-    │   ├── pose.ts                 # Zod Pose
-    │   ├── scene.ts                # Zod Scene
-    │   ├── event.ts                # Zod Event
-    │   ├── character.ts            # Zod Character
-    │   ├── npc.ts                  # Zod Npc + tags
-    │   ├── predicate.ts            # PredicateTree grammar
-    │   └── index.ts
-    ├── events/
-    │   ├── EventLoader.ts
-    │   ├── PredicateEvaluator.ts
-    │   ├── EventPool.ts
-    │   ├── ChoiceResolver.ts
-    │   └── index.ts
-    ├── rpg/
-    │   ├── Attributes.ts
-    │   ├── D20Roll.ts
-    │   ├── Modifiers.ts
-    │   └── index.ts
-    ├── npc/
-    │   ├── NpcRoster.ts
-    │   ├── NpcMatcher.ts
-    │   ├── NpcGenerator.ts
-    │   ├── Aging.ts
-    │   └── index.ts
-    ├── persistence/
-    │   ├── GameDB.ts               # classe Dexie principal
-    │   ├── migrations/
-    │   │   ├── v1.ts
-    │   │   └── v2.ts
-    │   ├── exporters.ts            # JSON export/import
-    │   └── index.ts
-    └── render/
-        ├── RigRenderer.ts          # bridge para PixiJS
-        ├── SceneRenderer.ts
-        ├── ExpressionRenderer.ts
-        └── index.ts
+packages/core/src/
+├── index.ts
+├── rig/
+│   ├── Skeleton.ts                 # 15 joints, FK
+│   ├── Joint.ts
+│   ├── ForwardKinematics.ts
+│   ├── constraints.ts
+│   ├── OrientacaoPersonagem.ts     # NEW: enum + configs para 4 orientações
+│   └── index.ts
+├── ik/
+│   ├── TwoBoneIK.ts
+│   ├── FABRIK.ts
+│   └── index.ts
+├── silhouette/
+│   ├── BezierSegment.ts
+│   ├── BodyProfile.ts              # EXTENDED: perfis por orientação (frontal, costas, perfil)
+│   └── index.ts
+├── schemas/
+│   ├── pose.ts
+│   ├── scene.ts
+│   ├── event.ts                    # EXTENDED: localContextId?, narrativeWeight?
+│   ├── character.ts                # EXTENDED: faseDeVidaAtual, origemFamiliar
+│   ├── npc.ts
+│   ├── predicate.ts
+│   ├── action.ts                   # NEW: ActionDefinition completo
+│   ├── location.ts                 # NEW: LocationDefinition + ComodoDefinition
+│   ├── furniture.ts                # NEW: FurnitureDefinition + availability
+│   ├── era.ts                      # NEW: EraDefinition + YearContext
+│   ├── lifephase.ts                # NEW: LifePhaseDefinition
+│   ├── birthprofile.ts             # NEW: BirthProfile + OriginProfile
+│   └── index.ts
+├── events/
+│   ├── EventLoader.ts
+│   ├── PredicateEvaluator.ts
+│   ├── EventPool.ts
+│   ├── ChoiceResolver.ts           # mantido para eventos pool clássicos
+│   └── index.ts
+├── interaction/                    # NEW: sistema de interação
+│   ├── ActionResolver.ts           # orquestrador único (direct + check)
+│   ├── ProgressionTracker.ts       # contadores de hábito por período
+│   ├── EffectEngine.ts             # aplica Effect[] ao GameState
+│   ├── InteractionLock.ts          # controla bloqueio de input
+│   └── index.ts
+├── rpg/
+│   ├── Attributes.ts
+│   ├── D20Roll.ts
+│   ├── Modifiers.ts
+│   └── index.ts
+├── npc/
+│   ├── NpcRoster.ts
+│   ├── NpcMatcher.ts
+│   ├── NpcGenerator.ts
+│   ├── Aging.ts
+│   └── index.ts
+├── lifephase/                      # NEW: fases da vida
+│   ├── LifePhaseManager.ts
+│   ├── phases.ts                   # definições das fases (bebe, crianca, adolescente...)
+│   └── index.ts
+├── era/                            # NEW: sistema de época
+│   ├── EraResolver.ts              # resolve o que está disponível dado um ano
+│   ├── YearContext.ts
+│   └── index.ts
+├── log/                            # NEW: sistema de log em 5 camadas
+│   ├── LifeLog.ts
+│   ├── MonthlyLog.ts
+│   └── index.ts
+├── persistence/
+│   ├── GameDB.ts                   # EXTENDED: novas tabelas
+│   ├── migrations/
+│   │   ├── v1.ts
+│   │   ├── v2.ts
+│   │   └── v3.ts                   # NEW: tabelas de location, furniture, progression
+│   ├── exporters.ts
+│   └── index.ts
+└── render/
+    ├── RigRenderer.ts              # EXTENDED: suporte a 4 orientações
+    ├── SceneRenderer.ts            # EXTENDED: render de cômodo com z-sorting
+    ├── RoomRenderer.ts             # NEW: renderiza ComodoDefinition completo
+    ├── ZSorter.ts                  # NEW: RenderLayer com sortFunction por Y
+    ├── ExpressionRenderer.ts
+    └── index.ts
 ```
 
 ### packages/game/ — app principal
 
 ```
-packages/game/
-├── package.json
-├── tsconfig.json
-├── vite.config.ts                  # com vite-plugin-pwa
-├── index.html
-├── public/
-│   ├── manifest.webmanifest
-│   ├── icons/                      # PWA icons
-│   ├── splash/                     # splash screens iOS
-│   └── fonts/
-└── src/
-    ├── main.tsx                    # bootstrap React
-    ├── app/
-    │   ├── App.tsx
-    │   ├── routes.tsx
-    │   └── providers.tsx           # Zustand, i18n, theme
-    ├── screens/
-    │   ├── TitleScreen.tsx
-    │   ├── CharacterCreatorScreen.tsx
-    │   ├── GameLoopScreen.tsx
-    │   ├── SettingsScreen.tsx
-    │   └── DeathScreen.tsx
-    ├── ui/
-    │   ├── Hud.tsx                 # barra de atributos, idade, dinheiro
-    │   ├── EventLog.tsx
-    │   ├── NpcPanel.tsx            # 5 abas
-    │   ├── ChoiceDialog.tsx
-    │   └── ActivityMenu.tsx
-    ├── stage/
-    │   ├── PixiStage.tsx           # React component wrapping PIXI.Application
-    │   ├── SceneController.ts
-    │   └── usePixiApp.ts           # hook
-    ├── state/
-    │   ├── saveStore.ts            # Zustand: estado do save atual
-    │   ├── settingsStore.ts        # Zustand: configurações persistidas
-    │   ├── uiStore.ts              # Zustand: estado efêmero da UI
-    │   └── index.ts
-    ├── audio/
-    │   ├── SfxPlayer.ts
-    │   └── MusicManager.ts
-    ├── i18n/
-    │   ├── pt-BR.json
-    │   ├── en-US.json
-    │   └── config.ts
-    └── styles/
-        └── globals.css
+packages/game/src/
+├── main.tsx
+├── app/
+│   ├── App.tsx
+│   ├── routes.tsx
+│   └── providers.tsx
+├── screens/
+│   ├── TitleScreen.tsx
+│   ├── NewGameScreen.tsx           # EXTENDED: BirthProfile + OriginProfile
+│   ├── WorldMapScreen.tsx          # NEW: mapa de locais clicáveis
+│   ├── ExplorationScene.tsx        # NEW: cômodo explorável com PixiJS
+│   ├── GameLoopScreen.tsx          # wrapper que orquestra Map ↔ Exploration
+│   ├── SettingsScreen.tsx
+│   └── DeathScreen.tsx
+├── ui/
+│   ├── Hud.tsx                     # EXTENDED: modo exploração vs modo mapa
+│   ├── ActionBubble.tsx            # NEW: menu contextual sobre canvas
+│   ├── VisualFeedback.tsx          # NEW: floating labels (+Força, -Energia)
+│   ├── LifeLogPanel.tsx            # NEW: log narrativo em 5 camadas
+│   ├── FurnitureCatalogUI.tsx      # NEW: sidebar de compra de móveis
+│   ├── EventLog.tsx                # mantido, absorvido pelo LifeLog
+│   ├── NpcPanel.tsx                # 5 abas
+│   └── ActivityMenu.tsx            # DEPRECATED: substituído por ActionBubble
+├── stage/
+│   ├── PixiStage.tsx               # React component wrapping PIXI.Application
+│   ├── RoomController.ts           # NEW: controla cômodo atual (enter/exit)
+│   ├── CharacterController.ts      # NEW: movimento click-to-move via GSAP
+│   ├── InteractableHighlight.ts    # NEW: hover highlight em objetos
+│   ├── SceneController.ts          # EXTENDED
+│   └── usePixiApp.ts
+├── state/
+│   ├── saveStore.ts                # EXTENDED: currentLocationId, currentRoomId, lifephase
+│   ├── explorationStore.ts         # NEW: estado efêmero da exploração
+│   ├── settingsStore.ts
+│   ├── uiStore.ts                  # EXTENDED: bubblePos, bubbleActions, interactionLock
+│   └── index.ts
+├── audio/
+│   ├── SfxPlayer.ts
+│   └── MusicManager.ts
+├── i18n/
+│   ├── pt-BR.json
+│   ├── en-US.json
+│   └── config.ts
+└── styles/
+    └── globals.css
 ```
 
 ### packages/dev-tools/ — ferramentas internas
 
-Apps separados que rodam em dev local. Nunca entram em produção.
-
 ```
-packages/dev-tools/
-├── package.json
-├── tsconfig.json
-└── apps/
-    ├── scene-validator/            # ferramenta principal de validação visual
-    │   ├── vite.config.ts
-    │   ├── index.html
-    │   └── src/
-    │       ├── App.tsx
-    │       ├── components/
-    │       │   ├── PoseEditor.tsx
-    │       │   ├── JointGizmo.tsx
-    │       │   ├── JsonInspector.tsx  # Monaco editor
-    │       │   ├── PoseLibrary.tsx
-    │       │   └── SceneCanvas.tsx    # PixiJS embedded
-    │       └── main.tsx
-    ├── event-grapher/              # visualizador de árvore narrativa
-    │   └── src/                    # usa react-flow
-    └── ai-pipeline/                # scripts CLI Node para geração
-        ├── package.json
-        ├── src/
-        │   ├── generateScene.ts    # CLI: gera 1 cena via Claude
-        │   ├── generateBatch.ts    # CLI: gera N cenas
-        │   ├── validateBatch.ts    # CLI: revalida pasta de cenas
-        │   ├── repairLoop.ts
-        │   └── prompts/
-        │       ├── sceneSystem.md
-        │       ├── rigGrammar.md
-        │       └── fewShots.json
-        └── bin/
-            └── pipeline.ts
+packages/dev-tools/apps/
+├── scene-validator/                # validação visual de poses e cenas
+├── room-validator/                 # NEW: validação visual de ComodoDefinition
+│   └── src/
+│       ├── App.tsx
+│       ├── components/
+│       │   ├── RoomCanvas.tsx      # renderiza cômodo com PixiJS
+│       │   ├── FurniturePlacer.tsx # drag de objetos, valida tiles
+│       │   ├── WalkableEditor.tsx  # editar navZonas
+│       │   └── JsonInspector.tsx
+│       └── main.tsx
+├── event-grapher/                  # visualizador de árvore narrativa
+└── ai-pipeline/                    # scripts CLI Node para geração
+    └── src/
+        ├── generateScene.ts
+        ├── generateRoom.ts         # NEW: gera ComodoDefinition via Claude
+        ├── generateFurniture.ts    # NEW: gera catálogo de móveis por era
+        ├── generateEvents.ts       # NEW: gera lote de eventos
+        ├── generateBatch.ts
+        ├── validateBatch.ts
+        └── prompts/
+            ├── sceneSystem.md
+            ├── roomSystem.md       # NEW
+            ├── furnitureSystem.md  # NEW
+            ├── rigGrammar.md
+            └── fewShots.json
 ```
 
 ### content/ — banco de conteúdo versionado
 
 ```
 content/
-├── events/                         # 1 arquivo JSON por evento
+├── events/
 │   ├── childhood/
-│   │   ├── 0-3-anos/
-│   │   ├── 4-7-anos/
-│   │   └── 8-12-anos/
 │   ├── education/
-│   │   ├── ensino-medio/
-│   │   ├── faculdade/
-│   │   └── pos-graduacao/
 │   ├── career/
-│   │   ├── primeiro-emprego/
-│   │   ├── promocoes/
-│   │   ├── conflitos-trabalho/
-│   │   └── empreendedorismo/
 │   ├── relationship/
-│   │   ├── familia/
-│   │   ├── amizades/
-│   │   ├── romance/
-│   │   └── traicao/
 │   ├── crime/
 │   ├── health/
 │   ├── hobby/
 │   └── mortality/
-├── poses/                          # biblioteca de poses validadas
+├── poses/
 │   ├── basic/
-│   │   ├── idle.json
-│   │   ├── sentado.json
-│   │   └── caminhando.json
 │   ├── interactions/
-│   │   ├── abracar.json
-│   │   ├── apertar-mao.json
-│   │   ├── socar.json
-│   │   └── beijar.json
 │   ├── emotional/
-│   │   ├── chorar.json
-│   │   ├── comemorar.json
-│   │   └── desespero.json
 │   └── action/
-│       ├── correr.json
-│       ├── beber-copo.json
-│       └── digitar-computador.json
-├── historical/                     # eventos históricos por ano
-│   ├── 1990.json
-│   ├── 1991.json
+├── historical/
+│   ├── 1985.json
+│   ├── 1986.json
 │   └── ...2025.json
+├── locations/                      # NEW
+│   ├── casa/
+│   │   ├── quarto_simples.json
+│   │   ├── sala_simples.json
+│   │   └── ...
+│   ├── escola/
+│   │   ├── sala_de_aula.json
+│   │   ├── corredor.json
+│   │   └── patio.json
+│   ├── academia/
+│   │   ├── area_musculacao.json
+│   │   └── recepcao.json
+│   └── restaurante/
+│       ├── salao.json
+│       └── ...
+├── furniture/                      # NEW
+│   ├── eighties/                   # móveis disponíveis 1980–1989
+│   ├── nineties/                   # móveis disponíveis 1990–1999
+│   ├── twothousands/               # 2000–2009
+│   └── modern/                     # 2010+
+├── eras/                           # NEW
+│   ├── eighties.json
+│   ├── nineties.json
+│   ├── twothousands.json
+│   └── tens.json
 └── presets/
-    ├── body-profiles/              # slim, average, strong, etc.
+    ├── body-profiles/
     ├── face-presets/
     ├── hair-presets/
     └── clothing-presets/
 ```
 
-Cada arquivo de evento, pose ou preset é um JSON independente. **Justificativa**: diff fácil em PRs, LLM consegue editar 1 arquivo por vez sem confundir, autor humano consegue achar via filesystem search.
+## Padrão de render: Zustand → PixiJS
 
-Loader em build-time agrega tudo em `events.manifest.json`, `poses.manifest.json` etc com índices invertidos (por categoria, idade, flag), para performance em runtime.
+O Zustand é a única fonte da verdade. O PixiJS nunca tem estado próprio — ele reflete o store.
+
+```typescript
+// ticker lê store imperativo (não via hook React)
+app.ticker.add((ticker) => {
+  const estado = useGameStore.getState();
+  if (estado.interactionLock) return;
+  estado.tickJogo(ticker.deltaMS);
+});
+
+// sprites atualizam via subscribe seletivo
+useGameStore.subscribe(
+  s => s.jogador.posicao,
+  ({ x, y }) => { spriteJogador.position.set(x, y); }
+);
+```
+
+React renderiza apenas HUD e overlays (ActionBubble, LifeLog, painéis) via hooks normais.
+
+## Z-sorting com RenderLayer (PixiJS v8.7+)
+
+```typescript
+import { RenderLayer } from 'pixi.js';
+
+const camadaPersonagens = new RenderLayer({
+  sortableChildren: true,
+  sortFunction: (a, b) => a.position.y - b.position.y,
+});
+
+// escala leve por profundidade (ilusão de perspectiva)
+app.ticker.add(() => {
+  for (const entidade of entidadesNaCena) {
+    const profundidade = entidade.y / ALTURA_COMODO;
+    entidade.scale.set(0.85 + profundidade * 0.20);
+  }
+});
+```
 
 ## Convenções de código TypeScript
 
-### Imports absolutos
-
-`tsconfig.base.json` define paths:
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@core/*": ["packages/core/src/*"],
-      "@game/*": ["packages/game/src/*"],
-      "@dev/*": ["packages/dev-tools/apps/*"],
-      "@content/*": ["content/*"]
-    }
-  }
-}
-```
-
-### Nomenclatura
-
-- Variáveis, métodos, classes, comentários: **português brasileiro**
-- Exceções: tipos que mapeiam APIs externas (`Application`, `Container`, `Texture` do PixiJS)
-- Nomes específicos sempre, nunca genéricos: `rosterDeNpcs` em vez de `lista`, `totalAtributosBase` em vez de `total`
-
-### Imutabilidade
-
-- `const` por default, `let` só onde necessário, `var` proibido
-- `readonly` em propriedades de configuração e domínio imutável
-- Para mutação estruturada: `immer` via Zustand `immer middleware`
-
-### Tipos
-
-- `type` preferido sobre `interface` (exceto quando precisar extender)
-- Tipos inferidos via `z.infer<typeof X>` quando vêm de Zod
+- `strict: true`, `noImplicitAny: true`, `noUncheckedIndexedAccess: true`
+- `const` por default, `let` só quando necessário, `var` proibido
+- `readonly` em propriedades imutáveis e arrays de configuração
+- `type` preferido sobre `interface`
 - `any` proibido sem comentário justificando
+- `undefined` em vez de `null` para ausência
+- Imports absolutos via tsconfig paths: `@core/interaction/ActionResolver`, `@game/state/saveStore`
+- Zod como source-of-truth — tipos inferidos via `z.infer<typeof X>`
 
-### Funções
+## Nomenclatura
 
-- Máximo 25 linhas por função (alinhado às preferences globais)
-- Complexidade ciclomática ≤ 15
-- Sem magic numbers — usar constantes nomeadas em SCREAMING_SNAKE_CASE
-
-### Performance
-
-- Análise Big-O explícita em algoritmos críticos (event matching, NPC matching, IK)
-- `Float32Array` reaproveitado em loops de render (não alocar por frame)
-- `pixi-cull` ou culling manual para entidades off-screen
+- Variáveis, métodos, classes em português brasileiro
+- Constantes: `SCREAMING_SNAKE_CASE` em português (`MAXIMO_MOVEIS_POR_COMODO`)
+- Tipos/classes: `PascalCase` em português (`Esqueleto`, `AcaoDefinicao`, `ComodoDefinicao`)
+- Excepcionalmente em inglês: tipos que mapeiam APIs externas (`Application`, `Container`, `Texture`)
 
 ## CI/CD
 
-GitHub Actions com 2 workflows:
+GitHub Actions: lint + typecheck + test + build em PRs. Deploy Cloudflare Pages em push para main.
 
-**ci.yml** — em PRs e push para main:
-1. Setup Node 20, pnpm
-2. `pnpm install --frozen-lockfile`
-3. `pnpm lint` (ESLint + Prettier)
-4. `pnpm typecheck`
-5. `pnpm test` (Vitest)
-6. `pnpm build`
+## Decisões de libs — veredicto final
 
-**deploy-preview.yml** — em push para main e PRs:
-- Build do `packages/game`
-- Deploy automático para Cloudflare Pages
-- URL de preview em PR comment
-
-## Versionamento
-
-- Semantic Versioning para a aplicação (`v0.1.0`, `v0.2.0`...)
-- Conventional Commits para mensagens (`feat:`, `fix:`, `refactor:`, `docs:`, `chore:`)
-- Tags Git para cada release de fase (`v0.1.0-fase-0-completa`)
-- CHANGELOG.md mantido manualmente
-
-## Decisões adiadas
-
-Estas decisões serão feitas quando a fase relevante chegar, com base em dados reais:
-
-- Provedor de ads exato (AdMob, Unity Ads, AppLovin) — fase 3 final
-- Provedor de IAP (Stripe direto, RevenueCat, Adapty) — fase 4
-- Provedor de auth backend (Supabase, Auth.js self-hosted, Clerk) — fase 4
-- Métrica de telemetria (Plausible, Umami, PostHog) — fase 3
-- Loja de assets gráficos (próprio, freelancer, marketplace) — fase 2
+| Lib | Status | Motivo |
+|---|---|---|
+| GSAP 3.13+ | ✅ ADICIONAR | Click-to-move, transições, feedback visual. 100% grátis comercialmente desde abr/2025 |
+| @pixi/ui v2.x | ✅ ADICIONAR | HUD in-canvas oficial PixiJS v8 |
+| pixi-viewport | ⚠️ Fase 2+ | Só se cômodos ficarem maiores que viewport |
+| easystar.js | ❌ NÃO | Sala única + interactionPoints declarados = overkill |
+| matter.js / planck.js | ❌ NÃO | Sem física dinâmica, AABB manual cobre placement |
+| pixi-projection | ❌ NÃO | Abandonado no v6, sem suporte v8 |
