@@ -5,9 +5,10 @@
    ▸ Componente NOVO (antes a identidade ficava dentro de HudLateral)
    ============================================================================ */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { IconBase } from './IconBase';
 import { BotaoAvancarTempo } from './BotaoAvancarTempo';
+import { LifeLogPanel } from './LifeLogPanel';
 import { useExplorationStore } from '../state/explorationStore';
 import './BarraSuperior.css';
 
@@ -47,8 +48,10 @@ export function BarraSuperior({
   aoAbrirConfig,
 }: PropsBarraSuperior): React.JSX.Element {
   const modoExploracao = useExplorationStore((estado) => estado.modoExploracao);
+  const [lifeLogAberto, setLifeLogAberto] = useState(false);
 
   return (
+    <>
     <header className="vida-topbar" role="banner">
       {aoNovoJogo && (
         <button
@@ -107,6 +110,14 @@ export function BarraSuperior({
             <IconBase name="save" size={16} />
           </button>
         )}
+        <button
+          className="vida-topbar__icone"
+          onClick={() => setLifeLogAberto((aberto) => !aberto)}
+          aria-label="Log narrativo"
+          title="Log narrativo"
+        >
+          <IconBase name="book" size={16} />
+        </button>
         {aoAbrirConfig && (
           <button
             className="vida-topbar__icone"
@@ -119,5 +130,7 @@ export function BarraSuperior({
         )}
       </div>
     </header>
+    <LifeLogPanel aberto={lifeLogAberto} aoFechar={() => setLifeLogAberto(false)} />
+    </>
   );
 }

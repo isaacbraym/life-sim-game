@@ -1,0 +1,130 @@
+.life-log {
+  position: fixed;
+  top: 64px;
+  right: 16px;
+  bottom: 16px;
+  width: min(420px, calc(100vw - 32px));
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: var(--vida-surface);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+  color: var(--vida-text);
+  font-family: var(--vida-font);
+}
+
+.life-log__topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.life-log__titulo {
+  margin: 0;
+  font-size: var(--vida-fs-17);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.life-log__subtitulo {
+  margin: 4px 0 0;
+  color: var(--vida-muted);
+  font-size: var(--vida-fs-11);
+}
+
+.life-log__fechar {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-sm);
+  color: var(--vida-muted);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.life-log__fechar:hover {
+  border-color: var(--vida-accent);
+  color: var(--vida-text);
+}
+
+.life-log__abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.life-log__aba {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-pill);
+  color: var(--vida-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--vida-fs-11);
+  font-weight: 700;
+  padding: 6px 10px;
+}
+
+.life-log__aba--ativa {
+  border-color: var(--vida-accent);
+  color: var(--vida-text);
+  background: rgba(91, 141, 238, 0.14);
+}
+
+.life-log__lista {
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.life-log__entrada {
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-sm);
+  padding: 12px;
+}
+
+.life-log__entrada--evento_importante {
+  border-color: var(--vida-accent);
+  box-shadow: inset 3px 0 0 var(--vida-accent);
+}
+
+.life-log__entrada-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--vida-muted);
+  font-family: var(--vida-font-mono);
+  font-size: var(--vida-fs-9);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.life-log__entrada-texto {
+  margin: 8px 0 0;
+  color: var(--vida-text-soft);
+  font-size: var(--vida-fs-13);
+  line-height: 1.45;
+}
+
+@media (max-width: 768px) {
+  .life-log {
+    top: 56px;
+    right: 8px;
+    bottom: 8px;
+    width: calc(100vw - 16px);
+  }
+}
+
