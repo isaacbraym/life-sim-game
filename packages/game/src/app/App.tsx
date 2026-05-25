@@ -17,8 +17,6 @@ import type { SaveSlot } from '@lifesim/core';
 import type { ComodoDefinition } from '@core/schemas/location';
 import { SaveManager, listarSaves, carregarSave, deletarSave } from '@core/persistence/SaveManager';
 import { forcarAutosave } from '@core/persistence/Autosave';
-import { gerarAtributosIniciais } from '@core/rpg/Attributes';
-import { gerarRosterInicial } from '@core/npc/NpcGenerator';
 import './App.css';
 
 // ---------------------------------------------------------------------------
@@ -161,21 +159,20 @@ export function App(): React.JSX.Element {
   // ── Novo personagem ────────────────────────────────────────────────────────
 
   async function aoConfirmarNovoPersonagem(dados: DadosNovoPersonagem): Promise<void> {
-    const anoNascimento  = 1990 + Math.floor(Math.random() * 16); // 1990–2005
-    const saveManager    = new SaveManager();
-    const rosterFamiliar = gerarRosterInicial(anoNascimento, Date.now() % 100000);
+    const saveManager = new SaveManager();
+    const estadoInicial = dados.estadoInicial;
 
     const novoSave = await saveManager.criarNovoSave({
       nomeSlot: `${dados.nome} ${dados.sobrenome}`,
       ritmo: dados.ritmo,
-      roster: rosterFamiliar,
+      roster: [...estadoInicial.rosterInicial],
       protagonista: {
         schemaVersion: '1.0.0' as const,
         characterId: uuidv4(),
         nome: dados.nome,
         sobrenome: dados.sobrenome,
         genero: dados.genero,
-        dataNascimento: { ano: anoNascimento, mes: 1, dia: 1 },
+        dataNascimento: { ano: dados.perfilNascimento.anoNascimento, mes: 1, dia: 1 },
         idadeAtualMeses: 0,
         tracosFisicos: {
           corPele:          '#f1c27d',
@@ -196,9 +193,9 @@ export function App(): React.JSX.Element {
           pesoAtual:    70,
           alturaAtual:  1.70,
         },
-        atributos:          dados.atributos,
-        atributosGeneticos: dados.atributos,
-        dinheiro:     0,
+        atributos:          estadoInicial.protagonista.atributos,
+        atributosGeneticos: estadoInicial.protagonista.atributosGeneticos,
+        dinheiro:     estadoInicial.dinheiro,
         humorAtual:   70,
         saudeAtual:   100,
         salarioMensal: 0,
@@ -209,6 +206,8 @@ export function App(): React.JSX.Element {
 
     inicializarEngine(novoSave);
     setTelaAtual('jogo');
+    setTelaAtiva('mapa');
+    useExplorationStore.getState().sairDeExploracao();
     void recarregarSaves();
   }
 
