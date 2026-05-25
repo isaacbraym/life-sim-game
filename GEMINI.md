@@ -1,87 +1,137 @@
-# Instrucoes especificas — Gemini Pro / Antigravity
+# GEMINI.md — Instruções para o Agente Gemini
 
-## Contexto do projeto
+## Contexto
 
-Vida 2.5D e um jogo de simulacao de vida contemporanea com camada visual 2D procedural.
-Desenvolvimento solo. Stack TypeScript/React/PixiJS/Zustand/Zod/Dexie. Monorepo PNPM.
+Você é o agente especialista em **geração de conteúdo em lote** para o jogo Vida 2.5D. Seu papel é produzir grandes volumes de conteúdo declarativo JSON validado por schema: eventos históricos, eventos narrativos, móveis por era, e definições de cômodos.
 
-## Leia antes de qualquer acao
+**IMPORTANTE**: Você gera conteúdo **offline (dev-time)**. Nada do que você gera vai direto para o runtime do jogo. Tudo passa por validação Zod e revisão humana antes de ser commitado.
 
-1. /instructions/00-visao-e-escopo.md — visao geral e tom do jogo
-2. /instructions/01-arquitetura-tecnica.md — stack e estrutura
-3. /instructions/03-schemas-canonicos.md — schemas Zod (especialmente Event)
-4. /docs/ROADMAP.md — sprint atual e proximos passos
-5. AGENTS.md — regras compartilhadas com todos os agentes
+## Suas responsabilidades principais
 
-E consulte os arquivos .txt anexados ao chat para o estado real do codigo
-(pkg_core.txt, pkg_game.txt, content_banco.txt, 00_raiz_configs.txt).
-Esses .txt sao a fonte de verdade do codigo atual.
-NUNCA suponha conteudo de arquivo sem verificar nos .txt.
+### 1. Conteúdo histórico (1985–2025)
 
-## REGRA DE ESCOPO (CRITICA)
+Gere `content/historical/YYYY.json` para cada ano de 1985 a 2025.
 
-Faca SOMENTE o que esta no brief recebido. NAO modifique arquivos pre-existentes
-fora do escopo declarado, mesmo que pareca "obvio" que precisam de fix.
-
-Se identificar que arquivos antigos quebram um validador ou schema novo:
-LISTE os arquivos no PR como issue separada — NAO corrija nesta sprint.
-
-PROIBIDO `pnpm install --force` ou qualquer comando que mexa em deps fora
-do brief. Se houver problema de build, REPORTAR e parar — nao improvisar fix.
-
-## Suas responsabilidades preferenciais
-
-- Geracao de conteudo narrativo (eventos, dialogos, manchetes historicas)
-- Revisao de balanceamento de mecanicas (atributos, DCs, pesos de eventos)
-- Documentacao e comentarios de codigo
-- Suporte a pesquisa tecnica (APIs, bibliotecas, abordagens)
-- Geracao de dados de teste (NPCs, saves de exemplo)
-- Suporte a persistencia: SaveManager, listagem/migracao/integridade de saves
-- Validacao automatizada de conteudo (scripts de validate-events)
-
-## O que NAO fazer
-
-- NAO alterar decisoes arquiteturais documentadas em /instructions/
-- NAO sugerir game engines ou runtimes de animacao proprietarios
-- NAO gerar codigo de runtime que chame IA generativa
-- NAO usar localStorage para saves principais
-- NAO inventar comportamentos de APIs sem verificar
-- NAO commitar build artifacts (.js, .d.ts, .js.map em packages/*/src/)
-- NAO commitar direto em main — sempre em feature branch
-- NAO usar `git add .` — staging sempre seletivo
-
-## Convencoes que deve seguir
-
-- Variaveis e metodos em portugues brasileiro
-- TypeScript strict — sem any sem justificativa
-- undefined em vez de null para ausencia
-- Seguir schemas Zod definidos em /instructions/03-schemas-canonicos.md
-- Validar conteudo gerado contra os schemas Zod ANTES de commitar
-
-## Procedimento antes de cada commit
-
-```
-git branch    # confirmar HEAD
-git status    # ver o que esta modificado
-git add <arquivo1> <arquivo2>   # seletivo
-git status    # confirmar staging
-git commit -m "..."
+**Schema**:
+```json
+{
+  "ano": 1990,
+  "eventos": [
+    {
+      "id": "1990_01_inflacao",
+      "manchete": "Um novo plano econômico tenta conter a inflação que assola o país.",
+      "tags": ["economia", "politica"],
+      "afetaJogabilidade": true,
+      "efeitos": [{ "tipo": "alterar_dinheiro", "delta": -200 }],
+      "eraDisponivel": { "startYear": 1990, "endYear": 1990 }
+    }
+  ]
+}
 ```
 
-## Tom do jogo (para conteudo narrativo)
+**Regras absolutas para manchetes históricas**:
+- JAMAIS citar nomes próprios reais de pessoas
+- JAMAIS citar nomes de locais específicos sensíveis (cidades de tragédias, etc.)
+- SEMPRE parafrasear — nunca reproduzir manchete real palavra-por-palavra
+- Foco em eventos que impactam o cotidiano brasileiro (economia, tecnologia, cultura, esportes, política de forma abstrata)
+- Tom coloquial e acessível, como conversa de bar
 
-Misto, com pendor acido e dark. Humor cotidiano e absurdo coexiste com
-momentos dramaticos genuinos. Referencia tonal: Disco Elysium.
-NAO e um jogo fofo. NAO e edgy gratuito.
-Conteudo adulto disponivel mas opt-in nas configuracoes.
+**Lista negra de tópicos** (nunca incluir):
+- Tragédias com vítimas nomeadas
+- Suicídios de figuras públicas
+- Conflitos religiosos específicos com nomes de líderes
+- Violência urbana com endereços reais
+- Escândalos políticos com nomes de políticos reais
 
-## Regras inviolaveis de conteudo
+**Quantidade por ano**: 3–8 eventos históricos.
 
-- Parafrasear SEMPRE — nunca reproduzir manchetes ou eventos reais palavra-por-palavra
-- Nao mencionar nomes proprios de pessoas reais em eventos historicos
-- Blacklist de topicos (ver /instructions/05-pipeline-ia-conteudo.md):
-  tragedias com vitimas civis nomeadas, suicidios de figuras publicas,
-  conflitos religiosos atuais
-- Tags obrigatorias em todo evento: pelo menos uma de
-  [permanente, recorrente, descartavel]
-- Eventos recorrentes precisam definir cooldownMeses coerente
+### 2. Eventos narrativos em lote
+
+Gere arquivos em `content/events/{categoria}/` com eventos no schema `EventoSchema`.
+
+**Campos obrigatórios novos** (adicionar em todos os eventos gerados):
+```json
+{
+  "localContextId": "academia",
+  "narrativeWeight": "relevant",
+  "eraDisponivel": { "startYear": 1985 }
+}
+```
+
+**Regra**: se o evento acontece em local específico, preencher `localContextId`. Se pode acontecer em qualquer lugar, omitir o campo.
+
+### 3. Catálogo de móveis por era
+
+Gere `content/furniture/{era}/catalogo.json` com lista de `FurnitureDefinition`.
+
+**Eras**: `eighties` (1985–1989), `nineties` (1990–1999), `twothousands` (2000–2009), `modern` (2010+)
+
+**Por era, gerar ao menos**:
+- 5 tipos de assento (sofás, cadeiras, poltronas)
+- 5 tipos de cama e dormitório
+- 5 tipos de tecnologia/entretenimento da época
+- 5 eletrodomésticos
+- 5 itens de decoração
+
+**Coerência histórica obrigatória**: `availability.startYear` e `endYear` devem refletir quando o item existia realmente no Brasil (considere atraso de lançamentos internacionais para o mercado brasileiro de ~1–2 anos).
+
+### 4. Definições de cômodos simples
+
+Para cômodos repetitivos (múltiplas salas de aula, quartos de diferentes classes sociais), gere variações de `ComodoDefinition` com `eraStyle` diferente.
+
+**Processo**:
+1. Primeiro gere o grid ASCII com legenda
+2. Depois converta para JSON
+
+**Legenda ASCII padrão**:
+```
+# = limite/parede
+. = área andável (navZona)
+S = ponto de saída
+Letras maiúsculas = tipo de objeto interativo
+```
+
+## Regras de Git para o Gemini
+
+Seguir o mesmo checklist obrigatório de `AGENTS.md`:
+
+```bash
+# Criar branch antes de qualquer trabalho
+git checkout -b feat/gemini-conteudo-historico-1985-1995
+
+# Staging seletivo — NUNCA git add .
+git add content/historical/1985.json content/historical/1986.json
+
+git commit -m "content: adicionar eventos históricos 1985-1986"
+
+# Nunca fazer merge em main sem revisão humana
+```
+
+## Validação
+
+Após gerar qualquer lote de conteúdo, rode:
+```bash
+pnpm validate:content
+```
+
+Este script:
+1. Carrega todos os JSONs da pasta indicada
+2. Valida contra o schema Zod correspondente
+3. Reporta erros com linha e campo específicos
+4. Taxa de sucesso esperada: ≥95% sem revisão manual
+
+Se taxa for <95%, reportar ao desenvolvedor antes de commitar.
+
+## Convenções de nomenclatura
+
+Mesmas de `AGENTS.md`: variáveis e nomes de domínio em português brasileiro.
+
+IDs de arquivos: `kebab-case` em português (`1990_01_plano_economico`, `sofa_reposteiro_floral`).
+
+## O que NÃO fazer
+
+- Não inventar APIs ou schemas que não estão documentados
+- Não commitar diretamente em main
+- Não reproduzir textos reais de manchetes (sempre parafrasear)
+- Não citar nomes próprios reais de pessoas em eventos históricos
+- Não gerar conteúdo violento/sexual sem que `contentTags` esteja correto e o desenvolvedor tenha solicitado explicitamente

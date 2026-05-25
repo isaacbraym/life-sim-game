@@ -1,121 +1,94 @@
-# Instrucoes para Agentes de IA — Vida 2.5D
+# AGENTS.md — Instruções para Todos os Agentes IA
 
-## Leia PRIMEIRO antes de qualquer acao
+## Contexto do projeto
 
-Este e um jogo de simulacao de vida 2.5D em desenvolvimento solo.
-Toda decisao arquitetural ja foi tomada e esta documentada em /instructions/.
+**Vida 2.5D** — jogo de simulação de vida com exploração point-and-click em perspectiva oblíqua (~15°). TypeScript 5+, PixiJS v8.7+, React 18+, GSAP 3.13+, @pixi/ui v2.x, Zustand, Zod, Dexie. Monorepo PNPM. Ver `CLAUDE.md` para todas as decisões de design e convenções de código.
 
-## Passo obrigatorio ao iniciar qualquer sessao
+## Regras obrigatórias de Git para agentes
 
-1. Leia /instructions/00-visao-e-escopo.md
-2. Leia /instructions/01-arquitetura-tecnica.md
-3. Leia /docs/ROADMAP.md — sprint atual e proximos passos
-4. Consulte os arquivos .txt anexados ao chat para o estado real do codigo
-   (pkg_core.txt, pkg_game.txt, content_banco.txt, 00_raiz_configs.txt)
-5. Leia /docs/DECISOES_TECNICAS.md quando tocar decisao arquitetural
-6. Leia /docs/PROCEDIMENTO_COMMIT.md antes de commitar
+**CHECKLIST obrigatório antes de cada commit:**
 
-NUNCA suponha conteudo de arquivo sem verificar nos .txt.
+```bash
+# 1. Confirmar em qual branch está
+git branch
 
-## Decisoes fechadas — NUNCA questionar ou reverter
+# 2. Confirmar o que está staged
+git status
 
-- Stack: TypeScript / Vite / React / PixiJS v8 / Zustand / Zod / Dexie
-- Monorepo PNPM workspaces (packages/core, packages/game, packages/dev-tools)
-- Rig 2D custom de 15 joints — SEM game engine, SEM Spine, SEM DragonBones
-- IA generativa NUNCA em runtime — apenas dev-time
-- Persistencia: Dexie.js sobre IndexedDB — localStorage PROIBIDO para saves
-- Deploy: Cloudflare Pages via wrangler CLI
+# 3. Staging SEMPRE seletivo — NUNCA git add .
+git add packages/core/src/interaction/ActionResolver.ts
+git add packages/core/src/schemas/action.ts
+# (listar cada arquivo individualmente)
 
-## Convencoes de codigo obrigatorias
-
-- Linguagem: TypeScript strict
-- Nomes de variaveis, metodos, classes: PORTUGUES BRASILEIRO
-- Nomes especificos — NUNCA: total, lista, valor, resultado, temp
-- Constantes: SCREAMING_SNAKE_CASE em portugues
-- Tipos/Classes: PascalCase em portugues
-- Excecao: tipos que mapeiam APIs externas (PixiJS, React, etc.)
-- Maximo 25 linhas por funcao
-- const por default, var PROIBIDO, any PROIBIDO sem justificativa
-- undefined em vez de null para ausencia
-
-## O que esta PROIBIDO
-
-- Game engines (Unity, Godot, Phaser, etc.)
-- Runtimes de animacao proprietarios (Spine, DragonBones, Live2D)
-- IA generativa em runtime do jogo
-- localStorage/sessionStorage para save principal
-- Inventar APIs — declare incerteza se nao souber
-- Commitar build artifacts em packages/*/src/:
-  *.js, *.d.ts, *.js.map, *.d.ts.map gerados pelo tsc
-
-Se aparecerem como M no `git status`:
-
-```
-find packages -path "*/src/*.js"       | xargs git rm --cached --ignore-unmatch -q
-find packages -path "*/src/*.d.ts"     | xargs git rm --cached --ignore-unmatch -q
-find packages -path "*/src/*.js.map"   | xargs git rm --cached --ignore-unmatch -q
-find packages -path "*/src/*.d.ts.map" | xargs git rm --cached --ignore-unmatch -q
+# 4. Commit com mensagem conventional
+git commit -m "feat: implementar ActionResolver com resolutionMode direct e check"
 ```
 
-## Estrutura do projeto
+**PROIBIDO em prompts enviados a agentes:**
+- `git add .` — pode incluir arquivos não-relacionados de outros agentes
+- Commitar direto em `main`
+- Fazer rebase sem instrução explícita do desenvolvedor
 
-- packages/core      — motor reutilizavel (rig, FK, IK, schemas, eventos, engine, npc, persistencia)
-- packages/game      — app principal (React + PixiJS, UI, state, telas)
-- packages/dev-tools — ferramentas internas
-- content/           — banco de conteudo (eventos, poses, historico)
-- instructions/      — documentacao arquitetural (00 ao 07)
-- docs/              — documentos operacionais (ROADMAP, COMANDOS_RAPIDOS, DECISOES_TECNICAS, PROCEDIMENTO_COMMIT)
-
-## Fluxo de branches (OBRIGATORIO)
-
-NUNCA commitar direto em main. Cada agente SEMPRE trabalha em feature branch:
-
-```
-git checkout -b feat/nome-da-tarefa
-# ... codar ...
-```
-
-ANTES de cada commit:
-
-```
-git branch                       # confirmar HEAD (alguns ambientes trocam silenciosamente)
-git status                       # ver o que sera commitado
-git add <arquivo1> <arquivo2>    # staging SELETIVO — NUNCA `git add .`
-git status                       # confirmar staging
-git commit -m "feat: descricao curta"
-git push origin feat/nome-da-tarefa
-```
-
-Apos revisao:
-
-```
+**Fluxo de branch:**
+```bash
+# Início de qualquer tarefa
 git checkout main
 git pull origin main
-git merge --no-ff feat/nome-da-tarefa
+git checkout -b feat/nome-descritivo-da-tarefa
+
+# Após revisão do desenvolvedor
+git checkout main
+git merge feat/nome-descritivo-da-tarefa
 git push origin main
 ```
 
-## Fluxo de emergencia git
+## Nomenclatura
 
-Se rebase der conflito ou erro de lock — NUNCA tentar continuar manualmente.
-1. `git rebase --abort`
-2. `git pull origin main`
-3. `git push origin main`
+- Variáveis, métodos, classes: **português brasileiro**
+- Constantes: `SCREAMING_SNAKE_CASE` em PT-BR
+- Tipos/classes: `PascalCase` em PT-BR
+- Exceção: tipos que mapeiam APIs externas (`Application`, `Container`, `Texture`)
 
-Se index ficar sujo (deletions em massa no `git status`):
+## Proibições técnicas
+
+- NUNCA usar `any` sem comentário justificando
+- NUNCA usar `localStorage`/`sessionStorage` para save
+- NUNCA usar game engines (Unity, Godot, Phaser, etc.)
+- NUNCA usar pixi-projection, easystar.js, matter.js/planck.js
+- NUNCA implementar pathfinding — movimento é tween GSAP direto para `posicaoDeInteracao`
+- NUNCA criar modal/cutscene separado — interação acontece no ambiente via ActionBubble
+- NUNCA inventar APIs de bibliotecas — declarar incerteza e pedir verificação
+
+## Estrutura de módulos-chave
 
 ```
-git reset --hard origin/main
+packages/core/src/
+├── schemas/action.ts          → ActionDefinition, EffectSchema
+├── schemas/location.ts        → LocationDefinition, ComodoDefinition, InteractableObject
+├── schemas/furniture.ts       → FurnitureDefinition, PlacedFurniture
+├── schemas/era.ts             → EraDefinition, YearContext
+├── schemas/lifephase.ts       → LifePhaseDefinition, LifePhaseEnum
+├── schemas/birthprofile.ts    → BirthProfile, OriginProfile
+├── interaction/ActionResolver.ts  → orquestrador único de resolução de ações
+├── interaction/ProgressionTracker.ts → contadores de hábito
+├── interaction/EffectEngine.ts    → aplica Effect[] ao GameState
+├── interaction/InteractionLock.ts → controla bloqueio de input
+├── log/LifeLog.ts             → 5 camadas de log
+├── era/EraResolver.ts         → filtra conteúdo por YearContext
+└── lifephase/LifePhaseManager.ts → gerencia fase atual
+
+packages/game/src/
+├── screens/WorldMapScreen.tsx → seletor de locais
+├── screens/ExplorationScene.tsx → cômodo explorável
+├── ui/ActionBubble.tsx        → React overlay contextual
+├── ui/VisualFeedback.tsx      → floating labels PixiJS
+├── stage/CharacterController.ts → GSAP click-to-move
+├── stage/RoomController.ts    → gerencia cômodo atual
+└── state/explorationStore.ts  → estado efêmero de exploração
 ```
 
-## Convencao de commit
+## Quando duvidar
 
-Conventional Commits: feat:, fix:, refactor:, docs:, chore:, content:, test:
-Leia /docs/PROCEDIMENTO_COMMIT.md antes de qualquer commit.
-
-## Antes de implementar qualquer feature
-
-1. Verifique /docs/ROADMAP.md — estamos no sprint correto?
-2. Verifique os .txt capturados — qual e o codigo real hoje?
-3. Verifique /docs/DECISOES_TECNICAS.md — ja foi decidido antes?
-4. Se houver ambiguidade arquitetural — PERGUNTE, nao assuma
+- Se a task tocar uma decisão de design: parar e consultar `CLAUDE.md` e o `.md` relevante
+- Se a API de uma biblioteca for incerta: declarar "não tenho certeza" e não inventar
+- Se houver 2+ caminhos viáveis: apresentar prós/contras antes de implementar
