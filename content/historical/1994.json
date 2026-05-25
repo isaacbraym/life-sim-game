@@ -1,0 +1,55 @@
+{
+  "ano": 1994,
+  "eventos": [
+    {
+      "id": "1994_01_plano_real",
+      "manchete": "A nova moeda nacional entra em circulação em julho, derrubando a inflação quase instantaneamente e trazendo estabilidade de preços.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 100
+        }
+      ],
+      "eraDisponivel": { "startYear": 1994, "endYear": 1994 }
+    },
+    {
+      "id": "1994_02_tetra_copa",
+      "manchete": "O país celebra a conquista do quarto título mundial de futebol na disputa realizada nos Estados Unidos, pintando as ruas e comemorando a vitória nos pênaltis.",
+      "tags": ["esporte", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1994, "endYear": 1994 }
+    },
+    {
+      "id": "1994_03_tragedia_pistas",
+      "manchete": "Um trágico acidente em um circuito automobilístico europeu vitima o maior herói do esporte nacional, gerando comoção em todo o país.",
+      "tags": ["esporte", "trauma"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -4
+        }
+      ],
+      "eraDisponivel": { "startYear": 1994, "endYear": 1994 }
+    },
+    {
+      "id": "1994_04_internet_universitaria",
+      "manchete": "As principais universidades públicas começam a se interconectar a uma rede global de computadores, abrindo portas para a pesquisa acadêmica digital.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1994, "endYear": 1994 }
+    },
+    {
+      "id": "1994_05_dolar_pareado",
+      "manchete": "A nova moeda nacional estreia valendo praticamente o mesmo que a moeda norte-americana, facilitando viagens e a compra de importados.",
+      "tags": ["economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1994, "endYear": 1994 }
+    }
+  ]
+}
