@@ -1,0 +1,82 @@
+{
+  "id": "cozinha_simples",
+  "localId": "casa",
+  "nome": "Cozinha Simples",
+  "backgroundAsset": "bg_cozinha_simples",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_cozinha",
+      "poligono": [
+        { "x": 80, "y": 360 },
+        { "x": 880, "y": 360 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_sala_de_cozinha",
+      "posicao": { "x": 50, "y": 430 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "sala_simples"
+      },
+      "rotulo": "Ir para a sala"
+    },
+    {
+      "id": "saida_mapa_cozinha",
+      "posicao": { "x": 900, "y": 430 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair de casa"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "fogao_cozinha",
+      "tipo": "eletrodomestico",
+      "posicao": { "x": 150, "y": 310 },
+      "tamanho": { "largura": 80, "altura": 90 },
+      "posicaoDeInteracao": { "x": 150, "y": 410 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "fogao_4bocas_gas",
+      "acoes": ["cozinhar"]
+    },
+    {
+      "id": "geladeira_cozinha",
+      "tipo": "eletrodomestico",
+      "posicao": { "x": 300, "y": 280 },
+      "tamanho": { "largura": 90, "altura": 180 },
+      "posicaoDeInteracao": { "x": 300, "y": 400 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "geladeira_retro_marrom",
+      "acoes": ["comer", "beber_agua"]
+    },
+    {
+      "id": "mesa_cozinha",
+      "tipo": "mesa",
+      "posicao": { "x": 550, "y": 330 },
+      "tamanho": { "largura": 150, "altura": 100 },
+      "posicaoDeInteracao": { "x": 550, "y": 440 },
+      "orientacaoAoInteragir": "FRONTAL",
+      "assetId": "mesa_formica",
+      "acoes": ["comer", "conversar"]
+    },
+    {
+      "id": "pia_cozinha",
+      "tipo": "pia",
+      "posicao": { "x": 780, "y": 310 },
+      "tamanho": { "largura": 120, "altura": 80 },
+      "posicaoDeInteracao": { "x": 780, "y": 400 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "pia_granito",
+      "acoes": ["lavar_louca", "beber_agua"]
+    }
+  ],
+  "npcsElegiveis": [],
+  "ambientTags": ["privado", "cozinha", "casa"],
+  "eraStyle": "nineties"
+}

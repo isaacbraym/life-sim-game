@@ -1,0 +1,73 @@
+{
+  "id": "sala_de_aula",
+  "localId": "escola",
+  "nome": "Sala de Aula",
+  "backgroundAsset": "bg_sala_de_aula",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_sala_aula",
+      "poligono": [
+        { "x": 80, "y": 360 },
+        { "x": 880, "y": 360 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_mapa_escola",
+      "posicao": { "x": 900, "y": 430 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair da escola"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "carteira_aluno",
+      "tipo": "carteira",
+      "posicao": { "x": 200, "y": 340 },
+      "tamanho": { "largura": 80, "altura": 80 },
+      "posicaoDeInteracao": { "x": 200, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "carteira_madeira",
+      "acoes": ["estudar", "conversar"]
+    },
+    {
+      "id": "quadro_negro",
+      "tipo": "lousa",
+      "posicao": { "x": 480, "y": 150 },
+      "tamanho": { "largura": 300, "altura": 100 },
+      "posicaoDeInteracao": { "x": 480, "y": 380 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "lousa_verde",
+      "acoes": ["prestar_atencao"]
+    },
+    {
+      "id": "mesa_professor",
+      "tipo": "mesa",
+      "posicao": { "x": 750, "y": 330 },
+      "tamanho": { "largura": 120, "altura": 80 },
+      "posicaoDeInteracao": { "x": 750, "y": 410 },
+      "orientacaoAoInteragir": "FRONTAL",
+      "assetId": "mesa_professor_asset",
+      "acoes": ["conversar"]
+    },
+    {
+      "id": "estante_livros",
+      "tipo": "estante",
+      "posicao": { "x": 100, "y": 280 },
+      "tamanho": { "largura": 100, "altura": 180 },
+      "posicaoDeInteracao": { "x": 170, "y": 380 },
+      "orientacaoAoInteragir": "PERFIL_ESQUERDO",
+      "assetId": "estante_metal",
+      "acoes": ["ler"]
+    }
+  ],
+  "npcsElegiveis": [],
+  "ambientTags": ["publico", "escola", "estudo"],
+  "eraStyle": "nineties"
+}
