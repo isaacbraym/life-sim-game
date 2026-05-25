@@ -1,0 +1,80 @@
+{
+  "id": "corredor_escola",
+  "localId": "escola",
+  "nome": "Corredor da Escola",
+  "backgroundAsset": "bg_corredor_escola",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_corredor",
+      "poligono": [
+        { "x": 60, "y": 400 },
+        { "x": 900, "y": 400 },
+        { "x": 900, "y": 500 },
+        { "x": 60, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_sala_de_aula",
+      "posicao": { "x": 50, "y": 450 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "sala_de_aula"
+      },
+      "rotulo": "Ir para a sala de aula"
+    },
+    {
+      "id": "saida_patio",
+      "posicao": { "x": 910, "y": 450 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "patio_escola"
+      },
+      "rotulo": "Ir para o pátio"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "bebedouro_corredor",
+      "tipo": "bebedouro",
+      "posicao": { "x": 200, "y": 320 },
+      "tamanho": { "largura": 50, "altura": 100 },
+      "posicaoDeInteracao": { "x": 200, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "bebedouro_pressao",
+      "acoes": ["beber_agua"]
+    },
+    {
+      "id": "quadro_avisos_corredor",
+      "tipo": "quadro_avisos",
+      "posicao": { "x": 480, "y": 180 },
+      "tamanho": { "largura": 200, "altura": 120 },
+      "posicaoDeInteracao": { "x": 480, "y": 410 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "quadro_cortica",
+      "acoes": ["ver_recados"]
+    },
+    {
+      "id": "armario_corredor",
+      "tipo": "armario",
+      "posicao": { "x": 750, "y": 250 },
+      "tamanho": { "largura": 120, "altura": 200 },
+      "posicaoDeInteracao": { "x": 750, "y": 430 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "armarios_metal",
+      "acoes": ["guardar_coisas"],
+      "npcSlot": "colega_corredor"
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "colega_escola",
+      "slot": "colega_corredor",
+      "persistencia": "descartavel"
+    }
+  ],
+  "ambientTags": ["publico", "escola", "corredor"],
+  "eraStyle": "nineties"
+}

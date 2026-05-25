@@ -1,0 +1,92 @@
+{
+  "id": "quarto_adolescente",
+  "localId": "casa",
+  "nome": "Quarto do Adolescente",
+  "backgroundAsset": "bg_quarto_adolescente",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_quarto_adolescente",
+      "poligono": [
+        { "x": 80, "y": 360 },
+        { "x": 880, "y": 360 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_sala",
+      "posicao": { "x": 50, "y": 430 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "sala_simples"
+      },
+      "rotulo": "Ir para a sala"
+    },
+    {
+      "id": "saida_mapa_quarto",
+      "posicao": { "x": 900, "y": 430 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair de casa"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "cama_adolescente",
+      "tipo": "cama",
+      "posicao": { "x": 100, "y": 300 },
+      "tamanho": { "largura": 150, "altura": 200 },
+      "posicaoDeInteracao": { "x": 280, "y": 420 },
+      "orientacaoAoInteragir": "PERFIL_ESQUERDO",
+      "assetId": "cama_solteiro_moderna",
+      "acoes": ["dormir", "descansar", "pensar_deitado"]
+    },
+    {
+      "id": "escrivaninha_adolescente",
+      "tipo": "mesa",
+      "posicao": { "x": 350, "y": 330 },
+      "tamanho": { "largura": 120, "altura": 80 },
+      "posicaoDeInteracao": { "x": 350, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "escrivaninha_estudante",
+      "acoes": ["estudar", "fazer_licao"]
+    },
+    {
+      "id": "computador_adolescente",
+      "tipo": "computador",
+      "posicao": { "x": 520, "y": 330 },
+      "tamanho": { "largura": 100, "altura": 80 },
+      "posicaoDeInteracao": { "x": 520, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "pc_desktop_gamer",
+      "acoes": ["estudar_online", "jogar_online", "navegar"]
+    },
+    {
+      "id": "videogame_adolescente",
+      "tipo": "videogame",
+      "posicao": { "x": 680, "y": 330 },
+      "tamanho": { "largura": 100, "altura": 80 },
+      "posicaoDeInteracao": { "x": 680, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "console_128bits_tv",
+      "acoes": ["jogar_videogame"]
+    },
+    {
+      "id": "guardaroupa_adolescente",
+      "tipo": "armario",
+      "posicao": { "x": 820, "y": 260 },
+      "tamanho": { "largura": 120, "altura": 220 },
+      "posicaoDeInteracao": { "x": 820, "y": 440 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "guarda_roupa_moderno",
+      "acoes": ["trocar_roupa"]
+    }
+  ],
+  "npcsElegiveis": [],
+  "ambientTags": ["privado", "quarto", "casa"],
+  "eraStyle": "twothousands"
+}
