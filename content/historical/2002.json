@@ -1,0 +1,50 @@
+{
+  "ano": 2002,
+  "eventos": [
+    {
+      "id": "2002_01_copa_mundo",
+      "manchete": "O Brasil conquista o pentacampeonato mundial de futebol, parando o país nas madrugadas para assistir aos jogos e gerando grande euforia nacional.",
+      "tags": ["entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2002, "endYear": 2002 }
+    },
+    {
+      "id": "2002_02_eleicao_polarizada",
+      "manchete": "Eleições presidenciais movimentam o país em debates intensos sobre os rumos econômicos e sociais para os anos seguintes.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2002, "endYear": 2002 }
+    },
+    {
+      "id": "2002_03_crise_cambial",
+      "manchete": "Incertezas eleitorais e pressões financeiras elevam a cotação do dólar a níveis históricos, encarecendo produtos importados.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -50
+        }
+      ],
+      "eraDisponivel": { "startYear": 2002, "endYear": 2002 }
+    },
+    {
+      "id": "2002_04_celulares_camera",
+      "manchete": "Começam a chegar ao mercado os primeiros modelos de telefones celulares que trazem câmera fotográfica integrada, ainda vistos como itens de luxo.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2002, "endYear": 2002 }
+    },
+    {
+      "id": "2002_05_popularizacao_dvd",
+      "manchete": "Os aparelhos leitores de DVD barateiam e começam a substituir os videocassetes nas salas das famílias brasileiras.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2002, "endYear": 2002 }
+    }
+  ]
+}
