@@ -1,0 +1,45 @@
+{
+  "ano": 2004,
+  "eventos": [
+    {
+      "id": "2004_01_orkut_domina",
+      "manchete": "Uma nova rede social baseada em comunidades e depoimentos vira febre absoluta entre os brasileiros, que lotam lan houses para enviar 'scraps'.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2004, "endYear": 2004 }
+    },
+    {
+      "id": "2004_02_lei_seca_debate",
+      "manchete": "Projetos para aumentar o rigor contra o consumo de bebidas alcoólicas por motoristas começam a ganhar força nos debates públicos.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2004, "endYear": 2004 }
+    },
+    {
+      "id": "2004_03_videogame_online",
+      "manchete": "Jogos online em consoles e computadores começam a ganhar comunidades dedicadas no país com conexões mais velozes.",
+      "tags": ["entretenimento", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2004, "endYear": 2004 }
+    },
+    {
+      "id": "2004_04_mensalao_gestacao",
+      "manchete": "Rumores de negociações escusas de bastidores políticos começam a aparecer de forma sutil em noticiários da capital.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2004, "endYear": 2004 }
+    },
+    {
+      "id": "2004_05_tv_tela_plana",
+      "manchete": "Televisores de tela plana e tubos mais finos começam a substituir os antigos aparelhos pesados nas vitrines das lojas.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2004, "endYear": 2004 }
+    }
+  ]
+}
