@@ -1,0 +1,50 @@
+{
+  "ano": 2006,
+  "eventos": [
+    {
+      "id": "2006_01_copa_alemanha",
+      "manchete": "A seleção brasileira masculina de futebol é eliminada nas quartas de final do mundial da Alemanha, frustrando a expectativa geral por mais um título.",
+      "tags": ["entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2006, "endYear": 2006 }
+    },
+    {
+      "id": "2006_02_reeleicao",
+      "manchete": "As eleições nacionais terminam com a reeleição do presidente em meio a polarizações partidárias e discussões de bem-estar social.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2006, "endYear": 2006 }
+    },
+    {
+      "id": "2006_03_apagao_aereo",
+      "manchete": "Problemas e greves no controle de tráfego aéreo provocam atrasos imensos e caos nos principais aeroportos do país por várias semanas.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -25
+        }
+      ],
+      "eraDisponivel": { "startYear": 2006, "endYear": 2006 }
+    },
+    {
+      "id": "2006_04_celulares_musica",
+      "manchete": "Celulares com reprodutores de MP3 dedicados e botões físicos para música começam a rivalizar com os tocadores portáteis avulsos.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2006, "endYear": 2006 }
+    },
+    {
+      "id": "2006_05_lan_houses_boom",
+      "manchete": "As lan houses atingem seu pico de popularidade, virando o principal local de acesso à internet e jogos de tiro em rede para milhões de brasileiros.",
+      "tags": ["entretenimento", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2006, "endYear": 2006 }
+    }
+  ]
+}

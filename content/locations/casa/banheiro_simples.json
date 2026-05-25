@@ -1,0 +1,73 @@
+{
+  "id": "banheiro_simples",
+  "localId": "casa",
+  "nome": "Banheiro",
+  "backgroundAsset": "bg_banheiro_simples",
+  "tamanho": { "largura": 720, "altura": 480 },
+  "navZonas": [
+    {
+      "id": "zona_banheiro",
+      "poligono": [
+        { "x": 100, "y": 320 },
+        { "x": 620, "y": 320 },
+        { "x": 620, "y": 440 },
+        { "x": 100, "y": 440 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_quarto",
+      "posicao": { "x": 50, "y": 380 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "quarto_simples"
+      },
+      "rotulo": "Ir para o quarto"
+    },
+    {
+      "id": "saida_sala",
+      "posicao": { "x": 670, "y": 380 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "sala_simples"
+      },
+      "rotulo": "Ir para a sala"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "chuveiro_banheiro",
+      "tipo": "chuveiro",
+      "posicao": { "x": 180, "y": 200 },
+      "tamanho": { "largura": 80, "altura": 150 },
+      "posicaoDeInteracao": { "x": 180, "y": 350 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "chuveiro_eletrico",
+      "acoes": ["tomar_banho"]
+    },
+    {
+      "id": "pia_banheiro",
+      "tipo": "pia",
+      "posicao": { "x": 380, "y": 240 },
+      "tamanho": { "largura": 80, "altura": 80 },
+      "posicaoDeInteracao": { "x": 380, "y": 340 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "pia_louca_branca",
+      "acoes": ["lavar_rosto", "escovar_dentes"]
+    },
+    {
+      "id": "espelho_banheiro",
+      "tipo": "espelho",
+      "posicao": { "x": 380, "y": 120 },
+      "tamanho": { "largura": 60, "altura": 80 },
+      "posicaoDeInteracao": { "x": 380, "y": 340 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "espelho_moldura_plastico",
+      "acoes": ["ver_aparencia", "auto_critica"]
+    }
+  ],
+  "npcsElegiveis": [],
+  "ambientTags": ["privado", "banheiro", "casa"],
+  "eraStyle": "nineties"
+}

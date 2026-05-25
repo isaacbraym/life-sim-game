@@ -1,0 +1,85 @@
+{
+  "id": "patio_escola",
+  "localId": "escola",
+  "nome": "Pátio da Escola",
+  "backgroundAsset": "bg_patio_escola",
+  "tamanho": { "largura": 1280, "altura": 720 },
+  "navZonas": [
+    {
+      "id": "zona_patio",
+      "poligono": [
+        { "x": 100, "y": 500 },
+        { "x": 1180, "y": 500 },
+        { "x": 1180, "y": 680 },
+        { "x": 100, "y": 680 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_corredor",
+      "posicao": { "x": 50, "y": 580 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "corredor_escola"
+      },
+      "rotulo": "Ir para o corredor"
+    },
+    {
+      "id": "saida_mapa_patio",
+      "posicao": { "x": 1220, "y": 580 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair da escola"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "quadra_esportiva",
+      "tipo": "quadra",
+      "posicao": { "x": 300, "y": 350 },
+      "tamanho": { "largura": 400, "altura": 200 },
+      "posicaoDeInteracao": { "x": 300, "y": 550 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "quadra_concreto",
+      "acoes": ["jogar_bola", "assistir_jogo"],
+      "npcSlot": "colega_patio"
+    },
+    {
+      "id": "cantina_escola",
+      "tipo": "cantina",
+      "posicao": { "x": 850, "y": 380 },
+      "tamanho": { "largura": 200, "altura": 150 },
+      "posicaoDeInteracao": { "x": 850, "y": 540 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "balcao_cantina",
+      "acoes": ["comprar_lanche"]
+    },
+    {
+      "id": "banco_patio",
+      "tipo": "banco",
+      "posicao": { "x": 1100, "y": 450 },
+      "tamanho": { "largura": 120, "altura": 80 },
+      "posicaoDeInteracao": { "x": 1100, "y": 560 },
+      "orientacaoAoInteragir": "FRONTAL",
+      "assetId": "banco_madeira_ferro",
+      "acoes": ["descansar", "conversar"],
+      "npcSlot": "professor_vigia"
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "colega_escola",
+      "slot": "colega_patio",
+      "persistencia": "descartavel"
+    },
+    {
+      "papel": "professor",
+      "slot": "professor_vigia",
+      "persistencia": "recorrente"
+    }
+  ],
+  "ambientTags": ["publico", "escola", "recreacao"],
+  "eraStyle": "nineties"
+}

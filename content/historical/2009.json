@@ -1,0 +1,50 @@
+{
+  "ano": 2009,
+  "eventos": [
+    {
+      "id": "2009_01_crescimento_resiliente",
+      "manchete": "Apesar da recessão internacional, o mercado consumidor interno sustenta uma rápida recuperação da economia nacional.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 40
+        }
+      ],
+      "eraDisponivel": { "startYear": 2009, "endYear": 2009 }
+    },
+    {
+      "id": "2009_02_copa_confirmacoes",
+      "manchete": "A confirmação de grandes eventos esportivos para os próximos anos atrai promessas de investimentos pesados em estádios e mobilidade.",
+      "tags": ["esportes", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2009, "endYear": 2009 }
+    },
+    {
+      "id": "2009_03_redes_sociais_transicao",
+      "manchete": "O público brasileiro começa a migrar de redes antigas de relacionamento para plataformas internacionais mais dinâmicas e focadas em atualizações rápidas.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2009, "endYear": 2009 }
+    },
+    {
+      "id": "2009_04_smartphones_populares",
+      "manchete": "Aparelhos inteligentes rodando o sistema operacional de código aberto da gigante das buscas começam a aparecer a preços acessíveis.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2009, "endYear": 2009 }
+    },
+    {
+      "id": "2009_05_gripe_suina",
+      "manchete": "Alertas globais sobre um novo vírus respiratório levam à adoção de hábitos de higiene e álcool em gel em escolas e locais públicos.",
+      "tags": ["saude"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2009, "endYear": 2009 }
+    }
+  ]
+}

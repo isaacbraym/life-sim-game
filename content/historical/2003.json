@@ -1,0 +1,45 @@
+{
+  "ano": 2003,
+  "eventos": [
+    {
+      "id": "2003_01_novo_governo",
+      "manchete": "Um novo governo assume o comando do país com promessas de reformas sociais estruturais e estabilidade econômica.",
+      "tags": ["politica", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2003, "endYear": 2003 }
+    },
+    {
+      "id": "2003_02_bolsa_familia",
+      "manchete": "Programas de transferência de renda governamentais começam a ser unificados para combater a extrema pobreza de forma coordenada.",
+      "tags": ["politica", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2003, "endYear": 2003 }
+    },
+    {
+      "id": "2003_03_mp3_players",
+      "manchete": "Pequenos tocadores de arquivos digitais de música em formato MP3 barateiam e viram febre entre os jovens que andam de ônibus ou caminham.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2003, "endYear": 2003 }
+    },
+    {
+      "id": "2003_04_pirataria_camelos",
+      "manchete": "CDs e DVDs gravados em casa inundam as bancas de camelôs em todo o país, mudando o acesso à música e ao cinema popular.",
+      "tags": ["entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2003, "endYear": 2003 }
+    },
+    {
+      "id": "2003_05_carro_flex",
+      "manchete": "São lançados os primeiros modelos de veículos nacionais com motor flex, capazes de rodar tanto com álcool quanto com gasolina.",
+      "tags": ["economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2003, "endYear": 2003 }
+    }
+  ]
+}

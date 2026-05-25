@@ -1,0 +1,50 @@
+{
+  "ano": 2010,
+  "eventos": [
+    {
+      "id": "2010_01_copa_africa",
+      "manchete": "A seleção brasileira masculina de futebol é eliminada novamente nas quartas de final, e o torneio na África do Sul populariza instrumentos de sopro barulhentos.",
+      "tags": ["entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2010, "endYear": 2010 }
+    },
+    {
+      "id": "2010_02_facebook_orkut",
+      "manchete": "Plataformas modernas de redes sociais consolidam sua liderança de usuários ativos no país, superando redes pioneiras de relacionamento.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2010, "endYear": 2010 }
+    },
+    {
+      "id": "2010_03_ipad_lancado",
+      "manchete": "Chega ao mercado o primeiro modelo de computador em formato de prancheta digital (tablet), inaugurando uma nova categoria de consumo.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2010, "endYear": 2010 }
+    },
+    {
+      "id": "2010_04_eleicao_dilma",
+      "manchete": "O país elege sua primeira presidente mulher após uma disputa eleitoral acirrada focada na continuidade de programas sociais.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2010, "endYear": 2010 }
+    },
+    {
+      "id": "2010_05_boom_credito",
+      "manchete": "A facilitação do crédito e o aumento do salário mínimo impulsionam um forte crescimento no consumo de eletrodomésticos e eletrônicos.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 50
+        }
+      ],
+      "eraDisponivel": { "startYear": 2010, "endYear": 2010 }
+    }
+  ]
+}

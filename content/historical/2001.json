@@ -1,0 +1,55 @@
+{
+  "ano": 2001,
+  "eventos": [
+    {
+      "id": "2001_01_crise_energetica",
+      "manchete": "O país entra em racionamento forçado de energia elétrica devido à crise nos reservatórios das hidrelétricas, popularizando o termo 'apagão'.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -30
+        }
+      ],
+      "eraDisponivel": { "startYear": 2001, "endYear": 2001 }
+    },
+    {
+      "id": "2001_02_atentados_economia",
+      "manchete": "Ataques de grandes proporções no hemisfério norte abalam a economia global, desvalorizando a moeda nacional e gerando clima de incerteza mundial.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -40
+        }
+      ],
+      "eraDisponivel": { "startYear": 2001, "endYear": 2001 }
+    },
+    {
+      "id": "2001_03_preparacao_orkut",
+      "manchete": "Pioneiras plataformas de relacionamentos e comunidades virtuais começam a ser discutidas nos primeiros círculos de internautas brasileiros.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2001, "endYear": 2001 }
+    },
+    {
+      "id": "2001_04_videogame_128bits",
+      "manchete": "Novos consoles de videogame de 128 bits com leitor de mídia digital DVD começam a aparecer nas lojas especializadas.",
+      "tags": ["entretenimento", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2001, "endYear": 2001 }
+    },
+    {
+      "id": "2001_05_novas_novelas",
+      "manchete": "Uma novela de grande sucesso na televisão populariza termos e danças orientais no cotidiano brasileiro.",
+      "tags": ["entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2001, "endYear": 2001 }
+    }
+  ]
+}

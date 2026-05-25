@@ -1,0 +1,50 @@
+{
+  "ano": 2008,
+  "eventos": [
+    {
+      "id": "2008_01_crise_financeira",
+      "manchete": "Uma grave crise imobiliária no exterior desencadeia pânico nos mercados mundiais, afetando o crédito e as exportações do país.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -60
+        }
+      ],
+      "eraDisponivel": { "startYear": 2008, "endYear": 2008 }
+    },
+    {
+      "id": "2008_02_bolsa_queda",
+      "manchete": "A bolsa de valores nacional sofre quedas acentuadas em decorrência da instabilidade global, interrompendo um ciclo longo de altas.",
+      "tags": ["economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2008, "endYear": 2008 }
+    },
+    {
+      "id": "2008_03_iphone_brasil",
+      "manchete": "Os primeiros modelos de telefone com tela sensível ao toque chegam oficialmente ao Brasil com preços muito elevados nas operadoras.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2008, "endYear": 2008 }
+    },
+    {
+      "id": "2008_04_pre_sal_descoberta",
+      "manchete": "Grandes reservas de petróleo em camadas ultraprofundas do oceano são confirmadas, gerando expectativas de autossuficiência e riqueza futura.",
+      "tags": ["economia", "politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2008, "endYear": 2008 }
+    },
+    {
+      "id": "2008_05_notebooks_baratos",
+      "manchete": "Os computadores portáteis começam a ultrapassar as vendas de desktops devido a reduções de preço e facilidades de crédito.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2008, "endYear": 2008 }
+    }
+  ]
+}

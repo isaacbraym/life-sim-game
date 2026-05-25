@@ -1,0 +1,69 @@
+{
+  "id": "recepcao_academia",
+  "localId": "academia",
+  "nome": "Recepção da Academia",
+  "backgroundAsset": "bg_recepcao_academia",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_recepcao",
+      "poligono": [
+        { "x": 100, "y": 380 },
+        { "x": 860, "y": 380 },
+        { "x": 860, "y": 500 },
+        { "x": 100, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_musculacao",
+      "posicao": { "x": 50, "y": 440 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "area_musculacao"
+      },
+      "rotulo": "Ir para a área de musculação"
+    },
+    {
+      "id": "saida_mapa_recepcao",
+      "posicao": { "x": 900, "y": 440 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair da academia"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "balcao_recepcao",
+      "tipo": "balcao",
+      "posicao": { "x": 480, "y": 280 },
+      "tamanho": { "largura": 150, "altura": 100 },
+      "posicaoDeInteracao": { "x": 480, "y": 410 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "balcao_formica_recepcao",
+      "acoes": ["pagar_mensalidade", "informacoes"],
+      "npcSlot": "recepcionista"
+    },
+    {
+      "id": "bebedouro_recepcao",
+      "tipo": "bebedouro",
+      "posicao": { "x": 200, "y": 300 },
+      "tamanho": { "largura": 50, "altura": 100 },
+      "posicaoDeInteracao": { "x": 200, "y": 400 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "bebedouro_coluna",
+      "acoes": ["beber_agua"]
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "recepcionista",
+      "slot": "recepcionista",
+      "persistencia": "recorrente"
+    }
+  ],
+  "ambientTags": ["publico", "academia", "recepcao"],
+  "eraStyle": "nineties"
+}
