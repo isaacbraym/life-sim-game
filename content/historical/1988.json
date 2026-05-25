@@ -1,0 +1,55 @@
+{
+  "ano": 1988,
+  "eventos": [
+    {
+      "id": "1988_01_constituicao_cidada",
+      "manchete": "É promulgada a nova Constituição Federal, garantindo uma ampla gama de direitos fundamentais e consolidando a volta da democracia.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1988, "endYear": 1988 }
+    },
+    {
+      "id": "1988_02_clima_extremo",
+      "manchete": "Condições climáticas difíceis provocam seca rigorosa em algumas regiões e fortes chuvas em outras, encarecendo a feira.",
+      "tags": ["cotidiano", "economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -40
+        }
+      ],
+      "eraDisponivel": { "startYear": 1988, "endYear": 1988 }
+    },
+    {
+      "id": "1988_03_tv_cabo",
+      "manchete": "Os primeiros serviços de transmissão de TV fechada começam a ser instalados, prometendo dezenas de canais para quem puder pagar.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1988, "endYear": 1988 }
+    },
+    {
+      "id": "1988_04_campeao_formula1",
+      "manchete": "Um piloto brasileiro brilha nas pistas e garante o título mundial na categoria máxima do automobilismo, enchendo o país de orgulho.",
+      "tags": ["esporte"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1988, "endYear": 1988 }
+    },
+    {
+      "id": "1988_05_inflacao_inercial",
+      "manchete": "Mesmo com regras novas, a inflação mensal atinge índices recordes, forçando todos a correrem para comprar tudo no dia do pagamento.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -1
+        }
+      ],
+      "eraDisponivel": { "startYear": 1988, "endYear": 1988 }
+    }
+  ]
+}
