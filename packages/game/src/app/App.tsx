@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { PixiStage } from '../stage/PixiStage';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BarraSuperior } from '../ui/BarraSuperior';
 import { EventoBase } from '../ui/EventoBase';
 import { NewGameScreen } from '../ui/NewGameScreen';
 import { SettingsScreen } from '../ui/SettingsScreen';
 import { DeathScreen } from '../ui/DeathScreen';
 import { LoadGameScreen } from '../ui/LoadGameScreen';
+import { WorldMapScreen } from '../screens/WorldMapScreen';
+import { ExplorationScene } from '../screens/ExplorationScene';
 import type { DadosNovoPersonagem } from '../ui/NewGameScreen';
 import type { DeathScreenProps } from '../ui/DeathScreen';
 import { useHudStore } from '../state/hudStore';
+import { useExplorationStore } from '../state/explorationStore';
 import { v4 as uuidv4 } from 'uuid';
 import type { SaveSlot } from '@lifesim/core';
+import type { ComodoDefinition } from '@core/schemas/location';
 import { SaveManager, listarSaves, carregarSave, deletarSave } from '@core/persistence/SaveManager';
 import { forcarAutosave } from '@core/persistence/Autosave';
 import { gerarAtributosIniciais } from '@core/rpg/Attributes';
@@ -22,6 +25,16 @@ import './App.css';
 // ---------------------------------------------------------------------------
 
 type TelaAtual = 'jogo' | 'selecionar_save' | 'novo_personagem' | 'configuracoes' | 'morte';
+type TelaAtiva = 'mapa' | 'exploracao' | 'carregando';
+type DestinoExploracao = ComodoDefinition['pontosDeSaida'][number]['destino'];
+
+const DURACAO_FADE_MS = 300;
+
+function aguardar(ms: number): Promise<void> {
+  return new Promise((resolver) => {
+    window.setTimeout(resolver, ms);
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Componente
@@ -29,6 +42,8 @@ type TelaAtual = 'jogo' | 'selecionar_save' | 'novo_personagem' | 'configuracoes
 
 export function App(): React.JSX.Element {
   const [telaAtual,    setTelaAtual]    = useState<TelaAtual>('jogo');
+  const [telaAtiva,    setTelaAtiva]    = useState<TelaAtiva>('mapa');
+  const [fadeAtivo,    setFadeAtivo]    = useState<boolean>(false);
   const [dadosMorte,   setDadosMorte]   = useState<Omit<DeathScreenProps, 'aoNovaVida' | 'aoMenuPrincipal'> | undefined>(undefined);
   const [saves,        setSaves]        = useState<readonly SaveSlot[]>([]);
   const [bootCompleto, setBootCompleto] = useState<boolean>(false);
@@ -47,6 +62,40 @@ export function App(): React.JSX.Element {
     realizarAtividade,
     avancarTempo,
   } = useHudStore();
+
+  const transicionarTelaAtiva = useCallback(async (
+    proximaTela: TelaAtiva,
+    aoTrocar?: () => void,
+  ): Promise<void> => {
+    setTelaAtiva('carregando');
+    setFadeAtivo(true);
+    await aguardar(DURACAO_FADE_MS);
+    aoTrocar?.();
+    setTelaAtiva(proximaTela);
+    await aguardar(20);
+    setFadeAtivo(false);
+    await aguardar(DURACAO_FADE_MS);
+  }, []);
+
+  const aoLocalEscolhido = useCallback((localId: string, comodoId: string) => {
+    void transicionarTelaAtiva('exploracao', () => {
+      useExplorationStore.getState().entrarEmExploracao(localId, comodoId);
+    });
+  }, [transicionarTelaAtiva]);
+
+  const aoSaidaExploracao = useCallback((destino: DestinoExploracao) => {
+    if (destino.tipo === 'mapa') {
+      void transicionarTelaAtiva('mapa', () => {
+        useExplorationStore.getState().sairDeExploracao();
+      });
+      return;
+    }
+
+    const localAtualId = useExplorationStore.getState().localAtualId ?? 'casa';
+    void transicionarTelaAtiva('exploracao', () => {
+      useExplorationStore.getState().entrarEmExploracao(localAtualId, destino.comodoId);
+    });
+  }, [transicionarTelaAtiva]);
 
   // ── Boot: listar saves e decidir tela inicial ─────────────────────────────
 
@@ -244,7 +293,19 @@ export function App(): React.JSX.Element {
         <div className="vida-app__corpo">
           <div className="vida-app__centro">
             <div className="vida-app__stage">
-              <PixiStage />
+              {telaAtiva === 'mapa' && (
+                <WorldMapScreen onLocalEscolhido={aoLocalEscolhido} />
+              )}
+              {telaAtiva === 'exploracao' && (
+                <ExplorationScene onSaida={aoSaidaExploracao} />
+              )}
+              {telaAtiva === 'carregando' && (
+                <div className="vida-app__carregando" aria-label="Carregando" />
+              )}
+              <div
+                className={`vida-app__fade${fadeAtivo ? ' vida-app__fade--ativo' : ''}`}
+                aria-hidden="true"
+              />
             </div>
             <EventoBase evento={eventoAtivo} aoEscolher={resolverOpcao} />
           </div>

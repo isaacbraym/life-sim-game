@@ -3,9 +3,15 @@ import { createPortal } from 'react-dom';
 import { Application, Container, Graphics, Text } from 'pixi.js';
 import { gsap } from 'gsap';
 import type { ComodoDefinition } from '@core/schemas/location';
+import type { ActionDefinition } from '@core/schemas/action';
+import type { EstadoDeJogo } from '@core/events/EstadoDeJogo';
+import { salvarParaEstadoDeJogo } from '@core/events/EstadoDeJogo';
+import { resolverAcao } from '@core/interaction/ActionResolver';
+import { interactionLock } from '@core/interaction/InteractionLock';
 import { CharacterController } from '@game/stage/CharacterController';
 import { RoomController } from '@game/stage/RoomController';
 import { useExplorationStore } from '@game/state/explorationStore';
+import { useHudStore } from '@game/state/hudStore';
 import { ActionBubble } from '@game/ui/ActionBubble';
 import { mostrarFeedback } from '@game/ui/VisualFeedback';
 
@@ -103,6 +109,29 @@ function criarOverlayFade(comodo: ComodoDefinition): Graphics {
   return overlay;
 }
 
+function estadoAtualDoJogo(): EstadoDeJogo {
+  const estadoHud = useHudStore.getState();
+  const saveAtual = estadoHud.saveAtual;
+
+  if (saveAtual !== undefined) {
+    return salvarParaEstadoDeJogo(saveAtual, saveAtual.estadoMundo.anoAtual);
+  }
+
+  return {
+    anoNascimento: estadoHud.anoAtual - estadoHud.idadeAnos,
+    anoAtual: estadoHud.anoAtual,
+    humor: estadoHud.humor,
+    saude: estadoHud.saude,
+    dinheiro: estadoHud.dinheiro,
+    atributos: estadoHud.atributos.reduce<Record<string, number>>((atributos, atributo) => ({
+      ...atributos,
+      [atributo.nome.toLowerCase()]: atributo.valor,
+    }), {}),
+    flags: [],
+    cooldownRegistry: {},
+  };
+}
+
 export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const appRef = useRef<Application | undefined>(undefined);
@@ -124,26 +153,57 @@ export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.
     timersRef.current = [];
   }, []);
 
-  const aoEscolherAcao = useCallback((acaoId: string) => {
+  const aoEscolherAcao = useCallback(async (acaoId: string): Promise<void> => {
     const app = appRef.current;
     const personagem = personagemRef.current;
     const { setInteractionLock, desfocarObjeto } = useExplorationStore.getState();
 
-    if (app === undefined || personagem === undefined) return;
+    if (app === undefined || personagem === undefined || interactionLock.estaLocked()) return;
 
     setInteractionLock(true);
-    mostrarFeedback({
-      app,
-      posicaoMundo: { x: personagem.x, y: personagem.y - 72 },
-      texto: `+${acaoId}`,
-      cor: 0x7bd389,
-    });
 
-    const timer = window.setTimeout(() => {
+    try {
+      const estadoHud = useHudStore.getState();
+      const estadoExploracao = useExplorationStore.getState();
+      const acaoDemo: ActionDefinition = {
+        id: acaoId,
+        rotulo: acaoId,
+        resolutionMode: 'direct',
+        narrativeWeight: 'routine',
+        onSuccess: [{ tipo: 'alterar_humor', delta: 2 }],
+        timeCost: { unidades: 1, tipo: 'periodo' },
+      };
+
+      const resultado = await resolverAcao(acaoDemo, {
+        estado: estadoAtualDoJogo(),
+        progressao: {
+          contadores: {},
+          marcadores: {},
+          ultimoReset: {},
+        },
+        anoJogo: estadoHud.saveAtual?.estadoMundo.anoAtual ?? estadoHud.anoAtual,
+        mesJogo: estadoHud.saveAtual?.estadoMundo.mesAtual ?? 1,
+        localId: estadoExploracao.localAtualId,
+      });
+
+      mostrarFeedback({
+        app,
+        posicaoMundo: { x: personagem.x, y: personagem.y - 72 },
+        texto: resultado.desfecho === 'direto' ? `✓ ${acaoId}` : '+Ação',
+        cor: 0x4ade80,
+      });
+    } catch (erro) {
+      console.error('[ExplorationScene] Falha ao resolver ação:', erro);
+      mostrarFeedback({
+        app,
+        posicaoMundo: { x: personagem.x, y: personagem.y - 72 },
+        texto: 'Ação falhou',
+        cor: 0xf87171,
+      });
+    } finally {
       desfocarObjeto();
       setInteractionLock(false);
-    }, 450);
-    timersRef.current.push(timer);
+    }
   }, []);
 
   useEffect(() => {
@@ -223,7 +283,6 @@ export function ExplorationScene({ onSaida }: ExplorationSceneProps): React.JSX.
       roomController.carregarComodo(app, COMODO_TESTE);
       app.stage.addChild(personagem);
       app.stage.addChild(fade);
-      useExplorationStore.getState().entrarEmExploracao(COMODO_TESTE.localId, COMODO_TESTE.id);
     });
 
     return () => {
