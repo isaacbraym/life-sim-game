@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "O Mistério da Copa",
   "descricaoCurta": "Seu pote de vidro importado sumiu da geladeira comum da firma. No dia seguinte, você vê um idêntico cheio de salada alheia na prateleira superior.",
-  "contentTags": ["language"],
+  "contentTags": [
+    "language"
+  ],
   "triggers": {
-    "idadeRange": [18, 60],
+    "idadeRange": [
+      18,
+      60
+    ],
     "peso": 30,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_exigindo_pote",
@@ -45,13 +54,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "colega_comendo_salada",
@@ -64,7 +81,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,31 +107,65 @@
         "opcoes": [
           {
             "texto": "Esperar o final do expediente e furtar o pote de volta da pia.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "pote_recuperado" },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pote_recuperado"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Explicar firmemente que aquele pote é seu e mostrar sua marcação no fundo.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "colega", "delta": 10 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "colega",
+                "delta": 10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Engolir o sapo e comprar um pote de plástico barato de R$ 5.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -5.0 },
-              { "tipo": "alterar_humor", "delta": -15 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

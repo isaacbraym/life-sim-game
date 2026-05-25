@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "O Furto de Cobre",
   "descricaoCurta": "Sem dinheiro para nada, você vê um aparelho de ar-condicionado desprotegido atrás de um prédio e cogita arrancar os fios de cobre.",
-  "contentTags": ["violence"],
+  "contentTags": [
+    "violence"
+  ],
   "triggers": {
-    "idadeRange": [16, 50],
+    "idadeRange": [
+      16,
+      50
+    ],
     "peso": 25,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_segura_alicate",
@@ -45,13 +54,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "comparsa_vigilante",
@@ -64,7 +81,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,32 +107,68 @@
         "opcoes": [
           {
             "texto": "Forçar e arrancar a fiação na força bruta usando o alicate.",
-            "atributoCheck": { "atributo": "forca", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "forca",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 150.0 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "arrancador_de_cobre" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 150
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "arrancador_de_cobre"
+              }
             ]
           },
           {
             "texto": "Desparafusar os painéis com calma para tirar o cobre limpo sem fazer barulho.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 300.0 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "tecnico_do_cobre" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 300
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tecnico_do_cobre"
+              }
             ]
           },
           {
             "texto": "Sair correndo antes que alguém desconfie da sua presença ali.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

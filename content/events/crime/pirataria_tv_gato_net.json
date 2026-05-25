@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "A Instalação do Gatonet",
   "descricaoCurta": "Cansado de pagar assinaturas absurdas de TV a cabo, você recebe uma oferta de instalação de um aparelho IPTV pirata.",
-  "contentTags": ["political"],
+  "contentTags": [
+    "political"
+  ],
   "triggers": {
-    "idadeRange": [18, 65],
+    "idadeRange": [
+      18,
+      65
+    ],
     "peso": 20,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_aponta_tv",
@@ -45,13 +54,21 @@
           "maoDireita": "apontando",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "tecnico_mostra_receptor",
@@ -64,7 +81,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,33 +107,72 @@
         "opcoes": [
           {
             "texto": "Pagar os trezentos reais e mandar o técnico instalar o 'gatonet' na hora.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -300.0 },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "adicionar_flag", "flag": "gato_net_ativo" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -300
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "gato_net_ativo"
+              }
             ]
           },
           {
             "texto": "Chorar um desconto e fechar a instalação por duzentos e cinquenta.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -250.0 },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "adicionar_flag", "flag": "gato_net_ativo" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -250
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "gato_net_ativo"
+              }
             ]
           },
           {
             "texto": "Recusar a pirataria e continuar pagando a TV oficial com dor no bolso.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -120.0 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -120
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "Mercado Negro na Faculdade",
   "descricaoCurta": "Durante a semana de provas finais, um colega desesperado te oferece uma grana para comprar seus comprimidos tarja-preta para foco.",
-  "contentTags": ["substance"],
+  "contentTags": [
+    "substance"
+  ],
   "triggers": {
-    "idadeRange": [18, 30],
+    "idadeRange": [
+      18,
+      30
+    ],
     "peso": 20,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_passa_remedio",
@@ -45,13 +54,21 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "aluno_suando_frio",
@@ -64,7 +81,11 @@
           "maoDireita": "palma_aberta",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,34 +107,77 @@
         "opcoes": [
           {
             "texto": "Vender a cartela pelo preço oferecido de R$ 150.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 150.0 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "trafico_universitario" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 150
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trafico_universitario"
+              }
             ]
           },
           {
             "texto": "Aproveitar o desespero e vender pelo dobro do preço sugerido (R$ 300).",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 300.0 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "trafico_universitario" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 300
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "trafico_universitario"
+              }
             ]
           },
           {
             "texto": "Recusar a venda ilegal e oferecer-se para resumir a matéria e estudar com ele.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "aluno_desesperado", "delta": 20 },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "aluno_desesperado",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

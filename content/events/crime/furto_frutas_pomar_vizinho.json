@@ -6,7 +6,10 @@
   "descricaoCurta": "Uma mangueira carregada no quintal do vizinho rabugento está implorando para ser colhida por cima do muro.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [8, 20],
+    "idadeRange": [
+      8,
+      20
+    ],
     "peso": 30,
     "cooldownMeses": 6,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_na_espreita",
@@ -45,13 +52,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "vizinho_bravo_gesticulando",
@@ -64,7 +79,11 @@
           "maoDireita": "fechada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,33 +105,73 @@
         "opcoes": [
           {
             "texto": "Subir no muro e pular rápido no quintal para pegar as mangas caídas no chão.",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "alterar_saude", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "pulador_de_muro" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pulador_de_muro"
+              }
             ]
           },
           {
             "texto": "Derrubar as mangas usando uma vara de bambu sem pisar no quintal dele.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 11 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 11
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "pescador_de_manga" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "pescador_de_manga"
+              }
             ]
           },
           {
             "texto": "Pedir desculpas e pedir uma manga educadamente para acalmar os ânimos.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_relacionamento", "npcId": "vizinho_rabugento", "delta": 15 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_relacionamento",
+                "npcId": "vizinho_rabugento",
+                "delta": 15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

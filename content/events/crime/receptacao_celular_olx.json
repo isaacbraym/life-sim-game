@@ -6,7 +6,10 @@
   "descricaoCurta": "Você encontra um iPhone seminovo por um terço do preço de mercado. O vendedor não tem nota fiscal e quer marcar a entrega rápido.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [16, 60],
+    "idadeRange": [
+      16,
+      60
+    ],
     "peso": 20,
     "cooldownMeses": 18,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_exibe_pix",
@@ -45,13 +52,21 @@
           "maoDireita": "apontando",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "vendedor_apressado",
@@ -64,7 +79,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,32 +105,71 @@
         "opcoes": [
           {
             "texto": "Comprar o celular suspeito torcendo para não ser roubado ou rastreado.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -1200.0 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "celular_olx_frio" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -1200
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "celular_olx_frio"
+              }
             ]
           },
           {
             "texto": "Chantagear o cara dizendo que sabe que é roubado para ele fechar por R$ 700.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 16 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 16
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -700.0 },
-              { "tipo": "alterar_humor", "delta": 25 },
-              { "tipo": "adicionar_flag", "flag": "receptador_audaz" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -700
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 25
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "receptador_audaz"
+              }
             ]
           },
           {
             "texto": "Agradecer, recusar e ir embora. Esse mato tem cachorro.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major",
+  "eraDisponivel": {
+    "startYear": 2005
+  }
 }

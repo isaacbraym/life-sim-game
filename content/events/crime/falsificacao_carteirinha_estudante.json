@@ -6,7 +6,10 @@
   "descricaoCurta": "Querendo pagar meia-entrada nos shows e cinemas, você se depara com a oportunidade de comprar uma carteirinha falsificada.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [15, 30],
+    "idadeRange": [
+      15,
+      30
+    ],
     "peso": 25,
     "cooldownMeses": 12,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_interessado",
@@ -45,13 +52,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "negociante_mostra_cartao",
@@ -64,7 +79,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,33 +105,72 @@
         "opcoes": [
           {
             "texto": "Pagar os cinquenta reais e encomendar a carteirinha fria.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -50.0 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "estudante_falso" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -50
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "estudante_falso"
+              }
             ]
           },
           {
             "texto": "Bolar seu próprio design no computador e imprimir em casa para economizar.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -10.0 },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "adicionar_flag", "flag": "falsificador_autodidata" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "falsificador_autodidata"
+              }
             ]
           },
           {
             "texto": "Recusar a proposta e pagar o valor integral oficial parcelado no cartão.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -250.0 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -250
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

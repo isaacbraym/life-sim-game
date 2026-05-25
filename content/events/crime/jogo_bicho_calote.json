@@ -6,7 +6,10 @@
   "descricaoCurta": "Você ganha uma bolada apostando no Macaco, mas o bicheiro do bar da esquina tenta te dar um migué na hora de pagar.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [18, 75],
+    "idadeRange": [
+      18,
+      75
+    ],
     "peso": 20,
     "cooldownMeses": 18,
     "uniqueOnce": false
@@ -32,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_exige_grana",
@@ -45,13 +52,21 @@
           "maoDireita": "fechada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "bicheiro_sorriso_nervoso",
@@ -64,7 +79,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,34 +105,76 @@
         "opcoes": [
           {
             "texto": "Bater a mão no balcão e exigir o dinheiro completo ameaçando subir a cobrança.",
-            "atributoCheck": { "atributo": "forca", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "forca",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 4000.0 },
-              { "tipo": "alterar_humor", "delta": 25 },
-              { "tipo": "adicionar_flag", "flag": "respeitado_no_bicho" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 4000
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 25
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "respeitado_no_bicho"
+              }
             ]
           },
           {
             "texto": "Aceitar os mil reais e encher o porta-malas do carro com engradados de cerveja.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 1000.0 },
-              { "tipo": "alterar_humor", "delta": 10 },
-              { "tipo": "adicionar_flag", "flag": "cerveja_estocada" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 1000
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "cerveja_estocada"
+              }
             ]
           },
           {
             "texto": "Propor usar o saldo retido como crédito para apostas maiores nas próximas rodadas.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 2000.0 },
-              { "tipo": "alterar_humor", "delta": 15 },
-              { "tipo": "adicionar_flag", "flag": "investidor_do_bicho" }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 2000
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "investidor_do_bicho"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }

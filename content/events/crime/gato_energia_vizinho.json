@@ -4,9 +4,14 @@
   "categoria": "crime",
   "titulo": "O Gato de Luz",
   "descricaoCurta": "Com a tarifa de energia nas alturas, surge a ideia de fazer uma ligação clandestina ('gato') direto no poste do condomínio.",
-  "contentTags": ["political"],
+  "contentTags": [
+    "political"
+  ],
   "triggers": {
-    "idadeRange": [21, 60],
+    "idadeRange": [
+      21,
+      60
+    ],
     "peso": 20,
     "cooldownMeses": 18,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "protagonista_cochichando",
@@ -45,13 +54,21 @@
           "maoDireita": "apontando",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "eletricista_pensativo",
@@ -64,7 +81,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "bota",
           "peDireito": "bota",
-          "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-22T00:00:00.000Z",
+            "criadoPor": "ia",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -86,31 +107,64 @@
         "opcoes": [
           {
             "texto": "Fazer você mesmo a ligação clandestina à noite para economizar o eletricista.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "gato_eletrico" },
-              { "tipo": "alterar_dinheiro", "delta": 400.0 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "gato_eletrico"
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 400
+              }
             ]
           },
           {
             "texto": "Pagar o eletricista para fazer o serviço técnico profissional clandestino.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "gato_eletrico" },
-              { "tipo": "alterar_dinheiro", "delta": -200.0 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "gato_eletrico"
+              },
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -200
+              }
             ]
           },
           {
             "texto": "Recusar e pagar a conta inteira para dormir de cabeça fria.",
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": -350.0 },
-              { "tipo": "alterar_humor", "delta": -10 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": -350
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-22T00:00:00.000Z",
+      "criadoPor": "ia",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-22T00:00:00.000Z", "criadoPor": "ia_assistido", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-22T00:00:00.000Z",
+    "criadoPor": "ia_assistido",
+    "versao": 1
+  },
+  "narrativeWeight": "major"
 }
