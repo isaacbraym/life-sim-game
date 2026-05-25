@@ -1,0 +1,50 @@
+{
+  "ano": 1997,
+  "eventos": [
+    {
+      "id": "1997_01_privatizacao_mineradora",
+      "manchete": "A venda de uma das maiores companhias mineradoras estatais do país gera protestos e grandes debates sobre o patrimônio público.",
+      "tags": ["economia", "politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1997, "endYear": 1997 }
+    },
+    {
+      "id": "1997_02_bichinho_virtual",
+      "manchete": "Um pequeno chaveiro eletrônico com um bichinho virtual que precisa de cuidados constantes vira a maior febre entre as crianças nas escolas.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1997, "endYear": 1997 }
+    },
+    {
+      "id": "1997_03_discadores_gratuitos",
+      "manchete": "O surgimento de novos provedores e discadores gratuitos de internet estimula a navegação nas madrugadas.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1997, "endYear": 1997 }
+    },
+    {
+      "id": "1997_04_saudade_velocidade",
+      "manchete": "As manhãs de domingo já não têm o mesmo brilho nas transmissões automobilísticas, e a saudade das vitórias vira assunto nas conversas de café.",
+      "tags": ["esporte", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1997, "endYear": 1997 }
+    },
+    {
+      "id": "1997_05_celular_pre_pago",
+      "manchete": "O lançamento de planos de celular pré-pagos com cartões recarregáveis começa a popularizar a telefonia móvel no cotidiano.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -20
+        }
+      ],
+      "eraDisponivel": { "startYear": 1997, "endYear": 1997 }
+    }
+  ]
+}
