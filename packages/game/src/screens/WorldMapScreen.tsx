@@ -1,37 +1,31 @@
 import React from 'react';
-
-type LocalDemo = {
-  readonly id: string;
-  readonly nome: string;
-  readonly icone: string;
-  readonly comodoEntrada: string;
-};
+import { listarLocaisDisponiveis } from '@game/content/locationCatalog';
 
 export type WorldMapScreenProps = {
   readonly onLocalEscolhido: (localId: string, comodoId: string) => void;
 };
 
-const LOCAIS_DEMO: readonly LocalDemo[] = [
-  { id: 'casa', nome: 'Casa', icone: '🏠', comodoEntrada: 'quarto_simples' },
-  { id: 'escola', nome: 'Escola', icone: '🏫', comodoEntrada: 'sala_de_aula' },
-  { id: 'academia', nome: 'Academia', icone: '💪', comodoEntrada: 'area_musculacao' },
-];
-
 export function WorldMapScreen({ onLocalEscolhido }: WorldMapScreenProps): React.JSX.Element {
+  const locais = listarLocaisDisponiveis();
+
   return (
     <main style={estilos.tela}>
       <section style={estilos.conteudo} aria-label="Escolha de local">
         <h1 style={estilos.titulo}>Escolha um local</h1>
         <div style={estilos.grid}>
-          {LOCAIS_DEMO.map((local) => (
+          {locais.map((local) => (
             <button
               key={local.id}
               type="button"
-              style={estilos.card}
+              style={local.disponivel ? estilos.card : { ...estilos.card, ...estilos.cardDesabilitado }}
+              disabled={!local.disponivel}
               onClick={() => onLocalEscolhido(local.id, local.comodoEntrada)}
             >
               <span style={estilos.icone} aria-hidden="true">{local.icone}</span>
               <span style={estilos.nome}>{local.nome}</span>
+              {!local.disponivel && (
+                <span style={estilos.status}>em breve</span>
+              )}
             </button>
           ))}
         </div>
@@ -80,6 +74,10 @@ const estilos = {
     padding: 18,
     font: 'inherit',
   },
+  cardDesabilitado: {
+    cursor: 'not-allowed',
+    opacity: 0.56,
+  },
   icone: {
     fontSize: 34,
     lineHeight: 1,
@@ -88,4 +86,13 @@ const estilos = {
     fontSize: 18,
     fontWeight: 700,
   },
+  status: {
+    minHeight: 18,
+    color: '#cbd5e1',
+    fontSize: 12,
+    fontWeight: 700,
+    letterSpacing: 0,
+    textTransform: 'uppercase',
+  },
 } satisfies Record<string, React.CSSProperties>;
+
