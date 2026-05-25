@@ -4,66 +4,97 @@
   --text:       #e8eaf0;
   --text-muted: #6b7594;
   --accent:     #5b8dee;
-  --red:        #e05c5c;
+  --green:      #5cc58a;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* ── Card base ── */
+.painel-atributos__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
 .painel-atrib-card {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 8px 6px;
+  padding: 8px;
+  display: grid;
+  gap: 5px;
+}
+
+.painel-atrib-card__topo {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2px;
-}
-
-/* ── Sorte: linha inteira em row ── */
-.painel-atrib-card--sorte {
-  grid-column: span 2;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  padding: 6px 10px;
 }
 
-/* ── Textos ── */
 .painel-atrib-abrev {
   font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
   font-size: 9px;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--text-muted);
 }
 
+.painel-atrib-nome {
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+
 .painel-atrib-valor {
   font-family: 'DM Mono', 'Courier New', monospace;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: var(--text);
   line-height: 1;
 }
 
-.painel-atrib-mod {
-  font-family: 'DM Mono', 'Courier New', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1;
+.painel-atrib-barra {
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* ── Cores do modificador ── */
-.painel-atrib-mod--positivo { color: var(--accent); }
-.painel-atrib-mod--zero     { color: var(--text-muted); }
-.painel-atrib-mod--negativo { color: var(--red); }
+.painel-atrib-barra > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
 
-/* ── Ajustes Sorte ── */
-.painel-atrib-card--sorte .painel-atrib-abrev { font-size: 10px; }
-.painel-atrib-card--sorte .painel-atrib-valor { font-size: 20px; }
-.painel-atrib-card--sorte .painel-atrib-mod   { font-size: 12px; }
+.painel-atributos__resumo {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.painel-atributos__linha {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.painel-atributos__linha strong {
+  color: var(--text);
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-weight: 700;
+  text-align: right;
+}
+
+.painel-atributos__linha:first-child strong {
+  color: var(--green);
+}
+
