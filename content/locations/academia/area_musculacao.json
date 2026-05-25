@@ -1,0 +1,80 @@
+{
+  "id": "area_musculacao",
+  "localId": "academia",
+  "nome": "Área de Musculação",
+  "backgroundAsset": "bg_academia_musculacao",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "corredor_central",
+      "poligono": [
+        { "x": 80, "y": 400 },
+        { "x": 880, "y": 400 },
+        { "x": 880, "y": 480 },
+        { "x": 80, "y": 480 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_academia",
+      "posicao": { "x": 50, "y": 440 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair da academia"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "aparelho_supino",
+      "tipo": "aparelho_musculacao",
+      "posicao": { "x": 150, "y": 300 },
+      "tamanho": { "largura": 120, "altura": 80 },
+      "posicaoDeInteracao": { "x": 210, "y": 400 },
+      "orientacaoAoInteragir": "PERFIL_DIREITO",
+      "assetId": "supino_olimpico",
+      "acoes": ["treinar_peito"]
+    },
+    {
+      "id": "aparelho_esteira",
+      "tipo": "aparelho_cardio",
+      "posicao": { "x": 400, "y": 300 },
+      "tamanho": { "largura": 80, "altura": 120 },
+      "posicaoDeInteracao": { "x": 400, "y": 420 },
+      "orientacaoAoInteragir": "PERFIL_ESQUERDO",
+      "assetId": "esteira_mecanica",
+      "acoes": ["correr", "caminhar"]
+    },
+    {
+      "id": "suporte_halteres",
+      "tipo": "peso_livre",
+      "posicao": { "x": 650, "y": 320 },
+      "tamanho": { "largura": 150, "altura": 60 },
+      "posicaoDeInteracao": { "x": 725, "y": 400 },
+      "orientacaoAoInteragir": "FRONTAL",
+      "assetId": "rack_halteres",
+      "acoes": ["treinar_bracos"]
+    },
+    {
+      "id": "slot_personal",
+      "tipo": "npc_slot",
+      "posicao": { "x": 830, "y": 300 },
+      "tamanho": { "largura": 60, "altura": 120 },
+      "posicaoDeInteracao": { "x": 800, "y": 400 },
+      "orientacaoAoInteragir": "PERFIL_DIREITO",
+      "assetId": "placeholder_npc",
+      "acoes": [],
+      "npcSlot": "personal_trainer"
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "personal_trainer",
+      "slot": "slot_personal",
+      "persistencia": "recorrente"
+    }
+  ],
+  "ambientTags": ["publico", "academia", "esporte", "saude"],
+  "eraStyle": "nineties"
+}

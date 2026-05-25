@@ -1,0 +1,334 @@
+[
+  {
+    "id": "tv_crt_teletexto",
+    "nome": "TV de Tubo com Teletexto",
+    "categoria": "tecnologia",
+    "assetId": "tv_crt_teletexto_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 1600,
+    "valorDeRevenda": 800,
+    "acoes": ["assistir_tv"],
+    "efeitos": {
+      "humor": 2,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["sala", "tecnologia"],
+    "descricao": "Televisor de tubo a cores com suporte à leitura de notícias e programação via sistema teletexto."
+  },
+  {
+    "id": "videogame_16bit",
+    "nome": "Videogame 16-Bit Clássico",
+    "categoria": "tecnologia",
+    "assetId": "videogame_16bit_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 700,
+    "valorDeRevenda": 350,
+    "acoes": ["jogar_videogame"],
+    "efeitos": {
+      "humor": 3,
+      "energia": -1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["quarto", "lazer"],
+    "descricao": "Console de 16 bits extremamente popular entre jovens, ideal para desafiar amigos em jogos de esporte."
+  },
+  {
+    "id": "aparelho_fax_escritorio",
+    "nome": "Aparelho de Fax para Escritório",
+    "categoria": "tecnologia",
+    "assetId": "aparelho_fax_escritorio_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 1200,
+    "valorDeRevenda": 600,
+    "acoes": ["enviar_fax"],
+    "efeitos": {
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["escritorio", "comunicacao"],
+    "descricao": "Aparelho clássico de transmissão de documentos para linhas telefônicas fixas comerciais."
+  },
+  {
+    "id": "computador_pentium",
+    "nome": "Computador Pentium",
+    "categoria": "tecnologia",
+    "assetId": "computador_pentium_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 3200,
+    "valorDeRevenda": 1600,
+    "acoes": ["usar_computador"],
+    "efeitos": {
+      "humor": 2,
+      "statusSocial": 2
+    },
+    "availability": { "startYear": 1995, "endYear": 2004 },
+    "tags": ["escritorio", "quarto", "tecnologia"],
+    "descricao": "Computador de mesa moderno com monitor CRT colorido de 14 polegadas e gabinete torre."
+  },
+  {
+    "id": "impressora_jato_tinta",
+    "nome": "Impressora Jato de Tinta",
+    "categoria": "tecnologia",
+    "assetId": "impressora_jato_tinta_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 600,
+    "valorDeRevenda": 300,
+    "acoes": ["imprimir_documento"],
+    "efeitos": {
+      "conforto": 1
+    },
+    "availability": { "startYear": 1995, "endYear": 2004 },
+    "tags": ["escritorio", "tecnologia"],
+    "descricao": "Impressora colorida de mesa de jato de tinta, perfeita para trabalhos de faculdade e impressões rápidas."
+  },
+  {
+    "id": "dvd_player_classic",
+    "nome": "DVD Player Clássico",
+    "categoria": "tecnologia",
+    "assetId": "dvd_player_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 1100,
+    "valorDeRevenda": 550,
+    "acoes": ["assistir_dvd"],
+    "efeitos": {
+      "humor": 3,
+      "statusSocial": 2
+    },
+    "availability": { "startYear": 1998, "endYear": 2007 },
+    "tags": ["sala", "tecnologia"],
+    "descricao": "Tocador de discos digitais de alta resolução para filmes, com controle remoto multifuncional."
+  },
+  {
+    "id": "telefone_sem_fio_900mhz",
+    "nome": "Telefone Sem Fio 900MHz",
+    "categoria": "tecnologia",
+    "assetId": "telefone_sem_fio_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 350,
+    "valorDeRevenda": 175,
+    "acoes": ["fazer_ligacao"],
+    "efeitos": {
+      "conforto": 2
+    },
+    "availability": { "startYear": 1993, "endYear": 2002 },
+    "tags": ["sala", "comunicacao"],
+    "descricao": "Aparelho de telefone fixo sem fio com alcance estendido para falar caminhando pela casa."
+  },
+  {
+    "id": "pager_bipe_pocket",
+    "nome": "Pager (Bipe) de Bolso",
+    "categoria": "tecnologia",
+    "assetId": "pager_bipe_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 200,
+    "valorDeRevenda": 100,
+    "acoes": ["verificar_mensagens"],
+    "efeitos": {
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["comunicacao", "portatil"],
+    "descricao": "Pequeno receptor de bolso para mensagens curtas enviadas por central telefônica."
+  },
+  {
+    "id": "celular_tijolao_nineties",
+    "nome": "Celular Tijolão",
+    "categoria": "tecnologia",
+    "assetId": "celular_tijolao_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 800,
+    "valorDeRevenda": 400,
+    "acoes": ["fazer_ligacao", "jogar_celular"],
+    "efeitos": {
+      "statusSocial": 2,
+      "humor": 1
+    },
+    "availability": { "startYear": 1997, "endYear": 2006 },
+    "tags": ["comunicacao", "portatil"],
+    "descricao": "Aparelho de telefone móvel robusto com tela monocromática e antena externa flexível."
+  },
+  {
+    "id": "mini_system_karaoke",
+    "nome": "Mini-System com CD e Fita",
+    "categoria": "tecnologia",
+    "assetId": "mini_system_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 900,
+    "valorDeRevenda": 450,
+    "acoes": ["ouvir_musica"],
+    "efeitos": {
+      "humor": 2,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1993, "endYear": 2002 },
+    "tags": ["sala", "musica"],
+    "descricao": "Aparelho de som compacto com bandeja para 3 CDs, tape-deck duplo e caixas acústicas destacáveis."
+  },
+  {
+    "id": "karaoke_portatil_videoke",
+    "nome": "Karaokê Portátil",
+    "categoria": "tecnologia",
+    "assetId": "videoke_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 750,
+    "valorDeRevenda": 375,
+    "acoes": ["cantar_karaoke"],
+    "efeitos": {
+      "humor": 3
+    },
+    "availability": { "startYear": 1995, "endYear": 2004 },
+    "tags": ["sala", "lazer"],
+    "descricao": "Aparelho de videokê que exibe letras de música na TV com pontuação ao final das canções."
+  },
+  {
+    "id": "antena_parabolica_grade",
+    "nome": "Antena Parabólica de Grade",
+    "categoria": "tecnologia",
+    "assetId": "antena_parabolica_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 2 },
+    "preco": 1000,
+    "valorDeRevenda": 500,
+    "acoes": [],
+    "efeitos": {
+      "humor": 1,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["exterior", "lazer"],
+    "descricao": "Grande antena externa de grade de alumínio para sintonizar canais de TV via satélite."
+  },
+  {
+    "id": "sofa_couro_sintetico",
+    "nome": "Sofá de Couro Sintético",
+    "categoria": "assento",
+    "assetId": "sofa_couro_sintetico_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 1 },
+    "preco": 1400,
+    "valorDeRevenda": 700,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 2,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["sala", "conforto"],
+    "descricao": "Sofá de 3 lugares revestido em couro sintético preto brilhante, símbolo de modernidade nos anos 90."
+  },
+  {
+    "id": "poltrona_reclinavel_nineties",
+    "nome": "Poltrona Reclinável Aveludada",
+    "categoria": "assento",
+    "assetId": "poltrona_aveludada_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 750,
+    "valorDeRevenda": 375,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["sala", "conforto"],
+    "descricao": "Poltrona aconchegante estofada com tecido aveludado na cor verde escura."
+  },
+  {
+    "id": "cadeira_escritorio_rodas",
+    "nome": "Cadeira de Escritório com Rodinhas",
+    "categoria": "assento",
+    "assetId": "cadeira_rodinhas_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 250,
+    "valorDeRevenda": 125,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "conforto": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["escritorio", "trabalho"],
+    "descricao": "Cadeira giratória ergonômica com regulagem de altura e base equipada com rodízios de plástico."
+  },
+  {
+    "id": "forno_microondas_90s",
+    "nome": "Forno Microondas Clássico",
+    "categoria": "eletrodomestico",
+    "assetId": "microondas_90s_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 800,
+    "valorDeRevenda": 400,
+    "acoes": ["aquecer_comida"],
+    "efeitos": {
+      "conforto": 2
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["cozinha", "eletro"],
+    "descricao": "Forno microondas espaçoso com painel de teclas e visor digital com timer analógico."
+  },
+  {
+    "id": "ventilador_teto_tres_pas",
+    "nome": "Ventilador de Teto",
+    "categoria": "eletrodomestico",
+    "assetId": "ventilador_teto_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 300,
+    "valorDeRevenda": 150,
+    "acoes": ["refrescar"],
+    "efeitos": {
+      "conforto": 1,
+      "energia": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["sala", "casa"],
+    "descricao": "Ventilador de teto silencioso com três pás de madeira laqueada e luminária central."
+  },
+  {
+    "id": "ar_condicionado_janela",
+    "nome": "Ar-Condicionado de Janela",
+    "categoria": "eletrodomestico",
+    "assetId": "ar_condicionado_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 1300,
+    "valorDeRevenda": 650,
+    "acoes": ["refrescar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["quarto", "sala", "eletro"],
+    "descricao": "Aparelho de ar-condicionado mecânico clássico instalado na parede com saída externa."
+  },
+  {
+    "id": "estante_mdf_modulada",
+    "nome": "Estante de MDF",
+    "categoria": "decoracao",
+    "assetId": "estante_mdf_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 1 },
+    "preco": 950,
+    "valorDeRevenda": 475,
+    "acoes": [],
+    "efeitos": {
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1992, "endYear": 2001 },
+    "tags": ["sala", "decoracao"],
+    "descricao": "Estante de sala produzida em chapas de MDF revestidas de melanina imitando madeira clara."
+  },
+  {
+    "id": "tapete_persa_sintetico",
+    "nome": "Tapete Persa Sintético",
+    "categoria": "decoracao",
+    "assetId": "tapete_persa_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 2 },
+    "preco": 500,
+    "valorDeRevenda": 250,
+    "acoes": [],
+    "efeitos": {
+      "conforto": 1,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["sala", "decoracao"],
+    "descricao": "Tapete clássico de sala com estampa inspirada em padrões persas tradicionais em fibras sintéticas."
+  }
+]

@@ -1,0 +1,81 @@
+{
+  "id": "quarto_simples",
+  "localId": "casa",
+  "nome": "Quarto Simples",
+  "backgroundAsset": "bg_quarto_simples",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_quarto",
+      "poligono": [
+        { "x": 80, "y": 360 },
+        { "x": 880, "y": 360 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_sala",
+      "posicao": { "x": 50, "y": 430 },
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "sala_simples"
+      },
+      "rotulo": "Ir para a sala"
+    },
+    {
+      "id": "saida_mapa_quarto",
+      "posicao": { "x": 900, "y": 430 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair de casa"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "cama_solteiro",
+      "tipo": "cama",
+      "posicao": { "x": 100, "y": 300 },
+      "tamanho": { "largura": 150, "altura": 200 },
+      "posicaoDeInteracao": { "x": 280, "y": 420 },
+      "orientacaoAoInteragir": "PERFIL_ESQUERDO",
+      "assetId": "cama_solteiro_formica",
+      "acoes": ["dormir", "descansar"]
+    },
+    {
+      "id": "escrivaninha_estudo",
+      "tipo": "mesa",
+      "posicao": { "x": 400, "y": 320 },
+      "tamanho": { "largura": 120, "altura": 80 },
+      "posicaoDeInteracao": { "x": 460, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "mesa_escrivaninha",
+      "acoes": ["estudar", "usar_computador"]
+    },
+    {
+      "id": "guarda_roupa_madeira",
+      "tipo": "armario",
+      "posicao": { "x": 650, "y": 250 },
+      "tamanho": { "largura": 180, "altura": 220 },
+      "posicaoDeInteracao": { "x": 740, "y": 450 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "guarda_roupa",
+      "acoes": ["trocar_roupa", "guardar_itens"]
+    },
+    {
+      "id": "janela_quarto",
+      "tipo": "janela",
+      "posicao": { "x": 450, "y": 120 },
+      "tamanho": { "largura": 100, "altura": 100 },
+      "posicaoDeInteracao": { "x": 500, "y": 350 },
+      "assetId": "janela_vidro",
+      "acoes": []
+    }
+  ],
+  "npcsElegiveis": [],
+  "ambientTags": ["privado", "quarto", "casa"],
+  "eraStyle": "nineties"
+}
