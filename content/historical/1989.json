@@ -1,0 +1,55 @@
+{
+  "ano": 1989,
+  "eventos": [
+    {
+      "id": "1989_01_eleicoes_diretas",
+      "manchete": "Depois de quase três décadas, os eleitores voltam às urnas para escolher diretamente o novo presidente da República em um clima de festa e debates acalorados.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1989, "endYear": 1989 }
+    },
+    {
+      "id": "1989_02_hiperinflacao",
+      "manchete": "A inflação fora de controle corrói os salários de forma avassaladora, fazendo os preços subirem várias vezes ao dia e gerando remarcações sem fim.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -120
+        }
+      ],
+      "eraDisponivel": { "startYear": 1989, "endYear": 1989 }
+    },
+    {
+      "id": "1989_03_consoles_16bits",
+      "manchete": "Chegam ao mercado brasileiro os novos consoles de videogame com tecnologia de 16 bits, trazendo gráficos coloridos e sons que impressionam as crianças.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1989, "endYear": 1989 }
+    },
+    {
+      "id": "1989_04_novela_sucesso",
+      "manchete": "Uma produção televisiva focada nas excentricidades de uma cidade fictícia no interior do país vira febre nacional, parando as famílias na frente da TV todas as noites.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1989, "endYear": 1989 }
+    },
+    {
+      "id": "1989_05_mudanca_moeda",
+      "manchete": "Em mais uma tentativa de conter o caos econômico, o governo altera o padrão monetário nacional e corta três zeros dos preços.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": -2
+        }
+      ],
+      "eraDisponivel": { "startYear": 1989, "endYear": 1989 }
+    }
+  ]
+}
