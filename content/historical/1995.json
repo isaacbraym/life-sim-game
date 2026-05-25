@@ -1,0 +1,50 @@
+{
+  "ano": 1995,
+  "eventos": [
+    {
+      "id": "1995_01_internet_comercial",
+      "manchete": "A internet deixa de ser restrita às universidades e é aberta comercialmente para o público, iniciando a corrida pelas conexões discadas.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1995, "endYear": 1995 }
+    },
+    {
+      "id": "1995_02_windows_95",
+      "manchete": "O lançamento de um novo sistema operacional revoluciona o uso de computadores pessoais com seu menu iniciar e interface mais amigável.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1995, "endYear": 1995 }
+    },
+    {
+      "id": "1995_03_lan_houses",
+      "manchete": "Os primeiros cybercafés e locais de jogos em rede começam a surgir nas cidades, virando ponto de encontro para navegar e jogar.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1995, "endYear": 1995 }
+    },
+    {
+      "id": "1995_04_celulares_menores",
+      "manchete": "Os aparelhos de telefonia celular começam a encolher de tamanho, perdendo o aspect de tijolo e cabendo mais facilmente nos bolsos.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 1995, "endYear": 1995 }
+    },
+    {
+      "id": "1995_05_crescimento_servicos",
+      "manchete": "A estabilização da nova moeda estimula o setor de serviços e o consumo das famílias, que agora conseguem planejar as compras do mês.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 80
+        }
+      ],
+      "eraDisponivel": { "startYear": 1995, "endYear": 1995 }
+    }
+  ]
+}
