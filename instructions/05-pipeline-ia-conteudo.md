@@ -12,6 +12,8 @@ O pipeline agora cobre 4 tipos de conteúdo:
 
 ## Tipo 1: Geração de Cenas/Poses
 
+> **Gate de QA: Scene Proofer (`pnpm dev:tools`) — obrigatório antes do commit.**
+
 Fluxo mantido do design original:
 
 1. Autor descreve evento e desfechos em PT-BR
@@ -23,6 +25,8 @@ Fluxo mantido do design original:
 7. Aprovação salva em `content/poses/`
 
 ## Tipo 2: Geração de Cômodos (novo)
+
+> **Gate de QA: Room Validator (`pnpm dev:tools`) — obrigatório antes do commit.**
 
 ### Fluxo
 
@@ -93,6 +97,8 @@ RESTRIÇÕES:
 
 ## Tipo 3: Geração de Móveis em lote (novo)
 
+> **Gate de QA: Furniture Viewer (`pnpm dev:tools`) — obrigatório antes do commit.**
+
 ### Fluxo
 
 ```bash
@@ -123,6 +129,8 @@ Schema: [JSON Schema do FurnitureDefinition aqui]
 ```
 
 ## Tipo 4: Geração de Eventos em lote (novo)
+
+> **Gate de QA: Event Graph + Simulador (`pnpm dev:tools`) — obrigatório antes do commit.**
 
 ### Fluxo
 
@@ -242,6 +250,11 @@ async function gerarComRetry<T>(
 
 Antes de commitar qualquer conteúdo gerado por IA:
 
+- [ ] Conteúdo aberto no proofer correspondente em `pnpm dev:tools` (ver `instructions/11-devtools-qa.md`)
+- [ ] Aprovação humana explícita registrada (screenshot ou nota no PR)
+- [ ] Para cômodos: `posicaoDeInteracao` de todos os objetos verificada dentro das navZonas no Room Validator
+- [ ] Para eventos (lote): pelo menos 3 eventos simulados no Consequence Simulator com `EstadoDeJogo` representativo
+- [ ] Para furniture: catálogo revisado no Furniture Viewer, nenhum móvel com `acoes[]` vazio ou `availability` incoerente
 - [ ] JSON valida 100% contra schema Zod via `pnpm validate:content`
 - [ ] Cômodo passou pelo room-validator (visual OK)
 - [ ] Pose/cena passou pelo scene-validator (anatômico OK)

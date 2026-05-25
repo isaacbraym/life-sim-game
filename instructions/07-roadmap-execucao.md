@@ -18,7 +18,7 @@
 
 A fase mais importante. Prova que o stack escolhido funciona antes de investir em conteúdo.
 
-### Sprint 0.1 — Scaffold (1 semana)
+### Sprint 0.1 — Scaffold ✅ (1 semana)
 
 Monorepo configurado, stack instalada, PWA deployada e instalável em 3 plataformas.
 
@@ -30,7 +30,7 @@ pnpm add @pixi/ui@^2.2.0
 
 **Critério**: PWA instalável no celular Android e iOS, carrega offline.
 
-### Sprint 0.2 — Rig estático com 4 orientações (1–2 semanas)
+### Sprint 0.2 — Rig estático com 4 orientações ✅ (1–2 semanas)
 
 - Rig de 15 joints em pose T estática
 - 4 orientações implementadas (PERFIL_ESQUERDO/DIREITO, FRONTAL, COSTAS)
@@ -41,7 +41,7 @@ pnpm add @pixi/ui@^2.2.0
 
 **Critério**: personagem visualmente coerente em pose T, 60fps, z-sorting funcional com 2 sprites, 4 orientações distintas sem quebra de silhueta.
 
-### Sprint 0.3 — Primeiro cômodo navegável (1–2 semanas)
+### Sprint 0.3 — Primeiro cômodo navegável ✅ (1–2 semanas)
 
 **Este é o sprint crítico novo.** Valida a mecânica central de exploração.
 
@@ -56,7 +56,7 @@ pnpm add @pixi/ui@^2.2.0
 
 **Critério**: clicar em qualquer objeto da sala faz o personagem andar até ele, ActionBubble aparece, escolha resolve com feedback visual, controle retorna. 60fps. Sem pathfinding.
 
-### Sprint 0.4 — WorldMapScreen + transição entre cômodos (1 semana)
+### Sprint 0.4 — WorldMapScreen + integração ✅ (1 semana)
 
 - `WorldMapScreen` com 3 locais clicáveis (Casa, Escola, Academia)
 - Cada local tem 2 cômodos hardcoded
@@ -66,28 +66,64 @@ pnpm add @pixi/ui@^2.2.0
 
 **Critério**: navegar Casa → Escola → cômodo de entrada → outro cômodo → WorldMapScreen sem crash. Estado correto após fechar e reabrir navegador.
 
-### Sprint 0.5 — Poses + animações de movimento (1 semana)
+### Sprint 0.5 — Prep Sprint 1.3 (LifeLog, NewGame, PainelAtributos) ✅ (1–2 semanas)
+
+Schemas Zod completos para `action`, `location`, `furniture`, `era`, `lifephase`, `birthprofile`. Módulos `LifeLog`, `InteractionLock`, `EffectEngine`, `ProgressionTracker`, `ActionResolver`, `EraResolver`, `LifePhaseManager`, `NewGameGenerator`. Migração Dexie v2 com tabelas `lifeLog`, `progressao`, `homeSave`, `locationState`.
+
+**Critério**: `pnpm --filter @lifesim/core typecheck` passa sem erros. Todos os schemas exportados de `packages/core`.
+
+### Sprint 0.6 — Dev Tools Visual QA Foundation (1–2 semanas)
+
+Criação do `packages/dev-tools` como app interno separado (`pnpm dev:tools`). Implementação das 5 ferramentas de QA humano obrigatório. Spec completa em `instructions/11-devtools-qa.md`.
+
+Entregas:
+- `packages/dev-tools` com Vite + React + TypeScript configurado
+- **Furniture Viewer**: grid filtrável de todos os `FurnitureDefinition` dos catálogos
+- **Room Validator**: renderiza `ComodoDefinition` com PixiJS (objetos, navZonas, saídas, posicaoDeInteracao); drag-and-drop sincronizado com painel JSON
+- **Scene Proofer**: rig 15 joints com silhueta, 4 orientações, modo debug, sliders por joint com limites anatômicos
+- **Character Editor**: grid 2×2 das 4 orientações, presets, slider de idade
+- **Event Graph**: grafo `@xyflow/react` de eventos por categoria + Simulador com `EstadoDeJogo` editável, execução passo a passo e diff rastreado por módulo
+
+Dependência: `@xyflow/react` (dev-tools only).
+
+**Critério de saída do Sprint 0.6**:
+- `pnpm dev:tools` abre sem erro
+- Furniture Viewer exibe os 60+ móveis existentes com filtros funcionando
+- Room Validator carrega `quarto_simples.json` e renderiza objetos, navZona e pontos de saída corretamente
+- Event Graph carrega pasta `career/` e exibe os eventos como nós conectados por `eventHooks`
+- Simulador executa um evento de `career` com `EstadoDeJogo` editado e mostra diff de estado com rastreabilidade por módulo
+
+### Sprint 0.7 — Poses + animações de movimento (1 semana)
+
+*Usa Scene Proofer (Sprint 0.6) como gate de aprovação.*
 
 - Ciclos de caminhada para PERFIL_ESQUERDO/DIREITO
 - Ciclo de idle para as 4 orientações
 - Transição de orientação ao mudar direção durante movimento
 - Interpolação suave entre poses (lerp com easing)
+- Toda pose gerada passa pelo Scene Proofer antes de ir para `content/poses/`
 
-**Critério**: personagem caminha com animação suave, muda de orientação coerentemente, idle visual enquanto parado.
+**Critério**: personagem caminha com animação suave, muda de orientação coerentemente, idle visual enquanto parado. Nenhuma pose commitada sem aprovação no Scene Proofer.
 
-### Sprint 0.6 — Pipeline de cômodos via IA (1–2 semanas)
+### Sprint 0.8 — Pipeline IA de cômodos (1–2 semanas)
 
-- Schema `ComodoDefinition` completo em Zod
+*Usa Room Validator (Sprint 0.6) como gate de aprovação.*
+
 - CLI `generate-room` com Anthropic SDK + Structured Outputs
 - Pipeline: grid ASCII → JSON → Zod.safeParse → validação
 - Retry loop (máximo 2 retries com erro injetado)
-- Room Validator básico: renderiza cômodo gerado, permite ajustar posições
+- Todo cômodo gerado passa pelo Room Validator antes de ir para `content/locations/`
 
-**Critério**: digitar "Academia anos 90 com 5 aparelhos" → CLI gera JSON válido em <45s → Room Validator renderiza visualmente com objetos em posições coerentes.
+**Critério**: digitar "Academia anos 90 com 5 aparelhos" → CLI gera JSON válido em <45s → Room Validator renderiza com objetos em posições coerentes → aprovação humana → commit.
 
-### Sprint 0.7 — Pipeline de poses/cenas (mantido do design original) (1 semana)
+### Sprint 0.9 — Pipeline IA de poses/cenas (1 semana)
 
-Validação do pipeline de geração de cenas de personagem. Ver spec original.
+*Usa Scene Proofer (Sprint 0.6) como gate de aprovação.*
+
+- CLI `generate-scene` para geração de poses/cenas via IA
+- Toda cena gerada passa pelo Scene Proofer antes de ir para `content/poses/`
+
+**Critério**: pipeline gera cena válida → Scene Proofer valida anatomicamente → aprovação humana → commit.
 
 ### 🎯 Critério de saída da Fase 0
 
@@ -97,8 +133,9 @@ Loop completo funcional:
 2. Personagem caminha por click-to-move
 3. Clicar em objeto → ActionBubble → escolher ação → resolver → feedback visual → log
 4. Sair do local → WorldMapScreen
-5. Gerar cômodo via CLI → validar no Room Validator → commitar
-6. Gerar cena/pose via CLI → validar no Scene Validator → commitar
+5. `pnpm dev:tools` abre e as 5 ferramentas funcionam
+6. Gerar cômodo via CLI → validar no Room Validator → commitar
+7. Gerar cena/pose via CLI → validar no Scene Proofer → commitar
 
 **Se este loop não funciona, não avance para Fase 1.**
 

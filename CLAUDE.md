@@ -33,6 +33,7 @@ As decisões arquiteturais estão consolidadas. Não debater arquitetura sem ped
 - PROIBIDO: pathfinding complexo (tween direto para posicaoDeInteracao do objeto)
 - PROIBIDO: reproduzir manchetes/eventos históricos reais palavra-por-palavra
 - PROIBIDO: inventar APIs de bibliotecas
+- PROIBIDO: mergear em main conteúdo visual (cômodo, pose, móvel, personagem) ou narrativo (evento em lote) gerado por agente sem aprovação explícita no proofer correspondente do packages/dev-tools (ver `instructions/11-devtools-qa.md`)
 
 ## Decisões de design fechadas
 
@@ -149,6 +150,7 @@ Sem explicações após o código, exceto:
 4. Se houver ambiguidade técnica → apresentar prós/contras e pedir decisão
 5. Implementar conforme convenções, em edições cirúrgicas
 6. Se dúvida sobre API externa → DECLARAR incerteza e oferecer verificar
+7. Para tasks que produzam conteúdo visual ou narrativo em lote, lembrar o desenvolvedor de abrir `pnpm dev:tools` para validação antes do merge
 
 ## Hierarquia de prioridade
 

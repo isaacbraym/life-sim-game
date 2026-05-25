@@ -212,33 +212,43 @@ packages/game/src/
 
 ### packages/dev-tools/ — ferramentas internas
 
+App interno separado (`pnpm dev:tools`), nunca incluído no bundle de produção.
+**Importa APENAS de `packages/core`** (schemas, rig, interaction). NÃO importa de `packages/game`.
+Spec completa das 5 ferramentas: `instructions/11-devtools-qa.md`.
+
 ```
-packages/dev-tools/apps/
-├── scene-validator/                # validação visual de poses e cenas
-├── room-validator/                 # NEW: validação visual de ComodoDefinition
-│   └── src/
-│       ├── App.tsx
-│       ├── components/
-│       │   ├── RoomCanvas.tsx      # renderiza cômodo com PixiJS
-│       │   ├── FurniturePlacer.tsx # drag de objetos, valida tiles
-│       │   ├── WalkableEditor.tsx  # editar navZonas
-│       │   └── JsonInspector.tsx
-│       └── main.tsx
-├── event-grapher/                  # visualizador de árvore narrativa
-└── ai-pipeline/                    # scripts CLI Node para geração
-    └── src/
-        ├── generateScene.ts
-        ├── generateRoom.ts         # NEW: gera ComodoDefinition via Claude
-        ├── generateFurniture.ts    # NEW: gera catálogo de móveis por era
-        ├── generateEvents.ts       # NEW: gera lote de eventos
-        ├── generateBatch.ts
-        ├── validateBatch.ts
-        └── prompts/
-            ├── sceneSystem.md
-            ├── roomSystem.md       # NEW
-            ├── furnitureSystem.md  # NEW
-            ├── rigGrammar.md
-            └── fewShots.json
+packages/dev-tools/
+├── package.json
+├── vite.config.ts
+├── index.html
+└── src/
+    ├── main.tsx
+    ├── App.tsx               # roteador entre as 5 ferramentas
+    ├── tools/
+    │   ├── FurnitureViewer/
+    │   │   ├── index.tsx
+    │   │   └── FurnitureCard.tsx
+    │   ├── RoomValidator/
+    │   │   ├── index.tsx
+    │   │   ├── RoomCanvas.tsx
+    │   │   ├── JsonPanel.tsx
+    │   │   └── ObjectDragger.tsx
+    │   ├── SceneProofer/
+    │   │   ├── index.tsx
+    │   │   ├── RigCanvas.tsx
+    │   │   └── JointSliders.tsx
+    │   ├── CharacterEditor/
+    │   │   ├── index.tsx
+    │   │   └── OrientationGrid.tsx
+    │   └── EventGraph/
+    │       ├── index.tsx
+    │       ├── GraphTab.tsx          # @xyflow/react — grafo de eventos
+    │       ├── SimulatorTab.tsx
+    │       ├── StateDiffPanel.tsx
+    │       └── ModuleTracer.tsx
+    └── shared/
+        ├── SchemaLoader.ts   # carrega e valida JSONs via Zod
+        └── PixiCanvas.tsx    # wrapper reutilizável do PixiJS
 ```
 
 ### content/ — banco de conteúdo versionado
@@ -363,6 +373,7 @@ GitHub Actions: lint + typecheck + test + build em PRs. Deploy Cloudflare Pages 
 |---|---|---|
 | GSAP 3.13+ | ✅ ADICIONAR | Click-to-move, transições, feedback visual. 100% grátis comercialmente desde abr/2025 |
 | @pixi/ui v2.x | ✅ ADICIONAR | HUD in-canvas oficial PixiJS v8 |
+| @xyflow/react | ✅ dev-tools only | Event Graph — editor de grafo de nós para visualizar árvore de eventos narrativos |
 | pixi-viewport | ⚠️ Fase 2+ | Só se cômodos ficarem maiores que viewport |
 | easystar.js | ❌ NÃO | Sala única + interactionPoints declarados = overkill |
 | matter.js / planck.js | ❌ NÃO | Sem física dinâmica, AABB manual cobre placement |
