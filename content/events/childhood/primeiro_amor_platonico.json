@@ -6,7 +6,10 @@
   "descricaoCurta": "Você não consegue explicar direito. Só que quando aquela pessoa aparece, você fica estúpido. O coração vai rápido. Você esquece como funciona o idioma.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [8, 12],
+    "idadeRange": [
+      8,
+      12
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "primeiro_amor_infancia",
@@ -21,7 +24,10 @@
       "papel": "interesse_romantico",
       "tipo": "sempre_novo",
       "persistenciaApos": "recorrente",
-      "constraints": { "idadeMin": 7, "idadeMax": 13 }
+      "constraints": {
+        "idadeMin": 7,
+        "idadeMax": 13
+      }
     }
   ],
   "scene": {
@@ -34,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "apaixonado_travado",
@@ -47,13 +57,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "passando_desavisado",
@@ -66,7 +84,11 @@
           "maoDireita": "segurando_objeto",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -88,32 +110,70 @@
         "opcoes": [
           {
             "texto": "Tentar falar com ela/ele amanhã. Preparar um assunto.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "primeiro_amor_infancia" },
-              { "tipo": "alterar_humor", "delta": 20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_amor_infancia"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Admirar de longe. Com dignidade. Por meses.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "primeiro_amor_infancia" },
-              { "tipo": "adicionar_flag", "flag": "amor_platônico_silencioso" },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_amor_infancia"
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "amor_platônico_silencioso"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Contar pro melhor amigo. Ele vai usar contra você pelo resto da vida.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "primeiro_amor_infancia" },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_amor_infancia"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

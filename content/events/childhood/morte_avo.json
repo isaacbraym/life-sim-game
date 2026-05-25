@@ -4,9 +4,15 @@
   "categoria": "childhood",
   "titulo": "O velório",
   "descricaoCurta": "Seu avô ou sua avó morreu. Você provavelmente não sabe muito bem o que fazer com isso. Os adultos ao redor também não sabem, só disfarçam melhor.",
-  "contentTags": ["death", "trauma"],
+  "contentTags": [
+    "death",
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [5, 12],
+    "idadeRange": [
+      5,
+      12
+    ],
     "peso": 12,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +28,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.4,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "crianca_no_canto_velorio",
@@ -35,7 +45,11 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -58,30 +72,66 @@
           {
             "texto": "Sentar do lado de quem você conhece e ficar em silêncio.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "perdeu_avo" },
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perdeu_avo"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Ajudar com o que puder. Pegar copo, trazer guardanapo.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "perdeu_avo" },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perdeu_avo"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Sair para o quintal. Precisar de ar.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "perdeu_avo" },
-              { "tipo": "alterar_humor", "delta": -18 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perdeu_avo"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -18
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

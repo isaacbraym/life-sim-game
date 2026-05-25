@@ -6,7 +6,10 @@
   "descricaoCurta": "Você mentiu. Parecia simples no começo. Aí a mentira precisou de outra mentira pra se sustentar. Agora desabou.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [7, 12],
+    "idadeRange": [
+      7,
+      12
+    ],
     "peso": 18,
     "cooldownMeses": 20,
     "uniqueOnce": false
@@ -16,7 +19,10 @@
       "papel": "pai_ou_mae_brabo",
       "tipo": "relacional",
       "persistenciaApos": "permanente",
-      "constraints": { "idadeMin": 25, "idadeMax": 55 }
+      "constraints": {
+        "idadeMin": 25,
+        "idadeMax": 55
+      }
     }
   ],
   "scene": {
@@ -29,7 +35,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "flagrado_sem_saida",
@@ -42,13 +52,21 @@
           "maoDireita": "fechada",
           "peEsquerdo": "tenis",
           "peDireito": "tenis",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "adulto_decepcionado",
@@ -61,7 +79,11 @@
           "maoDireita": "apontando",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -85,31 +107,70 @@
           {
             "texto": "Assumir tudo. Sem desculpa, sem enrolação.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "assumiu_mentira" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "assumiu_mentira"
+              }
             ]
           },
           {
             "texto": "Tentar explicar o contexto. Reduzir o dano.",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -8 },
-              { "tipo": "adicionar_flag", "flag": "tentou_explicar_mentira" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -8
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "tentou_explicar_mentira"
+              }
             ]
           },
           {
             "texto": "Mentir mais um pouco. Ver até onde vai.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
-              { "tipo": "adicionar_flag", "flag": "mentiu_de_novo" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "mentiu_de_novo"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }

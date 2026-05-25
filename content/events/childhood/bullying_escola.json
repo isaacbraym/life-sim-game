@@ -4,9 +4,14 @@
   "categoria": "childhood",
   "titulo": "Processo Seletivo de Traumas",
   "descricaoCurta": "Seu grupo de colegas decidiu que hoje você é o entretenimento gratuito da turma. A crueldade infantil está em seu ápice.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [7, 12],
+    "idadeRange": [
+      7,
+      12
+    ],
     "peso": 20,
     "cooldownMeses": 18,
     "uniqueOnce": false
@@ -32,7 +37,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.4, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.4,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "encolhido_humilhado",
@@ -55,7 +64,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.35, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.35,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "rindo_apontando",
@@ -95,28 +108,62 @@
         "opcoes": [
           {
             "texto": "Ativar o modo invisível. (Se eu não olhar nos olhos, talvez o T-Rex não me veja. Funciona no cinema).",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "sofreu_bullying" },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "sofreu_bullying"
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Mandar uma ofensa pesadíssima sobre a mãe do agressor. (Risco altíssimo de perder os dentes incisivos, mas vai valer a pena).",
-            "atributoCheck": { "atributo": "inteligencia", "dificuldade": 14 },
+            "atributoCheck": {
+              "atributo": "inteligencia",
+              "dificuldade": 14
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 5 },
-              { "tipo": "adicionar_flag", "flag": "revidou_bullying_verbalmente" }
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "revidou_bullying_verbalmente"
+              }
             ]
           },
           {
             "texto": "Partir pra porrada no puro desespero. (Espanque ou seja espancado: a suspensão já tá garantida de qualquer jeito).",
-            "atributoCheck": { "atributo": "forca", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "forca",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "revidou_bullying_fisicamente" },
-              { "tipo": "alterar_saude", "delta": -15 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "revidou_bullying_fisicamente"
+              },
+              {
+                "tipo": "alterar_saude",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           }
         ]
@@ -132,5 +179,7 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "humano",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }

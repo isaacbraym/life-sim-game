@@ -4,9 +4,15 @@
   "categoria": "childhood",
   "titulo": "Seu Primeiro Luto (O Trailer)",
   "descricaoCurta": "O conceito de mortalidade bateu na sua porta vestido de hamster duro (ou cachorro que não acorda). Parabéns, o mundo real chegou.",
-  "contentTags": ["death", "trauma"],
+  "contentTags": [
+    "death",
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [6, 14],
+    "idadeRange": [
+      6,
+      14
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "tem_animal_estimacao",
@@ -37,7 +43,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.2, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.2,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "chorando_quieto",
@@ -60,7 +70,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.25, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.25,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "consolando_crianca",
@@ -101,26 +115,57 @@
           {
             "texto": "Desabar em lágrimas traumáticas. (Pelo menos você pode faltar na escola amanhã).",
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_animal_estimacao" },
-              { "tipo": "alterar_humor", "delta": -25 },
-              { "tipo": "adicionar_flag", "flag": "perdeu_animal_estimacao" }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_animal_estimacao"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -25
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perdeu_animal_estimacao"
+              }
             ]
           },
           {
             "texto": "Reprimir as emoções e engolir o choro. (Excelente treino para a vida adulta corporativa).",
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_animal_estimacao" },
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "perdeu_animal_estimacao" }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_animal_estimacao"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perdeu_animal_estimacao"
+              }
             ]
           },
           {
             "texto": "O rei está morto, longa vida ao rei. Exigir outro bicho imediatamente para repor a perda.",
             "efeitos": [
-              { "tipo": "remover_flag", "flag": "tem_animal_estimacao" },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "perdeu_animal_estimacao" }
+              {
+                "tipo": "remover_flag",
+                "flag": "tem_animal_estimacao"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "perdeu_animal_estimacao"
+              }
             ]
           }
         ]
@@ -136,5 +181,7 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "humano",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

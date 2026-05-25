@@ -6,7 +6,10 @@
   "descricaoCurta": "Você está na porta da escola pela primeira vez. A mochila pesa mais do que parece e o coração pesa mais ainda.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [6, 7],
+    "idadeRange": [
+      6,
+      7
+    ],
     "peso": 80,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -33,7 +36,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "idle_neutro",
@@ -56,7 +63,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.2, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.2,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "idle_mae_acenando",
@@ -101,26 +112,55 @@
         "opcoes": [
           {
             "texto": "Entrar de cabeça erguida.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 8 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 8
+            },
             "efeitos": [
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 },
-              { "tipo": "adicionar_flag", "flag": "primeiro_dia_escola_bem" },
-              { "tipo": "alterar_humor", "delta": 10 }
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_dia_escola_bem"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 10
+              }
             ]
           },
           {
             "texto": "Ficar parado esperando a mãe ir embora primeiro.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "primeiro_dia_escola_timido" },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_dia_escola_timido"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Chorar e pedir para não ficar.",
             "efeitos": [
-              { "tipo": "adicionar_flag", "flag": "primeiro_dia_escola_choro" },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 }
+              {
+                "tipo": "adicionar_flag",
+                "flag": "primeiro_dia_escola_choro"
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              }
             ]
           }
         ]
@@ -136,5 +176,7 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "humano",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

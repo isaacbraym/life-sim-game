@@ -6,7 +6,10 @@
   "descricaoCurta": "A física não perdoa quem acha que é o Ayrton Senna de Monark sem freio. A bicicleta decidiu te ejetar.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [6, 12],
+    "idadeRange": [
+      6,
+      12
+    ],
     "peso": 15,
     "cooldownMeses": 30,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "no_chao_levantando",
@@ -61,26 +68,54 @@
         "opcoes": [
           {
             "texto": "Engolir o choro e voltar pra casa manquitola. (Dignidade destruída, mas o chassi segue vivo).",
-            "atributoCheck": { "atributo": "constituicao", "dificuldade": 10 },
+            "atributoCheck": {
+              "atributo": "constituicao",
+              "dificuldade": 10
+            },
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -8 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 },
-              { "tipo": "alterar_humor", "delta": 5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -8
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 5
+              }
             ]
           },
           {
             "texto": "Ficar no chão fingindo desmaio. (Vai que você ganha um Band-Aid e um picolé por pena).",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -8 },
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_saude",
+                "delta": -8
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           },
           {
             "texto": "Chorar feito um bezerro desmamado. (Até algum vizinho ameaçar chamar o Conselho Tutelar para os seus pais).",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -5 },
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "adicionar_flag", "flag": "choro_publico_vergonhoso" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "choro_publico_vergonhoso"
+              }
             ]
           }
         ]
@@ -96,5 +131,7 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "humano",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }

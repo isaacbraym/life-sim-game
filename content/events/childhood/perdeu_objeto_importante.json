@@ -6,7 +6,10 @@
   "descricaoCurta": "O brinquedo favorito, o chaveiro de lembrança, o caderno com os segredos. Sumiu. Você revirou tudo. Não está em lugar nenhum.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [5, 11],
+    "idadeRange": [
+      5,
+      11
+    ],
     "peso": 14,
     "cooldownMeses": 24,
     "uniqueOnce": false
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "procurando_desesperado",
@@ -35,7 +42,11 @@
           "maoDireita": "aberta",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -53,27 +64,53 @@
           {
             "texto": "Aceitar que foi e seguir em frente.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Perguntar para todo mundo se viu. Vasculhar a casa toda.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 13 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 13
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           },
           {
             "texto": "Chorar até aparecer alguém que ajude a procurar.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }

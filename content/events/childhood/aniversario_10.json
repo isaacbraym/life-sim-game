@@ -6,7 +6,10 @@
   "descricaoCurta": "Dez anos de idade. Dois dígitos. Você se sente o rei do mundo, até abrir os presentes e ver que ganhou meias.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [10, 10],
+    "idadeRange": [
+      10,
+      10
+    ],
     "peso": 90,
     "cooldownMeses": 0,
     "uniqueOnce": true
@@ -22,7 +25,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "aniversariante_dez_anos",
@@ -62,24 +69,50 @@
           {
             "texto": "Agradecer educadamente enquanto morre por dentro. (Maturidade precoce).",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": 1
+              }
             ]
           },
           {
             "texto": "Jogar as meias no chão e exigir o videogame prometido.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -15 },
-              { "tipo": "alterar_atributo", "atributo": "carisma", "delta": -1 },
-              { "tipo": "adicionar_flag", "flag": "criança_mimada" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -15
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "carisma",
+                "delta": -1
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "criança_mimada"
+              }
             ]
           },
           {
             "texto": "Tentar usar a sorte para ver se há dinheiro escondido dentro das meias.",
-            "atributoCheck": { "atributo": "sorte", "dificuldade": 12 },
+            "atributoCheck": {
+              "atributo": "sorte",
+              "dificuldade": 12
+            },
             "efeitos": [
-              { "tipo": "alterar_dinheiro", "delta": 20.0 },
-              { "tipo": "alterar_humor", "delta": 15 }
+              {
+                "tipo": "alterar_dinheiro",
+                "delta": 20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": 15
+              }
             ]
           }
         ]
@@ -95,5 +128,7 @@
     "criadoEm": "2026-05-24T19:10:40.000Z",
     "criadoPor": "ia_assistido",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "major"
 }

@@ -4,9 +4,14 @@
   "categoria": "childhood",
   "titulo": "Internação",
   "descricaoCurta": "Febre que não baixava. Hospital. Exames. Adultos com expressão que tentavam esconder de você mas não escondiam. Foram dias que pareceram meses.",
-  "contentTags": ["trauma"],
+  "contentTags": [
+    "trauma"
+  ],
   "triggers": {
-    "idadeRange": [5, 12],
+    "idadeRange": [
+      5,
+      12
+    ],
     "peso": 10,
     "cooldownMeses": 48,
     "uniqueOnce": false
@@ -16,7 +21,11 @@
       "papel": "mae_hospital",
       "tipo": "relacional",
       "persistenciaApos": "permanente",
-      "constraints": { "genero": "F", "idadeMin": 24, "idadeMax": 50 }
+      "constraints": {
+        "genero": "F",
+        "idadeMin": 24,
+        "idadeMax": 50
+      }
     }
   ],
   "scene": {
@@ -29,7 +38,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": 0.0, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": 0,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "deitado_cansado",
@@ -42,13 +55,21 @@
           "maoDireita": "relaxada",
           "peEsquerdo": "descalco",
           "peDireito": "descalco",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 1
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.35, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.35,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "mae_velando",
@@ -61,7 +82,11 @@
           "maoDireita": "palma_aberta",
           "peEsquerdo": "sapato_social",
           "peDireito": "sapato_social",
-          "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+          "metadata": {
+            "criadoEm": "2026-05-19T00:00:00.000Z",
+            "criadoPor": "humano",
+            "versao": 1
+          }
         },
         "zOrder": 0
       }
@@ -90,24 +115,56 @@
           {
             "texto": "Focar em melhorar. Comer a comida horrível e dormir.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 2 },
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "ficou_internado" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 2
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "ficou_internado"
+              }
             ]
           },
           {
             "texto": "Fazer drama. Merecer visitas e atenção total.",
             "efeitos": [
-              { "tipo": "alterar_saude", "delta": -20 },
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "ficou_internado" }
+              {
+                "tipo": "alterar_saude",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "ficou_internado"
+              }
             ]
           }
         ]
       }
     ],
-    "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+    "metadata": {
+      "criadoEm": "2026-05-19T00:00:00.000Z",
+      "criadoPor": "humano",
+      "versao": 1
+    }
   },
-  "metadata": { "criadoEm": "2026-05-19T00:00:00.000Z", "criadoPor": "humano", "versao": 1 }
+  "metadata": {
+    "criadoEm": "2026-05-19T00:00:00.000Z",
+    "criadoPor": "humano",
+    "versao": 1
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "routine"
 }

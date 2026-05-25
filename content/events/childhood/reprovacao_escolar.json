@@ -6,7 +6,10 @@
   "descricaoCurta": "Você rodou de ano. O boletim está na mochila como uma bomba prestes a explodir assim que chegar em casa.",
   "contentTags": [],
   "triggers": {
-    "idadeRange": [7, 12],
+    "idadeRange": [
+      7,
+      12
+    ],
     "requisitos": {
       "tipo": "flag",
       "flag": "notas_baixas",
@@ -37,7 +40,11 @@
     "atores": [
       {
         "papel": "protagonista",
-        "posicao": { "x": -0.3, "y": 0.0, "facing": "R" },
+        "posicao": {
+          "x": -0.3,
+          "y": 0,
+          "facing": "R"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "entrega_culpado",
@@ -60,7 +67,11 @@
       },
       {
         "papel": "npc_primario",
-        "posicao": { "x": 0.3, "y": 0.0, "facing": "L" },
+        "posicao": {
+          "x": 0.3,
+          "y": 0,
+          "facing": "L"
+        },
         "pose": {
           "schemaVersion": "1.0.0",
           "poseId": "lendo_boletim_raiva",
@@ -101,24 +112,49 @@
           {
             "texto": "Assumir a culpa e prometer que vai melhorar.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -5 },
-              { "tipo": "adicionar_flag", "flag": "prometeu_melhorar_escola" },
-              { "tipo": "remover_flag", "flag": "notas_baixas" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -5
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "prometeu_melhorar_escola"
+              },
+              {
+                "tipo": "remover_flag",
+                "flag": "notas_baixas"
+              }
             ]
           },
           {
             "texto": "Colocar a culpa no professor.",
-            "atributoCheck": { "atributo": "carisma", "dificuldade": 15 },
+            "atributoCheck": {
+              "atributo": "carisma",
+              "dificuldade": 15
+            },
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -10 },
-              { "tipo": "adicionar_flag", "flag": "culpou_professor" }
+              {
+                "tipo": "alterar_humor",
+                "delta": -10
+              },
+              {
+                "tipo": "adicionar_flag",
+                "flag": "culpou_professor"
+              }
             ]
           },
           {
             "texto": "Ficar em silêncio e absorver a bronca.",
             "efeitos": [
-              { "tipo": "alterar_humor", "delta": -20 },
-              { "tipo": "alterar_atributo", "atributo": "constituicao", "delta": 1 }
+              {
+                "tipo": "alterar_humor",
+                "delta": -20
+              },
+              {
+                "tipo": "alterar_atributo",
+                "atributo": "constituicao",
+                "delta": 1
+              }
             ]
           }
         ]
@@ -134,5 +170,7 @@
     "criadoEm": "2026-05-19T00:00:00.000Z",
     "criadoPor": "humano",
     "versao": 1
-  }
+  },
+  "localContextId": "casa",
+  "narrativeWeight": "relevant"
 }
