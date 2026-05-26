@@ -1,0 +1,66 @@
+{
+  "id": "escritorio_anos90",
+  "localId": "trabalho",
+  "nome": "Escritório Anos 90",
+  "backgroundAsset": "bg_escritorio_anos90",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_escritorio",
+      "poligono": [
+        { "x": 80, "y": 360 },
+        { "x": 880, "y": 360 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_mapa_trabalho",
+      "posicao": { "x": 900, "y": 430 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair do trabalho"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "mesa_trabalho_1",
+      "tipo": "mesa",
+      "posicao": { "x": 250, "y": 310 },
+      "tamanho": { "largura": 120, "altura": 80 },
+      "posicaoDeInteracao": { "x": 250, "y": 400 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "mesa_escritorio_cinza",
+      "acoes": ["trabalhar", "usar_computador"],
+      "npcSlot": "slot_colega_1"
+    },
+    {
+      "id": "mesa_reuniao",
+      "tipo": "mesa",
+      "posicao": { "x": 600, "y": 320 },
+      "tamanho": { "largura": 200, "altura": 100 },
+      "posicaoDeInteracao": { "x": 600, "y": 430 },
+      "orientacaoAoInteragir": "FRONTAL",
+      "assetId": "mesa_reuniao_madeira",
+      "acoes": ["fazer_reuniao", "conversar"],
+      "npcSlot": "slot_chefe"
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "colega_trabalho",
+      "slot": "slot_colega_1",
+      "persistencia": "recorrente"
+    },
+    {
+      "papel": "chefe",
+      "slot": "slot_chefe",
+      "persistencia": "permanente"
+    }
+  ],
+  "ambientTags": ["publico", "trabalho", "escritorio"],
+  "eraStyle": "nineties"
+}

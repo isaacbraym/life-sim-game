@@ -1,0 +1,82 @@
+{
+  "id": "bar_balcao",
+  "localId": "bar",
+  "nome": "Balcão do Bar",
+  "backgroundAsset": "bg_bar_balcao",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_bar",
+      "poligono": [
+        { "x": 80, "y": 380 },
+        { "x": 880, "y": 380 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_mapa_bar",
+      "posicao": { "x": 900, "y": 440 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair do bar"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "balcao_bebidas",
+      "tipo": "balcao",
+      "posicao": { "x": 480, "y": 320 },
+      "tamanho": { "largura": 400, "altura": 80 },
+      "posicaoDeInteracao": { "x": 480, "y": 410 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "balcao_madeira_escura",
+      "acoes": ["pedir_bebida", "conversar"],
+      "npcSlot": "slot_bartender"
+    },
+    {
+      "id": "banqueta_cliente_1",
+      "tipo": "assento",
+      "posicao": { "x": 350, "y": 360 },
+      "tamanho": { "largura": 50, "altura": 50 },
+      "posicaoDeInteracao": { "x": 350, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "banqueta_couro_vermelho",
+      "acoes": ["sentar", "relaxar"],
+      "npcSlot": "slot_cliente_1"
+    },
+    {
+      "id": "banqueta_cliente_2",
+      "tipo": "assento",
+      "posicao": { "x": 610, "y": 360 },
+      "tamanho": { "largura": 50, "altura": 50 },
+      "posicaoDeInteracao": { "x": 610, "y": 420 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "banqueta_couro_vermelho",
+      "acoes": ["sentar", "relaxar"],
+      "npcSlot": "slot_cliente_2"
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "bartender",
+      "slot": "slot_bartender",
+      "persistencia": "recorrente"
+    },
+    {
+      "papel": "cliente_bar",
+      "slot": "slot_cliente_1",
+      "persistencia": "descartavel"
+    },
+    {
+      "papel": "cliente_bar",
+      "slot": "slot_cliente_2",
+      "persistencia": "descartavel"
+    }
+  ],
+  "ambientTags": ["publico", "bar", "lazer"],
+  "eraStyle": "nineties"
+}

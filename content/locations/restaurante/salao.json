@@ -1,0 +1,66 @@
+{
+  "id": "restaurante_salao",
+  "localId": "restaurante",
+  "nome": "Salão do Restaurante",
+  "backgroundAsset": "bg_restaurante_salao",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_restaurante",
+      "poligono": [
+        { "x": 80, "y": 360 },
+        { "x": 880, "y": 360 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_mapa_restaurante",
+      "posicao": { "x": 900, "y": 430 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair do restaurante"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "mesa_cliente_1",
+      "tipo": "mesa",
+      "posicao": { "x": 250, "y": 320 },
+      "tamanho": { "largura": 100, "altura": 80 },
+      "posicaoDeInteracao": { "x": 250, "y": 410 },
+      "orientacaoAoInteragir": "FRONTAL",
+      "assetId": "mesa_restaurante_formica",
+      "acoes": ["comer", "conversar"],
+      "npcSlot": "slot_cliente_rest"
+    },
+    {
+      "id": "balcao_atendimento",
+      "tipo": "balcao",
+      "posicao": { "x": 650, "y": 300 },
+      "tamanho": { "largura": 200, "altura": 90 },
+      "posicaoDeInteracao": { "x": 650, "y": 400 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "balcao_restaurante_caixa",
+      "acoes": ["pagar_conta"],
+      "npcSlot": "slot_garcom"
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "garcom",
+      "slot": "slot_garcom",
+      "persistencia": "recorrente"
+    },
+    {
+      "papel": "cliente_casual",
+      "slot": "slot_cliente_rest",
+      "persistencia": "descartavel"
+    }
+  ],
+  "ambientTags": ["publico", "restaurante", "lazer"],
+  "eraStyle": "nineties"
+}

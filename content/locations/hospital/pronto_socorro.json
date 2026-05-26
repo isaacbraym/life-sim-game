@@ -1,0 +1,66 @@
+{
+  "id": "pronto_socorro",
+  "localId": "hospital",
+  "nome": "Pronto Socorro",
+  "backgroundAsset": "bg_pronto_socorro",
+  "tamanho": { "largura": 960, "altura": 540 },
+  "navZonas": [
+    {
+      "id": "zona_pronto_socorro",
+      "poligono": [
+        { "x": 80, "y": 360 },
+        { "x": 880, "y": 360 },
+        { "x": 880, "y": 500 },
+        { "x": 80, "y": 500 }
+      ]
+    }
+  ],
+  "pontosDeSaida": [
+    {
+      "id": "saida_mapa_hospital",
+      "posicao": { "x": 900, "y": 430 },
+      "destino": {
+        "tipo": "mapa"
+      },
+      "rotulo": "Sair do hospital"
+    }
+  ],
+  "objetos": [
+    {
+      "id": "balcao_triagem",
+      "tipo": "balcao",
+      "posicao": { "x": 300, "y": 300 },
+      "tamanho": { "largura": 150, "altura": 90 },
+      "posicaoDeInteracao": { "x": 300, "y": 400 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "balcao_hospital_branco",
+      "acoes": ["fazer_ficha", "conversar"],
+      "npcSlot": "slot_recepcionista_triagem"
+    },
+    {
+      "id": "maca_exame",
+      "tipo": "maca",
+      "posicao": { "x": 650, "y": 310 },
+      "tamanho": { "largura": 160, "altura": 80 },
+      "posicaoDeInteracao": { "x": 650, "y": 400 },
+      "orientacaoAoInteragir": "COSTAS",
+      "assetId": "maca_clinica",
+      "acoes": ["consultar", "descansar"],
+      "npcSlot": "slot_medico"
+    }
+  ],
+  "npcsElegiveis": [
+    {
+      "papel": "recepcionista",
+      "slot": "slot_recepcionista_triagem",
+      "persistencia": "recorrente"
+    },
+    {
+      "papel": "medico",
+      "slot": "slot_medico",
+      "persistencia": "recorrente"
+    }
+  ],
+  "ambientTags": ["publico", "hospital", "saude"],
+  "eraStyle": "nineties"
+}
