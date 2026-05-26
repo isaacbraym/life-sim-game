@@ -5,6 +5,7 @@ declare global {
   }
 
   interface FileSystemFileHandle {
+    getFile(): Promise<File>;
     createWritable(): Promise<FileSystemWritableFileStream>;
   }
 
@@ -18,6 +19,10 @@ declare global {
       name: string,
       options?: { readonly create?: boolean },
     ): Promise<FileSystemFileHandle>;
+    removeEntry(
+      name: string,
+      options?: { readonly recursive?: boolean },
+    ): Promise<void>;
   }
 
   interface Window {
