@@ -207,7 +207,7 @@ function PreviewAsset({ estadoAsset, assetId, rotacaoAtual, imagemComErro, icone
           backgroundSize: `${TAMANHO_TILE_CARD}px ${TAMANHO_TILE_CARD}px`,
           border: '1px solid rgba(100,100,100,0.2)',
           borderRadius: 2,
-          background: '#f3f4f6',
+          backgroundColor: '#f3f4f6',
         }} />
         {/* Sprite */}
         <img

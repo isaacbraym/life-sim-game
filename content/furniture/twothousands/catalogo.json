@@ -328,5 +328,22 @@
     "availability": { "startYear": 2007 },
     "tags": ["sala", "quarto", "decoracao"],
     "descricao": "Luminária moderna de coluna de metal escovado equipada com foco de luz indireta."
+  },
+  {
+    "id": "tv_tubo_2000",
+    "nome": "Televisão de Tubo dos Anos 2000",
+    "categoria": "tecnologia",
+    "assetId": "tv_tubo_2000",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 1200,
+    "valorDeRevenda": 400,
+    "acoes": ["assistir_tv"],
+    "efeitos": {
+      "humor": 2,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 2000, "endYear": 2009 },
+    "tags": ["tecnologia", "tv"],
+    "descricao": "Televisor de tubo clássico dos anos 2000, com gabinete de plástico preto brilhante."
   }
 ]

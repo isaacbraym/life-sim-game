@@ -330,5 +330,39 @@
     "availability": { "startYear": 1990, "endYear": 1999 },
     "tags": ["sala", "decoracao"],
     "descricao": "Tapete clássico de sala com estampa inspirada em padrões persas tradicionais em fibras sintéticas."
+  },
+  {
+    "id": "sofa_verde_gasto_3_lugares",
+    "nome": "Sofá Verde de 3 Lugares Gasto",
+    "categoria": "assento",
+    "assetId": "sofa_verde_gasto_3_lugares",
+    "tamanhoGrid": { "largura": 3, "altura": 1 },
+    "preco": 800,
+    "valorDeRevenda": 250,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 2,
+      "humor": 1
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["assento", "sofa", "gasto", "velho"],
+    "descricao": "Sofá de tecido verde gasto com visíveis marcas de uso e almofadas baixas."
+  },
+  {
+    "id": "banheira_simples",
+    "nome": "Banheira Simples",
+    "categoria": "outro",
+    "assetId": "banheira_simples",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 1500,
+    "valorDeRevenda": 500,
+    "acoes": ["tomar_banho"],
+    "efeitos": {
+      "conforto": 3,
+      "humor": 2
+    },
+    "availability": { "startYear": 1990, "endYear": 1999 },
+    "tags": ["banheiro", "higiene"],
+    "descricao": "Banheira simples de porcelana off-white com pés metálicos."
   }
 ]

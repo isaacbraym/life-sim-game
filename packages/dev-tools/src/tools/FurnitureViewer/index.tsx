@@ -411,7 +411,7 @@ function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErr
           backgroundSize: `${TAMANHO_TILE_INSPECAO}px ${TAMANHO_TILE_INSPECAO}px`,
           border: '1px solid rgba(100,100,100,0.2)',
           borderRadius: 2,
-          background: '#f3f4f6',
+          backgroundColor: '#f3f4f6',
         }} />
         <img
           src={urlImagemAsset(assetId, rotacaoAtual)}
