@@ -1,0 +1,16 @@
+{
+  "assetId": "sofa_verde_gasto_3_lugares",
+  "anchorX": 0.5,
+  "anchorY": 1.0,
+  "escalaBase": 1.0,
+  "rotacoesDisponiveis": [0, 90, 180, 270],
+  "footprintPorRotacao": {
+    "0":   { "largura": 3, "altura": 1 },
+    "90":  { "largura": 1, "altura": 3 },
+    "180": { "largura": 3, "altura": 1 },
+    "270": { "largura": 1, "altura": 3 }
+  },
+  "material": "tecido_verde_gasto",
+  "era": "nineties",
+  "tags": ["assento", "gasto"]
+}

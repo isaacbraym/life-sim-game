@@ -1,4 +1,5 @@
 export * from './pose';
+export * from './furnitureAsset';
 export * from './effect';
 export * from './predicate';
 export * from './scene';

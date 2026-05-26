@@ -1,0 +1,16 @@
+{
+  "assetId": "tv_tubo_2000",
+  "anchorX": 0.5,
+  "anchorY": 1.0,
+  "escalaBase": 1.0,
+  "rotacoesDisponiveis": [0, 90, 180, 270],
+  "footprintPorRotacao": {
+    "0":   { "largura": 2, "altura": 1 },
+    "90":  { "largura": 1, "altura": 2 },
+    "180": { "largura": 2, "altura": 1 },
+    "270": { "largura": 1, "altura": 2 }
+  },
+  "material": "plastico_preto",
+  "era": "twothousands",
+  "tags": ["tecnologia", "tv"]
+}

@@ -1,0 +1,14 @@
+{
+  "assetId": "banheira_simples",
+  "anchorX": 0.5,
+  "anchorY": 1.0,
+  "escalaBase": 1.0,
+  "rotacoesDisponiveis": [0, 90],
+  "footprintPorRotacao": {
+    "0":  { "largura": 2, "altura": 1 },
+    "90": { "largura": 1, "altura": 2 }
+  },
+  "material": "porcelana",
+  "era": "nineties",
+  "tags": ["banheiro"]
+}
