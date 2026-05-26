@@ -1,29 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
-import { ComodoDefinition } from '@lifesim/core';
+import { z } from 'zod';
 
-type PropsPainelJson = {
-  readonly comodo: ComodoDefinition;
-  readonly onAtualizar: (novoComodo: ComodoDefinition) => void;
+type PropsPainelJson<T> = {
+  readonly titulo: string;
+  readonly valor: T;
+  readonly schema: z.ZodType<T, z.ZodTypeDef, unknown>;
+  readonly onAtualizar: (novoValor: T) => void;
 };
 
-export function PainelJson({ comodo, onAtualizar }: PropsPainelJson) {
-  const [textoJson, setTextoJson] = useState(() => JSON.stringify(comodo, null, 2));
+export function PainelJson<T>({ titulo, valor, schema, onAtualizar }: PropsPainelJson<T>) {
+  const [textoJson, setTextoJson] = useState(() => JSON.stringify(valor, null, 2));
   const [erroValidacao, setErroValidacao] = useState<string | undefined>();
   const focadoRef = useRef(false);
 
-  // Sincroniza o textarea quando o comodo muda externamente (drag no canvas)
+  // Sincroniza o textarea quando o valor muda externamente (drag no canvas)
   useEffect(() => {
     if (!focadoRef.current) {
-      setTextoJson(JSON.stringify(comodo, null, 2));
+      setTextoJson(JSON.stringify(valor, null, 2));
       setErroValidacao(undefined);
     }
-  }, [comodo]);
+  }, [valor]);
 
   const aoAlterarTexto = (novoTexto: string) => {
     setTextoJson(novoTexto);
     try {
       const dados: unknown = JSON.parse(novoTexto);
-      const resultado = ComodoDefinition.safeParse(dados);
+      const resultado = schema.safeParse(dados);
       if (resultado.success) {
         setErroValidacao(undefined);
         onAtualizar(resultado.data);
@@ -59,7 +61,7 @@ export function PainelJson({ comodo, onAtualizar }: PropsPainelJson) {
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-        <span>ComodoDefinition JSON</span>
+        <span>{titulo}</span>
         {erroValidacao !== undefined ? (
           <span style={{ color: '#fc8181', fontSize: 11 }}>⚠️ {erroValidacao}</span>
         ) : (
