@@ -5,6 +5,7 @@
   "scripts": {
     "build": "pnpm --filter game build",
     "dev": "pnpm --filter game dev",
+    "dev:tools": "pnpm --filter @lifesim/dev-tools dev",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint . --ext .ts,.tsx",
     "validate:events": "node scripts/validate-events.mjs",
