@@ -204,6 +204,136 @@ def empacotar_zip(
     return caminho_zip
 
 
+def encontrar_raiz_projeto() -> str | None:
+    caminho = os.path.abspath(os.path.dirname(__file__))
+    for _ in range(8):
+        if (
+            os.path.exists(os.path.join(caminho, 'package.json'))
+            and os.path.isdir(os.path.join(caminho, 'content'))
+        ):
+            return caminho
+
+        proximo = os.path.dirname(caminho)
+        if proximo == caminho:
+            break
+        caminho = proximo
+
+    return None
+
+
+def salvar_asset_no_projeto(
+    raiz_projeto: str,
+    asset_id: str,
+    sprites: dict[int, Image.Image],
+    metadata: dict,
+) -> str:
+    pasta_asset = os.path.join(raiz_projeto, 'content', 'furniture-assets', asset_id)
+    os.makedirs(pasta_asset, exist_ok=True)
+
+    with open(os.path.join(pasta_asset, 'metadata.json'), 'w', encoding='utf-8') as f:
+        json.dump(metadata, f, indent=2, ensure_ascii=False)
+        f.write('\n')
+
+    for num, img in sorted(sprites.items()):
+        img.save(os.path.join(pasta_asset, f'{num}.webp'), format='WebP', lossless=True, quality=100)
+
+    return pasta_asset
+
+
+def nome_humano(asset_id: str) -> str:
+    return ' '.join(parte.capitalize() for parte in asset_id.split('_') if parte)
+
+
+def inferir_categoria(asset_id: str) -> str:
+    regras = [
+        (('sofa', 'cadeira', 'pufe', 'poltrona', 'banco'), 'assento'),
+        (('mesa', 'rack', 'escrivaninha'), 'mesa'),
+        (('cama', 'berco'), 'cama'),
+        (('tv', 'televisao', 'notebook', 'computador', 'pc', 'celular', 'radio'), 'tecnologia'),
+        (('geladeira', 'fogao', 'lavadora', 'microondas', 'freezer'), 'eletrodomestico'),
+        (('vaso', 'planta', 'quadro', 'luminaria', 'tapete'), 'decoracao'),
+        (('esteira', 'halter', 'bicicleta'), 'treino'),
+    ]
+    for termos, categoria in regras:
+        if any(termo in asset_id for termo in termos):
+            return categoria
+    return 'outro'
+
+
+def gerar_entrada_catalogo(
+    asset_id: str,
+    footprint: str,
+    nome: str | None,
+    categoria: str | None,
+    start_year: int,
+    preco: float,
+    valor_revenda: float,
+    tags: list[str],
+) -> dict:
+    partes = footprint.split('x')
+    largura, altura = int(partes[0]), int(partes[1])
+    tags_catalogo = sorted(set(tags + ['gerado_sprite']))
+
+    return {
+        'id': asset_id,
+        'nome': nome or nome_humano(asset_id),
+        'categoria': categoria or inferir_categoria(asset_id),
+        'assetId': asset_id,
+        'tamanhoGrid': {'largura': largura, 'altura': altura},
+        'preco': preco,
+        'valorDeRevenda': valor_revenda,
+        'acoes': [],
+        'efeitos': {},
+        'availability': {'startYear': start_year},
+        'tags': tags_catalogo,
+        'descricao': f'Entrada gerada automaticamente pelo sprite_generator para validar {asset_id} no Furniture Viewer.',
+    }
+
+
+def atualizar_catalogo(
+    catalogo_path: str,
+    entrada_gerada: dict,
+) -> str:
+    os.makedirs(os.path.dirname(catalogo_path), exist_ok=True)
+
+    if os.path.exists(catalogo_path):
+        with open(catalogo_path, 'r', encoding='utf-8') as f:
+            catalogo = json.load(f)
+    else:
+        catalogo = []
+
+    if not isinstance(catalogo, list):
+        raise ValueError(f'Catalogo precisa ser uma lista JSON: {catalogo_path}')
+
+    indice_existente = next(
+        (
+            i for i, item in enumerate(catalogo)
+            if isinstance(item, dict)
+            and (item.get('id') == entrada_gerada['id'] or item.get('assetId') == entrada_gerada['assetId'])
+        ),
+        None,
+    )
+
+    if indice_existente is None:
+        catalogo.append(entrada_gerada)
+        acao = 'adicionado'
+    else:
+        existente = catalogo[indice_existente]
+        atualizado = dict(entrada_gerada)
+        atualizado.update(existente)
+        atualizado['assetId'] = entrada_gerada['assetId']
+        atualizado['tamanhoGrid'] = entrada_gerada['tamanhoGrid']
+        atualizado['tags'] = sorted(set(existente.get('tags', []) + entrada_gerada['tags']))
+        catalogo[indice_existente] = atualizado
+        acao = 'atualizado'
+
+    with open(catalogo_path, 'w', encoding='utf-8') as f:
+        json.dump(catalogo, f, indent=2, ensure_ascii=False)
+        f.write('\n')
+
+    return acao
+
+
 def verificar_qualidade(sprites: dict[int, Image.Image]) -> None:
     for num, img in sprites.items():
         slot = next(s for s in SLOTS if s['num'] == num)
@@ -244,6 +374,21 @@ def main() -> None:
                         help='Slots disponiveis. Ex: 1,3,5,7 para so cardinais')
     parser.add_argument('--destino', default=None,
                         help='Pasta de destino do ZIP. Se omitida, usa a pasta do PNG')
+    parser.add_argument('--nao-instalar-projeto', action='store_true',
+                        help='Nao copia o asset nem atualiza catalogo em content/.')
+    parser.add_argument('--catalogo', default=None,
+                        help='Catalogo JSON a atualizar. Padrao: content/furniture/twothousands/catalogo.json')
+    parser.add_argument('--nome', default=None,
+                        help='Nome exibido no Furniture Viewer. Padrao: nome derivado do asset-id.')
+    parser.add_argument('--categoria', default=None,
+                        choices=['assento', 'mesa', 'cama', 'tecnologia', 'eletrodomestico', 'decoracao', 'treino', 'outro'],
+                        help='Categoria do movel no catalogo. Se omitida, tenta inferir pelo asset-id.')
+    parser.add_argument('--start-year', type=int, default=2000,
+                        help='Ano inicial no catalogo automatico.')
+    parser.add_argument('--preco', type=float, default=100,
+                        help='Preco padrao no catalogo automatico.')
+    parser.add_argument('--valor-revenda', type=float, default=25,
+                        help='Valor de revenda padrao no catalogo automatico.')
     args = parser.parse_args()
 
     if not os.path.exists(args.sheet):
@@ -287,15 +432,45 @@ def main() -> None:
     os.makedirs(destino, exist_ok=True)
     zip_path = empacotar_zip(asset_id, sprites, metadata, destino)
 
+    pasta_asset = None
+    catalogo_path = None
+    acao_catalogo = None
+    if not args.nao_instalar_projeto:
+        raiz_projeto = encontrar_raiz_projeto()
+        if raiz_projeto is None:
+            print('\nAVISO: raiz do projeto nao encontrada. ZIP gerado, mas catalogo nao foi atualizado.')
+        else:
+            print('5. Instalando no projeto e atualizando catalogo...')
+            pasta_asset = salvar_asset_no_projeto(raiz_projeto, asset_id, sprites, metadata)
+            catalogo_path = args.catalogo or os.path.join(
+                raiz_projeto, 'content', 'furniture', 'twothousands', 'catalogo.json'
+            )
+            entrada = gerar_entrada_catalogo(
+                asset_id=asset_id,
+                footprint=footprint,
+                nome=args.nome,
+                categoria=args.categoria,
+                start_year=args.start_year,
+                preco=args.preco,
+                valor_revenda=args.valor_revenda,
+                tags=tags,
+            )
+            acao_catalogo = atualizar_catalogo(catalogo_path, entrada)
+
     print(f'\nPronto: {zip_path}')
-    print('   Extraia na raiz do projeto (life-sim-game/).')
     print('   Conteudo:')
     print(f'   content/furniture-assets/{asset_id}/')
     print('   - metadata.json')
     for s in SLOTS:
         if s['num'] in slots_ativos:
             print(f"   - {s['num']}.webp  ({s['direcao']})")
-    print('\n   Abra no Dev Tools -> Furniture Viewer para validar.')
+    if pasta_asset and catalogo_path and acao_catalogo:
+        print('\nInstalado no projeto:')
+        print(f'   Asset:    {pasta_asset}')
+        print(f'   Catalogo: {catalogo_path} ({acao_catalogo})')
+        print('   Recarregue o Dev Tools -> Furniture Viewer para validar.')
+    else:
+        print('\n   Extraia o ZIP na raiz do projeto (life-sim-game/) para validar no Dev Tools.')
 
 if __name__ == '__main__':
     main()

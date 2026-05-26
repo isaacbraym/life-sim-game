@@ -12,6 +12,11 @@ type ItemDoCatalogo =
   | { readonly ok: true; readonly movel: FurnitureDefinition }
   | { readonly ok: false; readonly bruto: unknown; readonly erro: z.ZodError };
 
+type ResultadoCatalogo = {
+  readonly itens: ItemDoCatalogo[];
+  readonly mensagem: string;
+};
+
 function anoParaEra(startYear: number): FiltroEra {
   if (startYear < 1990) return 'eighties';
   if (startYear < 2000) return 'nineties';
@@ -41,9 +46,7 @@ function itemPassaFiltros(
   return true;
 }
 
-async function parsearCatalogo(arquivo: File): Promise<{ itens: ItemDoCatalogo[]; mensagem: string }> {
-  const texto = await arquivo.text();
-  const dados: unknown = JSON.parse(texto);
+function parsearDadosCatalogo(dados: unknown): ResultadoCatalogo {
   const lista: unknown[] = Array.isArray(dados) ? dados : [dados];
 
   const itens: ItemDoCatalogo[] = lista.map((entrada) => {
@@ -58,9 +61,22 @@ async function parsearCatalogo(arquivo: File): Promise<{ itens: ItemDoCatalogo[]
   return { itens, mensagem: msg };
 }
 
+async function parsearCatalogo(arquivo: File): Promise<ResultadoCatalogo> {
+  const texto = await arquivo.text();
+  const dados: unknown = JSON.parse(texto);
+  return parsearDadosCatalogo(dados);
+}
+
 const CATEGORIAS: FurnitureDefinition['categoria'][] = [
   'assento', 'mesa', 'cama', 'tecnologia', 'eletrodomestico', 'decoracao', 'treino', 'outro',
 ];
+
+const CATALOGOS_PADRAO = [
+  '/content/furniture/eighties/catalogo.json',
+  '/content/furniture/nineties/catalogo.json',
+  '/content/furniture/twothousands/catalogo.json',
+  '/content/furniture/modern/catalogo.json',
+] as const;
 
 const estiloSelect: React.CSSProperties = {
   background: '#ffffff',
@@ -81,6 +97,49 @@ export function VisualizadorDeMovel() {
   const [termoBusca, setTermoBusca] = useState('');
   const [movelInspecionado, setMovelInspecionado] = useState<FurnitureDefinition | undefined>();
   const inputArquivoRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    let cancelado = false;
+
+    const carregarCatalogosPadrao = async () => {
+      setMensagem('Carregando catalogos padrao...');
+      const resultados: ResultadoCatalogo[] = [];
+      let carregados = 0;
+      let falhas = 0;
+
+      for (const url of CATALOGOS_PADRAO) {
+        try {
+          const resposta = await fetch(url);
+          if (!resposta.ok) {
+            falhas++;
+            continue;
+          }
+          const dados: unknown = await resposta.json();
+          resultados.push(parsearDadosCatalogo(dados));
+          carregados++;
+        } catch {
+          falhas++;
+        }
+      }
+
+      if (cancelado) return;
+
+      const itens = resultados.flatMap((resultado) => resultado.itens);
+      if (itens.length === 0) {
+        setMensagem('Carregue um catalogo');
+        return;
+      }
+
+      const numErros = itens.filter((item) => !item.ok).length;
+      const numValidos = itens.length - numErros;
+      setItensCatalogo(itens);
+      setMensagem(`${numValidos} validos · ${carregados} catalogos padrao${falhas > 0 ? ` · ${falhas} falhas` : ''}`);
+    };
+
+    void carregarCatalogosPadrao();
+
+    return () => { cancelado = true; };
+  }, []);
 
   const aoCarregarArquivo = async (e: ChangeEvent<HTMLInputElement>) => {
     const arquivo = e.target.files?.[0];

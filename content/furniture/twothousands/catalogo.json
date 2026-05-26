@@ -590,6 +590,7 @@
     "tags": [
       "cozinha",
       "eletrodomestico",
+      "gerado_sprite",
       "teste_sprite"
     ],
     "descricao": "Entrada temporaria para validar no Furniture Viewer os sprites gerados por geladeira_2000_01."

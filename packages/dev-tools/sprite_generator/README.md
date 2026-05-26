@@ -12,7 +12,12 @@ py -m pip install Pillow
 
 O `.bat` chama o script existente `fatiar_sprites_v2.py`.
 
-3. O `.zip` sera criado no mesmo diretorio do PNG, com o nome:
+3. O gerador faz duas coisas:
+
+- cria o `.zip` no mesmo diretorio do PNG;
+- instala/atualiza o asset em `content/furniture-assets/<asset_id>/` e adiciona/atualiza a entrada em `content/furniture/twothousands/catalogo.json`.
+
+O `.zip` sera criado com o nome:
 
 ```text
 <asset_id>.zip
@@ -48,6 +53,10 @@ Quando chamado pelo `.bat`, `assetId`, `footprint` e pasta de destino sao preenc
 - `assetId`: vem do nome do PNG.
 - `footprint`: tenta detectar pelo tamanho da celula 4x2; se nao reconhecer, usa `1x1`.
 - `destino`: a mesma pasta do PNG.
+- `catalogo`: atualiza `content/furniture/twothousands/catalogo.json`.
+
+Depois de gerar um asset, recarregue o Dev Tools em `localhost:5174`.
+O Furniture Viewer carrega os catalogos padrao automaticamente.
 
 ## Asset ID
 
@@ -57,4 +66,11 @@ Exemplo:
 
 ```text
 geladeira_2000_01.png -> assetId "geladeira_2000_01" -> geladeira_2000_01.zip
+```
+
+## Opcoes uteis
+
+```bat
+python fatiar_sprites_v2.py minha_mesa.png --footprint 2x1 --categoria mesa --nome "Minha Mesa"
+python fatiar_sprites_v2.py sofa.png --nao-instalar-projeto
 ```
