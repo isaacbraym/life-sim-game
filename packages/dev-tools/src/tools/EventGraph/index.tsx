@@ -1,12 +1,17 @@
 import { useRef, useState } from 'react';
 import type { Event as EventoDefinition } from '@core/schemas/event';
-import { SchemaLoader, type ErroSchema } from '../../shared/SchemaLoader';
+import { carregarEventosLote } from '../../shared/SchemaLoader';
 import { GraphTab } from './GraphTab';
 import { SimulatorTab } from './SimulatorTab';
 
 type AbaEventGraph = 'grafo' | 'simulador';
 
-export function EventGraph() {
+type ErroSchema = {
+  readonly arquivo?: string | undefined;
+  readonly mensagem: string;
+};
+
+export function GrafoDeEventos() {
   const [abaAtiva, definirAbaAtiva] = useState<AbaEventGraph>('grafo');
   const [eventosSelecionados, definirEventosSelecionados] = useState<readonly EventoDefinition[]>([]);
   const [eventoAtivo, definirEventoAtivo] = useState<EventoDefinition | undefined>(undefined);
@@ -16,10 +21,26 @@ export function EventGraph() {
   async function carregarEventos(arquivos: FileList | undefined) {
     if (arquivos === undefined || arquivos.length === 0) return;
 
-    const resultado = await SchemaLoader.carregarEventosLote(Array.from(arquivos));
-    definirEventosSelecionados(resultado.dados);
-    definirErrosSchema(resultado.erros);
-    definirEventoAtivo(resultado.dados[0]);
+    const eventosValidos: EventoDefinition[] = [];
+    const erros: ErroSchema[] = [];
+
+    for (const arquivo of Array.from(arquivos)) {
+      try {
+        const resultado = await carregarEventosLote(arquivo);
+        eventosValidos.push(...resultado.validos);
+        erros.push(...resultado.erros.map(erroSchema => ({
+          arquivo: arquivo.name,
+          mensagem: `item ${erroSchema.indice}: ${erroSchema.erro.issues[0]?.message ?? 'schema inválido'}`,
+        })));
+      } catch (erroDesconhecido) {
+        const mensagem = erroDesconhecido instanceof Error ? erroDesconhecido.message : 'erro desconhecido ao carregar JSON';
+        erros.push({ arquivo: arquivo.name, mensagem });
+      }
+    }
+
+    definirEventosSelecionados(eventosValidos);
+    definirErrosSchema(erros);
+    definirEventoAtivo(eventosValidos[0]);
   }
 
   return (
