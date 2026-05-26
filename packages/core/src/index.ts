@@ -1,4 +1,5 @@
 export * from './schemas';
+export * from './iso';
 export * from './rig';
 export * from './ik';
 export * from './events';

@@ -13,3 +13,5 @@ export * from './era';
 export * from './action';
 export * from './location';
 export * from './furniture';
+export * from './direction';
+export * from './isoRoom';
