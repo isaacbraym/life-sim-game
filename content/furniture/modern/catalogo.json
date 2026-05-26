@@ -1,0 +1,426 @@
+[
+  {
+    "id": "poltrona_ergonomica_mesh",
+    "nome": "Poltrona de Escritório Ergonômica Mesh",
+    "categoria": "assento",
+    "assetId": "cadeira_mesh_moderna",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 1200,
+    "valorDeRevenda": 500,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "conforto": 3,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "escritorio"],
+    "descricao": "Cadeira com suporte lombar ajustável e encosto de tela mesh respirável."
+  },
+  {
+    "id": "sofa_retratil_veludo",
+    "nome": "Sofá Retrátil de Veludo Moderno",
+    "categoria": "assento",
+    "assetId": "sofa_veludo_moderno",
+    "tamanhoGrid": { "largura": 3, "altura": 2 },
+    "preco": 2500,
+    "valorDeRevenda": 1000,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 3,
+      "humor": 2
+    },
+    "availability": { "startYear": 2012 },
+    "tags": ["moderno", "sala"],
+    "descricao": "Sofá espaçoso de três lugares revestido em veludo cinza, com assentos retráteis."
+  },
+  {
+    "id": "poltrona_reclinavel_massagem",
+    "nome": "Poltrona Reclinável com Massageador",
+    "categoria": "assento",
+    "assetId": "poltrona_massagem_moderna",
+    "tamanhoGrid": { "largura": 1, "altura": 2 },
+    "preco": 3200,
+    "valorDeRevenda": 1200,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 3,
+      "humor": 3,
+      "energia": 1
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "sala"],
+    "descricao": "Poltrona revestida em couro com múltiplos pontos de massagem vibratória."
+  },
+  {
+    "id": "cadeira_gamer_premium",
+    "nome": "Cadeira Gamer Ergonômica Premium",
+    "categoria": "assento",
+    "assetId": "cadeira_gamer_premium_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 1600,
+    "valorDeRevenda": 600,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "conforto": 3,
+      "statusSocial": 2
+    },
+    "availability": { "startYear": 2011 },
+    "tags": ["moderno", "quarto"],
+    "descricao": "Cadeira gamer de alta qualidade com almofadas para lombar e pescoço."
+  },
+  {
+    "id": "pufe_gigante_suede",
+    "nome": "Pufe Gigante de Suede",
+    "categoria": "assento",
+    "assetId": "pufe_suede_gigante",
+    "tamanhoGrid": { "largura": 2, "altura": 2 },
+    "preco": 400,
+    "valorDeRevenda": 150,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 2,
+      "humor": 1
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "quarto", "sala"],
+    "descricao": "Pufe extremamente confortável preenchido com espuma picada de alta densidade."
+  },
+  {
+    "id": "cama_box_casal_premium",
+    "nome": "Cama Box Casal Premium com Molas Ensacadas",
+    "categoria": "cama",
+    "assetId": "cama_box_casal_premium_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 3 },
+    "preco": 3000,
+    "valorDeRevenda": 1000,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 3
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "quarto"],
+    "descricao": "Conjunto de cama box casal com colchão de molas ensacadas individualmente de alta tecnologia."
+  },
+  {
+    "id": "cama_box_solteiro_ortopedica",
+    "nome": "Cama Box Solteiro Ortopédica",
+    "categoria": "cama",
+    "assetId": "cama_box_solteiro_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 3 },
+    "preco": 1500,
+    "valorDeRevenda": 500,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 2,
+      "energia": 2
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "quarto"],
+    "descricao": "Cama box de solteiro com colchão de espuma densidade 33 ideal para coluna."
+  },
+  {
+    "id": "cama_king_size_latex",
+    "nome": "Cama Box King Size com Colchão de Látex",
+    "categoria": "cama",
+    "assetId": "cama_king_latex",
+    "tamanhoGrid": { "largura": 3, "altura": 4 },
+    "preco": 5000,
+    "valorDeRevenda": 1800,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 3,
+      "statusSocial": 2
+    },
+    "availability": { "startYear": 2012 },
+    "tags": ["moderno", "quarto"],
+    "descricao": "Luxuosa cama king size com colchão de látex natural que se molda perfeitamente ao corpo."
+  },
+  {
+    "id": "beliche_moderno_metal",
+    "nome": "Beliche de Metal com Escrivaninha Integrada",
+    "categoria": "cama",
+    "assetId": "beliche_metal_moderno",
+    "tamanhoGrid": { "largura": 2, "altura": 3 },
+    "preco": 1800,
+    "valorDeRevenda": 700,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 2,
+      "energia": 2
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "quarto"],
+    "descricao": "Estrutura moderna de beliche com cama na parte superior e espaço para escrivaninha na parte inferior."
+  },
+  {
+    "id": "cama_box_queen_massageadora",
+    "nome": "Cama Box Queen Size com Sistema de Vibração",
+    "categoria": "cama",
+    "assetId": "cama_queen_vibracao",
+    "tamanhoGrid": { "largura": 3, "altura": 3 },
+    "preco": 4500,
+    "valorDeRevenda": 1500,
+    "acoes": ["dormir", "descansar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 3,
+      "humor": 2
+    },
+    "availability": { "startYear": 2013 },
+    "tags": ["moderno", "quarto"],
+    "descricao": "Cama box queen size com controle sem fio para ajustar a inclinação e ligar motores de massagem."
+  },
+  {
+    "id": "smart_tv_4k_55",
+    "nome": "Smart TV LED 4K 55 Polegadas",
+    "categoria": "tecnologia",
+    "assetId": "smart_tv_4k_55_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 1 },
+    "preco": 2800,
+    "valorDeRevenda": 1000,
+    "acoes": ["assistir_tv"],
+    "efeitos": {
+      "humor": 2,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 2012 },
+    "tags": ["moderno", "sala"],
+    "descricao": "Televisor inteligente com resolução 4K e acesso integrado aos principais aplicativos de streaming."
+  },
+  {
+    "id": "notebook_ultrabook_fino",
+    "nome": "Notebook Ultrabook Ultrafino",
+    "categoria": "tecnologia",
+    "assetId": "ultrabook_fino_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 4000,
+    "valorDeRevenda": 1500,
+    "acoes": ["usar_computador"],
+    "efeitos": {
+      "humor": 2,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 2011 },
+    "tags": ["moderno", "escritorio", "quarto"],
+    "descricao": "Notebook extremamente leve e rápido, com corpo de alumínio e inicialização em poucos segundos."
+  },
+  {
+    "id": "tablet_tela_retina",
+    "nome": "Tablet de Alta Resolução",
+    "categoria": "tecnologia",
+    "assetId": "tablet_retina_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 2200,
+    "valorDeRevenda": 800,
+    "acoes": ["usar_computador"],
+    "efeitos": {
+      "humor": 2
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "portatil"],
+    "descricao": "Computador em formato de prancheta digital ideal para ler notícias e jogar em qualquer lugar."
+  },
+  {
+    "id": "console_oitava_geracao",
+    "nome": "Console de Videogame de Oitava Geração",
+    "categoria": "tecnologia",
+    "assetId": "videogame_oitava_gen",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 2000,
+    "valorDeRevenda": 900,
+    "acoes": ["jogar_videogame"],
+    "efeitos": {
+      "humor": 3,
+      "energia": -1
+    },
+    "availability": { "startYear": 2013 },
+    "tags": ["moderno", "quarto", "sala"],
+    "descricao": "Console de jogos moderno com suporte a gráficos em alta definição e jogos online."
+  },
+  {
+    "id": "smart_speaker_assistente",
+    "nome": "Caixa de Som Inteligente com Assistente",
+    "categoria": "tecnologia",
+    "assetId": "smart_speaker_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 350,
+    "valorDeRevenda": 100,
+    "acoes": ["ouvir_musica"],
+    "efeitos": {
+      "humor": 1,
+      "conforto": 1
+    },
+    "availability": { "startYear": 2014 },
+    "tags": ["moderno", "sala", "quarto"],
+    "descricao": "Pequeno assistente virtual ativado por voz para tocar música e ler as notícias."
+  },
+  {
+    "id": "lava_loucas_digital",
+    "nome": "Lava-Louças Automática Digital",
+    "categoria": "eletrodomestico",
+    "assetId": "lava_loucas_digital_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 2 },
+    "preco": 2600,
+    "valorDeRevenda": 1000,
+    "acoes": ["lavar_louca"],
+    "efeitos": {
+      "conforto": 3
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "cozinha"],
+    "descricao": "Máquina de lavar louça com múltiplos programas automáticos de limpeza e painel digital."
+  },
+  {
+    "id": "microondas_espelhado",
+    "nome": "Forno Microondas Espelhado com Grill",
+    "categoria": "eletrodomestico",
+    "assetId": "microondas_espelhado_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 800,
+    "valorDeRevenda": 300,
+    "acoes": ["aquecer_comida"],
+    "efeitos": {
+      "conforto": 2
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "cozinha"],
+    "descricao": "Forno microondas moderno com acabamento espelhado em inox e função douradora por grill."
+  },
+  {
+    "id": "ar_condicionado_split_inverter",
+    "nome": "Ar-Condicionado Split Inverter",
+    "categoria": "eletrodomestico",
+    "assetId": "ar_split_inverter",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 2200,
+    "valorDeRevenda": 800,
+    "acoes": ["refrescar"],
+    "efeitos": {
+      "conforto": 3,
+      "energia": 1
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "quarto", "sala"],
+    "descricao": "Aparelho de ar condicionado inverter de alta eficiência energética que resfria silenciosamente."
+  },
+  {
+    "id": "cafeteira_capsula_moderna",
+    "nome": "Cafeteira de Cápsulas Automática",
+    "categoria": "eletrodomestico",
+    "assetId": "cafeteira_capsula",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 450,
+    "valorDeRevenda": 150,
+    "acoes": ["comer"],
+    "efeitos": {
+      "humor": 2,
+      "energia": 2
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "cozinha"],
+    "descricao": "Cafeteira expressa que prepara diversos tipos de de bebidas usando cápsulas individuais."
+  },
+  {
+    "id": "geladeira_french_door",
+    "nome": "Geladeira French Door Frost Free",
+    "categoria": "eletrodomestico",
+    "assetId": "geladeira_french_door_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 2 },
+    "preco": 5500,
+    "valorDeRevenda": 2000,
+    "acoes": ["comer", "beber_agua"],
+    "efeitos": {
+      "conforto": 3,
+      "statusSocial": 2
+    },
+    "availability": { "startYear": 2011 },
+    "tags": ["moderno", "cozinha"],
+    "descricao": "Geladeira moderna com três portas, gaveta freezer invertida e dispensador de água."
+  },
+  {
+    "id": "planta_costela_de_adao",
+    "nome": "Vaso com Planta Costela de Adão",
+    "categoria": "decoracao",
+    "assetId": "planta_costela_adao",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 250,
+    "valorDeRevenda": 80,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "humor": 1,
+      "conforto": 1
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "sala", "decoracao"],
+    "descricao": "Vaso de cerâmica com planta de folhas grandes, tendência em decoração moderna."
+  },
+  {
+    "id": "quadro_abstrato_moderno",
+    "nome": "Quadro com Pintura Abstrata",
+    "categoria": "decoracao",
+    "assetId": "quadro_abstrato_asset",
+    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "preco": 600,
+    "valorDeRevenda": 200,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "humor": 1,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "sala", "decoracao"],
+    "descricao": "Quadro de grandes proporções com moldura fina e pintura de arte abstrata contemporânea."
+  },
+  {
+    "id": "luminaria_led_coluna",
+    "nome": "Luminária de Coluna LED Minimalista",
+    "categoria": "decoracao",
+    "assetId": "luminaria_led_coluna_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 400,
+    "valorDeRevenda": 150,
+    "acoes": ["sentar"],
+    "efeitos": {
+      "conforto": 2,
+      "humor": 1
+    },
+    "availability": { "startYear": 2012 },
+    "tags": ["moderno", "sala", "quarto"],
+    "descricao": "Luminária fina com fitas de LED embutidas em coluna de metal escovado."
+  },
+  {
+    "id": "espelho_corpo_inteiro",
+    "nome": "Espelho de Corpo Inteiro com Moldura de Metal",
+    "categoria": "decoracao",
+    "assetId": "espelho_corpo_inteiro_asset",
+    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "preco": 700,
+    "valorDeRevenda": 250,
+    "acoes": ["ver_aparencia", "auto_critica"],
+    "efeitos": {
+      "humor": 1,
+      "statusSocial": 1
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "quarto", "decoracao"],
+    "descricao": "Espelho alto autoportante com pés de metal, perfeito para ver o visual por completo."
+  },
+  {
+    "id": "tapete_geometrico_moderno",
+    "nome": "Tapete Geométrico de Fibras Naturais",
+    "categoria": "decoracao",
+    "assetId": "tapete_geometrico_asset",
+    "tamanhoGrid": { "largura": 3, "altura": 3 },
+    "preco": 850,
+    "valorDeRevenda": 300,
+    "acoes": ["sentar", "relaxar"],
+    "efeitos": {
+      "conforto": 2
+    },
+    "availability": { "startYear": 2010 },
+    "tags": ["moderno", "sala", "decoracao"],
+    "descricao": "Tapete de sala amplo com estampa de formas geométricas modernas e toque macio."
+  }
+]
