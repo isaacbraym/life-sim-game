@@ -1,0 +1,50 @@
+{
+  "ano": 2011,
+  "eventos": [
+    {
+      "id": "2011_01_smartphones_populares",
+      "manchete": "Os celulares inteligentes com telas grandes e teclado virtual começam a baratear, espalhando-se rapidamente pela classe média.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2011, "endYear": 2011 }
+    },
+    {
+      "id": "2011_02_redes_sociais_fotos",
+      "manchete": "Instigantes redes sociais focadas exclusivamente no compartilhamento rápido de fotos com filtros retrô viram febre absoluta nos telefones.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2011, "endYear": 2011 }
+    },
+    {
+      "id": "2011_03_streaming_chegada",
+      "manchete": "Serviços estrangeiros de aluguel digital de filmes por assinatura mensal chegam oficialmente ao país, concorrendo com as locadoras.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2011, "endYear": 2011 }
+    },
+    {
+      "id": "2011_04_inflacao_alimentos",
+      "manchete": "O preço de alimentos básicos e itens de feira começa a subir acima do esperado, pesando no orçamento mensal das famílias.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -40
+        }
+      ],
+      "eraDisponivel": { "startYear": 2011, "endYear": 2011 }
+    },
+    {
+      "id": "2011_05_videogames_nacionais",
+      "manchete": "Alguns dos consoles mais populares do mercado passam a ser fabricados em território nacional, reduzindo o preço final nas lojas autorizadas.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2011, "endYear": 2011 }
+    }
+  ]
+}

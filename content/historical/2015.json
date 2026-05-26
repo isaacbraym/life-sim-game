@@ -1,0 +1,50 @@
+{
+  "ano": 2015,
+  "eventos": [
+    {
+      "id": "2015_01_crise_economica",
+      "manchete": "A economia nacional entra em recessão, com disparada da inflação e aumento nas taxas de desemprego afetando o poder de compra da população.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -80
+        }
+      ],
+      "eraDisponivel": { "startYear": 2015, "endYear": 2015 }
+    },
+    {
+      "id": "2015_02_protestos_impeachment",
+      "manchete": "Novas manifestações reúnem milhões de pessoas vestidas de verde e amarelo nas ruas pedindo mudanças drásticas no comando do país.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2015, "endYear": 2015 }
+    },
+    {
+      "id": "2015_03_consoles_oitava",
+      "manchete": "Os novos consoles de videogame de oitava geração se consolidam no mercado brasileiro, oferecendo gráficos de altíssima definição.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2015, "endYear": 2015 }
+    },
+    {
+      "id": "2015_04_lan_houses_fim",
+      "manchete": "Com a popularização da banda larga residencial e dos celulares, as tradicionais lan houses fecham suas portas definitivamente na maioria dos bairros.",
+      "tags": ["tecnologia", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2015, "endYear": 2015 }
+    },
+    {
+      "id": "2015_05_memes_internet",
+      "manchete": "O humor da internet brasileira se profissionaliza com a explosão de memes rápidos nas redes, criando subcelebridades instantâneas.",
+      "tags": ["cultura", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2015, "endYear": 2015 }
+    }
+  ]
+}

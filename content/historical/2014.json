@@ -1,0 +1,50 @@
+{
+  "ano": 2014,
+  "eventos": [
+    {
+      "id": "2014_01_copa_mundo_brasil",
+      "manchete": "O país sedia o campeonato mundial de futebol masculino; a empolgação inicial dá lugar a uma histórica e vexatória eliminação da seleção nacional nas semifinais.",
+      "tags": ["esportes", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2014, "endYear": 2014 }
+    },
+    {
+      "id": "2014_02_crise_hidrica",
+      "manchete": "A falta prolongada de chuvas gera uma crise de abastecimento de água nas maiores cidades do sudeste, forçando a população a economizar.",
+      "tags": ["economia", "politica"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -30
+        }
+      ],
+      "eraDisponivel": { "startYear": 2014, "endYear": 2014 }
+    },
+    {
+      "id": "2014_03_operacao_bastidores",
+      "manchete": "Uma gigantesca investigação contra desvios de recursos públicos e fraudes financeiras na estatal de energia começa a agitar os bastidores políticos.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2014, "endYear": 2014 }
+    },
+    {
+      "id": "2014_04_febre_selfies",
+      "manchete": "A moda de tirar fotos de si mesmo (selfies) usando a câmera frontal do celular explode nas redes sociais, com acessórios de suporte virando febre nas ruas.",
+      "tags": ["cultura", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2014, "endYear": 2014 }
+    },
+    {
+      "id": "2014_05_eleicoes_tensas",
+      "manchete": "Eleições presidenciais extremamente disputadas dividem as discussões nas redes sociais, terminando com uma vitória apertada da situação.",
+      "tags": ["politica"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2014, "endYear": 2014 }
+    }
+  ]
+}

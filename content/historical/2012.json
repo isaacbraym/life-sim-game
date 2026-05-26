@@ -1,0 +1,50 @@
+{
+  "ano": 2012,
+  "eventos": [
+    {
+      "id": "2012_01_internet_3g_expansao",
+      "manchete": "A tecnologia de internet móvel de terceira geração se expande pelo país, permitindo que as pessoas enviem mensagens instantâneas na rua.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2012, "endYear": 2012 }
+    },
+    {
+      "id": "2012_02_novela_fenomeno",
+      "manchete": "Uma novela sobre vingança e dramas cotidianos vira fenômeno absoluto, parando o país no capítulo final e dominando todas as conversas na internet.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2012, "endYear": 2012 }
+    },
+    {
+      "id": "2012_03_aplicativos_transporte",
+      "manchete": "Primeiros aplicativos para chamar veículos particulares por celular começam a funcionar nas grandes metrópoles, mudando a rotina de locomoção.",
+      "tags": ["tecnologia", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2012, "endYear": 2012 }
+    },
+    {
+      "id": "2012_04_credito_facil",
+      "manchete": "Bancos facilitam o crédito para compra de veículos novos, enchendo as ruas de carros parcelados e gerando longos congestionamentos.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 30
+        }
+      ],
+      "eraDisponivel": { "startYear": 2012, "endYear": 2012 }
+    },
+    {
+      "id": "2012_05_tablet_escola",
+      "manchete": "Os computadores em formato de prancheta (tablets) viram moda e começam a ser usados em salas de aula de colégios particulares.",
+      "tags": ["tecnologia", "educacao"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2012, "endYear": 2012 }
+    }
+  ]
+}

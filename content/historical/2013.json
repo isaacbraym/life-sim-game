@@ -1,0 +1,55 @@
+{
+  "ano": 2013,
+  "eventos": [
+    {
+      "id": "2013_01_manifestacoes_rua",
+      "manchete": "Grandes protestos populares tomam as ruas das principais capitais do país, inicialmente contra o aumento das passagens de ônibus e depois cobrando melhorias gerais.",
+      "tags": ["politica", "cultura"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -25
+        }
+      ],
+      "eraDisponivel": { "startYear": 2013, "endYear": 2013 }
+    },
+    {
+      "id": "2013_02_copa_confederacoes",
+      "manchete": "O país sedia a Copa das Confederações em clima de festa e testes de estádios, com a seleção nacional conquistando o título sob forte apoio da torcida.",
+      "tags": ["esportes", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2013, "endYear": 2013 }
+    },
+    {
+      "id": "2013_03_mensageiros_substituicao",
+      "manchete": "Aplicativos de mensagens instantâneas pelo celular consolidam sua liderança, tornando o tradicional SMS obsoleto para o contato diário.",
+      "tags": ["tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2013, "endYear": 2013 }
+    },
+    {
+      "id": "2013_04_musica_streaming",
+      "manchete": "Plataformas digitais que reúnem milhões de músicas para escutar via internet começam a se popularizar no Brasil, mudando a forma de consumir música.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2013, "endYear": 2013 }
+    },
+    {
+      "id": "2013_05_dolar_alta",
+      "manchete": "A cotação do dólar inicia uma trajetória de subida consistente frente à moeda nacional, encarecendo viagens internacionais e eletrônicos importados.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -35
+        }
+      ],
+      "eraDisponivel": { "startYear": 2013, "endYear": 2013 }
+    }
+  ]
+}
