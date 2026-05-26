@@ -1,0 +1,75 @@
+{
+  "assetId": "geladeira_2000_01",
+  "anchorX": 0.5,
+  "anchorY": 0.9,
+  "anchorPixelX": 48,
+  "anchorPixelY": 72,
+  "canvasLargura": 96,
+  "canvasAltura": 80,
+  "escalaBase": 1.0,
+  "rotacoesDisponiveis": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "footprintPorRotacao": {
+    "0": {
+      "largura": 1,
+      "altura": 1
+    },
+    "45": {
+      "largura": 1,
+      "altura": 1
+    },
+    "90": {
+      "largura": 1,
+      "altura": 1
+    },
+    "135": {
+      "largura": 1,
+      "altura": 1
+    },
+    "180": {
+      "largura": 1,
+      "altura": 1
+    },
+    "225": {
+      "largura": 1,
+      "altura": 1
+    },
+    "270": {
+      "largura": 1,
+      "altura": 1
+    },
+    "315": {
+      "largura": 1,
+      "altura": 1
+    }
+  },
+  "spritesPorRotacao": {
+    "0": "1.webp",
+    "45": "2.webp",
+    "90": "3.webp",
+    "135": "4.webp",
+    "180": "5.webp",
+    "225": "6.webp",
+    "270": "7.webp",
+    "315": "8.webp"
+  },
+  "sequenciaSlots": {
+    "1": "N",
+    "2": "NE",
+    "3": "E",
+    "4": "SE",
+    "5": "S",
+    "6": "SW",
+    "7": "W",
+    "8": "NW"
+  },
+  "tags": []
+}

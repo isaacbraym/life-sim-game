@@ -4,16 +4,28 @@
     "nome": "Notebook Pesado de Primeira Geração",
     "categoria": "tecnologia",
     "assetId": "notebook_pesado_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 4500,
     "valorDeRevenda": 1500,
-    "acoes": ["usar_computador"],
+    "acoes": [
+      "usar_computador"
+    ],
     "efeitos": {
       "humor": 2,
       "statusSocial": 2
     },
-    "availability": { "startYear": 2002, "endYear": 2012 },
-    "tags": ["escritorio", "quarto", "tecnologia"],
+    "availability": {
+      "startYear": 2002,
+      "endYear": 2012
+    },
+    "tags": [
+      "escritorio",
+      "quarto",
+      "tecnologia"
+    ],
     "descricao": "Notebook espesso e pesado com tela colorida de baixa resolução e bateria de curta duração."
   },
   {
@@ -21,15 +33,26 @@
     "nome": "DVD Player Slim com Karaokê",
     "categoria": "tecnologia",
     "assetId": "dvd_player_slim_asset",
-    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 2,
+      "altura": 1
+    },
     "preco": 350,
     "valorDeRevenda": 100,
-    "acoes": ["assistir_dvd"],
+    "acoes": [
+      "assistir_dvd"
+    ],
     "efeitos": {
       "humor": 2
     },
-    "availability": { "startYear": 2002, "endYear": 2012 },
-    "tags": ["sala", "tecnologia"],
+    "availability": {
+      "startYear": 2002,
+      "endYear": 2012
+    },
+    "tags": [
+      "sala",
+      "tecnologia"
+    ],
     "descricao": "Tocador de DVD ultrafino que cabe em qualquer rack e possui entrada para microfone de karaokê."
   },
   {
@@ -37,15 +60,26 @@
     "nome": "MP3 Player USB de 128MB",
     "categoria": "tecnologia",
     "assetId": "mp3_player_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 250,
     "valorDeRevenda": 50,
-    "acoes": ["ouvir_musica"],
+    "acoes": [
+      "ouvir_musica"
+    ],
     "efeitos": {
       "humor": 2
     },
-    "availability": { "startYear": 2001, "endYear": 2010 },
-    "tags": ["portatil", "musica"],
+    "availability": {
+      "startYear": 2001,
+      "endYear": 2010
+    },
+    "tags": [
+      "portatil",
+      "musica"
+    ],
     "descricao": "Pequeno dispositivo com conector USB integrado para tocar músicas digitais comprimidas."
   },
   {
@@ -53,7 +87,10 @@
     "nome": "Câmera Fotográfica Digital de 3.2 Megapixels",
     "categoria": "tecnologia",
     "assetId": "camera_digital_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 1200,
     "valorDeRevenda": 300,
     "acoes": [],
@@ -61,8 +98,14 @@
       "humor": 2,
       "statusSocial": 1
     },
-    "availability": { "startYear": 2003, "endYear": 2015 },
-    "tags": ["portatil", "tecnologia"],
+    "availability": {
+      "startYear": 2003,
+      "endYear": 2015
+    },
+    "tags": [
+      "portatil",
+      "tecnologia"
+    ],
     "descricao": "Câmera digital com visor colorido traseiro e suporte a cartões de memória para guardar centenas de fotos."
   },
   {
@@ -70,15 +113,26 @@
     "nome": "Celular com Formato Flip",
     "categoria": "tecnologia",
     "assetId": "celular_flip_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 600,
     "valorDeRevenda": 150,
-    "acoes": ["fazer_ligacao"],
+    "acoes": [
+      "fazer_ligacao"
+    ],
     "efeitos": {
       "statusSocial": 1
     },
-    "availability": { "startYear": 2001, "endYear": 2010 },
-    "tags": ["comunicacao", "portatil"],
+    "availability": {
+      "startYear": 2001,
+      "endYear": 2010
+    },
+    "tags": [
+      "comunicacao",
+      "portatil"
+    ],
     "descricao": "Aparelho celular elegante com tampa dobrável que atende ligações ao ser aberto."
   },
   {
@@ -86,16 +140,27 @@
     "nome": "Celular com Câmera e Tela Colorida",
     "categoria": "tecnologia",
     "assetId": "celular_camera_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 1500,
     "valorDeRevenda": 400,
-    "acoes": ["fazer_ligacao"],
+    "acoes": [
+      "fazer_ligacao"
+    ],
     "efeitos": {
       "statusSocial": 2,
       "humor": 1
     },
-    "availability": { "startYear": 2003, "endYear": 2012 },
-    "tags": ["comunicacao", "portatil"],
+    "availability": {
+      "startYear": 2003,
+      "endYear": 2012
+    },
+    "tags": [
+      "comunicacao",
+      "portatil"
+    ],
     "descricao": "Celular moderno capaz de tirar fotos pixeladas e enviá-las via mensagens multimídia."
   },
   {
@@ -103,16 +168,27 @@
     "nome": "Smartphone com Tela Sensível ao Toque",
     "categoria": "tecnologia",
     "assetId": "smartphone_touch_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 2200,
     "valorDeRevenda": 800,
-    "acoes": ["fazer_ligacao"],
+    "acoes": [
+      "fazer_ligacao"
+    ],
     "efeitos": {
       "statusSocial": 3,
       "humor": 2
     },
-    "availability": { "startYear": 2008 },
-    "tags": ["comunicacao", "portatil", "tecnologia"],
+    "availability": {
+      "startYear": 2008
+    },
+    "tags": [
+      "comunicacao",
+      "portatil",
+      "tecnologia"
+    ],
     "descricao": "Dispositivo celular topo de linha com tela capacitiva multitouch e loja de aplicativos nativa."
   },
   {
@@ -120,16 +196,27 @@
     "nome": "Console de Videogame de 128 Bits",
     "categoria": "tecnologia",
     "assetId": "videogame_128bits_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 1000,
     "valorDeRevenda": 400,
-    "acoes": ["jogar_videogame"],
+    "acoes": [
+      "jogar_videogame"
+    ],
     "efeitos": {
       "humor": 3,
       "energia": -1
     },
-    "availability": { "startYear": 2000, "endYear": 2010 },
-    "tags": ["quarto", "lazer"],
+    "availability": {
+      "startYear": 2000,
+      "endYear": 2010
+    },
+    "tags": [
+      "quarto",
+      "lazer"
+    ],
     "descricao": "O console de videogame mais vendido de sua geração, capaz de rodar jogos em DVD e CD de música."
   },
   {
@@ -137,17 +224,29 @@
     "nome": "Home Theater 5.1 Canais",
     "categoria": "tecnologia",
     "assetId": "home_theater_asset",
-    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 2,
+      "altura": 1
+    },
     "preco": 1200,
     "valorDeRevenda": 500,
-    "acoes": ["assistir_tv", "ouvir_musica"],
+    "acoes": [
+      "assistir_tv",
+      "ouvir_musica"
+    ],
     "efeitos": {
       "humor": 2,
       "conforto": 1,
       "statusSocial": 2
     },
-    "availability": { "startYear": 2002, "endYear": 2012 },
-    "tags": ["sala", "tecnologia"],
+    "availability": {
+      "startYear": 2002,
+      "endYear": 2012
+    },
+    "tags": [
+      "sala",
+      "tecnologia"
+    ],
     "descricao": "Sistema de som surround composto por cinco caixas satélites e um subwoofer ativo para graves profundos."
   },
   {
@@ -155,15 +254,26 @@
     "nome": "Projetor de Vídeo Portátil",
     "categoria": "tecnologia",
     "assetId": "projetor_led_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 1800,
     "valorDeRevenda": 700,
-    "acoes": ["assistir_tv"],
+    "acoes": [
+      "assistir_tv"
+    ],
     "efeitos": {
       "humor": 3
     },
-    "availability": { "startYear": 2007, "endYear": 2016 },
-    "tags": ["sala", "lazer"],
+    "availability": {
+      "startYear": 2007,
+      "endYear": 2016
+    },
+    "tags": [
+      "sala",
+      "lazer"
+    ],
     "descricao": "Projetor compacto com lâmpada de LED capaz de projetar imagens de cinema na parede da sala."
   },
   {
@@ -171,16 +281,28 @@
     "nome": "Computador Desktop com Monitor LCD",
     "categoria": "tecnologia",
     "assetId": "desktop_lcd_asset",
-    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 2,
+      "altura": 1
+    },
     "preco": 3500,
     "valorDeRevenda": 1200,
-    "acoes": ["usar_computador"],
+    "acoes": [
+      "usar_computador"
+    ],
     "efeitos": {
       "humor": 2,
       "statusSocial": 2
     },
-    "availability": { "startYear": 2003, "endYear": 2012 },
-    "tags": ["escritorio", "quarto", "tecnologia"],
+    "availability": {
+      "startYear": 2003,
+      "endYear": 2012
+    },
+    "tags": [
+      "escritorio",
+      "quarto",
+      "tecnologia"
+    ],
     "descricao": "Computador de mesa de alta performance com monitor LCD fino de 15 polegadas de alta definição para a época."
   },
   {
@@ -188,15 +310,24 @@
     "nome": "Webcam USB de Formato Esférico",
     "categoria": "tecnologia",
     "assetId": "webcam_usb_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 150,
     "valorDeRevenda": 40,
     "acoes": [],
     "efeitos": {
       "humor": 1
     },
-    "availability": { "startYear": 2002, "endYear": 2012 },
-    "tags": ["escritorio", "tecnologia"],
+    "availability": {
+      "startYear": 2002,
+      "endYear": 2012
+    },
+    "tags": [
+      "escritorio",
+      "tecnologia"
+    ],
     "descricao": "Pequena câmera digital esférica que se conecta no topo do monitor para videoconferências."
   },
   {
@@ -204,15 +335,24 @@
     "nome": "Roteador Wi-Fi de Antena Única",
     "categoria": "tecnologia",
     "assetId": "roteador_wifi_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 300,
     "valorDeRevenda": 80,
     "acoes": [],
     "efeitos": {
       "conforto": 2
     },
-    "availability": { "startYear": 2004, "endYear": 2014 },
-    "tags": ["escritorio", "tecnologia"],
+    "availability": {
+      "startYear": 2004,
+      "endYear": 2014
+    },
+    "tags": [
+      "escritorio",
+      "tecnologia"
+    ],
     "descricao": "Aparelho de rede que permite conectar computadores e notebooks sem fios de rede espalhados pela casa."
   },
   {
@@ -220,15 +360,26 @@
     "nome": "Sofá Retrátil de 3 Lugares Suede",
     "categoria": "assento",
     "assetId": "sofa_retratil_asset",
-    "tamanhoGrid": { "largura": 3, "altura": 2 },
+    "tamanhoGrid": {
+      "largura": 3,
+      "altura": 2
+    },
     "preco": 1600,
     "valorDeRevenda": 600,
-    "acoes": ["sentar", "relaxar"],
+    "acoes": [
+      "sentar",
+      "relaxar"
+    ],
     "efeitos": {
       "conforto": 4
     },
-    "availability": { "startYear": 2004 },
-    "tags": ["sala", "conforto"],
+    "availability": {
+      "startYear": 2004
+    },
+    "tags": [
+      "sala",
+      "conforto"
+    ],
     "descricao": "Sofá moderno com assentos que deslizam para frente e encosto reclinável revestido em tecido suede macio."
   },
   {
@@ -236,16 +387,26 @@
     "nome": "Cadeira Gamer de Entrada",
     "categoria": "assento",
     "assetId": "cadeira_gamer_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 850,
     "valorDeRevenda": 300,
-    "acoes": ["sentar"],
+    "acoes": [
+      "sentar"
+    ],
     "efeitos": {
       "conforto": 3,
       "statusSocial": 1
     },
-    "availability": { "startYear": 2006 },
-    "tags": ["quarto", "trabalho"],
+    "availability": {
+      "startYear": 2006
+    },
+    "tags": [
+      "quarto",
+      "trabalho"
+    ],
     "descricao": "Cadeira ergonômica com design inspirado em bancos de carros de corrida, com costuras chamativas."
   },
   {
@@ -253,16 +414,28 @@
     "nome": "Pufe Gigante em Formato de Gota",
     "categoria": "assento",
     "assetId": "pufe_gigante_asset",
-    "tamanhoGrid": { "largura": 2, "altura": 2 },
+    "tamanhoGrid": {
+      "largura": 2,
+      "altura": 2
+    },
     "preco": 200,
     "valorDeRevenda": 50,
-    "acoes": ["sentar", "relaxar"],
+    "acoes": [
+      "sentar",
+      "relaxar"
+    ],
     "efeitos": {
       "conforto": 2,
       "humor": 1
     },
-    "availability": { "startYear": 2000 },
-    "tags": ["sala", "quarto", "conforto"],
+    "availability": {
+      "startYear": 2000
+    },
+    "tags": [
+      "sala",
+      "quarto",
+      "conforto"
+    ],
     "descricao": "Assento flexível preenchido com microesferas de isopor que se moldam ao corpo do usuário."
   },
   {
@@ -270,15 +443,23 @@
     "nome": "Máquina de Lavar com Painel Digital",
     "categoria": "eletrodomestico",
     "assetId": "lavadora_digital_asset",
-    "tamanhoGrid": { "largura": 2, "altura": 2 },
+    "tamanhoGrid": {
+      "largura": 2,
+      "altura": 2
+    },
     "preco": 1800,
     "valorDeRevenda": 700,
     "acoes": [],
     "efeitos": {
       "conforto": 3
     },
-    "availability": { "startYear": 2003 },
-    "tags": ["area_servico", "eletro"],
+    "availability": {
+      "startYear": 2003
+    },
+    "tags": [
+      "area_servico",
+      "eletro"
+    ],
     "descricao": "Lavadora automática moderna com visor digital de tempo restante e múltiplos programas."
   },
   {
@@ -286,15 +467,26 @@
     "nome": "Ar-Condicionado Split de Parede",
     "categoria": "eletrodomestico",
     "assetId": "ar_split_asset",
-    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 2,
+      "altura": 1
+    },
     "preco": 1400,
     "valorDeRevenda": 500,
-    "acoes": ["refrescar"],
+    "acoes": [
+      "refrescar"
+    ],
     "efeitos": {
       "conforto": 4
     },
-    "availability": { "startYear": 2002 },
-    "tags": ["quarto", "sala", "eletro"],
+    "availability": {
+      "startYear": 2002
+    },
+    "tags": [
+      "quarto",
+      "sala",
+      "eletro"
+    ],
     "descricao": "Condicionador de ar moderno com unidade evaporadora interna silenciosa e condensadora externa."
   },
   {
@@ -302,15 +494,23 @@
     "nome": "Rack Suspenso para Sala",
     "categoria": "decoracao",
     "assetId": "rack_moderno_asset",
-    "tamanhoGrid": { "largura": 3, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 3,
+      "altura": 1
+    },
     "preco": 450,
     "valorDeRevenda": 150,
     "acoes": [],
     "efeitos": {
       "statusSocial": 1
     },
-    "availability": { "startYear": 2004 },
-    "tags": ["sala", "decoracao"],
+    "availability": {
+      "startYear": 2004
+    },
+    "tags": [
+      "sala",
+      "decoracao"
+    ],
     "descricao": "Móvel baixo de madeira com nichos para aparelhos eletrônicos e tampo largo projetado para televisores finos."
   },
   {
@@ -318,15 +518,24 @@
     "nome": "Luminária de Coluna com Lâmpada de LED",
     "categoria": "decoracao",
     "assetId": "luminaria_led_asset",
-    "tamanhoGrid": { "largura": 1, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
     "preco": 280,
     "valorDeRevenda": 90,
     "acoes": [],
     "efeitos": {
       "conforto": 1
     },
-    "availability": { "startYear": 2007 },
-    "tags": ["sala", "quarto", "decoracao"],
+    "availability": {
+      "startYear": 2007
+    },
+    "tags": [
+      "sala",
+      "quarto",
+      "decoracao"
+    ],
     "descricao": "Luminária moderna de coluna de metal escovado equipada com foco de luz indireta."
   },
   {
@@ -334,16 +543,55 @@
     "nome": "Televisão de Tubo dos Anos 2000",
     "categoria": "tecnologia",
     "assetId": "tv_tubo_2000",
-    "tamanhoGrid": { "largura": 2, "altura": 1 },
+    "tamanhoGrid": {
+      "largura": 2,
+      "altura": 1
+    },
     "preco": 1200,
     "valorDeRevenda": 400,
-    "acoes": ["assistir_tv"],
+    "acoes": [
+      "assistir_tv"
+    ],
     "efeitos": {
       "humor": 2,
       "statusSocial": 1
     },
-    "availability": { "startYear": 2000, "endYear": 2009 },
-    "tags": ["tecnologia", "tv"],
+    "availability": {
+      "startYear": 2000,
+      "endYear": 2009
+    },
+    "tags": [
+      "tecnologia",
+      "tv"
+    ],
     "descricao": "Televisor de tubo clássico dos anos 2000, com gabinete de plástico preto brilhante."
+  },
+  {
+    "id": "geladeira_2000_01",
+    "nome": "Geladeira 2000 01",
+    "categoria": "eletrodomestico",
+    "assetId": "geladeira_2000_01",
+    "tamanhoGrid": {
+      "largura": 1,
+      "altura": 1
+    },
+    "preco": 1400,
+    "valorDeRevenda": 520,
+    "acoes": [
+      "guardar_comida"
+    ],
+    "efeitos": {
+      "conforto": 2
+    },
+    "availability": {
+      "startYear": 2000,
+      "endYear": 2009
+    },
+    "tags": [
+      "cozinha",
+      "eletrodomestico",
+      "teste_sprite"
+    ],
+    "descricao": "Entrada temporaria para validar no Furniture Viewer os sprites gerados por geladeira_2000_01."
   }
 ]

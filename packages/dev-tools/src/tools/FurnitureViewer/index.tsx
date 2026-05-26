@@ -228,7 +228,7 @@ function CartaoDeMovelComErro({ bruto, erro }: PropsCartaoComErro) {
 
 // --- Painel de inspeção lateral ---
 
-const TAMANHO_TILE_INSPECAO = 48;
+const TAMANHO_TILE_INSPECAO = 128;
 
 type PropsPainelInspecao = {
   readonly movel: FurnitureDefinition;
@@ -382,7 +382,7 @@ type PropsSecaoPreviewInspecao = {
 function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErro, aoErroImagem, aoAlterarRotacao }: PropsSecaoPreviewInspecao) {
   if (estadoAsset.tipo === 'carregando') {
     return (
-      <div style={{ height: 96, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: 13 }}>
+      <div style={{ height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#9ca3af', fontSize: 13 }}>
         carregando asset…
       </div>
     );
@@ -391,7 +391,7 @@ function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErr
   if (estadoAsset.tipo === 'ausente' || imagemComErro) {
     return (
       <div style={{
-        height: 96, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: '#f9fafb', borderRadius: 6, border: '1px dashed #d1d5db',
         color: '#9ca3af', fontSize: 13,
       }}>
@@ -405,34 +405,98 @@ function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErr
   const larguraPx = footprint.largura * TAMANHO_TILE_INSPECAO;
   const alturaPx = footprint.altura * TAMANHO_TILE_INSPECAO;
   const todasRotacoes: RotacaoMovel[] = [0, 45, 90, 135, 180, 225, 270, 315];
+  const rotacoesDisponiveis = todasRotacoes.filter((rot) => metadata.rotacoesDisponiveis.includes(rot));
+  const podeGirar = rotacoesDisponiveis.length > 1;
+
+  const irParaAnterior = () => {
+    if (!podeGirar) return;
+    const indiceAtual = rotacoesDisponiveis.indexOf(rotacaoAtual);
+    const indiceSeguro = indiceAtual >= 0 ? indiceAtual : 0;
+    const anterior = rotacoesDisponiveis[(indiceSeguro - 1 + rotacoesDisponiveis.length) % rotacoesDisponiveis.length];
+    if (anterior !== undefined) aoAlterarRotacao(anterior);
+  };
+
+  const irParaProxima = () => {
+    if (!podeGirar) return;
+    const indiceAtual = rotacoesDisponiveis.indexOf(rotacaoAtual);
+    const indiceSeguro = indiceAtual >= 0 ? indiceAtual : 0;
+    const proxima = rotacoesDisponiveis[(indiceSeguro + 1) % rotacoesDisponiveis.length];
+    if (proxima !== undefined) aoAlterarRotacao(proxima);
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-      <div style={{ position: 'relative', width: larguraPx, height: alturaPx }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: [
-            `repeating-linear-gradient(rgba(100,100,100,0.2) 0 1px, transparent 1px 100%)`,
-            `repeating-linear-gradient(90deg, rgba(100,100,100,0.2) 0 1px, transparent 1px 100%)`,
-          ].join(', '),
-          backgroundSize: `${TAMANHO_TILE_INSPECAO}px ${TAMANHO_TILE_INSPECAO}px`,
-          border: '1px solid rgba(100,100,100,0.2)',
-          borderRadius: 2,
-          backgroundColor: '#f3f4f6',
-        }} />
-        <img
-          src={urlImagemAsset(assetId, rotacaoAtual, metadata)}
-          alt={`${assetId} rot${rotacaoAtual}`}
-          onError={aoErroImagem}
-          style={{
+      <div style={{ maxWidth: '100%', overflow: 'auto', padding: '0.25rem' }}>
+        <div style={{ position: 'relative', width: larguraPx, height: alturaPx }}>
+          <div style={{
             position: 'absolute', inset: 0,
-            width: '100%', height: '100%',
-            objectFit: 'contain', imageRendering: 'pixelated',
-          }}
-        />
+            backgroundImage: [
+              `repeating-linear-gradient(rgba(100,100,100,0.2) 0 1px, transparent 1px 100%)`,
+              `repeating-linear-gradient(90deg, rgba(100,100,100,0.2) 0 1px, transparent 1px 100%)`,
+            ].join(', '),
+            backgroundSize: `${TAMANHO_TILE_INSPECAO}px ${TAMANHO_TILE_INSPECAO}px`,
+            border: '1px solid rgba(100,100,100,0.2)',
+            borderRadius: 2,
+            backgroundColor: '#f3f4f6',
+          }} />
+          <img
+            src={urlImagemAsset(assetId, rotacaoAtual, metadata)}
+            alt={`${assetId} rot${rotacaoAtual}`}
+            onError={aoErroImagem}
+            style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%',
+              objectFit: 'contain', imageRendering: 'pixelated',
+            }}
+          />
+        </div>
       </div>
 
       {/* Controles de rotação */}
+      {rotacoesDisponiveis.length > 0 && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <button
+            onClick={irParaAnterior}
+            disabled={!podeGirar}
+            title="Rotação anterior"
+            style={{
+              width: 38, height: 32,
+              border: '1px solid #d1d5db',
+              borderRadius: 6,
+              background: '#ffffff',
+              color: '#374151',
+              fontSize: 18,
+              lineHeight: 1,
+              cursor: podeGirar ? 'pointer' : 'default',
+              opacity: podeGirar ? 1 : 0.35,
+            }}
+          >
+            ↺
+          </button>
+          <span style={{ minWidth: 58, textAlign: 'center', fontSize: 13, fontWeight: 700, color: '#374151' }}>
+            {rotacaoAtual}°
+          </span>
+          <button
+            onClick={irParaProxima}
+            disabled={!podeGirar}
+            title="Próxima rotação"
+            style={{
+              width: 38, height: 32,
+              border: '1px solid #d1d5db',
+              borderRadius: 6,
+              background: '#ffffff',
+              color: '#374151',
+              fontSize: 18,
+              lineHeight: 1,
+              cursor: podeGirar ? 'pointer' : 'default',
+              opacity: podeGirar ? 1 : 0.35,
+            }}
+          >
+            ↻
+          </button>
+        </div>
+      )}
+
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
         {todasRotacoes.map((rot) => {
           const disponivel = metadata.rotacoesDisponiveis.includes(rot);
