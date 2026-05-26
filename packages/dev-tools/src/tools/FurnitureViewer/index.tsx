@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect, type ChangeEvent } from 'react';
 import { z } from 'zod';
 import { FurnitureDefinition } from '@lifesim/core';
-import type { FurnitureAssetMetadata } from '@core/schemas/furnitureAsset';
+import type { FurnitureAssetMetadata, RotacaoMovel } from '@core/schemas/furnitureAsset';
 import { carregarFurnitureAssetMetadata, urlImagemAsset } from '../../shared/SchemaLoader';
 import { CartaoDeMovel } from './FurnitureCard';
 
 type FiltroEra = 'todos' | 'eighties' | 'nineties' | 'twothousands' | 'modern';
 type FiltroCategoria = 'todos' | FurnitureDefinition['categoria'];
-type RotacaoDisponivel = 0 | 90 | 180 | 270;
 
 type ItemDoCatalogo =
   | { readonly ok: true; readonly movel: FurnitureDefinition }
@@ -242,7 +241,7 @@ function PainelInspecao({ movel, aoFechar }: PropsPainelInspecao) {
     | { tipo: 'disponivel'; metadata: FurnitureAssetMetadata }
     | { tipo: 'ausente' }
   >({ tipo: 'carregando' });
-  const [rotacaoAtual, setRotacaoAtual] = useState<RotacaoDisponivel>(0);
+  const [rotacaoAtual, setRotacaoAtual] = useState<RotacaoMovel>(0);
   const [imagemComErro, setImagemComErro] = useState(false);
 
   useEffect(() => {
@@ -334,6 +333,14 @@ function PainelInspecao({ movel, aoFechar }: PropsPainelInspecao) {
               <CampoInfo rotulo="Âncora" valor={`${estadoAsset.metadata.anchorX} × ${estadoAsset.metadata.anchorY}`} />
               <CampoInfo rotulo="Escala base" valor={String(estadoAsset.metadata.escalaBase)} />
               <CampoInfo rotulo="Rotações" valor={estadoAsset.metadata.rotacoesDisponiveis.map((r) => `${r}°`).join(', ')} />
+              {estadoAsset.metadata.spritesPorRotacao !== undefined && (
+                <CampoInfo
+                  rotulo="Sprites"
+                  valor={Object.entries(estadoAsset.metadata.spritesPorRotacao)
+                    .map(([rotacao, arquivo]) => `${rotacao}°: ${arquivo}`)
+                    .join(' · ')}
+                />
+              )}
               {estadoAsset.metadata.material && <CampoInfo rotulo="Material" valor={estadoAsset.metadata.material} />}
               {estadoAsset.metadata.era && <CampoInfo rotulo="Era" valor={estadoAsset.metadata.era} />}
               {estadoAsset.metadata.tags.length > 0 && (
@@ -366,10 +373,10 @@ function PainelInspecao({ movel, aoFechar }: PropsPainelInspecao) {
 type PropsSecaoPreviewInspecao = {
   readonly estadoAsset: { tipo: 'carregando' } | { tipo: 'disponivel'; metadata: FurnitureAssetMetadata } | { tipo: 'ausente' };
   readonly assetId: string;
-  readonly rotacaoAtual: RotacaoDisponivel;
+  readonly rotacaoAtual: RotacaoMovel;
   readonly imagemComErro: boolean;
   readonly aoErroImagem: () => void;
-  readonly aoAlterarRotacao: (rot: RotacaoDisponivel) => void;
+  readonly aoAlterarRotacao: (rot: RotacaoMovel) => void;
 };
 
 function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErro, aoErroImagem, aoAlterarRotacao }: PropsSecaoPreviewInspecao) {
@@ -397,7 +404,7 @@ function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErr
   const footprint = metadata.footprintPorRotacao[String(rotacaoAtual)] ?? { largura: 1, altura: 1 };
   const larguraPx = footprint.largura * TAMANHO_TILE_INSPECAO;
   const alturaPx = footprint.altura * TAMANHO_TILE_INSPECAO;
-  const todasRotacoes: RotacaoDisponivel[] = [0, 90, 180, 270];
+  const todasRotacoes: RotacaoMovel[] = [0, 45, 90, 135, 180, 225, 270, 315];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
@@ -414,7 +421,7 @@ function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErr
           backgroundColor: '#f3f4f6',
         }} />
         <img
-          src={urlImagemAsset(assetId, rotacaoAtual)}
+          src={urlImagemAsset(assetId, rotacaoAtual, metadata)}
           alt={`${assetId} rot${rotacaoAtual}`}
           onError={aoErroImagem}
           style={{
@@ -426,7 +433,7 @@ function SecaoPreviewInspecao({ estadoAsset, assetId, rotacaoAtual, imagemComErr
       </div>
 
       {/* Controles de rotação */}
-      <div style={{ display: 'flex', gap: '0.5rem' }}>
+      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
         {todasRotacoes.map((rot) => {
           const disponivel = metadata.rotacoesDisponiveis.includes(rot);
           const ativo = rot === rotacaoAtual;

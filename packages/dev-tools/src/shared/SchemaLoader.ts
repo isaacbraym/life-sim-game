@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { FurnitureDefinition, ComodoDefinition, Event } from '@lifesim/core';
-import { FurnitureAssetMetadata } from '@core/schemas/furnitureAsset';
+import { FurnitureAssetMetadata, type RotacaoMovel } from '@core/schemas/furnitureAsset';
 
 export type ErroSchemaComIndice = {
   readonly indice: number;
@@ -67,8 +67,13 @@ export async function carregarEventosLote(
 }
 
 // Retorna a URL de imagem para um asset em determinada rotação
-export function urlImagemAsset(assetId: string, rotacao: 0 | 90 | 180 | 270): string {
-  return `/content/furniture-assets/${assetId}/rot_${rotacao}.png`;
+export function urlImagemAsset(
+  assetId: string,
+  rotacao: RotacaoMovel,
+  metadata?: FurnitureAssetMetadata,
+): string {
+  const spriteDeclarado = metadata?.spritesPorRotacao?.[String(rotacao)];
+  return `/content/furniture-assets/${assetId}/${spriteDeclarado ?? `rot_${rotacao}.png`}`;
 }
 
 // Carrega e valida metadata.json de um asset via fetch (requer plugin serve-content no vite.config)

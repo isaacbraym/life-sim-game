@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { FurnitureDefinition } from '@lifesim/core';
-import type { FurnitureAssetMetadata } from '@core/schemas/furnitureAsset';
+import type { FurnitureAssetMetadata, RotacaoMovel } from '@core/schemas/furnitureAsset';
 import { carregarFurnitureAssetMetadata, urlImagemAsset } from '../../shared/SchemaLoader';
-
-type RotacaoDisponivel = 0 | 90 | 180 | 270;
 
 type EstadoAsset =
   | { readonly tipo: 'carregando' }
@@ -42,7 +40,7 @@ type PropsCartaoDeMovel = {
 
 export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
   const [estadoAsset, setEstadoAsset] = useState<EstadoAsset>({ tipo: 'carregando' });
-  const [rotacaoAtual, setRotacaoAtual] = useState<RotacaoDisponivel>(0);
+  const [rotacaoAtual, setRotacaoAtual] = useState<RotacaoMovel>(0);
   const [imagemComErro, setImagemComErro] = useState(false);
 
   useEffect(() => {
@@ -155,7 +153,7 @@ export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
 type PropsPreviewAsset = {
   readonly estadoAsset: EstadoAsset;
   readonly assetId: string;
-  readonly rotacaoAtual: RotacaoDisponivel;
+  readonly rotacaoAtual: RotacaoMovel;
   readonly imagemComErro: boolean;
   readonly iconeCategoria: string;
   readonly aoErroImagem: () => void;
@@ -211,7 +209,7 @@ function PreviewAsset({ estadoAsset, assetId, rotacaoAtual, imagemComErro, icone
         }} />
         {/* Sprite */}
         <img
-          src={urlImagemAsset(assetId, rotacaoAtual)}
+          src={urlImagemAsset(assetId, rotacaoAtual, metadata)}
           alt={`${assetId} rot${rotacaoAtual}`}
           onError={aoErroImagem}
           style={{
@@ -227,16 +225,16 @@ function PreviewAsset({ estadoAsset, assetId, rotacaoAtual, imagemComErro, icone
 }
 
 type PropsControleRotacao = {
-  readonly rotacoesDisponiveis: ReadonlyArray<RotacaoDisponivel>;
-  readonly rotacaoAtual: RotacaoDisponivel;
-  readonly aoAlterarRotacao: (rotacao: RotacaoDisponivel) => void;
+  readonly rotacoesDisponiveis: ReadonlyArray<RotacaoMovel>;
+  readonly rotacaoAtual: RotacaoMovel;
+  readonly aoAlterarRotacao: (rotacao: RotacaoMovel) => void;
 };
 
 function ControleRotacao({ rotacoesDisponiveis, rotacaoAtual, aoAlterarRotacao }: PropsControleRotacao) {
-  const todasRotacoes: RotacaoDisponivel[] = [0, 90, 180, 270];
+  const todasRotacoes: RotacaoMovel[] = [0, 45, 90, 135, 180, 225, 270, 315];
 
   return (
-    <div style={{ display: 'flex', gap: '0.25rem', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', gap: '0.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
       {todasRotacoes.map((rot) => {
         const disponivel = rotacoesDisponiveis.includes(rot);
         const ativo = rot === rotacaoAtual;

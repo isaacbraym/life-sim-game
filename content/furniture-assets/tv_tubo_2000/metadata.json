@@ -3,14 +3,28 @@
   "anchorX": 0.5,
   "anchorY": 1.0,
   "escalaBase": 1.0,
-  "rotacoesDisponiveis": [0, 90, 180, 270],
+  "rotacoesDisponiveis": [0, 45, 90, 135, 180, 225, 270, 315],
   "footprintPorRotacao": {
     "0":   { "largura": 2, "altura": 1 },
+    "45":  { "largura": 2, "altura": 2 },
     "90":  { "largura": 1, "altura": 2 },
+    "135": { "largura": 2, "altura": 2 },
     "180": { "largura": 2, "altura": 1 },
-    "270": { "largura": 1, "altura": 2 }
+    "225": { "largura": 2, "altura": 2 },
+    "270": { "largura": 1, "altura": 2 },
+    "315": { "largura": 2, "altura": 2 }
+  },
+  "spritesPorRotacao": {
+    "0": "rot_0.webp",
+    "45": "rot_45.webp",
+    "90": "rot_90.webp",
+    "135": "rot_135.webp",
+    "180": "rot_180.webp",
+    "225": "rot_225.webp",
+    "270": "rot_270.webp",
+    "315": "rot_315.webp"
   },
   "material": "plastico_preto",
   "era": "twothousands",
-  "tags": ["tecnologia", "tv"]
+  "tags": ["tecnologia", "tv", "crt", "webp"]
 }
