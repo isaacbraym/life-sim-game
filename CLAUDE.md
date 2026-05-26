@@ -2,11 +2,18 @@
 
 ## Identidade do projeto
 
-**Vida 2.5D** é um jogo de simulação de vida com exploração point-and-click em perspectiva oblíqua (~15°), desenvolvido em TypeScript/PixiJS por um único desenvolvedor. O jogador cria um personagem que nasce entre 1985 e 2000 e explora ambientes (casa, escola, academia, restaurante etc.) interagindo com objetos e NPCs via ActionBubble. A narrativa emerge de ações, decisões e consequências registradas em log — não de diálogos longos ou cutscenes.
+**Vida 2.5D** é um jogo de simulação de vida com exploração point-and-click em projeção dimétrica estilo Habbo (~26.57°, razão de pixel 2:1), desenvolvido em TypeScript/PixiJS por um único desenvolvedor. O jogador cria um personagem que nasce entre 1985 e 2000 e explora ambientes em grid de tiles (casa, escola, academia, restaurante etc.) interagindo com móveis, objetos e NPCs via ActionBubble. A narrativa emerge de ações, decisões e consequências registradas em log — não de diálogos longos ou cutscenes.
 
 ## Fase atual: EXECUÇÃO
 
 As decisões arquiteturais estão consolidadas. Não debater arquitetura sem pedido explícito. Antes de qualquer task de código, ler o(s) arquivo(s) `.md` relevante(s) desta pasta.
+
+## Arquivos de instrução relevantes
+
+- `instructions/12-furniture-art-styleguide.md` — styleguide de arte de móveis
+- `instructions/13-isometric-grid-system.md` — projeção dimétrica, BFS, `IsoRoomDefinition`
+- `instructions/14-character-pipeline.md` — sprites por camada, `CharacterRigDefinition`, animações
+- `instructions/15-asset-authoring.md` — File System Access API e fluxo de authoring no Dev Tools
 
 ## Stack obrigatória
 
@@ -22,7 +29,8 @@ As decisões arquiteturais estão consolidadas. Não debater arquitetura sem ped
 - PROIBIDO: game engines (Unity, Godot, Unreal, Phaser, ct.js)
 - PROIBIDO: runtimes proprietários de animação (Spine, DragonBones, Live2D)
 - PROIBIDO: pixi-projection (abandonado no v6, não migrou para v8)
-- PROIBIDO: easystar.js/pathfinding.js (sala única + interactionPoints declarados = overkill)
+- PROIBIDO: pathfinding.js, easystar.js ou qualquer biblioteca de pathfinding externa — usar exclusivamente o BFS próprio em `packages/core/src/iso/Pathfinder.ts`
+- PROIBIDO: sprites de personagem ou móvel com canvas variável entre direções — canvas DEVE ser fixo por footprint, anchor em pixel absoluto idêntico em todas as direções
 - PROIBIDO: matter.js/planck.js (sem física dinâmica no projeto)
 - PROIBIDO: IA generativa em runtime do jogo
 - PROIBIDO: localStorage/sessionStorage como save principal
@@ -30,7 +38,7 @@ As decisões arquiteturais estão consolidadas. Não debater arquitetura sem ped
 - PROIBIDO: modal de cutscene separado para eventos (tudo acontece no ambiente)
 - PROIBIDO: mundo aberto contínuo com ruas (WorldMapScreen = seletor de locais, não mundo aberto)
 - PROIBIDO: build mode de construção de casa (comprar/vender/mover móveis sim; paredes não)
-- PROIBIDO: pathfinding complexo (tween direto para posicaoDeInteracao do objeto)
+- PROIBIDO: pathfinding externo ou complexo fora do contrato de grid — movimento usa BFS próprio sobre tile grid booleano
 - PROIBIDO: reproduzir manchetes/eventos históricos reais palavra-por-palavra
 - PROIBIDO: inventar APIs de bibliotecas
 - PROIBIDO: mergear em main conteúdo visual (cômodo, pose, móvel, personagem) ou narrativo (evento em lote) gerado por agente sem aprovação explícita no proofer correspondente do packages/dev-tools (ver `instructions/11-devtools-qa.md`)
@@ -38,29 +46,39 @@ As decisões arquiteturais estão consolidadas. Não debater arquitetura sem ped
 ## Decisões de design fechadas
 
 ### Câmera e perspectiva
-- Perspectiva oblíqua 3/4 leve (~15°) — nem lateral puro, nem isométrico clássico
-- Z-sorting via `RenderLayer` com `sortFunction: (a, b) => a.position.y - b.position.y`
-- Escala leve por Y: `0.85 + (y / alturaComodo) * 0.20`
-- Personagem grande e próximo da câmera, fácil de ler
+- Projeção dimétrica estilo Habbo (~26.57°, razão de pixel 2:1) — NÃO isométrico 45°, NÃO oblíquo 15°
+- Tile na tela: 64px largura × 32px altura
+- Transformação tile→tela: `x = (tx - ty) * 32`, `y = (tx + ty) * 16`
+- Z-depth: `depth = tx + ty` (objetos com maior soma ficam na frente)
+- Personagem: canvas 64×96px, footprint 1×1 tile, anchor em (32, 90)
+- 8 direções visuais: N, NE, E, SE, S, SW, W, NW (enum `DirecaoVisual`)
+- Referência de qualidade: Habbo Hotel — móveis pequenos, charmosos, volume consistente, rotação expressiva, escala legível em cômodo denso
+- Ver `instructions/13-isometric-grid-system.md` para coordinate math completo
 
 ### Rig e animação
-- Rig 2D custom de 15 joints (lista canônica em `02-avatar-core.md`)
-- **4 orientações**: PERFIL_ESQUERDO, PERFIL_DIREITO, FRONTAL, COSTAS
-- IK: two-bone analítico (braços/pernas) + FABRIK (chains arbitrárias)
-- Silhueta orgânica contínua — SEM linhas/círculos/vincos visíveis em articulações
-- Mão e pé: presets de gesto (não joints individuais)
-- Expressões: presets nomeados no MVP
+- Runtime visual: sprites WebP pré-renderizados por direção, compostos em camadas
+- Camadas em ordem: sombra → sapato → calça → corpo_base → camisa → acessorio_corpo → cabelo_atras → cabeça → rosto → cabelo_frente → chapeu → acessorio_mao
+- Dev Tools: rig como overlay de autoria/validação (`CharacterRigDefinition`) — nunca renderizado em runtime de jogo
+- 8 direções por parte (N, NE, E, SE, S, SW, W, NW)
+- Animações: dados de offset/keyframe por camada, validadas no Character Proofer
+- Canvas fixo de personagem: 64×96px, anchor (32, 90) em todas as direções
+- Ver `instructions/14-character-pipeline.md` para schema e pipeline completo
 
 ### Game loop
 - Fluxo: `NewGameGenerator → LifePhase → WorldMapScreen → LocationDefinition → ComodoDefinition → ExplorationScene → ActionBubble → ActionResolver → EffectEngine → VisualFeedback → LifeLog → Save`
 - Exploração NÃO avança o tempo automaticamente
 - Tempo avança somente quando: ação com `timeCost` é resolvida, ou jogador avança explicitamente o mês
-- `InteractionLock` bloqueia input durante resolução de ação
+- Movimento: BFS próprio (`packages/core/src/iso/Pathfinder.ts`) sobre tile grid booleano, sem bibliotecas externas. Personagem anda tile a tile ao longo do caminho calculado, com GSAP para suavizar cada passo (`TILE_MOVE_MS = 180ms`)
+- Grid de tiles: booleano por tile (`caminhavel`/bloqueado por paredes, móveis e NPCs)
+- Colisão: tiles bloqueados declarados em `ObjetoIsoDefinicao.bloqueaTiles`
+- `InteractionLock` bloqueia input durante resolução de `ActionDefinition`
 
 ### Locais e cômodos
 - WorldMapScreen com ícones clicáveis — não mundo aberto
 - Sala única por vez (room-by-room navigation)
-- Movimento: tween GSAP direto para `posicaoDeInteracao` do objeto — sem pathfinding
+- Cômodos novos: schema `IsoRoomDefinition` (tile grid) em `content/locations-iso/`
+- Cômodos legados (`navZonas`) em `content/locations/` permanecem válidos até migração gradual
+- Movimento: clique em tile ou objeto calcula caminho por BFS e respeita tiles bloqueados
 - Transições entre cômodos: fade simples (GSAP)
 
 ### Interação
@@ -93,6 +111,19 @@ As decisões arquiteturais estão consolidadas. Não debater arquitetura sem ped
 - `FurnitureCatalog` filtrado por era via `availability.startYear/endYear`
 - Drag-and-drop em PixiJS com grid/snap
 - `HousingMarket` para mudar de casa
+
+### Formato de assets
+- Sprites de móveis e personagens: WebP (lossless para pixel art, lossy para fundos)
+- 8 direções por asset: `N.webp`, `NE.webp`, `E.webp`, `SE.webp`, `S.webp`, `SW.webp`, `W.webp`, `NW.webp`
+- Canvas fixo por footprint: ver tabela em `instructions/13-isometric-grid-system.md`
+- Anchor em pixel absoluto: `anchorPixelX`, `anchorPixelY` — idêntico em todas as direções
+- Estrutura: `content/furniture-assets/{assetId}/` e `content/character-parts/{tipo}/{partId}/`
+
+### Dev Tools como ferramenta de authoring
+- File System Access API (Chrome/Edge) para gravar assets direto no projeto
+- Fallback: download de ZIP (Firefox/Safari)
+- Fluxo: criar → upload sprites → ajustar anchor → salvar → vincula automaticamente ao `FurnitureDefinition` ou `CharacterPartMetadata` via ID
+- Ver `instructions/15-asset-authoring.md` para implementação completa
 
 ### Log narrativo
 - 5 camadas: `feedback` (efêmero) → `acao_simples` → `consequencia` → `evento_importante` → `resumo_periodico`
