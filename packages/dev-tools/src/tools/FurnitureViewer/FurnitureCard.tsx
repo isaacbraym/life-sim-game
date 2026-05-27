@@ -38,7 +38,13 @@ const SLOTS_ORDENADOS: readonly SlotRotacao[] = [
   { num: 8, direcao: 'NW', graus: 315 },
 ] as const;
 
-const SLOT_PADRAO = SLOTS_ORDENADOS[4]!;
+const SLOT_PADRAO = SLOTS_ORDENADOS[3]!; // SE — 135°, ângulo isométrico padrão
+
+/** Índice preferencial: SE (135°). Cai para 0 se o asset não tiver esse ângulo. */
+function indiceInicial(slots: readonly SlotRotacao[]): number {
+  const idx = slots.findIndex((s) => s.graus === 135);
+  return idx >= 0 ? idx : 0;
+}
 
 function formatarEra(availability: FurnitureDefinition['availability']): string {
   return availability.endYear !== undefined
@@ -59,13 +65,13 @@ type PropsCartaoDeMovel = {
 
 export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
   const [estadoAsset, setEstadoAsset] = useState<EstadoAsset>({ tipo: 'carregando' });
-  const [indiceSlot, setIndiceSlot] = useState(0);
+  const [indiceSlot, setIndiceSlot] = useState(0); // será ajustado por slotsDisponiveis
   const [imagemComErro, setImagemComErro] = useState(false);
 
   useEffect(() => {
     let cancelado = false;
     setEstadoAsset({ tipo: 'carregando' });
-    setIndiceSlot(0);
+    // indiceSlot será resetado pelo useEffect de slotsDisponiveis
     setImagemComErro(false);
 
     void carregarFurnitureAssetMetadata(movel.assetId).then((metadata) => {
@@ -88,6 +94,13 @@ export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
       assetMetadata.rotacoesDisponiveis.includes(slot.graus),
     );
   }, [assetMetadata]);
+
+  // Ao carregar um novo asset, posiciona na rotação preferencial (SE 135°)
+  useEffect(() => {
+    if (slotsDisponiveis.length > 0) {
+      setIndiceSlot(indiceInicial(slotsDisponiveis));
+    }
+  }, [slotsDisponiveis]);
 
   const slotAtual = slotsDisponiveis[indiceSlot] ?? SLOT_PADRAO;
 
