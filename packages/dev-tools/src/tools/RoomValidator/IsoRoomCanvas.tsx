@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { MouseEvent } from 'react';
 import { Application, Graphics, Text } from 'pixi.js';
-import { tileParaTela, type IsoRoomDefinition } from '@lifesim/core';
+import { tileParaTela, telaParaTile, type IsoRoomDefinition } from '@lifesim/core';
 import { PixiCanvas } from '../../shared/PixiCanvas';
 
 type PropsCanvasIso = {
@@ -13,34 +14,86 @@ const CORES_TILE: Record<IsoRoomDefinition['tiles'][number][number]['estado'], n
   vazio: 0x000000,
 };
 
+// Canvas fixo do personagem (spec: 64×96, âncora em (32, 90))
+const SILHUETA_W  = 64;
+const SILHUETA_H  = 96;
+const SILHUETA_AX = 32;
+const SILHUETA_AY = 90;
+
 export function CanvasIsoDoComodo({ comodo }: PropsCanvasIso) {
-  const appRef = useRef<Application | undefined>();
+  const appRef    = useRef<Application | undefined>();
   const comodoRef = useRef(comodo);
   const tamanhoCanvas = useMemo(() => calcularTamanhoCanvas(comodo), [comodo]);
 
+  const [mostrarReferencia, setMostrarReferencia] = useState(false);
+  const [tileRef, setTileRef]                     = useState<{ tx: number; ty: number } | undefined>();
+
   useEffect(() => {
     comodoRef.current = comodo;
+    setTileRef(undefined);
   }, [comodo]);
 
-  const renderizar = useCallback((app: Application) => {
+  const renderizarTudo = useCallback((app: Application) => {
     desenharComodoIso(app, comodoRef.current);
-  }, []);
+    if (mostrarReferencia && tileRef !== undefined) {
+      desenharSilhuetaPersonagem(app, comodoRef.current, tileRef.tx, tileRef.ty);
+    }
+  }, [mostrarReferencia, tileRef]);
 
   const aoInicializar = useCallback((app: Application) => {
     appRef.current = app;
-    renderizar(app);
-  }, [renderizar]);
+    renderizarTudo(app);
+  }, [renderizarTudo]);
 
   useEffect(() => {
-    if (appRef.current !== undefined) renderizar(appRef.current);
-  }, [comodo, renderizar]);
+    if (appRef.current !== undefined) renderizarTudo(appRef.current);
+  }, [comodo, renderizarTudo]);
+
+  const aoClicarCanvas = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    if (!mostrarReferencia) return;
+    const div    = e.currentTarget;
+    const rect   = div.getBoundingClientRect();
+    const clicX  = e.clientX - rect.left;
+    const clicY  = e.clientY - rect.top;
+    const origem = origemDoComodo(comodoRef.current);
+    const { tx, ty } = telaParaTile(clicX - origem.x, clicY - origem.y);
+    const comodoAtual = comodoRef.current;
+    const dentroGrade =
+      tx >= 0 && ty >= 0 &&
+      tx < comodoAtual.larguraTiles && ty < comodoAtual.alturaTiles;
+    if (dentroGrade) setTileRef({ tx, ty });
+  }, [mostrarReferencia]);
 
   return (
-    <PixiCanvas
-      largura={tamanhoCanvas.largura}
-      altura={tamanhoCanvas.altura}
-      aoInicializar={aoInicializar}
-    />
+    <div>
+      <div style={{ marginBottom: 8 }}>
+        <button
+          type="button"
+          onClick={() => {
+            setMostrarReferencia(v => !v);
+            setTileRef(undefined);
+          }}
+          style={{
+            padding: '4px 12px',
+            fontSize: 13,
+            cursor: 'pointer',
+            background: mostrarReferencia ? '#2b6cb0' : '#2d3748',
+            color: '#e2e8f0',
+            border: '1px solid #4a5568',
+            borderRadius: 4,
+          }}
+        >
+          👤 Referência de escala {mostrarReferencia ? '(ativo — clique num tile)' : ''}
+        </button>
+      </div>
+      <div onClick={aoClicarCanvas} style={{ cursor: mostrarReferencia ? 'crosshair' : 'default' }}>
+        <PixiCanvas
+          largura={tamanhoCanvas.largura}
+          altura={tamanhoCanvas.altura}
+          aoInicializar={aoInicializar}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -144,4 +197,43 @@ function desenharSetaSaida(app: Application, comodo: IsoRoomDefinition, tx: numb
   seta.lineTo(x + 2, y + 9);
   seta.stroke({ color: 0x9ae6b4, width: 2 });
   app.stage.addChild(seta);
+}
+
+function desenharSilhuetaPersonagem(
+  app: Application,
+  comodo: IsoRoomDefinition,
+  tx: number,
+  ty: number,
+): void {
+  const { x, y } = pontoTile(comodo, tx, ty);
+  // O âncora do personagem (SILHUETA_AX, SILHUETA_AY) coincide com o centro do tile
+  const esqX = x - SILHUETA_AX;
+  const topoY = y - SILHUETA_AY;
+
+  // Retângulo da silhueta 64×96
+  const silhueta = new Graphics();
+  silhueta.rect(esqX, topoY, SILHUETA_W, SILHUETA_H);
+  silhueta.fill({ color: 0x48bb78, alpha: 0.22 });
+  silhueta.stroke({ color: 0x68d391, width: 1.5 });
+
+  // Linha do âncora (chão)
+  const marcaAncora = new Graphics();
+  marcaAncora.moveTo(x - 12, y);
+  marcaAncora.lineTo(x + 12, y);
+  marcaAncora.stroke({ color: 0xf6ad55, width: 1.5 });
+
+  // Ponto de âncora
+  const ponto = new Graphics();
+  ponto.circle(x, y, 3);
+  ponto.fill({ color: 0xf6ad55 });
+
+  // Rótulo com coordenadas
+  const rotulo = new Text({
+    text: `(${tx}, ${ty})  64×96  ⚓(${SILHUETA_AX},${SILHUETA_AY})`,
+    style: { fill: '#f6e05e', fontSize: 10, fontFamily: 'monospace' },
+  });
+  rotulo.x = esqX;
+  rotulo.y = topoY - 14;
+
+  app.stage.addChild(silhueta, marcaAncora, ponto, rotulo);
 }
