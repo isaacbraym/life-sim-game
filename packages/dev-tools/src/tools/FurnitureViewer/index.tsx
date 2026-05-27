@@ -819,6 +819,14 @@ function PainelInspecao({ item, aoFechar, aoExcluir, aoSalvarDetalhes }: PropsPa
             </Secao>
           )}
 
+          {estadoAsset.tipo === 'disponivel' && (
+            <SecaoSequenciaSlots
+              key={movel.assetId}
+              metadata={estadoAsset.metadata}
+              assetId={movel.assetId}
+            />
+          )}
+
           {estadoAsset.tipo === 'ausente' && (
             <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 6, padding: '0.75rem', fontSize: 12 }}>
               <strong style={{ color: '#d97706' }}>⚠️ Asset não encontrado</strong>
@@ -1017,5 +1025,214 @@ function CampoInfo({ rotulo, valor }: { rotulo: string; valor: string }) {
       <span style={{ color: '#9ca3af', minWidth: 80, flexShrink: 0 }}>{rotulo}</span>
       <span style={{ color: '#111827', wordBreak: 'break-all' }}>{valor}</span>
     </div>
+  );
+}
+
+// --- Editor de sequência de slots ---
+
+const SLOTS_SEQUENCIA = [
+  { num: 1, direcao: 'N',  graus: 0   },
+  { num: 2, direcao: 'NE', graus: 45  },
+  { num: 3, direcao: 'E',  graus: 90  },
+  { num: 4, direcao: 'SE', graus: 135 },
+  { num: 5, direcao: 'S',  graus: 180 },
+  { num: 6, direcao: 'SW', graus: 225 },
+  { num: 7, direcao: 'W',  graus: 270 },
+  { num: 8, direcao: 'NW', graus: 315 },
+] as const;
+
+type EstadoEdicaoSlots = {
+  modoEdicao: boolean;
+  mapeamentoEditado: Record<string, string>;
+  slotArrastado: string | undefined;
+};
+
+function buildMapeamento(metadata: FurnitureAssetMetadata): Record<string, string> {
+  const resultado: Record<string, string> = {};
+  for (const slot of SLOTS_SEQUENCIA) {
+    if (!metadata.rotacoesDisponiveis.includes(slot.graus)) continue;
+    const grausStr = String(slot.graus);
+    resultado[grausStr] = metadata.spritesPorRotacao?.[grausStr] ?? `${slot.num}.webp`;
+  }
+  return resultado;
+}
+
+type PropsSecaoSequenciaSlots = {
+  readonly metadata: FurnitureAssetMetadata;
+  readonly assetId: string;
+};
+
+function SecaoSequenciaSlots({ metadata, assetId }: PropsSecaoSequenciaSlots) {
+  const [mapeamentoPersistido, setMapeamentoPersistido] = useState(() => buildMapeamento(metadata));
+  const [estado, setEstado] = useState<EstadoEdicaoSlots>({
+    modoEdicao: false,
+    mapeamentoEditado: {},
+    slotArrastado: undefined,
+  });
+  const [mensagemSalvar, setMensagemSalvar] = useState<string | undefined>();
+
+  const mapeamentoAtual = estado.modoEdicao ? estado.mapeamentoEditado : mapeamentoPersistido;
+
+  const iniciarEdicao = () => {
+    setEstado({ modoEdicao: true, mapeamentoEditado: { ...mapeamentoPersistido }, slotArrastado: undefined });
+    setMensagemSalvar(undefined);
+  };
+
+  const cancelar = () => {
+    setEstado({ modoEdicao: false, mapeamentoEditado: {}, slotArrastado: undefined });
+    setMensagemSalvar(undefined);
+  };
+
+  const aoIniciarArraste = (grausStr: string) =>
+    setEstado((s) => ({ ...s, slotArrastado: grausStr }));
+
+  const aoSoltarSobre = (grausAlvo: string) => {
+    setEstado((s) => {
+      const grausOrigem = s.slotArrastado;
+      if (!grausOrigem || grausOrigem === grausAlvo) return { ...s, slotArrastado: undefined };
+      const v1 = s.mapeamentoEditado[grausOrigem];
+      const v2 = s.mapeamentoEditado[grausAlvo];
+      if (v1 === undefined || v2 === undefined) return { ...s, slotArrastado: undefined };
+      return {
+        ...s,
+        slotArrastado: undefined,
+        mapeamentoEditado: { ...s.mapeamentoEditado, [grausOrigem]: v2, [grausAlvo]: v1 },
+      };
+    });
+  };
+
+  const salvar = async () => {
+    const metadataAtualizado: FurnitureAssetMetadata = { ...metadata, spritesPorRotacao: estado.mapeamentoEditado };
+    setMensagemSalvar(undefined);
+    try {
+      const resp = await fetch('/__devtools/asset/update-metadata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ assetId, metadata: metadataAtualizado }),
+      });
+      const dados: unknown = await resp.json();
+      if (!resp.ok) {
+        const erro =
+          typeof dados === 'object' && dados !== null && 'erro' in dados
+            ? String((dados as { erro: unknown }).erro)
+            : `HTTP ${resp.status}`;
+        throw new Error(erro);
+      }
+      setMapeamentoPersistido({ ...estado.mapeamentoEditado });
+      setEstado({ modoEdicao: false, mapeamentoEditado: {}, slotArrastado: undefined });
+      setMensagemSalvar('Sequência salva com sucesso.');
+    } catch (err) {
+      setMensagemSalvar(`Erro ao salvar: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  };
+
+  return (
+    <Secao titulo="Sequência de sprites">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {/* Grade 4×2 de miniaturas */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.4rem' }}>
+          {SLOTS_SEQUENCIA.map((slot) => {
+            const grausStr = String(slot.graus);
+            const arquivo: string | undefined = mapeamentoAtual[grausStr];
+            const estaArrastando = estado.slotArrastado === grausStr;
+            const temSprite = arquivo !== undefined;
+            const draggable = estado.modoEdicao && temSprite;
+
+            return (
+              <div
+                key={grausStr}
+                draggable={draggable}
+                onDragStart={draggable ? () => aoIniciarArraste(grausStr) : undefined}
+                onDragOver={draggable ? (e) => { e.preventDefault(); } : undefined}
+                onDrop={draggable ? () => aoSoltarSobre(grausStr) : undefined}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 2,
+                  padding: 4,
+                  borderRadius: 4,
+                  border: estado.modoEdicao
+                    ? `1.5px solid ${estaArrastando ? '#2563eb' : '#93c5fd'}`
+                    : '1px solid #e5e7eb',
+                  background: estaArrastando ? '#eff6ff' : '#f9fafb',
+                  cursor: draggable ? 'grab' : 'default',
+                  opacity: estaArrastando ? 0.6 : 1,
+                }}
+              >
+                <div style={{ position: 'relative' }}>
+                  {temSprite ? (
+                    <img
+                      src={`/content/furniture-assets/${assetId}/${arquivo}`}
+                      alt={`slot ${slot.num} ${slot.direcao}`}
+                      style={{ width: 40, height: 40, objectFit: 'contain', imageRendering: 'pixelated', display: 'block' }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: 40, height: 40, background: '#e5e7eb', borderRadius: 2,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      fontSize: 14, color: '#9ca3af',
+                    }}>
+                      —
+                    </div>
+                  )}
+                  <span style={{
+                    position: 'absolute', top: -4, right: -4,
+                    background: '#374151', color: '#fff',
+                    borderRadius: '50%', width: 14, height: 14,
+                    fontSize: 9, fontWeight: 700, lineHeight: 1,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    {slot.num}
+                  </span>
+                </div>
+                <span style={{ fontSize: 10, color: '#6b7280' }}>{slot.direcao}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Controles de edição */}
+        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', flexWrap: 'wrap' }}>
+          {!estado.modoEdicao ? (
+            <button
+              onClick={iniciarEdicao}
+              style={{
+                border: '1px solid #d1d5db', background: '#f9fafb', color: '#374151',
+                borderRadius: 6, padding: '0.3rem 0.6rem', fontSize: 12, cursor: 'pointer',
+              }}
+            >
+              Editar sequência
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={() => { void salvar(); }}
+                style={{
+                  border: '1px solid #bfdbfe', background: '#eff6ff', color: '#1d4ed8',
+                  borderRadius: 6, padding: '0.3rem 0.6rem', fontSize: 12, cursor: 'pointer',
+                }}
+              >
+                Salvar sequência
+              </button>
+              <button
+                onClick={cancelar}
+                style={{
+                  border: '1px solid #e5e7eb', background: '#fff', color: '#6b7280',
+                  borderRadius: 6, padding: '0.3rem 0.6rem', fontSize: 12, cursor: 'pointer',
+                }}
+              >
+                Cancelar
+              </button>
+            </>
+          )}
+          {mensagemSalvar !== undefined && (
+            <span style={{ fontSize: 11, color: mensagemSalvar.startsWith('Erro') ? '#dc2626' : '#16a34a' }}>
+              {mensagemSalvar}
+            </span>
+          )}
+        </div>
+      </div>
+    </Secao>
   );
 }

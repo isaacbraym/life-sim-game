@@ -14,6 +14,7 @@ Requisitos:
 import argparse
 import io
 import json
+import math
 import os
 import re
 import sys
@@ -45,9 +46,15 @@ CANVAS_POR_FOOTPRINT = {
 }
 
 COR_FUNDO  = (255, 0, 255)   # magenta #FF00FF
-TOLERANCIA = 35               # variação RGB tolerada para remoção
 COLUNAS    = 4
 LINHAS     = 2
+
+# Ajuste fino da remoção de fundo — editar aqui se necessário
+TOLERANCIA_FUNDO     = 40    # distância euclidiana para considerar fundo puro
+TOLERANCIA_SOMBRA_RB = 45    # quanto R e B podem diferir para ser sombra
+TOLERANCIA_VERDE     = 55    # máximo de verde para ser sombra (não conteúdo)
+LIMITE_ESCURO        = 210   # máximo de brilho médio R+B para ser sombra
+ALPHA_MAX_SOMBRA     = 200   # alpha máximo de pixels de sombra (0-255)
 
 
 # ─── Processamento ────────────────────────────────────────────────────────────
@@ -56,15 +63,47 @@ def cor_proximo(pixel: tuple, ref: tuple, tol: int) -> bool:
     return all(abs(int(pixel[i]) - ref[i]) <= tol for i in range(3))
 
 
+def processar_pixel(r: int, g: int, b: int) -> tuple[int, int, int, int]:
+    """
+    Retorna (r, g, b, alpha) após remoção inteligente do fundo magenta.
+
+    Zona 1 — Fundo puro: próximo de #FF00FF → totalmente transparente
+    Zona 2 — Sombra: pixel escuro onde R≈B e G≈0 → sombra semitransparente escura
+    Zona 3 — Conteúdo real: qualquer outro pixel → totalmente opaco
+    """
+    dist = math.sqrt((r - 255) ** 2 + g ** 2 + (b - 255) ** 2)
+
+    # ── Zona 1: fundo puro ────────────────────────────────────────────────
+    if dist < TOLERANCIA_FUNDO:
+        return (0, 0, 0, 0)
+
+    # ── Zona 2: sombra sobre magenta ──────────────────────────────────────
+    # Sombra = magenta escurecido: R e B baixos e similares, G baixo
+    canal_medio_rb = (r + b) / 2
+    equilibrio_rb  = abs(r - b) < TOLERANCIA_SOMBRA_RB
+    sem_verde      = g < TOLERANCIA_VERDE
+    escuro         = canal_medio_rb < LIMITE_ESCURO
+    parece_sombra  = equilibrio_rb and sem_verde and escuro
+
+    if parece_sombra:
+        fator_escurecimento = 1.0 - (canal_medio_rb / 255.0)
+        alpha = int(fator_escurecimento * ALPHA_MAX_SOMBRA)
+        alpha = max(0, min(255, alpha))
+        escuro_neutro = int(canal_medio_rb * 0.15)
+        return (escuro_neutro, escuro_neutro, escuro_neutro, alpha)
+
+    # ── Zona 3: conteúdo real ─────────────────────────────────────────────
+    return (r, g, b, 255)
+
+
 def remover_magenta(imagem: Image.Image) -> Image.Image:
     rgba = imagem.convert('RGBA')
     px   = rgba.load()
     w, h = rgba.size
     for y in range(h):
         for x in range(w):
-            r, g, b, a = px[x, y]
-            if cor_proximo((r, g, b), COR_FUNDO, TOLERANCIA):
-                px[x, y] = (0, 0, 0, 0)
+            r, g, b, _ = px[x, y]
+            px[x, y]   = processar_pixel(r, g, b)
     return rgba
 
 
