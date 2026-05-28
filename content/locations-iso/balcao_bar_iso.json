@@ -1,0 +1,198 @@
+{
+  "id": "balcao_bar_iso",
+  "nome": "Balcão do Bar ISO",
+  "larguraTiles": 14,
+  "alturaTiles": 10,
+  "tiles": [
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ]
+  ],
+  "objetos": [
+    {
+      "id": "balcao_bebidas",
+      "furnitureId": "balcao_madeira_escura",
+      "tileX": 4,
+      "tileY": 2,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 },
+        { "dx": 1, "dy": 0 },
+        { "dx": 2, "dy": 0 },
+        { "dx": 3, "dy": 0 }
+      ]
+    },
+    {
+      "id": "banqueta_cliente_1",
+      "furnitureId": "banqueta_couro_vermelho",
+      "tileX": 4,
+      "tileY": 3,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "banqueta_cliente_2",
+      "furnitureId": "banqueta_couro_vermelho",
+      "tileX": 5,
+      "tileY": 3,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "banqueta_cliente_3",
+      "furnitureId": "banqueta_couro_vermelho",
+      "tileX": 6,
+      "tileY": 3,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "banqueta_cliente_4",
+      "furnitureId": "banqueta_couro_vermelho",
+      "tileX": 7,
+      "tileY": 3,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "mesa_1",
+      "furnitureId": "mesa_centro_madeira",
+      "tileX": 2,
+      "tileY": 6,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_mesa_1_a",
+      "furnitureId": "cadeira_madeira_simples",
+      "tileX": 1,
+      "tileY": 6,
+      "direcao": "E",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_mesa_1_b",
+      "furnitureId": "cadeira_madeira_simples",
+      "tileX": 3,
+      "tileY": 6,
+      "direcao": "W",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "mesa_2",
+      "furnitureId": "mesa_centro_madeira",
+      "tileX": 10,
+      "tileY": 6,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_mesa_2_a",
+      "furnitureId": "cadeira_madeira_simples",
+      "tileX": 9,
+      "tileY": 6,
+      "direcao": "E",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_mesa_2_b",
+      "furnitureId": "cadeira_madeira_simples",
+      "tileX": 11,
+      "tileY": 6,
+      "direcao": "W",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    }
+  ],
+  "saidas": [
+    {
+      "id": "saida_bar_mapa",
+      "tileX": 6,
+      "tileY": 9,
+      "destino": {
+        "tipo": "mapa"
+      }
+    }
+  ],
+  "npcsElegiveis": [
+    "bartender",
+    "frequentador_bar"
+  ],
+  "eraStyle": "nineties"
+}

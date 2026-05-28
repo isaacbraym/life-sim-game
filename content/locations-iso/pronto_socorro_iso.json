@@ -1,0 +1,194 @@
+{
+  "id": "pronto_socorro_iso",
+  "nome": "Pronto Socorro ISO",
+  "larguraTiles": 16,
+  "alturaTiles": 12,
+  "tiles": [
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ]
+  ],
+  "objetos": [
+    {
+      "id": "balcao_triagem",
+      "furnitureId": "balcao_hospital_branco",
+      "tileX": 2,
+      "tileY": 2,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 },
+        { "dx": 1, "dy": 0 },
+        { "dx": 2, "dy": 0 }
+      ]
+    },
+    {
+      "id": "maca_exame_1",
+      "furnitureId": "maca_clinica",
+      "tileX": 7,
+      "tileY": 2,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 },
+        { "dx": 1, "dy": 0 }
+      ]
+    },
+    {
+      "id": "maca_exame_2",
+      "furnitureId": "maca_clinica",
+      "tileX": 10,
+      "tileY": 2,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 },
+        { "dx": 1, "dy": 0 }
+      ]
+    },
+    {
+      "id": "maca_exame_3",
+      "furnitureId": "maca_clinica",
+      "tileX": 13,
+      "tileY": 2,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 },
+        { "dx": 1, "dy": 0 }
+      ]
+    },
+    {
+      "id": "biombo_divisor",
+      "furnitureId": "mesa_escritorio_cinza",
+      "tileX": 7,
+      "tileY": 4,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 },
+        { "dx": 1, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_espera_1",
+      "furnitureId": "cadeira_espera",
+      "tileX": 2,
+      "tileY": 8,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_espera_2",
+      "furnitureId": "cadeira_espera",
+      "tileX": 3,
+      "tileY": 8,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_espera_3",
+      "furnitureId": "cadeira_espera",
+      "tileX": 4,
+      "tileY": 8,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_espera_4",
+      "furnitureId": "cadeira_espera",
+      "tileX": 5,
+      "tileY": 8,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    }
+  ],
+  "saidas": [
+    {
+      "id": "saida_hospital_mapa",
+      "tileX": 8,
+      "tileY": 11,
+      "destino": {
+        "tipo": "mapa"
+      }
+    }
+  ],
+  "npcsElegiveis": [
+    "medico",
+    "enfermeiro",
+    "recepcionista_hospital"
+  ],
+  "eraStyle": "nineties"
+}

@@ -1,5 +1,6 @@
 import { FurnitureDefinition } from '../packages/core/src/schemas/furniture';
 import { ComodoDefinition } from '../packages/core/src/schemas/location';
+import { IsoRoomDefinition } from '../packages/core/src/schemas/isoRoom';
 import { z } from 'zod';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -103,6 +104,29 @@ for (const filePath of locationFiles) {
     const raw = fs.readFileSync(filePath, 'utf8');
     const parsed = JSON.parse(raw) as unknown;
     const result = ComodoDefinition.safeParse(parsed);
+    if (!result.success) {
+      console.error(`\n❌ ${rel}:`);
+      console.error(JSON.stringify(result.error.format(), null, 2));
+      success = false;
+    } else {
+      console.log(`✅ ${rel}`);
+    }
+  } catch (e: unknown) {
+    console.error(`\n❌ ${rel}: ${e instanceof Error ? e.message : String(e)}`);
+    success = false;
+  }
+}
+
+// --- Locations ISO ---
+const locationsIsoDir = path.join(contentDir, 'locations-iso');
+const locationsIsoFiles = getJsonFiles(locationsIsoDir);
+console.log(`\n[locations-iso] ${locationsIsoFiles.length} arquivo(s) encontrado(s)`);
+for (const filePath of locationsIsoFiles) {
+  const rel = path.relative(locationsIsoDir, filePath);
+  try {
+    const raw = fs.readFileSync(filePath, 'utf8');
+    const parsed = JSON.parse(raw) as unknown;
+    const result = IsoRoomDefinition.safeParse(parsed);
     if (!result.success) {
       console.error(`\n❌ ${rel}:`);
       console.error(JSON.stringify(result.error.format(), null, 2));
