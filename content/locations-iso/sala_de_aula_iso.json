@@ -1,0 +1,187 @@
+{
+  "id": "sala_de_aula_iso",
+  "nome": "Sala de Aula ISO",
+  "larguraTiles": 16,
+  "alturaTiles": 12,
+  "tiles": [
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ],
+    [
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "caminhavel", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 },
+      { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }, { "estado": "bloqueado", "elevacao": 0 }
+    ]
+  ],
+  "objetos": [
+    {
+      "id": "lousa_1",
+      "furnitureId": "lousa_verde",
+      "tileX": 6,
+      "tileY": 0,
+      "direcao": "S",
+      "bloqueaTiles": []
+    },
+    {
+      "id": "mesa_professor",
+      "furnitureId": "mesa_professor_asset",
+      "tileX": 7,
+      "tileY": 2,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 },
+        { "dx": 1, "dy": 0 }
+      ]
+    },
+    {
+      "id": "cadeira_professor",
+      "furnitureId": "cadeira_madeira_simples",
+      "tileX": 7,
+      "tileY": 1,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "carteira_aluno_1",
+      "furnitureId": "carteira_madeira",
+      "tileX": 3,
+      "tileY": 5,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "carteira_aluno_2",
+      "furnitureId": "carteira_madeira",
+      "tileX": 6,
+      "tileY": 5,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "carteira_aluno_3",
+      "furnitureId": "carteira_madeira",
+      "tileX": 9,
+      "tileY": 5,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "carteira_aluno_4",
+      "furnitureId": "carteira_madeira",
+      "tileX": 3,
+      "tileY": 8,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "carteira_aluno_5",
+      "furnitureId": "carteira_madeira",
+      "tileX": 6,
+      "tileY": 8,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    },
+    {
+      "id": "carteira_aluno_6",
+      "furnitureId": "carteira_madeira",
+      "tileX": 9,
+      "tileY": 8,
+      "direcao": "S",
+      "bloqueaTiles": [
+        { "dx": 0, "dy": 0 }
+      ]
+    }
+  ],
+  "saidas": [
+    {
+      "id": "saida_sala_de_aula_corredor",
+      "tileX": 8,
+      "tileY": 11,
+      "destino": {
+        "tipo": "comodo",
+        "comodoId": "corredor_escola_iso"
+      }
+    }
+  ],
+  "npcsElegiveis": [
+    "professor",
+    "colega_de_classe"
+  ],
+  "eraStyle": "nineties"
+}
