@@ -1,0 +1,12 @@
+{
+  "partId": "adulto_neutro",
+  "tipo": "corpo_base",
+  "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+  "canvasLargura": 64,
+  "canvasAltura": 96,
+  "anchorPixelX": 32,
+  "anchorPixelY": 90,
+  "jointsDeEncaixe": ["joint_cabeca_topo","joint_ombro_dir","joint_ombro_esq","joint_quadril","joint_pe_dir","joint_pe_esq"],
+  "camada": "corpo_base",
+  "tags": ["adulto","base","neutro"]
+}

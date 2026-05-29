@@ -1,0 +1,12 @@
+{
+  "partId": "expressao_neutro",
+  "tipo": "rosto",
+  "direcoes": ["S","SE","SW"],
+  "canvasLargura": 64,
+  "canvasAltura": 96,
+  "anchorPixelX": 32,
+  "anchorPixelY": 90,
+  "jointsDeEncaixe": ["joint_cabeca_topo"],
+  "camada": "rosto",
+  "tags": ["neutro","expressao"]
+}

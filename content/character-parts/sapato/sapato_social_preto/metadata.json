@@ -1,0 +1,13 @@
+{
+  "partId": "sapato_social_preto",
+  "tipo": "sapato",
+  "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+  "canvasLargura": 64,
+  "canvasAltura": 96,
+  "anchorPixelX": 32,
+  "anchorPixelY": 90,
+  "jointsDeEncaixe": ["joint_pe_dir","joint_pe_esq"],
+  "camada": "sapato",
+  "era": "nineties",
+  "tags": ["sapato","social","preto","formal"]
+}

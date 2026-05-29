@@ -1,0 +1,13 @@
+{
+  "partId": "camisa_social_azul",
+  "tipo": "camisa",
+  "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+  "canvasLargura": 64,
+  "canvasAltura": 96,
+  "anchorPixelX": 32,
+  "anchorPixelY": 90,
+  "jointsDeEncaixe": ["joint_ombro_dir","joint_ombro_esq"],
+  "camada": "camisa",
+  "era": "nineties",
+  "tags": ["camisa","social","azul","formal"]
+}

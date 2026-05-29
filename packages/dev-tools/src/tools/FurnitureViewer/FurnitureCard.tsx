@@ -61,9 +61,16 @@ function estaRejeitado(movel: FurnitureDefinition): boolean {
 type PropsCartaoDeMovel = {
   readonly movel: FurnitureDefinition;
   readonly aoClicar: () => void;
+  readonly selecionado?: boolean;
+  readonly aoAlternarSelecao?: () => void;
 };
 
-export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
+export function CartaoDeMovel({
+  movel,
+  aoClicar,
+  selecionado = false,
+  aoAlternarSelecao,
+}: PropsCartaoDeMovel) {
   const [estadoAsset, setEstadoAsset] = useState<EstadoAsset>({ tipo: 'carregando' });
   const [indiceSlot, setIndiceSlot] = useState(0); // será ajustado por slotsDisponiveis
   const [imagemComErro, setImagemComErro] = useState(false);
@@ -132,7 +139,8 @@ export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
   const rejeitado = estaRejeitado(movel);
   const semAsset = estadoAsset.tipo === 'ausente';
 
-  const corBorda = rejeitado ? '#ef4444'
+  const corBorda = selecionado ? '#3b82f6'
+    : rejeitado ? '#ef4444'
     : semAsset ? '#f59e0b'
     : '#e5e7eb';
 
@@ -140,7 +148,7 @@ export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
     <div
       onClick={aoClicar}
       style={{
-        background: '#ffffff',
+        background: selecionado ? '#f0f6ff' : '#ffffff',
         border: `2px solid ${corBorda}`,
         borderRadius: 8,
         padding: '0.75rem',
@@ -156,6 +164,17 @@ export function CartaoDeMovel({ movel, aoClicar }: PropsCartaoDeMovel) {
       onMouseLeave={(evento) => { (evento.currentTarget as HTMLDivElement).style.boxShadow = ''; }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+        {aoAlternarSelecao && (
+          <input
+            type="checkbox"
+            checked={selecionado}
+            onChange={(evento) => {
+              evento.stopPropagation();
+              aoAlternarSelecao();
+            }}
+            style={{ cursor: 'pointer', margin: 0 }}
+          />
+        )}
         <span style={{ fontSize: 14 }}>{ICONES_CATEGORIA[movel.categoria]}</span>
         <strong style={{ flex: 1, wordBreak: 'break-word', color: rejeitado ? '#dc2626' : '#111827' }}>
           {movel.nome}

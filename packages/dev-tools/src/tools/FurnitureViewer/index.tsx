@@ -340,7 +340,6 @@ async function removerReferenciasDeMoveis(
     console.warn('[DevTools] Falha ao limpar referências via servidor, tentando fallback local:', erro);
   }
 
-  const raiz = obterPastaRaiz();
   const arquivosParaModificar: Record<string, { caminho: string[]; objIdsParaRemover: string[] }> = {};
 
   for (const refs of Object.values(referencias)) {
@@ -356,7 +355,14 @@ async function removerReferenciasDeMoveis(
     }
   }
 
-  for (const { caminho, objIdsParaRemover } of Object.values(arquivosParaModificar)) {
+  const listModificacoes = Object.values(arquivosParaModificar);
+  if (listModificacoes.length === 0) {
+    return;
+  }
+
+  const raiz = await obterOuSelecionarPastaRaiz();
+
+  for (const { caminho, objIdsParaRemover } of listModificacoes) {
     try {
       const pastaCaminho = caminho.slice(0, -1);
       const nomeArquivo = caminho[caminho.length - 1]!;

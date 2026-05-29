@@ -1,0 +1,13 @@
+{
+  "partId": "cabelo_longo_loiro",
+  "tipo": "cabelo_frente",
+  "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+  "canvasLargura": 64,
+  "canvasAltura": 96,
+  "anchorPixelX": 32,
+  "anchorPixelY": 90,
+  "jointsDeEncaixe": ["joint_cabeca_topo"],
+  "camada": "cabelo_frente",
+  "era": "nineties",
+  "tags": ["longo","loiro","casual"]
+}
