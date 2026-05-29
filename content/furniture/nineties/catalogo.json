@@ -339,7 +339,7 @@
     "tamanhoGrid": { "largura": 3, "altura": 1 },
     "preco": 800,
     "valorDeRevenda": 250,
-    "acoes": ["sentar", "relaxar"],
+    "acoes": ["sentar", "deitar", "descansar", "conversar"],
     "efeitos": {
       "conforto": 2,
       "humor": 1
@@ -373,7 +373,7 @@
     "tamanhoGrid": { "largura": 2, "altura": 1 },
     "preco": 350,
     "valorDeRevenda": 120,
-    "acoes": ["dormir", "descansar"],
+    "acoes": ["dormir", "descansar", "deitar", "acordar"],
     "efeitos": { "conforto": 2, "energia": 1, "humor": 0, "statusSocial": 0 },
     "availability": { "startYear": 1985 },
     "tags": ["quarto", "cama", "descanso"]
@@ -386,7 +386,7 @@
     "tamanhoGrid": { "largura": 2, "altura": 1 },
     "preco": 280,
     "valorDeRevenda": 90,
-    "acoes": ["estudar", "escrever"],
+    "acoes": ["estudar", "escrever", "fazer_licao", "usar_computador"],
     "efeitos": { "conforto": 0, "energia": 0, "humor": 0, "statusSocial": 0 },
     "availability": { "startYear": 1985 },
     "tags": ["quarto", "escritorio", "estudo"]
@@ -464,7 +464,7 @@
     "tamanhoGrid": { "largura": 2, "altura": 1 },
     "preco": 500,
     "valorDeRevenda": 180,
-    "acoes": ["cozinhar"],
+    "acoes": ["cozinhar", "fritar", "ferver", "usar"],
     "efeitos": { "conforto": 0, "energia": 0, "humor": 1, "statusSocial": 0 },
     "availability": { "startYear": 1985 },
     "tags": ["cozinha", "fogao", "cozinhar"]
@@ -477,7 +477,7 @@
     "tamanhoGrid": { "largura": 1, "altura": 2 },
     "preco": 800,
     "valorDeRevenda": 300,
-    "acoes": ["pegar_comida"],
+    "acoes": ["pegar_comida", "guardar_comida", "abrir", "fechar"],
     "efeitos": { "conforto": 0, "energia": 1, "humor": 0, "statusSocial": 0 },
     "availability": { "startYear": 1985 },
     "tags": ["cozinha", "geladeira", "comida"]
@@ -490,7 +490,7 @@
     "tamanhoGrid": { "largura": 2, "altura": 1 },
     "preco": 300,
     "valorDeRevenda": 100,
-    "acoes": ["lavar", "usar"],
+    "acoes": ["lavar_louça", "lavar_maos", "usar"],
     "efeitos": { "conforto": 0, "energia": 0, "humor": 0, "statusSocial": 0 },
     "availability": { "startYear": 1985 },
     "tags": ["cozinha", "pia", "lavar"]
@@ -503,7 +503,7 @@
     "tamanhoGrid": { "largura": 2, "altura": 2 },
     "preco": 420,
     "valorDeRevenda": 150,
-    "acoes": ["comer", "sentar"],
+    "acoes": ["comer", "conversar", "fazer_licao", "servir"],
     "efeitos": { "conforto": 1, "energia": 0, "humor": 1, "statusSocial": 1 },
     "availability": { "startYear": 1985 },
     "tags": ["cozinha", "sala", "mesa", "jantar"]

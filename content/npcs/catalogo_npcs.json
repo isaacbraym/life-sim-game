@@ -1,0 +1,234 @@
+[
+  {
+    "npcId": "familiar_adulto",
+    "nome": "Familiar",
+    "tipo": "familiar",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": [
+        "Oi! Como foi o dia?",
+        "Tá em casa? Que bom.",
+        "Vem cá, preciso te contar uma coisa."
+      ],
+      "recusa": ["Agora não posso, tô ocupado."],
+      "interacao": ["Vamos jantar logo?", "Já terminou o que tava fazendo?"]
+    },
+    "tags": ["casa","familia","recorrente"]
+  },
+  {
+    "npcId": "visitante",
+    "nome": "Visitante",
+    "tipo": "desconhecido",
+    "faseDeVida": ["adolescente","jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Oi, tudo bem?", "Posso entrar?", "Que lugar legal."],
+      "recusa": ["Acho que vim na hora errada."],
+      "interacao": ["Você tem alguma coisa pra beber?"]
+    },
+    "tags": ["casa","visita","descartavel"]
+  },
+  {
+    "npcId": "professor",
+    "nome": "Professor",
+    "tipo": "autoridade",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": [
+        "Silêncio, por favor.",
+        "Vamos começar a aula.",
+        "Alguém tem dúvida sobre a matéria?"
+      ],
+      "recusa": ["Não é hora de conversa."],
+      "interacao": ["Presta atenção aqui.", "Você entendeu essa parte?"]
+    },
+    "tags": ["escola","autoridade","permanente"]
+  },
+  {
+    "npcId": "colega_de_classe",
+    "nome": "Colega de Classe",
+    "tipo": "colega",
+    "faseDeVida": ["adolescente"],
+    "dialogo": {
+      "cumprimento": [
+        "E aí, fez a lição?",
+        "Cara, que aula chata.",
+        "Você viu o jogo ontem?"
+      ],
+      "recusa": ["Deixa eu me concentrar aqui."],
+      "interacao": ["Me empresta a borracha?", "Vai na cantina depois?"]
+    },
+    "tags": ["escola","colega","recorrente"]
+  },
+  {
+    "npcId": "personal_trainer",
+    "nome": "Personal Trainer",
+    "tipo": "comerciante",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": [
+        "Vamos treinar!",
+        "Hoje é dia de perna.",
+        "Aquece antes de começar!"
+      ],
+      "recusa": ["Descansa 2 minutos e volta."],
+      "interacao": ["Mais uma série!", "Mantém a forma!"]
+    },
+    "tags": ["academia","servico","recorrente"]
+  },
+  {
+    "npcId": "frequentador_academia",
+    "nome": "Frequentador",
+    "tipo": "desconhecido",
+    "faseDeVida": ["jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Tá malhando faz tempo?", "Essa máquina fica livre logo."],
+      "recusa": ["Tô no meio de uma série."],
+      "interacao": ["Me ajuda a segurar aqui?"]
+    },
+    "tags": ["academia","descartavel"]
+  },
+  {
+    "npcId": "recepcionista_academia",
+    "nome": "Recepcionista",
+    "tipo": "comerciante",
+    "faseDeVida": ["jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Bem-vindo!", "Sua mensalidade tá em dia.", "Pode entrar."],
+      "recusa": ["Um momento, por favor."],
+      "interacao": ["Precisa de alguma coisa?"]
+    },
+    "tags": ["academia","recepcao","permanente"]
+  },
+  {
+    "npcId": "bartender",
+    "nome": "Bartender",
+    "tipo": "comerciante",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": ["O que vai ser?", "Tá na mesa ou no balcão?", "De onde você é?"],
+      "recusa": ["Espera eu terminar esse pedido."],
+      "interacao": ["Mais um?", "Essa é por conta da casa."]
+    },
+    "tags": ["bar","servico","permanente"]
+  },
+  {
+    "npcId": "frequentador_bar",
+    "nome": "Frequentador do Bar",
+    "tipo": "desconhecido",
+    "faseDeVida": ["jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Você também vem sempre aqui?", "Salve!"],
+      "recusa": ["Tô numa conversa aqui."],
+      "interacao": ["Você viu o jogo?", "Saúde!"]
+    },
+    "tags": ["bar","descartavel"]
+  },
+  {
+    "npcId": "colega_trabalho",
+    "nome": "Colega de Trabalho",
+    "tipo": "colega",
+    "faseDeVida": ["jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["E o relatório, tá pronto?", "Reunião em 10 minutos.", "Você viu o e-mail do chefe?"],
+      "recusa": ["Agora não, tô num prazo."],
+      "interacao": ["Me manda esse arquivo depois.", "Vai almoçar onde?"]
+    },
+    "tags": ["trabalho","colega","recorrente"]
+  },
+  {
+    "npcId": "chefe",
+    "nome": "Chefe",
+    "tipo": "autoridade",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": ["Preciso dos números até sexta.", "Tudo certo por aqui?", "Bom trabalho naquele projeto."],
+      "recusa": ["Marca uma reunião pra amanhã."],
+      "interacao": ["Como tá andando isso?", "Precisamos conversar."]
+    },
+    "tags": ["trabalho","autoridade","permanente"]
+  },
+  {
+    "npcId": "medico",
+    "nome": "Médico",
+    "tipo": "autoridade",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": ["Pode entrar.", "O que está sentindo?", "Há quanto tempo tá assim?"],
+      "recusa": ["Aguarda um momento na recepção."],
+      "interacao": ["Respira fundo.", "Já tomou alguma coisa?"]
+    },
+    "tags": ["hospital","autoridade","permanente"]
+  },
+  {
+    "npcId": "enfermeiro",
+    "nome": "Enfermeiro",
+    "tipo": "autoridade",
+    "faseDeVida": ["jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Qual é o nome?", "Tem cartão do plano?", "Aguarda que o médico já vem."],
+      "recusa": ["Não pode entrar ainda."],
+      "interacao": ["Vai doer um pouquinho.", "Pronto, tá curado."]
+    },
+    "tags": ["hospital","servico","permanente"]
+  },
+  {
+    "npcId": "recepcionista_hospital",
+    "nome": "Recepcionista",
+    "tipo": "comerciante",
+    "faseDeVida": ["jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Qual é o seu nome?", "Tem hora marcada?", "Preenche esse formulário."],
+      "recusa": ["A espera é de umas 2 horas."],
+      "interacao": ["Senta e aguarda ser chamado."]
+    },
+    "tags": ["hospital","recepcao","permanente"]
+  },
+  {
+    "npcId": "garcom",
+    "nome": "Garçom",
+    "tipo": "comerciante",
+    "faseDeVida": ["jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Boa noite! O cardápio.", "Já escolheu?", "Agua com ou sem gás?"],
+      "recusa": ["Um momento que eu já volto."],
+      "interacao": ["Mais alguma coisa?", "Tá tudo bem com o prato?"]
+    },
+    "tags": ["restaurante","servico","permanente"]
+  },
+  {
+    "npcId": "cozinheiro",
+    "nome": "Cozinheiro",
+    "tipo": "comerciante",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": ["O prato do dia é...", "Tá quase pronto."],
+      "recusa": ["Cozinha é área restrita."],
+      "interacao": ["Pronto, pode levar.", "Bom apetite!"]
+    },
+    "tags": ["restaurante","cozinha","permanente"]
+  },
+  {
+    "npcId": "passante",
+    "nome": "Passante",
+    "tipo": "desconhecido",
+    "faseDeVida": ["adolescente","jovem_adulto","adulto"],
+    "dialogo": {
+      "cumprimento": ["Boa tarde.", "Que dia lindo.", "Tá quente hoje, né?"],
+      "recusa": ["Desculpa, tô com pressa."],
+      "interacao": ["Tem horas?"]
+    },
+    "tags": ["parque","descartavel"]
+  },
+  {
+    "npcId": "vizinho",
+    "nome": "Vizinho",
+    "tipo": "colega",
+    "faseDeVida": ["adulto"],
+    "dialogo": {
+      "cumprimento": ["Oi, como vai?", "Vi que chegaram ontem.", "Aqui no bairro é tranquilo."],
+      "recusa": ["Agora não posso parar."],
+      "interacao": ["Viu aquela obra na rua?", "Boa noite!"]
+    },
+    "tags": ["parque","vizinhanca","recorrente"]
+  }
+]
