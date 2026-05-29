@@ -1,6 +1,8 @@
-import { useState, useRef, useEffect, type ChangeEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, type ChangeEvent } from 'react';
+import { Application, Graphics } from 'pixi.js';
 import { z } from 'zod';
 import { FurnitureDefinition } from '@lifesim/core';
+import { PixiCanvas } from '../../shared/PixiCanvas';
 import type { FurnitureAssetMetadata, RotacaoMovel } from '@core/schemas/furnitureAsset';
 import { carregarFurnitureAssetMetadata, urlImagemAsset } from '../../shared/SchemaLoader';
 import {
@@ -1273,7 +1275,7 @@ type PropsPainelInspecao = {
   ) => void;
 };
 
-type TabId = 'atributos' | 'acoes_efeitos' | 'sprites' | 'ancora_grid' | 'footprint';
+type TabId = 'atributos' | 'acoes_efeitos' | 'sprites' | 'ancora_grid' | 'footprint' | 'preview_comodo';
 
 function PainelInspecao({
   item,
@@ -1561,6 +1563,7 @@ function PainelInspecao({
           <button className={`btn-tab ${tabAtiva === 'sprites' ? 'active' : ''}`} onClick={() => setTabAtiva('sprites')}>Sprites</button>
           <button className={`btn-tab ${tabAtiva === 'ancora_grid' ? 'active' : ''}`} onClick={() => setTabAtiva('ancora_grid')}>Âncora/Grid</button>
           <button className={`btn-tab ${tabAtiva === 'footprint' ? 'active' : ''}`} onClick={() => setTabAtiva('footprint')}>Footprint</button>
+          <button className={`btn-tab ${tabAtiva === 'preview_comodo' ? 'active' : ''}`} onClick={() => setTabAtiva('preview_comodo')}>Preview</button>
         </div>
 
         {/* Conteúdo scrollable */}
@@ -1816,6 +1819,11 @@ function PainelInspecao({
                 {estadoAsset.tipo === 'carregando' ? 'Carregando metadata...' : 'Metadata não encontrada para este asset.'}
               </div>
             )
+          )}
+
+          {/* Aba Preview de Cômodo */}
+          {tabAtiva === 'preview_comodo' && (
+            <MiniPreviewComodo movel={movel} />
           )}
 
           {/* Aba Âncora e Grid */}
@@ -2420,6 +2428,169 @@ function SecaoSequenciaSlots({ metadata, assetId }: PropsSecaoSequenciaSlots) {
             </span>
           )}
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Mini-preview de cômodo 3×3 para FurnitureViewer ─────────────────────────
+
+const PREVIEW_W = 380;
+const PREVIEW_H = 240;
+// Origem do mini-grid: posiciona tile (1,1) no centro visual do canvas.
+// tileParaTela(1,1) = {x:0, y:32} → origem em (190, 140)
+const PREVIEW_ORIGEM = { x: 190, y: 140 } as const;
+const PREVIEW_PAREDE_H = 96;
+const PREVIEW_GRADE = 3;
+
+function pontoPreviewGrid(tx: number, ty: number): { x: number; y: number } {
+  return {
+    x: PREVIEW_ORIGEM.x + (tx - ty) * 32,
+    y: PREVIEW_ORIGEM.y + (tx + ty) * 16,
+  };
+}
+
+function desenharMiniPreview(
+  app: Application,
+  movel: FurnitureDefinition,
+  mostrarPersonagem: boolean,
+): void {
+  app.stage.removeChildren();
+
+  const hw = 32;
+  const hh = 16;
+  const H  = PREVIEW_PAREDE_H;
+
+  // Paredes do fundo (ty=0)
+  for (let tx = 0; tx < PREVIEW_GRADE; tx += 1) {
+    const { x, y } = pontoPreviewGrid(tx, 0);
+    const g = new Graphics();
+    g.poly([x - hw, y - hh - H, x + hw, y - hh - H, x + hw, y - hh, x - hw, y - hh]);
+    g.fill({ color: 0xccd9e4 });
+    for (let h = 32; h < H; h += 32) {
+      g.moveTo(x - hw, y - hh - h).lineTo(x + hw, y - hh - h);
+    }
+    g.moveTo(x, y - hh - H).lineTo(x, y - hh);
+    g.stroke({ color: 0x8aa0b0, width: 0.5, alpha: 0.5 });
+    app.stage.addChild(g);
+  }
+
+  // Paredes esquerda (tx=0)
+  for (let ty = 0; ty < PREVIEW_GRADE; ty += 1) {
+    const { x, y } = pontoPreviewGrid(0, ty);
+    const g = new Graphics();
+    g.poly([x - hw, y - hh - H, x, y + hh - H, x, y + hh, x - hw, y - hh]);
+    g.fill({ color: 0xb8c8d6 });
+    for (let h = 32; h < H; h += 32) {
+      g.moveTo(x - hw, y - hh - h).lineTo(x, y + hh - h);
+    }
+    g.stroke({ color: 0x7e96a8, width: 0.5, alpha: 0.5 });
+    app.stage.addChild(g);
+  }
+
+  // Pilar
+  {
+    const { x, y } = pontoPreviewGrid(0, 0);
+    const g = new Graphics();
+    g.rect(x - 4, y - hh - H, 8, H + hh);
+    g.fill({ color: 0x3a5060 });
+    app.stage.addChild(g);
+  }
+
+  // Chão xadrez
+  for (let ty = 0; ty < PREVIEW_GRADE; ty += 1) {
+    for (let tx = 0; tx < PREVIEW_GRADE; tx += 1) {
+      const { x, y } = pontoPreviewGrid(tx, ty);
+      const par = (tx + ty) % 2 === 0;
+      const g = new Graphics();
+      g.poly([x, y - hh, x + hw, y, x, y + hh, x - hw, y]);
+      g.fill({ color: par ? 0xb5c9d8 : 0x9ab3c5, alpha: 0.9 });
+      g.stroke({ color: par ? 0x8fb3c8 : 0x7a9aad, width: 1 });
+      app.stage.addChild(g);
+    }
+  }
+
+  // Móvel em tile (1,1) — cubo 3 faces
+  {
+    const { x, y } = pontoPreviewGrid(1, 1);
+    const OH = Math.max(20, Math.min(36, movel.tamanhoGrid.largura * 14));
+    const topo = new Graphics();
+    topo.poly([x, y - hh - OH, x + hw, y - OH, x, y + hh - OH, x - hw, y - OH]);
+    topo.fill({ color: 0xa8cba9 });
+    topo.stroke({ color: 0x3d5c41, width: 1 });
+    const frente = new Graphics();
+    frente.poly([x - hw, y - OH, x, y + hh - OH, x, y + hh, x - hw, y]);
+    frente.fill({ color: 0x72966e });
+    frente.stroke({ color: 0x3d5c41, width: 1 });
+    const lado = new Graphics();
+    lado.poly([x, y + hh - OH, x + hw, y - OH, x + hw, y, x, y + hh]);
+    lado.fill({ color: 0x537a50 });
+    lado.stroke({ color: 0x3d5c41, width: 1 });
+    app.stage.addChild(topo, frente, lado);
+  }
+
+  // Personagem placeholder em tile (2,2)
+  if (mostrarPersonagem) {
+    const { x, y } = pontoPreviewGrid(2, 2);
+    const ancX = 32;
+    const ancY = 90;
+
+    // Sombra
+    const sombra = new Graphics();
+    sombra.ellipse(x, y - 2, 18, 7);
+    sombra.fill({ color: 0x000000, alpha: 0.3 });
+    app.stage.addChild(sombra);
+
+    // Corpo
+    const corpo = new Graphics();
+    corpo.roundRect(x - ancX + 18, y - ancY + 30, 28, 44, 6);
+    corpo.fill({ color: 0x4caf50 });
+    corpo.circle(x - ancX + 32, y - ancY + 22, 12);
+    corpo.fill({ color: 0xffcc80 });
+    app.stage.addChild(corpo);
+  }
+}
+
+type PropsMiniPreview = {
+  readonly movel: FurnitureDefinition;
+};
+
+function MiniPreviewComodo({ movel }: PropsMiniPreview) {
+  const [mostrarPersonagem, setMostrarPersonagem] = useState(true);
+  const appRef   = useRef<Application | undefined>();
+  const movelRef = useRef(movel);
+
+  useEffect(() => { movelRef.current = movel; }, [movel]);
+
+  useEffect(() => {
+    if (appRef.current !== undefined) {
+      desenharMiniPreview(appRef.current, movelRef.current, mostrarPersonagem);
+    }
+  }, [movel, mostrarPersonagem]);
+
+  const aoInicializar = useCallback((app: Application) => {
+    appRef.current = app;
+    desenharMiniPreview(app, movelRef.current, mostrarPersonagem);
+  }, []); // SAFETY: apenas inicialização
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ fontSize: 11, color: '#8d8d99', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
+        Preview no cômodo (cômodo 3×3 tiles)
+      </div>
+      <label style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 12, color: '#c4c4cc', cursor: 'pointer' }}>
+        <input
+          type="checkbox"
+          checked={mostrarPersonagem}
+          onChange={(e) => setMostrarPersonagem(e.target.checked)}
+        />
+        Mostrar personagem de escala
+      </label>
+      <div style={{ borderRadius: 6, overflow: 'hidden', border: '1px solid #202024' }}>
+        <PixiCanvas largura={PREVIEW_W} altura={PREVIEW_H} aoInicializar={aoInicializar} />
+      </div>
+      <div style={{ fontSize: 11, color: '#718096' }}>
+        Móvel em tile (1,1) · personagem em (2,2) para referência de escala
       </div>
     </div>
   );

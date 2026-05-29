@@ -286,7 +286,7 @@ function PixiPreview({ estado }: { readonly estado: EstadoComposicao }) {
 function renderizarPreview(app: Application, estado: EstadoComposicao) {
   app.stage.removeChildren();
 
-  desenharGradeDimetrica(app);
+  renderizarMiniGridJogo(app);
 
   const metadata = estado.parteCarregada;
   const imagem = estado.spriteCarregado;
@@ -326,23 +326,72 @@ function renderizarPreview(app: Application, estado: EstadoComposicao) {
   }
 }
 
-function desenharGradeDimetrica(app: Application) {
-  const grade = new Graphics();
-  for (let ty = -2; ty <= 3; ty += 1) {
-    for (let tx = -2; tx <= 3; tx += 1) {
-      const x = ANCHOR_PREVIEW.x + (tx - ty) * 32;
-      const y = ANCHOR_PREVIEW.y + (tx + ty) * 16;
-      grade.poly([
-        x, y - 16,
-        x + 32, y,
-        x, y + 16,
-        x - 32, y,
-      ]);
-      grade.fill({ color: 0x2d3748, alpha: 0.75 });
-      grade.stroke({ color: 0x4a5568, width: 1 });
+// Mini-grid 3×3 com visual idêntico ao jogo. Personagem fica em tile (1,1).
+// tileParaTela(1,1) = {x:0, y:32} → origem em (ANCHOR_X, ANCHOR_Y - 32).
+const MINI_GRADE_ORIGEM = { x: ANCHOR_PREVIEW.x, y: ANCHOR_PREVIEW.y - 32 } as const;
+const MINI_GRADE_TAMANHO = 3;
+const MINI_PAREDE_H = 96;
+
+function pontoMiniGrade(tx: number, ty: number): { x: number; y: number } {
+  return {
+    x: MINI_GRADE_ORIGEM.x + (tx - ty) * 32,
+    y: MINI_GRADE_ORIGEM.y + (tx + ty) * 16,
+  };
+}
+
+function renderizarMiniGridJogo(app: Application): void {
+  const hw = 32;
+  const hh = 16;
+  const H  = MINI_PAREDE_H;
+
+  // Paredes do fundo (ty=0) — retângulos planos
+  for (let tx = 0; tx < MINI_GRADE_TAMANHO; tx += 1) {
+    const { x, y } = pontoMiniGrade(tx, 0);
+    const g = new Graphics();
+    g.poly([x - hw, y - hh - H, x + hw, y - hh - H, x + hw, y - hh, x - hw, y - hh]);
+    g.fill({ color: 0xccd9e4 });
+    for (let h = 32; h < H; h += 32) {
+      g.moveTo(x - hw, y - hh - h).lineTo(x + hw, y - hh - h);
+    }
+    g.moveTo(x, y - hh - H).lineTo(x, y - hh);
+    g.stroke({ color: 0x8aa0b0, width: 0.5, alpha: 0.5 });
+    app.stage.addChild(g);
+  }
+
+  // Paredes esquerda (tx=0) — paralelogramos inclinados
+  for (let ty = 0; ty < MINI_GRADE_TAMANHO; ty += 1) {
+    const { x, y } = pontoMiniGrade(0, ty);
+    const g = new Graphics();
+    g.poly([x - hw, y - hh - H, x, y + hh - H, x, y + hh, x - hw, y - hh]);
+    g.fill({ color: 0xb8c8d6 });
+    for (let h = 32; h < H; h += 32) {
+      g.moveTo(x - hw, y - hh - h).lineTo(x, y + hh - h);
+    }
+    g.stroke({ color: 0x7e96a8, width: 0.5, alpha: 0.5 });
+    app.stage.addChild(g);
+  }
+
+  // Pilar no canto
+  {
+    const { x, y } = pontoMiniGrade(0, 0);
+    const g = new Graphics();
+    g.rect(x - 4, y - hh - H, 8, H + hh);
+    g.fill({ color: 0x3a5060 });
+    app.stage.addChild(g);
+  }
+
+  // Chão — xadrez estilo Habbo
+  for (let ty = 0; ty < MINI_GRADE_TAMANHO; ty += 1) {
+    for (let tx = 0; tx < MINI_GRADE_TAMANHO; tx += 1) {
+      const { x, y } = pontoMiniGrade(tx, ty);
+      const par = (tx + ty) % 2 === 0;
+      const g = new Graphics();
+      g.poly([x, y - hh, x + hw, y, x, y + hh, x - hw, y]);
+      g.fill({ color: par ? 0xb5c9d8 : 0x9ab3c5, alpha: 0.9 });
+      g.stroke({ color: par ? 0x8fb3c8 : 0x7a9aad, width: 1 });
+      app.stage.addChild(g);
     }
   }
-  app.stage.addChild(grade);
 }
 
 function ControleOffset({

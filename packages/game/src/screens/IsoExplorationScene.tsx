@@ -8,8 +8,8 @@ import { IsoCharacterController } from '../stage/IsoCharacterController';
 
 const LARGURA_CANVAS  = 900;
 const ALTURA_CANVAS   = 600;
-// Câmera deslocada para baixo para revelar as paredes acima do grid
-const OFFSET_CAMERA_Y = ALTURA_PAREDE_PX + 40; // 136px
+// Câmera mais alta para revelar topo das paredes Habbo-style
+const OFFSET_CAMERA_Y = ALTURA_PAREDE_PX + 80; // 176px
 
 export type IsoExplorationSceneProps = {
   readonly comodoId: string;
@@ -87,7 +87,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       );
       app.stage.position.set(
         LARGURA_CANVAS / 2 - cx,
-        ALTURA_CANVAS  / 2 - cy + OFFSET_CAMERA_Y,
+        ALTURA_CANVAS  / 3 - cy + OFFSET_CAMERA_Y,
       );
 
       personagem.posicionarEm(1, 1);

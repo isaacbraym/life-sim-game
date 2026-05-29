@@ -26,6 +26,7 @@ const COR = {
   PAREDE_FUNDO_BORDA:  0x8aa0b0,
   PAREDE_ESQ:          0xb8c8d6,   // tx=0 — levemente mais escura
   PAREDE_ESQ_BORDA:    0x7e96a8,
+  PILAR:               0x3a5060,
 
   // Tile de saída
   SAIDA:               0xf7b267,
@@ -65,6 +66,7 @@ export class IsoRoomController {
 
     // Ordem: paredes (atrás) → chão → objetos/saídas (frente)
     this.renderizarParedes(cont, comodo);
+    this.renderizarPilar(cont, comodo);
     this.renderizarTiles(comodo);
     for (const objeto of comodo.objetos) {
       this.renderizarObjeto(objeto);
@@ -100,64 +102,79 @@ export class IsoRoomController {
   // ── Paredes ───────────────────────────────────────────────────────────────
 
   /**
-   * Renderiza as paredes do fundo (ty=0) e esquerda (tx=0).
-   *
-   * Geometria:
-   *   - Vértice N do tile (tx, ty) = tileParaTela(tx,ty) + (0, -MEIA_ALTURA)
-   *   - N(tx, 0)   = (tx*32, tx*16−16)
-   *   - N(tx+1, 0) = E(tx, 0) = (tx*32+32, tx*16)   ← ponto compartilhado
-   *   - Cada painel é um paralelogramo: borda inferior = aresta NE/NW do tile,
-   *     borda superior = mesma aresta elevada H pixels.
+   * Paredes do fundo (ty=0) como retângulos planos e esquerda (tx=0) como
+   * paralelogramos inclinados — visual Habbo Hotel.
    */
   private renderizarParedes(cont: Container, comodo: IsoRoomDefinition): void {
-    const H = ALTURA_PAREDE_PX;
+    const H  = ALTURA_PAREDE_PX;
+    const hw = MEIA_LARGURA;  // 32
+    const hh = MEIA_ALTURA;   // 16
 
-    // ── Parede do fundo (ty = 0) — paralelogramos ao longo do eixo tx ──────
+    // ── Parede do fundo (ty = 0) — retângulos planos verticais ──────────────
     for (let tx = 0; tx < comodo.larguraTiles; tx += 1) {
-      // Só renderiza onde há tile definido
       if (comodo.tiles[0]?.[tx]?.estado === 'vazio') continue;
 
-      // Centro do tile (tx, 0) em tela: { x: tx*32, y: tx*16 }
-      const cY = tx * MEIA_ALTURA;          // tx * 16
-
-      // Vértice N:   (tx*32, tx*16−16)
-      const nX  = tx * MEIA_LARGURA;        // tx * 32
-      const nY  = cY - MEIA_ALTURA;         // tx*16 − 16
-
-      // Vértice E = N(tx+1, 0): (tx*32+32, tx*16)
-      const nXr = nX + MEIA_LARGURA;        // tx*32 + 32
-      const nYr = cY;                        // tx*16
-
+      const { x, y } = tileParaTela(tx, 0);
       const g = new Graphics();
-      g.poly([nX, nY, nXr, nYr, nXr, nYr - H, nX, nY - H]);
+
+      g.poly([
+        x - hw, y - hh - H,
+        x + hw, y - hh - H,
+        x + hw, y - hh,
+        x - hw, y - hh,
+      ]);
       g.fill({ color: COR.PAREDE_FUNDO });
-      g.stroke({ color: COR.PAREDE_FUNDO_BORDA, width: 1 });
-      g.zIndex = -100;
+
+      // Grade: linhas horizontais a cada TILE_H e linha vertical central
+      for (let h = TILE_H; h < H; h += TILE_H) {
+        g.moveTo(x - hw, y - hh - h).lineTo(x + hw, y - hh - h);
+      }
+      g.moveTo(x, y - hh - H).lineTo(x, y - hh);
+      g.stroke({ color: COR.PAREDE_FUNDO_BORDA, width: 0.5, alpha: 0.5 });
+
+      g.zIndex = calcularDepth(tx, 0) - 100;
       cont.addChild(g);
     }
 
-    // ── Parede esquerda (tx = 0) — paralelogramos ao longo do eixo ty ──────
+    // ── Parede esquerda (tx = 0) — paralelogramos inclinados ────────────────
     for (let ty = 0; ty < comodo.alturaTiles; ty += 1) {
       if (comodo.tiles[ty]?.[0]?.estado === 'vazio') continue;
 
-      // Centro do tile (0, ty) em tela: { x: -ty*32, y: ty*16 }
-      const cY = ty * MEIA_ALTURA;          // ty * 16
-
-      // Vértice N:   (-ty*32, ty*16−16)
-      const nX  = -(ty * MEIA_LARGURA);     // -ty * 32
-      const nY  = cY - MEIA_ALTURA;         // ty*16 − 16
-
-      // Vértice W = N(0, ty+1): (-ty*32−32, ty*16)
-      const nXl = nX - MEIA_LARGURA;        // -ty*32 − 32
-      const nYl = cY;                        // ty*16
-
+      const { x, y } = tileParaTela(0, ty);
       const g = new Graphics();
-      g.poly([nXl, nYl, nX, nY, nX, nY - H, nXl, nYl - H]);
+
+      g.poly([
+        x - hw, y - hh - H,
+        x,      y + hh - H,
+        x,      y + hh,
+        x - hw, y - hh,
+      ]);
       g.fill({ color: COR.PAREDE_ESQ });
-      g.stroke({ color: COR.PAREDE_ESQ_BORDA, width: 1 });
-      g.zIndex = -99; // ligeiramente à frente da parede do fundo no canto
+
+      // Grade: linhas diagonais a cada TILE_H de altura
+      for (let h = TILE_H; h < H; h += TILE_H) {
+        g.moveTo(x - hw, y - hh - h).lineTo(x, y + hh - h);
+      }
+      g.stroke({ color: COR.PAREDE_ESQ_BORDA, width: 0.5, alpha: 0.5 });
+
+      g.zIndex = calcularDepth(0, ty) - 99;
       cont.addChild(g);
     }
+  }
+
+  /** Pilar vertical no canto onde as duas paredes se encontram. */
+  private renderizarPilar(cont: Container, comodo: IsoRoomDefinition): void {
+    if (comodo.tiles[0]?.[0]?.estado === 'vazio') return;
+
+    const { x, y } = tileParaTela(0, 0);
+    const hh = MEIA_ALTURA;
+    const H  = ALTURA_PAREDE_PX;
+
+    const g = new Graphics();
+    g.rect(x - 4, y - hh - H, 8, H + hh);
+    g.fill({ color: COR.PILAR });
+    g.zIndex = calcularDepth(0, 0) - 98;
+    cont.addChild(g);
   }
 
   // ── Chão ──────────────────────────────────────────────────────────────────
