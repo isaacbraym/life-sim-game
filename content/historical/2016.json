@@ -2,48 +2,69 @@
   "ano": 2016,
   "eventos": [
     {
-      "id": "2016_01_grupos_zap",
-      "manchete": "O aplicativo de mensagens no celular vira febre nacional: agora até sua avó está em vários grupos da família mandando imagens de 'bom dia' e áudios engraçados.",
-      "tags": ["tecnologia", "cultura"],
-      "afetaJogabilidade": false,
-      "efeitos": [],
-      "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
-    },
-    {
-      "id": "2016_02_crise_bicos",
-      "manchete": "Com a barra pesando na economia e o desemprego em alta, a galera começa a se virar fazendo bicos e segurando os gastos como dá.",
-      "tags": ["economia"],
+      "id": "2016_01_jogos_rio",
+      "manchete": "O país sedia a maior festa do esporte mundial. O clima de festa contagia a todos, e cada medalha conquistada em casa vira motivo de orgulho nacional nas redes sociais.",
+      "tags": ["esporte", "cultura"],
       "afetaJogabilidade": true,
       "efeitos": [
         {
-          "tipo": "alterar_dinheiro",
-          "delta": -100
+          "tipo": "alterar_humor",
+          "delta": 15
         }
       ],
       "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
     },
     {
-      "id": "2016_03_app_transporte",
-      "manchete": "Os aplicativos de transporte particular caem de vez no gosto do povo nas capitais, oferecendo viagens mais baratas e agilidade.",
-      "tags": ["tecnologia", "cotidiano"],
-      "afetaJogabilidade": false,
-      "efeitos": [],
+      "id": "2016_02_crise_cortes",
+      "manchete": "A barra pesou de verdade na economia: o desemprego sobe e todo mundo começa a cortar gastos desnecessários dentro de casa para fechar as contas no fim do mês.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -120
+        }
+      ],
       "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
     },
     {
-      "id": "2016_04_streaming_tv",
-      "manchete": "Muita gente começa a aposentar os planos caros de TV a cabo para maratonar séries diretamente na internet por serviços de streaming.",
-      "tags": ["entretenimento", "tecnologia"],
-      "afetaJogabilidade": false,
-      "efeitos": [],
+      "id": "2016_03_zap_familia",
+      "manchete": "Aquele aplicativo verdinho de mensagens vira de vez o meio oficial de comunicação de qualquer família. Agora até a sua avó manda áudios de cinco minutos e figurinhas de bom dia.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": 10
+        }
+      ],
       "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
     },
     {
-      "id": "2016_05_festival_esportes",
-      "manchete": "O país sedia a maior festa do esporte mundial em clima de festa e feriados improvisados, enchendo as arenas e as redes de orgulho e memes.",
-      "tags": ["cultura", "lazer"],
-      "afetaJogabilidade": false,
-      "efeitos": [],
+      "id": "2016_04_streaming_rotina",
+      "manchete": "O hábito de assistir TV muda de vez. Em vez de esperar o horário da novela ou do filme na TV aberta, agora o plano é maratonar séries completas no streaming antes de dormir.",
+      "tags": ["cultura", "tecnologia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": 10
+        }
+      ],
+      "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
+    },
+    {
+      "id": "2016_05_monstrinhos_rua",
+      "manchete": "Febre total nas ruas: um jogo de celular faz pessoas de todas as idades saírem caçando monstrinhos virtuais pelas calçadas, praças e parques da cidade.",
+      "tags": ["tecnologia", "entretenimento", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_atributo",
+          "atributo": "carisma",
+          "delta": 1
+        }
+      ],
       "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
     }
   ]
