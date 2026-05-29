@@ -110,7 +110,9 @@ export class IsoRoomController {
     const hw = MEIA_LARGURA;  // 32
     const hh = MEIA_ALTURA;   // 16
 
-    // ── Parede do fundo (ty = 0) — retângulos planos verticais ──────────────
+    // ── Parede do fundo (ty = 0) — paralelogramo seguindo a perspectiva ─────
+    // Base: vértice topo de (tx,0) → vértice topo de (tx+1,0)
+    // Em tela: (x, y-hh) → (x+hw, y)  [aresta top-direita do diamond]
     for (let tx = 0; tx < comodo.larguraTiles; tx += 1) {
       if (comodo.tiles[0]?.[tx]?.estado === 'vazio') continue;
 
@@ -118,26 +120,26 @@ export class IsoRoomController {
       const g = new Graphics();
 
       g.poly([
-        x - hw, y - hh - H,
-        x + hw, y - hh - H,
-        x + hw, y - hh,
-        x - hw, y - hh,
+        { x: x,      y: y - hh },       // base-esquerda  (topo do diamond tx,0)
+        { x: x + hw, y: y },             // base-direita   (topo do diamond tx+1,0)
+        { x: x + hw, y: y - H },         // topo-direita
+        { x: x,      y: y - hh - H },    // topo-esquerda
       ]);
       g.fill({ color: COR.PAREDE_FUNDO });
 
-      // Grade: linhas horizontais a cada TILE_H e linha vertical central
+      // Grade: linhas horizontais isométricas (ligeiramente inclinadas)
       for (let h = TILE_H; h < H; h += TILE_H) {
-        g.moveTo(x - hw, y - hh - h).lineTo(x + hw, y - hh - h);
+        g.moveTo(x, y - hh - h).lineTo(x + hw, y - h);
       }
-      g.moveTo(x, y - hh - H).lineTo(x, y - hh);
       g.stroke({ color: COR.PAREDE_FUNDO_BORDA, width: 0.5, alpha: 0.5 });
 
-      // zIndex fixo: atrás dos tiles (mínimo -1) e objetos (mínimo 0)
       g.zIndex = -10;
       cont.addChild(g);
     }
 
-    // ── Parede esquerda (tx = 0) — paralelogramos inclinados ────────────────
+    // ── Parede esquerda (tx = 0) — paralelogramo seguindo a perspectiva ─────
+    // Base: vértice topo de (0,ty) → vértice topo de (0,ty+1)
+    // Em tela: (x, y-hh) → (x-hw, y)  [aresta top-esquerda do diamond]
     for (let ty = 0; ty < comodo.alturaTiles; ty += 1) {
       if (comodo.tiles[ty]?.[0]?.estado === 'vazio') continue;
 
@@ -145,16 +147,16 @@ export class IsoRoomController {
       const g = new Graphics();
 
       g.poly([
-        x - hw, y - hh - H,
-        x,      y + hh - H,
-        x,      y + hh,
-        x - hw, y - hh,
+        { x: x,      y: y - hh },       // base-frente  (topo do diamond 0,ty)
+        { x: x - hw, y: y },             // base-fundo   (topo do diamond 0,ty+1)
+        { x: x - hw, y: y - H },         // topo-fundo
+        { x: x,      y: y - hh - H },    // topo-frente
       ]);
       g.fill({ color: COR.PAREDE_ESQ });
 
-      // Grade: linhas diagonais a cada TILE_H de altura
+      // Grade: linhas horizontais isométricas (inclinadas para a esquerda)
       for (let h = TILE_H; h < H; h += TILE_H) {
-        g.moveTo(x - hw, y - hh - h).lineTo(x, y + hh - h);
+        g.moveTo(x, y - hh - h).lineTo(x - hw, y - h);
       }
       g.stroke({ color: COR.PAREDE_ESQ_BORDA, width: 0.5, alpha: 0.5 });
 
