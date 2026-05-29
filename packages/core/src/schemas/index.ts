@@ -15,3 +15,4 @@ export * from './location';
 export * from './furniture';
 export * from './direction';
 export * from './isoRoom';
+export * from './characterPart';

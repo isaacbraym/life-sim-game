@@ -67,6 +67,10 @@ export class IsoCharacterController {
     return this._container;
   }
 
+  obterPosicao(): { tx: number; ty: number } {
+    return { ...this.posicaoAtual };
+  }
+
   destruir(): void {
     gsap.killTweensOf(this._container.position);
     this._container.destroy({ children: true });

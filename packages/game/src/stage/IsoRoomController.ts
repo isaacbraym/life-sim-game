@@ -56,9 +56,9 @@ export class IsoRoomController {
     return this.comodo;
   }
 
-  atualizarGrid(): void {
+  atualizarGrid(npcs: readonly { tileX: number; tileY: number }[] = []): void {
     if (this.comodo !== undefined) {
-      this.gridAtual = construirGrid(this.comodo, []);
+      this.gridAtual = construirGrid(this.comodo, npcs);
     }
   }
 

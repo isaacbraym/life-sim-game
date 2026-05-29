@@ -6,33 +6,42 @@ import { carregarComodoIso } from '../content/isoRoomCatalog';
 import { IsoRoomController } from '../stage/IsoRoomController';
 import { IsoCharacterController } from '../stage/IsoCharacterController';
 
-const LARGURA_CANVAS = 900;
-const ALTURA_CANVAS  = 600;
+const LARGURA_CANVAS  = 900;
+const ALTURA_CANVAS   = 600;
 const OFFSET_CAMERA_Y = 60;
 
-type PropsExploracaoIso = {
+export type IsoExplorationSceneProps = {
   readonly comodoId: string;
   readonly onSaida?: (saidaId: string) => void;
 };
 
-export function IsoExplorationScene({ comodoId, onSaida }: PropsExploracaoIso) {
+export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationSceneProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [erro, setErro] = useState<string | undefined>();
+  const [posicao, setPosicao] = useState<{ tx: number; ty: number }>({ tx: 1, ty: 1 });
+
+  // Refs para acesso nos callbacks sem stale closure
+  const personagemRef = useRef<IsoCharacterController | undefined>();
+  const salaRef       = useRef<IsoRoomController | undefined>();
 
   useEffect(() => {
     if (canvasRef.current === null) return;
 
-    let cancelado   = false;
-    let appPronto   = false;
+    let cancelado = false;
+    let appPronto = false;
+
     const app        = new Application();
     const sala       = new IsoRoomController();
     const personagem = new IsoCharacterController();
 
+    personagemRef.current = personagem;
+    salaRef.current       = sala;
+
     const inicializar = async () => {
       await app.init({
-        canvas: canvasRef.current!,
-        width:  LARGURA_CANVAS,
-        height: ALTURA_CANVAS,
+        canvas:     canvasRef.current!,
+        width:      LARGURA_CANVAS,
+        height:     ALTURA_CANVAS,
         background: 0x1a2330,
         antialias:  false,
       });
@@ -55,8 +64,15 @@ export function IsoExplorationScene({ comodoId, onSaida }: PropsExploracaoIso) {
         app,
         comodo,
         (tx, ty) => {
-          if (!personagem.estaEmMovimento()) {
-            void personagem.moverPara({ tx, ty }, sala.obterGrid());
+          const char = personagemRef.current;
+          const rm   = salaRef.current;
+          if (char === undefined || rm === undefined) return;
+          if (!char.estaEmMovimento()) {
+            void char.moverPara({ tx, ty }, rm.obterGrid()).then(() => {
+              const pos = char.obterPosicao();
+              rm.atualizarGrid([{ tileX: pos.tx, tileY: pos.ty }]);
+              setPosicao(pos);
+            });
           }
         },
         (saidaId) => { onSaida?.(saidaId); },
@@ -65,7 +81,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: PropsExploracaoIso) {
       // Centraliza câmera no meio do cômodo
       const { x: cx, y: cy } = tileParaTela(
         comodo.larguraTiles / 2,
-        comodo.alturaTiles / 2,
+        comodo.alturaTiles  / 2,
       );
       app.stage.position.set(
         LARGURA_CANVAS / 2 - cx,
@@ -73,6 +89,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: PropsExploracaoIso) {
       );
 
       personagem.posicionarEm(1, 1);
+      setPosicao({ tx: 1, ty: 1 });
       app.stage.addChild(personagem.obterContainer());
 
       gsap.to(app.stage, { alpha: 1, duration: 0.4 });
@@ -83,7 +100,9 @@ export function IsoExplorationScene({ comodoId, onSaida }: PropsExploracaoIso) {
     });
 
     return () => {
-      cancelado = true;
+      cancelado             = true;
+      personagemRef.current = undefined;
+      salaRef.current       = undefined;
       if (appPronto) {
         gsap.killTweensOf(app.stage);
         personagem.destruir();
@@ -102,9 +121,27 @@ export function IsoExplorationScene({ comodoId, onSaida }: PropsExploracaoIso) {
   }
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{ display: 'block', background: '#1a2330' }}
-    />
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <canvas
+        ref={canvasRef}
+        style={{ display: 'block', background: '#1a2330' }}
+      />
+      {/* HUD de posição */}
+      <div style={{
+        position: 'absolute',
+        top: 8,
+        left: 8,
+        background: 'rgba(0,0,0,0.55)',
+        color: '#c4f0ff',
+        fontFamily: 'monospace',
+        fontSize: 12,
+        padding: '4px 10px',
+        borderRadius: 4,
+        pointerEvents: 'none',
+        userSelect: 'none',
+      }}>
+        {comodoId} | {posicao.tx},{posicao.ty}
+      </div>
+    </div>
   );
 }
