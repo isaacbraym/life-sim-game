@@ -110,8 +110,6 @@ export class IsoRoomController {
     const hw = MEIA_LARGURA;  // 32
     const hh = MEIA_ALTURA;   // 16
 
-    let segmentosParede = 0;
-
     // ── Parede do fundo (ty = 0) — retângulos planos verticais ──────────────
     for (let tx = 0; tx < comodo.larguraTiles; tx += 1) {
       if (comodo.tiles[0]?.[tx]?.estado === 'vazio') continue;
@@ -137,7 +135,6 @@ export class IsoRoomController {
       // zIndex fixo: atrás dos tiles (mínimo -1) e objetos (mínimo 0)
       g.zIndex = -10;
       cont.addChild(g);
-      segmentosParede += 1;
     }
 
     // ── Parede esquerda (tx = 0) — paralelogramos inclinados ────────────────
@@ -163,13 +160,7 @@ export class IsoRoomController {
 
       g.zIndex = -9;
       cont.addChild(g);
-      segmentosParede += 1;
     }
-
-    console.log(
-      `[IsoRoomController] renderizarParedes: ${segmentosParede} segmentos criados` +
-      ` (largura=${comodo.larguraTiles}, altura=${comodo.alturaTiles})`,
-    );
   }
 
   /** Pilar vertical no canto onde as duas paredes se encontram. */
@@ -185,7 +176,6 @@ export class IsoRoomController {
     g.fill({ color: COR.PILAR });
     g.zIndex = -8;
     cont.addChild(g);
-    console.log(`[IsoRoomController] renderizarPilar: pilar em (${x},${y})`);
   }
 
   // ── Chão ──────────────────────────────────────────────────────────────────
