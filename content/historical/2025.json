@@ -1,0 +1,56 @@
+{
+  "ano": 2025,
+  "eventos": [
+    {
+      "id": "2025_01_eVTOL_voadores_testes",
+      "manchete": "As discussões e primeiros testes práticos de veículos elétricos de decolagem vertical, os chamados carros voadores, ganham espaço no noticiário de mobilidade urbana.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2025, "endYear": 2025 }
+    },
+    {
+      "id": "2025_02_biometria_facial_padrao",
+      "manchete": "Os pagamentos por aproximação no relógio e por reconhecimento facial tornam-se o padrão em grandes capitais. Carteiras físicas começam a ser vistas como relíquias.",
+      "tags": ["economia", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2025, "endYear": 2025 }
+    },
+    {
+      "id": "2025_03_ia_local_celular",
+      "manchete": "Os modelos avançados de assistentes de inteligência artificial começam a rodar diretamente nos chips dos smartphones novos, respondendo instantaneamente sem precisar de internet.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_atributo",
+          "atributo": "inteligencia",
+          "delta": 1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2025, "endYear": 2025 }
+    },
+    {
+      "id": "2025_04_economia_circular_brecho",
+      "manchete": "A economia circular ganha as massas. O comércio de roupas de segunda mão e móveis reformados vira a opção preferida de consumo consciente para economizar e renovar a casa.",
+      "tags": ["economia", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": 50
+        }
+      ],
+      "eraDisponivel": { "startYear": 2025, "endYear": 2025 }
+    },
+    {
+      "id": "2025_05_energia_solar_bairros",
+      "manchete": "A transição energética residencial acelera no país. Placas solares passam a cobrir os telhados de bairros inteiros, reduzindo custos e gerando independência energética local.",
+      "tags": ["cotidiano", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2025, "endYear": 2025 }
+    }
+  ]
+}
