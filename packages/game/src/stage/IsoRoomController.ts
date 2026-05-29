@@ -255,8 +255,17 @@ export class IsoRoomController {
       for (let tx = 0; tx < linha.length; tx += 1) {
         const tile = linha[tx];
         if (tile === undefined || tile.estado === 'vazio') continue;
-        // Borda de parede (tx=0 ou ty=0): a parede renderiza esse espaço — não duplicar com tile de chão
-        if (tx === 0 || ty === 0) continue;
+        // Suprimir as 4 bordas — paredes e limite do cômodo
+        // Saídas SÃO renderizadas na borda (renderizarSaida sobrepõe com golden tile)
+        const ehBorda =
+          tx === 0 ||
+          ty === 0 ||
+          tx === comodo.larguraTiles - 1 ||
+          ty === comodo.alturaTiles  - 1;
+        if (ehBorda) {
+          const ehSaida = comodo.saidas.some(s => s.tileX === tx && s.tileY === ty);
+          if (!ehSaida) continue;
+        }
 
         const { x, y } = tileParaTela(tx, ty);
         const ehCaminhavel = tile.estado === 'caminhavel';
@@ -368,7 +377,7 @@ export class IsoRoomController {
 
     this.container?.addChild(topo, frente, lado, rotulo);
 
-    // Overlays nos tiles secundários do footprint (indicam bloqueio visual)
+    // Overlays nos tiles secundários do footprint (cor do móvel + borda + cruz)
     for (const offset of objeto.bloqueaTiles) {
       if (offset.dx === 0 && offset.dy === 0) continue;
       const tileX = objeto.tileX + offset.dx;
@@ -377,11 +386,22 @@ export class IsoRoomController {
 
       const overlay = new Graphics();
       overlay.poly([
-        { x: 0,    y: -hh },
-        { x: hw,   y: 0   },
-        { x: 0,    y: hh  },
-        { x: -hw,  y: 0   },
-      ]).fill({ color: corBase, alpha: 0.55 });
+        { x: 0,   y: -hh },
+        { x: hw,  y: 0   },
+        { x: 0,   y: hh  },
+        { x: -hw, y: 0   },
+      ]).fill({ color: corBase, alpha: 0.5 });
+      overlay.poly([
+        { x: 0,   y: -hh },
+        { x: hw,  y: 0   },
+        { x: 0,   y: hh  },
+        { x: -hw, y: 0   },
+      ]).stroke({ color: corBase, width: 2, alpha: 0.8 });
+      // Cruz no centro — sinaliza tile bloqueado
+      overlay.moveTo(-8, 0).lineTo(8, 0);
+      overlay.moveTo(0, -4).lineTo(0, 4);
+      overlay.stroke({ color: 0xffffff, width: 1, alpha: 0.5 });
+
       overlay.position.set(ox, oy);
       overlay.zIndex = calcularDepth(tileX, tileY) - 0.5;
       this.container?.addChild(overlay);
@@ -391,25 +411,54 @@ export class IsoRoomController {
   // ── Saídas ────────────────────────────────────────────────────────────────
 
   private renderizarSaida(saida: SaidaIso): void {
+    const comodo = this.comodo;
+    if (comodo === undefined || this.container === undefined) return;
+
     const { x, y } = tileParaTela(saida.tileX, saida.tileY);
+    const hw = MEIA_LARGURA;
+    const hh = MEIA_ALTURA;
 
     const g = new Graphics();
-    g.position.set(x, y);
+
+    // Losango dourado na borda — mesmo nível do chão
     g.poly([
-      0,             -MEIA_ALTURA,
-      MEIA_LARGURA,   0,
-      0,              MEIA_ALTURA,
-      -MEIA_LARGURA,  0,
-    ]);
-    g.fill({ color: COR.SAIDA, alpha: 0.8 });
-    g.stroke({ color: COR.SAIDA_BORDA, width: 2 });
-    g.zIndex    = calcularDepth(saida.tileX, saida.tileY) - 0.5;
+      { x: 0,   y: -hh },
+      { x: hw,  y: 0   },
+      { x: 0,   y: hh  },
+      { x: -hw, y: 0   },
+    ]).fill({ color: 0xd4a853 });
+    g.poly([
+      { x: 0,   y: -hh },
+      { x: hw,  y: 0   },
+      { x: 0,   y: hh  },
+      { x: -hw, y: 0   },
+    ]).stroke({ color: 0xb8862e, width: 1.5 });
+
+    // Seta indicando direção de saída (aponta para fora do cômodo)
+    const setaDx = saida.tileX === 0 ? -1 :
+                   saida.tileX === comodo.larguraTiles - 1 ? 1 : 0;
+    const setaDy = saida.tileY === 0 ? -1 :
+                   saida.tileY === comodo.alturaTiles  - 1 ? 1 : 0;
+    const setaX  = (setaDx - setaDy) * 10;
+    const setaY  = (setaDx + setaDy) * 5;
+
+    const seta = new Graphics();
+    seta.poly([
+      { x: setaX,     y: setaY - 6 },
+      { x: setaX + 6, y: setaY + 4 },
+      { x: setaX - 6, y: setaY + 4 },
+    ]).fill({ color: 0xffffff, alpha: 0.8 });
+    g.addChild(seta);
+
+    // Clicar inicia caminhada — ao chegar, IsoExplorationScene dispara onSaida (Fix 2c)
     g.eventMode = 'static';
     g.cursor    = 'pointer';
-    g.on('pointerover', () => { g.tint = 0xffe0b2; });
-    g.on('pointerout',  () => { g.tint = 0xffffff; });
-    g.on('pointertap',  () => { this.callbackSaida?.(saida.id); });
+    g.on('pointerenter', () => { g.tint = 0xffe0a0; });
+    g.on('pointerleave', () => { g.tint = 0xffffff; });
+    g.on('pointertap',   () => { this.callbackTile?.(saida.tileX, saida.tileY); });
 
-    this.container?.addChild(g);
+    g.position.set(x, y);
+    g.zIndex = calcularDepth(saida.tileX, saida.tileY) + 0.2;
+    this.container.addChild(g);
   }
 }

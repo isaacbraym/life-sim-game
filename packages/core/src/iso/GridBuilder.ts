@@ -34,5 +34,13 @@ export function construirGrid(
     }
   }
 
+  // Saídas são sempre caminháveis — o tile pode ser bloqueado no JSON mas deve ser acessível
+  for (const saida of comodo.saidas) {
+    const linha = grid[saida.tileY];
+    if (linha !== undefined) {
+      linha[saida.tileX] = true;
+    }
+  }
+
   return grid;
 }

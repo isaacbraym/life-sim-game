@@ -74,6 +74,16 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
               const pos = char.obterPosicao();
               rm.atualizarGrid([{ tileX: pos.tx, tileY: pos.ty }]);
               setPosicao(pos);
+              // 2c: personagem chegou a uma saída → disparar transição automaticamente
+              const comodoAtual = rm.obterComodo();
+              if (comodoAtual !== undefined) {
+                const saidaAlcancada = comodoAtual.saidas.find(
+                  s => s.tileX === pos.tx && s.tileY === pos.ty,
+                );
+                if (saidaAlcancada !== undefined) {
+                  onSaida?.(saidaAlcancada.id);
+                }
+              }
             });
             // Síncrono: _emMovimento já foi definido antes do primeiro await de moverPara
             if (char.estaEmMovimento()) {
