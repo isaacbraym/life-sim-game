@@ -3,12 +3,13 @@ import { Application } from 'pixi.js';
 import { gsap } from 'gsap';
 import { tileParaTela } from '@core/iso/IsoMath';
 import { carregarComodoIso } from '../content/isoRoomCatalog';
-import { IsoRoomController } from '../stage/IsoRoomController';
+import { IsoRoomController, ALTURA_PAREDE_PX } from '../stage/IsoRoomController';
 import { IsoCharacterController } from '../stage/IsoCharacterController';
 
 const LARGURA_CANVAS  = 900;
 const ALTURA_CANVAS   = 600;
-const OFFSET_CAMERA_Y = 60;
+// Câmera deslocada para baixo para revelar as paredes acima do grid
+const OFFSET_CAMERA_Y = ALTURA_PAREDE_PX + 40; // 136px
 
 export type IsoExplorationSceneProps = {
   readonly comodoId: string;
@@ -44,7 +45,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
         width:      LARGURA_CANVAS,
         height:     ALTURA_CANVAS,
         background: 0x1a2330,
-        antialias:  false,
+        antialias:  true,
       });
       // Verificar cancelamento logo após o primeiro await pesado
       if (cancelado) { app.destroy(true); return; }
