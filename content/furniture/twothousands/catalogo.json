@@ -550,7 +550,10 @@
     "preco": 1200,
     "valorDeRevenda": 400,
     "acoes": [
-      "assistir_tv"
+      "assistir_tv",
+      "ligar",
+      "desligar",
+      "mudar_canal"
     ],
     "efeitos": {
       "humor": 2,
