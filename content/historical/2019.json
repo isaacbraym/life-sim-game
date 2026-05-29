@@ -1,0 +1,45 @@
+{
+  "ano": 2019,
+  "eventos": [
+    {
+      "id": "2019_01_guerra_streamings",
+      "manchete": "Novos concorrentes entram no mercado nacional de streaming de vídeo. A disputa por produções exclusivas faz os usuários assinarem múltiplas plataformas.",
+      "tags": ["tecnologia", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2019, "endYear": 2019 }
+    },
+    {
+      "id": "2019_02_entrega_comida_app",
+      "manchete": "Aplicativos de entrega de comida e compras se consolidam como conveniência diária, enchendo as ruas de motoboys e facilitando a rotina corrida.",
+      "tags": ["cotidiano", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2019, "endYear": 2019 }
+    },
+    {
+      "id": "2019_03_explosao_podcasts",
+      "manchete": "Os programas de entrevista em áudio e vídeo explodem de audiência, tornando-se companhia constante no trânsito, nos treinos ou nas tarefas domésticas.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2019, "endYear": 2019 }
+    },
+    {
+      "id": "2019_04_casa_inteligente",
+      "manchete": "Lâmpadas conectadas e caixas de som inteligentes começam a equipar as salas brasileiras, tornando os comandos por voz uma realidade acessível.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2019, "endYear": 2019 }
+    },
+    {
+      "id": "2019_05_boom_imobiliario",
+      "manchete": "Com juros baixos para financiamento, o mercado de construção civil decola nas grandes cidades brasileiras com o lançamento de muitos empreendimentos.",
+      "tags": ["economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2019, "endYear": 2019 }
+    }
+  ]
+}

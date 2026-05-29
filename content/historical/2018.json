@@ -1,0 +1,55 @@
+{
+  "ano": 2018,
+  "eventos": [
+    {
+      "id": "2018_01_greve_caminhoneiros",
+      "manchete": "A paralisação nacional de caminhoneiros bloqueia rodovias, gerando desabastecimento de combustíveis e alimentos e deixando postos e feiras desertos.",
+      "tags": ["economia", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -120
+        }
+      ],
+      "eraDisponivel": { "startYear": 2018, "endYear": 2018 }
+    },
+    {
+      "id": "2018_02_dancinhas_influencers",
+      "manchete": "As coreografias e vídeos rápidos de dublagem viram febre, abrindo espaço para uma nova onda de produtores de conteúdo e influenciadores digitais.",
+      "tags": ["cultura", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2018, "endYear": 2018 }
+    },
+    {
+      "id": "2018_03_patinetes_eletricos",
+      "manchete": "Serviços de aluguel de patinetes elétricos e bicicletas por aplicativo tomam as grandes capitais, mudando o cenário da mobilidade urbana diária.",
+      "tags": ["cotidiano", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2018, "endYear": 2018 }
+    },
+    {
+      "id": "2018_04_gasolina_cara",
+      "manchete": "O reajuste constante nos preços dos combustíveis e do gás de cozinha pesa no bolso, aumentando o custo de vida e forçando mudanças no orçamento.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -50
+        }
+      ],
+      "eraDisponivel": { "startYear": 2018, "endYear": 2018 }
+    },
+    {
+      "id": "2018_05_copa_espectativa",
+      "manchete": "O país decora ruas e paralisa o comércio nos jogos do campeonato mundial de futebol, mas a eliminação frustra o sonho de gritar campeão.",
+      "tags": ["cultura", "lazer"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2018, "endYear": 2018 }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "ano": 2020,
+  "eventos": [
+    {
+      "id": "2020_01_quarentena_casa",
+      "manchete": "Uma emergência global de saúde muda a rotina de todos. O isolamento social esvazia as ruas, e álcool em gel e máscaras viram itens básicos de sobrevivência.",
+      "tags": ["cotidiano", "saude"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_saude",
+          "delta": -1
+        },
+        {
+          "tipo": "alterar_humor",
+          "delta": -1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2020, "endYear": 2020 }
+    },
+    {
+      "id": "2020_02_trabalho_remoto",
+      "manchete": "O home office e as aulas virtuais viram regra para milhões. As residências se adaptam para funcionar como escritórios e salas de aula improvisadas.",
+      "tags": ["cotidiano", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2020, "endYear": 2020 }
+    },
+    {
+      "id": "2020_03_lancamento_pix",
+      "manchete": "É lançado o novo sistema de transferências bancárias instantâneas e gratuitas, revolucionando a forma de fazer pagamentos e transferências no dia a dia.",
+      "tags": ["tecnologia", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2020, "endYear": 2020 }
+    },
+    {
+      "id": "2020_04_lives_videoconferencias",
+      "manchete": "As chamadas de vídeo corporativas e as apresentações musicais transmitidas ao vivo pela internet viram a principal ponte de contato com o mundo externo.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2020, "endYear": 2020 }
+    },
+    {
+      "id": "2020_05_eletronicos_caros",
+      "manchete": "A escassez global de componentes e a alta de moedas estrangeiras fazem os preços de computadores, componentes e videogames dispararem nas lojas.",
+      "tags": ["economia", "tecnologia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -150
+        }
+      ],
+      "eraDisponivel": { "startYear": 2020, "endYear": 2020 }
+    }
+  ]
+}

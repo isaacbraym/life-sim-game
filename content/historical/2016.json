@@ -1,0 +1,50 @@
+{
+  "ano": 2016,
+  "eventos": [
+    {
+      "id": "2016_01_grupos_zap",
+      "manchete": "O aplicativo de mensagens no celular vira febre nacional: agora até sua avó está em vários grupos da família mandando imagens de 'bom dia' e áudios engraçados.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
+    },
+    {
+      "id": "2016_02_crise_bicos",
+      "manchete": "Com a barra pesando na economia e o desemprego em alta, a galera começa a se virar fazendo bicos e segurando os gastos como dá.",
+      "tags": ["economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -100
+        }
+      ],
+      "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
+    },
+    {
+      "id": "2016_03_app_transporte",
+      "manchete": "Os aplicativos de transporte particular caem de vez no gosto do povo nas capitais, oferecendo viagens mais baratas e agilidade.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
+    },
+    {
+      "id": "2016_04_streaming_tv",
+      "manchete": "Muita gente começa a aposentar os planos caros de TV a cabo para maratonar séries diretamente na internet por serviços de streaming.",
+      "tags": ["entretenimento", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
+    },
+    {
+      "id": "2016_05_festival_esportes",
+      "manchete": "O país sedia a maior festa do esporte mundial em clima de festa e feriados improvisados, enchendo as arenas e as redes de orgulho e memes.",
+      "tags": ["cultura", "lazer"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2016, "endYear": 2016 }
+    }
+  ]
+}

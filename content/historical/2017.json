@@ -1,0 +1,51 @@
+{
+  "ano": 2017,
+  "eventos": [
+    {
+      "id": "2017_01_bancos_digitais",
+      "manchete": "Bancos totalmente digitais começam a bombar: a facilidade de abrir contas pelo aplicativo e sem taxas atrai uma multidão cansada de filas e burocracia.",
+      "tags": ["tecnologia", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2017, "endYear": 2017 }
+    },
+    {
+      "id": "2017_02_videos_curtos",
+      "manchete": "A moda de compartilhar vídeos rápidos que duram apenas um dia nas redes sociais pega de vez. Todo mundo quer registrar o cotidiano em tempo real.",
+      "tags": ["tecnologia", "cultura"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2017, "endYear": 2017 }
+    },
+    {
+      "id": "2017_03_trabalho_terceirizado",
+      "manchete": "Mudanças nas leis trabalhistas facilitam contratos temporários e terceirizados, dividindo opiniões sobre a criação de vagas e a estabilidade.",
+      "tags": ["economia", "politica"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_atributo",
+          "atributo": "sorte",
+          "delta": -1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2017, "endYear": 2017 }
+    },
+    {
+      "id": "2017_04_internet_redes_gratis",
+      "manchete": "Planos de celular com uso ilimitado de aplicativos de conversa e redes sociais viram padrão, mantendo a população conectada o tempo todo.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2017, "endYear": 2017 }
+    },
+    {
+      "id": "2017_05_sertanejo_feminino",
+      "manchete": "O sertanejo comandado por mulheres domina de ponta a ponta os palcos, as paradas de sucesso nas rádios e as principais playlists digitais do país.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2017, "endYear": 2017 }
+    }
+  ]
+}
