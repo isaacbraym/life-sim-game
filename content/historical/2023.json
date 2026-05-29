@@ -1,0 +1,65 @@
+{
+  "ano": 2023,
+  "eventos": [
+    {
+      "id": "2023_01_boom_inteligencia_artificial",
+      "manchete": "Ferramentas públicas de inteligência artificial generativa ganham o mundo, passando a ser utilizadas intensivamente para redação de textos, auxílio em estudos e criação de imagens.",
+      "tags": ["tecnologia", "carreira"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_atributo",
+          "atributo": "inteligencia",
+          "delta": 1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2023, "endYear": 2023 }
+    },
+    {
+      "id": "2023_02_casas_apostas_esportivas",
+      "manchete": "As plataformas de apostas esportivas online invadem o futebol e o entretenimento nacional, tornando-se patrocinadoras principais de times e tema constante de conversas.",
+      "tags": ["cotidiano", "economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -100
+        }
+      ],
+      "eraDisponivel": { "startYear": 2023, "endYear": 2023 }
+    },
+    {
+      "id": "2023_03_ondas_calor_historicas",
+      "manchete": "Fortes ondas de calor quebram recordes históricos pelo Brasil. A demanda por ar-condicionado atinge picos e a conta de energia das residências dispara.",
+      "tags": ["cotidiano", "economia"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -120
+        },
+        {
+          "tipo": "alterar_saude",
+          "delta": -1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2023, "endYear": 2023 }
+    },
+    {
+      "id": "2023_04_mega_shows_internacionais",
+      "manchete": "Uma impressionante sequência de turnês de megaestrelas da música internacional passa pelo Brasil, atraindo multidões e caravanas de fãs de todas as regiões.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2023, "endYear": 2023 }
+    },
+    {
+      "id": "2023_05_trabalho_hibrido_consolidacao",
+      "manchete": "O modelo híbrido de trabalho se consolida em grandes escritórios, definindo uma rotina dividida entre idas presenciais à empresa e dias de home office.",
+      "tags": ["carreira", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2023, "endYear": 2023 }
+    }
+  ]
+}

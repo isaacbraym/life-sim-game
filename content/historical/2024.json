@@ -1,0 +1,55 @@
+{
+  "ano": 2024,
+  "eventos": [
+    {
+      "id": "2024_01_carros_eletricos_chineses",
+      "manchete": "A chegada massiva de carros elétricos chineses com preços competitivos e design ultramoderno sacode o mercado automotivo nacional e atrai compradores.",
+      "tags": ["economia", "tecnologia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2024, "endYear": 2024 }
+    },
+    {
+      "id": "2024_02_trends_videos_curtos",
+      "manchete": "As tendências e desafios das redes de vídeos curtos dominam a cultura popular, ditando hits musicais, gírias e comportamentos de todas as faixas etárias.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": 1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2024, "endYear": 2024 }
+    },
+    {
+      "id": "2024_03_olimpiadas_medalhas_brasil",
+      "manchete": "As competições esportivas mundiais mobilizam a torcida brasileira. Conquistas históricas na ginástica artística e judô inspiram o surgimento de novos atletas.",
+      "tags": ["esporte", "cultura"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": 1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2024, "endYear": 2024 }
+    },
+    {
+      "id": "2024_04_reconhecimento_facial_popularizacao",
+      "manchete": "A biometria e o reconhecimento facial expandem-se rapidamente em portarias de condomínios, catracas de metrô e até mesmo para validação de pagamentos.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2024, "endYear": 2024 }
+    },
+    {
+      "id": "2024_05_charme_vinil_retro",
+      "manchete": "A valorização de mídias físicas antigas ganha força no mercado de colecionadores. O aumento nas vendas de discos de vinil e fitas cassete surpreende o comércio.",
+      "tags": ["cultura", "hobby"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2024, "endYear": 2024 }
+    }
+  ]
+}

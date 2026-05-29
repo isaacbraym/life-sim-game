@@ -1,0 +1,64 @@
+{
+  "ano": 2021,
+  "eventos": [
+    {
+      "id": "2021_01_sommelier_vacinas",
+      "manchete": "A campanha de imunização contra o vírus avança pelo país. Nas filas e redes sociais, as conversas giram em torno de qual marca de imunizante cada um vai tomar.",
+      "tags": ["saude", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_saude",
+          "delta": 1
+        },
+        {
+          "tipo": "alterar_humor",
+          "delta": 1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2021, "endYear": 2021 }
+    },
+    {
+      "id": "2021_02_pix_feiras_ruas",
+      "manchete": "O Pix se torna o meio de pagamento favorito no comércio popular. De vendedores de água de coco na praia a feirantes, a plaquinha com a chave Pix vira item obrigatório.",
+      "tags": ["tecnologia", "economia"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2021, "endYear": 2021 }
+    },
+    {
+      "id": "2021_03_videocasts_longos",
+      "manchete": "Os programas de entrevista em vídeo de longa duração explodem na internet brasileira, ditando os assuntos da semana e acumulando milhões de visualizações diárias.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2021, "endYear": 2021 }
+    },
+    {
+      "id": "2021_04_alta_precos_supermercado",
+      "manchete": "A inflação de itens da cesta básica pesa muito no bolso dos consumidores. Preços de itens essenciais como óleo de cozinha e carnes sobem drasticamente.",
+      "tags": ["economia", "cotidiano"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -180
+        }
+      ],
+      "eraDisponivel": { "startYear": 2021, "endYear": 2021 }
+    },
+    {
+      "id": "2021_05_olimpiadas_skate_surfe",
+      "manchete": "A realização das competições esportivas globais traz novas modalidades ao centro das atenções nacionais. O skate e o surfe ganham enorme espaço no coração dos jovens.",
+      "tags": ["esporte", "cultura"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": 1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2021, "endYear": 2021 }
+    }
+  ]
+}

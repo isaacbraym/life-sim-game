@@ -1,0 +1,59 @@
+{
+  "ano": 2022,
+  "eventos": [
+    {
+      "id": "2022_01_retorno_festivais_shows",
+      "manchete": "Grandes festivais de música e shows internacionais retornam aos palcos presenciais no Brasil, registrando enorme procura e ingressos esgotados em minutos.",
+      "tags": ["cultura", "entretenimento"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_dinheiro",
+          "delta": -250
+        },
+        {
+          "tipo": "alterar_humor",
+          "delta": 2
+        }
+      ],
+      "eraDisponivel": { "startYear": 2022, "endYear": 2022 }
+    },
+    {
+      "id": "2022_02_febre_album_copa",
+      "manchete": "O álbum de figurinhas da Copa do Mundo vira febre absoluta. Bancas de jornal ficam lotadas de colecionadores de todas as idades trocando figurinhas.",
+      "tags": ["cultura", "esporte"],
+      "afetaJogabilidade": true,
+      "efeitos": [
+        {
+          "tipo": "alterar_humor",
+          "delta": 1
+        }
+      ],
+      "eraDisponivel": { "startYear": 2022, "endYear": 2022 }
+    },
+    {
+      "id": "2022_03_jogos_palavra_diarios",
+      "manchete": "Jogos simples de adivinhação de palavras com cinco letras viram a nova obsessão matinal da internet, enchendo as redes com quadradinhos verdes e amarelos.",
+      "tags": ["cotidiano", "entretenimento"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2022, "endYear": 2022 }
+    },
+    {
+      "id": "2022_04_carros_eletricos_ruas",
+      "manchete": "Os primeiros modelos de veículos 100% elétricos e híbridos começam a aparecer em maior quantidade nas ruas e estacionamentos de shoppings pelo país.",
+      "tags": ["tecnologia", "cotidiano"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2022, "endYear": 2022 }
+    },
+    {
+      "id": "2022_05_empreendedores_redes_sociais",
+      "manchete": "Diante das flutuações de emprego, milhares de pessoas buscam renda extra criando pequenos negócios digitais e vendendo produtos através de redes sociais.",
+      "tags": ["economia", "carreira"],
+      "afetaJogabilidade": false,
+      "efeitos": [],
+      "eraDisponivel": { "startYear": 2022, "endYear": 2022 }
+    }
+  ]
+}
