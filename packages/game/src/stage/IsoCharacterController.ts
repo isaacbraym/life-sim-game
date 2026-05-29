@@ -58,7 +58,7 @@ export class IsoCharacterController {
           x: x - ANCORA_X,
           y: y - ANCORA_Y,
           duration: TILE_MOVE_MS / 1000,
-          ease: 'none',
+          ease: 'power1.inOut',
         });
 
         this.posicaoAtual              = proximo;

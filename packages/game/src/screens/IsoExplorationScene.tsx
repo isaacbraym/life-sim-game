@@ -75,6 +75,12 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
               rm.atualizarGrid([{ tileX: pos.tx, tileY: pos.ty }]);
               setPosicao(pos);
             });
+            // Síncrono: _emMovimento já foi definido antes do primeiro await de moverPara
+            if (char.estaEmMovimento()) {
+              rm.mostrarMarcadorDestino(tx, ty);
+            } else {
+              rm.flashTileBloqueado(tx, ty);
+            }
           }
         },
         (saidaId) => { onSaida?.(saidaId); },

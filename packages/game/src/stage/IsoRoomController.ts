@@ -1,4 +1,5 @@
 import { Application, Container, Graphics, Text } from 'pixi.js';
+import { gsap } from 'gsap';
 import { tileParaTela, calcularDepth, TILE_W, TILE_H } from '@core/iso/IsoMath';
 import type { IsoRoomDefinition, ObjetoIsoDefinicao, SaidaIso } from '@core/schemas/isoRoom';
 import { construirGrid } from '@core/iso/GridBuilder';
@@ -39,6 +40,28 @@ const COR = {
   OBJETO_LADO:         0x537a50,   // face SE (mais escura)
   OBJETO_BORDA:        0x3d5c41,
 } as const;
+
+// ── Helpers de cor por categoria de móvel ─────────────────────────────────
+
+function deslocarCor(cor: number, delta: number): number {
+  const r = Math.min(255, Math.max(0, ((cor >> 16) & 0xff) + delta));
+  const g = Math.min(255, Math.max(0, ((cor >> 8)  & 0xff) + delta));
+  const b = Math.min(255, Math.max(0, (cor & 0xff)          + delta));
+  return (r << 16) | (g << 8) | b;
+}
+
+function corBasePorFurniture(furnitureId: string): number {
+  if (furnitureId.includes('cama'))                                          return 0x8b6f8b;
+  if (furnitureId.includes('sofa')   || furnitureId.includes('cadeira') ||
+      furnitureId.includes('poltrona'))                                      return 0x6b8b6b;
+  if (furnitureId.includes('tv')     || furnitureId.includes('computador')) return 0x4a6b8b;
+  if (furnitureId.includes('mesa')   || furnitureId.includes('escrivaninha')) return 0x8b7b5b;
+  if (furnitureId.includes('guarda') || furnitureId.includes('armario') ||
+      furnitureId.includes('estante'))                                       return 0x7b6b4b;
+  return 0x5a7a6a;
+}
+
+// ─────────────────────────────────────────────────────────────────────────
 
 export class IsoRoomController {
   private comodo: IsoRoomDefinition | undefined;
@@ -88,6 +111,49 @@ export class IsoRoomController {
     if (this.comodo !== undefined) {
       this.gridAtual = construirGrid(this.comodo, npcs);
     }
+  }
+
+  /** Marcador branco pulsante no tile clicado — confirma destino acessível. */
+  mostrarMarcadorDestino(tx: number, ty: number): void {
+    if (this.container === undefined) return;
+    const { x, y } = tileParaTela(tx, ty);
+
+    const marcador = new Graphics();
+    marcador.circle(0, 0, 14).fill({ color: 0xffffff, alpha: 0.45 });
+    marcador.position.set(x, y);
+    marcador.zIndex = 9998;
+    this.container.addChild(marcador);
+
+    gsap.to(marcador, {
+      alpha:    0,
+      duration: 0.8,
+      onComplete: () => { marcador.destroy(); },
+    });
+  }
+
+  /** Flash vermelho rápido — sinaliza que o tile está bloqueado. */
+  flashTileBloqueado(tx: number, ty: number): void {
+    if (this.container === undefined) return;
+    const { x, y } = tileParaTela(tx, ty);
+    const hw = MEIA_LARGURA;
+    const hh = MEIA_ALTURA;
+
+    const flash = new Graphics();
+    flash.poly([
+      { x: 0,   y: -hh },
+      { x: hw,  y: 0   },
+      { x: 0,   y: hh  },
+      { x: -hw, y: 0   },
+    ]).fill({ color: 0xff4444, alpha: 0.65 });
+    flash.position.set(x, y);
+    flash.zIndex = 9999;
+    this.container.addChild(flash);
+
+    gsap.to(flash, {
+      alpha:    0,
+      duration: 0.4,
+      onComplete: () => { flash.destroy(); },
+    });
   }
 
   destruir(): void {
@@ -189,6 +255,8 @@ export class IsoRoomController {
       for (let tx = 0; tx < linha.length; tx += 1) {
         const tile = linha[tx];
         if (tile === undefined || tile.estado === 'vazio') continue;
+        // Borda de parede (tx=0 ou ty=0): a parede renderiza esse espaço — não duplicar com tile de chão
+        if (tx === 0 || ty === 0) continue;
 
         const { x, y } = tileParaTela(tx, ty);
         const ehCaminhavel = tile.estado === 'caminhavel';
@@ -232,48 +300,65 @@ export class IsoRoomController {
 
   private renderizarObjeto(objeto: ObjetoIsoDefinicao): void {
     const { x, y } = tileParaTela(objeto.tileX, objeto.tileY);
-    const H = ALTURA_OBJETO;
+    const H  = ALTURA_OBJETO;
+    const hw = MEIA_LARGURA;
+    const hh = MEIA_ALTURA;
+
+    const corBase   = corBasePorFurniture(objeto.furnitureId);
+    const corTopo   = deslocarCor(corBase,  32);
+    const corFrente = corBase;
+    const corLado   = deslocarCor(corBase, -16);
+    const corBorda  = deslocarCor(corBase, -48);
 
     // Face superior — losango elevado H px acima do chão
     const topo = new Graphics();
     topo.poly([
-      x,                y - MEIA_ALTURA - H,
-      x + MEIA_LARGURA, y - H,
-      x,                y + MEIA_ALTURA - H,
-      x - MEIA_LARGURA, y - H,
+      x,      y - hh - H,
+      x + hw, y - H,
+      x,      y + hh - H,
+      x - hw, y - H,
     ]);
-    topo.fill({ color: COR.OBJETO_TOPO });
-    topo.stroke({ color: COR.OBJETO_BORDA, width: 1 });
+    topo.fill({ color: corTopo });
+    topo.stroke({ color: corBorda, width: 1 });
 
-    // Face SW (frente) — face mais clara do Habbo (recebe mais luz)
+    // Face SW (frente)
     const frente = new Graphics();
     frente.poly([
-      x - MEIA_LARGURA, y - H,
-      x,                y + MEIA_ALTURA - H,
-      x,                y + MEIA_ALTURA,
-      x - MEIA_LARGURA, y,
+      x - hw, y - H,
+      x,      y + hh - H,
+      x,      y + hh,
+      x - hw, y,
     ]);
-    frente.fill({ color: COR.OBJETO_FRENTE });
-    frente.stroke({ color: COR.OBJETO_BORDA, width: 1 });
+    frente.fill({ color: corFrente });
+    frente.stroke({ color: corBorda, width: 1 });
 
-    // Face SE (lado) — face mais escura
+    // Face SE (lado)
     const lado = new Graphics();
     lado.poly([
-      x,                y + MEIA_ALTURA - H,
-      x + MEIA_LARGURA, y - H,
-      x + MEIA_LARGURA, y,
-      x,                y + MEIA_ALTURA,
+      x,      y + hh - H,
+      x + hw, y - H,
+      x + hw, y,
+      x,      y + hh,
     ]);
-    lado.fill({ color: COR.OBJETO_LADO });
-    lado.stroke({ color: COR.OBJETO_BORDA, width: 1 });
+    lado.fill({ color: corLado });
+    lado.stroke({ color: corBorda, width: 1 });
 
-    // Rótulo discreto acima do objeto
+    // Rótulo — visível apenas no hover
     const rotulo = new Text({
       text:  objeto.furnitureId,
       style: { fill: '#e8f4f8', fontSize: 9, fontFamily: 'monospace' },
     });
     rotulo.anchor.set(0.5, 1);
-    rotulo.position.set(x, y - MEIA_ALTURA - H - 2);
+    rotulo.position.set(x, y - hh - H - 2);
+    rotulo.visible = false;
+
+    const mostrarLabel  = () => { rotulo.visible = true; };
+    const esconderLabel = () => { rotulo.visible = false; };
+    for (const face of [topo, frente, lado]) {
+      face.eventMode = 'static';
+      face.on('pointerenter', mostrarLabel);
+      face.on('pointerleave', esconderLabel);
+    }
 
     const profundidade = calcularDepth(objeto.tileX, objeto.tileY);
     topo.zIndex    = profundidade;
@@ -282,6 +367,25 @@ export class IsoRoomController {
     rotulo.zIndex  = profundidade + 0.01;
 
     this.container?.addChild(topo, frente, lado, rotulo);
+
+    // Overlays nos tiles secundários do footprint (indicam bloqueio visual)
+    for (const offset of objeto.bloqueaTiles) {
+      if (offset.dx === 0 && offset.dy === 0) continue;
+      const tileX = objeto.tileX + offset.dx;
+      const tileY = objeto.tileY + offset.dy;
+      const { x: ox, y: oy } = tileParaTela(tileX, tileY);
+
+      const overlay = new Graphics();
+      overlay.poly([
+        { x: 0,    y: -hh },
+        { x: hw,   y: 0   },
+        { x: 0,    y: hh  },
+        { x: -hw,  y: 0   },
+      ]).fill({ color: corBase, alpha: 0.55 });
+      overlay.position.set(ox, oy);
+      overlay.zIndex = calcularDepth(tileX, tileY) - 0.5;
+      this.container?.addChild(overlay);
+    }
   }
 
   // ── Saídas ────────────────────────────────────────────────────────────────
