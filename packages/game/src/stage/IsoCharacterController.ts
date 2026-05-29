@@ -32,7 +32,12 @@ export class IsoCharacterController {
     return this._emMovimento;
   }
 
+  obterPosicao(): { tx: number; ty: number } {
+    return { ...this.posicaoAtual };
+  }
+
   async moverPara(destino: Tile, grid: GridCaminhavel): Promise<void> {
+    // Guarda contra movimentos simultâneos
     if (this._emMovimento) return;
 
     const caminho = calcularCaminho(grid, this.posicaoAtual, destino);
@@ -42,6 +47,7 @@ export class IsoCharacterController {
     try {
       for (let i = 1; i < caminho.length; i += 1) {
         const proximo = caminho[i];
+        // Guard noUncheckedIndexedAccess — caminho[i] pode ser undefined
         if (proximo === undefined) break;
 
         const direcao = calcularDirecao(this.posicaoAtual, proximo);
@@ -55,20 +61,17 @@ export class IsoCharacterController {
           ease: 'none',
         });
 
-        this.posicaoAtual = proximo;
+        this.posicaoAtual              = proximo;
         this._container.zIndex = calcularDepth(proximo.tx, proximo.ty);
       }
     } finally {
+      // finally garante reset mesmo em exceção do GSAP
       this._emMovimento = false;
     }
   }
 
   obterContainer(): Container {
     return this._container;
-  }
-
-  obterPosicao(): { tx: number; ty: number } {
-    return { ...this.posicaoAtual };
   }
 
   destruir(): void {

@@ -21,6 +21,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
   const [posicao, setPosicao] = useState<{ tx: number; ty: number }>({ tx: 1, ty: 1 });
 
   // Refs para acesso nos callbacks sem stale closure
+  const appRef        = useRef<Application | undefined>();
   const personagemRef = useRef<IsoCharacterController | undefined>();
   const salaRef       = useRef<IsoRoomController | undefined>();
 
@@ -28,12 +29,12 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
     if (canvasRef.current === null) return;
 
     let cancelado = false;
-    let appPronto = false;
 
     const app        = new Application();
     const sala       = new IsoRoomController();
     const personagem = new IsoCharacterController();
 
+    appRef.current        = app;
     personagemRef.current = personagem;
     salaRef.current       = sala;
 
@@ -45,15 +46,14 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
         background: 0x1a2330,
         antialias:  false,
       });
-
-      if (cancelado) { app.destroy(); return; }
-      appPronto = true;
+      // Verificar cancelamento logo após o primeiro await pesado
+      if (cancelado) { app.destroy(true); return; }
 
       app.stage.sortableChildren = true;
       app.stage.alpha = 0;
 
       const comodo = await carregarComodoIso(comodoId);
-      if (cancelado) return;
+      if (cancelado) return; // app.destroy já será chamado pelo cleanup
 
       if (comodo === undefined) {
         setErro(`Cômodo "${comodoId}" não encontrado.`);
@@ -69,6 +69,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
           if (char === undefined || rm === undefined) return;
           if (!char.estaEmMovimento()) {
             void char.moverPara({ tx, ty }, rm.obterGrid()).then(() => {
+              if (personagemRef.current === undefined) return; // componente desmontou
               const pos = char.obterPosicao();
               rm.atualizarGrid([{ tileX: pos.tx, tileY: pos.ty }]);
               setPosicao(pos);
@@ -100,15 +101,23 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
     });
 
     return () => {
-      cancelado             = true;
+      cancelado = true;
+
+      // Matar tweens antes de destruir o container
+      const char = personagemRef.current;
+      if (char !== undefined) {
+        gsap.killTweensOf(char.obterContainer().position);
+      }
+      gsap.killTweensOf(app.stage);
+
+      // Limpar refs antes de destruir para impedir callbacks órfãos
       personagemRef.current = undefined;
       salaRef.current       = undefined;
-      if (appPronto) {
-        gsap.killTweensOf(app.stage);
-        personagem.destruir();
-        sala.destruir();
-        app.destroy();
-      }
+      appRef.current        = undefined;
+
+      char?.destruir();
+      sala.destruir();
+      app.destroy(true);
     };
   }, [comodoId, onSaida]);
 

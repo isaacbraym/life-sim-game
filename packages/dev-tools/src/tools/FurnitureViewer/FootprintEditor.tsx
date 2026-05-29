@@ -381,20 +381,24 @@ const HANDLES: { id: HandleId; top: string; left: string }[] = [
 ];
 
 function HandlesOverlay({ estado, metadata, arrasteRef }: PropsHandlesOverlay) {
-  // Calcular posição e dimensões do sprite projetado no canvas
-  const { escalaAtual, rotacaoAtual, footprintLargura, footprintAltura } = estado;
+  const { escalaAtual } = estado;
 
-  // Posição do ponto de ancoragem no canvas (tile frontal central do footprint)
   const anchorPos = posicaoTileNaCanvas(CENTRO_TX, CENTRO_TY);
 
-  // Dimensão visual do sprite escalado (estimativa baseada em canvas padrão 96px)
-  const spriteUrlEstimado = urlImagemAsset(metadata.assetId, rotacaoAtual, metadata);
+  // Dimensão visual do sprite escalado (estimativa baseada em canvas padrão 96×80px)
   const larguraEscalada = 96 * escalaAtual;
-  const alturaEscalada = 80 * escalaAtual;
+  const alturaEscalada  = 80 * escalaAtual;
 
-  // Bounding box relativo ao canvas: anchor no centro-inferior do sprite
-  const bboxLeft = anchorPos.x - larguraEscalada * metadata.anchorX;
-  const bboxTop = anchorPos.y - alturaEscalada * metadata.anchorY;
+  // Bounding box relativo ao canvas — clampar para não sair do canvas
+  const clampX = (v: number) => Math.max(0, Math.min(v, LARGURA_CANVAS));
+  const clampY = (v: number) => Math.max(0, Math.min(v, ALTURA_CANVAS));
+
+  const bboxLeftRaw  = anchorPos.x - larguraEscalada * metadata.anchorX;
+  const bboxTopRaw   = anchorPos.y - alturaEscalada  * metadata.anchorY;
+  const bboxLeft     = clampX(bboxLeftRaw);
+  const bboxTop      = clampY(bboxTopRaw);
+  const bboxWidth    = Math.min(larguraEscalada,  LARGURA_CANVAS - bboxLeft);
+  const bboxHeight   = Math.min(alturaEscalada,   ALTURA_CANVAS  - bboxTop);
 
   return (
     <div
@@ -402,8 +406,8 @@ function HandlesOverlay({ estado, metadata, arrasteRef }: PropsHandlesOverlay) {
         position: 'absolute',
         left: bboxLeft,
         top: bboxTop,
-        width: larguraEscalada,
-        height: alturaEscalada,
+        width: bboxWidth,
+        height: bboxHeight,
         pointerEvents: 'none',
       }}
     >

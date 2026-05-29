@@ -4,7 +4,7 @@ import { ORDEM_CAMADAS, CHARACTER_CANVAS } from '@core/schemas/characterPart';
 import type { DirecaoVisual } from '@core/schemas/direction';
 
 type ConfiguracaoPersonagem = {
-  readonly corpoBase: string;          // partId do corpo base
+  readonly corpoBase: string;            // partId do corpo base
   readonly partes:    readonly string[]; // partIds das partes equipadas
 };
 
@@ -22,7 +22,7 @@ async function carregarMetadataParte(
   try {
     const res = await fetch(`/content/character-parts/${tipo}/${partId}/metadata.json`);
     if (!res.ok) return undefined;
-    // SAFETY: dados externos, validação de shape mínimo antes de cast
+    // SAFETY: dados externos — validação de shape mínimo antes de cast
     const dados = await res.json() as Record<string, unknown>;
     if (typeof dados['partId'] !== 'string') return undefined;
     return dados as unknown as CharacterPartMetadata;
@@ -86,6 +86,7 @@ export class CharacterRenderer {
   private direcaoAtual: DirecaoVisual = 'S';
   private readonly camadas: CamadaCarregada[] = [];
   private readonly config: ConfiguracaoPersonagem;
+  private destruido = false; // flag de cancelamento para Promises pendentes
 
   constructor(config: ConfiguracaoPersonagem) {
     this.config     = config;
@@ -95,16 +96,19 @@ export class CharacterRenderer {
   async inicializar(_app: Application): Promise<void> {
     const mapeamentoPorCamada: Partial<Record<CamadaPersonagem, string>> = {};
 
-    // Corpo base na camada correta
+    // Corpo base
     const metaCorpo = await carregarMetadataParte(this.config.corpoBase, 'corpo_base');
+    if (this.destruido) return;
     if (metaCorpo !== undefined) {
       mapeamentoPorCamada['corpo_base'] = this.config.corpoBase;
     }
 
-    // Demais partes equipadas — descobrir camada pelo metadata
+    // Demais partes — descobrir camada pelo metadata
     for (const partId of this.config.partes) {
+      if (this.destruido) return;
       for (const camada of ORDEM_CAMADAS) {
         const meta = await carregarMetadataParte(partId, camada);
+        if (this.destruido) return;
         if (meta !== undefined) {
           mapeamentoPorCamada[camada] = partId;
           break;
@@ -112,15 +116,23 @@ export class CharacterRenderer {
       }
     }
 
+    if (this.destruido) return;
+
     // Renderizar na ordem de camadas
     let zIdx = 0;
     for (const camada of ORDEM_CAMADAS) {
+      if (this.destruido) return;
+
       const partId = mapeamentoPorCamada[camada];
 
       if (partId !== undefined) {
         const meta = await carregarMetadataParte(partId, camada);
+        if (this.destruido) return;
+
         if (meta !== undefined) {
           const textura = await carregarTexturaParte(partId, camada, this.direcaoAtual);
+          if (this.destruido) return;
+
           let visual: Sprite | Graphics;
           if (textura !== undefined) {
             const spr = new Sprite(textura);
@@ -151,7 +163,7 @@ export class CharacterRenderer {
   }
 
   atualizarDirecao(direcao: DirecaoVisual): void {
-    if (direcao === this.direcaoAtual) return;
+    if (direcao === this.direcaoAtual || this.destruido) return;
     this.direcaoAtual = direcao;
 
     for (const entrada of this.camadas) {
@@ -161,6 +173,7 @@ export class CharacterRenderer {
 
       void (async () => {
         const textura = await carregarTexturaParte(entrada.partId, entrada.camada, direcaoAlvo);
+        if (this.destruido) return;
         if (textura !== undefined && entrada.sprite instanceof Sprite) {
           entrada.sprite.texture = textura;
         }
@@ -173,6 +186,7 @@ export class CharacterRenderer {
   }
 
   destruir(): void {
+    this.destruido = true;
     this._container.destroy({ children: true });
     this.camadas.length = 0;
   }
