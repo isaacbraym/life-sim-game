@@ -110,6 +110,8 @@ export class IsoRoomController {
     const hw = MEIA_LARGURA;  // 32
     const hh = MEIA_ALTURA;   // 16
 
+    let segmentosParede = 0;
+
     // ── Parede do fundo (ty = 0) — retângulos planos verticais ──────────────
     for (let tx = 0; tx < comodo.larguraTiles; tx += 1) {
       if (comodo.tiles[0]?.[tx]?.estado === 'vazio') continue;
@@ -132,8 +134,10 @@ export class IsoRoomController {
       g.moveTo(x, y - hh - H).lineTo(x, y - hh);
       g.stroke({ color: COR.PAREDE_FUNDO_BORDA, width: 0.5, alpha: 0.5 });
 
-      g.zIndex = calcularDepth(tx, 0) - 100;
+      // zIndex fixo: atrás dos tiles (mínimo -1) e objetos (mínimo 0)
+      g.zIndex = -10;
       cont.addChild(g);
+      segmentosParede += 1;
     }
 
     // ── Parede esquerda (tx = 0) — paralelogramos inclinados ────────────────
@@ -157,9 +161,15 @@ export class IsoRoomController {
       }
       g.stroke({ color: COR.PAREDE_ESQ_BORDA, width: 0.5, alpha: 0.5 });
 
-      g.zIndex = calcularDepth(0, ty) - 99;
+      g.zIndex = -9;
       cont.addChild(g);
+      segmentosParede += 1;
     }
+
+    console.log(
+      `[IsoRoomController] renderizarParedes: ${segmentosParede} segmentos criados` +
+      ` (largura=${comodo.larguraTiles}, altura=${comodo.alturaTiles})`,
+    );
   }
 
   /** Pilar vertical no canto onde as duas paredes se encontram. */
@@ -173,8 +183,9 @@ export class IsoRoomController {
     const g = new Graphics();
     g.rect(x - 4, y - hh - H, 8, H + hh);
     g.fill({ color: COR.PILAR });
-    g.zIndex = calcularDepth(0, 0) - 98;
+    g.zIndex = -8;
     cont.addChild(g);
+    console.log(`[IsoRoomController] renderizarPilar: pilar em (${x},${y})`);
   }
 
   // ── Chão ──────────────────────────────────────────────────────────────────
