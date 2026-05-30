@@ -1,512 +1,196 @@
-import { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react';
-import { Application, Graphics, Sprite, Text, Texture } from 'pixi.js';
-import { z } from 'zod';
-import { DirecaoVisual, type DirecaoVisual as TipoDirecaoVisual } from '@lifesim/core';
-import { PixiCanvas } from '../../shared/PixiCanvas';
-import { escreverArquivo, garantirPasta, obterPastaRaiz } from '../../shared/ProjetoHandle';
+import { useEffect, useMemo, useState } from 'react';
+import { useCharacterParts } from './useCharacterParts';
+import { CanvasPersonagem } from './CanvasPersonagem';
+import { PainelEsquerdo } from './PainelEsquerdo';
+import { PainelDireito } from './PainelDireito';
+import { direcaoDoSlot, type ModoCanvas, type ParteCarregada, type Ponto } from './types';
 
-const DIRECOES_VISUAIS: readonly TipoDirecaoVisual[] = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
-
-const CamadaPersonagem = z.enum([
-  'sombra',
-  'sapato',
-  'calca',
-  'corpo_base',
-  'camisa',
-  'acessorio_corpo',
-  'cabelo_atras',
-  'cabeca',
-  'rosto',
-  'cabelo_frente',
-  'chapeu',
-  'acessorio_mao',
-]);
-
-const CharacterPartMetadata = z.object({
-  partId: z.string(),
-  tipo: CamadaPersonagem,
-  direcoes: z.array(DirecaoVisual).min(1),
-  canvasLargura: z.number().int().positive(),
-  canvasAltura: z.number().int().positive(),
-  anchorPixelX: z.number().int(),
-  anchorPixelY: z.number().int(),
-  offsetsPorDirecao: z.record(
-    z.string(),
-    z.object({ x: z.number().int(), y: z.number().int() }),
-  ).optional(),
-  jointsDeEncaixe: z.array(z.string()).optional(),
-  camada: CamadaPersonagem,
-  era: z.string().optional(),
-  tags: z.array(z.string()),
-  variacao: z.string().optional(),
-});
-
-type CharacterPartMetadata = z.infer<typeof CharacterPartMetadata>;
-
-type EstadoComposicao = {
-  readonly parteCarregada: CharacterPartMetadata | undefined;
-  readonly direcaoAtual: TipoDirecaoVisual;
-  readonly spriteCarregado: HTMLImageElement | undefined;
-  readonly mostrarJoints: boolean;
-  readonly offsetX: number;
-  readonly offsetY: number;
+type PropsEditor = {
+  // Mantido por compatibilidade com App.tsx (a gravação usa a rota de dev-tools).
+  readonly pastaRaizSelecionada?: boolean;
 };
 
-type PropsEditorDePersonagem = {
-  readonly pastaRaizSelecionada: boolean;
-};
+type OverridesPorParte = Record<string, Record<number, Ponto>>;
 
-const ANCHOR_PREVIEW = { x: 160, y: 304 } as const;
+const MODOS: ReadonlyArray<{ readonly id: ModoCanvas; readonly rotulo: string }> = [
+  { id: 'sprite', rotulo: '🖼 Sprite' },
+  { id: 'composicao', rotulo: '👤 Composição' },
+  { id: 'comodo', rotulo: '🏠 Cômodo' },
+];
 
-export function EditorDePersonagem({ pastaRaizSelecionada }: PropsEditorDePersonagem) {
-  const [estado, setEstado] = useState<EstadoComposicao>({
-    parteCarregada: undefined,
-    direcaoAtual: 'S',
-    spriteCarregado: undefined,
-    mostrarJoints: true,
-    offsetX: 0,
-    offsetY: 0,
-  });
-  const [mensagem, setMensagem] = useState<string>('Carregue um metadata.json para iniciar.');
-  const [erro, setErro] = useState<string | undefined>();
-  const inputMetadataRef = useRef<HTMLInputElement>(null);
-  const inputSpriteRef = useRef<HTMLInputElement>(null);
-  const urlSpriteRef = useRef<string | undefined>();
+/** Aplica overrides de anchor (por caminho) a uma parte carregada. */
+function comOverrides(parte: ParteCarregada, overrides: OverridesPorParte): ParteCarregada {
+  const o = overrides[parte.caminho];
+  return o === undefined ? parte : { ...parte, anchorOverrides: o };
+}
 
-  useEffect(() => () => {
-    if (urlSpriteRef.current !== undefined) URL.revokeObjectURL(urlSpriteRef.current);
-  }, []);
+export function EditorDePersonagem(_props: PropsEditor) {
+  const { partes, carregando, recarregar } = useCharacterParts();
 
-  const carregarMetadata = async (arquivo: File) => {
-    setErro(undefined);
-    const texto = await arquivo.text();
-    const dados: unknown = JSON.parse(texto);
-    const resultado = CharacterPartMetadata.safeParse(dados);
-    if (!resultado.success) {
-      const primeiroErro = resultado.error.issues[0];
-      setErro(primeiroErro
-        ? `${primeiroErro.path.join('.') || 'raiz'}: ${primeiroErro.message}`
-        : 'Schema invalido');
-      return;
+  const [selCaminho, setSelCaminho] = useState<string | undefined>();
+  const [camadasCaminhos, setCamadasCaminhos] = useState<readonly string[]>([]);
+  const [overrides, setOverrides] = useState<OverridesPorParte>({});
+  const [slotAtual, setSlotAtual] = useState(5); // S (frente)
+  const [modo, setModo] = useState<ModoCanvas>('sprite');
+  const [playingWalk, setPlayingWalk] = useState(false);
+  const [velocidade, setVelocidade] = useState(300);
+  const [statusSalvar, setStatusSalvar] = useState<string | undefined>();
+
+  // Seleciona automaticamente — preferindo o corpo_base de referência.
+  useEffect(() => {
+    if (partes.length > 0 && selCaminho === undefined) {
+      const inicial = partes.find((p) => p.metadata.partId === 'adulto_neutro') ?? partes[0];
+      setSelCaminho(inicial?.caminho);
     }
+  }, [partes, selCaminho]);
 
-    const primeiraDirecao = resultado.data.direcoes[0] ?? 'S';
-    setEstado((atual) => ({
+  // Walk cycle: avança o slot em loop.
+  useEffect(() => {
+    if (!playingWalk) return;
+    const id = setInterval(() => setSlotAtual((s) => (s === 8 ? 1 : s + 1)), velocidade);
+    return () => clearInterval(id);
+  }, [playingWalk, velocidade]);
+
+  const parteSelecionada = useMemo(() => {
+    const base = partes.find((p) => p.caminho === selCaminho);
+    return base === undefined ? undefined : comOverrides(base, overrides);
+  }, [partes, selCaminho, overrides]);
+
+  const camadasAtivas = useMemo(
+    () => camadasCaminhos
+      .map((c) => partes.find((p) => p.caminho === c))
+      .filter((p): p is ParteCarregada => p !== undefined)
+      .map((p) => comOverrides(p, overrides)),
+    [camadasCaminhos, partes, overrides],
+  );
+
+  const aoAlterarAnchor = (slot: number, x: number, y: number) => {
+    if (selCaminho === undefined) return;
+    setOverrides((atual) => ({
       ...atual,
-      parteCarregada: resultado.data,
-      direcaoAtual: primeiraDirecao,
-      spriteCarregado: undefined,
-      offsetX: resultado.data.offsetsPorDirecao?.[primeiraDirecao]?.x ?? 0,
-      offsetY: resultado.data.offsetsPorDirecao?.[primeiraDirecao]?.y ?? 0,
+      [selCaminho]: { ...(atual[selCaminho] ?? {}), [slot]: { x, y } },
     }));
-    setMensagem(`Metadata carregado: ${resultado.data.partId}. Carregue o sprite ${primeiraDirecao}.webp ou ${primeiraDirecao}.png.`);
   };
 
-  const aoSelecionarMetadata = (evento: ChangeEvent<HTMLInputElement>) => {
-    const arquivo = evento.target.files?.[0];
-    if (arquivo !== undefined) {
-      void carregarMetadata(arquivo).catch((falha: unknown) => {
-        setErro(falha instanceof Error ? falha.message : String(falha));
-      });
+  const aoToggleCamada = (parte: ParteCarregada) => {
+    setCamadasCaminhos((atual) =>
+      atual.includes(parte.caminho)
+        ? atual.filter((c) => c !== parte.caminho)
+        : [...atual, parte.caminho],
+    );
+  };
+
+  const aoSalvar = () => { void salvar(); };
+
+  const salvar = async () => {
+    if (parteSelecionada === undefined) return;
+    setStatusSalvar('Salvando...');
+    const meta = parteSelecionada.metadata;
+
+    const offsetsAtuais: Record<string, { x: number; y: number }> = { ...(meta.offsetsPorDirecao ?? {}) };
+    for (const [slotStr, ponto] of Object.entries(parteSelecionada.anchorOverrides)) {
+      if (ponto === undefined) continue;
+      const dir = direcaoDoSlot(Number(slotStr));
+      offsetsAtuais[dir] = { x: ponto.x - meta.anchorPixelX, y: ponto.y - meta.anchorPixelY };
     }
-    evento.target.value = '';
-  };
+    const metadataAtualizado = Object.keys(offsetsAtuais).length > 0
+      ? { ...meta, offsetsPorDirecao: offsetsAtuais }
+      : meta;
 
-  const aoSelecionarSprite = (evento: ChangeEvent<HTMLInputElement>) => {
-    const arquivo = evento.target.files?.[0];
-    if (arquivo === undefined) return;
+    const [tipo, partId] = parteSelecionada.caminho.split('/');
+    if (tipo === undefined || partId === undefined) { setStatusSalvar('Erro: caminho inválido'); return; }
 
-    if (urlSpriteRef.current !== undefined) URL.revokeObjectURL(urlSpriteRef.current);
-    const url = URL.createObjectURL(arquivo);
-    urlSpriteRef.current = url;
-
-    const imagem = new Image();
-    imagem.onload = () => {
-      setEstado((atual) => ({ ...atual, spriteCarregado: imagem }));
-      setMensagem(`Sprite carregado: ${arquivo.name}`);
-    };
-    imagem.onerror = () => setErro(`Nao foi possivel carregar ${arquivo.name}`);
-    imagem.src = url;
-    evento.target.value = '';
-  };
-
-  const alterarDirecao = (direcao: TipoDirecaoVisual) => {
-    setEstado((atual) => ({
-      ...atual,
-      direcaoAtual: direcao,
-      spriteCarregado: undefined,
-      offsetX: atual.parteCarregada?.offsetsPorDirecao?.[direcao]?.x ?? 0,
-      offsetY: atual.parteCarregada?.offsetsPorDirecao?.[direcao]?.y ?? 0,
-    }));
-    setMensagem(`Direcao ${direcao} selecionada. Carregue ${direcao}.webp ou ${direcao}.png.`);
-  };
-
-  const salvarParte = async () => {
-    const metadata = estado.parteCarregada;
-    if (metadata === undefined) return;
-
-    setErro(undefined);
     try {
-      const raiz = obterPastaRaiz();
-      const pasta = await garantirPasta(
-        raiz,
-        'content',
-        'character-parts',
-        metadata.tipo,
-        metadata.partId,
-      );
-      await escreverArquivo(pasta, 'metadata.json', JSON.stringify(metadata, null, 2));
-      setMensagem(`Salvo em content/character-parts/${metadata.tipo}/${metadata.partId}/metadata.json`);
-    } catch (falha) {
-      setErro(falha instanceof Error ? falha.message : String(falha));
+      const res = await fetch('/__devtools/character/update-metadata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tipo, partId, metadata: metadataAtualizado }),
+      });
+      const dados = (await res.json().catch(() => ({}))) as { ok?: boolean; erro?: string };
+      if (res.ok && dados.ok === true) { setStatusSalvar('Salvo ✓'); return; }
+      throw new Error(dados.erro ?? `HTTP ${res.status}`);
+    } catch {
+      // Fallback: download do metadata.json
+      const blob = new Blob([JSON.stringify(metadataAtualizado, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'metadata.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      setStatusSalvar('Erro no servidor — baixado metadata.json');
     }
   };
+
+  if (carregando) {
+    return <div style={{ color: '#a0aec0', padding: '1rem', fontFamily: 'monospace' }}>Carregando partes...</div>;
+  }
 
   return (
     <div style={{
-      flex: 1,
+      height: '100%',
+      display: 'flex',
+      gap: '0.75rem',
+      padding: '0.75rem',
+      boxSizing: 'border-box',
+      fontFamily: 'monospace',
       minHeight: 0,
-      display: 'grid',
-      gridTemplateColumns: '260px minmax(360px, 1fr) 320px',
-      gap: '1rem',
-      padding: '1rem',
-      color: '#e2e8f0',
-      overflow: 'auto',
     }}>
-      <section style={estiloPainel}>
-        <h2 style={estiloTitulo}>Character Proofer</h2>
-        <button style={estiloBotaoPrimario} onClick={() => inputMetadataRef.current?.click()}>
-          Carregar parte
-        </button>
-        <input ref={inputMetadataRef} type="file" accept=".json" onChange={aoSelecionarMetadata} style={{ display: 'none' }} />
+      <div style={{ width: 240, flex: '0 0 240px', minHeight: 0 }}>
+        <PainelEsquerdo
+          partes={partes}
+          parteSelecionada={parteSelecionada}
+          camadasAtivas={camadasAtivas}
+          onSelecionarParte={(p) => setSelCaminho(p.caminho)}
+          onToggleCamada={aoToggleCamada}
+          onRecarregar={recarregar}
+        />
+      </div>
 
-        <button style={estiloBotaoPrimario} onClick={() => inputSpriteRef.current?.click()}>
-          Carregar sprite
-        </button>
-        <input ref={inputSpriteRef} type="file" accept=".webp,.png" onChange={aoSelecionarSprite} style={{ display: 'none' }} />
-
-        <div style={estiloGrupo}>
-          <span style={estiloRotulo}>Direcao</span>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.35rem' }}>
-            {DIRECOES_VISUAIS.map((direcao) => {
-              const disponivel = estado.parteCarregada?.direcoes.includes(direcao) ?? false;
-              const ativa = estado.direcaoAtual === direcao;
-              return (
-                <button
-                  key={direcao}
-                  disabled={!disponivel}
-                  onClick={() => alterarDirecao(direcao)}
-                  style={estiloBotaoDirecao(ativa, disponivel)}
-                >
-                  {direcao}
-                </button>
-              );
-            })}
-          </div>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', minWidth: 0 }}>
+        <div style={{ display: 'flex', gap: 4 }}>
+          {MODOS.map(({ id, rotulo }) => (
+            <button
+              key={id}
+              onClick={() => setModo(id)}
+              style={{
+                background: modo === id ? '#3182ce' : '#2d3748',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 4,
+                padding: '0.35rem 0.9rem',
+                cursor: 'pointer',
+                fontSize: 12,
+                fontFamily: 'monospace',
+              }}
+            >
+              {rotulo}
+            </button>
+          ))}
         </div>
+        <CanvasPersonagem
+          partePrincipal={parteSelecionada}
+          camadasAtivas={camadasAtivas}
+          slotAtual={slotAtual}
+          modo={modo}
+          onAnchorChange={aoAlterarAnchor}
+        />
+      </div>
 
-        <label style={{ ...estiloRotulo, display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <input
-            type="checkbox"
-            checked={estado.mostrarJoints}
-            onChange={(evento) => setEstado((atual) => ({ ...atual, mostrarJoints: evento.target.checked }))}
-          />
-          Mostrar joints
-        </label>
-
-        <div style={{ fontSize: 12, color: erro !== undefined ? '#fc8181' : '#a0aec0', lineHeight: 1.5 }}>
-          {erro ?? mensagem}
-        </div>
-      </section>
-
-      <section style={{ ...estiloPainel, alignItems: 'center' }}>
-        <PixiPreview estado={estado} />
-        <div style={{ width: 320, display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-          <ControleOffset
-            rotulo="offsetX"
-            valor={estado.offsetX}
-            onAlterar={(valor) => setEstado((atual) => ({ ...atual, offsetX: valor }))}
-          />
-          <ControleOffset
-            rotulo="offsetY"
-            valor={estado.offsetY}
-            onAlterar={(valor) => setEstado((atual) => ({ ...atual, offsetY: valor }))}
-          />
-          <button
-            style={estiloBotaoSecundario}
-            onClick={() => setEstado((atual) => ({ ...atual, offsetX: 0, offsetY: 0 }))}
-          >
-            Resetar offsets
-          </button>
-        </div>
-      </section>
-
-      <section style={estiloPainel}>
-        <PainelInformacoes metadata={estado.parteCarregada} />
-        <button
-          disabled={!pastaRaizSelecionada || estado.parteCarregada === undefined}
-          onClick={() => void salvarParte()}
-          style={{
-            ...estiloBotaoPrimario,
-            opacity: pastaRaizSelecionada && estado.parteCarregada !== undefined ? 1 : 0.45,
-            cursor: pastaRaizSelecionada && estado.parteCarregada !== undefined ? 'pointer' : 'not-allowed',
-          }}
-        >
-          Salvar parte
-        </button>
-      </section>
+      <div style={{ width: 320, flex: '0 0 320px', minHeight: 0 }}>
+        <PainelDireito
+          parte={parteSelecionada}
+          slotAtual={slotAtual}
+          onSlotChange={setSlotAtual}
+          onAnchorChange={aoAlterarAnchor}
+          playingWalk={playingWalk}
+          onTogglePlay={() => setPlayingWalk((p) => !p)}
+          velocidade={velocidade}
+          onVelocidadeChange={setVelocidade}
+          onSalvar={aoSalvar}
+          statusSalvar={statusSalvar}
+        />
+      </div>
     </div>
   );
-}
-
-function PixiPreview({ estado }: { readonly estado: EstadoComposicao }) {
-  const appRef = useRef<Application | undefined>();
-  const estadoRef = useRef(estado);
-
-  useEffect(() => {
-    estadoRef.current = estado;
-  }, [estado]);
-
-  const desenhar = useCallback((app: Application) => {
-    renderizarPreview(app, estadoRef.current);
-  }, []);
-
-  const aoInicializar = useCallback((app: Application) => {
-    appRef.current = app;
-    desenhar(app);
-  }, [desenhar]);
-
-  useEffect(() => {
-    if (appRef.current !== undefined) desenhar(appRef.current);
-  }, [estado, desenhar]);
-
-  return <PixiCanvas largura={320} altura={480} aoInicializar={aoInicializar} />;
-}
-
-function renderizarPreview(app: Application, estado: EstadoComposicao) {
-  app.stage.removeChildren();
-
-  renderizarMiniGridJogo(app);
-
-  const metadata = estado.parteCarregada;
-  const imagem = estado.spriteCarregado;
-  if (metadata !== undefined && imagem !== undefined) {
-    const sprite = new Sprite(Texture.from(imagem));
-    sprite.x = ANCHOR_PREVIEW.x - metadata.anchorPixelX + estado.offsetX;
-    sprite.y = ANCHOR_PREVIEW.y - metadata.anchorPixelY + estado.offsetY;
-    sprite.width = metadata.canvasLargura;
-    sprite.height = metadata.canvasAltura;
-    app.stage.addChild(sprite);
-  }
-
-  const anchor = new Graphics();
-  anchor.circle(ANCHOR_PREVIEW.x + estado.offsetX, ANCHOR_PREVIEW.y + estado.offsetY, 3);
-  anchor.fill({ color: 0xffd700, alpha: 1 });
-  app.stage.addChild(anchor);
-
-  if (metadata !== undefined && estado.mostrarJoints) {
-    const joints = metadata.jointsDeEncaixe ?? [];
-    joints.forEach((joint, indice) => {
-      const x = ANCHOR_PREVIEW.x + estado.offsetX;
-      const y = ANCHOR_PREVIEW.y - 66 + indice * 14 + estado.offsetY;
-      const ponto = new Graphics();
-      ponto.circle(x, y, 4);
-      ponto.fill({ color: 0xffd700, alpha: 1 });
-      ponto.stroke({ color: 0x1a202c, width: 1 });
-      app.stage.addChild(ponto);
-
-      const label = new Text({
-        text: joint,
-        style: { fill: '#fbd38d', fontSize: 10, fontFamily: 'monospace' },
-      });
-      label.x = x + 7;
-      label.y = y - 7;
-      app.stage.addChild(label);
-    });
-  }
-}
-
-// Mini-grid 3×3 com visual idêntico ao jogo. Personagem fica em tile (1,1).
-// tileParaTela(1,1) = {x:0, y:32} → origem em (ANCHOR_X, ANCHOR_Y - 32).
-const MINI_GRADE_ORIGEM = { x: ANCHOR_PREVIEW.x, y: ANCHOR_PREVIEW.y - 32 } as const;
-const MINI_GRADE_TAMANHO = 3;
-const MINI_PAREDE_H = 96;
-
-function pontoMiniGrade(tx: number, ty: number): { x: number; y: number } {
-  return {
-    x: MINI_GRADE_ORIGEM.x + (tx - ty) * 32,
-    y: MINI_GRADE_ORIGEM.y + (tx + ty) * 16,
-  };
-}
-
-function renderizarMiniGridJogo(app: Application): void {
-  const hw = 32;
-  const hh = 16;
-  const H  = MINI_PAREDE_H;
-
-  // Paredes do fundo (ty=0) — retângulos planos
-  for (let tx = 0; tx < MINI_GRADE_TAMANHO; tx += 1) {
-    const { x, y } = pontoMiniGrade(tx, 0);
-    const g = new Graphics();
-    g.poly([x - hw, y - hh - H, x + hw, y - hh - H, x + hw, y - hh, x - hw, y - hh]);
-    g.fill({ color: 0xccd9e4 });
-    for (let h = 32; h < H; h += 32) {
-      g.moveTo(x - hw, y - hh - h).lineTo(x + hw, y - hh - h);
-    }
-    g.moveTo(x, y - hh - H).lineTo(x, y - hh);
-    g.stroke({ color: 0x8aa0b0, width: 0.5, alpha: 0.5 });
-    app.stage.addChild(g);
-  }
-
-  // Paredes esquerda (tx=0) — paralelogramos inclinados
-  for (let ty = 0; ty < MINI_GRADE_TAMANHO; ty += 1) {
-    const { x, y } = pontoMiniGrade(0, ty);
-    const g = new Graphics();
-    g.poly([x - hw, y - hh - H, x, y + hh - H, x, y + hh, x - hw, y - hh]);
-    g.fill({ color: 0xb8c8d6 });
-    for (let h = 32; h < H; h += 32) {
-      g.moveTo(x - hw, y - hh - h).lineTo(x, y + hh - h);
-    }
-    g.stroke({ color: 0x7e96a8, width: 0.5, alpha: 0.5 });
-    app.stage.addChild(g);
-  }
-
-  // Pilar no canto
-  {
-    const { x, y } = pontoMiniGrade(0, 0);
-    const g = new Graphics();
-    g.rect(x - 4, y - hh - H, 8, H + hh);
-    g.fill({ color: 0x3a5060 });
-    app.stage.addChild(g);
-  }
-
-  // Chão — xadrez estilo Habbo
-  for (let ty = 0; ty < MINI_GRADE_TAMANHO; ty += 1) {
-    for (let tx = 0; tx < MINI_GRADE_TAMANHO; tx += 1) {
-      const { x, y } = pontoMiniGrade(tx, ty);
-      const par = (tx + ty) % 2 === 0;
-      const g = new Graphics();
-      g.poly([x, y - hh, x + hw, y, x, y + hh, x - hw, y]);
-      g.fill({ color: par ? 0xb5c9d8 : 0x9ab3c5, alpha: 0.9 });
-      g.stroke({ color: par ? 0x8fb3c8 : 0x7a9aad, width: 1 });
-      app.stage.addChild(g);
-    }
-  }
-}
-
-function ControleOffset({
-  rotulo,
-  valor,
-  onAlterar,
-}: {
-  readonly rotulo: string;
-  readonly valor: number;
-  readonly onAlterar: (valor: number) => void;
-}) {
-  return (
-    <label style={{ display: 'grid', gridTemplateColumns: '72px 1fr 48px', gap: '0.5rem', alignItems: 'center', fontSize: 12 }}>
-      <span>{rotulo}</span>
-      <input
-        type="range"
-        min={-32}
-        max={32}
-        step={1}
-        value={valor}
-        onChange={(evento) => onAlterar(Number(evento.target.value))}
-      />
-      <span style={{ color: '#90cdf4' }}>{valor}px</span>
-    </label>
-  );
-}
-
-function PainelInformacoes({ metadata }: { readonly metadata: CharacterPartMetadata | undefined }) {
-  if (metadata === undefined) {
-    return <div style={{ color: '#718096', fontSize: 13 }}>Nenhuma parte carregada.</div>;
-  }
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: 12, lineHeight: 1.45 }}>
-      <CampoInfo rotulo="partId" valor={metadata.partId} />
-      <CampoInfo rotulo="tipo" valor={metadata.tipo} />
-      <CampoInfo rotulo="direcoes" valor={metadata.direcoes.join(', ')} />
-      <CampoInfo rotulo="canvas" valor={`${metadata.canvasLargura} x ${metadata.canvasAltura}`} />
-      <CampoInfo rotulo="anchor" valor={`${metadata.anchorPixelX} / ${metadata.anchorPixelY}`} />
-      <CampoInfo rotulo="joints" valor={(metadata.jointsDeEncaixe ?? []).join(', ') || '-'} />
-      <CampoInfo rotulo="camada" valor={metadata.camada} />
-      <CampoInfo rotulo="era" valor={metadata.era ?? '-'} />
-      <CampoInfo rotulo="tags" valor={metadata.tags.join(', ') || '-'} />
-      {metadata.variacao !== undefined && <CampoInfo rotulo="variacao" valor={metadata.variacao} />}
-    </div>
-  );
-}
-
-function CampoInfo({ rotulo, valor }: { readonly rotulo: string; readonly valor: string }) {
-  return (
-    <div style={{ display: 'grid', gridTemplateColumns: '88px 1fr', gap: '0.5rem' }}>
-      <span style={{ color: '#718096' }}>{rotulo}</span>
-      <span style={{ color: '#e2e8f0', wordBreak: 'break-word' }}>{valor}</span>
-    </div>
-  );
-}
-
-const estiloPainel: React.CSSProperties = {
-  background: '#1a202c',
-  border: '1px solid #4a5568',
-  borderRadius: 6,
-  padding: '1rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.8rem',
-};
-
-const estiloTitulo: React.CSSProperties = {
-  margin: 0,
-  color: '#90cdf4',
-  fontSize: 16,
-};
-
-const estiloGrupo: React.CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.4rem',
-};
-
-const estiloRotulo: React.CSSProperties = {
-  color: '#a0aec0',
-  fontSize: 12,
-};
-
-const estiloBotaoPrimario: React.CSSProperties = {
-  background: '#3182ce',
-  color: '#ffffff',
-  border: 'none',
-  borderRadius: 4,
-  padding: '0.45rem 0.75rem',
-  cursor: 'pointer',
-  fontSize: 12,
-  fontFamily: 'monospace',
-};
-
-const estiloBotaoSecundario: React.CSSProperties = {
-  background: '#2d3748',
-  color: '#e2e8f0',
-  border: '1px solid #4a5568',
-  borderRadius: 4,
-  padding: '0.45rem 0.75rem',
-  cursor: 'pointer',
-  fontSize: 12,
-  fontFamily: 'monospace',
-};
-
-function estiloBotaoDirecao(ativo: boolean, disponivel: boolean): React.CSSProperties {
-  return {
-    background: ativo ? '#2b6cb0' : '#2d3748',
-    color: disponivel ? '#e2e8f0' : '#718096',
-    border: `1px solid ${ativo ? '#63b3ed' : '#4a5568'}`,
-    borderRadius: 4,
-    padding: '0.35rem 0',
-    cursor: disponivel ? 'pointer' : 'not-allowed',
-    fontSize: 12,
-    fontFamily: 'monospace',
-  };
 }

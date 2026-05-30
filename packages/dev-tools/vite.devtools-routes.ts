@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite';
 import { resolve } from 'path';
 import { createReadStream, existsSync } from 'node:fs';
-import { readFile, rm, writeFile } from 'node:fs/promises';
+import { readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import type { IncomingMessage } from 'node:http';
 import { extname, join, relative, sep } from 'node:path';
 
@@ -57,6 +57,21 @@ function validarCaminhoCatalogo(valor: unknown): string[] {
 
 function validarTexto(valor: unknown, campo: string): string {
   if (typeof valor !== 'string' || valor.trim().length === 0) {
+    throw new Error(`${campo} invalido.`);
+  }
+  return valor;
+}
+
+/** Valida um único segmento de caminho (sem separadores nem traversal). */
+function validarSegmento(valor: unknown, campo: string): string {
+  if (
+    typeof valor !== 'string'
+    || valor.length === 0
+    || valor.includes('/')
+    || valor.includes('\\')
+    || valor === '.'
+    || valor === '..'
+  ) {
     throw new Error(`${campo} invalido.`);
   }
   return valor;
@@ -217,6 +232,64 @@ export function devtoolsRoutes(): Plugin[] {
 
             const caminhoMetadata = resolve(pastaAsset, 'metadata.json');
             await writeFile(caminhoMetadata, `${JSON.stringify(metadata, null, 2)}\n`, 'utf-8');
+            enviarJson(res, 200, { ok: true });
+          } catch (erro) {
+            enviarJson(res, 500, { ok: false, erro: erro instanceof Error ? erro.message : String(erro) });
+          }
+        });
+
+        // Lista as partes de personagem disponíveis em content/character-parts/.
+        server.middlewares.use('/__devtools/character/list', async (req, res) => {
+          if (req.method !== 'GET') {
+            enviarJson(res, 405, { ok: false, erro: 'Metodo nao permitido.' });
+            return;
+          }
+          try {
+            const raizPartes = resolve(raizConteudo, 'character-parts');
+            const partes: Array<{ tipo: string; partId: string }> = [];
+            if (existsSync(raizPartes)) {
+              const tipos = await readdir(raizPartes, { withFileTypes: true });
+              for (const tipo of tipos) {
+                if (!tipo.isDirectory()) continue;
+                const pastaTipo = resolve(raizPartes, tipo.name);
+                const ids = await readdir(pastaTipo, { withFileTypes: true });
+                for (const id of ids) {
+                  if (!id.isDirectory()) continue;
+                  if (existsSync(resolve(pastaTipo, id.name, 'metadata.json'))) {
+                    partes.push({ tipo: tipo.name, partId: id.name });
+                  }
+                }
+              }
+            }
+            enviarJson(res, 200, { ok: true, partes });
+          } catch (erro) {
+            enviarJson(res, 500, { ok: false, erro: erro instanceof Error ? erro.message : String(erro) });
+          }
+        });
+
+        // Atualiza o metadata.json de uma parte de personagem.
+        server.middlewares.use('/__devtools/character/update-metadata', async (req, res) => {
+          if (req.method !== 'POST') {
+            enviarJson(res, 405, { ok: false, erro: 'Metodo nao permitido.' });
+            return;
+          }
+          try {
+            const corpo = await lerJsonDoRequest(req);
+            if (typeof corpo !== 'object' || corpo === null) throw new Error('Corpo JSON invalido.');
+            const registro = corpo as Record<string, unknown>;
+            const tipo = validarSegmento(registro.tipo, 'tipo');
+            const partId = validarSegmento(registro.partId, 'partId');
+            const metadata = registro.metadata;
+            if (typeof metadata !== 'object' || metadata === null) throw new Error('metadata invalido.');
+
+            const raizPartes = resolve(raizConteudo, 'character-parts');
+            const pastaParte = resolve(raizPartes, tipo, partId);
+            if (!caminhoDentroDe(raizPartes, pastaParte)) {
+              throw new Error('Parte fora de content/character-parts/.');
+            }
+            if (!existsSync(pastaParte)) throw new Error('Parte inexistente.');
+
+            await writeFile(resolve(pastaParte, 'metadata.json'), `${JSON.stringify(metadata, null, 2)}\n`, 'utf-8');
             enviarJson(res, 200, { ok: true });
           } catch (erro) {
             enviarJson(res, 500, { ok: false, erro: erro instanceof Error ? erro.message : String(erro) });
