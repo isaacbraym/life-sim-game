@@ -6,6 +6,12 @@ import type { DirecaoVisual } from '@core/schemas/direction';
 type ConfiguracaoPersonagem = {
   readonly corpoBase: string;            // partId do corpo base
   readonly partes:    readonly string[]; // partIds das partes equipadas
+  /**
+   * Quando `false`, renderiza apenas camadas com sprite real — sem placeholders.
+   * Usado no runtime de jogo (só o corpo_base real, sem caixas coloridas).
+   * Ausente/true preserva o comportamento de autoria do Dev Tools.
+   */
+  readonly mostrarPlaceholders?: boolean;
 };
 
 type CamadaCarregada = {
@@ -95,12 +101,23 @@ export class CharacterRenderer {
 
   async inicializar(_app: Application): Promise<void> {
     const mapeamentoPorCamada: Partial<Record<CamadaPersonagem, string>> = {};
+    const semPlaceholder = this.config.mostrarPlaceholders === false;
 
     // Corpo base
     const metaCorpo = await carregarMetadataParte(this.config.corpoBase, 'corpo_base');
     if (this.destruido) return;
     if (metaCorpo !== undefined) {
       mapeamentoPorCamada['corpo_base'] = this.config.corpoBase;
+    }
+
+    // Sprites podem ser exportados maiores que o canvas-alvo (64×96). Como o
+    // anchor é normalizado, basta escalar o container pela razão de altura para
+    // o personagem ocupar ~96px na tela. No-op quando o asset já é 64×96.
+    // Restrito ao modo de jogo (sem placeholders) para não afetar a composição
+    // multi-parte do Dev Tools, que mistura assets de tamanhos diferentes.
+    if (semPlaceholder && metaCorpo !== undefined && metaCorpo.canvasAltura > 0) {
+      const escala = CHARACTER_CANVAS.altura / metaCorpo.canvasAltura;
+      this._container.scale.set(escala);
     }
 
     // Demais partes — descobrir camada pelo metadata
@@ -133,7 +150,7 @@ export class CharacterRenderer {
           const textura = await carregarTexturaParte(partId, camada, this.direcaoAtual);
           if (this.destruido) return;
 
-          let visual: Sprite | Graphics;
+          let visual: Sprite | Graphics | undefined;
           if (textura !== undefined) {
             const spr = new Sprite(textura);
             spr.anchor.set(
@@ -141,18 +158,22 @@ export class CharacterRenderer {
               meta.anchorPixelY / meta.canvasAltura,
             );
             visual = spr;
-          } else {
+          } else if (!semPlaceholder) {
             visual = criarPlaceholderCamada(camada);
           }
-          visual.zIndex = zIdx;
-          this._container.addChild(visual);
-          this.camadas.push({ camada, partId, metadata: meta, sprite: visual });
-          zIdx += 1;
+
+          if (visual !== undefined) {
+            visual.zIndex = zIdx;
+            this._container.addChild(visual);
+            this.camadas.push({ camada, partId, metadata: meta, sprite: visual });
+            zIdx += 1;
+          }
           continue;
         }
       }
 
-      // Camada sem parte: placeholder
+      // Camada sem parte: placeholder (suprimido no modo de jogo)
+      if (semPlaceholder) continue;
       const placeholder = criarPlaceholderCamada(camada);
       placeholder.zIndex = zIdx;
       this._container.addChild(placeholder);
