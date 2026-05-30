@@ -5,9 +5,17 @@ export type PixiCanvasProps = {
   readonly largura: number;
   readonly altura: number;
   readonly aoInicializar: (app: Application) => void;
+  readonly background?: number | string; // default: 0x1a1a2e
+  readonly antialias?: boolean;          // default: true
 };
 
-export function PixiCanvas({ largura, altura, aoInicializar }: PixiCanvasProps) {
+export function PixiCanvas({
+  largura,
+  altura,
+  aoInicializar,
+  background = 0x1a1a2e,
+  antialias = true,
+}: PixiCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const callbackRef = useRef(aoInicializar);
 
@@ -27,8 +35,8 @@ export function PixiCanvas({ largura, altura, aoInicializar }: PixiCanvasProps) 
       await instancia.init({
         width: largura,
         height: altura,
-        background: '#1a1a2e',
-        antialias: true,
+        background,
+        antialias,
       });
       if (cancelado) {
         instancia.destroy();
@@ -50,7 +58,7 @@ export function PixiCanvas({ largura, altura, aoInicializar }: PixiCanvasProps) 
         app = undefined;
       }
     };
-  }, [largura, altura]);
+  }, [largura, altura, background, antialias]);
 
   return <div ref={containerRef} />;
 }

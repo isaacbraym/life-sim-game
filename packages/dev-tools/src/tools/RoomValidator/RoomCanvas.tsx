@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { Application, Graphics, Text, Container } from 'pixi.js';
-import type { ComodoDefinition } from '@lifesim/core';
+import type { ComodoDefinition } from '@core/schemas/location';
 import { PixiCanvas } from '../../shared/PixiCanvas';
 import { configurarDragAndDrop } from './ObjectDragger';
 

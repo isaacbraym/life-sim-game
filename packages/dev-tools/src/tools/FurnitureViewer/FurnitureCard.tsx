@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import type { FurnitureDefinition } from '@lifesim/core';
+import type { FurnitureDefinition } from '@core/schemas/furniture';
 import type { FurnitureAssetMetadata, RotacaoMovel } from '@core/schemas/furnitureAsset';
 import { carregarFurnitureAssetMetadata, urlImagemAsset } from '../../shared/SchemaLoader';
 
