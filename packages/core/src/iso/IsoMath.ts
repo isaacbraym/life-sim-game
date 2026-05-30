@@ -1,7 +1,7 @@
 export const TILE_W = 64;
 export const TILE_H = 32;
 
-export const TILE_MOVE_MS = 180;
+export const TILE_MOVE_MS = 300;
 
 /** Converte coordenadas de tile (tx, ty) para coordenadas de tela (sx, sy). */
 export function tileParaTela(tx: number, ty: number): { x: number; y: number } {
