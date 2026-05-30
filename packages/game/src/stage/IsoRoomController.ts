@@ -255,20 +255,15 @@ export class IsoRoomController {
       for (let tx = 0; tx < linha.length; tx += 1) {
         const tile = linha[tx];
         if (tile === undefined || tile.estado === 'vazio') continue;
-        // Suprimir as 4 bordas — paredes e limite do cômodo
-        // Saídas SÃO renderizadas na borda (renderizarSaida sobrepõe com golden tile)
-        const ehBorda =
-          tx === 0 ||
-          ty === 0 ||
-          tx === comodo.larguraTiles - 1 ||
-          ty === comodo.alturaTiles  - 1;
-        if (ehBorda) {
-          const ehSaida = comodo.saidas.some(s => s.tileX === tx && s.tileY === ty);
-          if (!ehSaida) continue;
-        }
+        // Bordas de limite (direita/frontal): suprimir — chão termina limpo
+        if (tx === comodo.larguraTiles - 1 || ty === comodo.alturaTiles - 1) continue;
+        // Bordas de parede (esquerda tx=0 / traseira ty=0): renderizar como chão
+        // para o piso chegar até a base da parede sem gap visual
+        const ehBordaParede = tx === 0 || ty === 0;
 
         const { x, y } = tileParaTela(tx, ty);
-        const ehCaminhavel = tile.estado === 'caminhavel';
+        // Tiles de borda de parede: forçar visual de chão (nunca dark red)
+        const ehCaminhavel = ehBordaParede ? true : tile.estado === 'caminhavel';
 
         // Xadrez: dois tons alternados por paridade de (tx+ty)
         const corFundo = ehCaminhavel
@@ -290,7 +285,7 @@ export class IsoRoomController {
         g.stroke({ color: corBorda, width: 1 });
         g.zIndex = calcularDepth(tx, ty) - 1;
 
-        if (ehCaminhavel && this.callbackTile !== undefined) {
+        if (!ehBordaParede && ehCaminhavel && this.callbackTile !== undefined) {
           g.eventMode = 'static';
           g.cursor    = 'pointer';
           const txC = tx;
@@ -414,7 +409,14 @@ export class IsoRoomController {
     const comodo = this.comodo;
     if (comodo === undefined || this.container === undefined) return;
 
-    const { x, y } = tileParaTela(saida.tileX, saida.tileY);
+    // Tile de saída renderizado FORA do cômodo — um passo além da borda
+    let visualTx = saida.tileX;
+    let visualTy = saida.tileY;
+    if      (saida.tileY === comodo.alturaTiles  - 1) visualTy += 1;
+    else if (saida.tileY === 0)                        visualTy -= 1;
+    else if (saida.tileX === comodo.larguraTiles - 1)  visualTx += 1;
+    else                                               visualTx -= 1;
+    const { x, y } = tileParaTela(visualTx, visualTy);
     const hw = MEIA_LARGURA;
     const hh = MEIA_ALTURA;
 
@@ -442,13 +444,12 @@ export class IsoRoomController {
     const setaX  = (setaDx - setaDy) * 10;
     const setaY  = (setaDx + setaDy) * 5;
 
-    const seta = new Graphics();
-    seta.poly([
+    // Seta desenhada diretamente em g (Graphics v8 não aceita addChild)
+    g.poly([
       { x: setaX,     y: setaY - 6 },
       { x: setaX + 6, y: setaY + 4 },
       { x: setaX - 6, y: setaY + 4 },
     ]).fill({ color: 0xffffff, alpha: 0.8 });
-    g.addChild(seta);
 
     // Clicar inicia caminhada — ao chegar, IsoExplorationScene dispara onSaida (Fix 2c)
     g.eventMode = 'static';
@@ -458,7 +459,7 @@ export class IsoRoomController {
     g.on('pointertap',   () => { this.callbackTile?.(saida.tileX, saida.tileY); });
 
     g.position.set(x, y);
-    g.zIndex = calcularDepth(saida.tileX, saida.tileY) + 0.2;
+    g.zIndex = calcularDepth(visualTx, visualTy) + 0.2;
     this.container.addChild(g);
   }
 }
