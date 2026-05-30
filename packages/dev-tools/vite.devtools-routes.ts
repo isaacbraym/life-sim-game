@@ -296,6 +296,53 @@ export function devtoolsRoutes(): Plugin[] {
           }
         });
 
+        // Lista os cômodos ISO disponíveis em content/locations-iso/.
+        server.middlewares.use('/__devtools/rooms/iso-list', async (req, res) => {
+          try {
+            const pastaIso = resolve(raizConteudo, 'locations-iso');
+            const comodos: string[] = [];
+            if (existsSync(pastaIso)) {
+              const arquivos = await readdir(pastaIso, { withFileTypes: true });
+              for (const arquivo of arquivos) {
+                if (arquivo.isFile() && arquivo.name.endsWith('.json')) {
+                  comodos.push(arquivo.name.replace(/\.json$/, ''));
+                }
+              }
+            }
+            comodos.sort();
+            enviarJson(res, 200, comodos);
+          } catch (erro) {
+            enviarJson(res, 500, { ok: false, erro: erro instanceof Error ? erro.message : String(erro) });
+          }
+        });
+
+        // Lista os eventos em content/events/ agrupados por categoria (subpasta).
+        server.middlewares.use('/__devtools/events/list', async (req, res) => {
+          try {
+            const pastaEventos = resolve(raizConteudo, 'events');
+            const eventos: Array<{ categoria: string; arquivo: string }> = [];
+
+            const varrer = async (dir: string, categoria: string): Promise<void> => {
+              const entradas = await readdir(dir, { withFileTypes: true });
+              for (const entrada of entradas) {
+                const caminho = join(dir, entrada.name);
+                if (entrada.isDirectory()) {
+                  await varrer(caminho, categoria || entrada.name);
+                } else if (entrada.isFile() && entrada.name.endsWith('.json')) {
+                  const rel = relative(pastaEventos, caminho).split(sep).join('/');
+                  eventos.push({ categoria: categoria || 'sem_categoria', arquivo: rel });
+                }
+              }
+            };
+
+            if (existsSync(pastaEventos)) await varrer(pastaEventos, '');
+            eventos.sort((a, b) => a.categoria.localeCompare(b.categoria) || a.arquivo.localeCompare(b.arquivo));
+            enviarJson(res, 200, eventos);
+          } catch (erro) {
+            enviarJson(res, 500, { ok: false, erro: erro instanceof Error ? erro.message : String(erro) });
+          }
+        });
+
         // Serve content/ em /content/ para fetch() nos dev-tools.
         server.middlewares.use('/content', (req, res, next) => {
           const reqUrl = (req as { url?: string }).url ?? '/';

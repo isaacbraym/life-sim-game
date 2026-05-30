@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { MouseEvent } from 'react';
 import { Application, Graphics, Text } from 'pixi.js';
-import { tileParaTela, telaParaTile, type IsoRoomDefinition } from '@lifesim/core';
+import { tileParaTela, telaParaTile } from '@core/iso/IsoMath';
+import type { IsoRoomDefinition } from '@core/schemas/isoRoom';
 import { PixiCanvas } from '../../shared/PixiCanvas';
 
 type PropsCanvasIso = {

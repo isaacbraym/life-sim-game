@@ -1,5 +1,7 @@
 import { z } from 'zod';
-import { FurnitureDefinition, ComodoDefinition, Event } from '@lifesim/core';
+import { FurnitureDefinition } from '@core/schemas/furniture';
+import { ComodoDefinition } from '@core/schemas/location';
+import { Event } from '@core/schemas/event';
 import { FurnitureAssetMetadata, type RotacaoMovel } from '@core/schemas/furnitureAsset';
 
 export type ErroSchemaComIndice = {
