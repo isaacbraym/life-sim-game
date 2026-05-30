@@ -255,23 +255,13 @@ export class IsoRoomController {
       for (let tx = 0; tx < linha.length; tx += 1) {
         const tile = linha[tx];
         if (tile === undefined || tile.estado === 'vazio') continue;
-        // Bordas de limite (direita/frontal): suprimir — chão termina limpo
-        if (tx === comodo.larguraTiles - 1 || ty === comodo.alturaTiles - 1) continue;
-        // Bordas de parede (esquerda tx=0 / traseira ty=0): renderizar como chão
-        // para o piso chegar até a base da parede sem gap visual
-        const ehBordaParede = tx === 0 || ty === 0;
 
         const { x, y } = tileParaTela(tx, ty);
-        // Tiles de borda de parede: forçar visual de chão (nunca dark red)
-        const ehCaminhavel = ehBordaParede ? true : tile.estado === 'caminhavel';
-
-        // Xadrez: dois tons alternados por paridade de (tx+ty)
-        const corFundo = ehCaminhavel
-          ? ((tx + ty) % 2 === 0 ? COR.CHAO_CLARO : COR.CHAO_ESCURO)
-          : COR.CHAO_BLOQUEADO;
-        const corBorda = ehCaminhavel
-          ? ((tx + ty) % 2 === 0 ? COR.CHAO_BORDA_CLARA : COR.CHAO_BORDA_ESCURA)
-          : COR.CHAO_BLOQUEADO_BORDA;
+        // Todos os tiles não-vazio renderizam com cor de chão (xadrez) — sem dark red.
+        // Interatividade apenas para tiles 'caminhavel' no JSON.
+        const ehCaminhavel = tile.estado === 'caminhavel';
+        const corFundo = (tx + ty) % 2 === 0 ? COR.CHAO_CLARO : COR.CHAO_ESCURO;
+        const corBorda = (tx + ty) % 2 === 0 ? COR.CHAO_BORDA_CLARA : COR.CHAO_BORDA_ESCURA;
 
         const g = new Graphics();
         g.position.set(x, y);  // posição em coordenadas do container
@@ -281,11 +271,11 @@ export class IsoRoomController {
           0,              MEIA_ALTURA,
           -MEIA_LARGURA,  0,
         ]);
-        g.fill({ color: corFundo, alpha: ehCaminhavel ? 0.9 : 0.75 });
+        g.fill({ color: corFundo, alpha: 0.9 });
         g.stroke({ color: corBorda, width: 1 });
         g.zIndex = calcularDepth(tx, ty) - 1;
 
-        if (!ehBordaParede && ehCaminhavel && this.callbackTile !== undefined) {
+        if (ehCaminhavel && this.callbackTile !== undefined) {
           g.eventMode = 'static';
           g.cursor    = 'pointer';
           const txC = tx;
