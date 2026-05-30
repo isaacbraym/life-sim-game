@@ -18,7 +18,9 @@ export default defineConfig({
           if (fs.existsSync(arquivo)) {
             const tipo = arquivo.endsWith('.json')
               ? 'application/json'
-              : 'application/octet-stream';
+              : arquivo.endsWith('.webp')
+                ? 'image/webp'
+                : 'application/octet-stream';
             res.setHeader('Content-Type', tipo);
             fs.createReadStream(arquivo).pipe(res);
           } else {

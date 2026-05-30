@@ -106,6 +106,10 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
         ALTURA_CANVAS  / 3 - cy + OFFSET_CAMERA_Y,
       );
 
+      // Carrega os sprites WebP do personagem (async) antes de exibir
+      await personagem.inicializar(app);
+      if (cancelado) return; // cleanup destrói app/personagem
+
       personagem.posicionarEm(1, 1);
       setPosicao({ tx: 1, ty: 1 });
       app.stage.addChild(personagem.obterContainer());
