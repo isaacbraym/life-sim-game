@@ -36,10 +36,6 @@ function resolverFaseDaVida(idadeAtual: number): FaseDaVida {
   return 'adulto';
 }
 
-function registroExiste(registro: Readonly<Record<string, number>>, chave: string): boolean {
-  return Object.prototype.hasOwnProperty.call(registro, chave);
-}
-
 function obterEventoId(evento: { readonly id?: string; readonly eventoId?: string }): string {
   return evento.id ?? evento.eventoId ?? '';
 }

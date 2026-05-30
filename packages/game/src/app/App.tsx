@@ -59,7 +59,6 @@ export function App(): React.JSX.Element {
     ritmoAtual,
     resolverOpcao,
     inicializarEngine,
-    realizarAtividade,
     avancarTempo,
   } = useHudStore();
 
@@ -209,12 +208,6 @@ export function App(): React.JSX.Element {
     setTelaAtiva('mapa');
     useExplorationStore.getState().sairDeExploracao();
     void recarregarSaves();
-  }
-
-  // ── Atividades ────────────────────────────────────────────────────────────
-
-  function aoClicarAtividade(idAtividade: string): void {
-    realizarAtividade(idAtividade);
   }
 
   // ── Renderização condicional ───────────────────────────────────────────────

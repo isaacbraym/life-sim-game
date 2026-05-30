@@ -102,7 +102,6 @@ export function desenharSilhueta(
 
   // --- tronco ---
   const pelvis   = p('root_pelvis');
-  const spineTopo = p('neck');
   const ombrosY  = p('shoulder_L').y;
   const quadrilL = p('hip_L');
   const quadrilR = p('hip_R');
