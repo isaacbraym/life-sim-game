@@ -9,5 +9,8 @@
   "jointsDeEncaixe": ["joint_ombro_dir","joint_ombro_esq"],
   "camada": "camisa",
   "era": "nineties",
-  "tags": ["camisa","social","azul","formal"]
+  "tags": ["camisa","social","azul","formal"],
+  "animacoesSuportadas": ["idle","walk"],
+  "framesDisponiveis": [],
+  "framesPendentes": ["idle_1","idle_2","walk_1","walk_2","walk_3","walk_4"]
 }

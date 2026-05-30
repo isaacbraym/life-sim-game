@@ -9,5 +9,8 @@
   "jointsDeEncaixe": ["joint_quadril","joint_pe_dir","joint_pe_esq"],
   "camada": "calca",
   "era": "nineties",
-  "tags": ["jeans","azul","casual"]
+  "tags": ["jeans","azul","casual"],
+  "animacoesSuportadas": ["idle","walk"],
+  "framesDisponiveis": [],
+  "framesPendentes": ["idle_1","idle_2","walk_1","walk_2","walk_3","walk_4"]
 }

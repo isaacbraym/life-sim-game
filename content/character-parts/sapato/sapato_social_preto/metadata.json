@@ -9,5 +9,8 @@
   "jointsDeEncaixe": ["joint_pe_dir","joint_pe_esq"],
   "camada": "sapato",
   "era": "nineties",
-  "tags": ["sapato","social","preto","formal"]
+  "tags": ["sapato","social","preto","formal"],
+  "animacoesSuportadas": ["idle","walk"],
+  "framesDisponiveis": [],
+  "framesPendentes": ["idle_1","idle_2","walk_1","walk_2","walk_3","walk_4"]
 }

@@ -9,5 +9,8 @@
   "jointsDeEncaixe": ["joint_cabeca_topo"],
   "camada": "cabelo_frente",
   "era": "nineties",
-  "tags": ["medio","preto","casual"]
+  "tags": ["medio","preto","casual"],
+  "animacoesSuportadas": ["idle","walk"],
+  "framesDisponiveis": [],
+  "framesPendentes": ["idle_1","idle_2","walk_1","walk_2","walk_3","walk_4"]
 }

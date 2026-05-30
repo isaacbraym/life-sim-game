@@ -1,0 +1,24 @@
+{
+  "versao": "1.0",
+  "poses": [
+    { "acaoId": "sentar",         "animacaoPersonagem": "sit",        "direcaoForcada": null, "descricao": "Personagem senta — direção do móvel define a direção" },
+    { "acaoId": "dormir",         "animacaoPersonagem": "lay",        "direcaoForcada": "S",  "descricao": "Personagem deita na cama — sempre orientado para sul" },
+    { "acaoId": "deitar",         "animacaoPersonagem": "lay",        "direcaoForcada": "S",  "descricao": "Igual dormir — pose de deitado" },
+    { "acaoId": "estudar",        "animacaoPersonagem": "sit",        "direcaoForcada": null, "descricao": "Personagem sentado na escrivaninha" },
+    { "acaoId": "usar_computador","animacaoPersonagem": "use_object", "direcaoForcada": null, "descricao": "Personagem interage com computador" },
+    { "acaoId": "assistir_tv",    "animacaoPersonagem": "sit",        "direcaoForcada": "S",  "descricao": "Personagem sentado olhando para a TV" },
+    { "acaoId": "cozinhar",       "animacaoPersonagem": "use_object", "direcaoForcada": null, "descricao": "Personagem usando fogão" },
+    { "acaoId": "descansar",      "animacaoPersonagem": "idle",       "direcaoForcada": null, "descricao": "Personagem parado descansando" },
+    { "acaoId": "conversar",      "animacaoPersonagem": "wave",       "direcaoForcada": null, "descricao": "Personagem gesticula ao conversar" },
+    { "acaoId": "treinar",        "animacaoPersonagem": "use_object", "direcaoForcada": null, "descricao": "Personagem usando equipamento de academia" },
+    { "acaoId": "lavar_louça",    "animacaoPersonagem": "use_object", "direcaoForcada": null, "descricao": "Personagem na pia" },
+    { "acaoId": "telefonar",      "animacaoPersonagem": "idle",       "direcaoForcada": "S",  "descricao": "Personagem falando ao telefone" },
+    { "acaoId": "fazer_licao",    "animacaoPersonagem": "sit",        "direcaoForcada": null, "descricao": "Personagem sentado fazendo lição" },
+    { "acaoId": "ler",            "animacaoPersonagem": "sit",        "direcaoForcada": null, "descricao": "Personagem sentado lendo" },
+    { "acaoId": "ouvir_musica",   "animacaoPersonagem": "idle",       "direcaoForcada": null, "descricao": "Personagem parado ouvindo música" },
+    { "acaoId": "jogar",          "animacaoPersonagem": "sit",        "direcaoForcada": "S",  "descricao": "Personagem sentado jogando videogame" },
+    { "acaoId": "comer",          "animacaoPersonagem": "sit",        "direcaoForcada": null, "descricao": "Personagem sentado comendo" },
+    { "acaoId": "pegar_comida",   "animacaoPersonagem": "use_object", "direcaoForcada": null, "descricao": "Personagem abrindo geladeira" },
+    { "acaoId": "lavar_maos",     "animacaoPersonagem": "use_object", "direcaoForcada": null, "descricao": "Personagem lavando as mãos" }
+  ]
+}

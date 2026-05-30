@@ -1,0 +1,85 @@
+{
+  "versao": "1.0",
+  "animacoes": [
+    {
+      "animacaoId": "idle",
+      "nome": "Parado",
+      "loop": true,
+      "fps": 4,
+      "frames": [
+        { "frame": 1, "arquivo": "idle_1.webp", "offsetY": 0 },
+        { "frame": 2, "arquivo": "idle_2.webp", "offsetY": -1 },
+        { "frame": 3, "arquivo": "idle_1.webp", "offsetY": 0 },
+        { "frame": 4, "arquivo": "idle_2.webp", "offsetY": -1 }
+      ],
+      "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+      "descricao": "Respiração sutil — 2 frames alternando leve movimento"
+    },
+    {
+      "animacaoId": "walk",
+      "nome": "Caminhando",
+      "loop": true,
+      "fps": 8,
+      "frames": [
+        { "frame": 1, "arquivo": "walk_1.webp", "offsetY": 0  },
+        { "frame": 2, "arquivo": "walk_2.webp", "offsetY": -2 },
+        { "frame": 3, "arquivo": "walk_3.webp", "offsetY": 0  },
+        { "frame": 4, "arquivo": "walk_4.webp", "offsetY": -2 }
+      ],
+      "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+      "descricao": "4 frames: perna dir frente, passagem, perna esq frente, passagem"
+    },
+    {
+      "animacaoId": "sit",
+      "nome": "Sentado",
+      "loop": false,
+      "fps": 4,
+      "frames": [
+        { "frame": 1, "arquivo": "sit_1.webp", "offsetY": 8 }
+      ],
+      "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+      "descricao": "1 frame estático — personagem sentado, deslocado 8px para cima"
+    },
+    {
+      "animacaoId": "lay",
+      "nome": "Deitado",
+      "loop": false,
+      "fps": 4,
+      "frames": [
+        { "frame": 1, "arquivo": "lay_1.webp", "offsetY": 12 }
+      ],
+      "direcoes": ["S","N"],
+      "descricao": "1 frame — personagem deitado, só frente e costas"
+    },
+    {
+      "animacaoId": "wave",
+      "nome": "Acenando",
+      "loop": false,
+      "fps": 6,
+      "frames": [
+        { "frame": 1, "arquivo": "wave_1.webp", "offsetY": 0  },
+        { "frame": 2, "arquivo": "wave_2.webp", "offsetY": -1 },
+        { "frame": 3, "arquivo": "wave_3.webp", "offsetY": 0  },
+        { "frame": 4, "arquivo": "wave_2.webp", "offsetY": -1 },
+        { "frame": 5, "arquivo": "wave_1.webp", "offsetY": 0  }
+      ],
+      "direcoes": ["S","SE","SW"],
+      "descricao": "5 frames — braço levantando e abaixando para acenar"
+    },
+    {
+      "animacaoId": "use_object",
+      "nome": "Usando objeto",
+      "loop": false,
+      "fps": 6,
+      "frames": [
+        { "frame": 1, "arquivo": "use_1.webp", "offsetY": 0  },
+        { "frame": 2, "arquivo": "use_2.webp", "offsetY": -2 },
+        { "frame": 3, "arquivo": "use_3.webp", "offsetY": -2 },
+        { "frame": 4, "arquivo": "use_2.webp", "offsetY": -1 },
+        { "frame": 5, "arquivo": "use_1.webp", "offsetY": 0  }
+      ],
+      "direcoes": ["N","NE","E","SE","S","SW","W","NW"],
+      "descricao": "5 frames — inclinação e retorno, genérico para interações"
+    }
+  ]
+}

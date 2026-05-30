@@ -8,5 +8,8 @@
   "anchorPixelY": 90,
   "jointsDeEncaixe": ["joint_cabeca_topo"],
   "camada": "rosto",
-  "tags": ["neutro","expressao"]
+  "tags": ["neutro","expressao"],
+  "animacoesSuportadas": ["idle","walk"],
+  "framesDisponiveis": [],
+  "framesPendentes": ["idle_1","idle_2","walk_1","walk_2","walk_3","walk_4"]
 }

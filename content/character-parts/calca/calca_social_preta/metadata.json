@@ -9,5 +9,8 @@
   "jointsDeEncaixe": ["joint_quadril","joint_pe_dir","joint_pe_esq"],
   "camada": "calca",
   "era": "nineties",
-  "tags": ["social","preta","formal"]
+  "tags": ["social","preta","formal"],
+  "animacoesSuportadas": ["idle","walk"],
+  "framesDisponiveis": [],
+  "framesPendentes": ["idle_1","idle_2","walk_1","walk_2","walk_3","walk_4"]
 }

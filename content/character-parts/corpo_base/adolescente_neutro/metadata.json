@@ -8,5 +8,8 @@
   "anchorPixelY": 90,
   "jointsDeEncaixe": ["joint_cabeca_topo","joint_ombro_dir","joint_ombro_esq","joint_quadril","joint_pe_dir","joint_pe_esq"],
   "camada": "corpo_base",
-  "tags": ["adolescente","base","neutro"]
+  "tags": ["adolescente","base","neutro"],
+  "animacoesSuportadas": ["idle","walk"],
+  "framesDisponiveis": [],
+  "framesPendentes": ["idle_1","idle_2","walk_1","walk_2","walk_3","walk_4"]
 }
