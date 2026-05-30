@@ -176,17 +176,6 @@ function obterCatalogoPorId(id: CatalogoId): OrigemCatalogo {
   return catalogo;
 }
 
-function moverMovelParaCatalogo(movel: FurnitureDefinition, catalogoId: CatalogoId, nome: string): FurnitureDefinition {
-  return {
-    ...movel,
-    nome,
-    availability: {
-      ...movel.availability,
-      startYear: ANO_INICIAL_POR_CATALOGO[catalogoId],
-    },
-  };
-}
-
 // --- Scanner de Referências nos Cômodos ---
 
 async function varrerDiretorioLocations(
@@ -704,7 +693,7 @@ export function VisualizadorDeMovel() {
       try {
         const raiz = obterPastaRaiz();
         temAcessoLocal = raiz !== undefined;
-      } catch {}
+      } catch { /* sem pasta do projeto conectada */ }
 
       if (temAcessoLocal) {
         const raiz = obterPastaRaiz();
@@ -1791,24 +1780,20 @@ function PainelInspecao({
               <FootprintEditor
                 metadata={estadoAsset.metadata}
                 onSalvar={async (novoMetadata) => {
-                  try {
-                    const resp = await fetch('/__devtools/asset/update-metadata', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ assetId: movel.assetId, metadata: novoMetadata }),
-                    });
-                    const dados: unknown = await resp.json().catch(() => null);
-                    if (!resp.ok) {
-                      const err = typeof dados === 'object' && dados !== null && 'erro' in dados
-                        ? String((dados as { erro: unknown }).erro)
-                        : `HTTP ${resp.status}`;
-                      throw new Error(err);
-                    }
-                    setFootprintPorRotacao(novoMetadata.footprintPorRotacao);
-                    setEscalaBase(novoMetadata.escalaBase);
-                  } catch (err) {
-                    throw err;
+                  const resp = await fetch('/__devtools/asset/update-metadata', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ assetId: movel.assetId, metadata: novoMetadata }),
+                  });
+                  const dados: unknown = await resp.json().catch(() => null);
+                  if (!resp.ok) {
+                    const err = typeof dados === 'object' && dados !== null && 'erro' in dados
+                      ? String((dados as { erro: unknown }).erro)
+                      : `HTTP ${resp.status}`;
+                    throw new Error(err);
                   }
+                  setFootprintPorRotacao(novoMetadata.footprintPorRotacao);
+                  setEscalaBase(novoMetadata.escalaBase);
                 }}
               />
             ) : (
