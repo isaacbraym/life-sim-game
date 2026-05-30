@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback, type ChangeEvent } from 'react';
 import { Application, Graphics } from 'pixi.js';
 import { z } from 'zod';
-import { FurnitureDefinition } from '@lifesim/core';
+import { FurnitureDefinition } from '@core/schemas/furniture';
 import { PixiCanvas } from '../../shared/PixiCanvas';
 import type { FurnitureAssetMetadata, RotacaoMovel } from '@core/schemas/furnitureAsset';
 import { carregarFurnitureAssetMetadata, urlImagemAsset } from '../../shared/SchemaLoader';
@@ -284,7 +284,6 @@ async function buscarReferenciasDeMoveis(
     if (resposta.ok) {
       const dados = await resposta.json().catch(() => null);
       if (dados && typeof dados === 'object') {
-        console.log('[DevTools] Referências escaneadas com sucesso via servidor.');
         return dados as Record<string, ReferenciaComodo[]>;
       }
     }
@@ -334,7 +333,6 @@ async function removerReferenciasDeMoveis(
     if (resposta.ok) {
       const dados = await resposta.json().catch(() => null);
       if (dados && dados.ok) {
-        console.log('[DevTools] Referências limpas com sucesso via servidor.');
         return;
       }
     }
@@ -375,7 +373,6 @@ async function removerReferenciasDeMoveis(
       if (comodo && Array.isArray(comodo.objetos)) {
         comodo.objetos = comodo.objetos.filter((obj: any) => !objIdsParaRemover.includes(obj.id));
         await escreverArquivo(pasta, nomeArquivo, `${JSON.stringify(comodo, null, 2)}\n`);
-        console.log(`Referências removidas e cômodo atualizado: ${caminho.join('/')}`);
       }
     } catch (e) {
       console.error(`Erro ao limpar referências no cômodo ${caminho.join('/')}:`, e);
