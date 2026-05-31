@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
+import { VisaoGeral } from './tools/Dashboard';
 import { VisualizadorDeMovel } from './tools/FurnitureViewer';
 import { ValidadorDeComodo } from './tools/RoomValidator';
 import { ProoferDeCena } from './tools/SceneProofer';
@@ -9,7 +10,7 @@ import { selecionarPastaRaiz, SUPORTA_FILE_SYSTEM_ACCESS } from './shared/Projet
 
 const AnimationProofer = lazy(() => import('./tools/AnimationProofer'));
 
-type Ferramenta = 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos' | 'animacao';
+type Ferramenta = 'geral' | 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos' | 'animacao';
 
 type DefFerramenta = {
   readonly id: Ferramenta;
@@ -20,6 +21,7 @@ type DefFerramenta = {
 };
 
 const FERRAMENTAS: readonly DefFerramenta[] = [
+  { id: 'geral', rotulo: 'Visão Geral', icone: '🩺', badge: '✓', corBadge: '#48bb78' },
   { id: 'movel', rotulo: 'Furniture Viewer', icone: '🪑', badge: '✓', corBadge: '#48bb78' },
   { id: 'comodo', rotulo: 'Room Validator', icone: '🏠', badge: '✓', corBadge: '#48bb78' },
   { id: 'personagem', rotulo: 'Character Editor', icone: '👤', badge: '✓', corBadge: '#48bb78' },
@@ -29,6 +31,7 @@ const FERRAMENTAS: readonly DefFerramenta[] = [
 ];
 
 const NOMES_FERRAMENTA: Record<Ferramenta, string> = {
+  geral: 'Visão Geral',
   movel: 'Furniture Viewer',
   comodo: 'Room Validator',
   cena: 'Scene Proofer',
@@ -37,9 +40,9 @@ const NOMES_FERRAMENTA: Record<Ferramenta, string> = {
   animacao: 'Animation Proofer',
 };
 
-// Atalhos Ctrl+1..6
+// Atalhos Ctrl+0..6
 const ATALHOS: Record<string, Ferramenta> = {
-  '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos', '6': 'animacao',
+  '0': 'geral', '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos', '6': 'animacao',
 };
 
 const estiloNavBar: React.CSSProperties = {
@@ -54,7 +57,7 @@ const estiloNavBar: React.CSSProperties = {
 };
 
 export function App() {
-  const [ferramentaAtiva, setFerramentaAtiva] = useState<Ferramenta>('movel');
+  const [ferramentaAtiva, setFerramentaAtiva] = useState<Ferramenta>('geral');
   const [nomePastaRaiz, setNomePastaRaiz] = useState<string | undefined>();
   const [erroPastaRaiz, setErroPastaRaiz] = useState<string | undefined>();
 
@@ -124,6 +127,9 @@ export function App() {
           onSelecionar={aoSelecionarPastaRaiz}
         />
         <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+          {ferramentaAtiva === 'geral' && (
+            <ErrorBoundary nomeFerramenta="Visão Geral"><VisaoGeral /></ErrorBoundary>
+          )}
           {ferramentaAtiva === 'movel' && (
             <ErrorBoundary nomeFerramenta="Furniture Viewer"><VisualizadorDeMovel /></ErrorBoundary>
           )}
