@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { VisualizadorDeMovel } from './tools/FurnitureViewer';
 import { ValidadorDeComodo } from './tools/RoomValidator';
 import { ProoferDeCena } from './tools/SceneProofer';
@@ -7,7 +7,9 @@ import { GrafoDeEventos } from './tools/EventGraph';
 import { ErrorBoundary } from './shared/ErrorBoundary';
 import { selecionarPastaRaiz, SUPORTA_FILE_SYSTEM_ACCESS } from './shared/ProjetoHandle';
 
-type Ferramenta = 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos';
+const AnimationProofer = lazy(() => import('./tools/AnimationProofer'));
+
+type Ferramenta = 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos' | 'animacao';
 
 type DefFerramenta = {
   readonly id: Ferramenta;
@@ -23,6 +25,7 @@ const FERRAMENTAS: readonly DefFerramenta[] = [
   { id: 'personagem', rotulo: 'Character Editor', icone: '👤', badge: '✓', corBadge: '#48bb78' },
   { id: 'cena', rotulo: 'Scene Proofer', icone: '🎬', badge: '✓', corBadge: '#48bb78' },
   { id: 'eventos', rotulo: 'Event Graph', icone: '📊', badge: '✓', corBadge: '#48bb78' },
+  { id: 'animacao', rotulo: 'Animation Proofer', icone: 'AP', badge: 'OK', corBadge: '#48bb78' },
 ];
 
 const NOMES_FERRAMENTA: Record<Ferramenta, string> = {
@@ -31,11 +34,12 @@ const NOMES_FERRAMENTA: Record<Ferramenta, string> = {
   cena: 'Scene Proofer',
   personagem: 'Character Editor',
   eventos: 'Event Graph',
+  animacao: 'Animation Proofer',
 };
 
-// Atalhos Ctrl+1..5
+// Atalhos Ctrl+1..6
 const ATALHOS: Record<string, Ferramenta> = {
-  '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos',
+  '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos', '6': 'animacao',
 };
 
 const estiloNavBar: React.CSSProperties = {
@@ -59,7 +63,7 @@ export function App() {
     document.title = `${NOMES_FERRAMENTA[ferramentaAtiva]} — Vida 2.5D Dev Tools`;
   }, [ferramentaAtiva]);
 
-  // Atalhos globais Ctrl+1..5 (6d)
+  // Atalhos globais Ctrl+1..6 (6d)
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (!e.ctrlKey) return;
@@ -136,6 +140,13 @@ export function App() {
           )}
           {ferramentaAtiva === 'eventos' && (
             <ErrorBoundary nomeFerramenta="Event Graph"><GrafoDeEventos /></ErrorBoundary>
+          )}
+          {ferramentaAtiva === 'animacao' && (
+            <ErrorBoundary nomeFerramenta="Animation Proofer">
+              <Suspense fallback={<div style={{ padding: '1rem', color: '#a0aec0' }}>Carregando Animation Proofer...</div>}>
+                <AnimationProofer />
+              </Suspense>
+            </ErrorBoundary>
           )}
         </div>
       </main>
