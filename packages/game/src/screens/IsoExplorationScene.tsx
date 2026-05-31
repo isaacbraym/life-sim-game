@@ -37,6 +37,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
   // Refs para acesso nos callbacks sem stale closure
   const appRef        = useRef<Application | undefined>();
   const personagemRef = useRef<ControladorPersonagem | undefined>();
+  const npcRef        = useRef<MarnieCharacterController | undefined>();
   const salaRef       = useRef<IsoRoomController | undefined>();
 
   useEffect(() => {
@@ -44,14 +45,19 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
 
     let cancelado = false;
 
+    const usarMarnie = detectarPersonagemTeste() === 'marnie';
     const app        = new Application();
     const sala       = new IsoRoomController();
-    const personagem: ControladorPersonagem = detectarPersonagemTeste() === 'marnie'
+    const personagem: ControladorPersonagem = usarMarnie
       ? new MarnieCharacterController('base')
       : new IsoCharacterController();
+    // NPC de teste: a variante "gym" da Marnie sentada conversando (interação
+    // das duas variações da mesma personagem).
+    const npc = usarMarnie ? new MarnieCharacterController('gym') : undefined;
 
     appRef.current        = app;
     personagemRef.current = personagem;
+    npcRef.current        = npc;
     salaRef.current       = sala;
 
     const inicializar = async () => {
@@ -129,6 +135,15 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       setPosicao({ tx: 1, ty: 1 });
       app.stage.addChild(personagem.obterContainer());
 
+      // NPC de teste (gym): senta e conversa num tile fixo, virada para o jogador.
+      if (npc !== undefined) {
+        await npc.inicializar(app);
+        if (cancelado) return;
+        npc.posicionarEm(4, 2);
+        app.stage.addChild(npc.obterContainer());
+        void npc.reproduzirClip('conversar', 'SW');
+      }
+
       gsap.to(app.stage, { alpha: 1, duration: 0.4 });
     };
 
@@ -144,14 +159,17 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       if (char !== undefined) {
         gsap.killTweensOf(char.obterContainer().position);
       }
+      const npcAtual = npcRef.current;
       gsap.killTweensOf(app.stage);
 
       // Limpar refs antes de destruir para impedir callbacks órfãos
       personagemRef.current = undefined;
+      npcRef.current        = undefined;
       salaRef.current       = undefined;
       appRef.current        = undefined;
 
       char?.destruir();
+      npcAtual?.destruir();
       sala.destruir();
       app.destroy(true);
     };
