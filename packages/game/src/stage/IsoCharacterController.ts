@@ -6,6 +6,7 @@ import type { GridCaminhavel } from '@core/iso/Pathfinder';
 import { calcularDirecao } from '@core/schemas/direction';
 import type { DirecaoVisual } from '@core/schemas/direction';
 import { CharacterRenderer } from './CharacterRenderer';
+import { CharacterAnimator } from './CharacterAnimator';
 
 type Tile = { tx: number; ty: number };
 
@@ -19,6 +20,7 @@ const BOB_AMPLITUDE_PX = 4;
 export class IsoCharacterController {
   private readonly _container: Container;
   private readonly renderer: CharacterRenderer;
+  private animator: CharacterAnimator | undefined;
   private readonly sombra: Graphics;
   private posicaoAtual: Tile = { tx: 1, ty: 1 };
   private _emMovimento      = false;
@@ -48,6 +50,8 @@ export class IsoCharacterController {
     await this.renderer.inicializar(app);
     this._container.addChild(this.renderer.obterContainer());
     this.renderer.atualizarDirecao(DIRECAO_IDLE);
+    // Animator opera sobre as camadas filhas do container do renderer.
+    this.animator = new CharacterAnimator(this.renderer.obterContainer());
   }
 
   posicionarEm(tx: number, ty: number): void {
@@ -81,6 +85,12 @@ export class IsoCharacterController {
         const direcao = calcularDirecao(this.posicaoAtual, proximo);
         this.atualizarDirecaoVisual(direcao);
 
+        // Clip de caminhada tem prioridade; o bob (iniciado abaixo) é o fallback
+        // quando não há clip "andar" para a direção.
+        void this.animator?.reproduzir('andar', direcao).then((temClip) => {
+          if (temClip) this.pararBob();
+        });
+
         const { x, y } = tileParaTela(proximo.tx, proximo.ty);
         await gsap.to(this._container.position, {
           x,
@@ -95,6 +105,7 @@ export class IsoCharacterController {
     } finally {
       // finally garante reset mesmo em exceção do GSAP
       this.pararBob();
+      this.animator?.parar();
       this.atualizarDirecaoVisual(DIRECAO_IDLE);
       this._emMovimento = false;
     }
@@ -106,6 +117,7 @@ export class IsoCharacterController {
 
   destruir(): void {
     this.pararBob();
+    this.animator?.destruir();
     gsap.killTweensOf(this._container.position);
     this.renderer.destruir();
     this._container.destroy({ children: true });
