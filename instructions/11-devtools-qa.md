@@ -216,3 +216,35 @@ packages/dev-tools/
         ├── SchemaLoader.ts   (carrega e valida JSONs via Zod)
         └── PixiCanvas.tsx    (wrapper reutilizável do PixiJS)
 ```
+## Ferramenta 6 — Animation Proofer
+
+**Atalho:** Ctrl+6
+
+**O que carrega**: JSONs de `content/character-animations/**/*.json`,
+validados como `AnimacaoPersonagem` via Zod em tempo real.
+
+**Preview**: PixiJS com interpolação linear de keyframes por camada.
+Controles: seletor de direção (8 botões), play/pause/stop, scrubber,
+loop toggle, display de FPS e tempo atual.
+
+**Editor**: tabela de keyframes editável inline com validação Zod em
+tempo real. Campos inválidos são destacados com borda vermelha.
+
+**Salvar**: File System Access API → grava diretamente em
+`content/character-animations/{animacaoId}/{direcao}.json`.
+Fallback ZIP automático no Firefox.
+
+**Gate de QA obrigatório**: todo clip de animação gerado por IA
+ou Blender bake passa aqui antes de ir para main. Verificar:
+- Keyframes em ordem crescente de `tempoMs`
+- Nenhum `offsetX`/`offsetY` absurdo (> 32px indica erro de bake)
+- Se `loop=true`: primeiro e último keyframe com valores iguais
+- Preview visual coerente com a ação descrita no `animacaoId`
+
+**Critério de aprovação**: preview reproduz sem saltos visuais;
+todos os keyframes validam sem ⚠️; clip salvo com sucesso via
+File System Access API.
+
+| Tipo de conteúdo | Proofer obrigatório |
+|---|---|
+| AnimacaoPersonagem (clip) | Animation Proofer (Ctrl+6) |

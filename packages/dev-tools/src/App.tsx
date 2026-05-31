@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { VisaoGeral } from './tools/Dashboard';
 import { VisualizadorDeMovel } from './tools/FurnitureViewer';
 import { ValidadorDeComodo } from './tools/RoomValidator';
 import { ProoferDeCena } from './tools/SceneProofer';
@@ -7,7 +8,9 @@ import { GrafoDeEventos } from './tools/EventGraph';
 import { ErrorBoundary } from './shared/ErrorBoundary';
 import { selecionarPastaRaiz, SUPORTA_FILE_SYSTEM_ACCESS } from './shared/ProjetoHandle';
 
-type Ferramenta = 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos';
+const AnimationProofer = lazy(() => import('./tools/AnimationProofer'));
+
+type Ferramenta = 'geral' | 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos' | 'animacao';
 
 type DefFerramenta = {
   readonly id: Ferramenta;
@@ -18,24 +21,28 @@ type DefFerramenta = {
 };
 
 const FERRAMENTAS: readonly DefFerramenta[] = [
+  { id: 'geral', rotulo: 'Visão Geral', icone: '🩺', badge: '✓', corBadge: '#48bb78' },
   { id: 'movel', rotulo: 'Furniture Viewer', icone: '🪑', badge: '✓', corBadge: '#48bb78' },
   { id: 'comodo', rotulo: 'Room Validator', icone: '🏠', badge: '✓', corBadge: '#48bb78' },
   { id: 'personagem', rotulo: 'Character Editor', icone: '👤', badge: '✓', corBadge: '#48bb78' },
   { id: 'cena', rotulo: 'Scene Proofer', icone: '🎬', badge: '✓', corBadge: '#48bb78' },
   { id: 'eventos', rotulo: 'Event Graph', icone: '📊', badge: '✓', corBadge: '#48bb78' },
+  { id: 'animacao', rotulo: 'Animation Proofer', icone: 'AP', badge: 'OK', corBadge: '#48bb78' },
 ];
 
 const NOMES_FERRAMENTA: Record<Ferramenta, string> = {
+  geral: 'Visão Geral',
   movel: 'Furniture Viewer',
   comodo: 'Room Validator',
   cena: 'Scene Proofer',
   personagem: 'Character Editor',
   eventos: 'Event Graph',
+  animacao: 'Animation Proofer',
 };
 
-// Atalhos Ctrl+1..5
+// Atalhos Ctrl+0..6
 const ATALHOS: Record<string, Ferramenta> = {
-  '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos',
+  '0': 'geral', '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos', '6': 'animacao',
 };
 
 const estiloNavBar: React.CSSProperties = {
@@ -50,7 +57,7 @@ const estiloNavBar: React.CSSProperties = {
 };
 
 export function App() {
-  const [ferramentaAtiva, setFerramentaAtiva] = useState<Ferramenta>('movel');
+  const [ferramentaAtiva, setFerramentaAtiva] = useState<Ferramenta>('geral');
   const [nomePastaRaiz, setNomePastaRaiz] = useState<string | undefined>();
   const [erroPastaRaiz, setErroPastaRaiz] = useState<string | undefined>();
 
@@ -59,7 +66,7 @@ export function App() {
     document.title = `${NOMES_FERRAMENTA[ferramentaAtiva]} — Vida 2.5D Dev Tools`;
   }, [ferramentaAtiva]);
 
-  // Atalhos globais Ctrl+1..5 (6d)
+  // Atalhos globais Ctrl+1..6 (6d)
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (!e.ctrlKey) return;
@@ -120,6 +127,9 @@ export function App() {
           onSelecionar={aoSelecionarPastaRaiz}
         />
         <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+          {ferramentaAtiva === 'geral' && (
+            <ErrorBoundary nomeFerramenta="Visão Geral"><VisaoGeral /></ErrorBoundary>
+          )}
           {ferramentaAtiva === 'movel' && (
             <ErrorBoundary nomeFerramenta="Furniture Viewer"><VisualizadorDeMovel /></ErrorBoundary>
           )}
@@ -136,6 +146,13 @@ export function App() {
           )}
           {ferramentaAtiva === 'eventos' && (
             <ErrorBoundary nomeFerramenta="Event Graph"><GrafoDeEventos /></ErrorBoundary>
+          )}
+          {ferramentaAtiva === 'animacao' && (
+            <ErrorBoundary nomeFerramenta="Animation Proofer">
+              <Suspense fallback={<div style={{ padding: '1rem', color: '#a0aec0' }}>Carregando Animation Proofer...</div>}>
+                <AnimationProofer />
+              </Suspense>
+            </ErrorBoundary>
           )}
         </div>
       </main>

@@ -16,3 +16,4 @@ export * from './furniture';
 export * from './direction';
 export * from './isoRoom';
 export * from './characterPart';
+export * from './characterAnimation';

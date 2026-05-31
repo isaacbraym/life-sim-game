@@ -163,6 +163,7 @@ export class CharacterRenderer {
           }
 
           if (visual !== undefined) {
+            visual.label = camada; // permite o CharacterAnimator localizar a camada por nome
             visual.zIndex = zIdx;
             this._container.addChild(visual);
             this.camadas.push({ camada, partId, metadata: meta, sprite: visual });
@@ -175,6 +176,7 @@ export class CharacterRenderer {
       // Camada sem parte: placeholder (suprimido no modo de jogo)
       if (semPlaceholder) continue;
       const placeholder = criarPlaceholderCamada(camada);
+      placeholder.label = camada;
       placeholder.zIndex = zIdx;
       this._container.addChild(placeholder);
       zIdx += 1;

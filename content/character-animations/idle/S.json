@@ -1,0 +1,32 @@
+{
+  "animacaoId": "idle",
+  "direcao": "S",
+  "duracaoMs": 2000,
+  "loop": true,
+  "keyframes": [
+    {
+      "tempoMs": 0,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 1000,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": -1,
+      "opacidade": 1,
+      "escala": 1.02
+    },
+    {
+      "tempoMs": 2000,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    }
+  ]
+}

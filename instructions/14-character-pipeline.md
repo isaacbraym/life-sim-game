@@ -323,3 +323,99 @@ Personagem:   64px × 96px de canvas, ~72px de altura visual
 
 Essa proporção é próxima do Habbo Hotel e garante boa legibilidade
 em cômodos de 10×10 tiles ou mais.
+
+## Pipeline de animação free (Mixamo + Blender headless)
+
+> Válido até agosto/2026 — custo zero.
+> Em agosto/2026: migrar para Meshy Pro + Cascadeur Indie (plano confirmado).
+
+### Ferramentas e papéis
+
+| Ferramenta | Papel | Custo |
+|---|---|---|
+| Mixamo (mixamo.com) | Auto-rig + biblioteca de 200+ animações mocap | Grátis (conta Adobe) |
+| Blender 4.2 | Bake headless: 8 direções × N frames → WebP por camada | Grátis |
+| CharacterAnimator | Runtime TS: lê AnimacaoPersonagem JSON e anima camadas | — |
+
+### Fluxo completo
+
+```
+
+Mixamo
+  → exportar FBX animado (Without Skin, 30fps, In Place=ON para walk)
+  → salvar em scripts/blender/input/{animacaoId}.fbx
+
+Blender headless (scripts/blender/bake_character.py)
+  → importar FBX
+  → câmera dimétrica 26.57° ortográfica
+  → renderizar 8 direções × N frames por camada
+  → salvar em content/character-animations/{animacaoId}/frames/{direcao}/frame_NNN.webp
+
+Animation Proofer (pnpm dev:tools → Ctrl+6)
+  → carregar frames gerados
+  → validar visualmente
+  → aprovar antes de commitar
+
+CharacterAnimator (runtime do jogo)
+  → lê AnimacaoPersonagem JSON (keyframes de offset)
+  → anima camadas via GSAP
+  → walk cycle real substituindo o bob
+
+```
+
+### Como baixar uma animação no Mixamo
+
+1. Acesse [mixamo.com](https://www.mixamo.com) com conta Adobe (grátis)
+2. Aba **Characters**: escolha `Y Bot` (humanóide neutro padrão)
+3. Aba **Animations**: busque o nome do clip desejado:
+   - Caminhada: `Walking`
+   - Sentar: `Sitting Down`
+   - Idle: `Idle`
+   - Aceno: `Waving`
+   - Pegar objeto: `Picking Up`
+4. Configure: `In Place = ON` (para walk cycles), ajuste os sliders de trim
+5. Download:
+   - Format: `FBX`
+   - Skin: `Without Skin`
+   - Keyframe Reduction: `None`
+   - FPS: `30`
+6. Salvar em `scripts/blender/input/{nome_da_animacao}.fbx`
+
+### Script de bake (produção)
+
+```bash
+"C:\Program Files\Blender Foundation\Blender 4.2\blender.exe" \
+  --background \
+  --python scripts/blender/bake_character.py \
+  -- \
+  --input scripts/blender/input/walk.fbx \
+  --output content/character-animations/andar/frames/ \
+  --fps 12 \
+  --directions 8
+```
+
+### Script de teste (verificar ambiente)
+
+```bash
+"C:\Program Files\Blender Foundation\Blender 4.2\blender.exe" \
+  --background \
+  --python scripts/blender/test_bake_pipeline.py
+```
+
+Verifica: `scripts/blender/output_test/` com 8 PNGs nas direções N→NW.
+
+### Estrutura de pastas de animação
+
+```
+content/character-animations/
+  {animacaoId}/                   ex: "andar", "sentar", "idle"
+    N.json  NE.json  E.json  SE.json
+    S.json  SW.json  W.json  NW.json     ← AnimacaoPersonagem (keyframes de offset)
+    frames/                              ← WebPs bakeados pelo script Blender
+      N/   NE/  E/   SE/
+      S/   SW/  W/   NW/
+        frame_000.webp
+        frame_001.webp
+        ...
+        frame_NNN.webp
+```
