@@ -4,6 +4,7 @@ import { IsoRoomDefinition, type IsoRoomDefinition as TipoIsoRoom } from '@core/
 import { Event, type Event as TipoEvento } from '@core/schemas/event';
 import { FurnitureDefinition, type FurnitureDefinition as TipoMovel } from '@core/schemas/furniture';
 import { CharacterPartMetadata } from '@core/schemas/characterPart';
+import { AnimacaoPersonagem } from '@core/schemas/characterAnimation';
 
 type Severidade = 'ok' | 'aviso' | 'erro';
 
@@ -117,7 +118,41 @@ async function checarMoveis(): Promise<{ moveis: TipoMovel[]; relatorio: Dominio
       }
     }
   }));
+
+  // Presença da pasta de asset (metadata.json) por assetId — surfacing de "móvel sem asset".
+  const assetIds = [...new Set(moveis.map((m) => m.assetId).filter((a): a is string => !!a))];
+  await Promise.all(assetIds.map(async (assetId) => {
+    const meta = await buscarJson(`/content/furniture-assets/${assetId}/metadata.json`);
+    if (meta === undefined) {
+      problemas.push({ chave: assetId, msg: 'pasta de asset ausente (sem metadata.json)', sev: 'aviso' });
+    }
+  }));
+
   return { moveis, relatorio: { titulo: 'Móveis', icone: '🪑', total, validos: moveis.length, problemas } };
+}
+
+async function checarAnimacoes(): Promise<{ relatorio: DominioRelatorio }> {
+  const lista = await buscarJson('/__devtools/animations/list');
+  const entradas = Array.isArray(lista)
+    ? lista.filter((e): e is { animacaoId: string; arquivo: string } =>
+        typeof e === 'object' && e !== null && typeof (e as Record<string, unknown>).arquivo === 'string')
+    : [];
+  const problemas: Problema[] = [];
+  let validos = 0;
+  await Promise.all(entradas.map(async ({ arquivo }) => {
+    const dados = await buscarJson(`/content/character-animations/${arquivo}`);
+    if (dados === undefined) { problemas.push({ chave: arquivo, msg: 'arquivo ausente ou inválido', sev: 'erro' }); return; }
+    const r = AnimacaoPersonagem.safeParse(dados);
+    if (r.success) {
+      validos += 1;
+      if (r.data.keyframes.length === 0) {
+        problemas.push({ chave: arquivo, msg: 'clip sem keyframes', sev: 'aviso' });
+      }
+    } else {
+      problemas.push({ chave: arquivo, msg: primeiroErro(r.error), sev: 'erro' });
+    }
+  }));
+  return { relatorio: { titulo: 'Animações', icone: '🎞️', total: entradas.length, validos, problemas } };
 }
 
 async function checarPartes(): Promise<{ relatorio: DominioRelatorio }> {
@@ -191,21 +226,46 @@ function checarReferencias(rooms: TipoIsoRoom[], moveis: TipoMovel[], eventos: T
   return { titulo: 'Referências cruzadas', icone: '🔗', total: checados, validos: checados - problemas.length, problemas };
 }
 
+function montarMarkdown(rel: Relatorio): string {
+  const dominios = [...rel.dominios, rel.refs];
+  const erros = dominios.reduce((n, d) => n + d.problemas.filter((p) => p.sev === 'erro').length, 0);
+  const avisos = dominios.reduce((n, d) => n + d.problemas.filter((p) => p.sev === 'aviso').length, 0);
+  const linhas: string[] = [
+    `# Relatório de Homologação — Vida 2.5D`,
+    `Gerado às ${rel.geradoEm} · ${erros} erro(s) · ${avisos} aviso(s)`,
+    '',
+  ];
+  for (const d of dominios) {
+    linhas.push(`## ${d.titulo} — ${d.validos}/${d.total} válidos (${d.problemas.length} problema(s))`);
+    if (d.problemas.length === 0) {
+      linhas.push('- ✓ sem problemas');
+    } else {
+      for (const p of d.problemas) {
+        linhas.push(`- [${p.sev}] \`${p.chave}\`: ${p.msg}`);
+      }
+    }
+    linhas.push('');
+  }
+  return linhas.join('\n');
+}
+
 // ─── Componente ─────────────────────────────────────────────────────────────
 
 export function VisaoGeral() {
   const [relatorio, setRelatorio] = useState<Relatorio | undefined>();
   const [rodando, setRodando] = useState(false);
 
+  const [statusCopia, setStatusCopia] = useState('');
+
   const rodar = useCallback(async () => {
     setRodando(true);
     try {
-      const [comodos, eventos, moveis, partes] = await Promise.all([
-        checarComodos(), checarEventos(), checarMoveis(), checarPartes(),
+      const [comodos, eventos, moveis, partes, animacoes] = await Promise.all([
+        checarComodos(), checarEventos(), checarMoveis(), checarPartes(), checarAnimacoes(),
       ]);
       const refs = checarReferencias(comodos.rooms, moveis.moveis, eventos.eventos);
       setRelatorio({
-        dominios: [comodos.relatorio, eventos.relatorio, moveis.relatorio, partes.relatorio],
+        dominios: [comodos.relatorio, eventos.relatorio, moveis.relatorio, partes.relatorio, animacoes.relatorio],
         refs,
         geradoEm: new Date().toLocaleTimeString('pt-BR'),
       });
@@ -213,6 +273,17 @@ export function VisaoGeral() {
       setRodando(false);
     }
   }, []);
+
+  const copiarRelatorio = useCallback(async () => {
+    if (relatorio === undefined) return;
+    try {
+      await navigator.clipboard.writeText(montarMarkdown(relatorio));
+      setStatusCopia('copiado ✓');
+    } catch {
+      setStatusCopia('falha ao copiar');
+    }
+    setTimeout(() => setStatusCopia(''), 2500);
+  }, [relatorio]);
 
   useEffect(() => { void rodar(); }, [rodar]);
 
@@ -228,6 +299,10 @@ export function VisaoGeral() {
         <button onClick={() => void rodar()} disabled={rodando} style={estiloBotao(rodando)}>
           {rodando ? 'Escaneando…' : '↻ Re-escanear'}
         </button>
+        <button onClick={() => void copiarRelatorio()} disabled={relatorio === undefined} style={estiloBotao(relatorio === undefined)}>
+          ⧉ Copiar relatório
+        </button>
+        {statusCopia && <span style={{ fontSize: 11, color: '#9ae6b4' }}>{statusCopia}</span>}
         {relatorio && <span style={{ fontSize: 11, color: '#718096' }}>gerado às {relatorio.geradoEm}</span>}
       </div>
 
