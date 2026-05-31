@@ -343,6 +343,30 @@ export function devtoolsRoutes(): Plugin[] {
           }
         });
 
+        // Lista os clips de animação em content/character-animations/.
+        server.middlewares.use('/__devtools/animations/list', async (req, res) => {
+          try {
+            const pastaAnim = resolve(raizConteudo, 'character-animations');
+            const clips: Array<{ animacaoId: string; arquivo: string }> = [];
+            if (existsSync(pastaAnim)) {
+              const ids = await readdir(pastaAnim, { withFileTypes: true });
+              for (const id of ids) {
+                if (!id.isDirectory()) continue;
+                const arqs = await readdir(resolve(pastaAnim, id.name), { withFileTypes: true });
+                for (const a of arqs) {
+                  if (a.isFile() && a.name.endsWith('.json')) {
+                    clips.push({ animacaoId: id.name, arquivo: `${id.name}/${a.name}` });
+                  }
+                }
+              }
+            }
+            clips.sort((a, b) => a.arquivo.localeCompare(b.arquivo));
+            enviarJson(res, 200, clips);
+          } catch (erro) {
+            enviarJson(res, 500, { ok: false, erro: erro instanceof Error ? erro.message : String(erro) });
+          }
+        });
+
         // Serve content/ em /content/ para fetch() nos dev-tools.
         server.middlewares.use('/content', (req, res, next) => {
           const reqUrl = (req as { url?: string }).url ?? '/';
