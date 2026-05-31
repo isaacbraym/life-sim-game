@@ -19,3 +19,9 @@ Lib/
 # Renders de teste do pipeline de bake (scratch)
 scripts/blender/_scratch_out/
 scripts/blender/output_test/
+
+# Fonte 3D da personagem de teste (FBX/texturas/animações Mixamo e móveis 3D):
+# binários grandes e assets de terceiros usados só para gerar os sprites bakeados.
+# Os sprites resultantes ficam versionados em content/test-characters/.
+packages/dev-tools/Marnie/
+packages/dev-tools/sprite_generator/
