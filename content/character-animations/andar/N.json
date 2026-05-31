@@ -1,0 +1,88 @@
+{
+  "animacaoId": "andar",
+  "direcao": "N",
+  "duracaoMs": 600,
+  "loop": true,
+  "keyframes": [
+    {
+      "tempoMs": 0,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 0,
+      "camada": "sapato",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 150,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": -5,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 150,
+      "camada": "sapato",
+      "offsetX": 0,
+      "offsetY": 2,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 300,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 300,
+      "camada": "sapato",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 450,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": -5,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 450,
+      "camada": "sapato",
+      "offsetX": 0,
+      "offsetY": -2,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 600,
+      "camada": "corpo_base",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    },
+    {
+      "tempoMs": 600,
+      "camada": "sapato",
+      "offsetX": 0,
+      "offsetY": 0,
+      "opacidade": 1,
+      "escala": 1
+    }
+  ]
+}
