@@ -367,6 +367,29 @@ export function devtoolsRoutes(): Plugin[] {
           }
         });
 
+        // Lista os cômodos legados (ComodoDefinition) em content/locations/ (recursivo).
+        server.middlewares.use('/__devtools/rooms/legacy-list', async (req, res) => {
+          try {
+            const pastaLoc = resolve(raizConteudo, 'locations');
+            const arquivos: string[] = [];
+            const varrer = async (dir: string): Promise<void> => {
+              const entradas = await readdir(dir, { withFileTypes: true });
+              for (const entrada of entradas) {
+                const caminho = join(dir, entrada.name);
+                if (entrada.isDirectory()) await varrer(caminho);
+                else if (entrada.isFile() && entrada.name.endsWith('.json')) {
+                  arquivos.push(relative(pastaLoc, caminho).split(sep).join('/'));
+                }
+              }
+            };
+            if (existsSync(pastaLoc)) await varrer(pastaLoc);
+            arquivos.sort();
+            enviarJson(res, 200, arquivos);
+          } catch (erro) {
+            enviarJson(res, 500, { ok: false, erro: erro instanceof Error ? erro.message : String(erro) });
+          }
+        });
+
         // Serve content/ em /content/ para fetch() nos dev-tools.
         server.middlewares.use('/content', (req, res, next) => {
           const reqUrl = (req as { url?: string }).url ?? '/';
