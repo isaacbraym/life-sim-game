@@ -5,10 +5,12 @@ import { Event, type Event as TipoEvento } from '@core/schemas/event';
 import { FurnitureDefinition, type FurnitureDefinition as TipoMovel } from '@core/schemas/furniture';
 import { CharacterPartMetadata } from '@core/schemas/characterPart';
 import { AnimacaoPersonagem } from '@core/schemas/characterAnimation';
+import { ComodoDefinition } from '@core/schemas/location';
 
 type Severidade = 'ok' | 'aviso' | 'erro';
 
-type Problema = { readonly chave: string; readonly msg: string; readonly sev: Severidade };
+/** `url` (opcional) = caminho do arquivo-fonte do problema, abrível em nova aba. */
+type Problema = { readonly chave: string; readonly msg: string; readonly sev: Severidade; readonly url?: string };
 
 type DominioRelatorio = {
   readonly titulo: string;
@@ -72,11 +74,12 @@ async function checarComodos(): Promise<{ rooms: TipoIsoRoom[]; relatorio: Domin
   const rooms: TipoIsoRoom[] = [];
   const problemas: Problema[] = [];
   await Promise.all(ids.map(async (id) => {
-    const dados = await buscarJson(`/content/locations-iso/${id}.json`);
-    if (dados === undefined) { problemas.push({ chave: id, msg: 'arquivo ausente ou inválido', sev: 'erro' }); return; }
+    const url = `/content/locations-iso/${id}.json`;
+    const dados = await buscarJson(url);
+    if (dados === undefined) { problemas.push({ chave: id, msg: 'arquivo ausente ou inválido', sev: 'erro', url }); return; }
     const r = IsoRoomDefinition.safeParse(dados);
     if (r.success) rooms.push(r.data);
-    else problemas.push({ chave: id, msg: primeiroErro(r.error), sev: 'erro' });
+    else problemas.push({ chave: id, msg: primeiroErro(r.error), sev: 'erro', url });
   }));
   return { rooms, relatorio: { titulo: 'Cômodos ISO', icone: '🏠', total: ids.length, validos: rooms.length, problemas } };
 }
@@ -90,11 +93,12 @@ async function checarEventos(): Promise<{ eventos: TipoEvento[]; relatorio: Domi
   const eventos: TipoEvento[] = [];
   const problemas: Problema[] = [];
   await Promise.all(entradas.map(async ({ arquivo }) => {
-    const dados = await buscarJson(`/content/events/${arquivo}`);
-    if (dados === undefined) { problemas.push({ chave: arquivo, msg: 'arquivo ausente ou inválido', sev: 'erro' }); return; }
+    const url = `/content/events/${arquivo}`;
+    const dados = await buscarJson(url);
+    if (dados === undefined) { problemas.push({ chave: arquivo, msg: 'arquivo ausente ou inválido', sev: 'erro', url }); return; }
     const r = Event.safeParse(dados);
     if (r.success) eventos.push(r.data);
-    else problemas.push({ chave: arquivo, msg: primeiroErro(r.error), sev: 'erro' });
+    else problemas.push({ chave: arquivo, msg: primeiroErro(r.error), sev: 'erro', url });
   }));
   return { eventos, relatorio: { titulo: 'Eventos', icone: '🎬', total: entradas.length, validos: eventos.length, problemas } };
 }
@@ -140,19 +144,36 @@ async function checarAnimacoes(): Promise<{ relatorio: DominioRelatorio }> {
   const problemas: Problema[] = [];
   let validos = 0;
   await Promise.all(entradas.map(async ({ arquivo }) => {
-    const dados = await buscarJson(`/content/character-animations/${arquivo}`);
-    if (dados === undefined) { problemas.push({ chave: arquivo, msg: 'arquivo ausente ou inválido', sev: 'erro' }); return; }
+    const url = `/content/character-animations/${arquivo}`;
+    const dados = await buscarJson(url);
+    if (dados === undefined) { problemas.push({ chave: arquivo, msg: 'arquivo ausente ou inválido', sev: 'erro', url }); return; }
     const r = AnimacaoPersonagem.safeParse(dados);
     if (r.success) {
       validos += 1;
       if (r.data.keyframes.length === 0) {
-        problemas.push({ chave: arquivo, msg: 'clip sem keyframes', sev: 'aviso' });
+        problemas.push({ chave: arquivo, msg: 'clip sem keyframes', sev: 'aviso', url });
       }
     } else {
-      problemas.push({ chave: arquivo, msg: primeiroErro(r.error), sev: 'erro' });
+      problemas.push({ chave: arquivo, msg: primeiroErro(r.error), sev: 'erro', url });
     }
   }));
   return { relatorio: { titulo: 'Animações', icone: '🎞️', total: entradas.length, validos, problemas } };
+}
+
+async function checarLocaisLegado(): Promise<{ relatorio: DominioRelatorio }> {
+  const lista = await buscarJson('/__devtools/rooms/legacy-list');
+  const arquivos = Array.isArray(lista) ? lista.filter((s): s is string => typeof s === 'string') : [];
+  const problemas: Problema[] = [];
+  let validos = 0;
+  await Promise.all(arquivos.map(async (arquivo) => {
+    const url = `/content/locations/${arquivo}`;
+    const dados = await buscarJson(url);
+    if (dados === undefined) { problemas.push({ chave: arquivo, msg: 'arquivo ausente ou inválido', sev: 'erro', url }); return; }
+    const r = ComodoDefinition.safeParse(dados);
+    if (r.success) validos += 1;
+    else problemas.push({ chave: arquivo, msg: primeiroErro(r.error), sev: 'erro', url });
+  }));
+  return { relatorio: { titulo: 'Locais legados', icone: '🗺️', total: arquivos.length, validos, problemas } };
 }
 
 async function checarPartes(): Promise<{ relatorio: DominioRelatorio }> {
@@ -171,14 +192,15 @@ async function checarPartes(): Promise<{ relatorio: DominioRelatorio }> {
   let validos = 0;
   await Promise.all(entradas.map(async ({ tipo, partId }) => {
     const base = `/content/character-parts/${tipo}/${partId}`;
-    const dados = await buscarJson(`${base}/metadata.json`);
+    const url = `${base}/metadata.json`;
+    const dados = await buscarJson(url);
     const r = CharacterPartMetadata.safeParse(dados);
-    if (!r.success) { problemas.push({ chave: `${tipo}/${partId}`, msg: dados === undefined ? 'metadata ausente' : primeiroErro(r.error), sev: 'erro' }); return; }
+    if (!r.success) { problemas.push({ chave: `${tipo}/${partId}`, msg: dados === undefined ? 'metadata ausente' : primeiroErro(r.error), sev: 'erro', url }); return; }
     validos += 1;
     const dir = r.data.direcoes[0];
     if (dir !== undefined) {
       const temSprite = await recursoWebpExiste(`${base}/${dir}.webp`);
-      if (!temSprite) problemas.push({ chave: `${tipo}/${partId}`, msg: 'metadata OK mas sem sprites WebP', sev: 'aviso' });
+      if (!temSprite) problemas.push({ chave: `${tipo}/${partId}`, msg: 'metadata OK mas sem sprites WebP', sev: 'aviso', url });
     }
   }));
   return { relatorio: { titulo: 'Partes de personagem', icone: '👤', total: entradas.length, validos, problemas } };
@@ -260,12 +282,12 @@ export function VisaoGeral() {
   const rodar = useCallback(async () => {
     setRodando(true);
     try {
-      const [comodos, eventos, moveis, partes, animacoes] = await Promise.all([
-        checarComodos(), checarEventos(), checarMoveis(), checarPartes(), checarAnimacoes(),
+      const [comodos, eventos, moveis, partes, animacoes, legados] = await Promise.all([
+        checarComodos(), checarEventos(), checarMoveis(), checarPartes(), checarAnimacoes(), checarLocaisLegado(),
       ]);
       const refs = checarReferencias(comodos.rooms, moveis.moveis, eventos.eventos);
       setRelatorio({
-        dominios: [comodos.relatorio, eventos.relatorio, moveis.relatorio, partes.relatorio, animacoes.relatorio],
+        dominios: [comodos.relatorio, eventos.relatorio, moveis.relatorio, partes.relatorio, animacoes.relatorio, legados.relatorio],
         refs,
         geradoEm: new Date().toLocaleTimeString('pt-BR'),
       });
@@ -360,7 +382,12 @@ function CartaoDominio({ dominio }: { readonly dominio: DominioRelatorio }) {
               {dominio.problemas.map((p, i) => (
                 <div key={i} style={{ fontSize: 11, borderBottom: '1px solid #222831', paddingBottom: 3 }}>
                   <span style={{ color: p.sev === 'erro' ? '#fc8181' : '#f6ad55' }}>{p.sev === 'erro' ? '✗' : '⚠'}</span>{' '}
-                  <code style={{ color: '#cbd5e0' }}>{p.chave}</code>
+                  {p.url !== undefined ? (
+                    <a href={p.url} target="_blank" rel="noreferrer" title={`Abrir ${p.url}`}
+                       style={{ color: '#63b3ed', textDecoration: 'underline' }}>{p.chave}</a>
+                  ) : (
+                    <code style={{ color: '#cbd5e0' }}>{p.chave}</code>
+                  )}
                   <div style={{ color: '#718096', paddingLeft: 14 }}>{p.msg}</div>
                 </div>
               ))}
