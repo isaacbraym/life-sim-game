@@ -12,4 +12,10 @@ packages/*/src/**/*.js.map
 packages/*/src/**/*.d.ts
 packages/*/src/**/*.d.ts.map
 scripts/pip3*.exe
+scripts/f2py.exe
+scripts/numpy-config.exe
 Lib/
+
+# Renders de teste do pipeline de bake (scratch)
+scripts/blender/_scratch_out/
+scripts/blender/output_test/
