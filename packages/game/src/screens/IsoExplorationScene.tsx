@@ -5,6 +5,19 @@ import { tileParaTela } from '@core/iso/IsoMath';
 import { carregarComodoIso } from '../content/isoRoomCatalog';
 import { IsoRoomController, ALTURA_PAREDE_PX } from '../stage/IsoRoomController';
 import { IsoCharacterController } from '../stage/IsoCharacterController';
+import { MarnieCharacterController } from '../stage/MarnieCharacterController';
+
+/** Interface mínima comum aos controladores de personagem (layered ou frames). */
+type ControladorPersonagem = Pick<
+  IsoCharacterController,
+  'inicializar' | 'posicionarEm' | 'estaEmMovimento' | 'obterPosicao' | 'moverPara' | 'obterContainer' | 'destruir'
+>;
+
+/** Modo de teste: `?personagem=marnie` usa o personagem 3D bakeado (Marnie). */
+function detectarPersonagemTeste(): string | undefined {
+  if (typeof window === 'undefined') return undefined;
+  return new URLSearchParams(window.location.search).get('personagem') ?? undefined;
+}
 
 const LARGURA_CANVAS  = 900;
 const ALTURA_CANVAS   = 600;
@@ -23,7 +36,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
 
   // Refs para acesso nos callbacks sem stale closure
   const appRef        = useRef<Application | undefined>();
-  const personagemRef = useRef<IsoCharacterController | undefined>();
+  const personagemRef = useRef<ControladorPersonagem | undefined>();
   const salaRef       = useRef<IsoRoomController | undefined>();
 
   useEffect(() => {
@@ -33,7 +46,9 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
 
     const app        = new Application();
     const sala       = new IsoRoomController();
-    const personagem = new IsoCharacterController();
+    const personagem: ControladorPersonagem = detectarPersonagemTeste() === 'marnie'
+      ? new MarnieCharacterController('base')
+      : new IsoCharacterController();
 
     appRef.current        = app;
     personagemRef.current = personagem;

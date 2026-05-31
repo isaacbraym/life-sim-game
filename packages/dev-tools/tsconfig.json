@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "paths": {
-      "@core/*": ["../core/src/*"]
+      "@core/*": ["../core/src/*"],
+      "@game/*": ["../game/src/*"]
     },
     "jsx": "react-jsx"
   },

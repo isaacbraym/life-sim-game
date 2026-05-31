@@ -9,8 +9,9 @@ import { ErrorBoundary } from './shared/ErrorBoundary';
 import { selecionarPastaRaiz, SUPORTA_FILE_SYSTEM_ACCESS } from './shared/ProjetoHandle';
 
 const AnimationProofer = lazy(() => import('./tools/AnimationProofer'));
+const VisualizadorMarnie = lazy(() => import('./tools/MarnieViewer'));
 
-type Ferramenta = 'geral' | 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos' | 'animacao';
+type Ferramenta = 'geral' | 'movel' | 'comodo' | 'cena' | 'personagem' | 'eventos' | 'animacao' | 'marnie';
 
 type DefFerramenta = {
   readonly id: Ferramenta;
@@ -28,6 +29,7 @@ const FERRAMENTAS: readonly DefFerramenta[] = [
   { id: 'cena', rotulo: 'Scene Proofer', icone: '🎬', badge: '✓', corBadge: '#48bb78' },
   { id: 'eventos', rotulo: 'Event Graph', icone: '📊', badge: '✓', corBadge: '#48bb78' },
   { id: 'animacao', rotulo: 'Animation Proofer', icone: 'AP', badge: 'OK', corBadge: '#48bb78' },
+  { id: 'marnie', rotulo: 'Personagem Teste', icone: '🧍', badge: 'NEW', corBadge: '#ed8936' },
 ];
 
 const NOMES_FERRAMENTA: Record<Ferramenta, string> = {
@@ -38,11 +40,12 @@ const NOMES_FERRAMENTA: Record<Ferramenta, string> = {
   personagem: 'Character Editor',
   eventos: 'Event Graph',
   animacao: 'Animation Proofer',
+  marnie: 'Personagem Teste',
 };
 
-// Atalhos Ctrl+0..6
+// Atalhos Ctrl+0..7
 const ATALHOS: Record<string, Ferramenta> = {
-  '0': 'geral', '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos', '6': 'animacao',
+  '0': 'geral', '1': 'movel', '2': 'comodo', '3': 'personagem', '4': 'cena', '5': 'eventos', '6': 'animacao', '7': 'marnie',
 };
 
 const estiloNavBar: React.CSSProperties = {
@@ -151,6 +154,13 @@ export function App() {
             <ErrorBoundary nomeFerramenta="Animation Proofer">
               <Suspense fallback={<div style={{ padding: '1rem', color: '#a0aec0' }}>Carregando Animation Proofer...</div>}>
                 <AnimationProofer />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+          {ferramentaAtiva === 'marnie' && (
+            <ErrorBoundary nomeFerramenta="Personagem Teste">
+              <Suspense fallback={<div style={{ padding: '1rem', color: '#a0aec0' }}>Carregando Personagem Teste...</div>}>
+                <VisualizadorMarnie />
               </Suspense>
             </ErrorBoundary>
           )}

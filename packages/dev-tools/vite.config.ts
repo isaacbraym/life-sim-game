@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@core': resolve(__dirname, '../core/src'),
+      '@game': resolve(__dirname, '../game/src'),
     },
   },
   server: { port: 5174 },
