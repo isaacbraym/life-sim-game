@@ -131,12 +131,15 @@ def run_bake(args, armature, meshes):
     frames_to_render = list(range(args.start_frame, args.end_frame + 1, step))
     print(f"Frames Blender a renderizar ({fps_blender} -> {args.fps} FPS): {frames_to_render}")
 
-    # 3. Definir direções de acordo com argumento
+    # 3. Definir direções de acordo com argumento.
+    # Mapa direção→ângulo Z calibrado visualmente (S=frente p/ câmera, N=costas);
+    # idêntico ao retarget_bake.py. NÃO usar o mapa antigo (NE=0) — ficava com
+    # E/W espelhados e S/N trocados.
     DIRECOES_8 = [
-        ('NE', 0),   ('E', 45),   ('SE', 90),  ('S', 135),
-        ('SW', 180), ('W', 225),  ('NW', 270), ('N', 315),
+        ('S', 0),    ('SE', 45),  ('E', 90),   ('NE', 135),
+        ('N', 180),  ('NW', 225), ('W', 270),  ('SW', 315),
     ]
-    DIRECOES_4 = [('SE', 90), ('S', 135), ('SW', 180), ('W', 225)]
+    DIRECOES_4 = [('SE', 45), ('E', 90), ('S', 0), ('SW', 315)]
     
     direcoes_selecionadas = DIRECOES_8 if args.directions == 8 else DIRECOES_4
 

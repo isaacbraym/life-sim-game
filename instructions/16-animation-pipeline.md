@@ -52,31 +52,46 @@ Consulte a tabela na seção [Plano de animações para o MVP](#plano-de-animaco
 O script Python headless automatiza a renderização de todas as frames da animação 3D convertendo-as na perspectiva dimétrica do projeto.
 
 ### Projeção Dimétrica 26.57° (Habbo-Style)
-O projeto utiliza uma câmera ortográfica configurada com declive dimétrico clássico (proporção 2:1 no pixel art). A câmera permanece fixa e o objeto (Armature) é rotacionado em 8 ângulos de Z para capturar as 8 direções:
-- **Ângulos de rotação do Objeto (Armature Z)**:
-  - `NE` = 0° (frente da câmera)
-  - `E`  = 45°
-  - `SE` = 90°
-  - `S`  = 135°
-  - `SW` = 180°
-  - `W`  = 225°
-  - `NW` = 270°
-  - `N`  = 315°
+O projeto utiliza uma câmera ortográfica configurada com declive dimétrico clássico (proporção 2:1 no pixel art). A câmera permanece fixa e o objeto (Armature) é rotacionado em 8 ângulos de Z para capturar as 8 direções.
+
+> ## ⚠️ Correção crítica de câmera (bug descoberto no pipeline da Marnie, 31/05/2026)
+>
+> O ângulo correto da câmera dimétrica é **26.57° ACIMA da horizontal**:
+> ```python
+> camera.rotation_euler.x = math.pi / 2 - math.atan(0.5)  # ≈ 63.43° a partir do eixo Z
+> camera.data.sensor_fit = 'VERTICAL'                      # anchor (32,90) determinístico
+> scene.render.film_transparent = True                     # fundo RGBA transparente
+> ```
+> **NÃO usar** `math.atan(0.5)` direto — esse é o ângulo a partir do eixo **vertical**
+> (top-down), e faz a câmera olhar o topo da cabeça em vez do rosto. O complemento
+> `π/2 − atan(0.5)` é o ângulo a partir da horizontal. Corrigido em
+> `bake_character.py`, `test_bake_pipeline.py` e `retarget_bake.py`.
+
+- **Mapa direção → ângulo de rotação Z da Armature** (calibrado visualmente; S de frente para a câmera, N de costas):
+  - `S`  = 0°      (frente, voltada para a câmera)
+  - `SE` = 45°
+  - `E`  = 90°
+  - `NE` = 135°
+  - `N`  = 180°    (costas)
+  - `NW` = 225°
+  - `W`  = 270°
+  - `SW` = 315°
 
 - **Configuração da Câmera**:
-  - `Rotation X` = `arctan(0.5) ≈ 26.57°` (`math.atan(0.5)` radianos)
-  - `Rotation Y` = 0
-  - `Rotation Z` = 0
+  - `Rotation X` = `π/2 − arctan(0.5) ≈ 63.43°` (elevação de 26.57° acima da horizontal)
+  - `Rotation Y` = 0, `Rotation Z` = 0
+  - `sensor_fit` = `VERTICAL`
   - `Tipo`: `ORTHO`
   - `Resolução`: 64 × 96 px
   - `Fundo`: Transparente (`film_transparent = True`)
   - `Formato de saída`: WebP Lossless (Qualidade = 100)
+  - `viewdir = (0, cos θ, −sin θ)`; posição da câmera = `foco − viewdir × distância`
 
 - **Alinhamento do Anchor (32, 90)**:
   - A origem 3D `(0, 0, 0)` representa a base dos pés do personagem.
-  - Para alinhar essa base com o pixel `(32, 90)` na imagem 64x96 px final, o script desloca a câmera verticalmente aplicando a fórmula de offset:
-    $$\text{offset}_z = \frac{\text{anchor}_y - (\text{res}_y / 2.0)}{\text{res}_y} \times \frac{\text{ortho\_scale}}{\sin(\theta)}$$
-    Onde $\theta = \arctan(0.5)$. Isso garante o enquadramento exato e consistente em todos os renders de forma automática.
+  - Com `sensor_fit = VERTICAL`, o foco vertical da câmera alinha os pés (z=0) ao pixel 90:
+    $$\text{foco}_z = \frac{\text{anchor}_y - (\text{res}_y / 2.0)}{\text{res}_y} \times \frac{\text{ortho\_scale}}{\cos(\theta)}$$
+    Onde $\theta = \arctan(0.5)$. O `retarget_bake.py` ainda auto-calibra escala e posição medindo a silhueta, garantindo altura ~74px consistente entre clips.
 
 ### Como funciona o script `bake_character.py`
 
@@ -237,6 +252,24 @@ modelo rigado (mesh+rig custom)  +  animação Mixamo (Without Skin)
 
 > A fonte 3D (FBX/texturas/animações) fica fora do git; apenas os sprites
 > derivados em `content/test-characters/` são versionados.
+
+### Sprites monolíticos vs. sistema de camadas
+
+O runtime do jogo (`CharacterRenderer`) compõe **sprites por camada**
+(corpo_base, camisa, calça, etc.) em runtime — permite mix-and-match de roupas
+sem re-bake. Personagens externos com rig complexo (como a Marnie) são tratados
+como **sprites monolíticos**: um único WebP por frame que combina tudo.
+
+| Característica          | Camadas                      | Monolítico                     |
+|------------------------|------------------------------|--------------------------------|
+| Mix de roupas          | ✅ sem re-bake               | ❌ re-bake por combinação      |
+| Rig externo complexo   | ❌ exige separação por mesh  | ✅ funciona direto             |
+| Onde fica              | `content/character-parts/`   | `content/test-characters/`     |
+| Runtime                | `CharacterRenderer`          | `FrameSequenceAnimator`        |
+| Uso                    | personagens do jogo          | personagens de teste / NPC externos |
+
+> Para personagens definitivos do jogo: usar o sistema de camadas.
+> Para personagens de teste e NPCs externos: monolítico é aceitável.
 
 ---
 
