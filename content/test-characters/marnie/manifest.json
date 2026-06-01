@@ -15,6 +15,13 @@
       "papel": "jogador",
       "clips": [
         {
+          "clipId": "idle",
+          "fps": 12,
+          "loop": true,
+          "frames": 45,
+          "rootVertical": false
+        },
+        {
           "clipId": "andar",
           "fps": 12,
           "loop": true,
@@ -56,6 +63,13 @@
       "nome": "Marnie (Líder de Ginásio)",
       "papel": "npc",
       "clips": [
+        {
+          "clipId": "idle",
+          "fps": 12,
+          "loop": true,
+          "frames": 45,
+          "rootVertical": false
+        },
         {
           "clipId": "andar",
           "fps": 12,

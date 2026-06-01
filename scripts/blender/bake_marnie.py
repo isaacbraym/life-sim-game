@@ -42,6 +42,7 @@ VARIANTES = [
 
 # (arquivo_fbx, clipId, root_vertical, loop, end_frame|None)
 CLIPS_BASE = [
+    ("Breathing Idle.fbx",  "idle",       False, True,  90),
     ("Walking.fbx",         "andar",      False, True,  None),
     ("Slow Run.fbx",        "correr",     False, True,  None),
     ("Sitting.fbx",         "sentado",    True,  True,  None),
@@ -49,6 +50,7 @@ CLIPS_BASE = [
     ("Sitting Talking.fbx", "conversar",  True,  True,  90),
 ]
 CLIPS_GYM = [
+    ("Breathing Idle.fbx",  "idle",       False, True,  90),
     ("Walking.fbx",         "andar",      False, True,  None),
     ("Sitting.fbx",         "sentado",    True,  True,  None),
     ("Sitting Talking.fbx", "conversar",  True,  True,  90),

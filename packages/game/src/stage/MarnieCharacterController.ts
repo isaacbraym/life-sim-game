@@ -14,6 +14,7 @@ import { FrameSequenceAnimator } from './FrameSequenceAnimator';
 const URL_MANIFESTO = '/content/test-characters/marnie/manifest.json';
 const DIRECAO_IDLE: DirecaoVisual = 'S';
 const CLIP_ANDAR = 'andar';
+const CLIP_IDLE = 'idle';
 
 type Tile = { tx: number; ty: number };
 
@@ -63,9 +64,17 @@ export class MarnieCharacterController {
     );
     this._container.addChild(this.animator.obterContainer());
 
-    // Pose de repouso: 1º frame de "andar" congelado.
-    await this.animator.reproduzir(CLIP_ANDAR, this.direcaoAtual);
-    if (!this.destruido) this.animator.pausar();
+    await this.repousar();
+  }
+
+  /** Repouso: toca o clip idle (loop). Se ausente, congela o 1º frame de andar. */
+  private async repousar(): Promise<void> {
+    const a = this.animator;
+    if (a === undefined) return;
+    const temIdle = await a.reproduzir(CLIP_IDLE, this.direcaoAtual);
+    if (this.destruido || temIdle) return;
+    await a.reproduzir(CLIP_ANDAR, this.direcaoAtual);
+    if (!this.destruido) a.pausar();
   }
 
   posicionarEm(tx: number, ty: number): void {
@@ -107,10 +116,7 @@ export class MarnieCharacterController {
       }
     } finally {
       this._emMovimento = false;
-      // Congela em repouso na direção final.
-      void this.animator?.reproduzir(CLIP_ANDAR, this.direcaoAtual).then(() => {
-        if (!this.destruido) this.animator?.pausar();
-      });
+      void this.repousar();
     }
   }
 
