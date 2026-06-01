@@ -197,6 +197,49 @@ life-sim-game/
 
 ---
 
+## Personagem de teste com rig custom (retarget) — Marnie
+
+> Caminho paralelo ao pipeline padrão, para validar bake/animação com um modelo
+> 3D real **antes** de existirem assets de camadas próprios. O personagem de teste
+> é um sprite **monolítico** (combinado), não o sistema de camadas do runtime.
+
+Quando o modelo 3D tem rig **próprio** (não Mixamo nativo — ex.: Marnie, rig de
+jogo `tr0005` com 193 bones, incluindo cabelo/rosto), o Mixamo não consegue
+auto-riggar. A solução é fazer **retarget** das animações Mixamo para o rig
+custom dentro do Blender:
+
+```
+modelo rigado (mesh+rig custom)  +  animação Mixamo (Without Skin)
+   → retarget world-delta osso-a-osso (scripts/blender/retarget_bake.py)
+   → bake 8 direções dimétricas → WebP combinado
+   → content/test-characters/{personagem}/{variante}/{clip}/frames/{dir}/frame_NNN.webp
+   → manifest.json (schema ManifestoPersonagemTeste)
+```
+
+- **Orquestrador**: `scripts/blender/bake_marnie.py` roda o retarget+bake para
+  todas as variantes/clips e gera o `manifest.json` + GIFs de review.
+- **Mapa de ossos**: `MAPA_MIXAMO_MARNIE` no topo do `retarget_bake.py`
+  (mixamorig → tr0005). Para outro rig custom, ajustar esse mapa.
+- **root vertical**: `--root-vertical` baixa o quadril (sentar/levantar);
+  default desligado mantém os pés plantados (andar/correr).
+- **Câmera**: elevação dimétrica correta (26.57° acima da horizontal) e
+  `sensor_fit=VERTICAL`, com auto-calibração de escala/anchor por medição de
+  silhueta (≈74px de altura, pés no pixel 90, consistente entre clips).
+
+### Runtime e Dev Tools
+- `FrameSequenceAnimator` (`packages/game/src/stage/`): toca a sequência de
+  frames como `AnimatedSprite` do PixiJS, anchor normalizado pelo manifesto.
+- `MarnieCharacterController`: espelha o `IsoCharacterController` (BFS+GSAP) mas
+  com frames bakeados. Ativado no jogo com `?personagem=marnie` (com NPC da
+  variante `gym` sentado conversando).
+- **Dev Tools → "Personagem Teste" (Ctrl+7)**: lista variantes/clips do
+  manifesto e reproduz os frames com troca de direção/variante/clip.
+
+> A fonte 3D (FBX/texturas/animações) fica fora do git; apenas os sprites
+> derivados em `content/test-characters/` são versionados.
+
+---
+
 ## Agosto/2026 — Upgrade do pipeline
 
 No planejamento de expansão técnica do projeto para **Agosto de 2026**, estão previstos investimentos em ferramentas avançadas para ganho de velocidade e qualidade de produção artística:
