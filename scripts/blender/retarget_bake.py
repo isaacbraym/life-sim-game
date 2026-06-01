@@ -60,15 +60,17 @@ MAPA_MIXAMO_MARNIE = [
 
 NOME_BONE_ROOT_ALVO = "Waist"
 
-# Mapa direção→ângulo de rotação Z da armature, calibrado visualmente para a
-# projeção iso do jogo (x=(tx-ty)*32, y=(tx+ty)*16):
-# quem aparece de FRENTE (olhando reto p/ baixo na tela) é SE — a direção mais
-# comum em cômodos iso. NW é de costas. Ver instructions/14.
+# Mapa direção→ângulo de rotação Z da armature, casado com calcularDirecao() do
+# jogo (que mapeia delta de tile → DirecaoVisual). Na projeção x=(tx-ty)*32,
+# y=(tx+ty)*16, andar em +tx+ty (SE) move o personagem RETO PARA BAIXO na tela —
+# logo o sprite 'SE' deve aparecer de FRENTE (ângulo 0). 'NW' é de costas.
+# Facing por ângulo: 0=baixo(SE) 45=baixo-dir(E) 90=dir(NE) 135=cima-dir(N)
+#                    180=cima(NW) 225=cima-esq(W) 270=esq(SW) 315=baixo-esq(S).
 DIRECOES_8 = [
-    ('S', 0),    ('SE', 45),  ('E', 90),   ('NE', 135),
-    ('N', 180),  ('NW', 225), ('W', 270),  ('SW', 315),
+    ('SE', 0),   ('E', 45),   ('NE', 90),  ('N', 135),
+    ('NW', 180), ('W', 225),  ('SW', 270), ('S', 315),
 ]
-DIRECOES_4 = [('SE', 45), ('E', 90), ('S', 0), ('SW', 315)]
+DIRECOES_4 = [('SE', 0), ('E', 45), ('S', 315), ('SW', 270)]
 
 
 def parse_args():
@@ -210,9 +212,12 @@ def aterrar_personagem(arm_obj, meshes):
     bpy.context.view_layer.update()
 
 
-RES_X, RES_Y = 64, 96
-ANCHOR_Y = 90            # pés no pixel y=90 (topo-down)
-ALTURA_ALVO_PX = 74.0    # altura visual do personagem em pé (~77% do canvas)
+# Supersampling: BAKE_ESCALA=2 gera frames 128x192 (lógico continua 64x96).
+# O runtime reduz a textura ao tamanho lógico → nitidez sem mudar a composição.
+ESCALA_BAKE = max(1, int(os.environ.get("BAKE_ESCALA", "1")))
+RES_X, RES_Y = 64 * ESCALA_BAKE, 96 * ESCALA_BAKE
+ANCHOR_Y = 90 * ESCALA_BAKE       # pés no pixel y=90*escala (topo-down)
+ALTURA_ALVO_PX = 74.0 * ESCALA_BAKE  # altura visual do personagem em pé
 THETA = math.atan(0.5)   # 26.57° dimétrico
 DIST_CAM = 10.0
 
@@ -265,6 +270,11 @@ def configurar_render(scene, fmt='WEBP'):
     scene.render.resolution_x = RES_X
     scene.render.resolution_y = RES_Y
     scene.render.film_transparent = True
+    # Anti-aliasing: mais amostras TAA = bordas mais suaves no bake.
+    try:
+        scene.eevee.taa_render_samples = 32
+    except Exception:
+        pass
     scene.render.image_settings.file_format = fmt
     scene.render.image_settings.color_mode = 'RGBA'
     scene.render.image_settings.quality = 100
@@ -315,8 +325,11 @@ def calibrar_camera(scene, arm_obj, meshes, args):
             ortho = ortho * (altura_px / ALTURA_ALVO_PX) * args.margin
             cam.data.ortho_scale = ortho
 
-    # Ajuste fino vertical (2 passes): coloca os pés exatamente no pixel 90.
-    for _ in range(2):
+    # Ajuste fino vertical: coloca os pés no pixel ANCHOR_Y.
+    # Relação: subir o personagem em world.z move-o para CIMA na tela (feet_top_y
+    # diminui). Para erro>0 (pés baixos demais) precisamos SUBIR (z+=). Para
+    # erro<0 (pés altos demais) descer (z-=). Logo: z += erro_px/ppu.
+    for _ in range(5):
         m2 = medir_silhueta(scene, tmp)
         if not m2:
             break
@@ -325,11 +338,11 @@ def calibrar_camera(scene, arm_obj, meshes, args):
         if abs(erro_px) <= 1:
             break
         px_por_unidade = altura_px / max(0.001, zmax)
-        dz = erro_px / px_por_unidade                 # sobe o personagem
-        arm_obj.location.z -= dz
+        dz = erro_px / px_por_unidade
+        arm_obj.location.z += dz
         for mo in meshes:
             if mo.parent is None:
-                mo.location.z -= dz
+                mo.location.z += dz
         bpy.context.view_layer.update()
     print(f"  Calibrado: ortho={ortho:.3f}, foco_z={foco_z:.3f}, "
           f"altura_px={altura_px}, feet_y->{ANCHOR_Y}")

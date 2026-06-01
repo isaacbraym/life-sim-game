@@ -132,14 +132,15 @@ def run_bake(args, armature, meshes):
     print(f"Frames Blender a renderizar ({fps_blender} -> {args.fps} FPS): {frames_to_render}")
 
     # 3. Definir direções de acordo com argumento.
-    # Mapa direção→ângulo Z calibrado visualmente (S=frente p/ câmera, N=costas);
-    # idêntico ao retarget_bake.py. NÃO usar o mapa antigo (NE=0) — ficava com
-    # E/W espelhados e S/N trocados.
+    # Mapa direção→ângulo Z casado com calcularDirecao() do jogo: andar em +tx+ty
+    # (SE) move o personagem RETO PARA BAIXO na tela → sprite 'SE' de FRENTE
+    # (ângulo 0). Idêntico ao retarget_bake.py. NÃO usar mapas antigos (NE=0 ou
+    # S=0), que deixam o facing fora de sincronia com o movimento.
     DIRECOES_8 = [
-        ('S', 0),    ('SE', 45),  ('E', 90),   ('NE', 135),
-        ('N', 180),  ('NW', 225), ('W', 270),  ('SW', 315),
+        ('SE', 0),   ('E', 45),   ('NE', 90),  ('N', 135),
+        ('NW', 180), ('W', 225),  ('SW', 270), ('S', 315),
     ]
-    DIRECOES_4 = [('SE', 45), ('E', 90), ('S', 0), ('SW', 315)]
+    DIRECOES_4 = [('SE', 0), ('E', 45), ('S', 315), ('SW', 270)]
     
     direcoes_selecionadas = DIRECOES_8 if args.directions == 8 else DIRECOES_4
 
