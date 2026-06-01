@@ -104,6 +104,7 @@ export function CharacterPreview({
     if (container === null) return undefined;
 
     let cancelado = false;
+    let appLocal: Application | undefined;
     const app = new Application();
 
     const inicializar = async () => {
@@ -113,11 +114,13 @@ export function CharacterPreview({
         background: '#1a1a1a',
         antialias: false,
       });
+      // StrictMode pode desmontar antes do init resolver: aborta e destrói.
       if (cancelado) {
         app.destroy();
         return;
       }
 
+      appLocal = app;
       appRef.current = app;
       container.appendChild(app.canvas as HTMLCanvasElement);
 
@@ -135,12 +138,13 @@ export function CharacterPreview({
       cancelado = true;
       spriteRef.current = undefined;
       appRef.current = undefined;
-      const canvas = app.canvas as HTMLCanvasElement | undefined;
-      const parentNode = canvas?.parentNode;
-      if (canvas !== undefined && parentNode !== null && parentNode !== undefined) {
-        parentNode.removeChild(canvas);
+      // Só toca o canvas/destroy se o init completou (app.canvas lança se o
+      // renderer ainda não existe — desmontagem antes do init no StrictMode).
+      if (appLocal !== undefined) {
+        const canvas = appLocal.canvas as HTMLCanvasElement | undefined;
+        if (canvas?.parentNode) canvas.parentNode.removeChild(canvas);
+        appLocal.destroy();
       }
-      app.destroy();
     };
   }, [altura, baseX, baseY, largura]);
 
