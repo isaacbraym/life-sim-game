@@ -160,6 +160,18 @@ def main():
     print(f"\n✓ Manifest: {destino_manifest}")
     print(f"✓ GIFs de review: {os.path.join(SAIDA_BASE, '_review')}")
 
+    # Gera 'sentar' (= 'levantar' invertido) e atualiza o manifest.
+    try:
+        import importlib.util
+        gs_path = os.path.join(RAIZ, "scripts", "blender", "gerar_sentar.py")
+        spec = importlib.util.spec_from_file_location("gerar_sentar", gs_path)
+        if spec is not None and spec.loader is not None:
+            gs = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(gs)
+            gs.main()
+    except Exception as e:
+        print(f"  [aviso] geração de 'sentar' falhou: {e}")
+
 
 if __name__ == "__main__":
     main()

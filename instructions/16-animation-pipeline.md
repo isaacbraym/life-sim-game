@@ -67,15 +67,20 @@ O projeto utiliza uma câmera ortográfica configurada com declive dimétrico cl
 > `π/2 − atan(0.5)` é o ângulo a partir da horizontal. Corrigido em
 > `bake_character.py`, `test_bake_pipeline.py` e `retarget_bake.py`.
 
-- **Mapa direção → ângulo de rotação Z da Armature** (calibrado visualmente; S de frente para a câmera, N de costas):
-  - `S`  = 0°      (frente, voltada para a câmera)
-  - `SE` = 45°
-  - `E`  = 90°
-  - `NE` = 135°
-  - `N`  = 180°    (costas)
-  - `NW` = 225°
-  - `W`  = 270°
-  - `SW` = 315°
+- **Mapa direção → ângulo de rotação Z da Armature** (casado com `calcularDirecao()`
+  do jogo: andar em +tx+ty = SE move o personagem RETO PARA BAIXO na tela, logo o
+  sprite `SE` deve aparecer de frente):
+  - `SE` = 0°      (frente, voltada para a câmera — direção mais comum em iso)
+  - `E`  = 45°
+  - `NE` = 90°
+  - `N`  = 135°
+  - `NW` = 180°    (costas)
+  - `W`  = 225°
+  - `SW` = 270°
+  - `S`  = 315°
+
+  > Histórico: versões anteriores usaram `NE=0` e depois `S=0`, ambos deixando o
+  > facing fora de sincronia com a direção de caminhada. O mapa correto é o acima.
 
 - **Configuração da Câmera**:
   - `Rotation X` = `π/2 − arctan(0.5) ≈ 63.43°` (elevação de 26.57° acima da horizontal)

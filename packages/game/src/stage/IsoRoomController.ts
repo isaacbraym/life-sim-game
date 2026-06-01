@@ -10,7 +10,7 @@ const MEIA_ALTURA     = TILE_H / 2;   // 16
 const ALTURA_OBJETO   = 28;
 
 /** Altura em pixels das paredes laterais e do fundo — exportado para uso na câmera. */
-export const ALTURA_PAREDE_PX = 96;
+export const ALTURA_PAREDE_PX = 144;
 
 // ── Paleta estilo Habbo Hotel ──────────────────────────────────────────────
 const COR = {
@@ -352,6 +352,9 @@ export class IsoRoomController {
       face.eventMode = 'static';
       face.on('pointerenter', mostrarLabel);
       face.on('pointerleave', esconderLabel);
+      // Encaminha o clique no móvel para o callback do tile (âncora do móvel),
+      // permitindo "clicar no assento" (a face do móvel cobriria o tile abaixo).
+      face.on('pointertap', () => { this.callbackTile?.(objeto.tileX, objeto.tileY); });
     }
 
     const profundidade = calcularDepth(objeto.tileX, objeto.tileY);

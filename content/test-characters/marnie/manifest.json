@@ -43,6 +43,13 @@
           "rootVertical": true
         },
         {
+          "clipId": "sentar",
+          "fps": 12,
+          "loop": false,
+          "frames": 35,
+          "rootVertical": true
+        },
+        {
           "clipId": "levantar",
           "fps": 12,
           "loop": false,

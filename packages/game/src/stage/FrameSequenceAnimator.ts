@@ -49,8 +49,28 @@ export class FrameSequenceAnimator {
     return this._container;
   }
 
+  /** Escala o sprite para o tamanho lógico do canvas, qualquer que seja a
+   * resolução real da textura (supersampling). Anchor é normalizado. */
+  private ajustarTamanhoLogico(): void {
+    const tex = this.sprite.texture;
+    if (tex.width > 0) {
+      this.sprite.scale.set(
+        this.canvas.largura / tex.width,
+        this.canvas.altura / tex.height,
+      );
+    }
+  }
+
   direcao(): DirecaoVisual {
     return this.direcaoAtual;
+  }
+
+  fpsDoClip(clipId: string): number | undefined {
+    return this.clipsPorId.get(clipId)?.fps;
+  }
+
+  framesDoClip(clipId: string): number | undefined {
+    return this.clipsPorId.get(clipId)?.frames;
   }
 
   /** Carrega (com cache) as texturas de um clip/direção. */
@@ -92,6 +112,9 @@ export class FrameSequenceAnimator {
     this.clipAtual = clipId;
     this.direcaoAtual = direcao;
     this.sprite.textures = texturas;
+    // Texturas podem ser bakeadas em supersampling (2x/3x); reduz ao tamanho
+    // lógico do canvas → nitidez (downscale) e composição estável.
+    this.ajustarTamanhoLogico();
     this.sprite.animationSpeed = clip.fps / 60; // PixiJS conta em frames de 60fps
     this.sprite.loop = clip.loop;
     this.sprite.gotoAndPlay(0);

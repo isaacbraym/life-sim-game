@@ -24,7 +24,7 @@ const SILHUETA_AX = 32;
 const SILHUETA_AY = 90;
 
 // Visual do jogo — mesmas constantes do IsoRoomController
-const ALTURA_PAREDE_PX = 96;
+const ALTURA_PAREDE_PX = 144;
 const COR_JOGO = {
   CHAO_CLARO:       0xb5c9d8,
   CHAO_ESCURO:      0x9ab3c5,
