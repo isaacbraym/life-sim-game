@@ -60,6 +60,9 @@ export function CanvasIsoDoComodo({ comodo }: PropsCanvasIso) {
   }, [comodo]);
 
   const renderizarTudo = useCallback((app: Application) => {
+    // O app pode ter sido destruído entre renders (troca rápida de cômodo/canvas);
+    // nesse caso app.stage fica nulo e um render tardio quebraria.
+    if ((app.stage as unknown) === null || (app.renderer as unknown) === null) return;
     if (modo === 'jogo') {
       desenharComodoJogo(app, comodoRef.current);
     } else {
@@ -311,42 +314,74 @@ function desenharComodoJogo(app: Application, comodo: IsoRoomDefinition): void {
   const hh = 16;
   const H  = ALTURA_PAREDE_PX;
 
-  // 1. Paredes do fundo (ty=0)
-  for (let tx = 0; tx < comodo.larguraTiles; tx += 1) {
-    if (comodo.tiles[0]?.[tx]?.estado === 'vazio') continue;
-    const { x, y } = pontoTile(comodo, tx, 0);
-    const g = new Graphics();
-    g.poly([x - hw, y - hh - H, x + hw, y - hh - H, x + hw, y - hh, x - hw, y - hh]);
-    g.fill({ color: COR_JOGO.PAREDE_FUNDO });
-    for (let h = 32; h < H; h += 32) {
-      g.moveTo(x - hw, y - hh - h).lineTo(x + hw, y - hh - h);
+  // Borda real do piso: tile fora do grid ou com estado 'vazio' conta como vazio.
+  const ehVazio = (tx: number, ty: number): boolean => {
+    const linha = comodo.tiles[ty];
+    if (linha === undefined) return true;
+    const tile = linha[tx];
+    return tile === undefined || tile.estado === 'vazio';
+  };
+
+  // 1. Parede do fundo: tile não-vazio cujo vizinho ao NORTE (ty-1) é vazio/fora.
+  // Paralelogramo seguindo a perspectiva (igual ao IsoRoomController) — corrige
+  // o serrilhado "triangular" da versão antiga (retângulos planos por tile).
+  for (let ty = 0; ty < comodo.tiles.length; ty += 1) {
+    const linha = comodo.tiles[ty];
+    if (linha === undefined) continue;
+    for (let tx = 0; tx < linha.length; tx += 1) {
+      if (ehVazio(tx, ty) || !ehVazio(tx, ty - 1)) continue;
+      const { x, y } = pontoTile(comodo, tx, ty);
+      const g = new Graphics();
+      g.poly([
+        { x: x,      y: y - hh },       // base-esquerda (topo do diamond tx,ty)
+        { x: x + hw, y: y },             // base-direita  (topo do diamond tx+1,ty)
+        { x: x + hw, y: y - H },         // topo-direita
+        { x: x,      y: y - hh - H },    // topo-esquerda
+      ]);
+      g.fill({ color: COR_JOGO.PAREDE_FUNDO });
+      for (let h = 32; h < H; h += 32) {
+        g.moveTo(x, y - hh - h).lineTo(x + hw, y - h);
+      }
+      g.stroke({ color: COR_JOGO.PAREDE_FUNDO_B, width: 0.5, alpha: 0.5 });
+      app.stage.addChild(g);
     }
-    g.moveTo(x, y - hh - H).lineTo(x, y - hh);
-    g.stroke({ color: COR_JOGO.PAREDE_FUNDO_B, width: 0.5, alpha: 0.5 });
-    app.stage.addChild(g);
   }
 
-  // 2. Paredes esquerda (tx=0)
-  for (let ty = 0; ty < comodo.alturaTiles; ty += 1) {
-    if (comodo.tiles[ty]?.[0]?.estado === 'vazio') continue;
-    const { x, y } = pontoTile(comodo, 0, ty);
-    const g = new Graphics();
-    g.poly([x - hw, y - hh - H, x, y + hh - H, x, y + hh, x - hw, y - hh]);
-    g.fill({ color: COR_JOGO.PAREDE_ESQ });
-    for (let h = 32; h < H; h += 32) {
-      g.moveTo(x - hw, y - hh - h).lineTo(x, y + hh - h);
+  // 2. Parede esquerda: tile não-vazio cujo vizinho a OESTE (tx-1) é vazio/fora.
+  for (let ty = 0; ty < comodo.tiles.length; ty += 1) {
+    const linha = comodo.tiles[ty];
+    if (linha === undefined) continue;
+    for (let tx = 0; tx < linha.length; tx += 1) {
+      if (ehVazio(tx, ty) || !ehVazio(tx - 1, ty)) continue;
+      const { x, y } = pontoTile(comodo, tx, ty);
+      const g = new Graphics();
+      g.poly([
+        { x: x,      y: y - hh },       // base-frente (topo do diamond 0,ty)
+        { x: x - hw, y: y },             // base-fundo  (topo do diamond 0,ty+1)
+        { x: x - hw, y: y - H },         // topo-fundo
+        { x: x,      y: y - hh - H },    // topo-frente
+      ]);
+      g.fill({ color: COR_JOGO.PAREDE_ESQ });
+      for (let h = 32; h < H; h += 32) {
+        g.moveTo(x, y - hh - h).lineTo(x - hw, y - h);
+      }
+      g.stroke({ color: COR_JOGO.PAREDE_ESQ_B, width: 0.5, alpha: 0.5 });
+      app.stage.addChild(g);
     }
-    g.stroke({ color: COR_JOGO.PAREDE_ESQ_B, width: 0.5, alpha: 0.5 });
-    app.stage.addChild(g);
   }
 
-  // 3. Pilar no canto
-  if (comodo.tiles[0]?.[0]?.estado !== 'vazio') {
-    const { x, y } = pontoTile(comodo, 0, 0);
-    const g = new Graphics();
-    g.rect(x - 4, y - hh - H, 8, H + hh);
-    g.fill({ color: COR_JOGO.PILAR });
-    app.stage.addChild(g);
+  // 3. Pilar nos cantos onde as paredes de fundo e esquerda se encontram.
+  for (let ty = 0; ty < comodo.tiles.length; ty += 1) {
+    const linha = comodo.tiles[ty];
+    if (linha === undefined) continue;
+    for (let tx = 0; tx < linha.length; tx += 1) {
+      if (ehVazio(tx, ty) || !ehVazio(tx, ty - 1) || !ehVazio(tx - 1, ty)) continue;
+      const { x, y } = pontoTile(comodo, tx, ty);
+      const g = new Graphics();
+      g.rect(x - 4, y - hh - H, 8, H + hh);
+      g.fill({ color: COR_JOGO.PILAR });
+      app.stage.addChild(g);
+    }
   }
 
   // 4. Chão
