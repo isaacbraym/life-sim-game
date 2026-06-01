@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite';
 import { resolve } from 'path';
-import { createReadStream, existsSync } from 'node:fs';
+import { createReadStream, existsSync, statSync } from 'node:fs';
 import { readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import type { IncomingMessage } from 'node:http';
 import { extname, join, relative, sep } from 'node:path';
@@ -395,10 +395,21 @@ export function devtoolsRoutes(): Plugin[] {
           const reqUrl = (req as { url?: string }).url ?? '/';
           const caminhoArquivo = join(raizConteudo, decodeURIComponent(reqUrl));
           if (!existsSync(caminhoArquivo)) { next(); return; }
+          // Diretórios não são servíveis como arquivo: repassa adiante. Sem isto,
+          // um fetch() de um caminho de pasta (ex.: /content/character-animations/)
+          // faria createReadStream lançar EISDIR — erro NÃO tratado que derruba
+          // o processo do Vite inteiro.
+          if (statSync(caminhoArquivo).isDirectory()) { next(); return; }
           const tipoMime = TIPOS_MIME[extname(caminhoArquivo)] ?? 'application/octet-stream';
           res.setHeader('Content-Type', tipoMime);
           res.setHeader('Cache-Control', 'no-cache');
-          createReadStream(caminhoArquivo).pipe(res);
+          const stream = createReadStream(caminhoArquivo);
+          // Rede de segurança: qualquer erro de I/O vira 404 em vez de crash global.
+          stream.on('error', () => {
+            if (!res.headersSent) res.statusCode = 404;
+            res.end();
+          });
+          stream.pipe(res);
         });
       },
     },
