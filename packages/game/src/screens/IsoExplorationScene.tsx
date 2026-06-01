@@ -13,10 +13,13 @@ type ControladorPersonagem = Pick<
   'inicializar' | 'posicionarEm' | 'estaEmMovimento' | 'obterPosicao' | 'moverPara' | 'obterContainer' | 'destruir'
 >;
 
-/** Modo de teste: `?personagem=marnie` usa o personagem 3D bakeado (Marnie). */
-function detectarPersonagemTeste(): string | undefined {
-  if (typeof window === 'undefined') return undefined;
-  return new URLSearchParams(window.location.search).get('personagem') ?? undefined;
+/**
+ * No modo de exploração iso (dev), a Marnie é o personagem PADRÃO.
+ * Use `?personagem=classico` para voltar ao personagem de camadas legado.
+ */
+function usarPersonagemMarnie(): boolean {
+  if (typeof window === 'undefined') return true;
+  return new URLSearchParams(window.location.search).get('personagem') !== 'classico';
 }
 
 const LARGURA_CANVAS  = 900;
@@ -45,7 +48,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
 
     let cancelado = false;
 
-    const usarMarnie = detectarPersonagemTeste() === 'marnie';
+    const usarMarnie = usarPersonagemMarnie();
     const app        = new Application();
     const sala       = new IsoRoomController();
     const personagem: ControladorPersonagem = usarMarnie

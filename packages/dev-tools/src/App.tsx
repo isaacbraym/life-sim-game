@@ -6,7 +6,12 @@ import { ProoferDeCena } from './tools/SceneProofer';
 import { EditorDePersonagem } from './tools/CharacterEditor';
 import { GrafoDeEventos } from './tools/EventGraph';
 import { ErrorBoundary } from './shared/ErrorBoundary';
-import { selecionarPastaRaiz, SUPORTA_FILE_SYSTEM_ACCESS } from './shared/ProjetoHandle';
+import {
+  selecionarPastaRaiz,
+  restaurarPastaRaiz,
+  reconectarPastaRaiz,
+  SUPORTA_FILE_SYSTEM_ACCESS,
+} from './shared/ProjetoHandle';
 
 const AnimationProofer = lazy(() => import('./tools/AnimationProofer'));
 const VisualizadorMarnie = lazy(() => import('./tools/MarnieViewer'));
@@ -63,6 +68,18 @@ export function App() {
   const [ferramentaAtiva, setFerramentaAtiva] = useState<Ferramenta>('geral');
   const [nomePastaRaiz, setNomePastaRaiz] = useState<string | undefined>();
   const [erroPastaRaiz, setErroPastaRaiz] = useState<string | undefined>();
+  // Pasta lembrada que precisa de um gesto para reconceder permissão.
+  const [pastaReconectar, setPastaReconectar] = useState<string | undefined>();
+
+  // Restaura a pasta do projeto salva (IndexedDB) sem reabrir o seletor.
+  useEffect(() => {
+    void (async () => {
+      const restaurada = await restaurarPastaRaiz();
+      if (restaurada === undefined) return;
+      if (restaurada.status === 'conectado') setNomePastaRaiz(restaurada.nome);
+      else setPastaReconectar(restaurada.nome);
+    })();
+  }, []);
 
   // Título do browser por ferramenta (6c)
   useEffect(() => {
@@ -88,6 +105,20 @@ export function App() {
     try {
       const pasta = await selecionarPastaRaiz();
       setNomePastaRaiz(pasta.name);
+      setPastaReconectar(undefined);
+    } catch (erro) {
+      setErroPastaRaiz(erro instanceof Error ? erro.message : String(erro));
+    }
+  };
+
+  const aoReconectarPastaRaiz = async () => {
+    setErroPastaRaiz(undefined);
+    try {
+      const handle = await reconectarPastaRaiz();
+      if (handle !== undefined) {
+        setNomePastaRaiz(handle.name);
+        setPastaReconectar(undefined);
+      }
     } catch (erro) {
       setErroPastaRaiz(erro instanceof Error ? erro.message : String(erro));
     }
@@ -126,8 +157,10 @@ export function App() {
       <main style={{ flex: 1, overflow: 'auto', background: '#2d3748', display: 'flex', flexDirection: 'column' }}>
         <BannerSessao
           nomePastaRaiz={nomePastaRaiz}
+          pastaReconectar={pastaReconectar}
           erro={erroPastaRaiz}
           onSelecionar={aoSelecionarPastaRaiz}
+          onReconectar={aoReconectarPastaRaiz}
         />
         <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
           {ferramentaAtiva === 'geral' && (
@@ -189,12 +222,29 @@ function estiloBotao(ativo: boolean): React.CSSProperties {
 
 type PropsBannerSessao = {
   readonly nomePastaRaiz: string | undefined;
+  readonly pastaReconectar: string | undefined;
   readonly erro: string | undefined;
   readonly onSelecionar: () => void;
+  readonly onReconectar: () => void;
 };
 
-function BannerSessao({ nomePastaRaiz, erro, onSelecionar }: PropsBannerSessao) {
+function BannerSessao({
+  nomePastaRaiz, pastaReconectar, erro, onSelecionar, onReconectar,
+}: PropsBannerSessao) {
   const conectado = nomePastaRaiz !== undefined;
+  const precisaReconectar = !conectado && pastaReconectar !== undefined;
+
+  const estiloAcao = (cor: string): React.CSSProperties => ({
+    background: cor,
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: 4,
+    padding: '0.35rem 0.75rem',
+    cursor: 'pointer',
+    fontSize: 12,
+    fontFamily: 'monospace',
+    whiteSpace: 'nowrap',
+  });
 
   return (
     <div style={{
@@ -213,32 +263,29 @@ function BannerSessao({ nomePastaRaiz, erro, onSelecionar }: PropsBannerSessao) 
         {!SUPORTA_FILE_SYSTEM_ACCESS ? (
           <span>File System Access API nao suportada - use Chrome/Edge. Download ZIP disponivel.</span>
         ) : conectado ? (
-          <span>Conectado: .../{nomePastaRaiz}</span>
+          <span>Pasta conectada: .../{nomePastaRaiz} · navegar não exige pasta; ela só é usada para salvar.</span>
+        ) : precisaReconectar ? (
+          <>
+            <span>Pasta lembrada: <strong>{pastaReconectar}</strong>. Clique em "Reconectar" para voltar a salvar.</span>
+            <span>(Navegar/visualizar funciona sem isto — só salvar precisa da pasta.)</span>
+          </>
         ) : (
           <>
-            <span>Pasta do projeto nao selecionada.</span>
-            <span>Selecione para habilitar "Salvar no Projeto".</span>
+            <span>Nenhuma pasta selecionada — necessária apenas para <strong>salvar</strong> no projeto.</span>
+            <span>Para só visualizar/navegar não precisa selecionar nada.</span>
           </>
         )}
         {erro !== undefined && <span style={{ color: '#fc8181' }}>{erro}</span>}
       </div>
       {SUPORTA_FILE_SYSTEM_ACCESS && (
-        <button
-          onClick={onSelecionar}
-          style={{
-            background: conectado ? '#2f855a' : '#d69e2e',
-            color: '#ffffff',
-            border: 'none',
-            borderRadius: 4,
-            padding: '0.35rem 0.75rem',
-            cursor: 'pointer',
-            fontSize: 12,
-            fontFamily: 'monospace',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {conectado ? 'Trocar pasta' : 'Selecionar pasta'}
-        </button>
+        <div style={{ display: 'flex', gap: 8 }}>
+          {precisaReconectar && (
+            <button onClick={onReconectar} style={estiloAcao('#2f855a')}>Reconectar</button>
+          )}
+          <button onClick={onSelecionar} style={estiloAcao(conectado ? '#2f855a' : '#d69e2e')}>
+            {conectado ? 'Trocar pasta' : 'Selecionar pasta'}
+          </button>
+        </div>
       )}
     </div>
   );
