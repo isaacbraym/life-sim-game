@@ -41,6 +41,43 @@ Gera `content/character-animations/index.json` lido pelo dev-tools.
 python scripts/blender/gerar_index_animacoes.py
 ```
 
+### retarget_bake.py — Retarget Mixamo → rig custom + bake (personagem de teste)
+Para personagens com rig próprio (NÃO Mixamo nativo), ex.: Marnie (tr0005, rig de
+jogo de 193 bones). Importa o personagem (mesh+rig), importa uma animação Mixamo
+(Without Skin), faz o retarget por world-delta de rotações osso-a-osso e bakeia
+as 8 direções dimétricas em WebP combinado.
+
+```bash
+"C:\Program Files\Blender Foundation\Blender 4.2\blender.exe" ^
+  --background --python scripts/blender/retarget_bake.py -- ^
+  --target "packages/dev-tools/Marnie/Marine/Marine.fbx" ^
+  --anim   "packages/dev-tools/Marnie/animations_mixamo/Walking.fbx" ^
+  --output "content/test-characters/marnie/base/andar/frames/" ^
+  --fps 12 --directions 8
+```
+
+Flags extras: `--root-vertical` (copia a descida do quadril — usar em sentar/
+levantar), `--scale auto|<float>` (auto-calibra escala+anchor por medição da
+silhueta), `--end-frame N` (cortar clips longos). O mapa de ossos
+(mixamorig → tr0005) está em `MAPA_MIXAMO_MARNIE` no topo do script.
+
+> Diferença de câmera vs. `bake_character.py`: este script usa a elevação
+> dimétrica correta (26.57° acima da horizontal) e `sensor_fit=VERTICAL`,
+> evitando a vista top-down e tornando o anchor (32,90) determinístico.
+
+### bake_marnie.py — Orquestrador da personagem de teste Marnie
+Roda `retarget_bake.py` para todas as variantes (base=jogador, gym=NPC) e clips,
+gera `content/test-characters/marnie/manifest.json` e GIFs de review em `_review/`.
+
+```bash
+python scripts/blender/bake_marnie.py
+```
+
+### inspecionar_fbx.py / montar_contato.py — QA
+`inspecionar_fbx.py <arquivo>` faz dump de objetos/rig/bones/texturas.
+`montar_contato.py <pasta_frames> <saida.png> [frame]` monta contact sheet das 8
+direções (fundo xadrez) para inspeção rápida.
+
 ## Fluxo completo de uma nova animação
 
 1. Baixar FBX do Mixamo (Without Skin, 30fps, In Place=ON) →
@@ -59,3 +96,10 @@ python scripts/blender/gerar_index_animacoes.py
 
 **Animação errada (frames errados):** verificar `--start-frame` e `--end-frame`
   com os valores da ação no Mixamo (visível na barra de timeline do FBX)
+
+**Retarget: personagem com pose estranha:** conferir o `MAPA_MIXAMO_MARNIE`. Os
+  dois rigs precisam estar em T-pose (ou A-pose) compatível. Para outro rig custom,
+  ajustar o mapa de ossos (origem mixamorig → destino) no topo do `retarget_bake.py`.
+
+**Personagem sentado "flutuando":** ligar `--root-vertical` para baixar o quadril.
+**Pés afundando no chão (walk):** desligar `--root-vertical` (default).

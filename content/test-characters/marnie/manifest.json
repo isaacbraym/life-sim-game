@@ -1,0 +1,97 @@
+{
+  "personagemId": "marnie",
+  "nome": "Marnie",
+  "fonte": "Pokémon Sword/Shield trainer tr0005 (uso de teste interno)",
+  "canvas": {
+    "largura": 64,
+    "altura": 96,
+    "anchorX": 32,
+    "anchorY": 90
+  },
+  "variantes": [
+    {
+      "varianteId": "base",
+      "nome": "Marnie",
+      "papel": "jogador",
+      "clips": [
+        {
+          "clipId": "idle",
+          "fps": 12,
+          "loop": true,
+          "frames": 45,
+          "rootVertical": false
+        },
+        {
+          "clipId": "andar",
+          "fps": 12,
+          "loop": true,
+          "frames": 15,
+          "rootVertical": false
+        },
+        {
+          "clipId": "correr",
+          "fps": 12,
+          "loop": true,
+          "frames": 12,
+          "rootVertical": false
+        },
+        {
+          "clipId": "sentado",
+          "fps": 12,
+          "loop": true,
+          "frames": 18,
+          "rootVertical": true
+        },
+        {
+          "clipId": "levantar",
+          "fps": 12,
+          "loop": false,
+          "frames": 35,
+          "rootVertical": true
+        },
+        {
+          "clipId": "conversar",
+          "fps": 12,
+          "loop": true,
+          "frames": 45,
+          "rootVertical": true
+        }
+      ]
+    },
+    {
+      "varianteId": "gym",
+      "nome": "Marnie (Líder de Ginásio)",
+      "papel": "npc",
+      "clips": [
+        {
+          "clipId": "idle",
+          "fps": 12,
+          "loop": true,
+          "frames": 45,
+          "rootVertical": false
+        },
+        {
+          "clipId": "andar",
+          "fps": 12,
+          "loop": true,
+          "frames": 15,
+          "rootVertical": false
+        },
+        {
+          "clipId": "sentado",
+          "fps": 12,
+          "loop": true,
+          "frames": 18,
+          "rootVertical": true
+        },
+        {
+          "clipId": "conversar",
+          "fps": 12,
+          "loop": true,
+          "frames": 45,
+          "rootVertical": true
+        }
+      ]
+    }
+  ]
+}

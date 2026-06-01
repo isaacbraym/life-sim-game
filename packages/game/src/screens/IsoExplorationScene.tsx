@@ -5,6 +5,19 @@ import { tileParaTela } from '@core/iso/IsoMath';
 import { carregarComodoIso } from '../content/isoRoomCatalog';
 import { IsoRoomController, ALTURA_PAREDE_PX } from '../stage/IsoRoomController';
 import { IsoCharacterController } from '../stage/IsoCharacterController';
+import { MarnieCharacterController } from '../stage/MarnieCharacterController';
+
+/** Interface mínima comum aos controladores de personagem (layered ou frames). */
+type ControladorPersonagem = Pick<
+  IsoCharacterController,
+  'inicializar' | 'posicionarEm' | 'estaEmMovimento' | 'obterPosicao' | 'moverPara' | 'obterContainer' | 'destruir'
+>;
+
+/** Modo de teste: `?personagem=marnie` usa o personagem 3D bakeado (Marnie). */
+function detectarPersonagemTeste(): string | undefined {
+  if (typeof window === 'undefined') return undefined;
+  return new URLSearchParams(window.location.search).get('personagem') ?? undefined;
+}
 
 const LARGURA_CANVAS  = 900;
 const ALTURA_CANVAS   = 600;
@@ -23,7 +36,8 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
 
   // Refs para acesso nos callbacks sem stale closure
   const appRef        = useRef<Application | undefined>();
-  const personagemRef = useRef<IsoCharacterController | undefined>();
+  const personagemRef = useRef<ControladorPersonagem | undefined>();
+  const npcRef        = useRef<MarnieCharacterController | undefined>();
   const salaRef       = useRef<IsoRoomController | undefined>();
 
   useEffect(() => {
@@ -31,12 +45,19 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
 
     let cancelado = false;
 
+    const usarMarnie = detectarPersonagemTeste() === 'marnie';
     const app        = new Application();
     const sala       = new IsoRoomController();
-    const personagem = new IsoCharacterController();
+    const personagem: ControladorPersonagem = usarMarnie
+      ? new MarnieCharacterController('base')
+      : new IsoCharacterController();
+    // NPC de teste: a variante "gym" da Marnie sentada conversando (interação
+    // das duas variações da mesma personagem).
+    const npc = usarMarnie ? new MarnieCharacterController('gym') : undefined;
 
     appRef.current        = app;
     personagemRef.current = personagem;
+    npcRef.current        = npc;
     salaRef.current       = sala;
 
     const inicializar = async () => {
@@ -114,6 +135,15 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       setPosicao({ tx: 1, ty: 1 });
       app.stage.addChild(personagem.obterContainer());
 
+      // NPC de teste (gym): senta e conversa num tile fixo, virada para o jogador.
+      if (npc !== undefined) {
+        await npc.inicializar(app);
+        if (cancelado) return;
+        npc.posicionarEm(4, 2);
+        app.stage.addChild(npc.obterContainer());
+        void npc.reproduzirClip('conversar', 'SW');
+      }
+
       gsap.to(app.stage, { alpha: 1, duration: 0.4 });
     };
 
@@ -129,14 +159,17 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       if (char !== undefined) {
         gsap.killTweensOf(char.obterContainer().position);
       }
+      const npcAtual = npcRef.current;
       gsap.killTweensOf(app.stage);
 
       // Limpar refs antes de destruir para impedir callbacks órfãos
       personagemRef.current = undefined;
+      npcRef.current        = undefined;
       salaRef.current       = undefined;
       appRef.current        = undefined;
 
       char?.destruir();
+      npcAtual?.destruir();
       sala.destruir();
       app.destroy(true);
     };

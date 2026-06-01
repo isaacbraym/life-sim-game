@@ -17,3 +17,4 @@ export * from './direction';
 export * from './isoRoom';
 export * from './characterPart';
 export * from './characterAnimation';
+export * from './testCharacter';

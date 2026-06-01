@@ -24,17 +24,19 @@ def setup_test_scene():
     camera_data = bpy.data.cameras.new(name="OrthoCamera")
     camera_data.type = 'ORTHO'
     camera_data.ortho_scale = 4.0
-    
+    camera_data.sensor_fit = 'VERTICAL'
+
     camera_object = bpy.data.objects.new(name="OrthoCamera", object_data=camera_data)
     bpy.context.scene.collection.objects.link(camera_object)
     bpy.context.scene.camera = camera_object
 
-    # Configurar posição e rotação dimétrica (ângulo ~26.57°)
-    # Altura é o dobro da distância horizontal para obter o declive de 26.57° (1/2)
-    # y = -d * sin(theta), z = d * cos(theta) -> z / -y = cot(theta) = 2.0
+    # Projeção dimétrica 2:1 (Habbo-style): ELEVAÇÃO de 26.57° ACIMA da horizontal.
+    # rotation.x = pi/2 - atan(0.5) ≈ 63.43°. NÃO usar atan(0.5) (vista top-down).
+    # viewdir = (0, cos θ, -sin θ); câmera = origem - viewdir * distância (mira o centro).
+    theta = math.atan(0.5)
     distance = 10.0
-    camera_object.location = (0, -distance, distance * 2.0)
-    camera_object.rotation_euler = (math.atan(0.5), 0, 0)
+    camera_object.location = (0.0, -math.cos(theta) * distance, math.sin(theta) * distance)
+    camera_object.rotation_euler = (math.pi / 2 - theta, 0, 0)
 
     # 5. Configurar Render
     scene = bpy.context.scene

@@ -72,32 +72,32 @@ def setup_render_scene(args):
     camera_data = bpy.data.cameras.new(name="BakeCamera")
     camera_data.type = 'ORTHO'
     camera_data.ortho_scale = args.scale
-    
+    # sensor_fit VERTICAL: ortho_scale mapeia exatamente os 96px de altura,
+    # tornando o alinhamento do anchor (32,90) determinístico.
+    camera_data.sensor_fit = 'VERTICAL'
+
     camera_object = bpy.data.objects.new(name="BakeCamera", object_data=camera_data)
     bpy.context.scene.collection.objects.link(camera_object)
     bpy.context.scene.camera = camera_object
 
-    # Enquadramento dimétrico com âncora no pé:
-    # A base dos pés está na origem (0,0,0).
-    # Queremos alinhar a base do pé no pixel (32, 90) de um canvas 64x96.
-    # A diferença do centro (48) para a âncora (90) é 42 pixels para baixo.
-    # Deslocamento vertical no plano do canvas: dy = 42 pixels.
-    # No 3D, isso equivale a deslocar o ponto de foco da câmera para cima.
-    # offset_z = (dy_pixels / resolution_y) * ortho_scale / sin(math.atan(0.5))
-    theta = math.atan(0.5) # ~26.565°
-    sin_theta = math.sin(theta)
-    
+    # Projeção dimétrica 2:1 (Habbo-style): ELEVAÇÃO de 26.57° ACIMA da horizontal.
+    # rotation.x = pi/2 - atan(0.5) ≈ 63.43° a partir do eixo Z.
+    # NÃO usar atan(0.5): esse é o ângulo a partir do eixo vertical (top-down),
+    # que faz a câmera olhar o topo da cabeça em vez do rosto.
+    theta = math.atan(0.5)  # 26.57°
     res_y = 96
     anchor_y = 90
-    dy = anchor_y - (res_y / 2.0) # 42 pixels
-    
-    # Calcular offset_z
-    offset_z = (dy / res_y) * args.scale / sin_theta
+    # Enquadramento com âncora no pé: a base dos pés está na origem (0,0,0).
+    # Com sensor_fit VERTICAL, o foco em z=foco_z faz os pés (z=0) caírem no
+    # pixel 90 (42px abaixo do centro). cam_up_world·(0,0,-foco_z) = -42px.
+    foco_z = (anchor_y - res_y / 2.0) / res_y * args.scale / math.cos(theta)
 
-    # Posicionar câmera: Y = -distance, Z = distance * 2.0 + offset_z
+    # viewdir = (0, cos θ, -sin θ); câmera = foco - viewdir * distância.
     distance = 10.0
-    camera_object.location = (0, -distance, distance * 2.0 + offset_z)
-    camera_object.rotation_euler = (theta, 0.0, 0.0)
+    camera_object.location = (0.0,
+                              -math.cos(theta) * distance,
+                              foco_z + math.sin(theta) * distance)
+    camera_object.rotation_euler = (math.pi / 2 - theta, 0.0, 0.0)
 
     # 5. Configurar renderizador
     scene = bpy.context.scene
@@ -131,12 +131,15 @@ def run_bake(args, armature, meshes):
     frames_to_render = list(range(args.start_frame, args.end_frame + 1, step))
     print(f"Frames Blender a renderizar ({fps_blender} -> {args.fps} FPS): {frames_to_render}")
 
-    # 3. Definir direções de acordo com argumento
+    # 3. Definir direções de acordo com argumento.
+    # Mapa direção→ângulo Z calibrado visualmente (S=frente p/ câmera, N=costas);
+    # idêntico ao retarget_bake.py. NÃO usar o mapa antigo (NE=0) — ficava com
+    # E/W espelhados e S/N trocados.
     DIRECOES_8 = [
-        ('NE', 0),   ('E', 45),   ('SE', 90),  ('S', 135),
-        ('SW', 180), ('W', 225),  ('NW', 270), ('N', 315),
+        ('S', 0),    ('SE', 45),  ('E', 90),   ('NE', 135),
+        ('N', 180),  ('NW', 225), ('W', 270),  ('SW', 315),
     ]
-    DIRECOES_4 = [('SE', 90), ('S', 135), ('SW', 180), ('W', 225)]
+    DIRECOES_4 = [('SE', 45), ('E', 90), ('S', 0), ('SW', 315)]
     
     direcoes_selecionadas = DIRECOES_8 if args.directions == 8 else DIRECOES_4
 
