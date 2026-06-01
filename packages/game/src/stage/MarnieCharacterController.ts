@@ -177,6 +177,9 @@ export class MarnieCharacterController {
     this._emMovimento = true;
     this.animator?.retomar();
     try {
+      // Garante que o clip 'andar' inicie já no 1º segmento, mesmo que a direção
+      // seja igual à do repouso (senão o personagem deslizava no idle/parado).
+      let precisaIniciarAndar = true;
       for (let i = 1; i < caminho.length; i += 1) {
         const proximo = caminho[i];
         if (proximo === undefined) break;
@@ -186,8 +189,9 @@ export class MarnieCharacterController {
         const dist = Math.hypot(para.x - de.x, para.y - de.y);
 
         const direcao = direcaoPorTela(para.x - de.x, para.y - de.y);
-        if (direcao !== this.direcaoAtual) {
+        if (precisaIniciarAndar || direcao !== this.direcaoAtual) {
           this.direcaoAtual = direcao;
+          precisaIniciarAndar = false;
           void this.animator?.reproduzir(CLIP_ANDAR, direcao);
         }
 
