@@ -7,6 +7,7 @@ import type { EstadoDeJogo } from '@core/events/EstadoDeJogo';
 import { salvarParaEstadoDeJogo } from '@core/events/EstadoDeJogo';
 import { resolverAcao } from '@core/interaction/ActionResolver';
 import { interactionLock } from '@core/interaction/InteractionLock';
+import { persistirLogsDeAcao } from '@core/log/LogPersistenceHook';
 import { carregarComodoIso } from '../content/isoRoomCatalog';
 import { IsoRoomController, ALTURA_PAREDE_PX } from '../stage/IsoRoomController';
 import type { ObjetoInterativoIso } from '../stage/IsoRoomController';
@@ -179,6 +180,12 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
         mesJogo: estadoHud.saveAtual?.estadoMundo.mesAtual ?? 1,
         localId: estadoExploracao.localAtualId,
       });
+
+      // Persistir logs no IndexedDB — fire-and-forget, não bloqueia UI
+      const saveId = useHudStore.getState().saveIdAtivo;
+      if (saveId !== undefined) {
+        persistirLogsDeAcao(saveId, resultado);
+      }
 
       const container = personagem.obterContainer();
       mostrarFeedback({
