@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import type { LogCamadaEnum } from '@core/log/LifeLog';
 import { LogCamadaEnum as LogCamadaSchema } from '@core/log/LifeLog';
+import { useHudStore } from '../state/hudStore';
 import './LifeLogPanel.css';
 
 type CamadaVisivel = Exclude<LogCamadaEnum, 'feedback'>;
@@ -12,7 +13,8 @@ type EntradaLogNarrativo = {
   readonly anoJogo: number;
   readonly mesJogo: number;
   readonly texto: string;
-  readonly tags: readonly string[];
+  readonly timestamp: number;
+  readonly tags: string[];
 };
 
 type PropsLifeLogPanel = {
@@ -40,41 +42,6 @@ const ROTULOS_CAMADA: Readonly<Record<CamadaVisivel, string>> = {
   resumo_periodico: 'Resumo',
 };
 
-const MOCK_LOG: readonly EntradaLogNarrativo[] = [
-  {
-    id: '1',
-    camada: 'acao_simples',
-    anoJogo: 1992,
-    mesJogo: 3,
-    texto: 'Voce treinou na academia.',
-    tags: [],
-  },
-  {
-    id: '2',
-    camada: 'consequencia',
-    anoJogo: 1992,
-    mesJogo: 3,
-    texto: 'Forca +1 apos rotina de treino.',
-    tags: [],
-  },
-  {
-    id: '3',
-    camada: 'evento_importante',
-    anoJogo: 1992,
-    mesJogo: 6,
-    texto: 'Aos 7 anos, voce fez seu primeiro amigo.',
-    tags: [],
-  },
-  {
-    id: '4',
-    camada: 'resumo_periodico',
-    anoJogo: 1992,
-    mesJogo: 12,
-    texto: 'Este ano voce cresceu, brigou com o irmao e descobriu que gosta de futebol.',
-    tags: [],
-  },
-];
-
 function ehFiltroCamada(valor: FiltroLog): valor is CamadaVisivel {
   return valor !== 'tudo' && LogCamadaSchema.options.includes(valor);
 }
@@ -83,13 +50,20 @@ function formatarData(entrada: EntradaLogNarrativo): string {
   return `${String(entrada.mesJogo).padStart(2, '0')}/${entrada.anoJogo}`;
 }
 
+function ehCamadaVisivel(camada: LogCamadaEnum): camada is CamadaVisivel {
+  return camada !== 'feedback';
+}
+
 export function LifeLogPanel({ aberto, aoFechar }: PropsLifeLogPanel): React.JSX.Element | null {
   const [filtro, setFiltro] = useState<FiltroLog>('tudo');
+  const logNarrativo = useHudStore((estado) => estado.logNarrativo);
   const entradasFiltradas = useMemo(() => (
     ehFiltroCamada(filtro)
-      ? MOCK_LOG.filter((entrada) => entrada.camada === filtro)
-      : MOCK_LOG
-  ), [filtro]);
+      ? logNarrativo.filter((entrada): entrada is EntradaLogNarrativo => (
+          ehCamadaVisivel(entrada.camada) && entrada.camada === filtro
+        ))
+      : logNarrativo.filter((entrada): entrada is EntradaLogNarrativo => ehCamadaVisivel(entrada.camada))
+  ).slice().sort((a, b) => b.timestamp - a.timestamp), [filtro, logNarrativo]);
 
   if (!aberto) return null;
 
@@ -124,6 +98,9 @@ export function LifeLogPanel({ aberto, aoFechar }: PropsLifeLogPanel): React.JSX
       </div>
 
       <div className="life-log__lista" aria-live="polite">
+        {entradasFiltradas.length === 0 && (
+          <p className="life-log__vazio">Nenhuma acao registrada nesta sessao.</p>
+        )}
         {entradasFiltradas.map((entrada) => (
           <article
             key={entrada.id}

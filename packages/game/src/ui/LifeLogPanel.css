@@ -96,6 +96,17 @@
   padding: 12px;
 }
 
+.life-log__vazio {
+  margin: 0;
+  padding: 12px;
+  color: var(--vida-muted);
+  font-size: var(--vida-fs-12);
+  line-height: 1.45;
+  background: var(--vida-surface2);
+  border: 1px solid var(--vida-border);
+  border-radius: var(--vida-r-sm);
+}
+
 .life-log__entrada--evento_importante {
   border-color: var(--vida-accent);
   box-shadow: inset 3px 0 0 var(--vida-accent);
