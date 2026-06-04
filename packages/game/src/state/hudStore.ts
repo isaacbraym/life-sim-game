@@ -54,6 +54,8 @@ type EstadoHud = {
   readonly eventosVividos: readonly string[];
   readonly logEventos: readonly EntradaLog[];
   readonly logNarrativo: readonly LogEntry[];
+  // Contador incrementado a cada ação resolvida — dispara recarga do LifeLogPanel.
+  readonly versaoLog: number;
   readonly conteudoAdultoAtivo: boolean;
   readonly saveIdAtivo: string | undefined;
   readonly ritmoAtual: 'mensal' | 'semestral' | 'anual' | undefined;
@@ -139,6 +141,7 @@ const ESTADO_INICIAL: EstadoHud = {
   eventosVividos: [],
   logEventos: [],
   logNarrativo: [],
+  versaoLog: 0,
   conteudoAdultoAtivo: false,
   saveIdAtivo: undefined,
   ritmoAtual: undefined,
@@ -279,6 +282,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
         eventosVividos: protagonistaAtual.eventosVividos,
         atributos: atributosParaHud(protagonistaAtual),
         logNarrativo: [...anterior.logNarrativo, ...entradasPersistentes],
+        versaoLog: anterior.versaoLog + 1,
       }));
       return;
     }
@@ -325,6 +329,7 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
         profissaoAtual,
         atributos,
         logNarrativo: [...anterior.logNarrativo, ...entradasPersistentes],
+        versaoLog: anterior.versaoLog + 1,
       };
     });
   },
