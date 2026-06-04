@@ -3,6 +3,7 @@ import type { Effect } from '../schemas/effect';
 import type { EstadoDeJogo } from '../events/EstadoDeJogo';
 import type { Npc } from '../schemas/npc';
 import type { LogEntry, LogCamadaEnum } from '../log/LifeLog';
+import { registrarResultadoNoLog } from '../log/LifeLog';
 import type { EstadoProgressao } from './ProgressionTracker';
 import { avaliarPredicado } from '../events/PredicateEvaluator';
 import { rolarD20ComModificador } from '../rpg/D20Roll';
@@ -33,6 +34,14 @@ export type ResultadoDeAcao = {
   readonly eventosDisparados: readonly string[];
   readonly progressoAtualizado: Record<string, number>;
 };
+
+type ObservadorResultadoAcao = (
+  resultado: ResultadoDeAcao,
+  acao: ActionDefinition,
+  contexto: ContextoDeAcao,
+) => void;
+
+let observadorResultadoAcao: ObservadorResultadoAcao | undefined;
 
 export class AcaoNaoPermitidaError extends Error {
   constructor(readonly acaoId: string) {
@@ -70,8 +79,6 @@ function gerarLogsDeAcao(
     ? (acao.logSucesso ?? acao.logAcao)
     : (acao.logFalha ?? acao.logAcao);
 
-  if (texto === undefined) return [];
-
   const camada: LogCamadaEnum =
     acao.narrativeWeight === 'major'
       ? 'evento_importante'
@@ -85,11 +92,63 @@ function gerarLogsDeAcao(
     timestamp: Date.now(),
     anoJogo: contexto.anoJogo,
     mesJogo: contexto.mesJogo,
-    texto,
+    texto: texto ?? `Voce realizou ${acao.rotulo}.`,
     npcIds: contexto.npcAlvo !== undefined ? [contexto.npcAlvo.npcId] : undefined,
     localId: contexto.localId,
     tags: [acao.id, desfecho],
   }];
+}
+
+function formatarDelta(delta: number): string {
+  return delta > 0 ? `+${delta}` : String(delta);
+}
+
+function textoConsequencia(efeito: Effect): string | undefined {
+  switch (efeito.tipo) {
+    case 'alterar_atributo':
+      return `${efeito.atributo} ${formatarDelta(efeito.delta)}.`;
+    case 'alterar_dinheiro':
+      return `Dinheiro ${formatarDelta(efeito.delta)}.`;
+    case 'alterar_humor':
+      return `Humor ${formatarDelta(efeito.delta)}.`;
+    case 'alterar_saude':
+      return `Saude ${formatarDelta(efeito.delta)}.`;
+    case 'mudar_profissao':
+      return `Profissao alterada para ${efeito.profissao}.`;
+    case 'aplicar_status':
+      return `Status aplicado: ${efeito.status}.`;
+    case 'disparar_evento':
+      return `Evento preparado: ${efeito.eventoId}.`;
+    case 'alterar_relacionamento':
+    case 'matar_npc':
+    case 'adicionar_flag':
+    case 'remover_flag':
+      return undefined;
+  }
+}
+
+function gerarLogsDeConsequencias(
+  acao: ActionDefinition,
+  desfecho: DesfechoAcao,
+  efeitos: readonly Effect[],
+  contexto: ContextoDeAcao,
+): LogEntry[] {
+  return efeitos.flatMap((efeito) => {
+    const texto = textoConsequencia(efeito);
+    if (texto === undefined) return [];
+
+    return [{
+      id: crypto.randomUUID(),
+      camada: 'consequencia' as const,
+      timestamp: Date.now(),
+      anoJogo: contexto.anoJogo,
+      mesJogo: contexto.mesJogo,
+      texto,
+      npcIds: contexto.npcAlvo !== undefined ? [contexto.npcAlvo.npcId] : undefined,
+      localId: contexto.localId,
+      tags: [acao.id, desfecho, efeito.tipo],
+    }];
+  });
 }
 
 function processarEventHooks(
@@ -111,6 +170,12 @@ function processarEventHooks(
     )
     .filter(h => Math.random() < h.chance)
     .map(h => h.eventoId);
+}
+
+export function configurarObservadorResultadoAcao(
+  observador: ObservadorResultadoAcao | undefined,
+): void {
+  observadorResultadoAcao = observador;
 }
 
 export function resolverAcao(
@@ -166,14 +231,23 @@ export function resolverAcao(
       }
     }
 
-    return {
+    const efeitosAplicados = [...(acao.custos ?? []), ...efeitosAcao, ...efeitosProgressao];
+    const resultado: ResultadoDeAcao = {
       desfecho,
       rollValor,
-      efeitosAplicados: [...(acao.custos ?? []), ...efeitosAcao, ...efeitosProgressao],
-      logsGerados: gerarLogsDeAcao(acao, desfecho, contexto),
+      efeitosAplicados,
+      logsGerados: [
+        ...gerarLogsDeAcao(acao, desfecho, contexto),
+        ...gerarLogsDeConsequencias(acao, desfecho, efeitosAplicados, contexto),
+      ],
       eventosDisparados: processarEventHooks(acao.eventHooks, desfecho),
       progressoAtualizado,
     };
+
+    registrarResultadoNoLog(resultado);
+    observadorResultadoAcao?.(resultado, acao, contexto);
+
+    return resultado;
   } finally {
     interactionLock.destravar();
   }
