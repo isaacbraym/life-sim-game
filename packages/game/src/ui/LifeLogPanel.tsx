@@ -62,8 +62,10 @@ export function LifeLogPanel({ aberto, aoFechar }: PropsLifeLogPanel): React.JSX
   const [entradas, setEntradas] = useState<readonly EntradaLogNarrativo[]>([]);
   const [carregando, setCarregando] = useState<boolean>(false);
   const saveIdAtivo = useHudStore((estado) => estado.saveIdAtivo);
+  const versaoLog = useHudStore((estado) => estado.versaoLog);
 
-  // Carregar o log real do IndexedDB sempre que o painel abrir ou o save mudar.
+  // Carregar o log real do IndexedDB ao abrir o painel, ao trocar de save, ou
+  // quando uma nova ação for resolvida (versaoLog incrementa).
   useEffect(() => {
     if (!aberto || saveIdAtivo === undefined) return;
 
@@ -95,7 +97,7 @@ export function LifeLogPanel({ aberto, aoFechar }: PropsLifeLogPanel): React.JSX
       });
 
     return () => { cancelado = true; };
-  }, [aberto, saveIdAtivo]);
+  }, [aberto, saveIdAtivo, versaoLog]);
 
   const entradasFiltradas = useMemo(() => (
     ehFiltroCamada(filtro)
