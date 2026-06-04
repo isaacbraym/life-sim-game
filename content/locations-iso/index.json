@@ -1,0 +1,89 @@
+{
+  "comodos": [
+    {
+      "id": "area_musculacao_iso",
+      "nome": "Área de Musculação ISO",
+      "arquivo": "area_musculacao_iso.json"
+    },
+    {
+      "id": "area_principal_parque_iso",
+      "nome": "Área Principal do Parque ISO",
+      "arquivo": "area_principal_parque_iso.json"
+    },
+    {
+      "id": "balcao_bar_iso",
+      "nome": "Balcão do Bar ISO",
+      "arquivo": "balcao_bar_iso.json"
+    },
+    {
+      "id": "banheiro_simples_iso",
+      "nome": "Banheiro Simples ISO",
+      "arquivo": "banheiro_simples_iso.json"
+    },
+    {
+      "id": "corredor_escola_iso",
+      "nome": "Corredor da Escola ISO",
+      "arquivo": "corredor_escola_iso.json"
+    },
+    {
+      "id": "cozinha_simples_iso",
+      "nome": "Cozinha Simples ISO",
+      "arquivo": "cozinha_simples_iso.json"
+    },
+    {
+      "id": "escritorio_anos90_iso",
+      "nome": "Escritório Anos 90 ISO",
+      "arquivo": "escritorio_anos90_iso.json"
+    },
+    {
+      "id": "patio_escola_iso",
+      "nome": "Pátio da Escola ISO",
+      "arquivo": "patio_escola_iso.json"
+    },
+    {
+      "id": "pronto_socorro_iso",
+      "nome": "Pronto Socorro ISO",
+      "arquivo": "pronto_socorro_iso.json"
+    },
+    {
+      "id": "quarto_adolescente_iso",
+      "nome": "Quarto do Adolescente ISO",
+      "arquivo": "quarto_adolescente_iso.json"
+    },
+    {
+      "id": "quarto_simples_iso",
+      "nome": "Quarto Simples ISO",
+      "arquivo": "quarto_simples_iso.json"
+    },
+    {
+      "id": "quarto_simples_iso_v2",
+      "nome": "Quarto Simples ISO v2",
+      "arquivo": "quarto_simples_iso_v2.json"
+    },
+    {
+      "id": "recepcao_academia_iso",
+      "nome": "Recepção da Academia ISO",
+      "arquivo": "recepcao_academia_iso.json"
+    },
+    {
+      "id": "sala_de_aula_iso",
+      "nome": "Sala de Aula ISO",
+      "arquivo": "sala_de_aula_iso.json"
+    },
+    {
+      "id": "sala_simples_iso",
+      "nome": "Sala Simples ISO",
+      "arquivo": "sala_simples_iso.json"
+    },
+    {
+      "id": "sala_simples_iso_v2",
+      "nome": "Sala Simples ISO v2",
+      "arquivo": "sala_simples_iso_v2.json"
+    },
+    {
+      "id": "restaurante_salao_iso",
+      "nome": "Salão do Restaurante ISO",
+      "arquivo": "salao_restaurante_iso.json"
+    }
+  ]
+}

@@ -123,6 +123,7 @@ const locationsIsoFiles = getJsonFiles(locationsIsoDir);
 console.log(`\n[locations-iso] ${locationsIsoFiles.length} arquivo(s) encontrado(s)`);
 for (const filePath of locationsIsoFiles) {
   const rel = path.relative(locationsIsoDir, filePath);
+  if (rel === 'index.json') continue;
   try {
     const raw = fs.readFileSync(filePath, 'utf8');
     const parsed = JSON.parse(raw) as unknown;
