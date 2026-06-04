@@ -135,7 +135,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 0, "dy": 1 }
-      ]
+      ],
+      "acoes": ["comer", "pegar_lanche", "examinar"]
     },
     {
       "id": "fogao_1",
@@ -146,7 +147,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 }
-      ]
+      ],
+      "acoes": ["cozinhar", "examinar"]
     },
     {
       "id": "pia_1",
@@ -157,7 +159,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 }
-      ]
+      ],
+      "acoes": ["lavar_louca", "examinar"]
     },
     {
       "id": "mesa_cozinha_1",
@@ -170,7 +173,8 @@
         { "dx": 1, "dy": 0 },
         { "dx": 0, "dy": 1 },
         { "dx": 1, "dy": 1 }
-      ]
+      ],
+      "acoes": ["comer", "sentar", "examinar"]
     },
     {
       "id": "cadeira_1",
@@ -180,7 +184,8 @@
       "direcao": "E",
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 }
-      ]
+      ],
+      "acoes": ["sentar", "examinar"]
     },
     {
       "id": "cadeira_2",
@@ -190,7 +195,8 @@
       "direcao": "W",
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 }
-      ]
+      ],
+      "acoes": ["sentar", "examinar"]
     }
   ],
   "saidas": [

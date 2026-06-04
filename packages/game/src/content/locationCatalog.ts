@@ -10,15 +10,15 @@ export type LocalDisponivel = {
 };
 
 const COMODOS_ENTRADA_POR_LOCAL: Readonly<Record<string, string>> = {
-  casa: 'quarto_simples',
-  escola: 'sala_de_aula',
-  academia: 'area_musculacao',
+  casa: 'quarto_simples_iso',
+  escola: 'sala_de_aula_iso',
+  academia: 'area_musculacao_iso',
 };
 
 const LOCAIS_DEMO: readonly Omit<LocalDisponivel, 'disponivel'>[] = [
-  { id: 'casa', nome: 'Casa', icone: '\u{1F3E0}', comodoEntrada: 'quarto_simples' },
-  { id: 'escola', nome: 'Escola', icone: '\u{1F3EB}', comodoEntrada: 'sala_de_aula' },
-  { id: 'academia', nome: 'Academia', icone: '\u{1F4AA}', comodoEntrada: 'area_musculacao' },
+  { id: 'casa', nome: 'Casa', icone: '\u{1F3E0}', comodoEntrada: 'quarto_simples_iso' },
+  { id: 'escola', nome: 'Escola', icone: '\u{1F3EB}', comodoEntrada: 'sala_de_aula_iso' },
+  { id: 'academia', nome: 'Academia', icone: '\u{1F4AA}', comodoEntrada: 'area_musculacao_iso' },
 ];
 
 const MODULOS_COMODOS = import.meta.glob('../../../../content/locations/**/*.json', { eager: true });
@@ -43,6 +43,20 @@ const COMODOS_POR_ID = Object.values(MODULOS_COMODOS).reduce<Record<string, Tipo
 );
 
 export function obterComodo(comodoId: string): TipoComodoDefinition | undefined {
+  if (comodoId.endsWith('_iso')) {
+    return {
+      id: comodoId,
+      localId: comodoId.replace('_iso', ''),
+      nome: comodoId,
+      backgroundAsset: '',
+      tamanho: { largura: 800, altura: 600 },
+      navZonas: [],
+      pontosDeSaida: [],
+      objetos: [],
+      npcsElegiveis: [],
+      ambientTags: [],
+    };
+  }
   return COMODOS_POR_ID[comodoId];
 }
 
