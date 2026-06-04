@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import type { LogCamadaEnum } from '@core/log/LifeLog';
-import { LogCamadaEnum as LogCamadaSchema } from '@core/log/LifeLog';
+import { LogCamadaEnum as LogCamadaSchema, carregarEntradasLog } from '@core/log/LifeLog';
 import { useHudStore } from '../state/hudStore';
 import './LifeLogPanel.css';
 
@@ -42,28 +42,66 @@ const ROTULOS_CAMADA: Readonly<Record<CamadaVisivel, string>> = {
   resumo_periodico: 'Resumo',
 };
 
+/** Quantas entradas mais recentes carregar do IndexedDB ao abrir o painel. */
+const LIMITE_ENTRADAS = 100;
+
 function ehFiltroCamada(valor: FiltroLog): valor is CamadaVisivel {
   return valor !== 'tudo' && LogCamadaSchema.options.includes(valor);
-}
-
-function formatarData(entrada: EntradaLogNarrativo): string {
-  return `${String(entrada.mesJogo).padStart(2, '0')}/${entrada.anoJogo}`;
 }
 
 function ehCamadaVisivel(camada: LogCamadaEnum): camada is CamadaVisivel {
   return camada !== 'feedback';
 }
 
+function formatarData(entrada: EntradaLogNarrativo): string {
+  return `${String(entrada.mesJogo).padStart(2, '0')}/${entrada.anoJogo}`;
+}
+
 export function LifeLogPanel({ aberto, aoFechar }: PropsLifeLogPanel): React.JSX.Element | null {
   const [filtro, setFiltro] = useState<FiltroLog>('tudo');
-  const logNarrativo = useHudStore((estado) => estado.logNarrativo);
+  const [entradas, setEntradas] = useState<readonly EntradaLogNarrativo[]>([]);
+  const [carregando, setCarregando] = useState<boolean>(false);
+  const saveIdAtivo = useHudStore((estado) => estado.saveIdAtivo);
+
+  // Carregar o log real do IndexedDB sempre que o painel abrir ou o save mudar.
+  useEffect(() => {
+    if (!aberto || saveIdAtivo === undefined) return;
+
+    let cancelado = false;
+    setCarregando(true);
+
+    carregarEntradasLog(saveIdAtivo, LIMITE_ENTRADAS)
+      .then((entradasRaw) => {
+        if (cancelado) return;
+        setEntradas(
+          entradasRaw
+            .filter((entrada) => ehCamadaVisivel(entrada.camada))
+            .map((entrada) => ({
+              id: entrada.id,
+              camada: entrada.camada as CamadaVisivel,
+              anoJogo: entrada.anoJogo,
+              mesJogo: entrada.mesJogo,
+              texto: entrada.texto,
+              timestamp: entrada.timestamp,
+              tags: entrada.tags,
+            })),
+        );
+      })
+      .catch((erro: unknown) => {
+        console.error('[LifeLogPanel] Falha ao carregar log:', erro);
+      })
+      .finally(() => {
+        if (!cancelado) setCarregando(false);
+      });
+
+    return () => { cancelado = true; };
+  }, [aberto, saveIdAtivo]);
+
   const entradasFiltradas = useMemo(() => (
     ehFiltroCamada(filtro)
-      ? logNarrativo.filter((entrada): entrada is EntradaLogNarrativo => (
-          ehCamadaVisivel(entrada.camada) && entrada.camada === filtro
-        ))
-      : logNarrativo.filter((entrada): entrada is EntradaLogNarrativo => ehCamadaVisivel(entrada.camada))
-  ).slice().sort((a, b) => b.timestamp - a.timestamp), [filtro, logNarrativo]);
+      ? entradas.filter((entrada) => entrada.camada === filtro)
+      : entradas.slice()
+  ).sort((a, b) => b.timestamp - a.timestamp), [filtro, entradas]);
 
   if (!aberto) return null;
 
@@ -98,10 +136,15 @@ export function LifeLogPanel({ aberto, aoFechar }: PropsLifeLogPanel): React.JSX
       </div>
 
       <div className="life-log__lista" aria-live="polite">
-        {entradasFiltradas.length === 0 && (
-          <p className="life-log__vazio">Nenhuma acao registrada nesta sessao.</p>
+        {carregando && (
+          <p className="life-log__vazio">Carregando...</p>
         )}
-        {entradasFiltradas.map((entrada) => (
+        {!carregando && entradasFiltradas.length === 0 && (
+          <p className="life-log__vazio">
+            Nenhuma ação registrada ainda. Explore um cômodo e interaja com os objetos.
+          </p>
+        )}
+        {!carregando && entradasFiltradas.map((entrada) => (
           <article
             key={entrada.id}
             className={`life-log__entrada life-log__entrada--${entrada.camada}`}
@@ -117,4 +160,3 @@ export function LifeLogPanel({ aberto, aoFechar }: PropsLifeLogPanel): React.JSX
     </aside>
   );
 }
-
