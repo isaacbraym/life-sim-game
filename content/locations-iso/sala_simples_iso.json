@@ -156,7 +156,8 @@
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 },
         { "dx": 2, "dy": 0 }
-      ]
+      ],
+      "acoes": ["sentar", "descansar", "examinar"]
     },
     {
       "id": "mesa_1",
@@ -167,7 +168,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 }
-      ]
+      ],
+      "acoes": ["examinar"]
     },
     {
       "id": "tv_1",
@@ -178,7 +180,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 }
-      ]
+      ],
+      "acoes": ["assistir_tv", "examinar"]
     },
     {
       "id": "poltrona_1",
@@ -188,7 +191,8 @@
       "direcao": "W",
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 }
-      ]
+      ],
+      "acoes": ["sentar", "descansar", "examinar"]
     }
   ],
   "saidas": [

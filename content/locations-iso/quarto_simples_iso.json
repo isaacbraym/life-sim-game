@@ -135,7 +135,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 }
-      ]
+      ],
+      "acoes": ["dormir", "descansar", "examinar"]
     },
     {
       "id": "escrivaninha_1",
@@ -146,7 +147,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 }
-      ]
+      ],
+      "acoes": ["estudar", "examinar"]
     },
     {
       "id": "cadeira_1",
@@ -156,7 +158,8 @@
       "direcao": "N",
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 }
-      ]
+      ],
+      "acoes": ["sentar", "examinar"]
     },
     {
       "id": "tv_1",
@@ -167,7 +170,8 @@
       "bloqueaTiles": [
         { "dx": 0, "dy": 0 },
         { "dx": 1, "dy": 0 }
-      ]
+      ],
+      "acoes": ["assistir_tv", "examinar"]
     }
   ],
   "saidas": [
