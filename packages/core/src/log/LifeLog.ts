@@ -22,6 +22,11 @@ export const LogEntrySchema = z.object({
 });
 export type LogEntry = z.infer<typeof LogEntrySchema>;
 
+type OuvinteLifeLogSessao = (entradas: readonly LogEntry[]) => void;
+
+const entradasSessao: LogEntry[] = [];
+const ouvintesSessao = new Set<OuvinteLifeLogSessao>();
+
 export type LifeLog = {
   adicionarEntrada(entrada: Omit<LogEntry, 'id' | 'timestamp'>): void;
   buscarPorCamada(camada: LogCamadaEnum, limite?: number): readonly LogEntry[];
@@ -62,4 +67,33 @@ export function criarLifeLog(): LifeLog {
         : `Período ${anoInicio}–${anoFim}: sem registros.`;
     },
   };
+}
+
+export function obterEntradasSessaoLifeLog(): readonly LogEntry[] {
+  return entradasSessao;
+}
+
+export function adicionarEntradasSessaoLifeLog(entradas: readonly LogEntry[]): void {
+  if (entradas.length === 0) return;
+
+  entradasSessao.push(...entradas);
+
+  for (const ouvinte of ouvintesSessao) {
+    ouvinte(entradasSessao);
+  }
+}
+
+export function assinarLifeLogSessao(ouvinte: OuvinteLifeLogSessao): () => void {
+  ouvintesSessao.add(ouvinte);
+  ouvinte(entradasSessao);
+
+  return () => {
+    ouvintesSessao.delete(ouvinte);
+  };
+}
+
+export function registrarResultadoNoLog(resultado: {
+  readonly logsGerados: readonly LogEntry[];
+}): void {
+  adicionarEntradasSessaoLifeLog(resultado.logsGerados);
 }

@@ -7,8 +7,9 @@ import {
   GameEngine as CoreGameEngine,
   rolarD20ComModificador,
 } from '@lifesim/core';
-import type { Event as CoreEvent, ResultadoResolucao, SaveSlot } from '@lifesim/core';
+import type { Event as CoreEvent, LogEntry, ResultadoDeAcao, ResultadoResolucao, SaveSlot } from '@lifesim/core';
 import type { TierResultado } from '@core/rpg/D20Roll';
+import type { AtributoRPG } from '@core/schemas/effect';
 import { ATIVIDADES_BASE } from '@core/activities/ActivityCatalog';
 import { realizarAtividade as realizarAtividadeCore } from '@core/activities/ActivityEngine';
 import { salvarSave } from '@core/persistence/SaveManager';
@@ -52,6 +53,7 @@ type EstadoHud = {
   // [NEW] feat/ui-sprint-1-5 — EventLog, SettingsScreen, DeathScreen
   readonly eventosVividos: readonly string[];
   readonly logEventos: readonly EntradaLog[];
+  readonly logNarrativo: readonly LogEntry[];
   readonly conteudoAdultoAtivo: boolean;
   readonly saveIdAtivo: string | undefined;
   readonly ritmoAtual: 'mensal' | 'semestral' | 'anual' | undefined;
@@ -87,6 +89,8 @@ type AcoesHud = {
   readonly inicializarEngine: (save: SaveSlot) => void;
   readonly avancarTurno: () => Promise<void>;
   readonly realizarAtividade: (idAtividade: string) => void;
+  readonly registrarEntradasLog: (entradas: readonly LogEntry[]) => void;
+  readonly aplicarResultadoAcao: (resultado: ResultadoDeAcao) => void;
   // [NEW]
   readonly alterarConteudoAdulto: (valor: boolean) => void;
 };
@@ -134,6 +138,7 @@ const ESTADO_INICIAL: EstadoHud = {
   telaAtual: 'jogo',
   eventosVividos: [],
   logEventos: [],
+  logNarrativo: [],
   conteudoAdultoAtivo: false,
   saveIdAtivo: undefined,
   ritmoAtual: undefined,
@@ -155,6 +160,39 @@ function atributosParaHud(protagonista: SaveSlot['protagonista']): readonly Atri
     { nome: 'Constituição', valor: protagonista.atributos.constituicao },
     { nome: 'Sorte',        valor: protagonista.atributos.sorte        },
   ];
+}
+
+function limitar(valor: number, minimo: number, maximo: number): number {
+  return Math.max(minimo, Math.min(maximo, valor));
+}
+
+function nomeAtributoHud(atributo: AtributoRPG): string {
+  switch (atributo) {
+    case 'forca':
+      return 'ForÃ§a';
+    case 'inteligencia':
+      return 'InteligÃªncia';
+    case 'carisma':
+      return 'Carisma';
+    case 'constituicao':
+      return 'ConstituiÃ§Ã£o';
+    case 'sorte':
+      return 'Sorte';
+  }
+}
+
+function atualizarAtributoHud(
+  atributos: readonly AtributoRpg[],
+  atributo: AtributoRPG,
+  delta: number,
+): readonly AtributoRpg[] {
+  const nome = nomeAtributoHud(atributo);
+
+  return atributos.map((item) => (
+    item.nome === nome
+      ? { ...item, valor: limitar(item.valor + delta, 1, 20) }
+      : item
+  ));
 }
 
 function estadoHudDoSave(save: SaveSlot): Pick<
@@ -198,6 +236,98 @@ export const useHudStore = create<EstadoHud & AcoesHud>((set, get) => ({
 
   atualizarEstado: (parcial) =>
     set((anterior) => ({ ...anterior, ...parcial })),
+
+  registrarEntradasLog: (entradas) => {
+    const entradasPersistentes = entradas.filter((entrada) => entrada.camada !== 'feedback');
+    if (entradasPersistentes.length === 0) return;
+
+    set((anterior) => ({
+      ...anterior,
+      logNarrativo: [...anterior.logNarrativo, ...entradasPersistentes],
+    }));
+  },
+
+  aplicarResultadoAcao: (resultado) => {
+    const entradasPersistentes = resultado.logsGerados.filter((entrada) => entrada.camada !== 'feedback');
+    const engine = get().engineAtivo;
+
+    if (engine !== undefined) {
+      const saveAtual = engine.obterEstadoAtual();
+      let protagonistaAtual = saveAtual.protagonista;
+      let rosterAtual = saveAtual.roster;
+
+      for (const efeito of resultado.efeitosAplicados) {
+        const aplicado = aplicarEfeito(efeito, protagonistaAtual, rosterAtual);
+        protagonistaAtual = aplicado.personagem;
+        rosterAtual = [...aplicado.roster];
+      }
+
+      engine.aplicarResultadoEfeitos(protagonistaAtual, rosterAtual);
+      const saveAtualizado = engine.obterEstadoAtual();
+      registrarAutosave(saveAtualizado, 'agendar');
+
+      set((anterior) => ({
+        ...anterior,
+        saveAtual: saveAtualizado,
+        nomePersonagem: `${protagonistaAtual.nome} ${protagonistaAtual.sobrenome}`,
+        profissaoAtual: protagonistaAtual.profissaoAtual ?? '',
+        idadeAnos: Math.floor(protagonistaAtual.idadeAtualMeses / 12),
+        anoAtual: saveAtualizado.estadoMundo.anoAtual,
+        humor: protagonistaAtual.humorAtual,
+        saude: protagonistaAtual.saudeAtual,
+        dinheiro: protagonistaAtual.dinheiro,
+        eventosVividos: protagonistaAtual.eventosVividos,
+        atributos: atributosParaHud(protagonistaAtual),
+        logNarrativo: [...anterior.logNarrativo, ...entradasPersistentes],
+      }));
+      return;
+    }
+
+    set((anterior) => {
+      let humor = anterior.humor;
+      let saude = anterior.saude;
+      let dinheiro = anterior.dinheiro;
+      let profissaoAtual = anterior.profissaoAtual;
+      let atributos = anterior.atributos;
+
+      for (const efeito of resultado.efeitosAplicados) {
+        switch (efeito.tipo) {
+          case 'alterar_humor':
+            humor = limitar(humor + efeito.delta, 0, 100);
+            break;
+          case 'alterar_saude':
+            saude = limitar(saude + efeito.delta, 0, 100);
+            break;
+          case 'alterar_dinheiro':
+            dinheiro += efeito.delta;
+            break;
+          case 'alterar_atributo':
+            atributos = atualizarAtributoHud(atributos, efeito.atributo, efeito.delta);
+            break;
+          case 'mudar_profissao':
+            profissaoAtual = efeito.profissao;
+            break;
+          case 'adicionar_flag':
+          case 'remover_flag':
+          case 'alterar_relacionamento':
+          case 'matar_npc':
+          case 'aplicar_status':
+          case 'disparar_evento':
+            break;
+        }
+      }
+
+      return {
+        ...anterior,
+        humor,
+        saude,
+        dinheiro,
+        profissaoAtual,
+        atributos,
+        logNarrativo: [...anterior.logNarrativo, ...entradasPersistentes],
+      };
+    });
+  },
 
   resolverOpcao: (indice: number) => {
     const { eventoAtivo, engineAtivo } = get();
