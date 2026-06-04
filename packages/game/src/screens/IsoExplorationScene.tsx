@@ -9,6 +9,7 @@ import { resolverAcao } from '@core/interaction/ActionResolver';
 import { interactionLock } from '@core/interaction/InteractionLock';
 import { persistirLogsDeAcao } from '@core/log/LogPersistenceHook';
 import { carregarCatalogoAcoes, obterAcao, acaoFallback } from '@game/content/actionCatalog';
+import { efeitoParaTexto, efeitoParaCor } from '@game/ui/efeitoParaTexto';
 import { carregarComodoIso } from '../content/isoRoomCatalog';
 import { IsoRoomController, ALTURA_PAREDE_PX } from '../stage/IsoRoomController';
 import type { ObjetoInterativoIso } from '../stage/IsoRoomController';
@@ -182,12 +183,32 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       }
 
       const container = personagem.obterContainer();
-      mostrarFeedback({
-        app,
-        posicaoMundo: { x: container.x, y: container.y - 72 },
-        texto: resultado.desfecho === 'direto' ? `✓ ${acaoId}` : '+Ação',
-        cor: 0x4ade80,
-      });
+      const posicaoFeedback = { x: container.x, y: container.y - 72 };
+
+      // Um floating label por efeito visível, escalonados para não se sobrepor.
+      let offsetY = 0;
+      for (const efeito of resultado.efeitosAplicados) {
+        const texto = efeitoParaTexto(efeito);
+        if (texto === undefined) continue;
+        mostrarFeedback({
+          app,
+          posicaoMundo: { x: posicaoFeedback.x, y: posicaoFeedback.y + offsetY },
+          texto,
+          cor: efeitoParaCor(efeito),
+          duracao: 1.8,
+        });
+        offsetY -= 28;
+      }
+
+      // Fallback: ação sem efeito visível (ex.: só flags) ainda dá confirmação.
+      if (offsetY === 0) {
+        mostrarFeedback({
+          app,
+          posicaoMundo: posicaoFeedback,
+          texto: resultado.desfecho === 'direto' ? `✓ ${acaoDefinida.rotulo}` : '+Ação',
+          cor: 0x4ade80,
+        });
+      }
     } catch (erroAcao) {
       console.error('[IsoExplorationScene] Falha ao resolver ação:', erroAcao);
       const container = personagemRef.current?.obterContainer();
