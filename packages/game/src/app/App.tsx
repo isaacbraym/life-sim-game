@@ -7,6 +7,8 @@ import { DeathScreen } from '../ui/DeathScreen';
 import { LoadGameScreen } from '../ui/LoadGameScreen';
 import { WorldMapScreen } from '../screens/WorldMapScreen';
 import { ExplorationScene } from '../screens/ExplorationScene';
+import { IsoExplorationScene } from '../screens/IsoExplorationScene';
+import { carregarComodoIso } from '../content/isoRoomCatalog';
 import type { DadosNovoPersonagem } from '../ui/NewGameScreen';
 import type { DeathScreenProps } from '../ui/DeathScreen';
 import { useHudStore } from '../state/hudStore';
@@ -35,6 +37,14 @@ function aguardar(ms: number): Promise<void> {
   });
 }
 
+/**
+ * Id do cômodo iso correspondente. Os arquivos em `content/locations-iso/`
+ * usam o sufixo `_iso` (ex.: `quarto_simples` → `quarto_simples_iso`).
+ */
+function idComodoIso(comodoId: string): string {
+  return comodoId.endsWith('_iso') ? comodoId : `${comodoId}_iso`;
+}
+
 // ---------------------------------------------------------------------------
 // Componente
 // ---------------------------------------------------------------------------
@@ -48,6 +58,8 @@ export function App(): React.JSX.Element {
   const [bootCompleto, setBootCompleto] = useState<boolean>(false);
   const [erroCarregar, setErroCarregar] = useState<string | undefined>(undefined);
   const comodoAtualId = useExplorationStore((estado) => estado.comodoAtualId);
+  // undefined = ainda detectando; true = usar cena iso; false = usar cena legada.
+  const [comodoEhIso, setComodoEhIso] = useState<boolean | undefined>(undefined);
 
   const {
     nomePersonagem,
@@ -119,6 +131,21 @@ export function App(): React.JSX.Element {
     void carregarListaInicial();
     return () => { cancelado = true; };
   }, []);
+
+  // ── Detecta se o cômodo atual tem versão iso (senão usa a cena legada) ─────
+
+  useEffect(() => {
+    if (comodoAtualId === undefined) {
+      setComodoEhIso(undefined);
+      return;
+    }
+    let cancelado = false;
+    setComodoEhIso(undefined);
+    void carregarComodoIso(idComodoIso(comodoAtualId))
+      .then((iso) => { if (!cancelado) setComodoEhIso(iso !== undefined); })
+      .catch(() => { if (!cancelado) setComodoEhIso(false); });
+    return () => { cancelado = true; };
+  }, [comodoAtualId]);
 
   async function recarregarSaves(): Promise<void> {
     try {
@@ -292,7 +319,22 @@ export function App(): React.JSX.Element {
                 <WorldMapScreen onLocalEscolhido={aoLocalEscolhido} />
               )}
               {telaAtiva === 'exploracao' && comodoAtualId !== undefined && (
-                <ExplorationScene comodoId={comodoAtualId} onSaida={aoSaidaExploracao} />
+                comodoEhIso === undefined
+                  ? <div className="vida-app__carregando" aria-label="Carregando" />
+                  : comodoEhIso
+                    ? (
+                      <IsoExplorationScene
+                        comodoId={idComodoIso(comodoAtualId)}
+                        onSaida={(destino) => {
+                          if (destino.tipo === 'mapa') {
+                            aoSaidaExploracao({ tipo: 'mapa' });
+                          } else if (destino.comodoId !== undefined) {
+                            aoSaidaExploracao({ tipo: 'comodo', comodoId: destino.comodoId });
+                          }
+                        }}
+                      />
+                    )
+                    : <ExplorationScene comodoId={comodoAtualId} onSaida={aoSaidaExploracao} />
               )}
               {telaAtiva === 'carregando' && (
                 <div className="vida-app__carregando" aria-label="Carregando" />
