@@ -8,6 +8,7 @@ import { salvarParaEstadoDeJogo } from '@core/events/EstadoDeJogo';
 import { resolverAcao } from '@core/interaction/ActionResolver';
 import { interactionLock } from '@core/interaction/InteractionLock';
 import { persistirLogsDeAcao } from '@core/log/LogPersistenceHook';
+import { carregarCatalogoAcoes, obterAcao, acaoFallback } from '@game/content/actionCatalog';
 import { carregarComodoIso } from '../content/isoRoomCatalog';
 import { IsoRoomController, ALTURA_PAREDE_PX } from '../stage/IsoRoomController';
 import type { ObjetoInterativoIso } from '../stage/IsoRoomController';
@@ -164,16 +165,9 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
     try {
       const estadoHud = useHudStore.getState();
       const estadoExploracao = useExplorationStore.getState();
-      const acaoDemo: ActionDefinition = {
-        id: acaoId,
-        rotulo: acaoId,
-        resolutionMode: 'direct',
-        narrativeWeight: 'routine',
-        onSuccess: [{ tipo: 'alterar_humor', delta: 2 }],
-        timeCost: { unidades: 1, tipo: 'periodo' },
-      };
+      const acaoDefinida: ActionDefinition = obterAcao(acaoId) ?? acaoFallback(acaoId);
 
-      const resultado = await resolverAcao(acaoDemo, {
+      const resultado = await resolverAcao(acaoDefinida, {
         estado: estadoAtualDoJogo(),
         progressao: { contadores: {}, marcadores: {}, ultimoReset: {} },
         anoJogo: estadoHud.saveAtual?.estadoMundo.anoAtual ?? estadoHud.anoAtual,
@@ -215,6 +209,9 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
     if (canvasRef.current === null) return;
 
     let cancelado = false;
+
+    // Catálogo de ações ISO — fire-and-forget, idempotente.
+    void carregarCatalogoAcoes();
 
     const usarMarnie = usarPersonagemMarnie();
     const app        = new Application();
