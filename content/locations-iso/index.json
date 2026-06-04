@@ -84,6 +84,16 @@
       "id": "restaurante_salao_iso",
       "nome": "Salão do Restaurante ISO",
       "arquivo": "salao_restaurante_iso.json"
+    },
+    {
+      "id": "biblioteca_escolar_iso",
+      "nome": "Biblioteca",
+      "arquivo": "biblioteca_escolar_iso.json"
+    },
+    {
+      "id": "vestiario_iso",
+      "nome": "Vestiário",
+      "arquivo": "vestiario_iso.json"
     }
   ]
 }

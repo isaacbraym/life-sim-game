@@ -1,0 +1,263 @@
+[
+  {
+    "id": "dormir",
+    "rotulo": "Dormir",
+    "icone": "😴",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 20 },
+      { "tipo": "alterar_saude", "delta": 10 },
+      { "tipo": "adicionar_flag", "flag": "dormiu_bem" }
+    ],
+    "logAcao": "Você foi dormir e acordou descansado."
+  },
+  {
+    "id": "descansar",
+    "rotulo": "Descansar",
+    "icone": "🛋️",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 8 }
+    ],
+    "logAcao": "Você descansou um pouco."
+  },
+  {
+    "id": "assistir_tv",
+    "rotulo": "Assistir TV",
+    "icone": "📺",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 5 },
+      { "tipo": "alterar_saude", "delta": -2 }
+    ],
+    "logAcao": "Você assistiu à televisão."
+  },
+  {
+    "id": "sentar",
+    "rotulo": "Sentar",
+    "icone": "🪑",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 3 }
+    ],
+    "logAcao": "Você se sentou para relaxar."
+  },
+  {
+    "id": "estudar",
+    "rotulo": "Estudar",
+    "icone": "📚",
+    "resolutionMode": "check",
+    "check": {
+      "atributo": "inteligencia",
+      "dc": 10
+    },
+    "narrativeWeight": "relevant",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 }
+    ],
+    "onFailure": [
+      { "tipo": "alterar_humor", "delta": -3 }
+    ],
+    "logAcao": "Você tentou estudar.",
+    "logSucesso": "Você estudou com foco e absorveu o conteúdo.",
+    "logFalha": "Você tentou estudar mas não conseguiu se concentrar."
+  },
+  {
+    "id": "cozinhar",
+    "rotulo": "Cozinhar",
+    "icone": "🍳",
+    "resolutionMode": "check",
+    "check": {
+      "atributo": "inteligencia",
+      "dc": 8
+    },
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 5 },
+      { "tipo": "adicionar_flag", "flag": "cozinhou" }
+    ],
+    "onFailure": [
+      { "tipo": "alterar_humor", "delta": -5 }
+    ],
+    "logAcao": "Você tentou preparar uma refeição.",
+    "logSucesso": "Você cozinhou um prato delicioso.",
+    "logFalha": "Você errou a receita e a comida ficou ruim."
+  },
+  {
+    "id": "comer",
+    "rotulo": "Comer",
+    "icone": "🍽️",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_saude", "delta": 8 },
+      { "tipo": "alterar_humor", "delta": 3 }
+    ],
+    "logAcao": "Você comeu uma refeição saborosa."
+  },
+  {
+    "id": "usar_geladeira",
+    "rotulo": "Usar Geladeira",
+    "icone": "🥛",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 3 }
+    ],
+    "logAcao": "Você pegou um lanche na geladeira."
+  },
+  {
+    "id": "lavar_louca",
+    "rotulo": "Lavar Louça",
+    "icone": "🧽",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": -2 },
+      { "tipo": "adicionar_flag", "flag": "louca_limpa" }
+    ],
+    "logAcao": "Você lavou a louça na pia."
+  },
+  {
+    "id": "malhar",
+    "rotulo": "Malhar",
+    "icone": "🏋️",
+    "resolutionMode": "check",
+    "check": {
+      "atributo": "forca",
+      "dc": 10
+    },
+    "narrativeWeight": "relevant",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_atributo", "atributo": "forca", "delta": 1 },
+      { "tipo": "alterar_saude", "delta": 5 }
+    ],
+    "onFailure": [
+      { "tipo": "alterar_humor", "delta": -3 }
+    ],
+    "logAcao": "Você tentou malhar.",
+    "logSucesso": "Você treinou com dedicação e sentiu seus músculos trabalharem.",
+    "logFalha": "Você tentou malhar mas estava sem energia."
+  },
+  {
+    "id": "alongar",
+    "rotulo": "Alongar",
+    "icone": "🧘",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_saude", "delta": 3 },
+      { "tipo": "alterar_humor", "delta": 2 }
+    ],
+    "logAcao": "Você fez uma sessão de alongamento."
+  },
+  {
+    "id": "prestar_atencao",
+    "rotulo": "Prestar Atenção",
+    "icone": "👂",
+    "resolutionMode": "check",
+    "check": {
+      "atributo": "inteligencia",
+      "dc": 12
+    },
+    "narrativeWeight": "relevant",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 2 }
+    ],
+    "onFailure": [
+      { "tipo": "alterar_humor", "delta": -2 }
+    ],
+    "logAcao": "Você tentou prestar atenção.",
+    "logSucesso": "Você prestou atenção na aula e aprendeu coisas novas.",
+    "logFalha": "Você se distraiu durante a aula e não absorveu nada."
+  },
+  {
+    "id": "copiar_materia",
+    "rotulo": "Copiar Matéria",
+    "icone": "✍️",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+      { "tipo": "alterar_humor", "delta": -2 }
+    ],
+    "logAcao": "Você copiou a matéria no caderno."
+  },
+  {
+    "id": "examinar",
+    "rotulo": "Examinar",
+    "icone": "🔍",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 1 }
+    ],
+    "logAcao": "Você examinou o objeto detalhadamente."
+  },
+  {
+    "id": "usar",
+    "rotulo": "Usar",
+    "icone": "⚙️",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 1 }
+    ],
+    "logAcao": "Você usou o objeto."
+  },
+  {
+    "id": "conversar",
+    "rotulo": "Conversar",
+    "icone": "💬",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_humor", "delta": 5 },
+      { "tipo": "alterar_atributo", "atributo": "carisma", "delta": 1 }
+    ],
+    "logAcao": "Você conversou com alguém e se sentiu mais social."
+  },
+  {
+    "id": "ignorar",
+    "rotulo": "Ignorar",
+    "icone": "🤷",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [],
+    "logAcao": "Você decidiu ignorar."
+  },
+  {
+    "id": "ler_livro",
+    "rotulo": "Ler Livro",
+    "icone": "📖",
+    "resolutionMode": "direct",
+    "narrativeWeight": "routine",
+    "timeCost": { "unidades": 1, "tipo": "periodo" },
+    "onSuccess": [
+      { "tipo": "alterar_atributo", "atributo": "inteligencia", "delta": 1 },
+      { "tipo": "alterar_humor", "delta": 3 }
+    ],
+    "logAcao": "Você leu um livro na biblioteca escolar."
+  }
+]
