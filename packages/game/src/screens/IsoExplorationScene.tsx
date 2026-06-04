@@ -1,10 +1,51 @@
-import { useEffect, useRef, useState } from 'react';
-import { Application } from 'pixi.js';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Application, Graphics } from 'pixi.js';
 import { gsap } from 'gsap';
+import type { ActionDefinition } from '@core/schemas/action';
+import type { EstadoDeJogo } from '@core/events/EstadoDeJogo';
+import { salvarParaEstadoDeJogo } from '@core/events/EstadoDeJogo';
+import { resolverAcao } from '@core/interaction/ActionResolver';
+import { interactionLock } from '@core/interaction/InteractionLock';
 import { carregarComodoIso } from '../content/isoRoomCatalog';
 import { IsoRoomController, ALTURA_PAREDE_PX } from '../stage/IsoRoomController';
+import type { ObjetoInterativoIso } from '../stage/IsoRoomController';
 import { IsoCharacterController } from '../stage/IsoCharacterController';
 import { MarnieCharacterController } from '../stage/MarnieCharacterController';
+import { useExplorationStore } from '../state/explorationStore';
+import { useHudStore } from '../state/hudStore';
+import { ActionBubble } from '../ui/ActionBubble';
+import { mostrarFeedback } from '../ui/VisualFeedback';
+
+/** Destino de uma saída iso — `{ tipo: 'comodo' | 'mapa', comodoId? }`. */
+type DestinoSaidaIso = {
+  readonly tipo: 'comodo' | 'mapa';
+  readonly comodoId?: string;
+};
+
+/** Monta o EstadoDeJogo atual a partir do HUD (igual à ExplorationScene legada). */
+function estadoAtualDoJogo(): EstadoDeJogo {
+  const estadoHud = useHudStore.getState();
+  const saveAtual = estadoHud.saveAtual;
+
+  if (saveAtual !== undefined) {
+    return salvarParaEstadoDeJogo(saveAtual, saveAtual.estadoMundo.anoAtual);
+  }
+
+  return {
+    anoNascimento: estadoHud.anoAtual - estadoHud.idadeAnos,
+    anoAtual: estadoHud.anoAtual,
+    humor: estadoHud.humor,
+    saude: estadoHud.saude,
+    dinheiro: estadoHud.dinheiro,
+    atributos: estadoHud.atributos.reduce<Record<string, number>>((atributos, atributo) => ({
+      ...atributos,
+      [atributo.nome.toLowerCase()]: atributo.valor,
+    }), {}),
+    flags: [],
+    cooldownRegistry: {},
+  };
+}
 
 /** Interface mínima comum aos controladores de personagem (layered ou frames). */
 type ControladorPersonagem = Pick<
@@ -90,19 +131,78 @@ function enquadrarComodo(larguraTiles: number, alturaTiles: number): {
 
 export type IsoExplorationSceneProps = {
   readonly comodoId: string;
-  readonly onSaida?: (saidaId: string) => void;
+  readonly onSaida?: (destino: DestinoSaidaIso) => void;
 };
 
 export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationSceneProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [erro, setErro] = useState<string | undefined>();
   const [posicao, setPosicao] = useState<{ tx: number; ty: number }>({ tx: 1, ty: 1 });
+  const [portalNode, setPortalNode] = useState<HTMLDivElement | undefined>();
 
   // Refs para acesso nos callbacks sem stale closure
   const appRef        = useRef<Application | undefined>();
   const personagemRef = useRef<ControladorPersonagem | undefined>();
   const npcRef        = useRef<MarnieCharacterController | undefined>();
   const salaRef       = useRef<IsoRoomController | undefined>();
+  const fadeRef       = useRef<Graphics | undefined>();
+
+  const definirPortalNode = useCallback((node: HTMLDivElement | null) => {
+    setPortalNode(node ?? undefined);
+  }, []);
+
+  // Resolve uma ação escolhida no ActionBubble (igual à ExplorationScene legada).
+  const aoEscolherAcao = useCallback(async (acaoId: string): Promise<void> => {
+    const app = appRef.current;
+    const personagem = personagemRef.current;
+    const { setInteractionLock, desfocarObjeto } = useExplorationStore.getState();
+
+    if (app === undefined || personagem === undefined || interactionLock.estaLocked()) return;
+
+    setInteractionLock(true);
+    try {
+      const estadoHud = useHudStore.getState();
+      const estadoExploracao = useExplorationStore.getState();
+      const acaoDemo: ActionDefinition = {
+        id: acaoId,
+        rotulo: acaoId,
+        resolutionMode: 'direct',
+        narrativeWeight: 'routine',
+        onSuccess: [{ tipo: 'alterar_humor', delta: 2 }],
+        timeCost: { unidades: 1, tipo: 'periodo' },
+      };
+
+      const resultado = await resolverAcao(acaoDemo, {
+        estado: estadoAtualDoJogo(),
+        progressao: { contadores: {}, marcadores: {}, ultimoReset: {} },
+        anoJogo: estadoHud.saveAtual?.estadoMundo.anoAtual ?? estadoHud.anoAtual,
+        mesJogo: estadoHud.saveAtual?.estadoMundo.mesAtual ?? 1,
+        localId: estadoExploracao.localAtualId,
+      });
+
+      const container = personagem.obterContainer();
+      mostrarFeedback({
+        app,
+        posicaoMundo: { x: container.x, y: container.y - 72 },
+        texto: resultado.desfecho === 'direto' ? `✓ ${acaoId}` : '+Ação',
+        cor: 0x4ade80,
+      });
+    } catch (erroAcao) {
+      console.error('[IsoExplorationScene] Falha ao resolver ação:', erroAcao);
+      const container = personagemRef.current?.obterContainer();
+      if (app !== undefined && container !== undefined) {
+        mostrarFeedback({
+          app,
+          posicaoMundo: { x: container.x, y: container.y - 72 },
+          texto: 'Ação falhou',
+          cor: 0xf87171,
+        });
+      }
+    } finally {
+      desfocarObjeto();
+      setInteractionLock(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (canvasRef.current === null) return;
@@ -138,6 +238,15 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       app.stage.sortableChildren = true;
       app.stage.alpha = 0;
 
+      // Overlay de fade (preto) para transição de saída. Rect superdimensionado
+      // p/ cobrir a tela apesar do zoom/translação aplicados ao stage.
+      const fade = new Graphics();
+      fade.rect(-10000, -10000, 20000, 20000).fill({ color: 0x000000 });
+      fade.alpha = 0;
+      fade.zIndex = 1_000_000;
+      app.stage.addChild(fade);
+      fadeRef.current = fade;
+
       const comodo = await carregarComodoIso(comodoId);
       if (cancelado) return; // app.destroy já será chamado pelo cleanup
 
@@ -145,6 +254,21 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
         setErro(`Cômodo "${comodoId}" não encontrado.`);
         return;
       }
+
+      // Transição de saída: fade para preto e então dispara onSaida(destino).
+      const realizarSaida = (destino: DestinoSaidaIso) => {
+        const overlay = fadeRef.current;
+        if (overlay !== undefined) {
+          gsap.to(overlay, {
+            alpha: 1,
+            duration: 0.3,
+            ease: 'power1.out',
+            onComplete: () => { onSaida?.(destino); },
+          });
+        } else {
+          onSaida?.(destino);
+        }
+      };
 
       sala.carregarComodo(
         app,
@@ -154,6 +278,7 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
           const rm   = salaRef.current;
           if (char === undefined || rm === undefined) return;
           if (char.estaEmMovimento()) return;
+          if (interactionLock.estaLocked() || useExplorationStore.getState().interactionLock) return;
 
           // Assento: clique num tile ocupado por móvel → Marnie anda e senta.
           const comodoClicado = rm.obterComodo();
@@ -176,14 +301,14 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
               const pos = char.obterPosicao();
               rm.atualizarGrid([{ tileX: pos.tx, tileY: pos.ty }]);
               setPosicao(pos);
-              // 2c: personagem chegou a uma saída → disparar transição automaticamente
+              // 2c: personagem chegou a uma saída → fade + transição automática
               const comodoAtual = rm.obterComodo();
               if (comodoAtual !== undefined) {
                 const saidaAlcancada = comodoAtual.saidas.find(
                   s => s.tileX === pos.tx && s.tileY === pos.ty,
                 );
                 if (saidaAlcancada !== undefined) {
-                  onSaida?.(saidaAlcancada.id);
+                  realizarSaida(saidaAlcancada.destino);
                 }
               }
             });
@@ -195,7 +320,45 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
             }
           }
         },
-        (saidaId) => { onSaida?.(saidaId); },
+        (saidaId) => {
+          const saida = comodo.saidas.find(s => s.id === saidaId);
+          if (saida !== undefined) realizarSaida(saida.destino);
+        },
+        // Clique em móvel → anda até o tile de interação e abre o ActionBubble.
+        (objeto: ObjetoInterativoIso) => {
+          const char = personagemRef.current;
+          const rm   = salaRef.current;
+          if (char === undefined || rm === undefined) return;
+          if (char.estaEmMovimento()) return;
+          if (interactionLock.estaLocked() || useExplorationStore.getState().interactionLock) return;
+
+          const estado = useExplorationStore.getState();
+          estado.setInteractionLock(true);
+          estado.desfocarObjeto();
+          rm.mostrarMarcadorDestino(objeto.tileInteracaoX, objeto.tileInteracaoY);
+
+          void char.moverPara(
+            { tx: objeto.tileInteracaoX, ty: objeto.tileInteracaoY },
+            rm.obterGrid(),
+          ).then(() => {
+            if (personagemRef.current === undefined) return;
+            const pos = char.obterPosicao();
+            rm.atualizarGrid([{ tileX: pos.tx, tileY: pos.ty }]);
+            setPosicao(pos);
+
+            const container = char.obterContainer();
+            const sprite    = rm.obterSpriteDeObjeto(objeto.id);
+            const posGlobal = sprite?.toGlobal({ x: 0, y: -18 })
+              ?? { x: container.x, y: container.y - 24 };
+
+            useExplorationStore.getState().focarObjeto({
+              id: objeto.id,
+              posicao: { x: posGlobal.x, y: posGlobal.y },
+              acoes: objeto.acoes,
+            });
+            useExplorationStore.getState().setInteractionLock(false);
+          });
+        },
       );
 
       // Zoom + centralização para o cômodo (com paredes) preencher a tela.
@@ -240,17 +403,22 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       }
       const npcAtual = npcRef.current;
       gsap.killTweensOf(app.stage);
+      const fadeAtual = fadeRef.current;
+      if (fadeAtual !== undefined) gsap.killTweensOf(fadeAtual);
 
       // Limpar refs antes de destruir para impedir callbacks órfãos
       personagemRef.current = undefined;
       npcRef.current        = undefined;
       salaRef.current       = undefined;
       appRef.current        = undefined;
+      fadeRef.current       = undefined;
 
       char?.destruir();
       npcAtual?.destruir();
       sala.destruir();
       app.destroy(true);
+
+      useExplorationStore.getState().sairDeExploracao();
     };
   }, [comodoId, onSaida]);
 
@@ -284,6 +452,16 @@ export function IsoExplorationScene({ comodoId, onSaida }: IsoExplorationScenePr
       }}>
         {comodoId} | {posicao.tx},{posicao.ty}
       </div>
+
+      {/* Overlay do ActionBubble (React portal sobre o canvas) */}
+      <div
+        ref={definirPortalNode}
+        style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
+      />
+      {portalNode !== undefined && createPortal(
+        <ActionBubble onAcaoEscolhida={aoEscolherAcao} />,
+        portalNode,
+      )}
     </div>
   );
 }
