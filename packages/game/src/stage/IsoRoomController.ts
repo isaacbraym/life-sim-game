@@ -9,6 +9,20 @@ const MEIA_LARGURA    = TILE_W / 2;   // 32
 const MEIA_ALTURA     = TILE_H / 2;   // 16
 const ALTURA_OBJETO   = 28;
 
+/** Ações padrão para móveis iso que ainda não declaram `acoes` no schema. */
+const ACOES_PADRAO_OBJETO: readonly string[] = ['examinar', 'usar'];
+
+/**
+ * Dados que o controlador entrega ao clicar num móvel iso.
+ * `tileInteracao*` é o tile caminhável adjacente onde o personagem para.
+ */
+export type ObjetoInterativoIso = {
+  readonly id: string;
+  readonly acoes: readonly string[];
+  readonly tileInteracaoX: number;
+  readonly tileInteracaoY: number;
+};
+
 /** Altura em pixels das paredes laterais e do fundo — exportado para uso na câmera. */
 export const ALTURA_PAREDE_PX = 144;
 
@@ -69,18 +83,22 @@ export class IsoRoomController {
   private gridAtual: GridCaminhavel = [];
   private callbackTile: ((tx: number, ty: number) => void) | undefined;
   private callbackSaida: ((saidaId: string) => void) | undefined;
+  private callbackObjeto: ((objeto: ObjetoInterativoIso) => void) | undefined;
+  private readonly spritesObjetos = new Map<string, Container>();
 
   carregarComodo(
     app: Application,
     comodo: IsoRoomDefinition,
     aoClicarTile?: (tx: number, ty: number) => void,
     aoClicarSaida?: (saidaId: string) => void,
+    aoClicarObjeto?: (objeto: ObjetoInterativoIso) => void,
   ): void {
     this.destruir();
-    this.comodo        = comodo;
-    this.callbackTile  = aoClicarTile;
-    this.callbackSaida = aoClicarSaida;
-    this.gridAtual     = construirGrid(comodo, []);
+    this.comodo         = comodo;
+    this.callbackTile   = aoClicarTile;
+    this.callbackSaida  = aoClicarSaida;
+    this.callbackObjeto = aoClicarObjeto;
+    this.gridAtual      = construirGrid(comodo, []);
 
     const cont = new Container();
     cont.sortableChildren = true;
@@ -105,6 +123,24 @@ export class IsoRoomController {
 
   obterComodo(): IsoRoomDefinition | undefined {
     return this.comodo;
+  }
+
+  /** Âncora de tela (topo do cubo) de um móvel — para posicionar o ActionBubble. */
+  obterSpriteDeObjeto(id: string): Container | undefined {
+    return this.spritesObjetos.get(id);
+  }
+
+  /** Tile caminhável adjacente à âncora do móvel — onde o personagem para p/ interagir. */
+  private acharTileInteracao(tileX: number, tileY: number): { tx: number; ty: number } {
+    const vizinhos = [
+      { dx: 0, dy: 1 }, { dx: 0, dy: -1 }, { dx: 1, dy: 0 }, { dx: -1, dy: 0 },
+    ];
+    for (const { dx, dy } of vizinhos) {
+      const tx = tileX + dx;
+      const ty = tileY + dy;
+      if (this.gridAtual[ty]?.[tx] === true) return { tx, ty };
+    }
+    return { tx: tileX, ty: tileY };
   }
 
   atualizarGrid(npcs: readonly { tileX: number; tileY: number }[] = []): void {
@@ -158,11 +194,13 @@ export class IsoRoomController {
 
   destruir(): void {
     this.container?.destroy({ children: true });
-    this.container     = undefined;
-    this.comodo        = undefined;
-    this.gridAtual     = [];
-    this.callbackTile  = undefined;
-    this.callbackSaida = undefined;
+    this.container      = undefined;
+    this.comodo         = undefined;
+    this.gridAtual      = [];
+    this.callbackTile   = undefined;
+    this.callbackSaida  = undefined;
+    this.callbackObjeto = undefined;
+    this.spritesObjetos.clear();
   }
 
   // ── Paredes ───────────────────────────────────────────────────────────────
@@ -348,13 +386,27 @@ export class IsoRoomController {
 
     const mostrarLabel  = () => { rotulo.visible = true; };
     const esconderLabel = () => { rotulo.visible = false; };
+    const aoClicarMovel = () => {
+      // Móvel clicável dispara o fluxo de interação (ActionBubble) quando há
+      // callback de objeto; senão encaminha ao callback do tile (compat. legado).
+      if (this.callbackObjeto !== undefined) {
+        const interacao = this.acharTileInteracao(objeto.tileX, objeto.tileY);
+        this.callbackObjeto({
+          id:    objeto.id,
+          acoes: ACOES_PADRAO_OBJETO,
+          tileInteracaoX: interacao.tx,
+          tileInteracaoY: interacao.ty,
+        });
+      } else {
+        this.callbackTile?.(objeto.tileX, objeto.tileY);
+      }
+    };
     for (const face of [topo, frente, lado]) {
       face.eventMode = 'static';
+      face.cursor    = 'pointer';
       face.on('pointerenter', mostrarLabel);
       face.on('pointerleave', esconderLabel);
-      // Encaminha o clique no móvel para o callback do tile (âncora do móvel),
-      // permitindo "clicar no assento" (a face do móvel cobriria o tile abaixo).
-      face.on('pointertap', () => { this.callbackTile?.(objeto.tileX, objeto.tileY); });
+      face.on('pointertap', aoClicarMovel);
     }
 
     const profundidade = calcularDepth(objeto.tileX, objeto.tileY);
@@ -364,6 +416,13 @@ export class IsoRoomController {
     rotulo.zIndex  = profundidade + 0.01;
 
     this.container?.addChild(topo, frente, lado, rotulo);
+
+    // Âncora invisível no topo do cubo — referência de tela para o ActionBubble.
+    const ancora = new Container();
+    ancora.position.set(x, y - hh - H);
+    ancora.zIndex = profundidade + 0.02;
+    this.container?.addChild(ancora);
+    this.spritesObjetos.set(objeto.id, ancora);
 
     // Overlays nos tiles secundários do footprint (cor do móvel + borda + cruz)
     for (const offset of objeto.bloqueaTiles) {
