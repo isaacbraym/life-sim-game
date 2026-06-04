@@ -19,6 +19,7 @@ export const ObjetoIsoDefinicao = z.object({
     dx: z.number().int(),
     dy: z.number().int(),
   })),
+  acoes: z.array(z.string()).default([]),
 });
 
 export const SaidaIso = z.object({
